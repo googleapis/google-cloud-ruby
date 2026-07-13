@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_create_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }) do |_result, response|
+        c.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_endpoint parent: parent, endpoint: endpoint, endpoint_id: endpoint_id do |_result, response|
+        c.create_endpoint parent: parent, endpoint: endpoint, endpoint_id: endpoint_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_endpoint ::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id) do |_result, response|
+        c.create_endpoint ::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }, call_options) do |_result, response|
+        c.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_endpoint(::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id), call_options) do |_result, response|
+        c.create_endpoint(::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_get_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_endpoint({ name: name }) do |_result, response|
+        c.get_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_endpoint name: name do |_result, response|
+        c.get_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_endpoint ::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name) do |_result, response|
+        c.get_endpoint ::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_endpoint({ name: name }, call_options) do |_result, response|
+        c.get_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_endpoint(::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.get_endpoint(::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_list_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |_result, response|
+        c.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |_result, response|
+        c.list_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_endpoints ::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |_result, response|
+        c.list_endpoints ::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
+        c.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_endpoints(::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
+        c.list_endpoints(::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_update_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_endpoint({ endpoint: endpoint, update_mask: update_mask }) do |_result, response|
+        c.update_endpoint({ endpoint: endpoint, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_endpoint endpoint: endpoint, update_mask: update_mask do |_result, response|
+        c.update_endpoint endpoint: endpoint, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_endpoint ::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask) do |_result, response|
+        c.update_endpoint ::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_endpoint({ endpoint: endpoint, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_endpoint({ endpoint: endpoint, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_endpoint(::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), call_options) do |_result, response|
+        c.update_endpoint(::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_update_endpoint_long_running_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_endpoint_long_running_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_endpoint_long_running({ endpoint: endpoint }) do |_result, response|
+        c.update_endpoint_long_running({ endpoint: endpoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_endpoint_long_running endpoint: endpoint do |_result, response|
+        c.update_endpoint_long_running endpoint: endpoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_endpoint_long_running ::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint) do |_result, response|
+        c.update_endpoint_long_running ::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_endpoint_long_running({ endpoint: endpoint }, call_options) do |_result, response|
+        c.update_endpoint_long_running({ endpoint: endpoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_endpoint_long_running(::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint), call_options) do |_result, response|
+        c.update_endpoint_long_running(::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_delete_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_endpoint({ name: name }) do |_result, response|
+        c.delete_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_endpoint name: name do |_result, response|
+        c.delete_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_endpoint ::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name) do |_result, response|
+        c.delete_endpoint ::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_endpoint({ name: name }, call_options) do |_result, response|
+        c.delete_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_endpoint(::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.delete_endpoint(::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_deploy_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deploy_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }) do |_result, response|
+        c.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deploy_model endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split do |_result, response|
+        c.deploy_model endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deploy_model ::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split) do |_result, response|
+        c.deploy_model ::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }, call_options) do |_result, response|
+        c.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deploy_model(::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split), call_options) do |_result, response|
+        c.deploy_model(::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_undeploy_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undeploy_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }) do |_result, response|
+        c.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undeploy_model endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split do |_result, response|
+        c.undeploy_model endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undeploy_model ::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split) do |_result, response|
+        c.undeploy_model ::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }, call_options) do |_result, response|
+        c.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undeploy_model(::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split), call_options) do |_result, response|
+        c.undeploy_model(::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ServiceStub.stub :transcode_mutate_deployed_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, mutate_deployed_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }) do |_result, response|
+        c.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.mutate_deployed_model endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask do |_result, response|
+        c.mutate_deployed_model endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.mutate_deployed_model ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask) do |_result, response|
+        c.mutate_deployed_model ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }, call_options) do |_result, response|
+        c.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.mutate_deployed_model(::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask), call_options) do |_result, response|
+        c.mutate_deployed_model(::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

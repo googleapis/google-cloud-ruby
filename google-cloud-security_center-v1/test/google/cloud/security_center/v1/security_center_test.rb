@@ -88,40 +88,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, bulk_mute_findings_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.bulk_mute_findings({ parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state }) do |response, operation|
+      c.bulk_mute_findings({ parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.bulk_mute_findings parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state do |response, operation|
+      c.bulk_mute_findings parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.bulk_mute_findings ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state) do |response, operation|
+      c.bulk_mute_findings ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.bulk_mute_findings({ parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state }, grpc_options) do |response, operation|
+      c.bulk_mute_findings({ parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.bulk_mute_findings(::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state), grpc_options) do |response, operation|
+      c.bulk_mute_findings(::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_annotation: mute_annotation, mute_state: mute_state), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_security_health_analytics_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }) do |response, operation|
+      c.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_security_health_analytics_custom_module parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module do |response, operation|
+      c.create_security_health_analytics_custom_module parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module) do |response, operation|
+      c.create_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }, grpc_options) do |response, operation|
+      c.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module), grpc_options) do |response, operation|
+      c.create_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_source_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_source({ parent: parent, source: source }) do |response, operation|
+      c.create_source({ parent: parent, source: source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_source parent: parent, source: source do |response, operation|
+      c.create_source parent: parent, source: source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_source ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source) do |response, operation|
+      c.create_source ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_source({ parent: parent, source: source }, grpc_options) do |response, operation|
+      c.create_source({ parent: parent, source: source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_source(::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source), grpc_options) do |response, operation|
+      c.create_source(::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -275,36 +275,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_finding_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_finding({ parent: parent, finding_id: finding_id, finding: finding }) do |response, operation|
+      c.create_finding({ parent: parent, finding_id: finding_id, finding: finding }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_finding parent: parent, finding_id: finding_id, finding: finding do |response, operation|
+      c.create_finding parent: parent, finding_id: finding_id, finding: finding do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_finding ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding) do |response, operation|
+      c.create_finding ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_finding({ parent: parent, finding_id: finding_id, finding: finding }, grpc_options) do |response, operation|
+      c.create_finding({ parent: parent, finding_id: finding_id, finding: finding }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_finding(::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), grpc_options) do |response, operation|
+      c.create_finding(::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -337,36 +337,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_mute_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_mute_config({ parent: parent, mute_config: mute_config, mute_config_id: mute_config_id }) do |response, operation|
+      c.create_mute_config({ parent: parent, mute_config: mute_config, mute_config_id: mute_config_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_mute_config parent: parent, mute_config: mute_config, mute_config_id: mute_config_id do |response, operation|
+      c.create_mute_config parent: parent, mute_config: mute_config, mute_config_id: mute_config_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_mute_config ::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new(parent: parent, mute_config: mute_config, mute_config_id: mute_config_id) do |response, operation|
+      c.create_mute_config ::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new(parent: parent, mute_config: mute_config, mute_config_id: mute_config_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_mute_config({ parent: parent, mute_config: mute_config, mute_config_id: mute_config_id }, grpc_options) do |response, operation|
+      c.create_mute_config({ parent: parent, mute_config: mute_config, mute_config_id: mute_config_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_mute_config(::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new(parent: parent, mute_config: mute_config, mute_config_id: mute_config_id), grpc_options) do |response, operation|
+      c.create_mute_config(::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new(parent: parent, mute_config: mute_config, mute_config_id: mute_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,36 +399,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_notification_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }) do |response, operation|
+      c.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_notification_config parent: parent, config_id: config_id, notification_config: notification_config do |response, operation|
+      c.create_notification_config parent: parent, config_id: config_id, notification_config: notification_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_notification_config ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config) do |response, operation|
+      c.create_notification_config ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }, grpc_options) do |response, operation|
+      c.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_notification_config(::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), grpc_options) do |response, operation|
+      c.create_notification_config(::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -457,36 +457,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_mute_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_mute_config({ name: name }) do |response, operation|
+      c.delete_mute_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_mute_config name: name do |response, operation|
+      c.delete_mute_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_mute_config ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new(name: name) do |response, operation|
+      c.delete_mute_config ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_mute_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_mute_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_mute_config(::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_mute_config(::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -515,36 +515,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_notification_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_notification_config({ name: name }) do |response, operation|
+      c.delete_notification_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_notification_config name: name do |response, operation|
+      c.delete_notification_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_notification_config ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name) do |response, operation|
+      c.delete_notification_config ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_notification_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_notification_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_notification_config(::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_notification_config(::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -573,36 +573,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_security_health_analytics_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_security_health_analytics_custom_module({ name: name }) do |response, operation|
+      c.delete_security_health_analytics_custom_module({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_security_health_analytics_custom_module name: name do |response, operation|
+      c.delete_security_health_analytics_custom_module name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
+      c.delete_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
+      c.delete_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -631,36 +631,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_simulation_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_simulation({ name: name }) do |response, operation|
+      c.get_simulation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_simulation name: name do |response, operation|
+      c.get_simulation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_simulation ::Google::Cloud::SecurityCenter::V1::GetSimulationRequest.new(name: name) do |response, operation|
+      c.get_simulation ::Google::Cloud::SecurityCenter::V1::GetSimulationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_simulation({ name: name }, grpc_options) do |response, operation|
+      c.get_simulation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_simulation(::Google::Cloud::SecurityCenter::V1::GetSimulationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_simulation(::Google::Cloud::SecurityCenter::V1::GetSimulationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -689,36 +689,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_valued_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_valued_resource({ name: name }) do |response, operation|
+      c.get_valued_resource({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_valued_resource name: name do |response, operation|
+      c.get_valued_resource name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_valued_resource ::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest.new(name: name) do |response, operation|
+      c.get_valued_resource ::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_valued_resource({ name: name }, grpc_options) do |response, operation|
+      c.get_valued_resource({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_valued_resource(::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_valued_resource(::Google::Cloud::SecurityCenter::V1::GetValuedResourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -747,36 +747,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_big_query_export({ name: name }) do |response, operation|
+      c.get_big_query_export({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_big_query_export name: name do |response, operation|
+      c.get_big_query_export name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_big_query_export ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new(name: name) do |response, operation|
+      c.get_big_query_export ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_big_query_export({ name: name }, grpc_options) do |response, operation|
+      c.get_big_query_export({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_big_query_export(::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_big_query_export(::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -807,36 +807,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -865,36 +865,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_mute_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_mute_config({ name: name }) do |response, operation|
+      c.get_mute_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_mute_config name: name do |response, operation|
+      c.get_mute_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_mute_config ::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new(name: name) do |response, operation|
+      c.get_mute_config ::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_mute_config({ name: name }, grpc_options) do |response, operation|
+      c.get_mute_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_mute_config(::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_mute_config(::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -923,36 +923,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_notification_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notification_config({ name: name }) do |response, operation|
+      c.get_notification_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notification_config name: name do |response, operation|
+      c.get_notification_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notification_config ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name) do |response, operation|
+      c.get_notification_config ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notification_config({ name: name }, grpc_options) do |response, operation|
+      c.get_notification_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notification_config(::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_notification_config(::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -981,36 +981,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_organization_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_organization_settings({ name: name }) do |response, operation|
+      c.get_organization_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_organization_settings name: name do |response, operation|
+      c.get_organization_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_organization_settings ::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name) do |response, operation|
+      c.get_organization_settings ::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_organization_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_organization_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_organization_settings(::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_organization_settings(::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1039,36 +1039,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_effective_security_health_analytics_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_effective_security_health_analytics_custom_module({ name: name }) do |response, operation|
+      c.get_effective_security_health_analytics_custom_module({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_effective_security_health_analytics_custom_module name: name do |response, operation|
+      c.get_effective_security_health_analytics_custom_module name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_effective_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
+      c.get_effective_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_effective_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
+      c.get_effective_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_effective_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_effective_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1097,36 +1097,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_security_health_analytics_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_security_health_analytics_custom_module({ name: name }) do |response, operation|
+      c.get_security_health_analytics_custom_module({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_security_health_analytics_custom_module name: name do |response, operation|
+      c.get_security_health_analytics_custom_module name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
+      c.get_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
+      c.get_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1155,36 +1155,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_source_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_source({ name: name }) do |response, operation|
+      c.get_source({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_source name: name do |response, operation|
+      c.get_source name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_source ::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name) do |response, operation|
+      c.get_source ::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_source({ name: name }, grpc_options) do |response, operation|
+      c.get_source({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_source(::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_source(::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1225,40 +1225,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, group_assets_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.group_assets parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size do |response, operation|
+      c.group_assets parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.group_assets ::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |response, operation|
+      c.group_assets ::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.group_assets(::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.group_assets(::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1300,40 +1300,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, group_findings_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.group_findings parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size do |response, operation|
+      c.group_findings parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.group_findings ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |response, operation|
+      c.group_findings ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.group_findings(::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.group_findings(::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1377,40 +1377,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_assets_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_assets parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_assets parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_assets ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_assets ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_assets(::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_assets(::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1444,40 +1444,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_descendant_security_health_analytics_custom_modules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_descendant_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_descendant_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_descendant_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_descendant_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_descendant_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_descendant_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1521,40 +1521,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_findings_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_findings parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_findings parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_findings ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_findings ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_findings(::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_findings(::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1588,40 +1588,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_mute_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_mute_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_mute_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_mute_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_mute_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_mute_configs ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_mute_configs ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_mute_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_mute_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_mute_configs(::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_mute_configs(::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1655,40 +1655,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_notification_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notification_configs parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_notification_configs parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notification_configs ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_notification_configs ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notification_configs(::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_notification_configs(::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1722,40 +1722,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_effective_security_health_analytics_custom_modules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_effective_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_effective_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_effective_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_effective_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_effective_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_effective_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1789,40 +1789,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_security_health_analytics_custom_modules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1856,40 +1856,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_sources_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_sources({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_sources({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_sources parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_sources parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_sources ::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_sources ::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_sources({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_sources({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_sources(::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_sources(::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1919,40 +1919,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, run_asset_discovery_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_asset_discovery({ parent: parent }) do |response, operation|
+      c.run_asset_discovery({ parent: parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_asset_discovery parent: parent do |response, operation|
+      c.run_asset_discovery parent: parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_asset_discovery ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent) do |response, operation|
+      c.run_asset_discovery ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_asset_discovery({ parent: parent }, grpc_options) do |response, operation|
+      c.run_asset_discovery({ parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_asset_discovery(::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.run_asset_discovery(::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1986,36 +1986,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, set_finding_state_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_finding_state({ name: name, state: state, start_time: start_time }) do |response, operation|
+      c.set_finding_state({ name: name, state: state, start_time: start_time }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_finding_state name: name, state: state, start_time: start_time do |response, operation|
+      c.set_finding_state name: name, state: state, start_time: start_time do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_finding_state ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time) do |response, operation|
+      c.set_finding_state ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_finding_state({ name: name, state: state, start_time: start_time }, grpc_options) do |response, operation|
+      c.set_finding_state({ name: name, state: state, start_time: start_time }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_finding_state(::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), grpc_options) do |response, operation|
+      c.set_finding_state(::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2046,36 +2046,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, set_mute_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_mute({ name: name, mute: mute }) do |response, operation|
+      c.set_mute({ name: name, mute: mute }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_mute name: name, mute: mute do |response, operation|
+      c.set_mute name: name, mute: mute do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_mute ::Google::Cloud::SecurityCenter::V1::SetMuteRequest.new(name: name, mute: mute) do |response, operation|
+      c.set_mute ::Google::Cloud::SecurityCenter::V1::SetMuteRequest.new(name: name, mute: mute) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_mute({ name: name, mute: mute }, grpc_options) do |response, operation|
+      c.set_mute({ name: name, mute: mute }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_mute(::Google::Cloud::SecurityCenter::V1::SetMuteRequest.new(name: name, mute: mute), grpc_options) do |response, operation|
+      c.set_mute(::Google::Cloud::SecurityCenter::V1::SetMuteRequest.new(name: name, mute: mute), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2108,36 +2108,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2168,36 +2168,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2230,36 +2230,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, simulate_security_health_analytics_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }) do |response, operation|
+      c.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.simulate_security_health_analytics_custom_module parent: parent, custom_config: custom_config, resource: resource do |response, operation|
+      c.simulate_security_health_analytics_custom_module parent: parent, custom_config: custom_config, resource: resource do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.simulate_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource) do |response, operation|
+      c.simulate_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }, grpc_options) do |response, operation|
+      c.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.simulate_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource), grpc_options) do |response, operation|
+      c.simulate_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2290,36 +2290,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_external_system_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_external_system({ external_system: external_system, update_mask: update_mask }) do |response, operation|
+      c.update_external_system({ external_system: external_system, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_external_system external_system: external_system, update_mask: update_mask do |response, operation|
+      c.update_external_system external_system: external_system, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_external_system ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new(external_system: external_system, update_mask: update_mask) do |response, operation|
+      c.update_external_system ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new(external_system: external_system, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_external_system({ external_system: external_system, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_external_system({ external_system: external_system, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_external_system(::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new(external_system: external_system, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_external_system(::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new(external_system: external_system, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2350,36 +2350,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_finding_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_finding({ finding: finding, update_mask: update_mask }) do |response, operation|
+      c.update_finding({ finding: finding, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_finding finding: finding, update_mask: update_mask do |response, operation|
+      c.update_finding finding: finding, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_finding ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask) do |response, operation|
+      c.update_finding ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_finding({ finding: finding, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_finding({ finding: finding, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_finding(::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_finding(::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2410,36 +2410,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_mute_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_mute_config({ mute_config: mute_config, update_mask: update_mask }) do |response, operation|
+      c.update_mute_config({ mute_config: mute_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_mute_config mute_config: mute_config, update_mask: update_mask do |response, operation|
+      c.update_mute_config mute_config: mute_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_mute_config ::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new(mute_config: mute_config, update_mask: update_mask) do |response, operation|
+      c.update_mute_config ::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new(mute_config: mute_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_mute_config({ mute_config: mute_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_mute_config({ mute_config: mute_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_mute_config(::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new(mute_config: mute_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_mute_config(::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new(mute_config: mute_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2470,36 +2470,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_notification_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_notification_config({ notification_config: notification_config, update_mask: update_mask }) do |response, operation|
+      c.update_notification_config({ notification_config: notification_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_notification_config notification_config: notification_config, update_mask: update_mask do |response, operation|
+      c.update_notification_config notification_config: notification_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_notification_config ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask) do |response, operation|
+      c.update_notification_config ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_notification_config({ notification_config: notification_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_notification_config({ notification_config: notification_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_notification_config(::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_notification_config(::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2530,36 +2530,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_organization_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }) do |response, operation|
+      c.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_organization_settings organization_settings: organization_settings, update_mask: update_mask do |response, operation|
+      c.update_organization_settings organization_settings: organization_settings, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_organization_settings ::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask) do |response, operation|
+      c.update_organization_settings ::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_organization_settings(::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_organization_settings(::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2590,36 +2590,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_security_health_analytics_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }) do |response, operation|
+      c.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_security_health_analytics_custom_module security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask do |response, operation|
+      c.update_security_health_analytics_custom_module security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask) do |response, operation|
+      c.update_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2650,36 +2650,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_source_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_source({ source: source, update_mask: update_mask }) do |response, operation|
+      c.update_source({ source: source, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_source source: source, update_mask: update_mask do |response, operation|
+      c.update_source source: source, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_source ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask) do |response, operation|
+      c.update_source ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_source({ source: source, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_source({ source: source, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_source(::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_source(::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2712,36 +2712,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_security_marks_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }) do |response, operation|
+      c.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_security_marks security_marks: security_marks, update_mask: update_mask, start_time: start_time do |response, operation|
+      c.update_security_marks security_marks: security_marks, update_mask: update_mask, start_time: start_time do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_security_marks ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time) do |response, operation|
+      c.update_security_marks ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }, grpc_options) do |response, operation|
+      c.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_security_marks(::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), grpc_options) do |response, operation|
+      c.update_security_marks(::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2774,36 +2774,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_big_query_export({ parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id }) do |response, operation|
+      c.create_big_query_export({ parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_big_query_export parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id do |response, operation|
+      c.create_big_query_export parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_big_query_export ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new(parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id) do |response, operation|
+      c.create_big_query_export ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new(parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_big_query_export({ parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id }, grpc_options) do |response, operation|
+      c.create_big_query_export({ parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_big_query_export(::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new(parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id), grpc_options) do |response, operation|
+      c.create_big_query_export(::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new(parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2832,36 +2832,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_big_query_export({ name: name }) do |response, operation|
+      c.delete_big_query_export({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_big_query_export name: name do |response, operation|
+      c.delete_big_query_export name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_big_query_export ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new(name: name) do |response, operation|
+      c.delete_big_query_export ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_big_query_export({ name: name }, grpc_options) do |response, operation|
+      c.delete_big_query_export({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_big_query_export(::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_big_query_export(::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2892,36 +2892,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |response, operation|
+      c.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |response, operation|
+      c.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_big_query_export ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |response, operation|
+      c.update_big_query_export ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_big_query_export(::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_big_query_export(::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2954,40 +2954,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_big_query_exports_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_big_query_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_big_query_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_big_query_exports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_big_query_exports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_big_query_exports ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_big_query_exports ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_big_query_exports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_big_query_exports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_big_query_exports(::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_big_query_exports(::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3019,36 +3019,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_event_threat_detection_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module }) do |response, operation|
+      c.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_event_threat_detection_custom_module parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module do |response, operation|
+      c.create_event_threat_detection_custom_module parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module) do |response, operation|
+      c.create_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module }, grpc_options) do |response, operation|
+      c.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module), grpc_options) do |response, operation|
+      c.create_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3077,36 +3077,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_event_threat_detection_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_event_threat_detection_custom_module({ name: name }) do |response, operation|
+      c.delete_event_threat_detection_custom_module({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_event_threat_detection_custom_module name: name do |response, operation|
+      c.delete_event_threat_detection_custom_module name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name) do |response, operation|
+      c.delete_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_event_threat_detection_custom_module({ name: name }, grpc_options) do |response, operation|
+      c.delete_event_threat_detection_custom_module({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3135,36 +3135,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_event_threat_detection_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_event_threat_detection_custom_module({ name: name }) do |response, operation|
+      c.get_event_threat_detection_custom_module({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_event_threat_detection_custom_module name: name do |response, operation|
+      c.get_event_threat_detection_custom_module name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name) do |response, operation|
+      c.get_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_event_threat_detection_custom_module({ name: name }, grpc_options) do |response, operation|
+      c.get_event_threat_detection_custom_module({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3197,40 +3197,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_descendant_event_threat_detection_custom_modules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_descendant_event_threat_detection_custom_modules parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_descendant_event_threat_detection_custom_modules parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_descendant_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_descendant_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_descendant_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_descendant_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenter::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3264,40 +3264,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_event_threat_detection_custom_modules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_event_threat_detection_custom_modules parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_event_threat_detection_custom_modules parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3329,36 +3329,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_event_threat_detection_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_event_threat_detection_custom_module({ event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask }) do |response, operation|
+      c.update_event_threat_detection_custom_module({ event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_event_threat_detection_custom_module event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask do |response, operation|
+      c.update_event_threat_detection_custom_module event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest.new(event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask) do |response, operation|
+      c.update_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest.new(event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_event_threat_detection_custom_module({ event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_event_threat_detection_custom_module({ event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest.new(event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::UpdateEventThreatDetectionCustomModuleRequest.new(event_threat_detection_custom_module: event_threat_detection_custom_module, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3391,36 +3391,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, validate_event_threat_detection_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }) do |response, operation|
+      c.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.validate_event_threat_detection_custom_module parent: parent, raw_text: raw_text, type: type do |response, operation|
+      c.validate_event_threat_detection_custom_module parent: parent, raw_text: raw_text, type: type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.validate_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type) do |response, operation|
+      c.validate_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }, grpc_options) do |response, operation|
+      c.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.validate_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type), grpc_options) do |response, operation|
+      c.validate_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3449,36 +3449,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_effective_event_threat_detection_custom_module_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_effective_event_threat_detection_custom_module({ name: name }) do |response, operation|
+      c.get_effective_event_threat_detection_custom_module({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_effective_event_threat_detection_custom_module name: name do |response, operation|
+      c.get_effective_event_threat_detection_custom_module name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_effective_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name) do |response, operation|
+      c.get_effective_event_threat_detection_custom_module ::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_effective_event_threat_detection_custom_module({ name: name }, grpc_options) do |response, operation|
+      c.get_effective_event_threat_detection_custom_module({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_effective_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_effective_event_threat_detection_custom_module(::Google::Cloud::SecurityCenter::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3511,40 +3511,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_effective_event_threat_detection_custom_modules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_effective_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_effective_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_effective_event_threat_detection_custom_modules parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_effective_event_threat_detection_custom_modules parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_effective_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_effective_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_effective_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_effective_event_threat_detection_custom_modules({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_effective_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_effective_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3576,36 +3576,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, batch_create_resource_value_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_resource_value_configs({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_resource_value_configs({ parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_resource_value_configs parent: parent, requests: requests do |response, operation|
+      c.batch_create_resource_value_configs parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_resource_value_configs ::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_resource_value_configs ::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_resource_value_configs({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_resource_value_configs({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_resource_value_configs(::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_resource_value_configs(::Google::Cloud::SecurityCenter::V1::BatchCreateResourceValueConfigsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3634,36 +3634,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, delete_resource_value_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_resource_value_config({ name: name }) do |response, operation|
+      c.delete_resource_value_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_resource_value_config name: name do |response, operation|
+      c.delete_resource_value_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_resource_value_config ::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest.new(name: name) do |response, operation|
+      c.delete_resource_value_config ::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_resource_value_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_resource_value_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_resource_value_config(::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_resource_value_config(::Google::Cloud::SecurityCenter::V1::DeleteResourceValueConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3692,36 +3692,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_resource_value_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_resource_value_config({ name: name }) do |response, operation|
+      c.get_resource_value_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_resource_value_config name: name do |response, operation|
+      c.get_resource_value_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_resource_value_config ::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest.new(name: name) do |response, operation|
+      c.get_resource_value_config ::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_resource_value_config({ name: name }, grpc_options) do |response, operation|
+      c.get_resource_value_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_resource_value_config(::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_resource_value_config(::Google::Cloud::SecurityCenter::V1::GetResourceValueConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3754,40 +3754,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_resource_value_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_resource_value_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_resource_value_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_resource_value_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_resource_value_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_resource_value_configs ::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_resource_value_configs ::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_resource_value_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_resource_value_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_resource_value_configs(::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_resource_value_configs(::Google::Cloud::SecurityCenter::V1::ListResourceValueConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3819,36 +3819,36 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, update_resource_value_config_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_resource_value_config({ resource_value_config: resource_value_config, update_mask: update_mask }) do |response, operation|
+      c.update_resource_value_config({ resource_value_config: resource_value_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_resource_value_config resource_value_config: resource_value_config, update_mask: update_mask do |response, operation|
+      c.update_resource_value_config resource_value_config: resource_value_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_resource_value_config ::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest.new(resource_value_config: resource_value_config, update_mask: update_mask) do |response, operation|
+      c.update_resource_value_config ::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest.new(resource_value_config: resource_value_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_resource_value_config({ resource_value_config: resource_value_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_resource_value_config({ resource_value_config: resource_value_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_resource_value_config(::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest.new(resource_value_config: resource_value_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_resource_value_config(::Google::Cloud::SecurityCenter::V1::UpdateResourceValueConfigRequest.new(resource_value_config: resource_value_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3885,40 +3885,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_valued_resources_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_valued_resources({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by }) do |response, operation|
+      c.list_valued_resources({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_valued_resources parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by do |response, operation|
+      c.list_valued_resources parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_valued_resources ::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by) do |response, operation|
+      c.list_valued_resources ::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_valued_resources({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_valued_resources({ parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_valued_resources(::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by), grpc_options) do |response, operation|
+      c.list_valued_resources(::Google::Cloud::SecurityCenter::V1::ListValuedResourcesRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3954,40 +3954,40 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_attack_paths_client_stub do
       # Create client
-      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+      c = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_attack_paths({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_attack_paths({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_attack_paths parent: parent, filter: filter, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_attack_paths parent: parent, filter: filter, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_attack_paths ::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_attack_paths ::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_attack_paths({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_attack_paths({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_attack_paths(::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_attack_paths(::Google::Cloud::SecurityCenter::V1::ListAttackPathsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

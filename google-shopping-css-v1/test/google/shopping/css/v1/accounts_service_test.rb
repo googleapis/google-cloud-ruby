@@ -92,40 +92,40 @@ class ::Google::Shopping::Css::V1::AccountsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_child_accounts_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_child_accounts parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_child_accounts parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_child_accounts ::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_child_accounts ::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_child_accounts(::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_child_accounts(::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -158,36 +158,36 @@ class ::Google::Shopping::Css::V1::AccountsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_account_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_account({ name: name, parent: parent }) do |response, operation|
+      c.get_account({ name: name, parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_account name: name, parent: parent do |response, operation|
+      c.get_account name: name, parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_account ::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent) do |response, operation|
+      c.get_account ::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_account({ name: name, parent: parent }, grpc_options) do |response, operation|
+      c.get_account({ name: name, parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_account(::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent), grpc_options) do |response, operation|
+      c.get_account(::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,36 +221,36 @@ class ::Google::Shopping::Css::V1::AccountsService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_labels_client_stub do
       # Create client
-      client = ::Google::Shopping::Css::V1::AccountsService::Client.new do |config|
+      c = ::Google::Shopping::Css::V1::AccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_labels({ name: name, label_ids: label_ids, parent: parent }) do |response, operation|
+      c.update_labels({ name: name, label_ids: label_ids, parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_labels name: name, label_ids: label_ids, parent: parent do |response, operation|
+      c.update_labels name: name, label_ids: label_ids, parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_labels ::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent) do |response, operation|
+      c.update_labels ::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_labels({ name: name, label_ids: label_ids, parent: parent }, grpc_options) do |response, operation|
+      c.update_labels({ name: name, label_ids: label_ids, parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_labels(::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent), grpc_options) do |response, operation|
+      c.update_labels(::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

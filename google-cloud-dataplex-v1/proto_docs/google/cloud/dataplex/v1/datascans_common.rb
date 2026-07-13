@@ -22,10 +22,11 @@ module Google
     module Dataplex
       module V1
         # The status of publishing the data scan result as Dataplex Universal Catalog
-        # metadata.
+        # metadata. Multiple DataScan log events may exist, each with different
+        # publishing information depending on the type of publishing triggered.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dataplex::V1::DataScanCatalogPublishingStatus::State]
-        #     Output only. Execution state for catalog publishing.
+        #     Output only. Execution state for publishing.
         class DataScanCatalogPublishingStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -35,11 +36,14 @@ module Google
             # The publishing state is unspecified.
             STATE_UNSPECIFIED = 0
 
-            # Publish to catalog completed successfully.
+            # Publishing to catalog completed successfully.
             SUCCEEDED = 1
 
             # Publish to catalog failed.
             FAILED = 2
+
+            # Publishing to catalog was skipped.
+            SKIPPED = 3
           end
         end
       end

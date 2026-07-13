@@ -101,32 +101,32 @@ class ::Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::ClientTest < Minitest::T
     ::Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::ServiceStub.stub :transcode_collect_api_data_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, collect_api_data_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.collect_api_data({ location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data }) do |_result, response|
+        c.collect_api_data({ location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.collect_api_data location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data do |_result, response|
+        c.collect_api_data location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.collect_api_data ::Google::Cloud::ApiHub::V1::CollectApiDataRequest.new(location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data) do |_result, response|
+        c.collect_api_data ::Google::Cloud::ApiHub::V1::CollectApiDataRequest.new(location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.collect_api_data({ location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data }, call_options) do |_result, response|
+        c.collect_api_data({ location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.collect_api_data(::Google::Cloud::ApiHub::V1::CollectApiDataRequest.new(location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data), call_options) do |_result, response|
+        c.collect_api_data(::Google::Cloud::ApiHub::V1::CollectApiDataRequest.new(location: location, collection_type: collection_type, plugin_instance: plugin_instance, action_id: action_id, api_data: api_data), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -99,32 +99,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ServiceStub.stub :transcode_create_framework_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_framework_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_framework_deployment({ parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment }) do |_result, response|
+        c.create_framework_deployment({ parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_framework_deployment parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment do |_result, response|
+        c.create_framework_deployment parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_framework_deployment ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkDeploymentRequest.new(parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment) do |_result, response|
+        c.create_framework_deployment ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkDeploymentRequest.new(parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_framework_deployment({ parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment }, call_options) do |_result, response|
+        c.create_framework_deployment({ parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_framework_deployment(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkDeploymentRequest.new(parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment), call_options) do |_result, response|
+        c.create_framework_deployment(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkDeploymentRequest.new(parent: parent, framework_deployment_id: framework_deployment_id, framework_deployment: framework_deployment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ServiceStub.stub :transcode_delete_framework_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_framework_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_framework_deployment({ name: name, etag: etag }) do |_result, response|
+        c.delete_framework_deployment({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_framework_deployment name: name, etag: etag do |_result, response|
+        c.delete_framework_deployment name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_framework_deployment ::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkDeploymentRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_framework_deployment ::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkDeploymentRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_framework_deployment({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_framework_deployment({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_framework_deployment(::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkDeploymentRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_framework_deployment(::Google::Cloud::CloudSecurityCompliance::V1::DeleteFrameworkDeploymentRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ServiceStub.stub :transcode_get_framework_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_framework_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_framework_deployment({ name: name }) do |_result, response|
+        c.get_framework_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_framework_deployment name: name do |_result, response|
+        c.get_framework_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_framework_deployment ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkDeploymentRequest.new(name: name) do |_result, response|
+        c.get_framework_deployment ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_framework_deployment({ name: name }, call_options) do |_result, response|
+        c.get_framework_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_framework_deployment(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.get_framework_deployment(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ServiceStub.stub :transcode_list_framework_deployments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_framework_deployments_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_framework_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_framework_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_framework_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_framework_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_framework_deployments ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_framework_deployments ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_framework_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_framework_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_framework_deployments(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_framework_deployments(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ServiceStub.stub :transcode_get_cloud_control_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cloud_control_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cloud_control_deployment({ name: name }) do |_result, response|
+        c.get_cloud_control_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cloud_control_deployment name: name do |_result, response|
+        c.get_cloud_control_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cloud_control_deployment ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlDeploymentRequest.new(name: name) do |_result, response|
+        c.get_cloud_control_deployment ::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cloud_control_deployment({ name: name }, call_options) do |_result, response|
+        c.get_cloud_control_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cloud_control_deployment(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.get_cloud_control_deployment(::Google::Cloud::CloudSecurityCompliance::V1::GetCloudControlDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ClientTest
     ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::ServiceStub.stub :transcode_list_cloud_control_deployments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cloud_control_deployments_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Deployment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cloud_control_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_cloud_control_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cloud_control_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_cloud_control_deployments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cloud_control_deployments ::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_cloud_control_deployments ::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cloud_control_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_cloud_control_deployments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cloud_control_deployments(::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_cloud_control_deployments(::Google::Cloud::CloudSecurityCompliance::V1::ListCloudControlDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

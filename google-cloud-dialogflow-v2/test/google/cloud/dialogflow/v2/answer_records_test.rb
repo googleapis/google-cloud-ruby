@@ -88,40 +88,40 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_answer_records_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_answer_records parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_answer_records parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_answer_records ::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_answer_records ::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_answer_records({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_answer_records(::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_answer_records(::Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_answer_record_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_answer_record({ answer_record: answer_record, update_mask: update_mask }) do |response, operation|
+      c.update_answer_record({ answer_record: answer_record, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_answer_record answer_record: answer_record, update_mask: update_mask do |response, operation|
+      c.update_answer_record answer_record: answer_record, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_answer_record ::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask) do |response, operation|
+      c.update_answer_record ::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_answer_record({ answer_record: answer_record, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_answer_record({ answer_record: answer_record, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_answer_record(::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_answer_record(::Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new(answer_record: answer_record, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

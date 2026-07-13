@@ -102,32 +102,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_export_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }) do |_result, response|
+        c.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types do |_result, response|
+        c.export_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types) do |_result, response|
+        c.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }, call_options) do |_result, response|
+        c.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types), call_options) do |_result, response|
+        c.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -162,32 +162,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }) do |_result, response|
+        c.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types do |_result, response|
+        c.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types) do |_result, response|
+        c.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }, call_options) do |_result, response|
+        c.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types), call_options) do |_result, response|
+        c.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -220,32 +220,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_batch_get_assets_history_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_get_assets_history_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }) do |_result, response|
+        c.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_get_assets_history parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types do |_result, response|
+        c.batch_get_assets_history parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types) do |_result, response|
+        c.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }, call_options) do |_result, response|
+        c.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types), call_options) do |_result, response|
+        c.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -276,32 +276,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_create_feed_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_feed_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_feed({ parent: parent, feed_id: feed_id, feed: feed }) do |_result, response|
+        c.create_feed({ parent: parent, feed_id: feed_id, feed: feed }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_feed parent: parent, feed_id: feed_id, feed: feed do |_result, response|
+        c.create_feed parent: parent, feed_id: feed_id, feed: feed do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_feed ::Google::Cloud::Asset::V1::CreateFeedRequest.new(parent: parent, feed_id: feed_id, feed: feed) do |_result, response|
+        c.create_feed ::Google::Cloud::Asset::V1::CreateFeedRequest.new(parent: parent, feed_id: feed_id, feed: feed) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_feed({ parent: parent, feed_id: feed_id, feed: feed }, call_options) do |_result, response|
+        c.create_feed({ parent: parent, feed_id: feed_id, feed: feed }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_feed(::Google::Cloud::Asset::V1::CreateFeedRequest.new(parent: parent, feed_id: feed_id, feed: feed), call_options) do |_result, response|
+        c.create_feed(::Google::Cloud::Asset::V1::CreateFeedRequest.new(parent: parent, feed_id: feed_id, feed: feed), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -330,32 +330,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_get_feed_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_feed_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_feed({ name: name }) do |_result, response|
+        c.get_feed({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_feed name: name do |_result, response|
+        c.get_feed name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_feed ::Google::Cloud::Asset::V1::GetFeedRequest.new(name: name) do |_result, response|
+        c.get_feed ::Google::Cloud::Asset::V1::GetFeedRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_feed({ name: name }, call_options) do |_result, response|
+        c.get_feed({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_feed(::Google::Cloud::Asset::V1::GetFeedRequest.new(name: name), call_options) do |_result, response|
+        c.get_feed(::Google::Cloud::Asset::V1::GetFeedRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -384,32 +384,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_list_feeds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_feeds_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_feeds({ parent: parent }) do |_result, response|
+        c.list_feeds({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_feeds parent: parent do |_result, response|
+        c.list_feeds parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_feeds ::Google::Cloud::Asset::V1::ListFeedsRequest.new(parent: parent) do |_result, response|
+        c.list_feeds ::Google::Cloud::Asset::V1::ListFeedsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_feeds({ parent: parent }, call_options) do |_result, response|
+        c.list_feeds({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_feeds(::Google::Cloud::Asset::V1::ListFeedsRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_feeds(::Google::Cloud::Asset::V1::ListFeedsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -439,32 +439,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_update_feed_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_feed_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_feed({ feed: feed, update_mask: update_mask }) do |_result, response|
+        c.update_feed({ feed: feed, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_feed feed: feed, update_mask: update_mask do |_result, response|
+        c.update_feed feed: feed, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_feed ::Google::Cloud::Asset::V1::UpdateFeedRequest.new(feed: feed, update_mask: update_mask) do |_result, response|
+        c.update_feed ::Google::Cloud::Asset::V1::UpdateFeedRequest.new(feed: feed, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_feed({ feed: feed, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_feed({ feed: feed, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_feed(::Google::Cloud::Asset::V1::UpdateFeedRequest.new(feed: feed, update_mask: update_mask), call_options) do |_result, response|
+        c.update_feed(::Google::Cloud::Asset::V1::UpdateFeedRequest.new(feed: feed, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -493,32 +493,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_delete_feed_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_feed_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_feed({ name: name }) do |_result, response|
+        c.delete_feed({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_feed name: name do |_result, response|
+        c.delete_feed name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_feed ::Google::Cloud::Asset::V1::DeleteFeedRequest.new(name: name) do |_result, response|
+        c.delete_feed ::Google::Cloud::Asset::V1::DeleteFeedRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_feed({ name: name }, call_options) do |_result, response|
+        c.delete_feed({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_feed(::Google::Cloud::Asset::V1::DeleteFeedRequest.new(name: name), call_options) do |_result, response|
+        c.delete_feed(::Google::Cloud::Asset::V1::DeleteFeedRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -553,32 +553,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_search_all_resources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_all_resources_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |_result, response|
+        c.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_all_resources scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |_result, response|
+        c.search_all_resources scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_all_resources ::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |_result, response|
+        c.search_all_resources ::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, call_options) do |_result, response|
+        c.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_all_resources(::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), call_options) do |_result, response|
+        c.search_all_resources(::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -612,32 +612,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_search_all_iam_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_all_iam_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }) do |_result, response|
+        c.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_all_iam_policies scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by do |_result, response|
+        c.search_all_iam_policies scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by) do |_result, response|
+        c.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }, call_options) do |_result, response|
+        c.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by), call_options) do |_result, response|
+        c.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -668,32 +668,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_analyze_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_iam_policy({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout }) do |_result, response|
+        c.analyze_iam_policy({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_iam_policy analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout do |_result, response|
+        c.analyze_iam_policy analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_iam_policy ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout) do |_result, response|
+        c.analyze_iam_policy ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_iam_policy({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout }, call_options) do |_result, response|
+        c.analyze_iam_policy({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_iam_policy(::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout), call_options) do |_result, response|
+        c.analyze_iam_policy(::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -724,32 +724,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_analyze_iam_policy_longrunning_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_iam_policy_longrunning_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_iam_policy_longrunning({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config }) do |_result, response|
+        c.analyze_iam_policy_longrunning({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_iam_policy_longrunning analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config do |_result, response|
+        c.analyze_iam_policy_longrunning analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_iam_policy_longrunning ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config) do |_result, response|
+        c.analyze_iam_policy_longrunning ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_iam_policy_longrunning({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config }, call_options) do |_result, response|
+        c.analyze_iam_policy_longrunning({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_iam_policy_longrunning(::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config), call_options) do |_result, response|
+        c.analyze_iam_policy_longrunning(::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -780,32 +780,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_analyze_move_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_move_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_move({ resource: resource, destination_parent: destination_parent, view: view }) do |_result, response|
+        c.analyze_move({ resource: resource, destination_parent: destination_parent, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_move resource: resource, destination_parent: destination_parent, view: view do |_result, response|
+        c.analyze_move resource: resource, destination_parent: destination_parent, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_move ::Google::Cloud::Asset::V1::AnalyzeMoveRequest.new(resource: resource, destination_parent: destination_parent, view: view) do |_result, response|
+        c.analyze_move ::Google::Cloud::Asset::V1::AnalyzeMoveRequest.new(resource: resource, destination_parent: destination_parent, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_move({ resource: resource, destination_parent: destination_parent, view: view }, call_options) do |_result, response|
+        c.analyze_move({ resource: resource, destination_parent: destination_parent, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_move(::Google::Cloud::Asset::V1::AnalyzeMoveRequest.new(resource: resource, destination_parent: destination_parent, view: view), call_options) do |_result, response|
+        c.analyze_move(::Google::Cloud::Asset::V1::AnalyzeMoveRequest.new(resource: resource, destination_parent: destination_parent, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -840,32 +840,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_query_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }) do |_result, response|
+        c.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_assets parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config do |_result, response|
+        c.query_assets parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_assets ::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config) do |_result, response|
+        c.query_assets ::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }, call_options) do |_result, response|
+        c.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_assets(::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config), call_options) do |_result, response|
+        c.query_assets(::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -896,32 +896,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_create_saved_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_saved_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_saved_query({ parent: parent, saved_query: saved_query, saved_query_id: saved_query_id }) do |_result, response|
+        c.create_saved_query({ parent: parent, saved_query: saved_query, saved_query_id: saved_query_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_saved_query parent: parent, saved_query: saved_query, saved_query_id: saved_query_id do |_result, response|
+        c.create_saved_query parent: parent, saved_query: saved_query, saved_query_id: saved_query_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_saved_query ::Google::Cloud::Asset::V1::CreateSavedQueryRequest.new(parent: parent, saved_query: saved_query, saved_query_id: saved_query_id) do |_result, response|
+        c.create_saved_query ::Google::Cloud::Asset::V1::CreateSavedQueryRequest.new(parent: parent, saved_query: saved_query, saved_query_id: saved_query_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_saved_query({ parent: parent, saved_query: saved_query, saved_query_id: saved_query_id }, call_options) do |_result, response|
+        c.create_saved_query({ parent: parent, saved_query: saved_query, saved_query_id: saved_query_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_saved_query(::Google::Cloud::Asset::V1::CreateSavedQueryRequest.new(parent: parent, saved_query: saved_query, saved_query_id: saved_query_id), call_options) do |_result, response|
+        c.create_saved_query(::Google::Cloud::Asset::V1::CreateSavedQueryRequest.new(parent: parent, saved_query: saved_query, saved_query_id: saved_query_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -950,32 +950,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_get_saved_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_saved_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_saved_query({ name: name }) do |_result, response|
+        c.get_saved_query({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_saved_query name: name do |_result, response|
+        c.get_saved_query name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_saved_query ::Google::Cloud::Asset::V1::GetSavedQueryRequest.new(name: name) do |_result, response|
+        c.get_saved_query ::Google::Cloud::Asset::V1::GetSavedQueryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_saved_query({ name: name }, call_options) do |_result, response|
+        c.get_saved_query({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_saved_query(::Google::Cloud::Asset::V1::GetSavedQueryRequest.new(name: name), call_options) do |_result, response|
+        c.get_saved_query(::Google::Cloud::Asset::V1::GetSavedQueryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1007,32 +1007,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_list_saved_queries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_saved_queries_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_saved_queries parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_saved_queries parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_saved_queries ::Google::Cloud::Asset::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_saved_queries ::Google::Cloud::Asset::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_saved_queries(::Google::Cloud::Asset::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_saved_queries(::Google::Cloud::Asset::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1062,32 +1062,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_update_saved_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_saved_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_saved_query({ saved_query: saved_query, update_mask: update_mask }) do |_result, response|
+        c.update_saved_query({ saved_query: saved_query, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_saved_query saved_query: saved_query, update_mask: update_mask do |_result, response|
+        c.update_saved_query saved_query: saved_query, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_saved_query ::Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new(saved_query: saved_query, update_mask: update_mask) do |_result, response|
+        c.update_saved_query ::Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new(saved_query: saved_query, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_saved_query({ saved_query: saved_query, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_saved_query({ saved_query: saved_query, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_saved_query(::Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new(saved_query: saved_query, update_mask: update_mask), call_options) do |_result, response|
+        c.update_saved_query(::Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new(saved_query: saved_query, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1116,32 +1116,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_delete_saved_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_saved_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_saved_query({ name: name }) do |_result, response|
+        c.delete_saved_query({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_saved_query name: name do |_result, response|
+        c.delete_saved_query name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_saved_query ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new(name: name) do |_result, response|
+        c.delete_saved_query ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_saved_query({ name: name }, call_options) do |_result, response|
+        c.delete_saved_query({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_saved_query(::Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_saved_query(::Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1171,32 +1171,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_batch_get_effective_iam_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_get_effective_iam_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_get_effective_iam_policies({ scope: scope, names: names }) do |_result, response|
+        c.batch_get_effective_iam_policies({ scope: scope, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_get_effective_iam_policies scope: scope, names: names do |_result, response|
+        c.batch_get_effective_iam_policies scope: scope, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_get_effective_iam_policies ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new(scope: scope, names: names) do |_result, response|
+        c.batch_get_effective_iam_policies ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new(scope: scope, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_get_effective_iam_policies({ scope: scope, names: names }, call_options) do |_result, response|
+        c.batch_get_effective_iam_policies({ scope: scope, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_get_effective_iam_policies(::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new(scope: scope, names: names), call_options) do |_result, response|
+        c.batch_get_effective_iam_policies(::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new(scope: scope, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1229,32 +1229,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_analyze_org_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_org_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_org_policies scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.analyze_org_policies scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_org_policies ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.analyze_org_policies ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_org_policies(::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.analyze_org_policies(::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1287,32 +1287,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_analyze_org_policy_governed_containers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_org_policy_governed_containers_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_org_policy_governed_containers scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.analyze_org_policy_governed_containers scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_org_policy_governed_containers ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.analyze_org_policy_governed_containers ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_org_policy_governed_containers(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.analyze_org_policy_governed_containers(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1345,32 +1345,32 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Asset::V1::AssetService::Rest::ServiceStub.stub :transcode_analyze_org_policy_governed_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_org_policy_governed_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Asset::V1::AssetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_org_policy_governed_assets scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.analyze_org_policy_governed_assets scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_org_policy_governed_assets ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.analyze_org_policy_governed_assets ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_org_policy_governed_assets(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.analyze_org_policy_governed_assets(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

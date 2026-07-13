@@ -107,32 +107,32 @@ class ::Google::Cloud::Retail::V2::ConversationalSearchService::Rest::ClientTest
     ::Google::Cloud::Retail::V2::ConversationalSearchService::Rest::ServiceStub.stub :transcode_conversational_search_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, conversational_search_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ConversationalSearchService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ConversationalSearchService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }) do |_result, response|
+        c.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.conversational_search placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings do |_result, response|
+        c.conversational_search placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.conversational_search ::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings) do |_result, response|
+        c.conversational_search ::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }, call_options) do |_result, response|
+        c.conversational_search({ placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.conversational_search(::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings), call_options) do |_result, response|
+        c.conversational_search(::Google::Cloud::Retail::V2::ConversationalSearchRequest.new(placement: placement, branch: branch, query: query, page_categories: page_categories, conversation_id: conversation_id, search_params: search_params, visitor_id: visitor_id, user_info: user_info, conversational_filtering_spec: conversational_filtering_spec, user_labels: user_labels, safety_settings: safety_settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 

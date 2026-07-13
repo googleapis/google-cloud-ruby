@@ -86,40 +86,40 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_report_client_stub do
       # Create client
-      client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
+      c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_report({ parent: parent, report_id: report_id, report: report }) do |response, operation|
+      c.create_report({ parent: parent, report_id: report_id, report: report }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_report parent: parent, report_id: report_id, report: report do |response, operation|
+      c.create_report parent: parent, report_id: report_id, report: report do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_report ::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report) do |response, operation|
+      c.create_report ::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_report({ parent: parent, report_id: report_id, report: report }, grpc_options) do |response, operation|
+      c.create_report({ parent: parent, report_id: report_id, report: report }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_report(::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report), grpc_options) do |response, operation|
+      c.create_report(::Google::Cloud::Appoptimize::V1beta::CreateReportRequest.new(parent: parent, report_id: report_id, report: report), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_report_client_stub do
       # Create client
-      client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
+      c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_report({ name: name }) do |response, operation|
+      c.get_report({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_report name: name do |response, operation|
+      c.get_report name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_report ::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name) do |response, operation|
+      c.get_report ::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_report({ name: name }, grpc_options) do |response, operation|
+      c.get_report({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_report(::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_report(::Google::Cloud::Appoptimize::V1beta::GetReportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_reports_client_stub do
       # Create client
-      client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
+      c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_reports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_reports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_reports ::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_reports ::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_reports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_reports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_reports(::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_reports(::Google::Cloud::Appoptimize::V1beta::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -276,36 +276,36 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_report_client_stub do
       # Create client
-      client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
+      c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_report({ name: name, allow_missing: allow_missing }) do |response, operation|
+      c.delete_report({ name: name, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_report name: name, allow_missing: allow_missing do |response, operation|
+      c.delete_report name: name, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_report ::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
+      c.delete_report ::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_report({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.delete_report({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_report(::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.delete_report(::Google::Cloud::Appoptimize::V1beta::DeleteReportRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,40 +338,40 @@ class ::Google::Cloud::Appoptimize::V1beta::AppOptimize::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, read_report_client_stub do
       # Create client
-      client = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
+      c = ::Google::Cloud::Appoptimize::V1beta::AppOptimize::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_report({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.read_report({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_report name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.read_report name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_report ::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.read_report ::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_report({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.read_report({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_report(::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.read_report(::Google::Cloud::Appoptimize::V1beta::ReadReportRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

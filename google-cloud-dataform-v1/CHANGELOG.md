@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.5.0 (2026-06-30)
+
+#### Features
+
+* Add Developer Connect integration for Git repository authentication ([#34672](https://github.com/googleapis/google-cloud-ruby/issues/34672)) 
+* Add effective default branch field for repositories 
+#### Documentation
+
+* Clarify field usage guidelines and default values in API reference documentation 
+
+### 0.4.0 (2026-06-11)
+
+#### Features
+
+* add folders and teamFolders related changes to v1 
+* publish client batch config schema 
+* update gapic-common dependency to 1.3 and document retry jitter ([#33330](https://github.com/googleapis/google-cloud-ruby/issues/33330)) 
+
 ### 0.3.0 (2026-03-19)
 
 #### Features

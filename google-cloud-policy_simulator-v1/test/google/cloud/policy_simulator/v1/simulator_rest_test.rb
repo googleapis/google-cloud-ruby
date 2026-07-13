@@ -97,32 +97,32 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::ClientTest < Minite
     ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::ServiceStub.stub :transcode_get_replay_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_replay_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_replay({ name: name }) do |_result, response|
+        c.get_replay({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_replay name: name do |_result, response|
+        c.get_replay name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_replay ::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name) do |_result, response|
+        c.get_replay ::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_replay({ name: name }, call_options) do |_result, response|
+        c.get_replay({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_replay(::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name), call_options) do |_result, response|
+        c.get_replay(::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::ClientTest < Minite
     ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::ServiceStub.stub :transcode_create_replay_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_replay_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_replay({ parent: parent, replay: replay }) do |_result, response|
+        c.create_replay({ parent: parent, replay: replay }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_replay parent: parent, replay: replay do |_result, response|
+        c.create_replay parent: parent, replay: replay do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_replay ::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay) do |_result, response|
+        c.create_replay ::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_replay({ parent: parent, replay: replay }, call_options) do |_result, response|
+        c.create_replay({ parent: parent, replay: replay }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_replay(::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay), call_options) do |_result, response|
+        c.create_replay(::Google::Cloud::PolicySimulator::V1::CreateReplayRequest.new(parent: parent, replay: replay), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::ClientTest < Minite
     ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::ServiceStub.stub :transcode_list_replay_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_replay_results_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::Simulator::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_replay_results parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_replay_results parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_replay_results ::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_replay_results ::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_replay_results({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_replay_results(::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_replay_results(::Google::Cloud::PolicySimulator::V1::ListReplayResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

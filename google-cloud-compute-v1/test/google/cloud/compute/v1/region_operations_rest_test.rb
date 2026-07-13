@@ -99,32 +99,32 @@ class ::Google::Cloud::Compute::V1::RegionOperations::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::RegionOperations::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ operation: operation, project: project, region: region }) do |_result, response|
+        c.delete({ operation: operation, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete operation: operation, project: project, region: region do |_result, response|
+        c.delete operation: operation, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteRegionOperationRequest.new(operation: operation, project: project, region: region) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteRegionOperationRequest.new(operation: operation, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ operation: operation, project: project, region: region }, call_options) do |_result, response|
+        c.delete({ operation: operation, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteRegionOperationRequest.new(operation: operation, project: project, region: region), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteRegionOperationRequest.new(operation: operation, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Compute::V1::RegionOperations::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::RegionOperations::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ operation: operation, project: project, region: region }) do |_result, response|
+        c.get({ operation: operation, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get operation: operation, project: project, region: region do |_result, response|
+        c.get operation: operation, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetRegionOperationRequest.new(operation: operation, project: project, region: region) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetRegionOperationRequest.new(operation: operation, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ operation: operation, project: project, region: region }, call_options) do |_result, response|
+        c.get({ operation: operation, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetRegionOperationRequest.new(operation: operation, project: project, region: region), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetRegionOperationRequest.new(operation: operation, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -215,32 +215,32 @@ class ::Google::Cloud::Compute::V1::RegionOperations::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::RegionOperations::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListRegionOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRegionOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListRegionOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRegionOperationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -271,32 +271,32 @@ class ::Google::Cloud::Compute::V1::RegionOperations::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::RegionOperations::Rest::ServiceStub.stub :transcode_wait_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, wait_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.wait({ operation: operation, project: project, region: region }) do |_result, response|
+        c.wait({ operation: operation, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.wait operation: operation, project: project, region: region do |_result, response|
+        c.wait operation: operation, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.wait ::Google::Cloud::Compute::V1::WaitRegionOperationRequest.new(operation: operation, project: project, region: region) do |_result, response|
+        c.wait ::Google::Cloud::Compute::V1::WaitRegionOperationRequest.new(operation: operation, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.wait({ operation: operation, project: project, region: region }, call_options) do |_result, response|
+        c.wait({ operation: operation, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.wait(::Google::Cloud::Compute::V1::WaitRegionOperationRequest.new(operation: operation, project: project, region: region), call_options) do |_result, response|
+        c.wait(::Google::Cloud::Compute::V1::WaitRegionOperationRequest.new(operation: operation, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

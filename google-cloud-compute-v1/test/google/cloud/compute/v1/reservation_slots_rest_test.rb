@@ -100,32 +100,32 @@ class ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone }) do |_result, response|
+        c.get({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone do |_result, response|
+        c.get parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone }, call_options) do |_result, response|
+        c.get({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ServiceStub.stub :transcode_get_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_version({ parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone }) do |_result, response|
+        c.get_version({ parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_version parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone do |_result, response|
+        c.get_version parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_version ::Google::Cloud::Compute::V1::GetVersionReservationSlotRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone) do |_result, response|
+        c.get_version ::Google::Cloud::Compute::V1::GetVersionReservationSlotRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_version({ parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone }, call_options) do |_result, response|
+        c.get_version({ parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_version(::Google::Cloud::Compute::V1::GetVersionReservationSlotRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone), call_options) do |_result, response|
+        c.get_version(::Google::Cloud::Compute::V1::GetVersionReservationSlotRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_slot: reservation_slot, reservation_slots_get_version_request_resource: reservation_slots_get_version_request_resource, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -220,32 +220,32 @@ class ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListReservationSlotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListReservationSlotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListReservationSlotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListReservationSlotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -279,32 +279,32 @@ class ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ClientTest < Minites
     ::Google::Cloud::Compute::V1::ReservationSlots::Rest::ServiceStub.stub :transcode_update_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::ReservationSlots::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone }) do |_result, response|
+        c.update({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone do |_result, response|
+        c.update parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update ::Google::Cloud::Compute::V1::UpdateReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone) do |_result, response|
+        c.update ::Google::Cloud::Compute::V1::UpdateReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
+        c.update({ parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update(::Google::Cloud::Compute::V1::UpdateReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone), call_options) do |_result, response|
+        c.update(::Google::Cloud::Compute::V1::UpdateReservationSlotRequest.new(parent_name: parent_name, project: project, reservation_slot: reservation_slot, reservation_slot_resource: reservation_slot_resource, update_mask: update_mask, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

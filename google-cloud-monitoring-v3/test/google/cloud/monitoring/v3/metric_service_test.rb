@@ -88,40 +88,40 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_monitored_resource_descriptors_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_monitored_resource_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_monitored_resource_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_monitored_resource_descriptors name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_monitored_resource_descriptors name: name, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_monitored_resource_descriptors ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_monitored_resource_descriptors ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_monitored_resource_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_monitored_resource_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_monitored_resource_descriptors(::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_monitored_resource_descriptors(::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_monitored_resource_descriptor_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_monitored_resource_descriptor({ name: name }) do |response, operation|
+      c.get_monitored_resource_descriptor({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_monitored_resource_descriptor name: name do |response, operation|
+      c.get_monitored_resource_descriptor name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_monitored_resource_descriptor ::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(name: name) do |response, operation|
+      c.get_monitored_resource_descriptor ::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_monitored_resource_descriptor({ name: name }, grpc_options) do |response, operation|
+      c.get_monitored_resource_descriptor({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_monitored_resource_descriptor(::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_monitored_resource_descriptor(::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_metric_descriptors_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_metric_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only }) do |response, operation|
+      c.list_metric_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_metric_descriptors name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only do |response, operation|
+      c.list_metric_descriptors name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_metric_descriptors ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only) do |response, operation|
+      c.list_metric_descriptors ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_metric_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only }, grpc_options) do |response, operation|
+      c.list_metric_descriptors({ name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_metric_descriptors(::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only), grpc_options) do |response, operation|
+      c.list_metric_descriptors(::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token, active_only: active_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,36 +280,36 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_metric_descriptor_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_metric_descriptor({ name: name }) do |response, operation|
+      c.get_metric_descriptor({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_metric_descriptor name: name do |response, operation|
+      c.get_metric_descriptor name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_metric_descriptor ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new(name: name) do |response, operation|
+      c.get_metric_descriptor ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_metric_descriptor({ name: name }, grpc_options) do |response, operation|
+      c.get_metric_descriptor({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_metric_descriptor(::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_metric_descriptor(::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,36 +340,36 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_metric_descriptor_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_metric_descriptor({ name: name, metric_descriptor: metric_descriptor }) do |response, operation|
+      c.create_metric_descriptor({ name: name, metric_descriptor: metric_descriptor }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_metric_descriptor name: name, metric_descriptor: metric_descriptor do |response, operation|
+      c.create_metric_descriptor name: name, metric_descriptor: metric_descriptor do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_metric_descriptor ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new(name: name, metric_descriptor: metric_descriptor) do |response, operation|
+      c.create_metric_descriptor ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new(name: name, metric_descriptor: metric_descriptor) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_metric_descriptor({ name: name, metric_descriptor: metric_descriptor }, grpc_options) do |response, operation|
+      c.create_metric_descriptor({ name: name, metric_descriptor: metric_descriptor }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_metric_descriptor(::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new(name: name, metric_descriptor: metric_descriptor), grpc_options) do |response, operation|
+      c.create_metric_descriptor(::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new(name: name, metric_descriptor: metric_descriptor), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,36 +398,36 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_metric_descriptor_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_metric_descriptor({ name: name }) do |response, operation|
+      c.delete_metric_descriptor({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_metric_descriptor name: name do |response, operation|
+      c.delete_metric_descriptor name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_metric_descriptor ::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new(name: name) do |response, operation|
+      c.delete_metric_descriptor ::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_metric_descriptor({ name: name }, grpc_options) do |response, operation|
+      c.delete_metric_descriptor({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_metric_descriptor(::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_metric_descriptor(::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -472,40 +472,40 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_time_series name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_time_series name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_time_series ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_time_series ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_time_series(::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_time_series(::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -537,36 +537,36 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_time_series({ name: name, time_series: time_series }) do |response, operation|
+      c.create_time_series({ name: name, time_series: time_series }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_time_series name: name, time_series: time_series do |response, operation|
+      c.create_time_series name: name, time_series: time_series do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_time_series ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series) do |response, operation|
+      c.create_time_series ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_time_series({ name: name, time_series: time_series }, grpc_options) do |response, operation|
+      c.create_time_series({ name: name, time_series: time_series }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_time_series(::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options) do |response, operation|
+      c.create_time_series(::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,36 +597,36 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_service_time_series_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service_time_series({ name: name, time_series: time_series }) do |response, operation|
+      c.create_service_time_series({ name: name, time_series: time_series }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service_time_series name: name, time_series: time_series do |response, operation|
+      c.create_service_time_series name: name, time_series: time_series do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service_time_series ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series) do |response, operation|
+      c.create_service_time_series ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service_time_series({ name: name, time_series: time_series }, grpc_options) do |response, operation|
+      c.create_service_time_series({ name: name, time_series: time_series }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service_time_series(::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options) do |response, operation|
+      c.create_service_time_series(::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

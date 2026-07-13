@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.12.0 (2026-06-25)
+
+#### Features
+
+* add DMS Private Connection ([#34654](https://github.com/googleapis/google-cloud-ruby/issues/34654)) 
+* add fields and messages for Cloud Run jobs ([#34648](https://github.com/googleapis/google-cloud-ruby/issues/34648)) 
+
+### 2.11.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34051](https://github.com/googleapis/google-cloud-ruby/issues/34051)) 
+
 ### 2.10.1 (2026-04-15)
 
 #### Documentation

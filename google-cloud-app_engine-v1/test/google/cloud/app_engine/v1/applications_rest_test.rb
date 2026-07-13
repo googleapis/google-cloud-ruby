@@ -97,32 +97,32 @@ class ::Google::Cloud::AppEngine::V1::Applications::Rest::ClientTest < Minitest:
     ::Google::Cloud::AppEngine::V1::Applications::Rest::ServiceStub.stub :transcode_get_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_application({ name: name }) do |_result, response|
+        c.get_application({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_application name: name do |_result, response|
+        c.get_application name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_application ::Google::Cloud::AppEngine::V1::GetApplicationRequest.new(name: name) do |_result, response|
+        c.get_application ::Google::Cloud::AppEngine::V1::GetApplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_application({ name: name }, call_options) do |_result, response|
+        c.get_application({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_application(::Google::Cloud::AppEngine::V1::GetApplicationRequest.new(name: name), call_options) do |_result, response|
+        c.get_application(::Google::Cloud::AppEngine::V1::GetApplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Cloud::AppEngine::V1::Applications::Rest::ClientTest < Minitest:
     ::Google::Cloud::AppEngine::V1::Applications::Rest::ServiceStub.stub :transcode_create_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_application({ application: application }) do |_result, response|
+        c.create_application({ application: application }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_application application: application do |_result, response|
+        c.create_application application: application do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_application ::Google::Cloud::AppEngine::V1::CreateApplicationRequest.new(application: application) do |_result, response|
+        c.create_application ::Google::Cloud::AppEngine::V1::CreateApplicationRequest.new(application: application) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_application({ application: application }, call_options) do |_result, response|
+        c.create_application({ application: application }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_application(::Google::Cloud::AppEngine::V1::CreateApplicationRequest.new(application: application), call_options) do |_result, response|
+        c.create_application(::Google::Cloud::AppEngine::V1::CreateApplicationRequest.new(application: application), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::AppEngine::V1::Applications::Rest::ClientTest < Minitest:
     ::Google::Cloud::AppEngine::V1::Applications::Rest::ServiceStub.stub :transcode_update_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_application({ name: name, application: application, update_mask: update_mask }) do |_result, response|
+        c.update_application({ name: name, application: application, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_application name: name, application: application, update_mask: update_mask do |_result, response|
+        c.update_application name: name, application: application, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_application ::Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new(name: name, application: application, update_mask: update_mask) do |_result, response|
+        c.update_application ::Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new(name: name, application: application, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_application({ name: name, application: application, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_application({ name: name, application: application, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_application(::Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new(name: name, application: application, update_mask: update_mask), call_options) do |_result, response|
+        c.update_application(::Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new(name: name, application: application, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::AppEngine::V1::Applications::Rest::ClientTest < Minitest:
     ::Google::Cloud::AppEngine::V1::Applications::Rest::ServiceStub.stub :transcode_repair_application_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, repair_application_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Applications::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.repair_application({ name: name }) do |_result, response|
+        c.repair_application({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.repair_application name: name do |_result, response|
+        c.repair_application name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.repair_application ::Google::Cloud::AppEngine::V1::RepairApplicationRequest.new(name: name) do |_result, response|
+        c.repair_application ::Google::Cloud::AppEngine::V1::RepairApplicationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.repair_application({ name: name }, call_options) do |_result, response|
+        c.repair_application({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.repair_application(::Google::Cloud::AppEngine::V1::RepairApplicationRequest.new(name: name), call_options) do |_result, response|
+        c.repair_application(::Google::Cloud::AppEngine::V1::RepairApplicationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

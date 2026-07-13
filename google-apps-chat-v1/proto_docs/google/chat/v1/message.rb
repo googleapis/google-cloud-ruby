@@ -172,6 +172,10 @@ module Google
         #
         #     If the space doesn't support reply in threads, this field is always
         #     `false`.
+        # @!attribute [r] silent
+        #   @return [::Boolean]
+        #     Output only. Whether this is a silent message. Silent messages are messages
+        #     where Chat suppresses push notifications for recipients.
         # @!attribute [rw] client_assigned_message_id
         #   @return [::String]
         #     Optional. A custom ID for the message. You can use field to identify a
@@ -243,10 +247,6 @@ module Google
 
         # Information about a message that another message quotes.
         #
-        # When you create a message, you can quote messages within the same
-        # thread, or quote a root message to create a new root message.
-        # However, you can't quote a message reply from a different thread.
-        #
         # When you update a message, you can't add or replace the
         # `quotedMessageMetadata` field, but you can remove it.
         #
@@ -287,16 +287,21 @@ module Google
             # Reserved. This value is unused.
             QUOTE_TYPE_UNSPECIFIED = 0
 
-            # If quote_type is `REPLY`, you can do the following:
+            # When `quote_type` is `REPLY`, you can do the following:
             #
             # * If you're replying in a thread, you can quote another message in that
             # thread.
             #
             # * If you're creating a root message, you can quote another root message
             # in that space.
-            #
-            # You can't quote a message reply from a different thread.
             REPLY = 1
+
+            # When `quote_type` is `FORWARD`, you can quote a:
+            #
+            # * Message from a different space.
+            #
+            # * Message reply from a different thread in the same space.
+            FORWARD = 2
           end
         end
 
@@ -583,6 +588,11 @@ module Google
         #
         #     For details, see [Name a
         #     message](https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+        # @!attribute [rw] create_message_notification_options
+        #   @return [::Google::Apps::Chat::V1::CreateMessageNotificationOptions]
+        #     Optional. Controls the notification behavior when the message is posted.
+        #     To learn more, see [Force notifications or send silent
+        #     messages](https://developer.google.com/workspace/chat/create-messages#force-notify-silent).
         class CreateMessageRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -607,6 +617,40 @@ module Google
             # is used, a new thread is created. If the message creation fails, a
             # `NOT_FOUND` error is returned instead.
             REPLY_MESSAGE_OR_FAIL = 2
+          end
+        end
+
+        # Options for the notification behavior when the message is posted.
+        # @!attribute [rw] notification_type
+        #   @return [::Google::Apps::Chat::V1::CreateMessageNotificationOptions::NotificationType]
+        #     The notification type for the message.
+        class CreateMessageNotificationOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The notification types options for the message.
+          module NotificationType
+            # Default behavior. Notification behavior is similar to when the human user
+            # sends the message using the Chat UI: no notification is sent to the
+            # human sender.
+            NOTIFICATION_TYPE_NONE = 0
+
+            # Force notify recipients. This bypasses users' space notification settings
+            # and [Chat Do Not Disturb
+            # settings](https://support.google.com/chat/answer/9093489). This option
+            # does not bypass device-level Do Not Disturb settings.
+            #
+            # Requires [app authentication]
+            # (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+            NOTIFICATION_TYPE_FORCE_NOTIFY = 2
+
+            # Silence the notification as if the recipients have [Chat Do Not
+            # Disturb](https://support.google.com/chat/answer/9093489) enabled or
+            # have muted the space.
+            #
+            # Requires [app authentication]
+            # (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+            NOTIFICATION_TYPE_SILENT = 3
           end
         end
 

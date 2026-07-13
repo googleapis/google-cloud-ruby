@@ -97,32 +97,32 @@ class ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::ServiceStub.stub :transcode_get_dashboard_chart_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dashboard_chart_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dashboard_chart({ name: name }) do |_result, response|
+        c.get_dashboard_chart({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dashboard_chart name: name do |_result, response|
+        c.get_dashboard_chart name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dashboard_chart ::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name) do |_result, response|
+        c.get_dashboard_chart ::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dashboard_chart({ name: name }, call_options) do |_result, response|
+        c.get_dashboard_chart({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dashboard_chart(::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name), call_options) do |_result, response|
+        c.get_dashboard_chart(::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::ServiceStub.stub :transcode_batch_get_dashboard_charts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_get_dashboard_charts_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DashboardChartService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_get_dashboard_charts({ parent: parent, names: names }) do |_result, response|
+        c.batch_get_dashboard_charts({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_get_dashboard_charts parent: parent, names: names do |_result, response|
+        c.batch_get_dashboard_charts parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_get_dashboard_charts ::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_get_dashboard_charts ::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_get_dashboard_charts({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_get_dashboard_charts({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_get_dashboard_charts(::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_get_dashboard_charts(::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

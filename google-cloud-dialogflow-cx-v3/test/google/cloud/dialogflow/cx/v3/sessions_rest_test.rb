@@ -101,32 +101,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ServiceStub.stub :transcode_detect_intent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, detect_intent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }) do |_result, response|
+        c.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view do |_result, response|
+        c.detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view) do |_result, response|
+        c.detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }, call_options) do |_result, response|
+        c.detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view), call_options) do |_result, response|
+        c.detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ServiceStub.stub :transcode_server_streaming_detect_intent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, server_streaming_detect_intent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }) do |_result, response|
+        c.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.server_streaming_detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view do |_result, response|
+        c.server_streaming_detect_intent session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.server_streaming_detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view) do |_result, response|
+        c.server_streaming_detect_intent ::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }, call_options) do |_result, response|
+        c.server_streaming_detect_intent({ session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.server_streaming_detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view), call_options) do |_result, response|
+        c.server_streaming_detect_intent(::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, response_view: response_view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -216,32 +216,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ServiceStub.stub :transcode_match_intent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, match_intent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.match_intent({ session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes }) do |_result, response|
+        c.match_intent({ session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.match_intent session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes do |_result, response|
+        c.match_intent session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.match_intent ::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes) do |_result, response|
+        c.match_intent ::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.match_intent({ session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes }, call_options) do |_result, response|
+        c.match_intent({ session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.match_intent(::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes), call_options) do |_result, response|
+        c.match_intent(::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -272,32 +272,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ServiceStub.stub :transcode_fulfill_intent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fulfill_intent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fulfill_intent({ match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config }) do |_result, response|
+        c.fulfill_intent({ match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fulfill_intent match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config do |_result, response|
+        c.fulfill_intent match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fulfill_intent ::Google::Cloud::Dialogflow::CX::V3::FulfillIntentRequest.new(match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config) do |_result, response|
+        c.fulfill_intent ::Google::Cloud::Dialogflow::CX::V3::FulfillIntentRequest.new(match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fulfill_intent({ match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config }, call_options) do |_result, response|
+        c.fulfill_intent({ match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fulfill_intent(::Google::Cloud::Dialogflow::CX::V3::FulfillIntentRequest.new(match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config), call_options) do |_result, response|
+        c.fulfill_intent(::Google::Cloud::Dialogflow::CX::V3::FulfillIntentRequest.new(match_intent_request: match_intent_request, match: match, output_audio_config: output_audio_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -329,32 +329,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ServiceStub.stub :transcode_submit_answer_feedback_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, submit_answer_feedback_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.submit_answer_feedback({ session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask }) do |_result, response|
+        c.submit_answer_feedback({ session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_answer_feedback session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask do |_result, response|
+        c.submit_answer_feedback session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_answer_feedback ::Google::Cloud::Dialogflow::CX::V3::SubmitAnswerFeedbackRequest.new(session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask) do |_result, response|
+        c.submit_answer_feedback ::Google::Cloud::Dialogflow::CX::V3::SubmitAnswerFeedbackRequest.new(session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_answer_feedback({ session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask }, call_options) do |_result, response|
+        c.submit_answer_feedback({ session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_answer_feedback(::Google::Cloud::Dialogflow::CX::V3::SubmitAnswerFeedbackRequest.new(session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask), call_options) do |_result, response|
+        c.submit_answer_feedback(::Google::Cloud::Dialogflow::CX::V3::SubmitAnswerFeedbackRequest.new(session: session, response_id: response_id, answer_feedback: answer_feedback, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

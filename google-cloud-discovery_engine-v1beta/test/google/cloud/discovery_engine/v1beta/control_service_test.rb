@@ -86,36 +86,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, create_control_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_control({ parent: parent, control: control, control_id: control_id }) do |response, operation|
+      c.create_control({ parent: parent, control: control, control_id: control_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_control parent: parent, control: control, control_id: control_id do |response, operation|
+      c.create_control parent: parent, control: control, control_id: control_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_control ::Google::Cloud::DiscoveryEngine::V1beta::CreateControlRequest.new(parent: parent, control: control, control_id: control_id) do |response, operation|
+      c.create_control ::Google::Cloud::DiscoveryEngine::V1beta::CreateControlRequest.new(parent: parent, control: control, control_id: control_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_control({ parent: parent, control: control, control_id: control_id }, grpc_options) do |response, operation|
+      c.create_control({ parent: parent, control: control, control_id: control_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_control(::Google::Cloud::DiscoveryEngine::V1beta::CreateControlRequest.new(parent: parent, control: control, control_id: control_id), grpc_options) do |response, operation|
+      c.create_control(::Google::Cloud::DiscoveryEngine::V1beta::CreateControlRequest.new(parent: parent, control: control, control_id: control_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, delete_control_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_control({ name: name }) do |response, operation|
+      c.delete_control({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_control name: name do |response, operation|
+      c.delete_control name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_control ::Google::Cloud::DiscoveryEngine::V1beta::DeleteControlRequest.new(name: name) do |response, operation|
+      c.delete_control ::Google::Cloud::DiscoveryEngine::V1beta::DeleteControlRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_control({ name: name }, grpc_options) do |response, operation|
+      c.delete_control({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_control(::Google::Cloud::DiscoveryEngine::V1beta::DeleteControlRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_control(::Google::Cloud::DiscoveryEngine::V1beta::DeleteControlRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,36 +204,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, update_control_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_control({ control: control, update_mask: update_mask }) do |response, operation|
+      c.update_control({ control: control, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_control control: control, update_mask: update_mask do |response, operation|
+      c.update_control control: control, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_control ::Google::Cloud::DiscoveryEngine::V1beta::UpdateControlRequest.new(control: control, update_mask: update_mask) do |response, operation|
+      c.update_control ::Google::Cloud::DiscoveryEngine::V1beta::UpdateControlRequest.new(control: control, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_control({ control: control, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_control({ control: control, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_control(::Google::Cloud::DiscoveryEngine::V1beta::UpdateControlRequest.new(control: control, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_control(::Google::Cloud::DiscoveryEngine::V1beta::UpdateControlRequest.new(control: control, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -262,36 +262,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, get_control_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_control({ name: name }) do |response, operation|
+      c.get_control({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_control name: name do |response, operation|
+      c.get_control name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_control ::Google::Cloud::DiscoveryEngine::V1beta::GetControlRequest.new(name: name) do |response, operation|
+      c.get_control ::Google::Cloud::DiscoveryEngine::V1beta::GetControlRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_control({ name: name }, grpc_options) do |response, operation|
+      c.get_control({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_control(::Google::Cloud::DiscoveryEngine::V1beta::GetControlRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_control(::Google::Cloud::DiscoveryEngine::V1beta::GetControlRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -326,40 +326,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_controls_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_controls parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_controls parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_controls ::Google::Cloud::DiscoveryEngine::V1beta::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_controls ::Google::Cloud::DiscoveryEngine::V1beta::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_controls({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_controls(::Google::Cloud::DiscoveryEngine::V1beta::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_controls(::Google::Cloud::DiscoveryEngine::V1beta::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

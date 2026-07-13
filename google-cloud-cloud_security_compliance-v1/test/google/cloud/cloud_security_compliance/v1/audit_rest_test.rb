@@ -99,32 +99,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ClientTest < Mi
     ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ServiceStub.stub :transcode_generate_framework_audit_scope_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_framework_audit_scope_report_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
+        c.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_framework_audit_scope_report scope: scope, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
+        c.generate_framework_audit_scope_report scope: scope, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_framework_audit_scope_report ::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
+        c.generate_framework_audit_scope_report ::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
+        c.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_framework_audit_scope_report(::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
+        c.generate_framework_audit_scope_report(::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ClientTest < Mi
     ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ServiceStub.stub :transcode_create_framework_audit_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_framework_audit_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }) do |_result, response|
+        c.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_framework_audit parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit do |_result, response|
+        c.create_framework_audit parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit) do |_result, response|
+        c.create_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }, call_options) do |_result, response|
+        c.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit), call_options) do |_result, response|
+        c.create_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ClientTest < Mi
     ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ServiceStub.stub :transcode_list_framework_audits_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_framework_audits_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_framework_audits parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_framework_audits parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_framework_audits ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_framework_audits ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_framework_audits(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_framework_audits(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ClientTest < Mi
     ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::ServiceStub.stub :transcode_get_framework_audit_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_framework_audit_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_framework_audit({ name: name }) do |_result, response|
+        c.get_framework_audit({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_framework_audit name: name do |_result, response|
+        c.get_framework_audit name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name) do |_result, response|
+        c.get_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_framework_audit({ name: name }, call_options) do |_result, response|
+        c.get_framework_audit({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name), call_options) do |_result, response|
+        c.get_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

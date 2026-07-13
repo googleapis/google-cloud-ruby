@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.12.1 (2026-06-22)
+
+#### Documentation
+
+* clarified OUTPUT_AUDIO_ENCODING_MP3 bit rate with deprecation and DETECT_INTENT_RESPONSE_VIEW_BASIC ([#34639](https://github.com/googleapis/google-cloud-ruby/issues/34639)) 
+
+### 1.12.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
 ### 1.11.0 (2026-04-15)
 
 #### Features

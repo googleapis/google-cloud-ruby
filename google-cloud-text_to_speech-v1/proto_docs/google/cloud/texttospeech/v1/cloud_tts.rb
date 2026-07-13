@@ -72,14 +72,84 @@ module Google
         #     Only for Journey voices. If false, the synthesis is context aware
         #     and has a higher latency.
         # @!attribute [rw] relax_safety_filters
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. Input only. If true, relaxes safety filters for Gemini TTS. Only
-        #     supported for accounts linked to Invoiced (Offline) Cloud billing accounts.
-        #     Otherwise, will return result
-        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
+        #     Optional. Input only. Deprecated, use safety_settings instead.
+        #     If true, relaxes safety filters for Gemini TTS.
+        # @!attribute [rw] safety_settings
+        #   @return [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions::SafetySettings]
+        #     Optional. Input only. This applies to Gemini TTS only. If set, the category
+        #     specified in the safety setting will be blocked if the harm probability is
+        #     above the threshold. Otherwise, the safety filter will be disabled by
+        #     default.
+        # @!attribute [rw] enable_textnorm
+        #   @return [::Boolean]
+        #     Optional. If true, textnorm will be applied to text input. This feature is
+        #     enabled by default. Only applies for Gemini TTS.
         class AdvancedVoiceOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Safety setting for a single harm category.
+          # @!attribute [rw] category
+          #   @return [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions::HarmCategory]
+          #     The harm category to apply the safety setting to.
+          # @!attribute [rw] threshold
+          #   @return [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions::HarmBlockThreshold]
+          #     The harm block threshold for the safety setting.
+          class SafetySetting
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Safety settings for the request.
+          # @!attribute [rw] settings
+          #   @return [::Array<::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions::SafetySetting>]
+          #     The safety settings for the request.
+          class SafetySettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Harm categories that will block the content.
+          module HarmCategory
+            # Default value. This value is unused.
+            HARM_CATEGORY_UNSPECIFIED = 0
+
+            # Content that promotes violence or incites hatred against individuals or
+            # groups based on certain attributes.
+            HARM_CATEGORY_HATE_SPEECH = 1
+
+            # Content that promotes, facilitates, or enables dangerous activities.
+            HARM_CATEGORY_DANGEROUS_CONTENT = 2
+
+            # Abusive, threatening, or content intended to bully, torment, or ridicule.
+            HARM_CATEGORY_HARASSMENT = 3
+
+            # Content that contains sexually explicit material.
+            HARM_CATEGORY_SEXUALLY_EXPLICIT = 4
+          end
+
+          # Harm block thresholds for the safety settings.
+          module HarmBlockThreshold
+            # The harm block threshold is unspecified.
+            HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0
+
+            # Block content with a low harm probability or higher.
+            BLOCK_LOW_AND_ABOVE = 1
+
+            # Block content with a medium harm probability or higher.
+            BLOCK_MEDIUM_AND_ABOVE = 2
+
+            # Block content with a high harm probability.
+            BLOCK_ONLY_HIGH = 3
+
+            # Do not block any content, regardless of its harm probability.
+            BLOCK_NONE = 4
+
+            # Turn off the safety filter entirely.
+            OFF = 5
+          end
         end
 
         # The top-level message sent by the client for the `SynthesizeSpeech` method.
@@ -94,7 +164,7 @@ module Google
         #     Required. The configuration of the synthesized audio.
         # @!attribute [rw] advanced_voice_options
         #   @return [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions]
-        #     Advanced voice options.
+        #     Optional. Advanced voice options.
         class SynthesizeSpeechRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -224,8 +294,8 @@ module Google
         #     Note: The following fields are mutually exclusive: `text`, `markup`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] markup
         #   @return [::String]
-        #     Markup for HD voices specifically. This field may not be used with any
-        #     other voices.
+        #     Markup for Chirp 3: HD voices specifically. This field may not be used
+        #     with any other voices.
         #
         #     Note: The following fields are mutually exclusive: `markup`, `text`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ssml
@@ -453,6 +523,9 @@ module Google
         #     In order to customize the pronunciation of a phrase, there must be an exact
         #     match of the phrase in the input types. If using SSML, the phrase must not
         #     be inside a phoneme tag.
+        # @!attribute [rw] advanced_voice_options
+        #   @return [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions]
+        #     Optional. Advanced voice options.
         class StreamingSynthesizeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -468,8 +541,8 @@ module Google
         #     Note: The following fields are mutually exclusive: `text`, `markup`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] markup
         #   @return [::String]
-        #     Markup for HD voices specifically. This field may not be used with any
-        #     other voices.
+        #     Markup for Chirp 3: HD voices specifically. This field may not be used
+        #     with any other voices.
         #
         #     Note: The following fields are mutually exclusive: `markup`, `text`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_speaker_markup

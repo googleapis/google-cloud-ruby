@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::C
     ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::ServiceStub.stub :transcode_read_feature_values_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, read_feature_values_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.read_feature_values({ entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector }) do |_result, response|
+        c.read_feature_values({ entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.read_feature_values entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector do |_result, response|
+        c.read_feature_values entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.read_feature_values ::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest.new(entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector) do |_result, response|
+        c.read_feature_values ::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest.new(entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.read_feature_values({ entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector }, call_options) do |_result, response|
+        c.read_feature_values({ entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.read_feature_values(::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest.new(entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector), call_options) do |_result, response|
+        c.read_feature_values(::Google::Cloud::AIPlatform::V1::ReadFeatureValuesRequest.new(entity_type: entity_type, entity_id: entity_id, feature_selector: feature_selector), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::C
     ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::ServiceStub.stub :transcode_streaming_read_feature_values_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, streaming_read_feature_values_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.streaming_read_feature_values({ entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector }) do |_result, response|
+        c.streaming_read_feature_values({ entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.streaming_read_feature_values entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector do |_result, response|
+        c.streaming_read_feature_values entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.streaming_read_feature_values ::Google::Cloud::AIPlatform::V1::StreamingReadFeatureValuesRequest.new(entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector) do |_result, response|
+        c.streaming_read_feature_values ::Google::Cloud::AIPlatform::V1::StreamingReadFeatureValuesRequest.new(entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.streaming_read_feature_values({ entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector }, call_options) do |_result, response|
+        c.streaming_read_feature_values({ entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.streaming_read_feature_values(::Google::Cloud::AIPlatform::V1::StreamingReadFeatureValuesRequest.new(entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector), call_options) do |_result, response|
+        c.streaming_read_feature_values(::Google::Cloud::AIPlatform::V1::StreamingReadFeatureValuesRequest.new(entity_type: entity_type, entity_ids: entity_ids, feature_selector: feature_selector), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::C
     ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::ServiceStub.stub :transcode_write_feature_values_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, write_feature_values_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.write_feature_values({ entity_type: entity_type, payloads: payloads }) do |_result, response|
+        c.write_feature_values({ entity_type: entity_type, payloads: payloads }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.write_feature_values entity_type: entity_type, payloads: payloads do |_result, response|
+        c.write_feature_values entity_type: entity_type, payloads: payloads do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.write_feature_values ::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest.new(entity_type: entity_type, payloads: payloads) do |_result, response|
+        c.write_feature_values ::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest.new(entity_type: entity_type, payloads: payloads) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.write_feature_values({ entity_type: entity_type, payloads: payloads }, call_options) do |_result, response|
+        c.write_feature_values({ entity_type: entity_type, payloads: payloads }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.write_feature_values(::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest.new(entity_type: entity_type, payloads: payloads), call_options) do |_result, response|
+        c.write_feature_values(::Google::Cloud::AIPlatform::V1::WriteFeatureValuesRequest.new(entity_type: entity_type, payloads: payloads), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

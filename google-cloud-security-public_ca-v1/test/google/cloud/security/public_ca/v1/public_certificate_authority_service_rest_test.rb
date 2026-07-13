@@ -98,32 +98,32 @@ class ::Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService
     ::Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService::Rest::ServiceStub.stub :transcode_create_external_account_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_external_account_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_external_account_key({ parent: parent, external_account_key: external_account_key }) do |_result, response|
+        c.create_external_account_key({ parent: parent, external_account_key: external_account_key }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_external_account_key parent: parent, external_account_key: external_account_key do |_result, response|
+        c.create_external_account_key parent: parent, external_account_key: external_account_key do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_external_account_key ::Google::Cloud::Security::PublicCA::V1::CreateExternalAccountKeyRequest.new(parent: parent, external_account_key: external_account_key) do |_result, response|
+        c.create_external_account_key ::Google::Cloud::Security::PublicCA::V1::CreateExternalAccountKeyRequest.new(parent: parent, external_account_key: external_account_key) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_external_account_key({ parent: parent, external_account_key: external_account_key }, call_options) do |_result, response|
+        c.create_external_account_key({ parent: parent, external_account_key: external_account_key }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_external_account_key(::Google::Cloud::Security::PublicCA::V1::CreateExternalAccountKeyRequest.new(parent: parent, external_account_key: external_account_key), call_options) do |_result, response|
+        c.create_external_account_key(::Google::Cloud::Security::PublicCA::V1::CreateExternalAccountKeyRequest.new(parent: parent, external_account_key: external_account_key), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -101,32 +101,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::ServiceStub.stub :transcode_train_custom_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, train_custom_model_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }) do |_result, response|
+        c.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.train_custom_model gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id do |_result, response|
+        c.train_custom_model gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.train_custom_model ::Google::Cloud::DiscoveryEngine::V1::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id) do |_result, response|
+        c.train_custom_model ::Google::Cloud::DiscoveryEngine::V1::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }, call_options) do |_result, response|
+        c.train_custom_model({ gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.train_custom_model(::Google::Cloud::DiscoveryEngine::V1::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id), call_options) do |_result, response|
+        c.train_custom_model(::Google::Cloud::DiscoveryEngine::V1::TrainCustomModelRequest.new(gcs_training_input: gcs_training_input, data_store: data_store, model_type: model_type, error_config: error_config, model_id: model_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::ClientTes
     ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::ServiceStub.stub :transcode_list_custom_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_custom_models_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_custom_models({ data_store: data_store }) do |_result, response|
+        c.list_custom_models({ data_store: data_store }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_custom_models data_store: data_store do |_result, response|
+        c.list_custom_models data_store: data_store do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_custom_models ::Google::Cloud::DiscoveryEngine::V1::ListCustomModelsRequest.new(data_store: data_store) do |_result, response|
+        c.list_custom_models ::Google::Cloud::DiscoveryEngine::V1::ListCustomModelsRequest.new(data_store: data_store) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_custom_models({ data_store: data_store }, call_options) do |_result, response|
+        c.list_custom_models({ data_store: data_store }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_custom_models(::Google::Cloud::DiscoveryEngine::V1::ListCustomModelsRequest.new(data_store: data_store), call_options) do |_result, response|
+        c.list_custom_models(::Google::Cloud::DiscoveryEngine::V1::ListCustomModelsRequest.new(data_store: data_store), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

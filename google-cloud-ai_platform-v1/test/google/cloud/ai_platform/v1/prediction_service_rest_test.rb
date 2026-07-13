@@ -100,32 +100,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }) do |_result, response|
+        c.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.predict endpoint: endpoint, instances: instances, parameters: parameters, labels: labels do |_result, response|
+        c.predict endpoint: endpoint, instances: instances, parameters: parameters, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels) do |_result, response|
+        c.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }, call_options) do |_result, response|
+        c.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels), call_options) do |_result, response|
+        c.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_raw_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, raw_predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.raw_predict({ endpoint: endpoint, http_body: http_body }) do |_result, response|
+        c.raw_predict({ endpoint: endpoint, http_body: http_body }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.raw_predict endpoint: endpoint, http_body: http_body do |_result, response|
+        c.raw_predict endpoint: endpoint, http_body: http_body do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.raw_predict ::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |_result, response|
+        c.raw_predict ::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.raw_predict({ endpoint: endpoint, http_body: http_body }, call_options) do |_result, response|
+        c.raw_predict({ endpoint: endpoint, http_body: http_body }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.raw_predict(::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body), call_options) do |_result, response|
+        c.raw_predict(::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_stream_raw_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stream_raw_predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stream_raw_predict({ endpoint: endpoint, http_body: http_body }) do |_result, response|
+        c.stream_raw_predict({ endpoint: endpoint, http_body: http_body }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.stream_raw_predict endpoint: endpoint, http_body: http_body do |_result, response|
+        c.stream_raw_predict endpoint: endpoint, http_body: http_body do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.stream_raw_predict ::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |_result, response|
+        c.stream_raw_predict ::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.stream_raw_predict({ endpoint: endpoint, http_body: http_body }, call_options) do |_result, response|
+        c.stream_raw_predict({ endpoint: endpoint, http_body: http_body }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.stream_raw_predict(::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body), call_options) do |_result, response|
+        c.stream_raw_predict(::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_direct_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, direct_predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |_result, response|
+        c.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.direct_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |_result, response|
+        c.direct_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.direct_predict ::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |_result, response|
+        c.direct_predict ::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, call_options) do |_result, response|
+        c.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.direct_predict(::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), call_options) do |_result, response|
+        c.direct_predict(::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_direct_raw_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, direct_raw_predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }) do |_result, response|
+        c.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.direct_raw_predict endpoint: endpoint, method_name: method_name, input: input do |_result, response|
+        c.direct_raw_predict endpoint: endpoint, method_name: method_name, input: input do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.direct_raw_predict ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input) do |_result, response|
+        c.direct_raw_predict ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }, call_options) do |_result, response|
+        c.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.direct_raw_predict(::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input), call_options) do |_result, response|
+        c.direct_raw_predict(::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_server_streaming_predict_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, server_streaming_predict_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |_result, response|
+        c.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.server_streaming_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |_result, response|
+        c.server_streaming_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.server_streaming_predict ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |_result, response|
+        c.server_streaming_predict ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, call_options) do |_result, response|
+        c.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.server_streaming_predict(::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), call_options) do |_result, response|
+        c.server_streaming_predict(::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_explain_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, explain_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }) do |_result, response|
+        c.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.explain endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id do |_result, response|
+        c.explain endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.explain ::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id) do |_result, response|
+        c.explain ::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }, call_options) do |_result, response|
+        c.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.explain(::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id), call_options) do |_result, response|
+        c.explain(::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -499,32 +499,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_generate_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |_result, response|
+        c.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |_result, response|
+        c.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |_result, response|
+        c.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, call_options) do |_result, response|
+        c.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), call_options) do |_result, response|
+        c.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -562,32 +562,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_stream_generate_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stream_generate_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |_result, response|
+        c.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |_result, response|
+        c.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |_result, response|
+        c.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, call_options) do |_result, response|
+        c.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), call_options) do |_result, response|
+        c.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -622,32 +622,32 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ServiceStub.stub :transcode_embed_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, embed_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }) do |_result, response|
+        c.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config do |_result, response|
+        c.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config) do |_result, response|
+        c.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }, call_options) do |_result, response|
+        c.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config), call_options) do |_result, response|
+        c.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

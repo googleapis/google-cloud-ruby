@@ -99,32 +99,32 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest:
     ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::ServiceStub.stub :transcode_create_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workload({ parent: parent, workload: workload, external_id: external_id }) do |_result, response|
+        c.create_workload({ parent: parent, workload: workload, external_id: external_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workload parent: parent, workload: workload, external_id: external_id do |_result, response|
+        c.create_workload parent: parent, workload: workload, external_id: external_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workload ::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id) do |_result, response|
+        c.create_workload ::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workload({ parent: parent, workload: workload, external_id: external_id }, call_options) do |_result, response|
+        c.create_workload({ parent: parent, workload: workload, external_id: external_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workload(::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id), call_options) do |_result, response|
+        c.create_workload(::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new(parent: parent, workload: workload, external_id: external_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest:
     ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::ServiceStub.stub :transcode_restrict_allowed_resources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restrict_allowed_resources_client_stub do
         # Create client
-        client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restrict_allowed_resources({ name: name, restriction_type: restriction_type }) do |_result, response|
+        c.restrict_allowed_resources({ name: name, restriction_type: restriction_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restrict_allowed_resources name: name, restriction_type: restriction_type do |_result, response|
+        c.restrict_allowed_resources name: name, restriction_type: restriction_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restrict_allowed_resources ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type) do |_result, response|
+        c.restrict_allowed_resources ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restrict_allowed_resources({ name: name, restriction_type: restriction_type }, call_options) do |_result, response|
+        c.restrict_allowed_resources({ name: name, restriction_type: restriction_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restrict_allowed_resources(::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type), call_options) do |_result, response|
+        c.restrict_allowed_resources(::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest:
     ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::ServiceStub.stub :transcode_delete_workload_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workload_client_stub do
         # Create client
-        client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workload({ name: name, etag: etag }) do |_result, response|
+        c.delete_workload({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workload name: name, etag: etag do |_result, response|
+        c.delete_workload name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workload ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_workload ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workload({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_workload({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workload(::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_workload(::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

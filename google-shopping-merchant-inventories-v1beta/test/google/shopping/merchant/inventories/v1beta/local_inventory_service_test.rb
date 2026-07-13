@@ -86,40 +86,40 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
 
     Gapic::ServiceStub.stub :new, list_local_inventories_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_local_inventories parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_local_inventories parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
 
     Gapic::ServiceStub.stub :new, insert_local_inventory_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }) do |response, operation|
+      c.insert_local_inventory({ parent: parent, local_inventory: local_inventory }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_local_inventory parent: parent, local_inventory: local_inventory do |response, operation|
+      c.insert_local_inventory parent: parent, local_inventory: local_inventory do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory) do |response, operation|
+      c.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }, grpc_options) do |response, operation|
+      c.insert_local_inventory({ parent: parent, local_inventory: local_inventory }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory), grpc_options) do |response, operation|
+      c.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,36 +209,36 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
 
     Gapic::ServiceStub.stub :new, delete_local_inventory_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_local_inventory({ name: name }) do |response, operation|
+      c.delete_local_inventory({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_local_inventory name: name do |response, operation|
+      c.delete_local_inventory name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name) do |response, operation|
+      c.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_local_inventory({ name: name }, grpc_options) do |response, operation|
+      c.delete_local_inventory({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

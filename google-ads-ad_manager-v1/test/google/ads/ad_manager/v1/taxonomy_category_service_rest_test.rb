@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::ClientTest < 
     ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::ServiceStub.stub :transcode_get_taxonomy_category_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_taxonomy_category_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_taxonomy_category({ name: name }) do |_result, response|
+        c.get_taxonomy_category({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_taxonomy_category name: name do |_result, response|
+        c.get_taxonomy_category name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_taxonomy_category ::Google::Ads::AdManager::V1::GetTaxonomyCategoryRequest.new(name: name) do |_result, response|
+        c.get_taxonomy_category ::Google::Ads::AdManager::V1::GetTaxonomyCategoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_taxonomy_category({ name: name }, call_options) do |_result, response|
+        c.get_taxonomy_category({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_taxonomy_category(::Google::Ads::AdManager::V1::GetTaxonomyCategoryRequest.new(name: name), call_options) do |_result, response|
+        c.get_taxonomy_category(::Google::Ads::AdManager::V1::GetTaxonomyCategoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::ClientTest < 
     ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::ServiceStub.stub :transcode_list_taxonomy_categories_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_taxonomy_categories_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_taxonomy_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_taxonomy_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_taxonomy_categories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_taxonomy_categories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_taxonomy_categories ::Google::Ads::AdManager::V1::ListTaxonomyCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_taxonomy_categories ::Google::Ads::AdManager::V1::ListTaxonomyCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_taxonomy_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_taxonomy_categories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_taxonomy_categories(::Google::Ads::AdManager::V1::ListTaxonomyCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_taxonomy_categories(::Google::Ads::AdManager::V1::ListTaxonomyCategoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

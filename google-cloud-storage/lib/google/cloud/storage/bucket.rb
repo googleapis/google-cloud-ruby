@@ -2220,6 +2220,8 @@ module Google
         # @param [Integer] if_metageneration_match Makes the operation conditional
         #   on whether the destination file's current metageneration matches the
         #   given value.
+        # @param [Boolean] delete_source_objects If true, the source objects
+        #   will be deleted after the composition operation is successful.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.
@@ -2274,7 +2276,8 @@ module Google
                     encryption_key: nil,
                     if_source_generation_match: nil,
                     if_generation_match: nil,
-                    if_metageneration_match: nil
+                    if_metageneration_match: nil,
+                    delete_source_objects: nil
           ensure_service!
           sources = Array sources
           if sources.size < 2
@@ -2299,7 +2302,8 @@ module Google
                                       if_source_generation_match: if_source_generation_match,
                                       if_generation_match: if_generation_match,
                                       if_metageneration_match: if_metageneration_match,
-                                      user_project: user_project
+                                      user_project: user_project,
+                                      delete_source_objects: delete_source_objects
           File.from_gapi gapi, service, user_project: user_project
         end
         alias compose_file compose

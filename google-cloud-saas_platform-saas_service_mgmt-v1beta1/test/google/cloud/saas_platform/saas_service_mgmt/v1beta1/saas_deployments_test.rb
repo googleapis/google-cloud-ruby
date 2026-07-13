@@ -90,40 +90,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, list_saas_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_saas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_saas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_saas parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_saas parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListSaasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListSaasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_saas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_saas({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListSaasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListSaasRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, get_saas_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_saas({ name: name }) do |response, operation|
+      c.get_saas({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_saas name: name do |response, operation|
+      c.get_saas name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetSaasRequest.new(name: name) do |response, operation|
+      c.get_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetSaasRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_saas({ name: name }, grpc_options) do |response, operation|
+      c.get_saas({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetSaasRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetSaasRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,36 +219,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, create_saas_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_saas({ parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_saas({ parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_saas parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_saas parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateSaasRequest.new(parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateSaasRequest.new(parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_saas({ parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_saas({ parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateSaasRequest.new(parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateSaasRequest.new(parent: parent, saas_id: saas_id, saas: saas, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,36 +283,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, update_saas_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_saas({ saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_saas({ saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_saas saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_saas saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateSaasRequest.new(saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateSaasRequest.new(saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_saas({ saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_saas({ saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateSaasRequest.new(saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateSaasRequest.new(saas: saas, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -347,36 +347,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, delete_saas_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_saas({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_saas({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_saas name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_saas name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteSaasRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_saas ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteSaasRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_saas({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_saas({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteSaasRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_saas(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteSaasRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -413,40 +413,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, list_tenants_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tenants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_tenants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tenants parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_tenants parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tenants ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListTenantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_tenants ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListTenantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tenants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_tenants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tenants(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListTenantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_tenants(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListTenantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -476,36 +476,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, get_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tenant({ name: name }) do |response, operation|
+      c.get_tenant({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tenant name: name do |response, operation|
+      c.get_tenant name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetTenantRequest.new(name: name) do |response, operation|
+      c.get_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetTenantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tenant({ name: name }, grpc_options) do |response, operation|
+      c.get_tenant({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetTenantRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetTenantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -542,36 +542,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, create_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tenant({ parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_tenant({ parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tenant parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_tenant parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateTenantRequest.new(parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateTenantRequest.new(parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tenant({ parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_tenant({ parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateTenantRequest.new(parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateTenantRequest.new(parent: parent, tenant_id: tenant_id, tenant: tenant, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -606,36 +606,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, update_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tenant({ tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_tenant({ tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tenant tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_tenant tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateTenantRequest.new(tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateTenantRequest.new(tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tenant({ tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tenant({ tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateTenantRequest.new(tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateTenantRequest.new(tenant: tenant, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -670,36 +670,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, delete_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tenant({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_tenant({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tenant name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_tenant name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteTenantRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_tenant ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteTenantRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tenant({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_tenant({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteTenantRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_tenant(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteTenantRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -736,40 +736,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, list_unit_kinds_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_unit_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_unit_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_unit_kinds parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_unit_kinds parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_unit_kinds ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_unit_kinds ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_unit_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_unit_kinds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_unit_kinds(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_unit_kinds(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitKindsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -799,36 +799,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, get_unit_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_unit_kind({ name: name }) do |response, operation|
+      c.get_unit_kind({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_unit_kind name: name do |response, operation|
+      c.get_unit_kind name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitKindRequest.new(name: name) do |response, operation|
+      c.get_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitKindRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_unit_kind({ name: name }, grpc_options) do |response, operation|
+      c.get_unit_kind({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitKindRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitKindRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -865,36 +865,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, create_unit_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_unit_kind({ parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_unit_kind({ parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_unit_kind parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_unit_kind parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitKindRequest.new(parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitKindRequest.new(parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_unit_kind({ parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_unit_kind({ parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitKindRequest.new(parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitKindRequest.new(parent: parent, unit_kind_id: unit_kind_id, unit_kind: unit_kind, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -929,36 +929,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, update_unit_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_unit_kind({ unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_unit_kind({ unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_unit_kind unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_unit_kind unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitKindRequest.new(unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitKindRequest.new(unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_unit_kind({ unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_unit_kind({ unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitKindRequest.new(unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitKindRequest.new(unit_kind: unit_kind, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -993,36 +993,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, delete_unit_kind_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_unit_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_unit_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_unit_kind name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_unit_kind name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_unit_kind ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_unit_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_unit_kind({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_unit_kind(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitKindRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1059,40 +1059,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, list_units_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_units parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_units parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_units ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_units ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_units({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_units(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_units(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1122,36 +1122,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, get_unit_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_unit({ name: name }) do |response, operation|
+      c.get_unit({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_unit name: name do |response, operation|
+      c.get_unit name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitRequest.new(name: name) do |response, operation|
+      c.get_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_unit({ name: name }, grpc_options) do |response, operation|
+      c.get_unit({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1188,36 +1188,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, create_unit_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_unit({ parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_unit({ parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_unit parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_unit parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitRequest.new(parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitRequest.new(parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_unit({ parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_unit({ parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitRequest.new(parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitRequest.new(parent: parent, unit_id: unit_id, unit: unit, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1252,36 +1252,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, update_unit_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_unit({ unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_unit({ unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_unit unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_unit unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitRequest.new(unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitRequest.new(unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_unit({ unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_unit({ unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitRequest.new(unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitRequest.new(unit: unit, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1316,36 +1316,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, delete_unit_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_unit({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_unit({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_unit name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_unit name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_unit ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_unit({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_unit({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_unit(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1382,40 +1382,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, list_unit_operations_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_unit_operations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_unit_operations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_unit_operations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_unit_operations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_unit_operations ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitOperationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_unit_operations ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitOperationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_unit_operations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_unit_operations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_unit_operations(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitOperationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_unit_operations(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitOperationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1445,36 +1445,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, get_unit_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_unit_operation({ name: name }) do |response, operation|
+      c.get_unit_operation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_unit_operation name: name do |response, operation|
+      c.get_unit_operation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitOperationRequest.new(name: name) do |response, operation|
+      c.get_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitOperationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_unit_operation({ name: name }, grpc_options) do |response, operation|
+      c.get_unit_operation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitOperationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitOperationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1511,36 +1511,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, create_unit_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_unit_operation({ parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_unit_operation({ parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_unit_operation parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_unit_operation parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitOperationRequest.new(parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitOperationRequest.new(parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_unit_operation({ parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_unit_operation({ parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitOperationRequest.new(parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitOperationRequest.new(parent: parent, unit_operation_id: unit_operation_id, unit_operation: unit_operation, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1575,36 +1575,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, update_unit_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_unit_operation({ unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_unit_operation({ unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_unit_operation unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_unit_operation unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitOperationRequest.new(unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitOperationRequest.new(unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_unit_operation({ unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_unit_operation({ unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitOperationRequest.new(unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitOperationRequest.new(unit_operation: unit_operation, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1639,36 +1639,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, delete_unit_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_unit_operation({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_unit_operation({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_unit_operation name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_unit_operation name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitOperationRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_unit_operation ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitOperationRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_unit_operation({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_unit_operation({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitOperationRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_unit_operation(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitOperationRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1705,40 +1705,40 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, list_releases_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_releases parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_releases parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_releases ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_releases ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_releases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_releases(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_releases(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListReleasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1768,36 +1768,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, get_release_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_release({ name: name }) do |response, operation|
+      c.get_release({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_release name: name do |response, operation|
+      c.get_release name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetReleaseRequest.new(name: name) do |response, operation|
+      c.get_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetReleaseRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_release({ name: name }, grpc_options) do |response, operation|
+      c.get_release({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetReleaseRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetReleaseRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1834,36 +1834,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, create_release_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_release({ parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.create_release({ parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_release parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.create_release parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.create_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_release({ parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_release({ parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.create_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateReleaseRequest.new(parent: parent, release_id: release_id, release: release, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1898,36 +1898,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, update_release_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_release({ release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
+      c.update_release({ release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_release release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
+      c.update_release release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateReleaseRequest.new(release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
+      c.update_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateReleaseRequest.new(release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_release({ release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_release({ release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateReleaseRequest.new(release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateReleaseRequest.new(release: release, validate_only: validate_only, request_id: request_id, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1962,36 +1962,36 @@ class ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::
 
     Gapic::ServiceStub.stub :new, delete_release_client_stub do
       # Create client
-      client = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
+      c = ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_release({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
+      c.delete_release({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_release name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
+      c.delete_release name: name, etag: etag, validate_only: validate_only, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteReleaseRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
+      c.delete_release ::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteReleaseRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_release({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_release({ name: name, etag: etag, validate_only: validate_only, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteReleaseRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_release(::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteReleaseRequest.new(name: name, etag: etag, validate_only: validate_only, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

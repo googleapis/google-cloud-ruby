@@ -26,7 +26,8 @@ module Google
           # Credentials for the MetadataService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/dataplex.read-write"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

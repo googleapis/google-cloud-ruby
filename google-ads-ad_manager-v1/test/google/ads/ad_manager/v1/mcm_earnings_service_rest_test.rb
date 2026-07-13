@@ -103,32 +103,32 @@ class ::Google::Ads::AdManager::V1::McmEarningsService::Rest::ClientTest < Minit
     ::Google::Ads::AdManager::V1::McmEarningsService::Rest::ServiceStub.stub :transcode_fetch_mcm_earnings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_mcm_earnings_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::McmEarningsService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::McmEarningsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_mcm_earnings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month }) do |_result, response|
+        c.fetch_mcm_earnings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_mcm_earnings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month do |_result, response|
+        c.fetch_mcm_earnings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_mcm_earnings ::Google::Ads::AdManager::V1::FetchMcmEarningsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month) do |_result, response|
+        c.fetch_mcm_earnings ::Google::Ads::AdManager::V1::FetchMcmEarningsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_mcm_earnings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month }, call_options) do |_result, response|
+        c.fetch_mcm_earnings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_mcm_earnings(::Google::Ads::AdManager::V1::FetchMcmEarningsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month), call_options) do |_result, response|
+        c.fetch_mcm_earnings(::Google::Ads::AdManager::V1::FetchMcmEarningsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip, month: month), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

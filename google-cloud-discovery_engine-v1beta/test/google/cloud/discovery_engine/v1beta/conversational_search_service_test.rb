@@ -98,36 +98,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, converse_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec }) do |response, operation|
+      c.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.converse_conversation name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec do |response, operation|
+      c.converse_conversation name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.converse_conversation ::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec) do |response, operation|
+      c.converse_conversation ::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec }, grpc_options) do |response, operation|
+      c.converse_conversation({ name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.converse_conversation(::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec), grpc_options) do |response, operation|
+      c.converse_conversation(::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest.new(name: name, query: query, serving_config: serving_config, conversation: conversation, safe_search: safe_search, user_labels: user_labels, summary_spec: summary_spec, filter: filter, boost_spec: boost_spec), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -158,36 +158,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, create_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_conversation({ parent: parent, conversation: conversation }) do |response, operation|
+      c.create_conversation({ parent: parent, conversation: conversation }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_conversation parent: parent, conversation: conversation do |response, operation|
+      c.create_conversation parent: parent, conversation: conversation do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_conversation ::Google::Cloud::DiscoveryEngine::V1beta::CreateConversationRequest.new(parent: parent, conversation: conversation) do |response, operation|
+      c.create_conversation ::Google::Cloud::DiscoveryEngine::V1beta::CreateConversationRequest.new(parent: parent, conversation: conversation) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_conversation({ parent: parent, conversation: conversation }, grpc_options) do |response, operation|
+      c.create_conversation({ parent: parent, conversation: conversation }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_conversation(::Google::Cloud::DiscoveryEngine::V1beta::CreateConversationRequest.new(parent: parent, conversation: conversation), grpc_options) do |response, operation|
+      c.create_conversation(::Google::Cloud::DiscoveryEngine::V1beta::CreateConversationRequest.new(parent: parent, conversation: conversation), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -216,36 +216,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, delete_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_conversation({ name: name }) do |response, operation|
+      c.delete_conversation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_conversation name: name do |response, operation|
+      c.delete_conversation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_conversation ::Google::Cloud::DiscoveryEngine::V1beta::DeleteConversationRequest.new(name: name) do |response, operation|
+      c.delete_conversation ::Google::Cloud::DiscoveryEngine::V1beta::DeleteConversationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_conversation({ name: name }, grpc_options) do |response, operation|
+      c.delete_conversation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_conversation(::Google::Cloud::DiscoveryEngine::V1beta::DeleteConversationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_conversation(::Google::Cloud::DiscoveryEngine::V1beta::DeleteConversationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -276,36 +276,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, update_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_conversation({ conversation: conversation, update_mask: update_mask }) do |response, operation|
+      c.update_conversation({ conversation: conversation, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_conversation conversation: conversation, update_mask: update_mask do |response, operation|
+      c.update_conversation conversation: conversation, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_conversation ::Google::Cloud::DiscoveryEngine::V1beta::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask) do |response, operation|
+      c.update_conversation ::Google::Cloud::DiscoveryEngine::V1beta::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_conversation({ conversation: conversation, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_conversation({ conversation: conversation, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_conversation(::Google::Cloud::DiscoveryEngine::V1beta::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_conversation(::Google::Cloud::DiscoveryEngine::V1beta::UpdateConversationRequest.new(conversation: conversation, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -334,36 +334,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, get_conversation_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_conversation({ name: name }) do |response, operation|
+      c.get_conversation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_conversation name: name do |response, operation|
+      c.get_conversation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_conversation ::Google::Cloud::DiscoveryEngine::V1beta::GetConversationRequest.new(name: name) do |response, operation|
+      c.get_conversation ::Google::Cloud::DiscoveryEngine::V1beta::GetConversationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_conversation({ name: name }, grpc_options) do |response, operation|
+      c.get_conversation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_conversation(::Google::Cloud::DiscoveryEngine::V1beta::GetConversationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_conversation(::Google::Cloud::DiscoveryEngine::V1beta::GetConversationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,40 +400,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, list_conversations_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_conversations ::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_conversations ::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_conversations(::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_conversations(::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -464,6 +464,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
     asynchronous_mode = true
     user_pseudo_id = "hello world"
     user_labels = {}
+    end_user_spec = {}
 
     answer_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :answer_query, name
@@ -480,47 +481,145 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
       assert_equal true, request["asynchronous_mode"]
       assert_equal "hello world", request["user_pseudo_id"]
       assert_equal({}, request["user_labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::EndUserSpec), request["end_user_spec"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, answer_query_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }) do |response, operation|
+      c.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels do |response, operation|
+      c.answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.answer_query ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels) do |response, operation|
+      c.answer_query ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }, grpc_options) do |response, operation|
+      c.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.answer_query(::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels), grpc_options) do |response, operation|
+      c.answer_query(::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, answer_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_stream_answer_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    serving_config = "hello world"
+    query = {}
+    session = "hello world"
+    safety_spec = {}
+    related_questions_spec = {}
+    grounding_spec = {}
+    answer_generation_spec = {}
+    search_spec = {}
+    query_understanding_spec = {}
+    asynchronous_mode = true
+    user_pseudo_id = "hello world"
+    user_labels = {}
+    end_user_spec = {}
+
+    stream_answer_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :stream_answer_query, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest, request
+      assert_equal "hello world", request["serving_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::Query), request["query"]
+      assert_equal "hello world", request["session"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SafetySpec), request["safety_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::RelatedQuestionsSpec), request["related_questions_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::GroundingSpec), request["grounding_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::AnswerGenerationSpec), request["answer_generation_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SearchSpec), request["search_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::QueryUnderstandingSpec), request["query_understanding_spec"]
+      assert_equal true, request["asynchronous_mode"]
+      assert_equal "hello world", request["user_pseudo_id"]
+      assert_equal({}, request["user_labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::EndUserSpec), request["end_user_spec"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stream_answer_query_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.stream_answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.stream_answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.stream_answer_query ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.stream_answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.stream_answer_query(::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stream_answer_query_client_stub.call_rpc_count
     end
   end
 
@@ -543,36 +642,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, get_answer_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_answer({ name: name }) do |response, operation|
+      c.get_answer({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_answer name: name do |response, operation|
+      c.get_answer name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_answer ::Google::Cloud::DiscoveryEngine::V1beta::GetAnswerRequest.new(name: name) do |response, operation|
+      c.get_answer ::Google::Cloud::DiscoveryEngine::V1beta::GetAnswerRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_answer({ name: name }, grpc_options) do |response, operation|
+      c.get_answer({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_answer(::Google::Cloud::DiscoveryEngine::V1beta::GetAnswerRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_answer(::Google::Cloud::DiscoveryEngine::V1beta::GetAnswerRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -592,47 +691,49 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
     # Create request parameters for a unary method.
     parent = "hello world"
     session = {}
+    session_id = "hello world"
 
     create_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_session, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::Session), request["session"]
+      assert_equal "hello world", request["session_id"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_session({ parent: parent, session: session }) do |response, operation|
+      c.create_session({ parent: parent, session: session, session_id: session_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_session parent: parent, session: session do |response, operation|
+      c.create_session parent: parent, session: session, session_id: session_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_session ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session) do |response, operation|
+      c.create_session ::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_session({ parent: parent, session: session }, grpc_options) do |response, operation|
+      c.create_session({ parent: parent, session: session, session_id: session_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_session(::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session), grpc_options) do |response, operation|
+      c.create_session(::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -661,36 +762,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, delete_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_session({ name: name }) do |response, operation|
+      c.delete_session({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_session name: name do |response, operation|
+      c.delete_session name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_session ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name) do |response, operation|
+      c.delete_session ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_session({ name: name }, grpc_options) do |response, operation|
+      c.delete_session({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_session(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_session(::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -721,36 +822,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, update_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_session({ session: session, update_mask: update_mask }) do |response, operation|
+      c.update_session({ session: session, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_session session: session, update_mask: update_mask do |response, operation|
+      c.update_session session: session, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_session ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask) do |response, operation|
+      c.update_session ::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_session({ session: session, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_session({ session: session, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_session(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_session(::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest.new(session: session, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -781,36 +882,36 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, get_session_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_session({ name: name, include_answer_details: include_answer_details }) do |response, operation|
+      c.get_session({ name: name, include_answer_details: include_answer_details }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_session name: name, include_answer_details: include_answer_details do |response, operation|
+      c.get_session name: name, include_answer_details: include_answer_details do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |response, operation|
+      c.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_session({ name: name, include_answer_details: include_answer_details }, grpc_options) do |response, operation|
+      c.get_session({ name: name, include_answer_details: include_answer_details }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), grpc_options) do |response, operation|
+      c.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -847,40 +948,40 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     Gapic::ServiceStub.stub :new, list_sessions_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_sessions ::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_sessions ::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_sessions(::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_sessions(::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

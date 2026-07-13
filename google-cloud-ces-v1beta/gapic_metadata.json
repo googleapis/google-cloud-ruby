@@ -457,6 +457,21 @@
               "methods": [
                 "export_evaluations"
               ]
+            },
+            "ExportEvaluationRuns": {
+              "methods": [
+                "export_evaluation_runs"
+              ]
+            },
+            "ExportEvaluationResults": {
+              "methods": [
+                "export_evaluation_results"
+              ]
+            },
+            "RunEvaluationResultMetrics": {
+              "methods": [
+                "run_evaluation_result_metrics"
+              ]
             }
           }
         }

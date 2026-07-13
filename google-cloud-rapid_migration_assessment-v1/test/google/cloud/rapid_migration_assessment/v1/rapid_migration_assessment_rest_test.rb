@@ -100,32 +100,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_create_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_collector({ parent: parent, collector_id: collector_id, collector: collector, request_id: request_id }) do |_result, response|
+        c.create_collector({ parent: parent, collector_id: collector_id, collector: collector, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_collector parent: parent, collector_id: collector_id, collector: collector, request_id: request_id do |_result, response|
+        c.create_collector parent: parent, collector_id: collector_id, collector: collector, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_collector ::Google::Cloud::RapidMigrationAssessment::V1::CreateCollectorRequest.new(parent: parent, collector_id: collector_id, collector: collector, request_id: request_id) do |_result, response|
+        c.create_collector ::Google::Cloud::RapidMigrationAssessment::V1::CreateCollectorRequest.new(parent: parent, collector_id: collector_id, collector: collector, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_collector({ parent: parent, collector_id: collector_id, collector: collector, request_id: request_id }, call_options) do |_result, response|
+        c.create_collector({ parent: parent, collector_id: collector_id, collector: collector, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_collector(::Google::Cloud::RapidMigrationAssessment::V1::CreateCollectorRequest.new(parent: parent, collector_id: collector_id, collector: collector, request_id: request_id), call_options) do |_result, response|
+        c.create_collector(::Google::Cloud::RapidMigrationAssessment::V1::CreateCollectorRequest.new(parent: parent, collector_id: collector_id, collector: collector, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_create_annotation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_annotation_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_annotation({ parent: parent, annotation: annotation, request_id: request_id }) do |_result, response|
+        c.create_annotation({ parent: parent, annotation: annotation, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_annotation parent: parent, annotation: annotation, request_id: request_id do |_result, response|
+        c.create_annotation parent: parent, annotation: annotation, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_annotation ::Google::Cloud::RapidMigrationAssessment::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, request_id: request_id) do |_result, response|
+        c.create_annotation ::Google::Cloud::RapidMigrationAssessment::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_annotation({ parent: parent, annotation: annotation, request_id: request_id }, call_options) do |_result, response|
+        c.create_annotation({ parent: parent, annotation: annotation, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_annotation(::Google::Cloud::RapidMigrationAssessment::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, request_id: request_id), call_options) do |_result, response|
+        c.create_annotation(::Google::Cloud::RapidMigrationAssessment::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_get_annotation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_annotation_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_annotation({ name: name }) do |_result, response|
+        c.get_annotation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_annotation name: name do |_result, response|
+        c.get_annotation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_annotation ::Google::Cloud::RapidMigrationAssessment::V1::GetAnnotationRequest.new(name: name) do |_result, response|
+        c.get_annotation ::Google::Cloud::RapidMigrationAssessment::V1::GetAnnotationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_annotation({ name: name }, call_options) do |_result, response|
+        c.get_annotation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_annotation(::Google::Cloud::RapidMigrationAssessment::V1::GetAnnotationRequest.new(name: name), call_options) do |_result, response|
+        c.get_annotation(::Google::Cloud::RapidMigrationAssessment::V1::GetAnnotationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_list_collectors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_collectors_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_collectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_collectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_collectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_collectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_collectors ::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_collectors ::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_collectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_collectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_collectors(::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_collectors(::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_get_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_collector({ name: name }) do |_result, response|
+        c.get_collector({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_collector name: name do |_result, response|
+        c.get_collector name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_collector ::Google::Cloud::RapidMigrationAssessment::V1::GetCollectorRequest.new(name: name) do |_result, response|
+        c.get_collector ::Google::Cloud::RapidMigrationAssessment::V1::GetCollectorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_collector({ name: name }, call_options) do |_result, response|
+        c.get_collector({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_collector(::Google::Cloud::RapidMigrationAssessment::V1::GetCollectorRequest.new(name: name), call_options) do |_result, response|
+        c.get_collector(::Google::Cloud::RapidMigrationAssessment::V1::GetCollectorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_update_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_collector({ update_mask: update_mask, collector: collector, request_id: request_id }) do |_result, response|
+        c.update_collector({ update_mask: update_mask, collector: collector, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_collector update_mask: update_mask, collector: collector, request_id: request_id do |_result, response|
+        c.update_collector update_mask: update_mask, collector: collector, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_collector ::Google::Cloud::RapidMigrationAssessment::V1::UpdateCollectorRequest.new(update_mask: update_mask, collector: collector, request_id: request_id) do |_result, response|
+        c.update_collector ::Google::Cloud::RapidMigrationAssessment::V1::UpdateCollectorRequest.new(update_mask: update_mask, collector: collector, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_collector({ update_mask: update_mask, collector: collector, request_id: request_id }, call_options) do |_result, response|
+        c.update_collector({ update_mask: update_mask, collector: collector, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_collector(::Google::Cloud::RapidMigrationAssessment::V1::UpdateCollectorRequest.new(update_mask: update_mask, collector: collector, request_id: request_id), call_options) do |_result, response|
+        c.update_collector(::Google::Cloud::RapidMigrationAssessment::V1::UpdateCollectorRequest.new(update_mask: update_mask, collector: collector, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_delete_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_collector({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_collector({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_collector name: name, request_id: request_id do |_result, response|
+        c.delete_collector name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_collector ::Google::Cloud::RapidMigrationAssessment::V1::DeleteCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_collector ::Google::Cloud::RapidMigrationAssessment::V1::DeleteCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_collector(::Google::Cloud::RapidMigrationAssessment::V1::DeleteCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_collector(::Google::Cloud::RapidMigrationAssessment::V1::DeleteCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_resume_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_collector({ name: name, request_id: request_id }) do |_result, response|
+        c.resume_collector({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_collector name: name, request_id: request_id do |_result, response|
+        c.resume_collector name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_collector ::Google::Cloud::RapidMigrationAssessment::V1::ResumeCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.resume_collector ::Google::Cloud::RapidMigrationAssessment::V1::ResumeCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.resume_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_collector(::Google::Cloud::RapidMigrationAssessment::V1::ResumeCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.resume_collector(::Google::Cloud::RapidMigrationAssessment::V1::ResumeCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_register_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, register_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.register_collector({ name: name, request_id: request_id }) do |_result, response|
+        c.register_collector({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.register_collector name: name, request_id: request_id do |_result, response|
+        c.register_collector name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.register_collector ::Google::Cloud::RapidMigrationAssessment::V1::RegisterCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.register_collector ::Google::Cloud::RapidMigrationAssessment::V1::RegisterCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.register_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.register_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.register_collector(::Google::Cloud::RapidMigrationAssessment::V1::RegisterCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.register_collector(::Google::Cloud::RapidMigrationAssessment::V1::RegisterCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -598,32 +598,32 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::R
     ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::ServiceStub.stub :transcode_pause_collector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_collector_client_stub do
         # Create client
-        client = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
+        c = ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_collector({ name: name, request_id: request_id }) do |_result, response|
+        c.pause_collector({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_collector name: name, request_id: request_id do |_result, response|
+        c.pause_collector name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_collector ::Google::Cloud::RapidMigrationAssessment::V1::PauseCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.pause_collector ::Google::Cloud::RapidMigrationAssessment::V1::PauseCollectorRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.pause_collector({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_collector(::Google::Cloud::RapidMigrationAssessment::V1::PauseCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.pause_collector(::Google::Cloud::RapidMigrationAssessment::V1::PauseCollectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

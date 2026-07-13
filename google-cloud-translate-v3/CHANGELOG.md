@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34057](https://github.com/googleapis/google-cloud-ruby/issues/34057)) 
+
 ### 1.9.0 (2026-04-09)
 
 #### Features

@@ -98,32 +98,32 @@ class ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesServic
     ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::ServiceStub.stub :transcode_create_conversion_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_conversion_source_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_conversion_source({ parent: parent, conversion_source: conversion_source }) do |_result, response|
+        c.create_conversion_source({ parent: parent, conversion_source: conversion_source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_conversion_source parent: parent, conversion_source: conversion_source do |_result, response|
+        c.create_conversion_source parent: parent, conversion_source: conversion_source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::CreateConversionSourceRequest.new(parent: parent, conversion_source: conversion_source) do |_result, response|
+        c.create_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::CreateConversionSourceRequest.new(parent: parent, conversion_source: conversion_source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_conversion_source({ parent: parent, conversion_source: conversion_source }, call_options) do |_result, response|
+        c.create_conversion_source({ parent: parent, conversion_source: conversion_source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::CreateConversionSourceRequest.new(parent: parent, conversion_source: conversion_source), call_options) do |_result, response|
+        c.create_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::CreateConversionSourceRequest.new(parent: parent, conversion_source: conversion_source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesServic
     ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::ServiceStub.stub :transcode_update_conversion_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_conversion_source_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_conversion_source({ conversion_source: conversion_source, update_mask: update_mask }) do |_result, response|
+        c.update_conversion_source({ conversion_source: conversion_source, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_conversion_source conversion_source: conversion_source, update_mask: update_mask do |_result, response|
+        c.update_conversion_source conversion_source: conversion_source, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::UpdateConversionSourceRequest.new(conversion_source: conversion_source, update_mask: update_mask) do |_result, response|
+        c.update_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::UpdateConversionSourceRequest.new(conversion_source: conversion_source, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_conversion_source({ conversion_source: conversion_source, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_conversion_source({ conversion_source: conversion_source, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::UpdateConversionSourceRequest.new(conversion_source: conversion_source, update_mask: update_mask), call_options) do |_result, response|
+        c.update_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::UpdateConversionSourceRequest.new(conversion_source: conversion_source, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesServic
     ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::ServiceStub.stub :transcode_delete_conversion_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_conversion_source_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_conversion_source({ name: name }) do |_result, response|
+        c.delete_conversion_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_conversion_source name: name do |_result, response|
+        c.delete_conversion_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::DeleteConversionSourceRequest.new(name: name) do |_result, response|
+        c.delete_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::DeleteConversionSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_conversion_source({ name: name }, call_options) do |_result, response|
+        c.delete_conversion_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::DeleteConversionSourceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::DeleteConversionSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesServic
     ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::ServiceStub.stub :transcode_undelete_conversion_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_conversion_source_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_conversion_source({ name: name }) do |_result, response|
+        c.undelete_conversion_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_conversion_source name: name do |_result, response|
+        c.undelete_conversion_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::UndeleteConversionSourceRequest.new(name: name) do |_result, response|
+        c.undelete_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::UndeleteConversionSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_conversion_source({ name: name }, call_options) do |_result, response|
+        c.undelete_conversion_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::UndeleteConversionSourceRequest.new(name: name), call_options) do |_result, response|
+        c.undelete_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::UndeleteConversionSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -315,32 +315,32 @@ class ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesServic
     ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::ServiceStub.stub :transcode_get_conversion_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conversion_source_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conversion_source({ name: name }) do |_result, response|
+        c.get_conversion_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conversion_source name: name do |_result, response|
+        c.get_conversion_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::GetConversionSourceRequest.new(name: name) do |_result, response|
+        c.get_conversion_source ::Google::Shopping::Merchant::Conversions::V1beta::GetConversionSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conversion_source({ name: name }, call_options) do |_result, response|
+        c.get_conversion_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::GetConversionSourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_conversion_source(::Google::Shopping::Merchant::Conversions::V1beta::GetConversionSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesServic
     ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::ServiceStub.stub :transcode_list_conversion_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conversion_sources_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Conversions::V1beta::ConversionSourcesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conversion_sources({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_conversion_sources({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversion_sources parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_conversion_sources parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversion_sources ::Google::Shopping::Merchant::Conversions::V1beta::ListConversionSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_conversion_sources ::Google::Shopping::Merchant::Conversions::V1beta::ListConversionSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversion_sources({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_conversion_sources({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversion_sources(::Google::Shopping::Merchant::Conversions::V1beta::ListConversionSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_conversion_sources(::Google::Shopping::Merchant::Conversions::V1beta::ListConversionSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

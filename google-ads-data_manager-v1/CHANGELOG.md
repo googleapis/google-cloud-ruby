@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.7.0 (2026-06-17)
+
+#### Features
+
+* add AdEvent message and related enums for ingesting ad event data ([#34611](https://github.com/googleapis/google-cloud-ruby/issues/34611)) 
+
+### 0.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34037](https://github.com/googleapis/google-cloud-ruby/issues/34037)) 
+
 ### 0.5.0 (2026-06-01)
 
 #### Features

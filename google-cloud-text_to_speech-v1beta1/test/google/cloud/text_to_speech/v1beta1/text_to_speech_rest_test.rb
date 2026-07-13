@@ -97,32 +97,32 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::ClientTest < M
     ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::ServiceStub.stub :transcode_list_voices_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_voices_client_stub do
         # Create client
-        client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::Client.new do |config|
+        c = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_voices({ language_code: language_code }) do |_result, response|
+        c.list_voices({ language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_voices language_code: language_code do |_result, response|
+        c.list_voices language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_voices ::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new(language_code: language_code) do |_result, response|
+        c.list_voices ::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new(language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_voices({ language_code: language_code }, call_options) do |_result, response|
+        c.list_voices({ language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_voices(::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new(language_code: language_code), call_options) do |_result, response|
+        c.list_voices(::Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new(language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::ClientTest < M
     ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::ServiceStub.stub :transcode_synthesize_speech_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, synthesize_speech_client_stub do
         # Create client
-        client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::Client.new do |config|
+        c = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }) do |_result, response|
+        c.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.synthesize_speech input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options do |_result, response|
+        c.synthesize_speech input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options) do |_result, response|
+        c.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }, call_options) do |_result, response|
+        c.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options), call_options) do |_result, response|
+        c.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -97,32 +97,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_get_table_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_table_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_table({ name: name }) do |_result, response|
+        c.get_table({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_table name: name do |_result, response|
+        c.get_table name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_table ::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name) do |_result, response|
+        c.get_table ::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_table({ name: name }, call_options) do |_result, response|
+        c.get_table({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_table(::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name), call_options) do |_result, response|
+        c.get_table(::Google::Area120::Tables::V1alpha1::GetTableRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_list_tables_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tables_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tables({ page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tables({ page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tables page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tables page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tables ::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tables ::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tables({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tables({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tables(::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tables(::Google::Area120::Tables::V1alpha1::ListTablesRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_get_workspace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workspace_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workspace({ name: name }) do |_result, response|
+        c.get_workspace({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workspace name: name do |_result, response|
+        c.get_workspace name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name) do |_result, response|
+        c.get_workspace ::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workspace({ name: name }, call_options) do |_result, response|
+        c.get_workspace({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workspace(::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), call_options) do |_result, response|
+        c.get_workspace(::Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_list_workspaces_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workspaces_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workspaces({ page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_workspaces({ page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workspaces page_size: page_size, page_token: page_token do |_result, response|
+        c.list_workspaces page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_workspaces ::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workspaces({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_workspaces({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workspaces(::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_workspaces(::Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -316,32 +316,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_get_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_row_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_row({ name: name, view: view }) do |_result, response|
+        c.get_row({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_row name: name, view: view do |_result, response|
+        c.get_row name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_row ::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view) do |_result, response|
+        c.get_row ::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_row({ name: name, view: view }, call_options) do |_result, response|
+        c.get_row({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_row(::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_row(::Google::Area120::Tables::V1alpha1::GetRowRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_list_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_rows_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |_result, response|
+        c.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_rows parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |_result, response|
+        c.list_rows parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |_result, response|
+        c.list_rows ::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, call_options) do |_result, response|
+        c.list_rows({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_rows(::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), call_options) do |_result, response|
+        c.list_rows(::Google::Area120::Tables::V1alpha1::ListRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -430,32 +430,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_create_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_row_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_row({ parent: parent, row: row, view: view }) do |_result, response|
+        c.create_row({ parent: parent, row: row, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_row parent: parent, row: row, view: view do |_result, response|
+        c.create_row parent: parent, row: row, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_row ::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view) do |_result, response|
+        c.create_row ::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_row({ parent: parent, row: row, view: view }, call_options) do |_result, response|
+        c.create_row({ parent: parent, row: row, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_row(::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view), call_options) do |_result, response|
+        c.create_row(::Google::Area120::Tables::V1alpha1::CreateRowRequest.new(parent: parent, row: row, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_batch_create_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_rows_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_rows({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_rows({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_rows parent: parent, requests: requests do |_result, response|
+        c.batch_create_rows parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_rows ::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_rows ::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_rows(::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_rows(::Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -541,32 +541,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_update_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_row_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_row({ row: row, update_mask: update_mask, view: view }) do |_result, response|
+        c.update_row({ row: row, update_mask: update_mask, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_row row: row, update_mask: update_mask, view: view do |_result, response|
+        c.update_row row: row, update_mask: update_mask, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_row ::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view) do |_result, response|
+        c.update_row ::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_row({ row: row, update_mask: update_mask, view: view }, call_options) do |_result, response|
+        c.update_row({ row: row, update_mask: update_mask, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_row(::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view), call_options) do |_result, response|
+        c.update_row(::Google::Area120::Tables::V1alpha1::UpdateRowRequest.new(row: row, update_mask: update_mask, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -596,32 +596,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_batch_update_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_rows_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_rows({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_rows({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_rows parent: parent, requests: requests do |_result, response|
+        c.batch_update_rows parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_rows ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_rows ::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_rows(::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_rows(::Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -650,32 +650,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_delete_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_row_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_row({ name: name }) do |_result, response|
+        c.delete_row({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_row name: name do |_result, response|
+        c.delete_row name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_row ::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name) do |_result, response|
+        c.delete_row ::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_row({ name: name }, call_options) do |_result, response|
+        c.delete_row({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_row(::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name), call_options) do |_result, response|
+        c.delete_row(::Google::Area120::Tables::V1alpha1::DeleteRowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -705,32 +705,32 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ClientTest < Min
     ::Google::Area120::Tables::V1alpha1::TablesService::Rest::ServiceStub.stub :transcode_batch_delete_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_delete_rows_client_stub do
         # Create client
-        client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
+        c = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_delete_rows({ parent: parent, names: names }) do |_result, response|
+        c.batch_delete_rows({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_delete_rows parent: parent, names: names do |_result, response|
+        c.batch_delete_rows parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_delete_rows ::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_delete_rows({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_delete_rows({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_delete_rows(::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_delete_rows(::Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

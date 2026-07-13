@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ServiceStub.stub :transcode_create_generator_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_generator_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }) do |_result, response|
+        c.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_generator_evaluation parent: parent, generator_evaluation: generator_evaluation do |_result, response|
+        c.create_generator_evaluation parent: parent, generator_evaluation: generator_evaluation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_generator_evaluation ::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation) do |_result, response|
+        c.create_generator_evaluation ::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }, call_options) do |_result, response|
+        c.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_generator_evaluation(::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation), call_options) do |_result, response|
+        c.create_generator_evaluation(::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ServiceStub.stub :transcode_get_generator_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_generator_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_generator_evaluation({ name: name }) do |_result, response|
+        c.get_generator_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_generator_evaluation name: name do |_result, response|
+        c.get_generator_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_generator_evaluation ::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name) do |_result, response|
+        c.get_generator_evaluation ::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_generator_evaluation({ name: name }, call_options) do |_result, response|
+        c.get_generator_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_generator_evaluation(::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.get_generator_evaluation(::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ServiceStub.stub :transcode_list_generator_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_generator_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_generator_evaluations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_generator_evaluations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_generator_evaluations ::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_generator_evaluations ::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_generator_evaluations(::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_generator_evaluations(::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ClientTest < 
     ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::ServiceStub.stub :transcode_delete_generator_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_generator_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_generator_evaluation({ name: name }) do |_result, response|
+        c.delete_generator_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_generator_evaluation name: name do |_result, response|
+        c.delete_generator_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_generator_evaluation ::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name) do |_result, response|
+        c.delete_generator_evaluation ::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_generator_evaluation({ name: name }, call_options) do |_result, response|
+        c.delete_generator_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_generator_evaluation(::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_generator_evaluation(::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

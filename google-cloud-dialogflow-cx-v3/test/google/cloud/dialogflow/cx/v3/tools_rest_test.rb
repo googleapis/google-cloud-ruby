@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_create_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tool({ parent: parent, tool: tool }) do |_result, response|
+        c.create_tool({ parent: parent, tool: tool }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tool parent: parent, tool: tool do |_result, response|
+        c.create_tool parent: parent, tool: tool do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tool ::Google::Cloud::Dialogflow::CX::V3::CreateToolRequest.new(parent: parent, tool: tool) do |_result, response|
+        c.create_tool ::Google::Cloud::Dialogflow::CX::V3::CreateToolRequest.new(parent: parent, tool: tool) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tool({ parent: parent, tool: tool }, call_options) do |_result, response|
+        c.create_tool({ parent: parent, tool: tool }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tool(::Google::Cloud::Dialogflow::CX::V3::CreateToolRequest.new(parent: parent, tool: tool), call_options) do |_result, response|
+        c.create_tool(::Google::Cloud::Dialogflow::CX::V3::CreateToolRequest.new(parent: parent, tool: tool), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_list_tools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tools_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tools ::Google::Cloud::Dialogflow::CX::V3::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tools ::Google::Cloud::Dialogflow::CX::V3::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tools(::Google::Cloud::Dialogflow::CX::V3::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tools(::Google::Cloud::Dialogflow::CX::V3::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_get_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tool({ name: name }) do |_result, response|
+        c.get_tool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tool name: name do |_result, response|
+        c.get_tool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tool ::Google::Cloud::Dialogflow::CX::V3::GetToolRequest.new(name: name) do |_result, response|
+        c.get_tool ::Google::Cloud::Dialogflow::CX::V3::GetToolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tool({ name: name }, call_options) do |_result, response|
+        c.get_tool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tool(::Google::Cloud::Dialogflow::CX::V3::GetToolRequest.new(name: name), call_options) do |_result, response|
+        c.get_tool(::Google::Cloud::Dialogflow::CX::V3::GetToolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_update_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tool({ tool: tool, update_mask: update_mask }) do |_result, response|
+        c.update_tool({ tool: tool, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tool tool: tool, update_mask: update_mask do |_result, response|
+        c.update_tool tool: tool, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tool ::Google::Cloud::Dialogflow::CX::V3::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |_result, response|
+        c.update_tool ::Google::Cloud::Dialogflow::CX::V3::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tool({ tool: tool, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tool({ tool: tool, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tool(::Google::Cloud::Dialogflow::CX::V3::UpdateToolRequest.new(tool: tool, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tool(::Google::Cloud::Dialogflow::CX::V3::UpdateToolRequest.new(tool: tool, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_delete_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tool({ name: name, force: force }) do |_result, response|
+        c.delete_tool({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tool name: name, force: force do |_result, response|
+        c.delete_tool name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tool ::Google::Cloud::Dialogflow::CX::V3::DeleteToolRequest.new(name: name, force: force) do |_result, response|
+        c.delete_tool ::Google::Cloud::Dialogflow::CX::V3::DeleteToolRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tool({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_tool({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tool(::Google::Cloud::Dialogflow::CX::V3::DeleteToolRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_tool(::Google::Cloud::Dialogflow::CX::V3::DeleteToolRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_list_tool_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tool_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tool_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tool_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tool_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tool_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tool_versions ::Google::Cloud::Dialogflow::CX::V3::ListToolVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tool_versions ::Google::Cloud::Dialogflow::CX::V3::ListToolVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tool_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tool_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tool_versions(::Google::Cloud::Dialogflow::CX::V3::ListToolVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tool_versions(::Google::Cloud::Dialogflow::CX::V3::ListToolVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_create_tool_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tool_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tool_version({ parent: parent, tool_version: tool_version }) do |_result, response|
+        c.create_tool_version({ parent: parent, tool_version: tool_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tool_version parent: parent, tool_version: tool_version do |_result, response|
+        c.create_tool_version parent: parent, tool_version: tool_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tool_version ::Google::Cloud::Dialogflow::CX::V3::CreateToolVersionRequest.new(parent: parent, tool_version: tool_version) do |_result, response|
+        c.create_tool_version ::Google::Cloud::Dialogflow::CX::V3::CreateToolVersionRequest.new(parent: parent, tool_version: tool_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tool_version({ parent: parent, tool_version: tool_version }, call_options) do |_result, response|
+        c.create_tool_version({ parent: parent, tool_version: tool_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tool_version(::Google::Cloud::Dialogflow::CX::V3::CreateToolVersionRequest.new(parent: parent, tool_version: tool_version), call_options) do |_result, response|
+        c.create_tool_version(::Google::Cloud::Dialogflow::CX::V3::CreateToolVersionRequest.new(parent: parent, tool_version: tool_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_get_tool_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tool_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tool_version({ name: name }) do |_result, response|
+        c.get_tool_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tool_version name: name do |_result, response|
+        c.get_tool_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tool_version ::Google::Cloud::Dialogflow::CX::V3::GetToolVersionRequest.new(name: name) do |_result, response|
+        c.get_tool_version ::Google::Cloud::Dialogflow::CX::V3::GetToolVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tool_version({ name: name }, call_options) do |_result, response|
+        c.get_tool_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tool_version(::Google::Cloud::Dialogflow::CX::V3::GetToolVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_tool_version(::Google::Cloud::Dialogflow::CX::V3::GetToolVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -538,32 +538,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_delete_tool_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tool_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tool_version({ name: name, force: force }) do |_result, response|
+        c.delete_tool_version({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tool_version name: name, force: force do |_result, response|
+        c.delete_tool_version name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tool_version ::Google::Cloud::Dialogflow::CX::V3::DeleteToolVersionRequest.new(name: name, force: force) do |_result, response|
+        c.delete_tool_version ::Google::Cloud::Dialogflow::CX::V3::DeleteToolVersionRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tool_version({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_tool_version({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tool_version(::Google::Cloud::Dialogflow::CX::V3::DeleteToolVersionRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_tool_version(::Google::Cloud::Dialogflow::CX::V3::DeleteToolVersionRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -592,32 +592,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::ServiceStub.stub :transcode_restore_tool_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_tool_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Tools::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_tool_version({ name: name }) do |_result, response|
+        c.restore_tool_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_tool_version name: name do |_result, response|
+        c.restore_tool_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_tool_version ::Google::Cloud::Dialogflow::CX::V3::RestoreToolVersionRequest.new(name: name) do |_result, response|
+        c.restore_tool_version ::Google::Cloud::Dialogflow::CX::V3::RestoreToolVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_tool_version({ name: name }, call_options) do |_result, response|
+        c.restore_tool_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_tool_version(::Google::Cloud::Dialogflow::CX::V3::RestoreToolVersionRequest.new(name: name), call_options) do |_result, response|
+        c.restore_tool_version(::Google::Cloud::Dialogflow::CX::V3::RestoreToolVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

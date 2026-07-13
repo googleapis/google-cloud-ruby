@@ -100,32 +100,32 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Rest::ClientTest <
     ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Rest::ServiceStub.stub :transcode_restore_from_cloud_sql_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_from_cloud_sql_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }) do |_result, response|
+        c.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_from_cloud_sql cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster do |_result, response|
+        c.restore_from_cloud_sql cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_from_cloud_sql ::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster) do |_result, response|
+        c.restore_from_cloud_sql ::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }, call_options) do |_result, response|
+        c.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_from_cloud_sql(::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster), call_options) do |_result, response|
+        c.restore_from_cloud_sql(::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

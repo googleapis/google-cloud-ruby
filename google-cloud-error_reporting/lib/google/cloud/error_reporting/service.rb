@@ -29,14 +29,17 @@ module Google
         attr_accessor :credentials
         attr_accessor :timeout
         attr_accessor :host
+        attr_accessor :quota_project
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, host: nil
+        def initialize project, credentials, timeout: nil, host: nil, quota_project: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
           @host = host
+          @quota_project = quota_project
+          @quota_project ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
         end
 
         def error_reporting
@@ -46,6 +49,7 @@ module Google
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host
+              config.quota_project = quota_project if quota_project
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::ErrorReporting::VERSION
             end

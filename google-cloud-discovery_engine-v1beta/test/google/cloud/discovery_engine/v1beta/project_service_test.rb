@@ -74,6 +74,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::ClientTest < Min
     name = "hello world"
     accept_data_use_terms = true
     data_use_terms_version = "hello world"
+    saas_params = {}
 
     provision_project_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :provision_project, name
@@ -81,45 +82,46 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::ClientTest < Min
       assert_equal "hello world", request["name"]
       assert_equal true, request["accept_data_use_terms"]
       assert_equal "hello world", request["data_use_terms_version"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest::SaasParams), request["saas_params"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, provision_project_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }) do |response, operation|
+      c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version do |response, operation|
+      c.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.provision_project ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version) do |response, operation|
+      c.provision_project ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }, grpc_options) do |response, operation|
+      c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.provision_project(::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version), grpc_options) do |response, operation|
+      c.provision_project(::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

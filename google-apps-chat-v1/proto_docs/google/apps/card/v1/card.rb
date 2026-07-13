@@ -790,7 +790,7 @@ module Google
             # Aligns widgets to the end position of the column. For left-to-right
             # layouts, aligns widgets to the right. For right-to-left layouts, aligns
             # widgets to the left.
-            HorizontalAlignment::END = 3
+            const_set :END, 3
           end
 
           # Represents vertical alignment attribute.

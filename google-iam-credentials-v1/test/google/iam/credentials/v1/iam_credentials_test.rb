@@ -88,36 +88,36 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, generate_access_token_client_stub do
       # Create client
-      client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
+      c = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }) do |response, operation|
+      c.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_access_token name: name, delegates: delegates, scope: scope, lifetime: lifetime do |response, operation|
+      c.generate_access_token name: name, delegates: delegates, scope: scope, lifetime: lifetime do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_access_token ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime) do |response, operation|
+      c.generate_access_token ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }, grpc_options) do |response, operation|
+      c.generate_access_token({ name: name, delegates: delegates, scope: scope, lifetime: lifetime }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_access_token(::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime), grpc_options) do |response, operation|
+      c.generate_access_token(::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new(name: name, delegates: delegates, scope: scope, lifetime: lifetime), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -152,36 +152,36 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, generate_id_token_client_stub do
       # Create client
-      client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
+      c = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }) do |response, operation|
+      c.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_id_token name: name, delegates: delegates, audience: audience, include_email: include_email do |response, operation|
+      c.generate_id_token name: name, delegates: delegates, audience: audience, include_email: include_email do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_id_token ::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email) do |response, operation|
+      c.generate_id_token ::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }, grpc_options) do |response, operation|
+      c.generate_id_token({ name: name, delegates: delegates, audience: audience, include_email: include_email }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_id_token(::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email), grpc_options) do |response, operation|
+      c.generate_id_token(::Google::Iam::Credentials::V1::GenerateIdTokenRequest.new(name: name, delegates: delegates, audience: audience, include_email: include_email), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -214,36 +214,36 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, sign_blob_client_stub do
       # Create client
-      client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
+      c = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.sign_blob({ name: name, delegates: delegates, payload: payload }) do |response, operation|
+      c.sign_blob({ name: name, delegates: delegates, payload: payload }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.sign_blob name: name, delegates: delegates, payload: payload do |response, operation|
+      c.sign_blob name: name, delegates: delegates, payload: payload do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.sign_blob ::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload) do |response, operation|
+      c.sign_blob ::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.sign_blob({ name: name, delegates: delegates, payload: payload }, grpc_options) do |response, operation|
+      c.sign_blob({ name: name, delegates: delegates, payload: payload }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.sign_blob(::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload), grpc_options) do |response, operation|
+      c.sign_blob(::Google::Iam::Credentials::V1::SignBlobRequest.new(name: name, delegates: delegates, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -276,36 +276,36 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, sign_jwt_client_stub do
       # Create client
-      client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
+      c = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.sign_jwt({ name: name, delegates: delegates, payload: payload }) do |response, operation|
+      c.sign_jwt({ name: name, delegates: delegates, payload: payload }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.sign_jwt name: name, delegates: delegates, payload: payload do |response, operation|
+      c.sign_jwt name: name, delegates: delegates, payload: payload do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.sign_jwt ::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload) do |response, operation|
+      c.sign_jwt ::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.sign_jwt({ name: name, delegates: delegates, payload: payload }, grpc_options) do |response, operation|
+      c.sign_jwt({ name: name, delegates: delegates, payload: payload }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.sign_jwt(::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload), grpc_options) do |response, operation|
+      c.sign_jwt(::Google::Iam::Credentials::V1::SignJwtRequest.new(name: name, delegates: delegates, payload: payload), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

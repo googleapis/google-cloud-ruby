@@ -99,32 +99,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_create_os_policy_assignment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_os_policy_assignment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_os_policy_assignment({ parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id }) do |_result, response|
+        c.create_os_policy_assignment({ parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_os_policy_assignment parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id do |_result, response|
+        c.create_os_policy_assignment parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_os_policy_assignment ::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest.new(parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id) do |_result, response|
+        c.create_os_policy_assignment ::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest.new(parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_os_policy_assignment({ parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id }, call_options) do |_result, response|
+        c.create_os_policy_assignment({ parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_os_policy_assignment(::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest.new(parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id), call_options) do |_result, response|
+        c.create_os_policy_assignment(::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest.new(parent: parent, os_policy_assignment: os_policy_assignment, os_policy_assignment_id: os_policy_assignment_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_update_os_policy_assignment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_os_policy_assignment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_os_policy_assignment({ os_policy_assignment: os_policy_assignment, update_mask: update_mask }) do |_result, response|
+        c.update_os_policy_assignment({ os_policy_assignment: os_policy_assignment, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_os_policy_assignment os_policy_assignment: os_policy_assignment, update_mask: update_mask do |_result, response|
+        c.update_os_policy_assignment os_policy_assignment: os_policy_assignment, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_os_policy_assignment ::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest.new(os_policy_assignment: os_policy_assignment, update_mask: update_mask) do |_result, response|
+        c.update_os_policy_assignment ::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest.new(os_policy_assignment: os_policy_assignment, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_os_policy_assignment({ os_policy_assignment: os_policy_assignment, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_os_policy_assignment({ os_policy_assignment: os_policy_assignment, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_os_policy_assignment(::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest.new(os_policy_assignment: os_policy_assignment, update_mask: update_mask), call_options) do |_result, response|
+        c.update_os_policy_assignment(::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest.new(os_policy_assignment: os_policy_assignment, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_get_os_policy_assignment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_os_policy_assignment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_os_policy_assignment({ name: name }) do |_result, response|
+        c.get_os_policy_assignment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_os_policy_assignment name: name do |_result, response|
+        c.get_os_policy_assignment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_os_policy_assignment ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest.new(name: name) do |_result, response|
+        c.get_os_policy_assignment ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_os_policy_assignment({ name: name }, call_options) do |_result, response|
+        c.get_os_policy_assignment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_os_policy_assignment(::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_os_policy_assignment(::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_list_os_policy_assignments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_os_policy_assignments_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_os_policy_assignments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_os_policy_assignments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_os_policy_assignments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_os_policy_assignments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_os_policy_assignments ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_os_policy_assignments ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_os_policy_assignments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_os_policy_assignments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_os_policy_assignments(::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_os_policy_assignments(::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_list_os_policy_assignment_revisions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_os_policy_assignment_revisions_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_os_policy_assignment_revisions({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_os_policy_assignment_revisions({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_os_policy_assignment_revisions name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_os_policy_assignment_revisions name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_os_policy_assignment_revisions ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_os_policy_assignment_revisions ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_os_policy_assignment_revisions({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_os_policy_assignment_revisions({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_os_policy_assignment_revisions(::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_os_policy_assignment_revisions(::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_delete_os_policy_assignment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_os_policy_assignment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_os_policy_assignment({ name: name }) do |_result, response|
+        c.delete_os_policy_assignment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_os_policy_assignment name: name do |_result, response|
+        c.delete_os_policy_assignment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_os_policy_assignment ::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest.new(name: name) do |_result, response|
+        c.delete_os_policy_assignment ::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_os_policy_assignment({ name: name }, call_options) do |_result, response|
+        c.delete_os_policy_assignment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_os_policy_assignment(::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_os_policy_assignment(::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_get_os_policy_assignment_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_os_policy_assignment_report_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_os_policy_assignment_report({ name: name }) do |_result, response|
+        c.get_os_policy_assignment_report({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_os_policy_assignment_report name: name do |_result, response|
+        c.get_os_policy_assignment_report name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_os_policy_assignment_report ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest.new(name: name) do |_result, response|
+        c.get_os_policy_assignment_report ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_os_policy_assignment_report({ name: name }, call_options) do |_result, response|
+        c.get_os_policy_assignment_report({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_os_policy_assignment_report(::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest.new(name: name), call_options) do |_result, response|
+        c.get_os_policy_assignment_report(::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_list_os_policy_assignment_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_os_policy_assignment_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_os_policy_assignment_reports({ parent: parent, page_size: page_size, filter: filter, page_token: page_token }) do |_result, response|
+        c.list_os_policy_assignment_reports({ parent: parent, page_size: page_size, filter: filter, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_os_policy_assignment_reports parent: parent, page_size: page_size, filter: filter, page_token: page_token do |_result, response|
+        c.list_os_policy_assignment_reports parent: parent, page_size: page_size, filter: filter, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_os_policy_assignment_reports ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest.new(parent: parent, page_size: page_size, filter: filter, page_token: page_token) do |_result, response|
+        c.list_os_policy_assignment_reports ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest.new(parent: parent, page_size: page_size, filter: filter, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_os_policy_assignment_reports({ parent: parent, page_size: page_size, filter: filter, page_token: page_token }, call_options) do |_result, response|
+        c.list_os_policy_assignment_reports({ parent: parent, page_size: page_size, filter: filter, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_os_policy_assignment_reports(::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest.new(parent: parent, page_size: page_size, filter: filter, page_token: page_token), call_options) do |_result, response|
+        c.list_os_policy_assignment_reports(::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest.new(parent: parent, page_size: page_size, filter: filter, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -540,32 +540,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_get_inventory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_inventory_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_inventory({ name: name, view: view }) do |_result, response|
+        c.get_inventory({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_inventory name: name, view: view do |_result, response|
+        c.get_inventory name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_inventory ::Google::Cloud::OsConfig::V1::GetInventoryRequest.new(name: name, view: view) do |_result, response|
+        c.get_inventory ::Google::Cloud::OsConfig::V1::GetInventoryRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_inventory({ name: name, view: view }, call_options) do |_result, response|
+        c.get_inventory({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_inventory(::Google::Cloud::OsConfig::V1::GetInventoryRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_inventory(::Google::Cloud::OsConfig::V1::GetInventoryRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -598,32 +598,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_list_inventories_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_inventories_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_inventories({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_inventories({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_inventories parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_inventories parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_inventories ::Google::Cloud::OsConfig::V1::ListInventoriesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_inventories ::Google::Cloud::OsConfig::V1::ListInventoriesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_inventories({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_inventories({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_inventories(::Google::Cloud::OsConfig::V1::ListInventoriesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_inventories(::Google::Cloud::OsConfig::V1::ListInventoriesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -652,32 +652,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_get_vulnerability_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_vulnerability_report_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_vulnerability_report({ name: name }) do |_result, response|
+        c.get_vulnerability_report({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_vulnerability_report name: name do |_result, response|
+        c.get_vulnerability_report name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_vulnerability_report ::Google::Cloud::OsConfig::V1::GetVulnerabilityReportRequest.new(name: name) do |_result, response|
+        c.get_vulnerability_report ::Google::Cloud::OsConfig::V1::GetVulnerabilityReportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_vulnerability_report({ name: name }, call_options) do |_result, response|
+        c.get_vulnerability_report({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_vulnerability_report(::Google::Cloud::OsConfig::V1::GetVulnerabilityReportRequest.new(name: name), call_options) do |_result, response|
+        c.get_vulnerability_report(::Google::Cloud::OsConfig::V1::GetVulnerabilityReportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -709,32 +709,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ClientTest < Mi
     ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::ServiceStub.stub :transcode_list_vulnerability_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_vulnerability_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_vulnerability_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_vulnerability_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_vulnerability_reports parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_vulnerability_reports parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_vulnerability_reports ::Google::Cloud::OsConfig::V1::ListVulnerabilityReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_vulnerability_reports ::Google::Cloud::OsConfig::V1::ListVulnerabilityReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_vulnerability_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_vulnerability_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_vulnerability_reports(::Google::Cloud::OsConfig::V1::ListVulnerabilityReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_vulnerability_reports(::Google::Cloud::OsConfig::V1::ListVulnerabilityReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

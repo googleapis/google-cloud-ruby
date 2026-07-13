@@ -98,32 +98,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_create_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_environment({ parent: parent, environment: environment }) do |_result, response|
+        c.create_environment({ parent: parent, environment: environment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_environment parent: parent, environment: environment do |_result, response|
+        c.create_environment parent: parent, environment: environment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new(parent: parent, environment: environment) do |_result, response|
+        c.create_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new(parent: parent, environment: environment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_environment({ parent: parent, environment: environment }, call_options) do |_result, response|
+        c.create_environment({ parent: parent, environment: environment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new(parent: parent, environment: environment), call_options) do |_result, response|
+        c.create_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new(parent: parent, environment: environment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_get_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_environment({ name: name }) do |_result, response|
+        c.get_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_environment name: name do |_result, response|
+        c.get_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
+        c.get_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_environment({ name: name }, call_options) do |_result, response|
+        c.get_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_list_environments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_environments_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_environments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_environments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_environments ::Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_environments ::Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_environments(::Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_environments(::Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_update_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_environment({ name: name, environment: environment, update_mask: update_mask }) do |_result, response|
+        c.update_environment({ name: name, environment: environment, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_environment name: name, environment: environment, update_mask: update_mask do |_result, response|
+        c.update_environment name: name, environment: environment, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest.new(name: name, environment: environment, update_mask: update_mask) do |_result, response|
+        c.update_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest.new(name: name, environment: environment, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_environment({ name: name, environment: environment, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_environment({ name: name, environment: environment, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest.new(name: name, environment: environment, update_mask: update_mask), call_options) do |_result, response|
+        c.update_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest.new(name: name, environment: environment, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_delete_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_environment({ name: name }) do |_result, response|
+        c.delete_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_environment name: name do |_result, response|
+        c.delete_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest.new(name: name) do |_result, response|
+        c.delete_environment ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_environment({ name: name }, call_options) do |_result, response|
+        c.delete_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_environment(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_execute_airflow_command_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, execute_airflow_command_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }) do |_result, response|
+        c.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_airflow_command environment: environment, command: command, subcommand: subcommand, parameters: parameters do |_result, response|
+        c.execute_airflow_command environment: environment, command: command, subcommand: subcommand, parameters: parameters do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters) do |_result, response|
+        c.execute_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }, call_options) do |_result, response|
+        c.execute_airflow_command({ environment: environment, command: command, subcommand: subcommand, parameters: parameters }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters), call_options) do |_result, response|
+        c.execute_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest.new(environment: environment, command: command, subcommand: subcommand, parameters: parameters), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_stop_airflow_command_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_airflow_command_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }) do |_result, response|
+        c.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force do |_result, response|
+        c.stop_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force) do |_result, response|
+        c.stop_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }, call_options) do |_result, response|
+        c.stop_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force), call_options) do |_result, response|
+        c.stop_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -491,32 +491,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_poll_airflow_command_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, poll_airflow_command_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }) do |_result, response|
+        c.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.poll_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number do |_result, response|
+        c.poll_airflow_command environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.poll_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number) do |_result, response|
+        c.poll_airflow_command ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }, call_options) do |_result, response|
+        c.poll_airflow_command({ environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.poll_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number), call_options) do |_result, response|
+        c.poll_airflow_command(::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest.new(environment: environment, execution_id: execution_id, pod: pod, pod_namespace: pod_namespace, next_line_number: next_line_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -548,32 +548,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_list_workloads_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workloads_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_workloads parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workloads ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_workloads ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_workloads({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workloads(::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_workloads(::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -603,32 +603,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_check_upgrade_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, check_upgrade_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.check_upgrade({ environment: environment, image_version: image_version }) do |_result, response|
+        c.check_upgrade({ environment: environment, image_version: image_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check_upgrade environment: environment, image_version: image_version do |_result, response|
+        c.check_upgrade environment: environment, image_version: image_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check_upgrade ::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest.new(environment: environment, image_version: image_version) do |_result, response|
+        c.check_upgrade ::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest.new(environment: environment, image_version: image_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check_upgrade({ environment: environment, image_version: image_version }, call_options) do |_result, response|
+        c.check_upgrade({ environment: environment, image_version: image_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check_upgrade(::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest.new(environment: environment, image_version: image_version), call_options) do |_result, response|
+        c.check_upgrade(::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest.new(environment: environment, image_version: image_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -658,32 +658,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_create_user_workloads_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_user_workloads_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_user_workloads_secret({ parent: parent, user_workloads_secret: user_workloads_secret }) do |_result, response|
+        c.create_user_workloads_secret({ parent: parent, user_workloads_secret: user_workloads_secret }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_user_workloads_secret parent: parent, user_workloads_secret: user_workloads_secret do |_result, response|
+        c.create_user_workloads_secret parent: parent, user_workloads_secret: user_workloads_secret do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new(parent: parent, user_workloads_secret: user_workloads_secret) do |_result, response|
+        c.create_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new(parent: parent, user_workloads_secret: user_workloads_secret) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_user_workloads_secret({ parent: parent, user_workloads_secret: user_workloads_secret }, call_options) do |_result, response|
+        c.create_user_workloads_secret({ parent: parent, user_workloads_secret: user_workloads_secret }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new(parent: parent, user_workloads_secret: user_workloads_secret), call_options) do |_result, response|
+        c.create_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsSecretRequest.new(parent: parent, user_workloads_secret: user_workloads_secret), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -712,32 +712,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_get_user_workloads_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_user_workloads_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_user_workloads_secret({ name: name }) do |_result, response|
+        c.get_user_workloads_secret({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_user_workloads_secret name: name do |_result, response|
+        c.get_user_workloads_secret name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new(name: name) do |_result, response|
+        c.get_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_user_workloads_secret({ name: name }, call_options) do |_result, response|
+        c.get_user_workloads_secret({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new(name: name), call_options) do |_result, response|
+        c.get_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsSecretRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -768,32 +768,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_list_user_workloads_secrets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_user_workloads_secrets_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_user_workloads_secrets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_user_workloads_secrets({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_user_workloads_secrets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_user_workloads_secrets parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_user_workloads_secrets ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_user_workloads_secrets ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_user_workloads_secrets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_user_workloads_secrets({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_user_workloads_secrets(::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_user_workloads_secrets(::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsSecretsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -822,32 +822,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_update_user_workloads_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_user_workloads_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_user_workloads_secret({ user_workloads_secret: user_workloads_secret }) do |_result, response|
+        c.update_user_workloads_secret({ user_workloads_secret: user_workloads_secret }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_user_workloads_secret user_workloads_secret: user_workloads_secret do |_result, response|
+        c.update_user_workloads_secret user_workloads_secret: user_workloads_secret do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new(user_workloads_secret: user_workloads_secret) do |_result, response|
+        c.update_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new(user_workloads_secret: user_workloads_secret) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_user_workloads_secret({ user_workloads_secret: user_workloads_secret }, call_options) do |_result, response|
+        c.update_user_workloads_secret({ user_workloads_secret: user_workloads_secret }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new(user_workloads_secret: user_workloads_secret), call_options) do |_result, response|
+        c.update_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsSecretRequest.new(user_workloads_secret: user_workloads_secret), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -876,32 +876,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_delete_user_workloads_secret_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_user_workloads_secret_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_user_workloads_secret({ name: name }) do |_result, response|
+        c.delete_user_workloads_secret({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_user_workloads_secret name: name do |_result, response|
+        c.delete_user_workloads_secret name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new(name: name) do |_result, response|
+        c.delete_user_workloads_secret ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_user_workloads_secret({ name: name }, call_options) do |_result, response|
+        c.delete_user_workloads_secret({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new(name: name), call_options) do |_result, response|
+        c.delete_user_workloads_secret(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsSecretRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -931,32 +931,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_create_user_workloads_config_map_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_user_workloads_config_map_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_user_workloads_config_map({ parent: parent, user_workloads_config_map: user_workloads_config_map }) do |_result, response|
+        c.create_user_workloads_config_map({ parent: parent, user_workloads_config_map: user_workloads_config_map }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_user_workloads_config_map parent: parent, user_workloads_config_map: user_workloads_config_map do |_result, response|
+        c.create_user_workloads_config_map parent: parent, user_workloads_config_map: user_workloads_config_map do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new(parent: parent, user_workloads_config_map: user_workloads_config_map) do |_result, response|
+        c.create_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new(parent: parent, user_workloads_config_map: user_workloads_config_map) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_user_workloads_config_map({ parent: parent, user_workloads_config_map: user_workloads_config_map }, call_options) do |_result, response|
+        c.create_user_workloads_config_map({ parent: parent, user_workloads_config_map: user_workloads_config_map }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new(parent: parent, user_workloads_config_map: user_workloads_config_map), call_options) do |_result, response|
+        c.create_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::CreateUserWorkloadsConfigMapRequest.new(parent: parent, user_workloads_config_map: user_workloads_config_map), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -985,32 +985,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_get_user_workloads_config_map_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_user_workloads_config_map_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_user_workloads_config_map({ name: name }) do |_result, response|
+        c.get_user_workloads_config_map({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_user_workloads_config_map name: name do |_result, response|
+        c.get_user_workloads_config_map name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new(name: name) do |_result, response|
+        c.get_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_user_workloads_config_map({ name: name }, call_options) do |_result, response|
+        c.get_user_workloads_config_map({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new(name: name), call_options) do |_result, response|
+        c.get_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::GetUserWorkloadsConfigMapRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1041,32 +1041,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_list_user_workloads_config_maps_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_user_workloads_config_maps_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_user_workloads_config_maps({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_user_workloads_config_maps({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_user_workloads_config_maps parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_user_workloads_config_maps parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_user_workloads_config_maps ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_user_workloads_config_maps ::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_user_workloads_config_maps({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_user_workloads_config_maps({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_user_workloads_config_maps(::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_user_workloads_config_maps(::Google::Cloud::Orchestration::Airflow::Service::V1::ListUserWorkloadsConfigMapsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1095,32 +1095,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_update_user_workloads_config_map_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_user_workloads_config_map_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_user_workloads_config_map({ user_workloads_config_map: user_workloads_config_map }) do |_result, response|
+        c.update_user_workloads_config_map({ user_workloads_config_map: user_workloads_config_map }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_user_workloads_config_map user_workloads_config_map: user_workloads_config_map do |_result, response|
+        c.update_user_workloads_config_map user_workloads_config_map: user_workloads_config_map do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new(user_workloads_config_map: user_workloads_config_map) do |_result, response|
+        c.update_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new(user_workloads_config_map: user_workloads_config_map) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_user_workloads_config_map({ user_workloads_config_map: user_workloads_config_map }, call_options) do |_result, response|
+        c.update_user_workloads_config_map({ user_workloads_config_map: user_workloads_config_map }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new(user_workloads_config_map: user_workloads_config_map), call_options) do |_result, response|
+        c.update_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateUserWorkloadsConfigMapRequest.new(user_workloads_config_map: user_workloads_config_map), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1149,32 +1149,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_delete_user_workloads_config_map_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_user_workloads_config_map_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_user_workloads_config_map({ name: name }) do |_result, response|
+        c.delete_user_workloads_config_map({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_user_workloads_config_map name: name do |_result, response|
+        c.delete_user_workloads_config_map name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new(name: name) do |_result, response|
+        c.delete_user_workloads_config_map ::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_user_workloads_config_map({ name: name }, call_options) do |_result, response|
+        c.delete_user_workloads_config_map({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new(name: name), call_options) do |_result, response|
+        c.delete_user_workloads_config_map(::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteUserWorkloadsConfigMapRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1204,32 +1204,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_save_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, save_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.save_snapshot({ environment: environment, snapshot_location: snapshot_location }) do |_result, response|
+        c.save_snapshot({ environment: environment, snapshot_location: snapshot_location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.save_snapshot environment: environment, snapshot_location: snapshot_location do |_result, response|
+        c.save_snapshot environment: environment, snapshot_location: snapshot_location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.save_snapshot ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new(environment: environment, snapshot_location: snapshot_location) do |_result, response|
+        c.save_snapshot ::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new(environment: environment, snapshot_location: snapshot_location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.save_snapshot({ environment: environment, snapshot_location: snapshot_location }, call_options) do |_result, response|
+        c.save_snapshot({ environment: environment, snapshot_location: snapshot_location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.save_snapshot(::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new(environment: environment, snapshot_location: snapshot_location), call_options) do |_result, response|
+        c.save_snapshot(::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest.new(environment: environment, snapshot_location: snapshot_location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1263,32 +1263,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_load_snapshot_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, load_snapshot_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.load_snapshot({ environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying }) do |_result, response|
+        c.load_snapshot({ environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.load_snapshot environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying do |_result, response|
+        c.load_snapshot environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.load_snapshot ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new(environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying) do |_result, response|
+        c.load_snapshot ::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new(environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.load_snapshot({ environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying }, call_options) do |_result, response|
+        c.load_snapshot({ environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.load_snapshot(::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new(environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying), call_options) do |_result, response|
+        c.load_snapshot(::Google::Cloud::Orchestration::Airflow::Service::V1::LoadSnapshotRequest.new(environment: environment, snapshot_path: snapshot_path, skip_pypi_packages_installation: skip_pypi_packages_installation, skip_environment_variables_setting: skip_environment_variables_setting, skip_airflow_overrides_setting: skip_airflow_overrides_setting, skip_gcs_data_copying: skip_gcs_data_copying), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1317,32 +1317,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_database_failover_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, database_failover_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.database_failover({ environment: environment }) do |_result, response|
+        c.database_failover({ environment: environment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.database_failover environment: environment do |_result, response|
+        c.database_failover environment: environment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.database_failover ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment) do |_result, response|
+        c.database_failover ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.database_failover({ environment: environment }, call_options) do |_result, response|
+        c.database_failover({ environment: environment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.database_failover(::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment), call_options) do |_result, response|
+        c.database_failover(::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest.new(environment: environment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1371,32 +1371,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::ServiceStub.stub :transcode_fetch_database_properties_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_database_properties_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_database_properties({ environment: environment }) do |_result, response|
+        c.fetch_database_properties({ environment: environment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_database_properties environment: environment do |_result, response|
+        c.fetch_database_properties environment: environment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_database_properties ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment) do |_result, response|
+        c.fetch_database_properties ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_database_properties({ environment: environment }, call_options) do |_result, response|
+        c.fetch_database_properties({ environment: environment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_database_properties(::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment), call_options) do |_result, response|
+        c.fetch_database_properties(::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest.new(environment: environment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

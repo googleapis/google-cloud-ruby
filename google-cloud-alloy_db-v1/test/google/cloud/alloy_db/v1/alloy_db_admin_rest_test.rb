@@ -101,32 +101,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_clusters_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_clusters_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_clusters ::Google::Cloud::AlloyDB::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_clusters ::Google::Cloud::AlloyDB::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_clusters(::Google::Cloud::AlloyDB::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_clusters(::Google::Cloud::AlloyDB::V1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_get_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cluster({ name: name, view: view }) do |_result, response|
+        c.get_cluster({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cluster name: name, view: view do |_result, response|
+        c.get_cluster name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cluster ::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name, view: view) do |_result, response|
+        c.get_cluster ::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cluster({ name: name, view: view }, call_options) do |_result, response|
+        c.get_cluster({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cluster(::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_cluster(::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_cluster ::Google::Cloud::AlloyDB::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_cluster ::Google::Cloud::AlloyDB::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_cluster(::Google::Cloud::AlloyDB::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_cluster(::Google::Cloud::AlloyDB::V1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -272,32 +272,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_update_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_cluster update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_cluster update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_cluster ::Google::Cloud::AlloyDB::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_cluster ::Google::Cloud::AlloyDB::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_cluster(::Google::Cloud::AlloyDB::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_cluster(::Google::Cloud::AlloyDB::V1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -329,32 +329,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_export_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }) do |_result, response|
+        c.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_cluster gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database do |_result, response|
+        c.export_cluster gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_cluster ::Google::Cloud::AlloyDB::V1::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database) do |_result, response|
+        c.export_cluster ::Google::Cloud::AlloyDB::V1::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }, call_options) do |_result, response|
+        c.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_cluster(::Google::Cloud::AlloyDB::V1::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database), call_options) do |_result, response|
+        c.export_cluster(::Google::Cloud::AlloyDB::V1::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -387,32 +387,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_import_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }) do |_result, response|
+        c.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_cluster sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user do |_result, response|
+        c.import_cluster sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_cluster ::Google::Cloud::AlloyDB::V1::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user) do |_result, response|
+        c.import_cluster ::Google::Cloud::AlloyDB::V1::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }, call_options) do |_result, response|
+        c.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_cluster(::Google::Cloud::AlloyDB::V1::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user), call_options) do |_result, response|
+        c.import_cluster(::Google::Cloud::AlloyDB::V1::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -445,32 +445,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_upgrade_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upgrade_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upgrade_cluster name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
+        c.upgrade_cluster name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upgrade_cluster ::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
+        c.upgrade_cluster ::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upgrade_cluster(::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.upgrade_cluster(::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -503,32 +503,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_delete_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force }) do |_result, response|
+        c.delete_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_cluster name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force do |_result, response|
+        c.delete_cluster name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_cluster ::Google::Cloud::AlloyDB::V1::DeleteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force) do |_result, response|
+        c.delete_cluster ::Google::Cloud::AlloyDB::V1::DeleteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force }, call_options) do |_result, response|
+        c.delete_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_cluster(::Google::Cloud::AlloyDB::V1::DeleteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force), call_options) do |_result, response|
+        c.delete_cluster(::Google::Cloud::AlloyDB::V1::DeleteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -560,32 +560,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_promote_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, promote_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.promote_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }) do |_result, response|
+        c.promote_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.promote_cluster name: name, request_id: request_id, etag: etag, validate_only: validate_only do |_result, response|
+        c.promote_cluster name: name, request_id: request_id, etag: etag, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.promote_cluster ::Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only) do |_result, response|
+        c.promote_cluster ::Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.promote_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
+        c.promote_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.promote_cluster(::Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only), call_options) do |_result, response|
+        c.promote_cluster(::Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -616,32 +616,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_switchover_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, switchover_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.switchover_cluster name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.switchover_cluster name: name, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.switchover_cluster ::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.switchover_cluster ::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.switchover_cluster(::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.switchover_cluster(::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -675,32 +675,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_restore_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_cluster({ backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.restore_cluster({ backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_cluster backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.restore_cluster backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_cluster ::Google::Cloud::AlloyDB::V1::RestoreClusterRequest.new(backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.restore_cluster ::Google::Cloud::AlloyDB::V1::RestoreClusterRequest.new(backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_cluster({ backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.restore_cluster({ backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_cluster(::Google::Cloud::AlloyDB::V1::RestoreClusterRequest.new(backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.restore_cluster(::Google::Cloud::AlloyDB::V1::RestoreClusterRequest.new(backup_source: backup_source, parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -733,32 +733,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_secondary_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_secondary_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_secondary_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_secondary_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_secondary_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_secondary_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_secondary_cluster ::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_secondary_cluster ::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_secondary_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_secondary_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_secondary_cluster(::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_secondary_cluster(::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -791,32 +791,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::AlloyDB::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_instances ::Google::Cloud::AlloyDB::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::AlloyDB::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::AlloyDB::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -846,32 +846,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name, view: view }) do |_result, response|
+        c.get_instance({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name, view: view do |_result, response|
+        c.get_instance name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::AlloyDB::V1::GetInstanceRequest.new(name: name, view: view) do |_result, response|
+        c.get_instance ::Google::Cloud::AlloyDB::V1::GetInstanceRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name, view: view }, call_options) do |_result, response|
+        c.get_instance({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::AlloyDB::V1::GetInstanceRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::AlloyDB::V1::GetInstanceRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -904,32 +904,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::AlloyDB::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_instance ::Google::Cloud::AlloyDB::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::AlloyDB::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::AlloyDB::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -962,32 +962,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_secondary_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_secondary_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_secondary_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_secondary_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_secondary_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_secondary_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_secondary_instance ::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_secondary_instance ::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_secondary_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_secondary_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_secondary_instance(::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_secondary_instance(::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1018,32 +1018,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_batch_create_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_instances({ parent: parent, requests: requests, request_id: request_id }) do |_result, response|
+        c.batch_create_instances({ parent: parent, requests: requests, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_instances parent: parent, requests: requests, request_id: request_id do |_result, response|
+        c.batch_create_instances parent: parent, requests: requests, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_instances ::Google::Cloud::AlloyDB::V1::BatchCreateInstancesRequest.new(parent: parent, requests: requests, request_id: request_id) do |_result, response|
+        c.batch_create_instances ::Google::Cloud::AlloyDB::V1::BatchCreateInstancesRequest.new(parent: parent, requests: requests, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_instances({ parent: parent, requests: requests, request_id: request_id }, call_options) do |_result, response|
+        c.batch_create_instances({ parent: parent, requests: requests, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_instances(::Google::Cloud::AlloyDB::V1::BatchCreateInstancesRequest.new(parent: parent, requests: requests, request_id: request_id), call_options) do |_result, response|
+        c.batch_create_instances(::Google::Cloud::AlloyDB::V1::BatchCreateInstancesRequest.new(parent: parent, requests: requests, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1076,32 +1076,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_instance update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::AlloyDB::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_instance ::Google::Cloud::AlloyDB::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::AlloyDB::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::AlloyDB::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1133,32 +1133,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name, request_id: request_id, etag: etag, validate_only: validate_only do |_result, response|
+        c.delete_instance name: name, request_id: request_id, etag: etag, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::AlloyDB::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only) do |_result, response|
+        c.delete_instance ::Google::Cloud::AlloyDB::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_instance({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::AlloyDB::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::AlloyDB::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1189,32 +1189,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_failover_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, failover_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.failover_instance({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.failover_instance({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.failover_instance name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.failover_instance name: name, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.failover_instance ::Google::Cloud::AlloyDB::V1::FailoverInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.failover_instance ::Google::Cloud::AlloyDB::V1::FailoverInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.failover_instance({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.failover_instance({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.failover_instance(::Google::Cloud::AlloyDB::V1::FailoverInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.failover_instance(::Google::Cloud::AlloyDB::V1::FailoverInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1246,32 +1246,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_inject_fault_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, inject_fault_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.inject_fault fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.inject_fault fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.inject_fault ::Google::Cloud::AlloyDB::V1::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.inject_fault ::Google::Cloud::AlloyDB::V1::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.inject_fault(::Google::Cloud::AlloyDB::V1::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.inject_fault(::Google::Cloud::AlloyDB::V1::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1303,32 +1303,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_restart_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restart_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }) do |_result, response|
+        c.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restart_instance name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids do |_result, response|
+        c.restart_instance name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restart_instance ::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids) do |_result, response|
+        c.restart_instance ::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }, call_options) do |_result, response|
+        c.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restart_instance(::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids), call_options) do |_result, response|
+        c.restart_instance(::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1362,32 +1362,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_execute_sql_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, execute_sql_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }) do |_result, response|
+        c.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only do |_result, response|
+        c.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_sql ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only) do |_result, response|
+        c.execute_sql ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }, call_options) do |_result, response|
+        c.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_sql(::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only), call_options) do |_result, response|
+        c.execute_sql(::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1420,32 +1420,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_backups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::AlloyDB::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_backups ::Google::Cloud::AlloyDB::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::AlloyDB::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::AlloyDB::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1474,32 +1474,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name }) do |_result, response|
+        c.get_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name do |_result, response|
+        c.get_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::AlloyDB::V1::GetBackupRequest.new(name: name) do |_result, response|
+        c.get_backup ::Google::Cloud::AlloyDB::V1::GetBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name }, call_options) do |_result, response|
+        c.get_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::AlloyDB::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::AlloyDB::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1532,32 +1532,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_backup parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup ::Google::Cloud::AlloyDB::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_backup ::Google::Cloud::AlloyDB::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup(::Google::Cloud::AlloyDB::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_backup(::Google::Cloud::AlloyDB::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1590,32 +1590,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_update_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_backup update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup ::Google::Cloud::AlloyDB::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_backup ::Google::Cloud::AlloyDB::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_backup({ update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup(::Google::Cloud::AlloyDB::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_backup(::Google::Cloud::AlloyDB::V1::UpdateBackupRequest.new(update_mask: update_mask, backup: backup, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1647,32 +1647,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.delete_backup({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
+        c.delete_backup name: name, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::AlloyDB::V1::DeleteBackupRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
+        c.delete_backup ::Google::Cloud::AlloyDB::V1::DeleteBackupRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.delete_backup({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::AlloyDB::V1::DeleteBackupRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::AlloyDB::V1::DeleteBackupRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1704,32 +1704,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_supported_database_flags_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_supported_database_flags_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }) do |_result, response|
+        c.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_supported_database_flags parent: parent, page_size: page_size, page_token: page_token, scope: scope do |_result, response|
+        c.list_supported_database_flags parent: parent, page_size: page_size, page_token: page_token, scope: scope do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_supported_database_flags ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope) do |_result, response|
+        c.list_supported_database_flags ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }, call_options) do |_result, response|
+        c.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_supported_database_flags(::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope), call_options) do |_result, response|
+        c.list_supported_database_flags(::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1762,32 +1762,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_generate_client_certificate_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_client_certificate_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }) do |_result, response|
+        c.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_client_certificate parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange do |_result, response|
+        c.generate_client_certificate parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_client_certificate ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange) do |_result, response|
+        c.generate_client_certificate ::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }, call_options) do |_result, response|
+        c.generate_client_certificate({ parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_client_certificate(::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange), call_options) do |_result, response|
+        c.generate_client_certificate(::Google::Cloud::AlloyDB::V1::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, cert_duration: cert_duration, public_key: public_key, use_metadata_exchange: use_metadata_exchange), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1817,32 +1817,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_get_connection_info_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connection_info_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connection_info({ parent: parent, request_id: request_id }) do |_result, response|
+        c.get_connection_info({ parent: parent, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connection_info parent: parent, request_id: request_id do |_result, response|
+        c.get_connection_info parent: parent, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connection_info ::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest.new(parent: parent, request_id: request_id) do |_result, response|
+        c.get_connection_info ::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest.new(parent: parent, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connection_info({ parent: parent, request_id: request_id }, call_options) do |_result, response|
+        c.get_connection_info({ parent: parent, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connection_info(::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest.new(parent: parent, request_id: request_id), call_options) do |_result, response|
+        c.get_connection_info(::Google::Cloud::AlloyDB::V1::GetConnectionInfoRequest.new(parent: parent, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1875,32 +1875,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_users_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_users_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_users ::Google::Cloud::AlloyDB::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_users ::Google::Cloud::AlloyDB::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_users(::Google::Cloud::AlloyDB::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_users(::Google::Cloud::AlloyDB::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1929,32 +1929,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_get_user_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_user_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_user({ name: name }) do |_result, response|
+        c.get_user({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_user name: name do |_result, response|
+        c.get_user name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_user ::Google::Cloud::AlloyDB::V1::GetUserRequest.new(name: name) do |_result, response|
+        c.get_user ::Google::Cloud::AlloyDB::V1::GetUserRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_user({ name: name }, call_options) do |_result, response|
+        c.get_user({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_user(::Google::Cloud::AlloyDB::V1::GetUserRequest.new(name: name), call_options) do |_result, response|
+        c.get_user(::Google::Cloud::AlloyDB::V1::GetUserRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1987,32 +1987,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_user_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_user_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_user parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.create_user parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_user ::Google::Cloud::AlloyDB::V1::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.create_user ::Google::Cloud::AlloyDB::V1::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_user(::Google::Cloud::AlloyDB::V1::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_user(::Google::Cloud::AlloyDB::V1::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2045,32 +2045,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_update_user_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_user_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_user update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_user update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_user ::Google::Cloud::AlloyDB::V1::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_user ::Google::Cloud::AlloyDB::V1::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_user(::Google::Cloud::AlloyDB::V1::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_user(::Google::Cloud::AlloyDB::V1::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2101,32 +2101,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_delete_user_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_user_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_user({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        c.delete_user({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_user name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+        c.delete_user name: name, request_id: request_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_user ::Google::Cloud::AlloyDB::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+        c.delete_user ::Google::Cloud::AlloyDB::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_user({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_user({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_user(::Google::Cloud::AlloyDB::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_user(::Google::Cloud::AlloyDB::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2158,32 +2158,32 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_databases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_databases_client_stub do
         # Create client
-        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_databases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_databases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_databases ::Google::Cloud::AlloyDB::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_databases ::Google::Cloud::AlloyDB::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_databases(::Google::Cloud::AlloyDB::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_databases(::Google::Cloud::AlloyDB::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

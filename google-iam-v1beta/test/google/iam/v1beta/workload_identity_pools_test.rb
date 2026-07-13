@@ -88,40 +88,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_workload_identity_pools_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workload_identity_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_workload_identity_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workload_identity_pools parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_workload_identity_pools parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workload_identity_pools ::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_workload_identity_pools ::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workload_identity_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_workload_identity_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workload_identity_pools(::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_workload_identity_pools(::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_workload_identity_pool_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workload_identity_pool({ name: name }) do |response, operation|
+      c.get_workload_identity_pool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workload_identity_pool name: name do |response, operation|
+      c.get_workload_identity_pool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workload_identity_pool ::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new(name: name) do |response, operation|
+      c.get_workload_identity_pool ::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workload_identity_pool({ name: name }, grpc_options) do |response, operation|
+      c.get_workload_identity_pool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workload_identity_pool(::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workload_identity_pool(::Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_workload_identity_pool_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workload_identity_pool({ parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id }) do |response, operation|
+      c.create_workload_identity_pool({ parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workload_identity_pool parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id do |response, operation|
+      c.create_workload_identity_pool parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workload_identity_pool ::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new(parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id) do |response, operation|
+      c.create_workload_identity_pool ::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new(parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workload_identity_pool({ parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id }, grpc_options) do |response, operation|
+      c.create_workload_identity_pool({ parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workload_identity_pool(::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new(parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id), grpc_options) do |response, operation|
+      c.create_workload_identity_pool(::Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new(parent: parent, workload_identity_pool: workload_identity_pool, workload_identity_pool_id: workload_identity_pool_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -278,40 +278,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_workload_identity_pool_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workload_identity_pool({ workload_identity_pool: workload_identity_pool, update_mask: update_mask }) do |response, operation|
+      c.update_workload_identity_pool({ workload_identity_pool: workload_identity_pool, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workload_identity_pool workload_identity_pool: workload_identity_pool, update_mask: update_mask do |response, operation|
+      c.update_workload_identity_pool workload_identity_pool: workload_identity_pool, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workload_identity_pool ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new(workload_identity_pool: workload_identity_pool, update_mask: update_mask) do |response, operation|
+      c.update_workload_identity_pool ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new(workload_identity_pool: workload_identity_pool, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workload_identity_pool({ workload_identity_pool: workload_identity_pool, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_workload_identity_pool({ workload_identity_pool: workload_identity_pool, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workload_identity_pool(::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new(workload_identity_pool: workload_identity_pool, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_workload_identity_pool(::Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new(workload_identity_pool: workload_identity_pool, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -341,40 +341,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_workload_identity_pool_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workload_identity_pool({ name: name }) do |response, operation|
+      c.delete_workload_identity_pool({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workload_identity_pool name: name do |response, operation|
+      c.delete_workload_identity_pool name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workload_identity_pool ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new(name: name) do |response, operation|
+      c.delete_workload_identity_pool ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workload_identity_pool({ name: name }, grpc_options) do |response, operation|
+      c.delete_workload_identity_pool({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workload_identity_pool(::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_workload_identity_pool(::Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -404,40 +404,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, undelete_workload_identity_pool_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undelete_workload_identity_pool({ name: name }) do |response, operation|
+      c.undelete_workload_identity_pool({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undelete_workload_identity_pool name: name do |response, operation|
+      c.undelete_workload_identity_pool name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undelete_workload_identity_pool ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new(name: name) do |response, operation|
+      c.undelete_workload_identity_pool ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undelete_workload_identity_pool({ name: name }, grpc_options) do |response, operation|
+      c.undelete_workload_identity_pool({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undelete_workload_identity_pool(::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.undelete_workload_identity_pool(::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -473,40 +473,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_workload_identity_pool_providers_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workload_identity_pool_providers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_workload_identity_pool_providers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workload_identity_pool_providers parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_workload_identity_pool_providers parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workload_identity_pool_providers ::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_workload_identity_pool_providers ::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workload_identity_pool_providers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_workload_identity_pool_providers({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workload_identity_pool_providers(::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_workload_identity_pool_providers(::Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -536,36 +536,36 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_workload_identity_pool_provider_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workload_identity_pool_provider({ name: name }) do |response, operation|
+      c.get_workload_identity_pool_provider({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workload_identity_pool_provider name: name do |response, operation|
+      c.get_workload_identity_pool_provider name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workload_identity_pool_provider ::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new(name: name) do |response, operation|
+      c.get_workload_identity_pool_provider ::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workload_identity_pool_provider({ name: name }, grpc_options) do |response, operation|
+      c.get_workload_identity_pool_provider({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workload_identity_pool_provider(::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workload_identity_pool_provider(::Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -598,40 +598,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_workload_identity_pool_provider_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workload_identity_pool_provider({ parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id }) do |response, operation|
+      c.create_workload_identity_pool_provider({ parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workload_identity_pool_provider parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id do |response, operation|
+      c.create_workload_identity_pool_provider parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workload_identity_pool_provider ::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new(parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id) do |response, operation|
+      c.create_workload_identity_pool_provider ::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new(parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workload_identity_pool_provider({ parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id }, grpc_options) do |response, operation|
+      c.create_workload_identity_pool_provider({ parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workload_identity_pool_provider(::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new(parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id), grpc_options) do |response, operation|
+      c.create_workload_identity_pool_provider(::Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new(parent: parent, workload_identity_pool_provider: workload_identity_pool_provider, workload_identity_pool_provider_id: workload_identity_pool_provider_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -663,40 +663,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_workload_identity_pool_provider_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workload_identity_pool_provider({ workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask }) do |response, operation|
+      c.update_workload_identity_pool_provider({ workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workload_identity_pool_provider workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask do |response, operation|
+      c.update_workload_identity_pool_provider workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workload_identity_pool_provider ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new(workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask) do |response, operation|
+      c.update_workload_identity_pool_provider ::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new(workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workload_identity_pool_provider({ workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_workload_identity_pool_provider({ workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workload_identity_pool_provider(::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new(workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_workload_identity_pool_provider(::Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new(workload_identity_pool_provider: workload_identity_pool_provider, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -726,40 +726,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_workload_identity_pool_provider_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workload_identity_pool_provider({ name: name }) do |response, operation|
+      c.delete_workload_identity_pool_provider({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workload_identity_pool_provider name: name do |response, operation|
+      c.delete_workload_identity_pool_provider name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workload_identity_pool_provider ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new(name: name) do |response, operation|
+      c.delete_workload_identity_pool_provider ::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workload_identity_pool_provider({ name: name }, grpc_options) do |response, operation|
+      c.delete_workload_identity_pool_provider({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workload_identity_pool_provider(::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_workload_identity_pool_provider(::Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -789,40 +789,40 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, undelete_workload_identity_pool_provider_client_stub do
       # Create client
-      client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
+      c = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undelete_workload_identity_pool_provider({ name: name }) do |response, operation|
+      c.undelete_workload_identity_pool_provider({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undelete_workload_identity_pool_provider name: name do |response, operation|
+      c.undelete_workload_identity_pool_provider name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undelete_workload_identity_pool_provider ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new(name: name) do |response, operation|
+      c.undelete_workload_identity_pool_provider ::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undelete_workload_identity_pool_provider({ name: name }, grpc_options) do |response, operation|
+      c.undelete_workload_identity_pool_provider({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undelete_workload_identity_pool_provider(::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
+      c.undelete_workload_identity_pool_provider(::Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

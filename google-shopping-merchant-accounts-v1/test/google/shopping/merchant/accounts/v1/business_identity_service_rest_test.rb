@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest:
     ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest::ServiceStub.stub :transcode_get_business_identity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_business_identity_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_business_identity({ name: name }) do |_result, response|
+        c.get_business_identity({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_business_identity name: name do |_result, response|
+        c.get_business_identity name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_business_identity ::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name) do |_result, response|
+        c.get_business_identity ::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_business_identity({ name: name }, call_options) do |_result, response|
+        c.get_business_identity({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_business_identity(::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name), call_options) do |_result, response|
+        c.get_business_identity(::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest:
     ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest::ServiceStub.stub :transcode_update_business_identity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_business_identity_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_business_identity({ business_identity: business_identity, update_mask: update_mask }) do |_result, response|
+        c.update_business_identity({ business_identity: business_identity, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_business_identity business_identity: business_identity, update_mask: update_mask do |_result, response|
+        c.update_business_identity business_identity: business_identity, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_business_identity ::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask) do |_result, response|
+        c.update_business_identity ::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_business_identity({ business_identity: business_identity, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_business_identity({ business_identity: business_identity, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_business_identity(::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask), call_options) do |_result, response|
+        c.update_business_identity(::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

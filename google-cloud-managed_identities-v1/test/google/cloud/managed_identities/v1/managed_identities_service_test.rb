@@ -86,40 +86,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, create_microsoft_ad_domain_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_microsoft_ad_domain({ parent: parent, domain_name: domain_name, domain: domain }) do |response, operation|
+      c.create_microsoft_ad_domain({ parent: parent, domain_name: domain_name, domain: domain }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_microsoft_ad_domain parent: parent, domain_name: domain_name, domain: domain do |response, operation|
+      c.create_microsoft_ad_domain parent: parent, domain_name: domain_name, domain: domain do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_microsoft_ad_domain ::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new(parent: parent, domain_name: domain_name, domain: domain) do |response, operation|
+      c.create_microsoft_ad_domain ::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new(parent: parent, domain_name: domain_name, domain: domain) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_microsoft_ad_domain({ parent: parent, domain_name: domain_name, domain: domain }, grpc_options) do |response, operation|
+      c.create_microsoft_ad_domain({ parent: parent, domain_name: domain_name, domain: domain }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_microsoft_ad_domain(::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new(parent: parent, domain_name: domain_name, domain: domain), grpc_options) do |response, operation|
+      c.create_microsoft_ad_domain(::Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new(parent: parent, domain_name: domain_name, domain: domain), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, reset_admin_password_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reset_admin_password({ name: name }) do |response, operation|
+      c.reset_admin_password({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reset_admin_password name: name do |response, operation|
+      c.reset_admin_password name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reset_admin_password ::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new(name: name) do |response, operation|
+      c.reset_admin_password ::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reset_admin_password({ name: name }, grpc_options) do |response, operation|
+      c.reset_admin_password({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reset_admin_password(::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new(name: name), grpc_options) do |response, operation|
+      c.reset_admin_password(::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, list_domains_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_domains({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_domains({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_domains parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_domains parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_domains ::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_domains ::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_domains({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_domains({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_domains(::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_domains(::Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -278,36 +278,36 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, get_domain_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_domain({ name: name }) do |response, operation|
+      c.get_domain({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_domain name: name do |response, operation|
+      c.get_domain name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_domain ::Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new(name: name) do |response, operation|
+      c.get_domain ::Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_domain({ name: name }, grpc_options) do |response, operation|
+      c.get_domain({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_domain(::Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_domain(::Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,40 +338,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, update_domain_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_domain({ update_mask: update_mask, domain: domain }) do |response, operation|
+      c.update_domain({ update_mask: update_mask, domain: domain }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_domain update_mask: update_mask, domain: domain do |response, operation|
+      c.update_domain update_mask: update_mask, domain: domain do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_domain ::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new(update_mask: update_mask, domain: domain) do |response, operation|
+      c.update_domain ::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new(update_mask: update_mask, domain: domain) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_domain({ update_mask: update_mask, domain: domain }, grpc_options) do |response, operation|
+      c.update_domain({ update_mask: update_mask, domain: domain }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_domain(::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new(update_mask: update_mask, domain: domain), grpc_options) do |response, operation|
+      c.update_domain(::Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new(update_mask: update_mask, domain: domain), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -401,40 +401,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, delete_domain_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_domain({ name: name }) do |response, operation|
+      c.delete_domain({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_domain name: name do |response, operation|
+      c.delete_domain name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_domain ::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new(name: name) do |response, operation|
+      c.delete_domain ::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_domain({ name: name }, grpc_options) do |response, operation|
+      c.delete_domain({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_domain(::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_domain(::Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -466,40 +466,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, attach_trust_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.attach_trust({ name: name, trust: trust }) do |response, operation|
+      c.attach_trust({ name: name, trust: trust }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.attach_trust name: name, trust: trust do |response, operation|
+      c.attach_trust name: name, trust: trust do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.attach_trust ::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new(name: name, trust: trust) do |response, operation|
+      c.attach_trust ::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new(name: name, trust: trust) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.attach_trust({ name: name, trust: trust }, grpc_options) do |response, operation|
+      c.attach_trust({ name: name, trust: trust }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.attach_trust(::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
+      c.attach_trust(::Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -533,40 +533,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, reconfigure_trust_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reconfigure_trust({ name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses }) do |response, operation|
+      c.reconfigure_trust({ name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reconfigure_trust name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses do |response, operation|
+      c.reconfigure_trust name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reconfigure_trust ::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new(name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses) do |response, operation|
+      c.reconfigure_trust ::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new(name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reconfigure_trust({ name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses }, grpc_options) do |response, operation|
+      c.reconfigure_trust({ name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reconfigure_trust(::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new(name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses), grpc_options) do |response, operation|
+      c.reconfigure_trust(::Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new(name: name, target_domain_name: target_domain_name, target_dns_ip_addresses: target_dns_ip_addresses), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -598,40 +598,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, detach_trust_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.detach_trust({ name: name, trust: trust }) do |response, operation|
+      c.detach_trust({ name: name, trust: trust }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.detach_trust name: name, trust: trust do |response, operation|
+      c.detach_trust name: name, trust: trust do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.detach_trust ::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new(name: name, trust: trust) do |response, operation|
+      c.detach_trust ::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new(name: name, trust: trust) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.detach_trust({ name: name, trust: trust }, grpc_options) do |response, operation|
+      c.detach_trust({ name: name, trust: trust }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.detach_trust(::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
+      c.detach_trust(::Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -663,40 +663,40 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
 
     Gapic::ServiceStub.stub :new, validate_trust_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+      c = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.validate_trust({ name: name, trust: trust }) do |response, operation|
+      c.validate_trust({ name: name, trust: trust }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.validate_trust name: name, trust: trust do |response, operation|
+      c.validate_trust name: name, trust: trust do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.validate_trust ::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new(name: name, trust: trust) do |response, operation|
+      c.validate_trust ::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new(name: name, trust: trust) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.validate_trust({ name: name, trust: trust }, grpc_options) do |response, operation|
+      c.validate_trust({ name: name, trust: trust }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.validate_trust(::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
+      c.validate_trust(::Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new(name: name, trust: trust), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

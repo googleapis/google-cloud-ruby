@@ -92,12 +92,12 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, stream_assist_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec }) do |response, operation|
+      c.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse, r
@@ -106,7 +106,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::ClientTest < Minit
       end
 
       # Use named arguments
-      client.stream_assist name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec do |response, operation|
+      c.stream_assist name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse, r
@@ -115,7 +115,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::ClientTest < Minit
       end
 
       # Use protobuf object
-      client.stream_assist ::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec) do |response, operation|
+      c.stream_assist ::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse, r
@@ -124,7 +124,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::ClientTest < Minit
       end
 
       # Use hash object with options
-      client.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec }, grpc_options) do |response, operation|
+      c.stream_assist({ name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse, r
@@ -133,7 +133,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::AssistantService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.stream_assist(::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec), grpc_options) do |response, operation|
+      c.stream_assist(::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest.new(name: name, query: query, session: session, user_metadata: user_metadata, tools_spec: tools_spec, generation_spec: generation_spec), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse, r

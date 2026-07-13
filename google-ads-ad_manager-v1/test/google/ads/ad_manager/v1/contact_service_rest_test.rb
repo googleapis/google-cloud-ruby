@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::ContactService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::ContactService::Rest::ServiceStub.stub :transcode_get_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_contact_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_contact({ name: name }) do |_result, response|
+        c.get_contact({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_contact name: name do |_result, response|
+        c.get_contact name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_contact ::Google::Ads::AdManager::V1::GetContactRequest.new(name: name) do |_result, response|
+        c.get_contact ::Google::Ads::AdManager::V1::GetContactRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_contact({ name: name }, call_options) do |_result, response|
+        c.get_contact({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_contact(::Google::Ads::AdManager::V1::GetContactRequest.new(name: name), call_options) do |_result, response|
+        c.get_contact(::Google::Ads::AdManager::V1::GetContactRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::ContactService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::ContactService::Rest::ServiceStub.stub :transcode_list_contacts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_contacts_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_contacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_contacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_contacts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_contacts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_contacts ::Google::Ads::AdManager::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_contacts ::Google::Ads::AdManager::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_contacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_contacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_contacts(::Google::Ads::AdManager::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_contacts(::Google::Ads::AdManager::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::ContactService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::ContactService::Rest::ServiceStub.stub :transcode_create_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_contact_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_contact({ parent: parent, contact: contact }) do |_result, response|
+        c.create_contact({ parent: parent, contact: contact }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_contact parent: parent, contact: contact do |_result, response|
+        c.create_contact parent: parent, contact: contact do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_contact ::Google::Ads::AdManager::V1::CreateContactRequest.new(parent: parent, contact: contact) do |_result, response|
+        c.create_contact ::Google::Ads::AdManager::V1::CreateContactRequest.new(parent: parent, contact: contact) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_contact({ parent: parent, contact: contact }, call_options) do |_result, response|
+        c.create_contact({ parent: parent, contact: contact }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_contact(::Google::Ads::AdManager::V1::CreateContactRequest.new(parent: parent, contact: contact), call_options) do |_result, response|
+        c.create_contact(::Google::Ads::AdManager::V1::CreateContactRequest.new(parent: parent, contact: contact), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::ContactService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::ContactService::Rest::ServiceStub.stub :transcode_batch_create_contacts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_contacts_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_contacts({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_contacts({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_contacts parent: parent, requests: requests do |_result, response|
+        c.batch_create_contacts parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_contacts ::Google::Ads::AdManager::V1::BatchCreateContactsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_contacts ::Google::Ads::AdManager::V1::BatchCreateContactsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_contacts({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_contacts({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_contacts(::Google::Ads::AdManager::V1::BatchCreateContactsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_contacts(::Google::Ads::AdManager::V1::BatchCreateContactsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Ads::AdManager::V1::ContactService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::ContactService::Rest::ServiceStub.stub :transcode_update_contact_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_contact_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_contact({ contact: contact, update_mask: update_mask }) do |_result, response|
+        c.update_contact({ contact: contact, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_contact contact: contact, update_mask: update_mask do |_result, response|
+        c.update_contact contact: contact, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_contact ::Google::Ads::AdManager::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask) do |_result, response|
+        c.update_contact ::Google::Ads::AdManager::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_contact({ contact: contact, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_contact({ contact: contact, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_contact(::Google::Ads::AdManager::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask), call_options) do |_result, response|
+        c.update_contact(::Google::Ads::AdManager::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Ads::AdManager::V1::ContactService::Rest::ClientTest < Minitest:
     ::Google::Ads::AdManager::V1::ContactService::Rest::ServiceStub.stub :transcode_batch_update_contacts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_contacts_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ContactService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_contacts({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_contacts({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_contacts parent: parent, requests: requests do |_result, response|
+        c.batch_update_contacts parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_contacts ::Google::Ads::AdManager::V1::BatchUpdateContactsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_contacts ::Google::Ads::AdManager::V1::BatchUpdateContactsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_contacts({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_contacts({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_contacts(::Google::Ads::AdManager::V1::BatchUpdateContactsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_contacts(::Google::Ads::AdManager::V1::BatchUpdateContactsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

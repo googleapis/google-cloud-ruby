@@ -84,40 +84,40 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, create_specialist_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }) do |response, operation|
+      c.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_specialist_pool parent: parent, specialist_pool: specialist_pool do |response, operation|
+      c.create_specialist_pool parent: parent, specialist_pool: specialist_pool do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_specialist_pool ::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool) do |response, operation|
+      c.create_specialist_pool ::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }, grpc_options) do |response, operation|
+      c.create_specialist_pool({ parent: parent, specialist_pool: specialist_pool }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_specialist_pool(::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool), grpc_options) do |response, operation|
+      c.create_specialist_pool(::Google::Cloud::AIPlatform::V1::CreateSpecialistPoolRequest.new(parent: parent, specialist_pool: specialist_pool), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_specialist_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_specialist_pool({ name: name }) do |response, operation|
+      c.get_specialist_pool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_specialist_pool name: name do |response, operation|
+      c.get_specialist_pool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_specialist_pool ::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name) do |response, operation|
+      c.get_specialist_pool ::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_specialist_pool({ name: name }, grpc_options) do |response, operation|
+      c.get_specialist_pool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_specialist_pool(::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_specialist_pool(::Google::Cloud::AIPlatform::V1::GetSpecialistPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_specialist_pools_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_specialist_pools parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_specialist_pools parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_specialist_pools ::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_specialist_pools ::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_specialist_pools({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_specialist_pools(::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_specialist_pools(::Google::Cloud::AIPlatform::V1::ListSpecialistPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, delete_specialist_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_specialist_pool({ name: name, force: force }) do |response, operation|
+      c.delete_specialist_pool({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_specialist_pool name: name, force: force do |response, operation|
+      c.delete_specialist_pool name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_specialist_pool ::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force) do |response, operation|
+      c.delete_specialist_pool ::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_specialist_pool({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_specialist_pool({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_specialist_pool(::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_specialist_pool(::Google::Cloud::AIPlatform::V1::DeleteSpecialistPoolRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -341,40 +341,40 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, update_specialist_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }) do |response, operation|
+      c.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_specialist_pool specialist_pool: specialist_pool, update_mask: update_mask do |response, operation|
+      c.update_specialist_pool specialist_pool: specialist_pool, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_specialist_pool ::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask) do |response, operation|
+      c.update_specialist_pool ::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_specialist_pool({ specialist_pool: specialist_pool, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_specialist_pool(::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_specialist_pool(::Google::Cloud::AIPlatform::V1::UpdateSpecialistPoolRequest.new(specialist_pool: specialist_pool, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

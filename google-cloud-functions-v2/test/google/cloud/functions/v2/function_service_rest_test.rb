@@ -98,32 +98,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_get_function_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_function_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_function({ name: name, revision: revision }) do |_result, response|
+        c.get_function({ name: name, revision: revision }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_function name: name, revision: revision do |_result, response|
+        c.get_function name: name, revision: revision do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_function ::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name, revision: revision) do |_result, response|
+        c.get_function ::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name, revision: revision) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_function({ name: name, revision: revision }, call_options) do |_result, response|
+        c.get_function({ name: name, revision: revision }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_function(::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name, revision: revision), call_options) do |_result, response|
+        c.get_function(::Google::Cloud::Functions::V2::GetFunctionRequest.new(name: name, revision: revision), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_list_functions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_functions_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_functions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_functions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_functions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_functions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_functions ::Google::Cloud::Functions::V2::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_functions ::Google::Cloud::Functions::V2::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_functions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_functions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_functions(::Google::Cloud::Functions::V2::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_functions(::Google::Cloud::Functions::V2::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_create_function_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_function_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_function({ parent: parent, function: function, function_id: function_id }) do |_result, response|
+        c.create_function({ parent: parent, function: function, function_id: function_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_function parent: parent, function: function, function_id: function_id do |_result, response|
+        c.create_function parent: parent, function: function, function_id: function_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_function ::Google::Cloud::Functions::V2::CreateFunctionRequest.new(parent: parent, function: function, function_id: function_id) do |_result, response|
+        c.create_function ::Google::Cloud::Functions::V2::CreateFunctionRequest.new(parent: parent, function: function, function_id: function_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_function({ parent: parent, function: function, function_id: function_id }, call_options) do |_result, response|
+        c.create_function({ parent: parent, function: function, function_id: function_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_function(::Google::Cloud::Functions::V2::CreateFunctionRequest.new(parent: parent, function: function, function_id: function_id), call_options) do |_result, response|
+        c.create_function(::Google::Cloud::Functions::V2::CreateFunctionRequest.new(parent: parent, function: function, function_id: function_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_update_function_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_function_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_function({ function: function, update_mask: update_mask }) do |_result, response|
+        c.update_function({ function: function, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_function function: function, update_mask: update_mask do |_result, response|
+        c.update_function function: function, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_function ::Google::Cloud::Functions::V2::UpdateFunctionRequest.new(function: function, update_mask: update_mask) do |_result, response|
+        c.update_function ::Google::Cloud::Functions::V2::UpdateFunctionRequest.new(function: function, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_function({ function: function, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_function({ function: function, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_function(::Google::Cloud::Functions::V2::UpdateFunctionRequest.new(function: function, update_mask: update_mask), call_options) do |_result, response|
+        c.update_function(::Google::Cloud::Functions::V2::UpdateFunctionRequest.new(function: function, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_delete_function_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_function_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_function({ name: name }) do |_result, response|
+        c.delete_function({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_function name: name do |_result, response|
+        c.delete_function name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_function ::Google::Cloud::Functions::V2::DeleteFunctionRequest.new(name: name) do |_result, response|
+        c.delete_function ::Google::Cloud::Functions::V2::DeleteFunctionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_function({ name: name }, call_options) do |_result, response|
+        c.delete_function({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_function(::Google::Cloud::Functions::V2::DeleteFunctionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_function(::Google::Cloud::Functions::V2::DeleteFunctionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_generate_upload_url_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_upload_url_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name, environment: environment }) do |_result, response|
+        c.generate_upload_url({ parent: parent, kms_key_name: kms_key_name, environment: environment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_upload_url parent: parent, kms_key_name: kms_key_name, environment: environment do |_result, response|
+        c.generate_upload_url parent: parent, kms_key_name: kms_key_name, environment: environment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_upload_url ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name, environment: environment) do |_result, response|
+        c.generate_upload_url ::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name, environment: environment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name, environment: environment }, call_options) do |_result, response|
+        c.generate_upload_url({ parent: parent, kms_key_name: kms_key_name, environment: environment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_upload_url(::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name, environment: environment), call_options) do |_result, response|
+        c.generate_upload_url(::Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name, environment: environment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_generate_download_url_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_download_url_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_download_url({ name: name }) do |_result, response|
+        c.generate_download_url({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_download_url name: name do |_result, response|
+        c.generate_download_url name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_download_url ::Google::Cloud::Functions::V2::GenerateDownloadUrlRequest.new(name: name) do |_result, response|
+        c.generate_download_url ::Google::Cloud::Functions::V2::GenerateDownloadUrlRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_download_url({ name: name }, call_options) do |_result, response|
+        c.generate_download_url({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_download_url(::Google::Cloud::Functions::V2::GenerateDownloadUrlRequest.new(name: name), call_options) do |_result, response|
+        c.generate_download_url(::Google::Cloud::Functions::V2::GenerateDownloadUrlRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     ::Google::Cloud::Functions::V2::FunctionService::Rest::ServiceStub.stub :transcode_list_runtimes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_runtimes_client_stub do
         # Create client
-        client = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Functions::V2::FunctionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_runtimes({ parent: parent, filter: filter }) do |_result, response|
+        c.list_runtimes({ parent: parent, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_runtimes parent: parent, filter: filter do |_result, response|
+        c.list_runtimes parent: parent, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_runtimes ::Google::Cloud::Functions::V2::ListRuntimesRequest.new(parent: parent, filter: filter) do |_result, response|
+        c.list_runtimes ::Google::Cloud::Functions::V2::ListRuntimesRequest.new(parent: parent, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_runtimes({ parent: parent, filter: filter }, call_options) do |_result, response|
+        c.list_runtimes({ parent: parent, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_runtimes(::Google::Cloud::Functions::V2::ListRuntimesRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
+        c.list_runtimes(::Google::Cloud::Functions::V2::ListRuntimesRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

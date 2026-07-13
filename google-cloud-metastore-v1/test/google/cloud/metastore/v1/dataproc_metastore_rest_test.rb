@@ -101,32 +101,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::Metastore::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_services ::Google::Cloud::Metastore::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::Metastore::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::Metastore::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_get_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service({ name: name }) do |_result, response|
+        c.get_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service name: name do |_result, response|
+        c.get_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service ::Google::Cloud::Metastore::V1::GetServiceRequest.new(name: name) do |_result, response|
+        c.get_service ::Google::Cloud::Metastore::V1::GetServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service({ name: name }, call_options) do |_result, response|
+        c.get_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service(::Google::Cloud::Metastore::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_service(::Google::Cloud::Metastore::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_create_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }) do |_result, response|
+        c.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service parent: parent, service_id: service_id, service: service, request_id: request_id do |_result, response|
+        c.create_service parent: parent, service_id: service_id, service: service, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service ::Google::Cloud::Metastore::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id) do |_result, response|
+        c.create_service ::Google::Cloud::Metastore::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }, call_options) do |_result, response|
+        c.create_service({ parent: parent, service_id: service_id, service: service, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service(::Google::Cloud::Metastore::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id), call_options) do |_result, response|
+        c.create_service(::Google::Cloud::Metastore::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_update_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_service_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_service({ update_mask: update_mask, service: service, request_id: request_id }) do |_result, response|
+        c.update_service({ update_mask: update_mask, service: service, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_service update_mask: update_mask, service: service, request_id: request_id do |_result, response|
+        c.update_service update_mask: update_mask, service: service, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_service ::Google::Cloud::Metastore::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id) do |_result, response|
+        c.update_service ::Google::Cloud::Metastore::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_service({ update_mask: update_mask, service: service, request_id: request_id }, call_options) do |_result, response|
+        c.update_service({ update_mask: update_mask, service: service, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_service(::Google::Cloud::Metastore::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id), call_options) do |_result, response|
+        c.update_service(::Google::Cloud::Metastore::V1::UpdateServiceRequest.new(update_mask: update_mask, service: service, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_delete_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_service({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service name: name, request_id: request_id do |_result, response|
+        c.delete_service name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service ::Google::Cloud::Metastore::V1::DeleteServiceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_service ::Google::Cloud::Metastore::V1::DeleteServiceRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_service({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service(::Google::Cloud::Metastore::V1::DeleteServiceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_service(::Google::Cloud::Metastore::V1::DeleteServiceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -381,32 +381,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_list_metadata_imports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_metadata_imports_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_metadata_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_metadata_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_metadata_imports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_metadata_imports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_metadata_imports ::Google::Cloud::Metastore::V1::ListMetadataImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_metadata_imports ::Google::Cloud::Metastore::V1::ListMetadataImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_metadata_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_metadata_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_metadata_imports(::Google::Cloud::Metastore::V1::ListMetadataImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_metadata_imports(::Google::Cloud::Metastore::V1::ListMetadataImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -435,32 +435,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_get_metadata_import_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_metadata_import_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_metadata_import({ name: name }) do |_result, response|
+        c.get_metadata_import({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_metadata_import name: name do |_result, response|
+        c.get_metadata_import name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_metadata_import ::Google::Cloud::Metastore::V1::GetMetadataImportRequest.new(name: name) do |_result, response|
+        c.get_metadata_import ::Google::Cloud::Metastore::V1::GetMetadataImportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_metadata_import({ name: name }, call_options) do |_result, response|
+        c.get_metadata_import({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_metadata_import(::Google::Cloud::Metastore::V1::GetMetadataImportRequest.new(name: name), call_options) do |_result, response|
+        c.get_metadata_import(::Google::Cloud::Metastore::V1::GetMetadataImportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +492,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_create_metadata_import_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_metadata_import_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_metadata_import({ parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id }) do |_result, response|
+        c.create_metadata_import({ parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_metadata_import parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id do |_result, response|
+        c.create_metadata_import parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_metadata_import ::Google::Cloud::Metastore::V1::CreateMetadataImportRequest.new(parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id) do |_result, response|
+        c.create_metadata_import ::Google::Cloud::Metastore::V1::CreateMetadataImportRequest.new(parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_metadata_import({ parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id }, call_options) do |_result, response|
+        c.create_metadata_import({ parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_metadata_import(::Google::Cloud::Metastore::V1::CreateMetadataImportRequest.new(parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id), call_options) do |_result, response|
+        c.create_metadata_import(::Google::Cloud::Metastore::V1::CreateMetadataImportRequest.new(parent: parent, metadata_import_id: metadata_import_id, metadata_import: metadata_import, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -548,32 +548,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_update_metadata_import_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_metadata_import_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_metadata_import({ update_mask: update_mask, metadata_import: metadata_import, request_id: request_id }) do |_result, response|
+        c.update_metadata_import({ update_mask: update_mask, metadata_import: metadata_import, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_metadata_import update_mask: update_mask, metadata_import: metadata_import, request_id: request_id do |_result, response|
+        c.update_metadata_import update_mask: update_mask, metadata_import: metadata_import, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_metadata_import ::Google::Cloud::Metastore::V1::UpdateMetadataImportRequest.new(update_mask: update_mask, metadata_import: metadata_import, request_id: request_id) do |_result, response|
+        c.update_metadata_import ::Google::Cloud::Metastore::V1::UpdateMetadataImportRequest.new(update_mask: update_mask, metadata_import: metadata_import, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_metadata_import({ update_mask: update_mask, metadata_import: metadata_import, request_id: request_id }, call_options) do |_result, response|
+        c.update_metadata_import({ update_mask: update_mask, metadata_import: metadata_import, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_metadata_import(::Google::Cloud::Metastore::V1::UpdateMetadataImportRequest.new(update_mask: update_mask, metadata_import: metadata_import, request_id: request_id), call_options) do |_result, response|
+        c.update_metadata_import(::Google::Cloud::Metastore::V1::UpdateMetadataImportRequest.new(update_mask: update_mask, metadata_import: metadata_import, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_export_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_metadata({ destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type }) do |_result, response|
+        c.export_metadata({ destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_metadata destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type do |_result, response|
+        c.export_metadata destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_metadata ::Google::Cloud::Metastore::V1::ExportMetadataRequest.new(destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type) do |_result, response|
+        c.export_metadata ::Google::Cloud::Metastore::V1::ExportMetadataRequest.new(destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_metadata({ destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type }, call_options) do |_result, response|
+        c.export_metadata({ destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_metadata(::Google::Cloud::Metastore::V1::ExportMetadataRequest.new(destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type), call_options) do |_result, response|
+        c.export_metadata(::Google::Cloud::Metastore::V1::ExportMetadataRequest.new(destination_gcs_folder: destination_gcs_folder, service: service, request_id: request_id, database_dump_type: database_dump_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_restore_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_service_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_service({ service: service, backup: backup, restore_type: restore_type, request_id: request_id }) do |_result, response|
+        c.restore_service({ service: service, backup: backup, restore_type: restore_type, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_service service: service, backup: backup, restore_type: restore_type, request_id: request_id do |_result, response|
+        c.restore_service service: service, backup: backup, restore_type: restore_type, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_service ::Google::Cloud::Metastore::V1::RestoreServiceRequest.new(service: service, backup: backup, restore_type: restore_type, request_id: request_id) do |_result, response|
+        c.restore_service ::Google::Cloud::Metastore::V1::RestoreServiceRequest.new(service: service, backup: backup, restore_type: restore_type, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_service({ service: service, backup: backup, restore_type: restore_type, request_id: request_id }, call_options) do |_result, response|
+        c.restore_service({ service: service, backup: backup, restore_type: restore_type, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_service(::Google::Cloud::Metastore::V1::RestoreServiceRequest.new(service: service, backup: backup, restore_type: restore_type, request_id: request_id), call_options) do |_result, response|
+        c.restore_service(::Google::Cloud::Metastore::V1::RestoreServiceRequest.new(service: service, backup: backup, restore_type: restore_type, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -720,32 +720,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_backups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::Metastore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_backups ::Google::Cloud::Metastore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::Metastore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::Metastore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -774,32 +774,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name }) do |_result, response|
+        c.get_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name do |_result, response|
+        c.get_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::Metastore::V1::GetBackupRequest.new(name: name) do |_result, response|
+        c.get_backup ::Google::Cloud::Metastore::V1::GetBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name }, call_options) do |_result, response|
+        c.get_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::Metastore::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::Metastore::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -831,32 +831,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_create_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id }) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup parent: parent, backup_id: backup_id, backup: backup, request_id: request_id do |_result, response|
+        c.create_backup parent: parent, backup_id: backup_id, backup: backup, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup ::Google::Cloud::Metastore::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id) do |_result, response|
+        c.create_backup ::Google::Cloud::Metastore::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id }, call_options) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup(::Google::Cloud::Metastore::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id), call_options) do |_result, response|
+        c.create_backup(::Google::Cloud::Metastore::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,32 +886,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_backup({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name, request_id: request_id do |_result, response|
+        c.delete_backup name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::Metastore::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_backup ::Google::Cloud::Metastore::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_backup({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::Metastore::V1::DeleteBackupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::Metastore::V1::DeleteBackupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -941,32 +941,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_query_metadata_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_metadata_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_metadata({ service: service, query: query }) do |_result, response|
+        c.query_metadata({ service: service, query: query }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_metadata service: service, query: query do |_result, response|
+        c.query_metadata service: service, query: query do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_metadata ::Google::Cloud::Metastore::V1::QueryMetadataRequest.new(service: service, query: query) do |_result, response|
+        c.query_metadata ::Google::Cloud::Metastore::V1::QueryMetadataRequest.new(service: service, query: query) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_metadata({ service: service, query: query }, call_options) do |_result, response|
+        c.query_metadata({ service: service, query: query }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_metadata(::Google::Cloud::Metastore::V1::QueryMetadataRequest.new(service: service, query: query), call_options) do |_result, response|
+        c.query_metadata(::Google::Cloud::Metastore::V1::QueryMetadataRequest.new(service: service, query: query), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -998,32 +998,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_move_table_to_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, move_table_to_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.move_table_to_database({ service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name }) do |_result, response|
+        c.move_table_to_database({ service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.move_table_to_database service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name do |_result, response|
+        c.move_table_to_database service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.move_table_to_database ::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new(service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name) do |_result, response|
+        c.move_table_to_database ::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new(service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.move_table_to_database({ service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name }, call_options) do |_result, response|
+        c.move_table_to_database({ service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.move_table_to_database(::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new(service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name), call_options) do |_result, response|
+        c.move_table_to_database(::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new(service: service, table_name: table_name, db_name: db_name, destination_db_name: destination_db_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1054,32 +1054,32 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ServiceStub.stub :transcode_alter_metadata_resource_location_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, alter_metadata_resource_location_client_stub do
         # Create client
-        client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
+        c = ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.alter_metadata_resource_location({ service: service, resource_name: resource_name, location_uri: location_uri }) do |_result, response|
+        c.alter_metadata_resource_location({ service: service, resource_name: resource_name, location_uri: location_uri }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.alter_metadata_resource_location service: service, resource_name: resource_name, location_uri: location_uri do |_result, response|
+        c.alter_metadata_resource_location service: service, resource_name: resource_name, location_uri: location_uri do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.alter_metadata_resource_location ::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new(service: service, resource_name: resource_name, location_uri: location_uri) do |_result, response|
+        c.alter_metadata_resource_location ::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new(service: service, resource_name: resource_name, location_uri: location_uri) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.alter_metadata_resource_location({ service: service, resource_name: resource_name, location_uri: location_uri }, call_options) do |_result, response|
+        c.alter_metadata_resource_location({ service: service, resource_name: resource_name, location_uri: location_uri }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.alter_metadata_resource_location(::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new(service: service, resource_name: resource_name, location_uri: location_uri), call_options) do |_result, response|
+        c.alter_metadata_resource_location(::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new(service: service, resource_name: resource_name, location_uri: location_uri), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

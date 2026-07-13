@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ServiceStub.stub :transcode_list_webhooks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_webhooks_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_webhooks parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_webhooks parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_webhooks ::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_webhooks ::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_webhooks({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_webhooks(::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_webhooks(::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ServiceStub.stub :transcode_get_webhook_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_webhook_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_webhook({ name: name }) do |_result, response|
+        c.get_webhook({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_webhook name: name do |_result, response|
+        c.get_webhook name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_webhook ::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name) do |_result, response|
+        c.get_webhook ::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_webhook({ name: name }, call_options) do |_result, response|
+        c.get_webhook({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_webhook(::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name), call_options) do |_result, response|
+        c.get_webhook(::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ServiceStub.stub :transcode_create_webhook_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_webhook_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_webhook({ parent: parent, webhook: webhook }) do |_result, response|
+        c.create_webhook({ parent: parent, webhook: webhook }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_webhook parent: parent, webhook: webhook do |_result, response|
+        c.create_webhook parent: parent, webhook: webhook do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_webhook ::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook) do |_result, response|
+        c.create_webhook ::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_webhook({ parent: parent, webhook: webhook }, call_options) do |_result, response|
+        c.create_webhook({ parent: parent, webhook: webhook }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_webhook(::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook), call_options) do |_result, response|
+        c.create_webhook(::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new(parent: parent, webhook: webhook), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ServiceStub.stub :transcode_update_webhook_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_webhook_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_webhook({ webhook: webhook, update_mask: update_mask }) do |_result, response|
+        c.update_webhook({ webhook: webhook, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_webhook webhook: webhook, update_mask: update_mask do |_result, response|
+        c.update_webhook webhook: webhook, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_webhook ::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask) do |_result, response|
+        c.update_webhook ::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_webhook({ webhook: webhook, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_webhook({ webhook: webhook, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_webhook(::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask), call_options) do |_result, response|
+        c.update_webhook(::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new(webhook: webhook, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::ServiceStub.stub :transcode_delete_webhook_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_webhook_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Webhooks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_webhook({ name: name, force: force }) do |_result, response|
+        c.delete_webhook({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_webhook name: name, force: force do |_result, response|
+        c.delete_webhook name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_webhook ::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force) do |_result, response|
+        c.delete_webhook ::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_webhook({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_webhook({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_webhook(::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_webhook(::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

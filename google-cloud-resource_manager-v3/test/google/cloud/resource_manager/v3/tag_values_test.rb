@@ -86,40 +86,40 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_tag_values_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tag_values({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tag_values({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tag_values parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tag_values parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tag_values ::Google::Cloud::ResourceManager::V3::ListTagValuesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tag_values ::Google::Cloud::ResourceManager::V3::ListTagValuesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tag_values({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tag_values({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tag_values(::Google::Cloud::ResourceManager::V3::ListTagValuesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tag_values(::Google::Cloud::ResourceManager::V3::ListTagValuesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_tag_value_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tag_value({ name: name }) do |response, operation|
+      c.get_tag_value({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tag_value name: name do |response, operation|
+      c.get_tag_value name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tag_value ::Google::Cloud::ResourceManager::V3::GetTagValueRequest.new(name: name) do |response, operation|
+      c.get_tag_value ::Google::Cloud::ResourceManager::V3::GetTagValueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tag_value({ name: name }, grpc_options) do |response, operation|
+      c.get_tag_value({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tag_value(::Google::Cloud::ResourceManager::V3::GetTagValueRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tag_value(::Google::Cloud::ResourceManager::V3::GetTagValueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -207,36 +207,36 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_namespaced_tag_value_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_namespaced_tag_value({ name: name }) do |response, operation|
+      c.get_namespaced_tag_value({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_namespaced_tag_value name: name do |response, operation|
+      c.get_namespaced_tag_value name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_namespaced_tag_value ::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest.new(name: name) do |response, operation|
+      c.get_namespaced_tag_value ::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_namespaced_tag_value({ name: name }, grpc_options) do |response, operation|
+      c.get_namespaced_tag_value({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_namespaced_tag_value(::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_namespaced_tag_value(::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -267,40 +267,40 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_tag_value_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tag_value({ tag_value: tag_value, validate_only: validate_only }) do |response, operation|
+      c.create_tag_value({ tag_value: tag_value, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tag_value tag_value: tag_value, validate_only: validate_only do |response, operation|
+      c.create_tag_value tag_value: tag_value, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tag_value ::Google::Cloud::ResourceManager::V3::CreateTagValueRequest.new(tag_value: tag_value, validate_only: validate_only) do |response, operation|
+      c.create_tag_value ::Google::Cloud::ResourceManager::V3::CreateTagValueRequest.new(tag_value: tag_value, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tag_value({ tag_value: tag_value, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_tag_value({ tag_value: tag_value, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tag_value(::Google::Cloud::ResourceManager::V3::CreateTagValueRequest.new(tag_value: tag_value, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_tag_value(::Google::Cloud::ResourceManager::V3::CreateTagValueRequest.new(tag_value: tag_value, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -334,40 +334,40 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_tag_value_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tag_value({ tag_value: tag_value, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_tag_value({ tag_value: tag_value, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tag_value tag_value: tag_value, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_tag_value tag_value: tag_value, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tag_value ::Google::Cloud::ResourceManager::V3::UpdateTagValueRequest.new(tag_value: tag_value, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_tag_value ::Google::Cloud::ResourceManager::V3::UpdateTagValueRequest.new(tag_value: tag_value, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tag_value({ tag_value: tag_value, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_tag_value({ tag_value: tag_value, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tag_value(::Google::Cloud::ResourceManager::V3::UpdateTagValueRequest.new(tag_value: tag_value, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_tag_value(::Google::Cloud::ResourceManager::V3::UpdateTagValueRequest.new(tag_value: tag_value, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -401,40 +401,40 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_tag_value_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tag_value({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_tag_value({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tag_value name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_tag_value name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tag_value ::Google::Cloud::ResourceManager::V3::DeleteTagValueRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_tag_value ::Google::Cloud::ResourceManager::V3::DeleteTagValueRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tag_value({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_tag_value({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tag_value(::Google::Cloud::ResourceManager::V3::DeleteTagValueRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_tag_value(::Google::Cloud::ResourceManager::V3::DeleteTagValueRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -466,36 +466,36 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -528,36 +528,36 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -588,36 +588,36 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

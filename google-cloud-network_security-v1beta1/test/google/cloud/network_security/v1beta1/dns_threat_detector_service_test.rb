@@ -86,40 +86,40 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Clien
 
     Gapic::ServiceStub.stub :new, list_dns_threat_detectors_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
+      c = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_dns_threat_detectors({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_dns_threat_detectors({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_dns_threat_detectors parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_dns_threat_detectors parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_dns_threat_detectors ::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_dns_threat_detectors ::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_dns_threat_detectors({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_dns_threat_detectors({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_dns_threat_detectors(::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_dns_threat_detectors(::Google::Cloud::NetworkSecurity::V1beta1::ListDnsThreatDetectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Clien
 
     Gapic::ServiceStub.stub :new, get_dns_threat_detector_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
+      c = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dns_threat_detector({ name: name }) do |response, operation|
+      c.get_dns_threat_detector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dns_threat_detector name: name do |response, operation|
+      c.get_dns_threat_detector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::GetDnsThreatDetectorRequest.new(name: name) do |response, operation|
+      c.get_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::GetDnsThreatDetectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dns_threat_detector({ name: name }, grpc_options) do |response, operation|
+      c.get_dns_threat_detector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::GetDnsThreatDetectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::GetDnsThreatDetectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,36 +211,36 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Clien
 
     Gapic::ServiceStub.stub :new, create_dns_threat_detector_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
+      c = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dns_threat_detector({ parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector }) do |response, operation|
+      c.create_dns_threat_detector({ parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dns_threat_detector parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector do |response, operation|
+      c.create_dns_threat_detector parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::CreateDnsThreatDetectorRequest.new(parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector) do |response, operation|
+      c.create_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::CreateDnsThreatDetectorRequest.new(parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dns_threat_detector({ parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector }, grpc_options) do |response, operation|
+      c.create_dns_threat_detector({ parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::CreateDnsThreatDetectorRequest.new(parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector), grpc_options) do |response, operation|
+      c.create_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::CreateDnsThreatDetectorRequest.new(parent: parent, dns_threat_detector_id: dns_threat_detector_id, dns_threat_detector: dns_threat_detector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Clien
 
     Gapic::ServiceStub.stub :new, update_dns_threat_detector_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
+      c = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_dns_threat_detector({ update_mask: update_mask, dns_threat_detector: dns_threat_detector }) do |response, operation|
+      c.update_dns_threat_detector({ update_mask: update_mask, dns_threat_detector: dns_threat_detector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_dns_threat_detector update_mask: update_mask, dns_threat_detector: dns_threat_detector do |response, operation|
+      c.update_dns_threat_detector update_mask: update_mask, dns_threat_detector: dns_threat_detector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::UpdateDnsThreatDetectorRequest.new(update_mask: update_mask, dns_threat_detector: dns_threat_detector) do |response, operation|
+      c.update_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::UpdateDnsThreatDetectorRequest.new(update_mask: update_mask, dns_threat_detector: dns_threat_detector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_dns_threat_detector({ update_mask: update_mask, dns_threat_detector: dns_threat_detector }, grpc_options) do |response, operation|
+      c.update_dns_threat_detector({ update_mask: update_mask, dns_threat_detector: dns_threat_detector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::UpdateDnsThreatDetectorRequest.new(update_mask: update_mask, dns_threat_detector: dns_threat_detector), grpc_options) do |response, operation|
+      c.update_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::UpdateDnsThreatDetectorRequest.new(update_mask: update_mask, dns_threat_detector: dns_threat_detector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +329,36 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Clien
 
     Gapic::ServiceStub.stub :new, delete_dns_threat_detector_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
+      c = ::Google::Cloud::NetworkSecurity::V1beta1::DnsThreatDetectorService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dns_threat_detector({ name: name }) do |response, operation|
+      c.delete_dns_threat_detector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dns_threat_detector name: name do |response, operation|
+      c.delete_dns_threat_detector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::DeleteDnsThreatDetectorRequest.new(name: name) do |response, operation|
+      c.delete_dns_threat_detector ::Google::Cloud::NetworkSecurity::V1beta1::DeleteDnsThreatDetectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dns_threat_detector({ name: name }, grpc_options) do |response, operation|
+      c.delete_dns_threat_detector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::DeleteDnsThreatDetectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_dns_threat_detector(::Google::Cloud::NetworkSecurity::V1beta1::DeleteDnsThreatDetectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

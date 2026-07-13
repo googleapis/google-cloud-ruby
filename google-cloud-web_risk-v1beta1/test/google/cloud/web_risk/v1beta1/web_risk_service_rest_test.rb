@@ -99,32 +99,32 @@ class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::ClientTest < Mini
     ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::ServiceStub.stub :transcode_compute_threat_list_diff_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, compute_threat_list_diff_client_stub do
         # Create client
-        client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }) do |_result, response|
+        c.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.compute_threat_list_diff threat_type: threat_type, version_token: version_token, constraints: constraints do |_result, response|
+        c.compute_threat_list_diff threat_type: threat_type, version_token: version_token, constraints: constraints do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.compute_threat_list_diff ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints) do |_result, response|
+        c.compute_threat_list_diff ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }, call_options) do |_result, response|
+        c.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.compute_threat_list_diff(::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), call_options) do |_result, response|
+        c.compute_threat_list_diff(::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::ClientTest < Mini
     ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::ServiceStub.stub :transcode_search_uris_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_uris_client_stub do
         # Create client
-        client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_uris({ uri: uri, threat_types: threat_types }) do |_result, response|
+        c.search_uris({ uri: uri, threat_types: threat_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_uris uri: uri, threat_types: threat_types do |_result, response|
+        c.search_uris uri: uri, threat_types: threat_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_uris ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types) do |_result, response|
+        c.search_uris ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_uris({ uri: uri, threat_types: threat_types }, call_options) do |_result, response|
+        c.search_uris({ uri: uri, threat_types: threat_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_uris(::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), call_options) do |_result, response|
+        c.search_uris(::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::ClientTest < Mini
     ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::ServiceStub.stub :transcode_search_hashes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_hashes_client_stub do
         # Create client
-        client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::Client.new do |config|
+        c = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }) do |_result, response|
+        c.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_hashes hash_prefix: hash_prefix, threat_types: threat_types do |_result, response|
+        c.search_hashes hash_prefix: hash_prefix, threat_types: threat_types do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_hashes ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types) do |_result, response|
+        c.search_hashes ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }, call_options) do |_result, response|
+        c.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_hashes(::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), call_options) do |_result, response|
+        c.search_hashes(::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

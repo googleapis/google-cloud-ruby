@@ -99,32 +99,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_effective_security_health_analytics_custom_modules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_effective_security_health_analytics_custom_modules_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_effective_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_effective_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_effective_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_effective_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_effective_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_effective_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_get_effective_security_health_analytics_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_effective_security_health_analytics_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_effective_security_health_analytics_custom_module({ name: name }) do |_result, response|
+        c.get_effective_security_health_analytics_custom_module({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_effective_security_health_analytics_custom_module name: name do |_result, response|
+        c.get_effective_security_health_analytics_custom_module name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_effective_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
+        c.get_effective_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_effective_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
+        c.get_effective_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_effective_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
+        c.get_effective_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_security_health_analytics_custom_modules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_security_health_analytics_custom_modules_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_descendant_security_health_analytics_custom_modules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_descendant_security_health_analytics_custom_modules_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_descendant_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_descendant_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_descendant_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_descendant_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_descendant_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_descendant_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_get_security_health_analytics_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_security_health_analytics_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_security_health_analytics_custom_module({ name: name }) do |_result, response|
+        c.get_security_health_analytics_custom_module({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_security_health_analytics_custom_module name: name do |_result, response|
+        c.get_security_health_analytics_custom_module name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
+        c.get_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
+        c.get_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
+        c.get_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_create_security_health_analytics_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_security_health_analytics_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }) do |_result, response|
+        c.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_security_health_analytics_custom_module parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only do |_result, response|
+        c.create_security_health_analytics_custom_module parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only) do |_result, response|
+        c.create_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only), call_options) do |_result, response|
+        c.create_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_update_security_health_analytics_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_security_health_analytics_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_security_health_analytics_custom_module({ update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }) do |_result, response|
+        c.update_security_health_analytics_custom_module({ update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_security_health_analytics_custom_module update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only do |_result, response|
+        c.update_security_health_analytics_custom_module update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only) do |_result, response|
+        c.update_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_security_health_analytics_custom_module({ update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_security_health_analytics_custom_module({ update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only), call_options) do |_result, response|
+        c.update_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(update_mask: update_mask, security_health_analytics_custom_module: security_health_analytics_custom_module, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_delete_security_health_analytics_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_security_health_analytics_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_security_health_analytics_custom_module({ name: name, validate_only: validate_only }) do |_result, response|
+        c.delete_security_health_analytics_custom_module({ name: name, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_security_health_analytics_custom_module name: name, validate_only: validate_only do |_result, response|
+        c.delete_security_health_analytics_custom_module name: name, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name, validate_only: validate_only) do |_result, response|
+        c.delete_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_security_health_analytics_custom_module({ name: name, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_security_health_analytics_custom_module({ name: name, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_simulate_security_health_analytics_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, simulate_security_health_analytics_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }) do |_result, response|
+        c.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.simulate_security_health_analytics_custom_module parent: parent, custom_config: custom_config, resource: resource do |_result, response|
+        c.simulate_security_health_analytics_custom_module parent: parent, custom_config: custom_config, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.simulate_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource) do |_result, response|
+        c.simulate_security_health_analytics_custom_module ::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }, call_options) do |_result, response|
+        c.simulate_security_health_analytics_custom_module({ parent: parent, custom_config: custom_config, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.simulate_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource), call_options) do |_result, response|
+        c.simulate_security_health_analytics_custom_module(::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, custom_config: custom_config, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -598,32 +598,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_effective_event_threat_detection_custom_modules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_effective_event_threat_detection_custom_modules_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_effective_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_effective_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_effective_event_threat_detection_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_effective_event_threat_detection_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_effective_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_effective_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_effective_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_effective_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_effective_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_effective_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -652,32 +652,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_get_effective_event_threat_detection_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_effective_event_threat_detection_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_effective_event_threat_detection_custom_module({ name: name }) do |_result, response|
+        c.get_effective_event_threat_detection_custom_module({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_effective_event_threat_detection_custom_module name: name do |_result, response|
+        c.get_effective_event_threat_detection_custom_module name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_effective_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name) do |_result, response|
+        c.get_effective_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_effective_event_threat_detection_custom_module({ name: name }, call_options) do |_result, response|
+        c.get_effective_event_threat_detection_custom_module({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_effective_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name), call_options) do |_result, response|
+        c.get_effective_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetEffectiveEventThreatDetectionCustomModuleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -708,32 +708,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_event_threat_detection_custom_modules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_event_threat_detection_custom_modules_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_event_threat_detection_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_event_threat_detection_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -764,32 +764,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_descendant_event_threat_detection_custom_modules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_descendant_event_threat_detection_custom_modules_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_descendant_event_threat_detection_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_descendant_event_threat_detection_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_descendant_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_descendant_event_threat_detection_custom_modules ::Google::Cloud::SecurityCenterManagement::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_descendant_event_threat_detection_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_descendant_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_descendant_event_threat_detection_custom_modules(::Google::Cloud::SecurityCenterManagement::V1::ListDescendantEventThreatDetectionCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -818,32 +818,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_get_event_threat_detection_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_event_threat_detection_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_event_threat_detection_custom_module({ name: name }) do |_result, response|
+        c.get_event_threat_detection_custom_module({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_event_threat_detection_custom_module name: name do |_result, response|
+        c.get_event_threat_detection_custom_module name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name) do |_result, response|
+        c.get_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_event_threat_detection_custom_module({ name: name }, call_options) do |_result, response|
+        c.get_event_threat_detection_custom_module({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name), call_options) do |_result, response|
+        c.get_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::GetEventThreatDetectionCustomModuleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -874,32 +874,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_create_event_threat_detection_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_event_threat_detection_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }) do |_result, response|
+        c.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_event_threat_detection_custom_module parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only do |_result, response|
+        c.create_event_threat_detection_custom_module parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only) do |_result, response|
+        c.create_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_event_threat_detection_custom_module({ parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only), call_options) do |_result, response|
+        c.create_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::CreateEventThreatDetectionCustomModuleRequest.new(parent: parent, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -930,32 +930,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_update_event_threat_detection_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_event_threat_detection_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_event_threat_detection_custom_module({ update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }) do |_result, response|
+        c.update_event_threat_detection_custom_module({ update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_event_threat_detection_custom_module update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only do |_result, response|
+        c.update_event_threat_detection_custom_module update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::UpdateEventThreatDetectionCustomModuleRequest.new(update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only) do |_result, response|
+        c.update_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::UpdateEventThreatDetectionCustomModuleRequest.new(update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_event_threat_detection_custom_module({ update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_event_threat_detection_custom_module({ update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::UpdateEventThreatDetectionCustomModuleRequest.new(update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only), call_options) do |_result, response|
+        c.update_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::UpdateEventThreatDetectionCustomModuleRequest.new(update_mask: update_mask, event_threat_detection_custom_module: event_threat_detection_custom_module, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -985,32 +985,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_delete_event_threat_detection_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_event_threat_detection_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_event_threat_detection_custom_module({ name: name, validate_only: validate_only }) do |_result, response|
+        c.delete_event_threat_detection_custom_module({ name: name, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_event_threat_detection_custom_module name: name, validate_only: validate_only do |_result, response|
+        c.delete_event_threat_detection_custom_module name: name, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name, validate_only: validate_only) do |_result, response|
+        c.delete_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_event_threat_detection_custom_module({ name: name, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_event_threat_detection_custom_module({ name: name, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::DeleteEventThreatDetectionCustomModuleRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1041,32 +1041,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_validate_event_threat_detection_custom_module_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_event_threat_detection_custom_module_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }) do |_result, response|
+        c.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_event_threat_detection_custom_module parent: parent, raw_text: raw_text, type: type do |_result, response|
+        c.validate_event_threat_detection_custom_module parent: parent, raw_text: raw_text, type: type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type) do |_result, response|
+        c.validate_event_threat_detection_custom_module ::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }, call_options) do |_result, response|
+        c.validate_event_threat_detection_custom_module({ parent: parent, raw_text: raw_text, type: type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type), call_options) do |_result, response|
+        c.validate_event_threat_detection_custom_module(::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleRequest.new(parent: parent, raw_text: raw_text, type: type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1096,32 +1096,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_get_security_center_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_security_center_service_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }) do |_result, response|
+        c.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_security_center_service name: name, show_eligible_modules_only: show_eligible_modules_only do |_result, response|
+        c.get_security_center_service name: name, show_eligible_modules_only: show_eligible_modules_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only) do |_result, response|
+        c.get_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }, call_options) do |_result, response|
+        c.get_security_center_service({ name: name, show_eligible_modules_only: show_eligible_modules_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only), call_options) do |_result, response|
+        c.get_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::GetSecurityCenterServiceRequest.new(name: name, show_eligible_modules_only: show_eligible_modules_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1153,32 +1153,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_list_security_center_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_security_center_services_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }) do |_result, response|
+        c.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_security_center_services parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only do |_result, response|
+        c.list_security_center_services parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only) do |_result, response|
+        c.list_security_center_services ::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }, call_options) do |_result, response|
+        c.list_security_center_services({ parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only), call_options) do |_result, response|
+        c.list_security_center_services(::Google::Cloud::SecurityCenterManagement::V1::ListSecurityCenterServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_eligible_modules_only: show_eligible_modules_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1209,32 +1209,32 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::ServiceStub.stub :transcode_update_security_center_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_security_center_service_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_security_center_service({ security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_security_center_service({ security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_security_center_service security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_security_center_service security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new(security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_security_center_service ::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new(security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_security_center_service({ security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_security_center_service({ security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new(security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_security_center_service(::Google::Cloud::SecurityCenterManagement::V1::UpdateSecurityCenterServiceRequest.new(security_center_service: security_center_service, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

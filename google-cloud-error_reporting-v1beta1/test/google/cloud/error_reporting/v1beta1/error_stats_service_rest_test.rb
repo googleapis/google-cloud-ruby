@@ -106,32 +106,32 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ClientT
     ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ServiceStub.stub :transcode_list_group_stats_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_group_stats_client_stub do
         # Create client
-        client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_group_stats project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_group_stats project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_group_stats ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_group_stats ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_group_stats(::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_group_stats(::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -165,32 +165,32 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ClientT
     ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ServiceStub.stub :transcode_list_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_events_client_stub do
         # Create client
-        client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_events project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_events project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_events ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_events ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_events(::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_events(::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -219,32 +219,32 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ClientT
     ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ServiceStub.stub :transcode_delete_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_events_client_stub do
         # Create client
-        client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_events({ project_name: project_name }) do |_result, response|
+        c.delete_events({ project_name: project_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_events project_name: project_name do |_result, response|
+        c.delete_events project_name: project_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_events ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name) do |_result, response|
+        c.delete_events ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_events({ project_name: project_name }, call_options) do |_result, response|
+        c.delete_events({ project_name: project_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_events(::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name), call_options) do |_result, response|
+        c.delete_events(::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

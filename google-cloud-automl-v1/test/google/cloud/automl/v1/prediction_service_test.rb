@@ -86,36 +86,36 @@ class ::Google::Cloud::AutoML::V1::PredictionService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.predict({ name: name, payload: payload, params: params }) do |response, operation|
+      c.predict({ name: name, payload: payload, params: params }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.predict name: name, payload: payload, params: params do |response, operation|
+      c.predict name: name, payload: payload, params: params do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.predict ::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params) do |response, operation|
+      c.predict ::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.predict({ name: name, payload: payload, params: params }, grpc_options) do |response, operation|
+      c.predict({ name: name, payload: payload, params: params }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.predict(::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params), grpc_options) do |response, operation|
+      c.predict(::Google::Cloud::AutoML::V1::PredictRequest.new(name: name, payload: payload, params: params), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -150,40 +150,40 @@ class ::Google::Cloud::AutoML::V1::PredictionService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, batch_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }) do |response, operation|
+      c.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_predict name: name, input_config: input_config, output_config: output_config, params: params do |response, operation|
+      c.batch_predict name: name, input_config: input_config, output_config: output_config, params: params do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_predict ::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params) do |response, operation|
+      c.batch_predict ::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }, grpc_options) do |response, operation|
+      c.batch_predict({ name: name, input_config: input_config, output_config: output_config, params: params }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_predict(::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params), grpc_options) do |response, operation|
+      c.batch_predict(::Google::Cloud::AutoML::V1::BatchPredictRequest.new(name: name, input_config: input_config, output_config: output_config, params: params), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

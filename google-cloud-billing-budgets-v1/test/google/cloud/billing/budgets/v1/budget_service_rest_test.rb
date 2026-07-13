@@ -98,32 +98,32 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
     ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ServiceStub.stub :transcode_create_budget_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_budget_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_budget({ parent: parent, budget: budget }) do |_result, response|
+        c.create_budget({ parent: parent, budget: budget }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_budget parent: parent, budget: budget do |_result, response|
+        c.create_budget parent: parent, budget: budget do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_budget ::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget) do |_result, response|
+        c.create_budget ::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_budget({ parent: parent, budget: budget }, call_options) do |_result, response|
+        c.create_budget({ parent: parent, budget: budget }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_budget(::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget), call_options) do |_result, response|
+        c.create_budget(::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new(parent: parent, budget: budget), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
     ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ServiceStub.stub :transcode_update_budget_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_budget_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_budget({ budget: budget, update_mask: update_mask }) do |_result, response|
+        c.update_budget({ budget: budget, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_budget budget: budget, update_mask: update_mask do |_result, response|
+        c.update_budget budget: budget, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_budget ::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask) do |_result, response|
+        c.update_budget ::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_budget({ budget: budget, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_budget({ budget: budget, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_budget(::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask), call_options) do |_result, response|
+        c.update_budget(::Google::Cloud::Billing::Budgets::V1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
     ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ServiceStub.stub :transcode_get_budget_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_budget_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_budget({ name: name }) do |_result, response|
+        c.get_budget({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_budget name: name do |_result, response|
+        c.get_budget name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_budget ::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name) do |_result, response|
+        c.get_budget ::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_budget({ name: name }, call_options) do |_result, response|
+        c.get_budget({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_budget(::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name), call_options) do |_result, response|
+        c.get_budget(::Google::Cloud::Billing::Budgets::V1::GetBudgetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
     ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ServiceStub.stub :transcode_list_budgets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_budgets_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_budgets parent: parent, scope: scope, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_budgets parent: parent, scope: scope, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_budgets ::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_budgets({ parent: parent, scope: scope, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_budgets(::Google::Cloud::Billing::Budgets::V1::ListBudgetsRequest.new(parent: parent, scope: scope, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
     ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ServiceStub.stub :transcode_delete_budget_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_budget_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_budget({ name: name }) do |_result, response|
+        c.delete_budget({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_budget name: name do |_result, response|
+        c.delete_budget name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_budget ::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name) do |_result, response|
+        c.delete_budget ::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_budget({ name: name }, call_options) do |_result, response|
+        c.delete_budget({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_budget(::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name), call_options) do |_result, response|
+        c.delete_budget(::Google::Cloud::Billing::Budgets::V1::DeleteBudgetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -48,8 +48,8 @@ module Google
         #     excluded.
         # @!attribute [rw] exact_match
         #   @return [::Boolean]
-        #     Input only. If set to false, a uri_pattern is generated to include all
-        #     pages whose address contains the provided_uri_pattern. If set to true, an
+        #     Immutable. If set to false, a uri_pattern is generated to include all pages
+        #     whose address contains the provided_uri_pattern. If set to true, an
         #     uri_pattern is generated to try to be an exact match of the
         #     provided_uri_pattern or just the specific page if the provided_uri_pattern
         #     is a specific one. provided_uri_pattern is always normalized to
@@ -128,6 +128,12 @@ module Google
             # 1. target site deleted if unindexing is successful;
             # 2. state reverts to SUCCEEDED if the unindexing fails.
             DELETING = 4
+
+            # The target site change is pending but cancellable.
+            CANCELLABLE = 5
+
+            # The target site change is cancelled.
+            CANCELLED = 6
           end
         end
 

@@ -273,9 +273,9 @@ module Google
             #     attribute-based expressions are expected instead of the above described
             #     tag-based syntax. Examples:
             #
-            #      * (launguage: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
+            #      * (language: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
             #      * (available: true) AND
-            #        (launguage: ANY("en", "es")) OR (categories: ANY("Movie"))
+            #        (language: ANY("en", "es")) OR (categories: ANY("Movie"))
             #
             #     If your filter blocks all results, the API returns generic
             #     (unfiltered) popular Documents. If you only want results strictly matching
@@ -499,6 +499,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -582,6 +583,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

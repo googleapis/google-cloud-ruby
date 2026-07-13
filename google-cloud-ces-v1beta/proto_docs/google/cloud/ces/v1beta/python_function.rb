@@ -34,6 +34,9 @@ module Google
         #   @return [::String]
         #     Output only. The description of the Python function, parsed from the python
         #     code's docstring.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::Ces::V1beta::ServiceDirectoryConfig]
+        #     Optional. Service Directory configuration for the tool.
         class PythonFunction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

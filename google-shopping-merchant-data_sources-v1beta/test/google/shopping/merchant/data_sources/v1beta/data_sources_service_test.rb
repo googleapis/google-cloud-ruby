@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
 
     Gapic::ServiceStub.stub :new, get_data_source_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_source({ name: name }) do |response, operation|
+      c.get_data_source({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_source name: name do |response, operation|
+      c.get_data_source name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_source ::Google::Shopping::Merchant::DataSources::V1beta::GetDataSourceRequest.new(name: name) do |response, operation|
+      c.get_data_source ::Google::Shopping::Merchant::DataSources::V1beta::GetDataSourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_source({ name: name }, grpc_options) do |response, operation|
+      c.get_data_source({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_source(::Google::Shopping::Merchant::DataSources::V1beta::GetDataSourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_source(::Google::Shopping::Merchant::DataSources::V1beta::GetDataSourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
 
     Gapic::ServiceStub.stub :new, list_data_sources_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_sources parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_data_sources parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_sources ::Google::Shopping::Merchant::DataSources::V1beta::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_data_sources ::Google::Shopping::Merchant::DataSources::V1beta::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_data_sources({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_sources(::Google::Shopping::Merchant::DataSources::V1beta::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_data_sources(::Google::Shopping::Merchant::DataSources::V1beta::ListDataSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -209,36 +209,36 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
 
     Gapic::ServiceStub.stub :new, create_data_source_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_source({ parent: parent, data_source: data_source }) do |response, operation|
+      c.create_data_source({ parent: parent, data_source: data_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_source parent: parent, data_source: data_source do |response, operation|
+      c.create_data_source parent: parent, data_source: data_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_source ::Google::Shopping::Merchant::DataSources::V1beta::CreateDataSourceRequest.new(parent: parent, data_source: data_source) do |response, operation|
+      c.create_data_source ::Google::Shopping::Merchant::DataSources::V1beta::CreateDataSourceRequest.new(parent: parent, data_source: data_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_source({ parent: parent, data_source: data_source }, grpc_options) do |response, operation|
+      c.create_data_source({ parent: parent, data_source: data_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_source(::Google::Shopping::Merchant::DataSources::V1beta::CreateDataSourceRequest.new(parent: parent, data_source: data_source), grpc_options) do |response, operation|
+      c.create_data_source(::Google::Shopping::Merchant::DataSources::V1beta::CreateDataSourceRequest.new(parent: parent, data_source: data_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -269,36 +269,36 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
 
     Gapic::ServiceStub.stub :new, update_data_source_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_source({ data_source: data_source, update_mask: update_mask }) do |response, operation|
+      c.update_data_source({ data_source: data_source, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_source data_source: data_source, update_mask: update_mask do |response, operation|
+      c.update_data_source data_source: data_source, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_source ::Google::Shopping::Merchant::DataSources::V1beta::UpdateDataSourceRequest.new(data_source: data_source, update_mask: update_mask) do |response, operation|
+      c.update_data_source ::Google::Shopping::Merchant::DataSources::V1beta::UpdateDataSourceRequest.new(data_source: data_source, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_source({ data_source: data_source, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_data_source({ data_source: data_source, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_source(::Google::Shopping::Merchant::DataSources::V1beta::UpdateDataSourceRequest.new(data_source: data_source, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_data_source(::Google::Shopping::Merchant::DataSources::V1beta::UpdateDataSourceRequest.new(data_source: data_source, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
 
     Gapic::ServiceStub.stub :new, delete_data_source_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_source({ name: name }) do |response, operation|
+      c.delete_data_source({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_source name: name do |response, operation|
+      c.delete_data_source name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_source ::Google::Shopping::Merchant::DataSources::V1beta::DeleteDataSourceRequest.new(name: name) do |response, operation|
+      c.delete_data_source ::Google::Shopping::Merchant::DataSources::V1beta::DeleteDataSourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_source({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_source({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_source(::Google::Shopping::Merchant::DataSources::V1beta::DeleteDataSourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_source(::Google::Shopping::Merchant::DataSources::V1beta::DeleteDataSourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -385,36 +385,36 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
 
     Gapic::ServiceStub.stub :new, fetch_data_source_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_data_source({ name: name }) do |response, operation|
+      c.fetch_data_source({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_data_source name: name do |response, operation|
+      c.fetch_data_source name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_data_source ::Google::Shopping::Merchant::DataSources::V1beta::FetchDataSourceRequest.new(name: name) do |response, operation|
+      c.fetch_data_source ::Google::Shopping::Merchant::DataSources::V1beta::FetchDataSourceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_data_source({ name: name }, grpc_options) do |response, operation|
+      c.fetch_data_source({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_data_source(::Google::Shopping::Merchant::DataSources::V1beta::FetchDataSourceRequest.new(name: name), grpc_options) do |response, operation|
+      c.fetch_data_source(::Google::Shopping::Merchant::DataSources::V1beta::FetchDataSourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

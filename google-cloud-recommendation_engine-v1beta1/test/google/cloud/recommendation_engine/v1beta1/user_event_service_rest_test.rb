@@ -98,32 +98,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Cl
     ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::ServiceStub.stub :transcode_write_user_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, write_user_event_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.write_user_event({ parent: parent, user_event: user_event }) do |_result, response|
+        c.write_user_event({ parent: parent, user_event: user_event }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.write_user_event parent: parent, user_event: user_event do |_result, response|
+        c.write_user_event parent: parent, user_event: user_event do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.write_user_event ::Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new(parent: parent, user_event: user_event) do |_result, response|
+        c.write_user_event ::Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new(parent: parent, user_event: user_event) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.write_user_event({ parent: parent, user_event: user_event }, call_options) do |_result, response|
+        c.write_user_event({ parent: parent, user_event: user_event }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.write_user_event(::Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new(parent: parent, user_event: user_event), call_options) do |_result, response|
+        c.write_user_event(::Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new(parent: parent, user_event: user_event), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Cl
     ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::ServiceStub.stub :transcode_collect_user_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, collect_user_event_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }) do |_result, response|
+        c.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.collect_user_event parent: parent, user_event: user_event, uri: uri, ets: ets do |_result, response|
+        c.collect_user_event parent: parent, user_event: user_event, uri: uri, ets: ets do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.collect_user_event ::Google::Cloud::RecommendationEngine::V1beta1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets) do |_result, response|
+        c.collect_user_event ::Google::Cloud::RecommendationEngine::V1beta1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }, call_options) do |_result, response|
+        c.collect_user_event({ parent: parent, user_event: user_event, uri: uri, ets: ets }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.collect_user_event(::Google::Cloud::RecommendationEngine::V1beta1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), call_options) do |_result, response|
+        c.collect_user_event(::Google::Cloud::RecommendationEngine::V1beta1::CollectUserEventRequest.new(parent: parent, user_event: user_event, uri: uri, ets: ets), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Cl
     ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::ServiceStub.stub :transcode_list_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_user_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_user_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_user_events parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_user_events parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_user_events ::Google::Cloud::RecommendationEngine::V1beta1::ListUserEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_user_events ::Google::Cloud::RecommendationEngine::V1beta1::ListUserEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_user_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_user_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_user_events(::Google::Cloud::RecommendationEngine::V1beta1::ListUserEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_user_events(::Google::Cloud::RecommendationEngine::V1beta1::ListUserEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Cl
     ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::ServiceStub.stub :transcode_purge_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, purge_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
+        c.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
+        c.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.purge_user_events ::Google::Cloud::RecommendationEngine::V1beta1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
+        c.purge_user_events ::Google::Cloud::RecommendationEngine::V1beta1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
+        c.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.purge_user_events(::Google::Cloud::RecommendationEngine::V1beta1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
+        c.purge_user_events(::Google::Cloud::RecommendationEngine::V1beta1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Cl
     ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::ServiceStub.stub :transcode_import_user_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_user_events_client_stub do
         # Create client
-        client = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_user_events({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }) do |_result, response|
+        c.import_user_events({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_user_events parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config do |_result, response|
+        c.import_user_events parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_user_events ::Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config) do |_result, response|
+        c.import_user_events ::Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_user_events({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }, call_options) do |_result, response|
+        c.import_user_events({ parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_user_events(::Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config), call_options) do |_result, response|
+        c.import_user_events(::Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new(parent: parent, request_id: request_id, input_config: input_config, errors_config: errors_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

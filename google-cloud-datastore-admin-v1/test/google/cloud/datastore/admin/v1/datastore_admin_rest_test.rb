@@ -100,32 +100,32 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ServiceStub.stub :transcode_export_entities_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_entities_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }) do |_result, response|
+        c.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_entities project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix do |_result, response|
+        c.export_entities project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_entities ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix) do |_result, response|
+        c.export_entities ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }, call_options) do |_result, response|
+        c.export_entities({ project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_entities(::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix), call_options) do |_result, response|
+        c.export_entities(::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new(project_id: project_id, labels: labels, entity_filter: entity_filter, output_url_prefix: output_url_prefix), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ServiceStub.stub :transcode_import_entities_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_entities_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }) do |_result, response|
+        c.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_entities project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter do |_result, response|
+        c.import_entities project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_entities ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter) do |_result, response|
+        c.import_entities ::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }, call_options) do |_result, response|
+        c.import_entities({ project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_entities(::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter), call_options) do |_result, response|
+        c.import_entities(::Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new(project_id: project_id, labels: labels, input_url: input_url, entity_filter: entity_filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ServiceStub.stub :transcode_create_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_index_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_index({ project_id: project_id, index: index }) do |_result, response|
+        c.create_index({ project_id: project_id, index: index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_index project_id: project_id, index: index do |_result, response|
+        c.create_index project_id: project_id, index: index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_index ::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index) do |_result, response|
+        c.create_index ::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_index({ project_id: project_id, index: index }, call_options) do |_result, response|
+        c.create_index({ project_id: project_id, index: index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_index(::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index), call_options) do |_result, response|
+        c.create_index(::Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new(project_id: project_id, index: index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ServiceStub.stub :transcode_delete_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_index_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_index({ project_id: project_id, index_id: index_id }) do |_result, response|
+        c.delete_index({ project_id: project_id, index_id: index_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_index project_id: project_id, index_id: index_id do |_result, response|
+        c.delete_index project_id: project_id, index_id: index_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_index ::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id) do |_result, response|
+        c.delete_index ::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_index({ project_id: project_id, index_id: index_id }, call_options) do |_result, response|
+        c.delete_index({ project_id: project_id, index_id: index_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_index(::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id), call_options) do |_result, response|
+        c.delete_index(::Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new(project_id: project_id, index_id: index_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ServiceStub.stub :transcode_get_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_index_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_index({ project_id: project_id, index_id: index_id }) do |_result, response|
+        c.get_index({ project_id: project_id, index_id: index_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_index project_id: project_id, index_id: index_id do |_result, response|
+        c.get_index project_id: project_id, index_id: index_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_index ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id) do |_result, response|
+        c.get_index ::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_index({ project_id: project_id, index_id: index_id }, call_options) do |_result, response|
+        c.get_index({ project_id: project_id, index_id: index_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_index(::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id), call_options) do |_result, response|
+        c.get_index(::Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new(project_id: project_id, index_id: index_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ClientTest < 
     ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::ServiceStub.stub :transcode_list_indexes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_indexes_client_stub do
         # Create client
-        client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_indexes project_id: project_id, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_indexes project_id: project_id, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_indexes ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_indexes ::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_indexes({ project_id: project_id, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_indexes(::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_indexes(::Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new(project_id: project_id, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

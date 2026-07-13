@@ -86,36 +86,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, create_service_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service({ parent: parent, service_id: service_id, service: service }) do |response, operation|
+      c.create_service({ parent: parent, service_id: service_id, service: service }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service parent: parent, service_id: service_id, service: service do |response, operation|
+      c.create_service parent: parent, service_id: service_id, service: service do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service ::Google::Cloud::Monitoring::V3::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service) do |response, operation|
+      c.create_service ::Google::Cloud::Monitoring::V3::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service({ parent: parent, service_id: service_id, service: service }, grpc_options) do |response, operation|
+      c.create_service({ parent: parent, service_id: service_id, service: service }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service(::Google::Cloud::Monitoring::V3::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service), grpc_options) do |response, operation|
+      c.create_service(::Google::Cloud::Monitoring::V3::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, get_service_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service({ name: name }) do |response, operation|
+      c.get_service({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service name: name do |response, operation|
+      c.get_service name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service ::Google::Cloud::Monitoring::V3::GetServiceRequest.new(name: name) do |response, operation|
+      c.get_service ::Google::Cloud::Monitoring::V3::GetServiceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service({ name: name }, grpc_options) do |response, operation|
+      c.get_service({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service(::Google::Cloud::Monitoring::V3::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service(::Google::Cloud::Monitoring::V3::GetServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,40 +208,40 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, list_services_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_services({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_services({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_services parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_services parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_services ::Google::Cloud::Monitoring::V3::ListServicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_services ::Google::Cloud::Monitoring::V3::ListServicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_services({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_services({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_services(::Google::Cloud::Monitoring::V3::ListServicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_services(::Google::Cloud::Monitoring::V3::ListServicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -273,36 +273,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, update_service_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service({ service: service, update_mask: update_mask }) do |response, operation|
+      c.update_service({ service: service, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service service: service, update_mask: update_mask do |response, operation|
+      c.update_service service: service, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service ::Google::Cloud::Monitoring::V3::UpdateServiceRequest.new(service: service, update_mask: update_mask) do |response, operation|
+      c.update_service ::Google::Cloud::Monitoring::V3::UpdateServiceRequest.new(service: service, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service({ service: service, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_service({ service: service, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service(::Google::Cloud::Monitoring::V3::UpdateServiceRequest.new(service: service, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_service(::Google::Cloud::Monitoring::V3::UpdateServiceRequest.new(service: service, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, delete_service_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service({ name: name }) do |response, operation|
+      c.delete_service({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service name: name do |response, operation|
+      c.delete_service name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service ::Google::Cloud::Monitoring::V3::DeleteServiceRequest.new(name: name) do |response, operation|
+      c.delete_service ::Google::Cloud::Monitoring::V3::DeleteServiceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service({ name: name }, grpc_options) do |response, operation|
+      c.delete_service({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service(::Google::Cloud::Monitoring::V3::DeleteServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_service(::Google::Cloud::Monitoring::V3::DeleteServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -393,36 +393,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, create_service_level_objective_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service_level_objective({ parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective }) do |response, operation|
+      c.create_service_level_objective({ parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service_level_objective parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective do |response, operation|
+      c.create_service_level_objective parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service_level_objective ::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new(parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective) do |response, operation|
+      c.create_service_level_objective ::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new(parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service_level_objective({ parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective }, grpc_options) do |response, operation|
+      c.create_service_level_objective({ parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service_level_objective(::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new(parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective), grpc_options) do |response, operation|
+      c.create_service_level_objective(::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new(parent: parent, service_level_objective_id: service_level_objective_id, service_level_objective: service_level_objective), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -453,36 +453,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, get_service_level_objective_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service_level_objective({ name: name, view: view }) do |response, operation|
+      c.get_service_level_objective({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service_level_objective name: name, view: view do |response, operation|
+      c.get_service_level_objective name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service_level_objective ::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest.new(name: name, view: view) do |response, operation|
+      c.get_service_level_objective ::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service_level_objective({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_service_level_objective({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service_level_objective(::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_service_level_objective(::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -519,40 +519,40 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, list_service_level_objectives_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_service_level_objectives({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
+      c.list_service_level_objectives({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_service_level_objectives parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view do |response, operation|
+      c.list_service_level_objectives parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_service_level_objectives ::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view) do |response, operation|
+      c.list_service_level_objectives ::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_service_level_objectives({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
+      c.list_service_level_objectives({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_service_level_objectives(::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
+      c.list_service_level_objectives(::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -584,36 +584,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, update_service_level_objective_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service_level_objective({ service_level_objective: service_level_objective, update_mask: update_mask }) do |response, operation|
+      c.update_service_level_objective({ service_level_objective: service_level_objective, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service_level_objective service_level_objective: service_level_objective, update_mask: update_mask do |response, operation|
+      c.update_service_level_objective service_level_objective: service_level_objective, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service_level_objective ::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest.new(service_level_objective: service_level_objective, update_mask: update_mask) do |response, operation|
+      c.update_service_level_objective ::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest.new(service_level_objective: service_level_objective, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service_level_objective({ service_level_objective: service_level_objective, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_service_level_objective({ service_level_objective: service_level_objective, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service_level_objective(::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest.new(service_level_objective: service_level_objective, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_service_level_objective(::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest.new(service_level_objective: service_level_objective, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -642,36 +642,36 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, delete_service_level_objective_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service_level_objective({ name: name }) do |response, operation|
+      c.delete_service_level_objective({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service_level_objective name: name do |response, operation|
+      c.delete_service_level_objective name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service_level_objective ::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest.new(name: name) do |response, operation|
+      c.delete_service_level_objective ::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service_level_objective({ name: name }, grpc_options) do |response, operation|
+      c.delete_service_level_objective({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service_level_objective(::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_service_level_objective(::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

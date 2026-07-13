@@ -1011,11 +1011,11 @@ module Google
               #     If not specified, a default value of 1000 will be used by the service.
               #     Regardless of the page_size value, the response may include a partial list
               #     and a caller should only rely on response's
-              #     {::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse#next_page_token `next_page_token`}
+              #     `next_page_token`
               #     to determine if there are more clusters left to be queried.
               #   @param page_token [::String]
               #     Optional. The `next_page_token` value returned from a previous
-              #     [ListBackupCollections] request, if any.
+              #     `ListBackupCollections` request, if any.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::BackupCollection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1187,11 +1187,11 @@ module Google
               #     If not specified, a default value of 1000 will be used by the service.
               #     Regardless of the page_size value, the response may include a partial list
               #     and a caller should only rely on response's
-              #     {::Google::Cloud::Memorystore::V1::ListBackupsResponse#next_page_token `next_page_token`}
+              #     `next_page_token`
               #     to determine if there are more clusters left to be queried.
               #   @param page_token [::String]
               #     Optional. The `next_page_token` value returned from a previous
-              #     [ListBackupCollections] request, if any.
+              #     `ListBackupCollections` request, if any.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::Backup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1622,6 +1622,201 @@ module Google
               end
 
               ##
+              # Initiates the migration of a source instance to the target Memorystore
+              # instance.
+              #
+              # After the successful completion of this operation, the target instance
+              # will:
+              # 1. Set up replication with the source instance and replicate any writes to
+              # the source instance.
+              # 2. Only allow reads.
+              #
+              # @overload start_migration(request, options = nil)
+              #   Pass arguments to `start_migration` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::StartMigrationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::StartMigrationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload start_migration(self_managed_source: nil, name: nil)
+              #   Pass arguments to `start_migration` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param self_managed_source [::Google::Cloud::Memorystore::V1::SelfManagedSource, ::Hash]
+              #     Required. Configuration for migrating from a self-managed Valkey/Redis
+              #     instance
+              #   @param name [::String]
+              #     Required. The resource name of the instance to start migration on.
+              #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::StartMigrationRequest.new
+              #
+              #   # Call the start_migration method.
+              #   result = client.start_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def start_migration request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::StartMigrationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.start_migration.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.start_migration.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start_migration.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.start_migration request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Finalizes the migration process.
+              #
+              # After the successful completion of this operation, the target instance
+              # will:
+              # 1. Stop replicating from the source instance.
+              # 2. Allow both reads and writes.
+              #
+              # @overload finish_migration(request, options = nil)
+              #   Pass arguments to `finish_migration` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::FinishMigrationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::FinishMigrationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload finish_migration(name: nil, force: nil)
+              #   Pass arguments to `finish_migration` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the instance to finalize migration on.
+              #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param force [::Boolean]
+              #     Optional. By default, the `FinishMigration` operation ensures the target
+              #     replication offset to catch up to the source offset as of the time of the
+              #     call. Set this field to `true` to bypass this offset verification check.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::FinishMigrationRequest.new
+              #
+              #   # Call the finish_migration method.
+              #   result = client.finish_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def finish_migration request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::FinishMigrationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.finish_migration.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.finish_migration.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.finish_migration.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.finish_migration request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Memorystore REST API.
               #
               # This class represents the configuration for Memorystore REST,
@@ -1691,6 +1886,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -1770,6 +1966,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #
@@ -1849,6 +2046,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :backup_instance
+                  ##
+                  # RPC-specific configuration for `start_migration`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :start_migration
+                  ##
+                  # RPC-specific configuration for `finish_migration`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :finish_migration
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1882,6 +2089,10 @@ module Google
                     @export_backup = ::Gapic::Config::Method.new export_backup_config
                     backup_instance_config = parent_rpcs.backup_instance if parent_rpcs.respond_to? :backup_instance
                     @backup_instance = ::Gapic::Config::Method.new backup_instance_config
+                    start_migration_config = parent_rpcs.start_migration if parent_rpcs.respond_to? :start_migration
+                    @start_migration = ::Gapic::Config::Method.new start_migration_config
+                    finish_migration_config = parent_rpcs.finish_migration if parent_rpcs.respond_to? :finish_migration
+                    @finish_migration = ::Gapic::Config::Method.new finish_migration_config
 
                     yield self if block_given?
                   end

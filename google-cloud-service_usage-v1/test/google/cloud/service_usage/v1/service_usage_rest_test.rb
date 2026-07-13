@@ -97,32 +97,32 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ServiceStub.stub :transcode_enable_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enable_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enable_service({ name: name }) do |_result, response|
+        c.enable_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enable_service name: name do |_result, response|
+        c.enable_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enable_service ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name) do |_result, response|
+        c.enable_service ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enable_service({ name: name }, call_options) do |_result, response|
+        c.enable_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enable_service(::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name), call_options) do |_result, response|
+        c.enable_service(::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ServiceStub.stub :transcode_disable_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, disable_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }) do |_result, response|
+        c.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.disable_service name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage do |_result, response|
+        c.disable_service name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.disable_service ::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage) do |_result, response|
+        c.disable_service ::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }, call_options) do |_result, response|
+        c.disable_service({ name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.disable_service(::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage), call_options) do |_result, response|
+        c.disable_service(::Google::Cloud::ServiceUsage::V1::DisableServiceRequest.new(name: name, disable_dependent_services: disable_dependent_services, check_if_service_has_usage: check_if_service_has_usage), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ServiceStub.stub :transcode_get_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service({ name: name }) do |_result, response|
+        c.get_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service name: name do |_result, response|
+        c.get_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service ::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name) do |_result, response|
+        c.get_service ::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service({ name: name }, call_options) do |_result, response|
+        c.get_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service(::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_service(::Google::Cloud::ServiceUsage::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_services ::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::ServiceUsage::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ServiceStub.stub :transcode_batch_enable_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_enable_services_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_enable_services({ parent: parent, service_ids: service_ids }) do |_result, response|
+        c.batch_enable_services({ parent: parent, service_ids: service_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_enable_services parent: parent, service_ids: service_ids do |_result, response|
+        c.batch_enable_services parent: parent, service_ids: service_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_enable_services ::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids) do |_result, response|
+        c.batch_enable_services ::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_enable_services({ parent: parent, service_ids: service_ids }, call_options) do |_result, response|
+        c.batch_enable_services({ parent: parent, service_ids: service_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_enable_services(::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids), call_options) do |_result, response|
+        c.batch_enable_services(::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest.new(parent: parent, service_ids: service_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ServiceStub.stub :transcode_batch_get_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_get_services_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_get_services({ parent: parent, names: names }) do |_result, response|
+        c.batch_get_services({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_get_services parent: parent, names: names do |_result, response|
+        c.batch_get_services parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_get_services ::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_get_services ::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_get_services({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_get_services({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_get_services(::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_get_services(::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

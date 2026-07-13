@@ -165,6 +165,9 @@ module Google
         # @!attribute [r] storage_server_type
         #   @return [::String]
         #     Output only. The storage server type of the Exadata Infrastructure.
+        # @!attribute [r] exascale_config
+        #   @return [::Google::Cloud::OracleDatabase::V1::ExascaleConfig]
+        #     Output only. The Exascale configuration for the Exadata Infrastructure.
         class CloudExadataInfrastructureProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,6 +198,18 @@ module Google
             # The Exadata Infrastructure is in maintenance.
             MAINTENANCE_IN_PROGRESS = 7
           end
+        end
+
+        # Details of the Exascale configuration for the Exadata Infrastructure.
+        # @!attribute [r] total_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Total storage size needed for Exascale in GBs.
+        # @!attribute [r] available_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Available storage size for Exascale in GBs.
+        class ExascaleConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Maintenance window as defined by Oracle.
@@ -269,6 +284,23 @@ module Google
             # the same time, then your database servers at the same time.
             NON_ROLLING = 2
           end
+        end
+
+        # The request for `CloudExadataInfrastructure.ConfigureExascale`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Cloud Exadata Infrastructure in the following
+        #     format:
+        #     projects/\\{project}/locations/\\{location}/cloudExadataInfrastructures/\\{cloud_exadata_infrastructure}.
+        # @!attribute [rw] total_storage_size_gb
+        #   @return [::Integer]
+        #     Required. The total storage to be allocated to Exascale in GBs.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request.
+        class ConfigureExascaleCloudExadataInfrastructureRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

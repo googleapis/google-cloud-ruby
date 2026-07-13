@@ -98,32 +98,32 @@ class ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ClientTest < Minit
     ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ServiceStub.stub :transcode_create_company_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_company_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_company({ parent: parent, company: company }) do |_result, response|
+        c.create_company({ parent: parent, company: company }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_company parent: parent, company: company do |_result, response|
+        c.create_company parent: parent, company: company do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_company ::Google::Cloud::Talent::V4beta1::CreateCompanyRequest.new(parent: parent, company: company) do |_result, response|
+        c.create_company ::Google::Cloud::Talent::V4beta1::CreateCompanyRequest.new(parent: parent, company: company) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_company({ parent: parent, company: company }, call_options) do |_result, response|
+        c.create_company({ parent: parent, company: company }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_company(::Google::Cloud::Talent::V4beta1::CreateCompanyRequest.new(parent: parent, company: company), call_options) do |_result, response|
+        c.create_company(::Google::Cloud::Talent::V4beta1::CreateCompanyRequest.new(parent: parent, company: company), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ClientTest < Minit
     ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ServiceStub.stub :transcode_get_company_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_company_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_company({ name: name }) do |_result, response|
+        c.get_company({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_company name: name do |_result, response|
+        c.get_company name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_company ::Google::Cloud::Talent::V4beta1::GetCompanyRequest.new(name: name) do |_result, response|
+        c.get_company ::Google::Cloud::Talent::V4beta1::GetCompanyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_company({ name: name }, call_options) do |_result, response|
+        c.get_company({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_company(::Google::Cloud::Talent::V4beta1::GetCompanyRequest.new(name: name), call_options) do |_result, response|
+        c.get_company(::Google::Cloud::Talent::V4beta1::GetCompanyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ClientTest < Minit
     ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ServiceStub.stub :transcode_update_company_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_company_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_company({ company: company, update_mask: update_mask }) do |_result, response|
+        c.update_company({ company: company, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_company company: company, update_mask: update_mask do |_result, response|
+        c.update_company company: company, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_company ::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest.new(company: company, update_mask: update_mask) do |_result, response|
+        c.update_company ::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest.new(company: company, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_company({ company: company, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_company({ company: company, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_company(::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest.new(company: company, update_mask: update_mask), call_options) do |_result, response|
+        c.update_company(::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest.new(company: company, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ClientTest < Minit
     ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ServiceStub.stub :transcode_delete_company_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_company_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_company({ name: name }) do |_result, response|
+        c.delete_company({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_company name: name do |_result, response|
+        c.delete_company name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_company ::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest.new(name: name) do |_result, response|
+        c.delete_company ::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_company({ name: name }, call_options) do |_result, response|
+        c.delete_company({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_company(::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_company(::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ClientTest < Minit
     ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::ServiceStub.stub :transcode_list_companies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_companies_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::CompanyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_companies({ parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs }) do |_result, response|
+        c.list_companies({ parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_companies parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs do |_result, response|
+        c.list_companies parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_companies ::Google::Cloud::Talent::V4beta1::ListCompaniesRequest.new(parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs) do |_result, response|
+        c.list_companies ::Google::Cloud::Talent::V4beta1::ListCompaniesRequest.new(parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_companies({ parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs }, call_options) do |_result, response|
+        c.list_companies({ parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_companies(::Google::Cloud::Talent::V4beta1::ListCompaniesRequest.new(parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs), call_options) do |_result, response|
+        c.list_companies(::Google::Cloud::Talent::V4beta1::ListCompaniesRequest.new(parent: parent, page_token: page_token, page_size: page_size, require_open_jobs: require_open_jobs), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

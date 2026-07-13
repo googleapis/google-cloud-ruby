@@ -210,7 +210,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_score_spec: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_filter_spec: nil, relevance_score_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -567,6 +567,14 @@ module Google
               #     `relevance_filter_spec` instead.
               #
               #     This feature is not supported for healthcare search.
+              #   @param relevance_filter_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceFilterSpec, ::Hash]
+              #     Optional. The granular relevance filtering specification.
+              #
+              #     If not specified, the global `relevance_threshold` will be used for all
+              #     sub-searches. If specified, this overrides the global
+              #     `relevance_threshold` to use thresholds on a per sub-search basis.
+              #
+              #     This feature is currently supported only for custom and site search.
               #   @param relevance_score_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec, ::Hash]
               #     Optional. The specification for returning the relevance score.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -658,7 +666,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_lite(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_score_spec: nil)
+              # @overload search_lite(serving_config: nil, branch: nil, query: nil, page_categories: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, display_spec: nil, crowding_specs: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_filter_spec: nil, relevance_score_spec: nil)
               #   Pass arguments to `search_lite` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1015,6 +1023,14 @@ module Google
               #     `relevance_filter_spec` instead.
               #
               #     This feature is not supported for healthcare search.
+              #   @param relevance_filter_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceFilterSpec, ::Hash]
+              #     Optional. The granular relevance filtering specification.
+              #
+              #     If not specified, the global `relevance_threshold` will be used for all
+              #     sub-searches. If specified, this overrides the global
+              #     `relevance_threshold` to use thresholds on a per sub-search basis.
+              #
+              #     This feature is currently supported only for custom and site search.
               #   @param relevance_score_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec, ::Hash]
               #     Optional. The specification for returning the relevance score.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1151,6 +1167,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -1223,6 +1240,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

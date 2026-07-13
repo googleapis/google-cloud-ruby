@@ -99,32 +99,32 @@ class ::Google::Shopping::Css::V1::QuotaService::Rest::ClientTest < Minitest::Te
     ::Google::Shopping::Css::V1::QuotaService::Rest::ServiceStub.stub :transcode_list_quota_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_quota_groups_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::QuotaService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::QuotaService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_quota_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_quota_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_quota_groups ::Google::Shopping::Css::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_quota_groups ::Google::Shopping::Css::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_quota_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_quota_groups(::Google::Shopping::Css::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_quota_groups(::Google::Shopping::Css::V1::ListQuotaGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

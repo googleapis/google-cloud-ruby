@@ -110,36 +110,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, run_report_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }) do |response, operation|
+      c.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons do |response, operation|
+      c.run_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_report ::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons) do |response, operation|
+      c.run_report ::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }, grpc_options) do |response, operation|
+      c.run_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_report(::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons), grpc_options) do |response, operation|
+      c.run_report(::Google::Analytics::Data::V1beta::RunReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -190,36 +190,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, run_pivot_report_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }) do |response, operation|
+      c.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_pivot_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons do |response, operation|
+      c.run_pivot_report property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_pivot_report ::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons) do |response, operation|
+      c.run_pivot_report ::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }, grpc_options) do |response, operation|
+      c.run_pivot_report({ property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_pivot_report(::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons), grpc_options) do |response, operation|
+      c.run_pivot_report(::Google::Analytics::Data::V1beta::RunPivotReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, pivots: pivots, dimension_filter: dimension_filter, metric_filter: metric_filter, currency_code: currency_code, cohort_spec: cohort_spec, keep_empty_rows: keep_empty_rows, return_property_quota: return_property_quota, comparisons: comparisons), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -250,36 +250,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, batch_run_reports_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_run_reports({ property: property, requests: requests }) do |response, operation|
+      c.batch_run_reports({ property: property, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_run_reports property: property, requests: requests do |response, operation|
+      c.batch_run_reports property: property, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_run_reports ::Google::Analytics::Data::V1beta::BatchRunReportsRequest.new(property: property, requests: requests) do |response, operation|
+      c.batch_run_reports ::Google::Analytics::Data::V1beta::BatchRunReportsRequest.new(property: property, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_run_reports({ property: property, requests: requests }, grpc_options) do |response, operation|
+      c.batch_run_reports({ property: property, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_run_reports(::Google::Analytics::Data::V1beta::BatchRunReportsRequest.new(property: property, requests: requests), grpc_options) do |response, operation|
+      c.batch_run_reports(::Google::Analytics::Data::V1beta::BatchRunReportsRequest.new(property: property, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -310,36 +310,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, batch_run_pivot_reports_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_run_pivot_reports({ property: property, requests: requests }) do |response, operation|
+      c.batch_run_pivot_reports({ property: property, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_run_pivot_reports property: property, requests: requests do |response, operation|
+      c.batch_run_pivot_reports property: property, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_run_pivot_reports ::Google::Analytics::Data::V1beta::BatchRunPivotReportsRequest.new(property: property, requests: requests) do |response, operation|
+      c.batch_run_pivot_reports ::Google::Analytics::Data::V1beta::BatchRunPivotReportsRequest.new(property: property, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_run_pivot_reports({ property: property, requests: requests }, grpc_options) do |response, operation|
+      c.batch_run_pivot_reports({ property: property, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_run_pivot_reports(::Google::Analytics::Data::V1beta::BatchRunPivotReportsRequest.new(property: property, requests: requests), grpc_options) do |response, operation|
+      c.batch_run_pivot_reports(::Google::Analytics::Data::V1beta::BatchRunPivotReportsRequest.new(property: property, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -368,36 +368,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_metadata_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_metadata({ name: name }) do |response, operation|
+      c.get_metadata({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_metadata name: name do |response, operation|
+      c.get_metadata name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_metadata ::Google::Analytics::Data::V1beta::GetMetadataRequest.new(name: name) do |response, operation|
+      c.get_metadata ::Google::Analytics::Data::V1beta::GetMetadataRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_metadata({ name: name }, grpc_options) do |response, operation|
+      c.get_metadata({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_metadata(::Google::Analytics::Data::V1beta::GetMetadataRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_metadata(::Google::Analytics::Data::V1beta::GetMetadataRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -444,36 +444,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, run_realtime_report_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges }) do |response, operation|
+      c.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_realtime_report property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges do |response, operation|
+      c.run_realtime_report property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_realtime_report ::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges) do |response, operation|
+      c.run_realtime_report ::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges }, grpc_options) do |response, operation|
+      c.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_realtime_report(::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges), grpc_options) do |response, operation|
+      c.run_realtime_report(::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -512,36 +512,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, check_compatibility_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.check_compatibility({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter }) do |response, operation|
+      c.check_compatibility({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_compatibility property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter do |response, operation|
+      c.check_compatibility property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_compatibility ::Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter) do |response, operation|
+      c.check_compatibility ::Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_compatibility({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter }, grpc_options) do |response, operation|
+      c.check_compatibility({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_compatibility(::Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter), grpc_options) do |response, operation|
+      c.check_compatibility(::Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -572,40 +572,40 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_audience_export_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_audience_export({ parent: parent, audience_export: audience_export }) do |response, operation|
+      c.create_audience_export({ parent: parent, audience_export: audience_export }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_audience_export parent: parent, audience_export: audience_export do |response, operation|
+      c.create_audience_export parent: parent, audience_export: audience_export do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_audience_export ::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export) do |response, operation|
+      c.create_audience_export ::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_audience_export({ parent: parent, audience_export: audience_export }, grpc_options) do |response, operation|
+      c.create_audience_export({ parent: parent, audience_export: audience_export }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_audience_export(::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export), grpc_options) do |response, operation|
+      c.create_audience_export(::Google::Analytics::Data::V1beta::CreateAudienceExportRequest.new(parent: parent, audience_export: audience_export), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -639,36 +639,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, query_audience_export_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_audience_export({ name: name, offset: offset, limit: limit }) do |response, operation|
+      c.query_audience_export({ name: name, offset: offset, limit: limit }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_audience_export name: name, offset: offset, limit: limit do |response, operation|
+      c.query_audience_export name: name, offset: offset, limit: limit do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_audience_export ::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit) do |response, operation|
+      c.query_audience_export ::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_audience_export({ name: name, offset: offset, limit: limit }, grpc_options) do |response, operation|
+      c.query_audience_export({ name: name, offset: offset, limit: limit }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_audience_export(::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit), grpc_options) do |response, operation|
+      c.query_audience_export(::Google::Analytics::Data::V1beta::QueryAudienceExportRequest.new(name: name, offset: offset, limit: limit), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -697,36 +697,36 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_audience_export_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_audience_export({ name: name }) do |response, operation|
+      c.get_audience_export({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_audience_export name: name do |response, operation|
+      c.get_audience_export name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_audience_export ::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name) do |response, operation|
+      c.get_audience_export ::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_audience_export({ name: name }, grpc_options) do |response, operation|
+      c.get_audience_export({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_audience_export(::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_audience_export(::Google::Analytics::Data::V1beta::GetAudienceExportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -759,40 +759,40 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_audience_exports_client_stub do
       # Create client
-      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+      c = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_audience_exports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_audience_exports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_audience_exports ::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_audience_exports ::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_audience_exports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_audience_exports(::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_audience_exports(::Google::Analytics::Data::V1beta::ListAudienceExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

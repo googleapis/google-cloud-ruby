@@ -82,36 +82,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_site_search_engine_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_site_search_engine({ name: name }) do |response, operation|
+      c.get_site_search_engine({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_site_search_engine name: name do |response, operation|
+      c.get_site_search_engine name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_site_search_engine ::Google::Cloud::DiscoveryEngine::V1::GetSiteSearchEngineRequest.new(name: name) do |response, operation|
+      c.get_site_search_engine ::Google::Cloud::DiscoveryEngine::V1::GetSiteSearchEngineRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_site_search_engine({ name: name }, grpc_options) do |response, operation|
+      c.get_site_search_engine({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_site_search_engine(::Google::Cloud::DiscoveryEngine::V1::GetSiteSearchEngineRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_site_search_engine(::Google::Cloud::DiscoveryEngine::V1::GetSiteSearchEngineRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,40 +142,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_target_site_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_target_site({ parent: parent, target_site: target_site }) do |response, operation|
+      c.create_target_site({ parent: parent, target_site: target_site }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_target_site parent: parent, target_site: target_site do |response, operation|
+      c.create_target_site parent: parent, target_site: target_site do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_target_site ::Google::Cloud::DiscoveryEngine::V1::CreateTargetSiteRequest.new(parent: parent, target_site: target_site) do |response, operation|
+      c.create_target_site ::Google::Cloud::DiscoveryEngine::V1::CreateTargetSiteRequest.new(parent: parent, target_site: target_site) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_target_site({ parent: parent, target_site: target_site }, grpc_options) do |response, operation|
+      c.create_target_site({ parent: parent, target_site: target_site }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_target_site(::Google::Cloud::DiscoveryEngine::V1::CreateTargetSiteRequest.new(parent: parent, target_site: target_site), grpc_options) do |response, operation|
+      c.create_target_site(::Google::Cloud::DiscoveryEngine::V1::CreateTargetSiteRequest.new(parent: parent, target_site: target_site), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -207,40 +207,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, batch_create_target_sites_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_target_sites({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_target_sites({ parent: parent, requests: requests }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_target_sites parent: parent, requests: requests do |response, operation|
+      c.batch_create_target_sites parent: parent, requests: requests do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_target_sites ::Google::Cloud::DiscoveryEngine::V1::BatchCreateTargetSitesRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_target_sites ::Google::Cloud::DiscoveryEngine::V1::BatchCreateTargetSitesRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_target_sites({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_target_sites({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_target_sites(::Google::Cloud::DiscoveryEngine::V1::BatchCreateTargetSitesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_target_sites(::Google::Cloud::DiscoveryEngine::V1::BatchCreateTargetSitesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -270,36 +270,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_target_site_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_target_site({ name: name }) do |response, operation|
+      c.get_target_site({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_target_site name: name do |response, operation|
+      c.get_target_site name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_target_site ::Google::Cloud::DiscoveryEngine::V1::GetTargetSiteRequest.new(name: name) do |response, operation|
+      c.get_target_site ::Google::Cloud::DiscoveryEngine::V1::GetTargetSiteRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_target_site({ name: name }, grpc_options) do |response, operation|
+      c.get_target_site({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_target_site(::Google::Cloud::DiscoveryEngine::V1::GetTargetSiteRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_target_site(::Google::Cloud::DiscoveryEngine::V1::GetTargetSiteRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -328,40 +328,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_target_site_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_target_site({ target_site: target_site }) do |response, operation|
+      c.update_target_site({ target_site: target_site }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_target_site target_site: target_site do |response, operation|
+      c.update_target_site target_site: target_site do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_target_site ::Google::Cloud::DiscoveryEngine::V1::UpdateTargetSiteRequest.new(target_site: target_site) do |response, operation|
+      c.update_target_site ::Google::Cloud::DiscoveryEngine::V1::UpdateTargetSiteRequest.new(target_site: target_site) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_target_site({ target_site: target_site }, grpc_options) do |response, operation|
+      c.update_target_site({ target_site: target_site }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_target_site(::Google::Cloud::DiscoveryEngine::V1::UpdateTargetSiteRequest.new(target_site: target_site), grpc_options) do |response, operation|
+      c.update_target_site(::Google::Cloud::DiscoveryEngine::V1::UpdateTargetSiteRequest.new(target_site: target_site), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -391,40 +391,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_target_site_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_target_site({ name: name }) do |response, operation|
+      c.delete_target_site({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_target_site name: name do |response, operation|
+      c.delete_target_site name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_target_site ::Google::Cloud::DiscoveryEngine::V1::DeleteTargetSiteRequest.new(name: name) do |response, operation|
+      c.delete_target_site ::Google::Cloud::DiscoveryEngine::V1::DeleteTargetSiteRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_target_site({ name: name }, grpc_options) do |response, operation|
+      c.delete_target_site({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_target_site(::Google::Cloud::DiscoveryEngine::V1::DeleteTargetSiteRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_target_site(::Google::Cloud::DiscoveryEngine::V1::DeleteTargetSiteRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -458,40 +458,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_target_sites_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_target_sites({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_target_sites({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_target_sites parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_target_sites parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_target_sites ::Google::Cloud::DiscoveryEngine::V1::ListTargetSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_target_sites ::Google::Cloud::DiscoveryEngine::V1::ListTargetSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_target_sites({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_target_sites({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_target_sites(::Google::Cloud::DiscoveryEngine::V1::ListTargetSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_target_sites(::Google::Cloud::DiscoveryEngine::V1::ListTargetSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -523,40 +523,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_sitemap_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_sitemap({ parent: parent, sitemap: sitemap }) do |response, operation|
+      c.create_sitemap({ parent: parent, sitemap: sitemap }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_sitemap parent: parent, sitemap: sitemap do |response, operation|
+      c.create_sitemap parent: parent, sitemap: sitemap do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_sitemap ::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest.new(parent: parent, sitemap: sitemap) do |response, operation|
+      c.create_sitemap ::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest.new(parent: parent, sitemap: sitemap) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_sitemap({ parent: parent, sitemap: sitemap }, grpc_options) do |response, operation|
+      c.create_sitemap({ parent: parent, sitemap: sitemap }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_sitemap(::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest.new(parent: parent, sitemap: sitemap), grpc_options) do |response, operation|
+      c.create_sitemap(::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest.new(parent: parent, sitemap: sitemap), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -586,40 +586,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_sitemap_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_sitemap({ name: name }) do |response, operation|
+      c.delete_sitemap({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_sitemap name: name do |response, operation|
+      c.delete_sitemap name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_sitemap ::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest.new(name: name) do |response, operation|
+      c.delete_sitemap ::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_sitemap({ name: name }, grpc_options) do |response, operation|
+      c.delete_sitemap({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_sitemap(::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_sitemap(::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -651,36 +651,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, fetch_sitemaps_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_sitemaps({ parent: parent, matcher: matcher }) do |response, operation|
+      c.fetch_sitemaps({ parent: parent, matcher: matcher }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_sitemaps parent: parent, matcher: matcher do |response, operation|
+      c.fetch_sitemaps parent: parent, matcher: matcher do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_sitemaps ::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest.new(parent: parent, matcher: matcher) do |response, operation|
+      c.fetch_sitemaps ::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest.new(parent: parent, matcher: matcher) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_sitemaps({ parent: parent, matcher: matcher }, grpc_options) do |response, operation|
+      c.fetch_sitemaps({ parent: parent, matcher: matcher }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_sitemaps(::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest.new(parent: parent, matcher: matcher), grpc_options) do |response, operation|
+      c.fetch_sitemaps(::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest.new(parent: parent, matcher: matcher), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -709,40 +709,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, enable_advanced_site_search_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.enable_advanced_site_search({ site_search_engine: site_search_engine }) do |response, operation|
+      c.enable_advanced_site_search({ site_search_engine: site_search_engine }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.enable_advanced_site_search site_search_engine: site_search_engine do |response, operation|
+      c.enable_advanced_site_search site_search_engine: site_search_engine do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.enable_advanced_site_search ::Google::Cloud::DiscoveryEngine::V1::EnableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine) do |response, operation|
+      c.enable_advanced_site_search ::Google::Cloud::DiscoveryEngine::V1::EnableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.enable_advanced_site_search({ site_search_engine: site_search_engine }, grpc_options) do |response, operation|
+      c.enable_advanced_site_search({ site_search_engine: site_search_engine }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.enable_advanced_site_search(::Google::Cloud::DiscoveryEngine::V1::EnableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine), grpc_options) do |response, operation|
+      c.enable_advanced_site_search(::Google::Cloud::DiscoveryEngine::V1::EnableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -772,40 +772,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, disable_advanced_site_search_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.disable_advanced_site_search({ site_search_engine: site_search_engine }) do |response, operation|
+      c.disable_advanced_site_search({ site_search_engine: site_search_engine }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.disable_advanced_site_search site_search_engine: site_search_engine do |response, operation|
+      c.disable_advanced_site_search site_search_engine: site_search_engine do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.disable_advanced_site_search ::Google::Cloud::DiscoveryEngine::V1::DisableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine) do |response, operation|
+      c.disable_advanced_site_search ::Google::Cloud::DiscoveryEngine::V1::DisableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.disable_advanced_site_search({ site_search_engine: site_search_engine }, grpc_options) do |response, operation|
+      c.disable_advanced_site_search({ site_search_engine: site_search_engine }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.disable_advanced_site_search(::Google::Cloud::DiscoveryEngine::V1::DisableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine), grpc_options) do |response, operation|
+      c.disable_advanced_site_search(::Google::Cloud::DiscoveryEngine::V1::DisableAdvancedSiteSearchRequest.new(site_search_engine: site_search_engine), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -839,40 +839,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, recrawl_uris_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }) do |response, operation|
+      c.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.recrawl_uris site_search_engine: site_search_engine, uris: uris, site_credential: site_credential do |response, operation|
+      c.recrawl_uris site_search_engine: site_search_engine, uris: uris, site_credential: site_credential do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.recrawl_uris ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential) do |response, operation|
+      c.recrawl_uris ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }, grpc_options) do |response, operation|
+      c.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.recrawl_uris(::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential), grpc_options) do |response, operation|
+      c.recrawl_uris(::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -902,40 +902,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, batch_verify_target_sites_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_verify_target_sites({ parent: parent }) do |response, operation|
+      c.batch_verify_target_sites({ parent: parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_verify_target_sites parent: parent do |response, operation|
+      c.batch_verify_target_sites parent: parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_verify_target_sites ::Google::Cloud::DiscoveryEngine::V1::BatchVerifyTargetSitesRequest.new(parent: parent) do |response, operation|
+      c.batch_verify_target_sites ::Google::Cloud::DiscoveryEngine::V1::BatchVerifyTargetSitesRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_verify_target_sites({ parent: parent }, grpc_options) do |response, operation|
+      c.batch_verify_target_sites({ parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_verify_target_sites(::Google::Cloud::DiscoveryEngine::V1::BatchVerifyTargetSitesRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.batch_verify_target_sites(::Google::Cloud::DiscoveryEngine::V1::BatchVerifyTargetSitesRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -969,40 +969,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
 
     Gapic::ServiceStub.stub :new, fetch_domain_verification_status_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_domain_verification_status({ site_search_engine: site_search_engine, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_domain_verification_status({ site_search_engine: site_search_engine, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_domain_verification_status site_search_engine: site_search_engine, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_domain_verification_status site_search_engine: site_search_engine, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_domain_verification_status ::Google::Cloud::DiscoveryEngine::V1::FetchDomainVerificationStatusRequest.new(site_search_engine: site_search_engine, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_domain_verification_status ::Google::Cloud::DiscoveryEngine::V1::FetchDomainVerificationStatusRequest.new(site_search_engine: site_search_engine, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_domain_verification_status({ site_search_engine: site_search_engine, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_domain_verification_status({ site_search_engine: site_search_engine, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_domain_verification_status(::Google::Cloud::DiscoveryEngine::V1::FetchDomainVerificationStatusRequest.new(site_search_engine: site_search_engine, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_domain_verification_status(::Google::Cloud::DiscoveryEngine::V1::FetchDomainVerificationStatusRequest.new(site_search_engine: site_search_engine, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

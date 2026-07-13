@@ -104,32 +104,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_aggregated_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregated_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
+        c.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListFutureReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
+        c.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListFutureReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListFutureReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
+        c.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListFutureReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -161,32 +161,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_cancel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.cancel({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel future_reservation: future_reservation, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.cancel future_reservation: future_reservation, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel ::Google::Cloud::Compute::V1::CancelFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.cancel ::Google::Cloud::Compute::V1::CancelFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.cancel({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel(::Google::Cloud::Compute::V1::CancelFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.cancel(::Google::Cloud::Compute::V1::CancelFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -218,32 +218,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.delete({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete future_reservation: future_reservation, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.delete future_reservation: future_reservation, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.delete({ future_reservation: future_reservation, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteFutureReservationRequest.new(future_reservation: future_reservation, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -274,32 +274,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ future_reservation: future_reservation, project: project, zone: zone }) do |_result, response|
+        c.get({ future_reservation: future_reservation, project: project, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get future_reservation: future_reservation, project: project, zone: zone do |_result, response|
+        c.get future_reservation: future_reservation, project: project, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetFutureReservationRequest.new(future_reservation: future_reservation, project: project, zone: zone) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetFutureReservationRequest.new(future_reservation: future_reservation, project: project, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ future_reservation: future_reservation, project: project, zone: zone }, call_options) do |_result, response|
+        c.get({ future_reservation: future_reservation, project: project, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetFutureReservationRequest.new(future_reservation: future_reservation, project: project, zone: zone), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetFutureReservationRequest.new(future_reservation: future_reservation, project: project, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -331,32 +331,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.insert({ future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.insert future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertFutureReservationRequest.new(future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertFutureReservationRequest.new(future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.insert({ future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertFutureReservationRequest.new(future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertFutureReservationRequest.new(future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -391,32 +391,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListFutureReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListFutureReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListFutureReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListFutureReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -450,32 +450,32 @@ class ::Google::Cloud::Compute::V1::FutureReservations::Rest::ClientTest < Minit
     ::Google::Cloud::Compute::V1::FutureReservations::Rest::ServiceStub.stub :transcode_update_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::FutureReservations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update({ future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }) do |_result, response|
+        c.update({ future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone do |_result, response|
+        c.update future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update ::Google::Cloud::Compute::V1::UpdateFutureReservationRequest.new(future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone) do |_result, response|
+        c.update ::Google::Cloud::Compute::V1::UpdateFutureReservationRequest.new(future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update({ future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
+        c.update({ future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update(::Google::Cloud::Compute::V1::UpdateFutureReservationRequest.new(future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone), call_options) do |_result, response|
+        c.update(::Google::Cloud::Compute::V1::UpdateFutureReservationRequest.new(future_reservation: future_reservation, future_reservation_resource: future_reservation_resource, project: project, request_id: request_id, update_mask: update_mask, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

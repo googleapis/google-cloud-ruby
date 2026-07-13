@@ -1,6 +1,54 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
-  "rangeStrategy": "widen"
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "rangeStrategy": "widen",
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      "description": "Disable Renovate processing for non-Phase 1 gems during phased rollout",
+      "matchFileNames": [
+        "!google-cloud-core/**",
+        "!google-cloud-storage/**",
+        "!google-cloud-pubsub/**",
+        "!google-cloud-bigquery/**",
+        "!google-cloud-errors/**",
+        "!google-cloud-resource_manager/**",
+        "!google-cloud-bigtable/**",
+        "!google-cloud-logging/**",
+        "!google-cloud-monitoring/**"
+      ],
+      "enabled": false
+    },
+    {
+      "description": "Phase 1: Core & Handwritten Gems Lockfile Rollout",
+      "matchFileNames": [
+        "google-cloud-core/**",
+        "google-cloud-storage/**",
+        "google-cloud-pubsub/**",
+        "google-cloud-bigquery/**",
+        "google-cloud-errors/**",
+        "google-cloud-resource_manager/**",
+        "google-cloud-bigtable/**",
+        "google-cloud-logging/**",
+        "google-cloud-monitoring/**"
+      ],
+      "groupName": "core handwritten gems lockfiles",
+      "rangeStrategy": "update-lockfile",
+      "lockFileMaintenance": {
+        "enabled": true,
+        "automerge": false,
+        "schedule": [
+          "before 5am every day"
+        ],
+        "commitMessageAction": "maintain Gemfile.lock files"
+      }
+    }
+  ]
 }

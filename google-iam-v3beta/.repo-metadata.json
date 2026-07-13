@@ -13,5 +13,5 @@
     "requires_billing": true,
     "ruby-cloud-description": "Manages identity and access control for Google Cloud resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Enabling this API also enables the IAM Service Account Credentials API (iamcredentials.googleapis.com). However, disabling this API doesn't disable the IAM Service Account Credentials API. Note that google-iam-v3beta is a version-specific client library. For most uses, we recommend installing the main client library google-iam instead. See the readme for more details.",
     "ruby-cloud-product-url": "https://cloud.google.com/iam/docs/overview",
-    "library_type": "GAPIC_COMBO"
+    "library_type": "GAPIC_AUTO"
 }

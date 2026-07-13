@@ -97,32 +97,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_get_conference_record_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conference_record_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conference_record({ name: name }) do |_result, response|
+        c.get_conference_record({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conference_record name: name do |_result, response|
+        c.get_conference_record name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conference_record ::Google::Apps::Meet::V2beta::GetConferenceRecordRequest.new(name: name) do |_result, response|
+        c.get_conference_record ::Google::Apps::Meet::V2beta::GetConferenceRecordRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conference_record({ name: name }, call_options) do |_result, response|
+        c.get_conference_record({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conference_record(::Google::Apps::Meet::V2beta::GetConferenceRecordRequest.new(name: name), call_options) do |_result, response|
+        c.get_conference_record(::Google::Apps::Meet::V2beta::GetConferenceRecordRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_list_conference_records_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conference_records_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conference_records page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_conference_records page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conference_records ::Google::Apps::Meet::V2beta::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_conference_records ::Google::Apps::Meet::V2beta::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_conference_records({ page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conference_records(::Google::Apps::Meet::V2beta::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_conference_records(::Google::Apps::Meet::V2beta::ListConferenceRecordsRequest.new(page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_get_participant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_participant_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_participant({ name: name }) do |_result, response|
+        c.get_participant({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_participant name: name do |_result, response|
+        c.get_participant name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_participant ::Google::Apps::Meet::V2beta::GetParticipantRequest.new(name: name) do |_result, response|
+        c.get_participant ::Google::Apps::Meet::V2beta::GetParticipantRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_participant({ name: name }, call_options) do |_result, response|
+        c.get_participant({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_participant(::Google::Apps::Meet::V2beta::GetParticipantRequest.new(name: name), call_options) do |_result, response|
+        c.get_participant(::Google::Apps::Meet::V2beta::GetParticipantRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_list_participants_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_participants_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_participants parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_participants parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_participants ::Google::Apps::Meet::V2beta::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_participants ::Google::Apps::Meet::V2beta::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_participants({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_participants(::Google::Apps::Meet::V2beta::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_participants(::Google::Apps::Meet::V2beta::ListParticipantsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_get_participant_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_participant_session_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_participant_session({ name: name }) do |_result, response|
+        c.get_participant_session({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_participant_session name: name do |_result, response|
+        c.get_participant_session name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_participant_session ::Google::Apps::Meet::V2beta::GetParticipantSessionRequest.new(name: name) do |_result, response|
+        c.get_participant_session ::Google::Apps::Meet::V2beta::GetParticipantSessionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_participant_session({ name: name }, call_options) do |_result, response|
+        c.get_participant_session({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_participant_session(::Google::Apps::Meet::V2beta::GetParticipantSessionRequest.new(name: name), call_options) do |_result, response|
+        c.get_participant_session(::Google::Apps::Meet::V2beta::GetParticipantSessionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_list_participant_sessions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_participant_sessions_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_participant_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_participant_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_participant_sessions ::Google::Apps::Meet::V2beta::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_participant_sessions ::Google::Apps::Meet::V2beta::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_participant_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_participant_sessions(::Google::Apps::Meet::V2beta::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_participant_sessions(::Google::Apps::Meet::V2beta::ListParticipantSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_get_recording_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_recording_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_recording({ name: name }) do |_result, response|
+        c.get_recording({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_recording name: name do |_result, response|
+        c.get_recording name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_recording ::Google::Apps::Meet::V2beta::GetRecordingRequest.new(name: name) do |_result, response|
+        c.get_recording ::Google::Apps::Meet::V2beta::GetRecordingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_recording({ name: name }, call_options) do |_result, response|
+        c.get_recording({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_recording(::Google::Apps::Meet::V2beta::GetRecordingRequest.new(name: name), call_options) do |_result, response|
+        c.get_recording(::Google::Apps::Meet::V2beta::GetRecordingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_list_recordings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_recordings_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_recordings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_recordings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_recordings ::Google::Apps::Meet::V2beta::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_recordings ::Google::Apps::Meet::V2beta::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_recordings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_recordings(::Google::Apps::Meet::V2beta::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_recordings(::Google::Apps::Meet::V2beta::ListRecordingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -539,32 +539,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_get_transcript_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_transcript_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_transcript({ name: name }) do |_result, response|
+        c.get_transcript({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_transcript name: name do |_result, response|
+        c.get_transcript name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_transcript ::Google::Apps::Meet::V2beta::GetTranscriptRequest.new(name: name) do |_result, response|
+        c.get_transcript ::Google::Apps::Meet::V2beta::GetTranscriptRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_transcript({ name: name }, call_options) do |_result, response|
+        c.get_transcript({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_transcript(::Google::Apps::Meet::V2beta::GetTranscriptRequest.new(name: name), call_options) do |_result, response|
+        c.get_transcript(::Google::Apps::Meet::V2beta::GetTranscriptRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -595,32 +595,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_list_transcripts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_transcripts_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transcripts parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_transcripts parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transcripts ::Google::Apps::Meet::V2beta::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_transcripts ::Google::Apps::Meet::V2beta::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_transcripts({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transcripts(::Google::Apps::Meet::V2beta::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_transcripts(::Google::Apps::Meet::V2beta::ListTranscriptsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -649,32 +649,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_get_transcript_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_transcript_entry_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_transcript_entry({ name: name }) do |_result, response|
+        c.get_transcript_entry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_transcript_entry name: name do |_result, response|
+        c.get_transcript_entry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_transcript_entry ::Google::Apps::Meet::V2beta::GetTranscriptEntryRequest.new(name: name) do |_result, response|
+        c.get_transcript_entry ::Google::Apps::Meet::V2beta::GetTranscriptEntryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_transcript_entry({ name: name }, call_options) do |_result, response|
+        c.get_transcript_entry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_transcript_entry(::Google::Apps::Meet::V2beta::GetTranscriptEntryRequest.new(name: name), call_options) do |_result, response|
+        c.get_transcript_entry(::Google::Apps::Meet::V2beta::GetTranscriptEntryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -705,32 +705,32 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ServiceStub.stub :transcode_list_transcript_entries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_transcript_entries_client_stub do
         # Create client
-        client = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
+        c = ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_transcript_entries parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_transcript_entries parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_transcript_entries ::Google::Apps::Meet::V2beta::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_transcript_entries ::Google::Apps::Meet::V2beta::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_transcript_entries({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_transcript_entries(::Google::Apps::Meet::V2beta::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_transcript_entries(::Google::Apps::Meet::V2beta::ListTranscriptEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

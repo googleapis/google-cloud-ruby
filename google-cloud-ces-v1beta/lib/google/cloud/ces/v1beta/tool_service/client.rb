@@ -430,7 +430,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload retrieve_tools(toolset: nil, tool_ids: nil)
+            # @overload retrieve_tools(toolset: nil, tool_ids: nil, bypass_persistence_config: nil)
             #   Pass arguments to `retrieve_tools` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -442,6 +442,10 @@ module Google
             #   @param tool_ids [::Array<::String>]
             #     Optional. The identifiers of the tools to retrieve from the toolset.
             #     If empty, all tools in the toolset will be returned.
+            #   @param bypass_persistence_config [::Boolean]
+            #     Optional. If true, the returned tools will contain raw descriptions and
+            #     schemas directly from the server, bypassing any stored persistence
+            #     configurations (overrides/snapshots).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Ces::V1beta::RetrieveToolsResponse]
@@ -603,6 +607,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -686,6 +691,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

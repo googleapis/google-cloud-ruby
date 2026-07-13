@@ -84,6 +84,11 @@ module Google
 
                 default_config.rpcs.update_reference_list.timeout = 60.0
 
+                default_config.rpcs.verify_reference_list.timeout = 60.0
+                default_config.rpcs.verify_reference_list.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -583,6 +588,98 @@ module Google
             end
 
             ##
+            # VerifyReferenceList validates list content and returns line errors, if any.
+            #
+            # @overload verify_reference_list(request, options = nil)
+            #   Pass arguments to `verify_reference_list` via a request object, either of type
+            #   {::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload verify_reference_list(instance: nil, syntax_type: nil, entries: nil)
+            #   Pass arguments to `verify_reference_list` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param instance [::String]
+            #     Required. The name of the parent resource, which is the SecOps instance
+            #     associated with the request. Format:
+            #     `projects/{project}/locations/{location}/instances/{instance}`
+            #   @param syntax_type [::Google::Cloud::Chronicle::V1::ReferenceListSyntaxType]
+            #     Required. Type (format) of list lines.
+            #   @param entries [::Array<::Google::Cloud::Chronicle::V1::ReferenceListEntry, ::Hash>]
+            #     Required. The entries of the reference list.
+            #     Each line may be either an item in the list or a comment.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Chronicle::V1::VerifyReferenceListResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Chronicle::V1::VerifyReferenceListResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/chronicle/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Chronicle::V1::ReferenceListService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Chronicle::V1::VerifyReferenceListRequest.new
+            #
+            #   # Call the verify_reference_list method.
+            #   result = client.verify_reference_list request
+            #
+            #   # The returned object is of type Google::Cloud::Chronicle::V1::VerifyReferenceListResponse.
+            #   p result
+            #
+            def verify_reference_list request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.verify_reference_list.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Chronicle::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.instance
+                header_params["instance"] = request.instance
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.verify_reference_list.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.verify_reference_list.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @reference_list_service_stub.call_rpc :verify_reference_list, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ReferenceListService API.
             #
             # This class represents the configuration for ReferenceListService,
@@ -678,6 +775,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -761,6 +859,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #
@@ -785,6 +884,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_reference_list
+                ##
+                # RPC-specific configuration for `verify_reference_list`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :verify_reference_list
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -796,6 +900,8 @@ module Google
                   @create_reference_list = ::Gapic::Config::Method.new create_reference_list_config
                   update_reference_list_config = parent_rpcs.update_reference_list if parent_rpcs.respond_to? :update_reference_list
                   @update_reference_list = ::Gapic::Config::Method.new update_reference_list_config
+                  verify_reference_list_config = parent_rpcs.verify_reference_list if parent_rpcs.respond_to? :verify_reference_list
+                  @verify_reference_list = ::Gapic::Config::Method.new verify_reference_list_config
 
                   yield self if block_given?
                 end

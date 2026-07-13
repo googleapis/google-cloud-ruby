@@ -99,32 +99,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_list_authorization_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_authorization_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_authorization_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_authorization_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_authorization_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_authorization_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_authorization_policies ::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_authorization_policies ::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_authorization_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_authorization_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_authorization_policies(::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_authorization_policies(::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_get_authorization_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_authorization_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_authorization_policy({ name: name }) do |_result, response|
+        c.get_authorization_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_authorization_policy name: name do |_result, response|
+        c.get_authorization_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::GetAuthorizationPolicyRequest.new(name: name) do |_result, response|
+        c.get_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::GetAuthorizationPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_authorization_policy({ name: name }, call_options) do |_result, response|
+        c.get_authorization_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::GetAuthorizationPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::GetAuthorizationPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_create_authorization_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_authorization_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_authorization_policy({ parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy }) do |_result, response|
+        c.create_authorization_policy({ parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_authorization_policy parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy do |_result, response|
+        c.create_authorization_policy parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::CreateAuthorizationPolicyRequest.new(parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy) do |_result, response|
+        c.create_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::CreateAuthorizationPolicyRequest.new(parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_authorization_policy({ parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy }, call_options) do |_result, response|
+        c.create_authorization_policy({ parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::CreateAuthorizationPolicyRequest.new(parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy), call_options) do |_result, response|
+        c.create_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::CreateAuthorizationPolicyRequest.new(parent: parent, authorization_policy_id: authorization_policy_id, authorization_policy: authorization_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_update_authorization_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_authorization_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_authorization_policy({ update_mask: update_mask, authorization_policy: authorization_policy }) do |_result, response|
+        c.update_authorization_policy({ update_mask: update_mask, authorization_policy: authorization_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_authorization_policy update_mask: update_mask, authorization_policy: authorization_policy do |_result, response|
+        c.update_authorization_policy update_mask: update_mask, authorization_policy: authorization_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::UpdateAuthorizationPolicyRequest.new(update_mask: update_mask, authorization_policy: authorization_policy) do |_result, response|
+        c.update_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::UpdateAuthorizationPolicyRequest.new(update_mask: update_mask, authorization_policy: authorization_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_authorization_policy({ update_mask: update_mask, authorization_policy: authorization_policy }, call_options) do |_result, response|
+        c.update_authorization_policy({ update_mask: update_mask, authorization_policy: authorization_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::UpdateAuthorizationPolicyRequest.new(update_mask: update_mask, authorization_policy: authorization_policy), call_options) do |_result, response|
+        c.update_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::UpdateAuthorizationPolicyRequest.new(update_mask: update_mask, authorization_policy: authorization_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_delete_authorization_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_authorization_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_authorization_policy({ name: name }) do |_result, response|
+        c.delete_authorization_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_authorization_policy name: name do |_result, response|
+        c.delete_authorization_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::DeleteAuthorizationPolicyRequest.new(name: name) do |_result, response|
+        c.delete_authorization_policy ::Google::Cloud::NetworkSecurity::V1beta1::DeleteAuthorizationPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_authorization_policy({ name: name }, call_options) do |_result, response|
+        c.delete_authorization_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::DeleteAuthorizationPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_authorization_policy(::Google::Cloud::NetworkSecurity::V1beta1::DeleteAuthorizationPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_list_server_tls_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_server_tls_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_server_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_server_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_server_tls_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_server_tls_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_server_tls_policies ::Google::Cloud::NetworkSecurity::V1beta1::ListServerTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_server_tls_policies ::Google::Cloud::NetworkSecurity::V1beta1::ListServerTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_server_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_server_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_server_tls_policies(::Google::Cloud::NetworkSecurity::V1beta1::ListServerTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_server_tls_policies(::Google::Cloud::NetworkSecurity::V1beta1::ListServerTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_get_server_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_server_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_server_tls_policy({ name: name }) do |_result, response|
+        c.get_server_tls_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_server_tls_policy name: name do |_result, response|
+        c.get_server_tls_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::GetServerTlsPolicyRequest.new(name: name) do |_result, response|
+        c.get_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::GetServerTlsPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_server_tls_policy({ name: name }, call_options) do |_result, response|
+        c.get_server_tls_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::GetServerTlsPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::GetServerTlsPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -484,32 +484,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_create_server_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_server_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_server_tls_policy({ parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy }) do |_result, response|
+        c.create_server_tls_policy({ parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_server_tls_policy parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy do |_result, response|
+        c.create_server_tls_policy parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::CreateServerTlsPolicyRequest.new(parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy) do |_result, response|
+        c.create_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::CreateServerTlsPolicyRequest.new(parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_server_tls_policy({ parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy }, call_options) do |_result, response|
+        c.create_server_tls_policy({ parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::CreateServerTlsPolicyRequest.new(parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy), call_options) do |_result, response|
+        c.create_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::CreateServerTlsPolicyRequest.new(parent: parent, server_tls_policy_id: server_tls_policy_id, server_tls_policy: server_tls_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -539,32 +539,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_update_server_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_server_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_server_tls_policy({ update_mask: update_mask, server_tls_policy: server_tls_policy }) do |_result, response|
+        c.update_server_tls_policy({ update_mask: update_mask, server_tls_policy: server_tls_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_server_tls_policy update_mask: update_mask, server_tls_policy: server_tls_policy do |_result, response|
+        c.update_server_tls_policy update_mask: update_mask, server_tls_policy: server_tls_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::UpdateServerTlsPolicyRequest.new(update_mask: update_mask, server_tls_policy: server_tls_policy) do |_result, response|
+        c.update_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::UpdateServerTlsPolicyRequest.new(update_mask: update_mask, server_tls_policy: server_tls_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_server_tls_policy({ update_mask: update_mask, server_tls_policy: server_tls_policy }, call_options) do |_result, response|
+        c.update_server_tls_policy({ update_mask: update_mask, server_tls_policy: server_tls_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::UpdateServerTlsPolicyRequest.new(update_mask: update_mask, server_tls_policy: server_tls_policy), call_options) do |_result, response|
+        c.update_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::UpdateServerTlsPolicyRequest.new(update_mask: update_mask, server_tls_policy: server_tls_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -593,32 +593,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_delete_server_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_server_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_server_tls_policy({ name: name }) do |_result, response|
+        c.delete_server_tls_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_server_tls_policy name: name do |_result, response|
+        c.delete_server_tls_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::DeleteServerTlsPolicyRequest.new(name: name) do |_result, response|
+        c.delete_server_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::DeleteServerTlsPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_server_tls_policy({ name: name }, call_options) do |_result, response|
+        c.delete_server_tls_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::DeleteServerTlsPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_server_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::DeleteServerTlsPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -649,32 +649,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_list_client_tls_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_tls_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_client_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_client_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_client_tls_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_client_tls_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_client_tls_policies ::Google::Cloud::NetworkSecurity::V1beta1::ListClientTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_client_tls_policies ::Google::Cloud::NetworkSecurity::V1beta1::ListClientTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_client_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_client_tls_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_client_tls_policies(::Google::Cloud::NetworkSecurity::V1beta1::ListClientTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_client_tls_policies(::Google::Cloud::NetworkSecurity::V1beta1::ListClientTlsPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -703,32 +703,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_get_client_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_client_tls_policy({ name: name }) do |_result, response|
+        c.get_client_tls_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_client_tls_policy name: name do |_result, response|
+        c.get_client_tls_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::GetClientTlsPolicyRequest.new(name: name) do |_result, response|
+        c.get_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::GetClientTlsPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_client_tls_policy({ name: name }, call_options) do |_result, response|
+        c.get_client_tls_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::GetClientTlsPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::GetClientTlsPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -759,32 +759,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_create_client_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_client_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_client_tls_policy({ parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy }) do |_result, response|
+        c.create_client_tls_policy({ parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_client_tls_policy parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy do |_result, response|
+        c.create_client_tls_policy parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::CreateClientTlsPolicyRequest.new(parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy) do |_result, response|
+        c.create_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::CreateClientTlsPolicyRequest.new(parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_client_tls_policy({ parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy }, call_options) do |_result, response|
+        c.create_client_tls_policy({ parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::CreateClientTlsPolicyRequest.new(parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy), call_options) do |_result, response|
+        c.create_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::CreateClientTlsPolicyRequest.new(parent: parent, client_tls_policy_id: client_tls_policy_id, client_tls_policy: client_tls_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -814,32 +814,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_update_client_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_client_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_client_tls_policy({ update_mask: update_mask, client_tls_policy: client_tls_policy }) do |_result, response|
+        c.update_client_tls_policy({ update_mask: update_mask, client_tls_policy: client_tls_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_client_tls_policy update_mask: update_mask, client_tls_policy: client_tls_policy do |_result, response|
+        c.update_client_tls_policy update_mask: update_mask, client_tls_policy: client_tls_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::UpdateClientTlsPolicyRequest.new(update_mask: update_mask, client_tls_policy: client_tls_policy) do |_result, response|
+        c.update_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::UpdateClientTlsPolicyRequest.new(update_mask: update_mask, client_tls_policy: client_tls_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_client_tls_policy({ update_mask: update_mask, client_tls_policy: client_tls_policy }, call_options) do |_result, response|
+        c.update_client_tls_policy({ update_mask: update_mask, client_tls_policy: client_tls_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::UpdateClientTlsPolicyRequest.new(update_mask: update_mask, client_tls_policy: client_tls_policy), call_options) do |_result, response|
+        c.update_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::UpdateClientTlsPolicyRequest.new(update_mask: update_mask, client_tls_policy: client_tls_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -868,32 +868,32 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ServiceStub.stub :transcode_delete_client_tls_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_tls_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_client_tls_policy({ name: name }) do |_result, response|
+        c.delete_client_tls_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_client_tls_policy name: name do |_result, response|
+        c.delete_client_tls_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::DeleteClientTlsPolicyRequest.new(name: name) do |_result, response|
+        c.delete_client_tls_policy ::Google::Cloud::NetworkSecurity::V1beta1::DeleteClientTlsPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_client_tls_policy({ name: name }, call_options) do |_result, response|
+        c.delete_client_tls_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::DeleteClientTlsPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_client_tls_policy(::Google::Cloud::NetworkSecurity::V1beta1::DeleteClientTlsPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

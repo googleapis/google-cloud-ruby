@@ -84,36 +84,36 @@ class ::Google::Shopping::Merchant::Lfp::V1::LfpInventoryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, insert_lfp_inventory_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Lfp::V1::LfpInventoryService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Lfp::V1::LfpInventoryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.insert_lfp_inventory({ parent: parent, lfp_inventory: lfp_inventory }) do |response, operation|
+      c.insert_lfp_inventory({ parent: parent, lfp_inventory: lfp_inventory }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.insert_lfp_inventory parent: parent, lfp_inventory: lfp_inventory do |response, operation|
+      c.insert_lfp_inventory parent: parent, lfp_inventory: lfp_inventory do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.insert_lfp_inventory ::Google::Shopping::Merchant::Lfp::V1::InsertLfpInventoryRequest.new(parent: parent, lfp_inventory: lfp_inventory) do |response, operation|
+      c.insert_lfp_inventory ::Google::Shopping::Merchant::Lfp::V1::InsertLfpInventoryRequest.new(parent: parent, lfp_inventory: lfp_inventory) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.insert_lfp_inventory({ parent: parent, lfp_inventory: lfp_inventory }, grpc_options) do |response, operation|
+      c.insert_lfp_inventory({ parent: parent, lfp_inventory: lfp_inventory }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.insert_lfp_inventory(::Google::Shopping::Merchant::Lfp::V1::InsertLfpInventoryRequest.new(parent: parent, lfp_inventory: lfp_inventory), grpc_options) do |response, operation|
+      c.insert_lfp_inventory(::Google::Shopping::Merchant::Lfp::V1::InsertLfpInventoryRequest.new(parent: parent, lfp_inventory: lfp_inventory), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

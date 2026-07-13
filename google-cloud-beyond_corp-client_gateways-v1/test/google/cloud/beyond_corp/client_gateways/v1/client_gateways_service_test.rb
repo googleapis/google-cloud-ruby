@@ -90,40 +90,40 @@ class ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Cl
 
     Gapic::ServiceStub.stub :new, list_client_gateways_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_client_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_client_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_client_gateways parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_client_gateways parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_client_gateways ::Google::Cloud::BeyondCorp::ClientGateways::V1::ListClientGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_client_gateways ::Google::Cloud::BeyondCorp::ClientGateways::V1::ListClientGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_client_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_client_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_client_gateways(::Google::Cloud::BeyondCorp::ClientGateways::V1::ListClientGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_client_gateways(::Google::Cloud::BeyondCorp::ClientGateways::V1::ListClientGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Cl
 
     Gapic::ServiceStub.stub :new, get_client_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_client_gateway({ name: name }) do |response, operation|
+      c.get_client_gateway({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_client_gateway name: name do |response, operation|
+      c.get_client_gateway name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_client_gateway ::Google::Cloud::BeyondCorp::ClientGateways::V1::GetClientGatewayRequest.new(name: name) do |response, operation|
+      c.get_client_gateway ::Google::Cloud::BeyondCorp::ClientGateways::V1::GetClientGatewayRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_client_gateway({ name: name }, grpc_options) do |response, operation|
+      c.get_client_gateway({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_client_gateway(::Google::Cloud::BeyondCorp::ClientGateways::V1::GetClientGatewayRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_client_gateway(::Google::Cloud::BeyondCorp::ClientGateways::V1::GetClientGatewayRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Cl
 
     Gapic::ServiceStub.stub :new, create_client_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_client_gateway({ parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.create_client_gateway({ parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_client_gateway parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.create_client_gateway parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_client_gateway ::Google::Cloud::BeyondCorp::ClientGateways::V1::CreateClientGatewayRequest.new(parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.create_client_gateway ::Google::Cloud::BeyondCorp::ClientGateways::V1::CreateClientGatewayRequest.new(parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_client_gateway({ parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_client_gateway({ parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_client_gateway(::Google::Cloud::BeyondCorp::ClientGateways::V1::CreateClientGatewayRequest.new(parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_client_gateway(::Google::Cloud::BeyondCorp::ClientGateways::V1::CreateClientGatewayRequest.new(parent: parent, client_gateway_id: client_gateway_id, client_gateway: client_gateway, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -286,40 +286,40 @@ class ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Cl
 
     Gapic::ServiceStub.stub :new, delete_client_gateway_client_stub do
       # Create client
-      client = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
+      c = ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_client_gateway({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      c.delete_client_gateway({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_client_gateway name: name, request_id: request_id, validate_only: validate_only do |response, operation|
+      c.delete_client_gateway name: name, request_id: request_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_client_gateway ::Google::Cloud::BeyondCorp::ClientGateways::V1::DeleteClientGatewayRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
+      c.delete_client_gateway ::Google::Cloud::BeyondCorp::ClientGateways::V1::DeleteClientGatewayRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_client_gateway({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.delete_client_gateway({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_client_gateway(::Google::Cloud::BeyondCorp::ClientGateways::V1::DeleteClientGatewayRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.delete_client_gateway(::Google::Cloud::BeyondCorp::ClientGateways::V1::DeleteClientGatewayRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -86,40 +86,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_notebook_runtime_template_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_notebook_runtime_template({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id }) do |response, operation|
+      c.create_notebook_runtime_template({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_notebook_runtime_template parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id do |response, operation|
+      c.create_notebook_runtime_template parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::CreateNotebookRuntimeTemplateRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id) do |response, operation|
+      c.create_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::CreateNotebookRuntimeTemplateRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_notebook_runtime_template({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id }, grpc_options) do |response, operation|
+      c.create_notebook_runtime_template({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::CreateNotebookRuntimeTemplateRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id), grpc_options) do |response, operation|
+      c.create_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::CreateNotebookRuntimeTemplateRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime_template_id: notebook_runtime_template_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_notebook_runtime_template_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notebook_runtime_template({ name: name }) do |response, operation|
+      c.get_notebook_runtime_template({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notebook_runtime_template name: name do |response, operation|
+      c.get_notebook_runtime_template name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeTemplateRequest.new(name: name) do |response, operation|
+      c.get_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeTemplateRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notebook_runtime_template({ name: name }, grpc_options) do |response, operation|
+      c.get_notebook_runtime_template({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeTemplateRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_notebook_runtime_templates_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notebook_runtime_templates({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_notebook_runtime_templates({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notebook_runtime_templates parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_notebook_runtime_templates parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notebook_runtime_templates ::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_notebook_runtime_templates ::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notebook_runtime_templates({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_notebook_runtime_templates({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notebook_runtime_templates(::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_notebook_runtime_templates(::Google::Cloud::AIPlatform::V1::ListNotebookRuntimeTemplatesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_notebook_runtime_template_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_notebook_runtime_template({ name: name }) do |response, operation|
+      c.delete_notebook_runtime_template({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_notebook_runtime_template name: name do |response, operation|
+      c.delete_notebook_runtime_template name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeTemplateRequest.new(name: name) do |response, operation|
+      c.delete_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeTemplateRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_notebook_runtime_template({ name: name }, grpc_options) do |response, operation|
+      c.delete_notebook_runtime_template({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeTemplateRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeTemplateRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -345,36 +345,36 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_notebook_runtime_template_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_notebook_runtime_template({ notebook_runtime_template: notebook_runtime_template, update_mask: update_mask }) do |response, operation|
+      c.update_notebook_runtime_template({ notebook_runtime_template: notebook_runtime_template, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_notebook_runtime_template notebook_runtime_template: notebook_runtime_template, update_mask: update_mask do |response, operation|
+      c.update_notebook_runtime_template notebook_runtime_template: notebook_runtime_template, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new(notebook_runtime_template: notebook_runtime_template, update_mask: update_mask) do |response, operation|
+      c.update_notebook_runtime_template ::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new(notebook_runtime_template: notebook_runtime_template, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_notebook_runtime_template({ notebook_runtime_template: notebook_runtime_template, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_notebook_runtime_template({ notebook_runtime_template: notebook_runtime_template, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new(notebook_runtime_template: notebook_runtime_template, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_notebook_runtime_template(::Google::Cloud::AIPlatform::V1::UpdateNotebookRuntimeTemplateRequest.new(notebook_runtime_template: notebook_runtime_template, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -409,40 +409,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, assign_notebook_runtime_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.assign_notebook_runtime({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id }) do |response, operation|
+      c.assign_notebook_runtime({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.assign_notebook_runtime parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id do |response, operation|
+      c.assign_notebook_runtime parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.assign_notebook_runtime ::Google::Cloud::AIPlatform::V1::AssignNotebookRuntimeRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id) do |response, operation|
+      c.assign_notebook_runtime ::Google::Cloud::AIPlatform::V1::AssignNotebookRuntimeRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.assign_notebook_runtime({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id }, grpc_options) do |response, operation|
+      c.assign_notebook_runtime({ parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.assign_notebook_runtime(::Google::Cloud::AIPlatform::V1::AssignNotebookRuntimeRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id), grpc_options) do |response, operation|
+      c.assign_notebook_runtime(::Google::Cloud::AIPlatform::V1::AssignNotebookRuntimeRequest.new(parent: parent, notebook_runtime_template: notebook_runtime_template, notebook_runtime: notebook_runtime, notebook_runtime_id: notebook_runtime_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -472,36 +472,36 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_notebook_runtime_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notebook_runtime({ name: name }) do |response, operation|
+      c.get_notebook_runtime({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notebook_runtime name: name do |response, operation|
+      c.get_notebook_runtime name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notebook_runtime ::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeRequest.new(name: name) do |response, operation|
+      c.get_notebook_runtime ::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notebook_runtime({ name: name }, grpc_options) do |response, operation|
+      c.get_notebook_runtime({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notebook_runtime(::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_notebook_runtime(::Google::Cloud::AIPlatform::V1::GetNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -540,40 +540,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_notebook_runtimes_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notebook_runtimes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_notebook_runtimes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notebook_runtimes parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_notebook_runtimes parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notebook_runtimes ::Google::Cloud::AIPlatform::V1::ListNotebookRuntimesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_notebook_runtimes ::Google::Cloud::AIPlatform::V1::ListNotebookRuntimesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notebook_runtimes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_notebook_runtimes({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notebook_runtimes(::Google::Cloud::AIPlatform::V1::ListNotebookRuntimesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_notebook_runtimes(::Google::Cloud::AIPlatform::V1::ListNotebookRuntimesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -603,40 +603,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_notebook_runtime_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_notebook_runtime({ name: name }) do |response, operation|
+      c.delete_notebook_runtime({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_notebook_runtime name: name do |response, operation|
+      c.delete_notebook_runtime name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_notebook_runtime ::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeRequest.new(name: name) do |response, operation|
+      c.delete_notebook_runtime ::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_notebook_runtime({ name: name }, grpc_options) do |response, operation|
+      c.delete_notebook_runtime({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_notebook_runtime(::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_notebook_runtime(::Google::Cloud::AIPlatform::V1::DeleteNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -666,40 +666,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, upgrade_notebook_runtime_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.upgrade_notebook_runtime({ name: name }) do |response, operation|
+      c.upgrade_notebook_runtime({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upgrade_notebook_runtime name: name do |response, operation|
+      c.upgrade_notebook_runtime name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upgrade_notebook_runtime ::Google::Cloud::AIPlatform::V1::UpgradeNotebookRuntimeRequest.new(name: name) do |response, operation|
+      c.upgrade_notebook_runtime ::Google::Cloud::AIPlatform::V1::UpgradeNotebookRuntimeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upgrade_notebook_runtime({ name: name }, grpc_options) do |response, operation|
+      c.upgrade_notebook_runtime({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upgrade_notebook_runtime(::Google::Cloud::AIPlatform::V1::UpgradeNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
+      c.upgrade_notebook_runtime(::Google::Cloud::AIPlatform::V1::UpgradeNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -729,40 +729,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, start_notebook_runtime_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_notebook_runtime({ name: name }) do |response, operation|
+      c.start_notebook_runtime({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_notebook_runtime name: name do |response, operation|
+      c.start_notebook_runtime name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_notebook_runtime ::Google::Cloud::AIPlatform::V1::StartNotebookRuntimeRequest.new(name: name) do |response, operation|
+      c.start_notebook_runtime ::Google::Cloud::AIPlatform::V1::StartNotebookRuntimeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_notebook_runtime({ name: name }, grpc_options) do |response, operation|
+      c.start_notebook_runtime({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_notebook_runtime(::Google::Cloud::AIPlatform::V1::StartNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
+      c.start_notebook_runtime(::Google::Cloud::AIPlatform::V1::StartNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -792,40 +792,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, stop_notebook_runtime_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_notebook_runtime({ name: name }) do |response, operation|
+      c.stop_notebook_runtime({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_notebook_runtime name: name do |response, operation|
+      c.stop_notebook_runtime name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_notebook_runtime ::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest.new(name: name) do |response, operation|
+      c.stop_notebook_runtime ::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_notebook_runtime({ name: name }, grpc_options) do |response, operation|
+      c.stop_notebook_runtime({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_notebook_runtime(::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_notebook_runtime(::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -859,40 +859,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_notebook_execution_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_notebook_execution_job({ parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id }) do |response, operation|
+      c.create_notebook_execution_job({ parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_notebook_execution_job parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id do |response, operation|
+      c.create_notebook_execution_job parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_notebook_execution_job ::Google::Cloud::AIPlatform::V1::CreateNotebookExecutionJobRequest.new(parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id) do |response, operation|
+      c.create_notebook_execution_job ::Google::Cloud::AIPlatform::V1::CreateNotebookExecutionJobRequest.new(parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_notebook_execution_job({ parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id }, grpc_options) do |response, operation|
+      c.create_notebook_execution_job({ parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_notebook_execution_job(::Google::Cloud::AIPlatform::V1::CreateNotebookExecutionJobRequest.new(parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id), grpc_options) do |response, operation|
+      c.create_notebook_execution_job(::Google::Cloud::AIPlatform::V1::CreateNotebookExecutionJobRequest.new(parent: parent, notebook_execution_job: notebook_execution_job, notebook_execution_job_id: notebook_execution_job_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -924,36 +924,36 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_notebook_execution_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notebook_execution_job({ name: name, view: view }) do |response, operation|
+      c.get_notebook_execution_job({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notebook_execution_job name: name, view: view do |response, operation|
+      c.get_notebook_execution_job name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notebook_execution_job ::Google::Cloud::AIPlatform::V1::GetNotebookExecutionJobRequest.new(name: name, view: view) do |response, operation|
+      c.get_notebook_execution_job ::Google::Cloud::AIPlatform::V1::GetNotebookExecutionJobRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notebook_execution_job({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_notebook_execution_job({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notebook_execution_job(::Google::Cloud::AIPlatform::V1::GetNotebookExecutionJobRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_notebook_execution_job(::Google::Cloud::AIPlatform::V1::GetNotebookExecutionJobRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -992,40 +992,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_notebook_execution_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notebook_execution_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }) do |response, operation|
+      c.list_notebook_execution_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notebook_execution_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view do |response, operation|
+      c.list_notebook_execution_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notebook_execution_jobs ::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view) do |response, operation|
+      c.list_notebook_execution_jobs ::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notebook_execution_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }, grpc_options) do |response, operation|
+      c.list_notebook_execution_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notebook_execution_jobs(::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view), grpc_options) do |response, operation|
+      c.list_notebook_execution_jobs(::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1055,40 +1055,40 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_notebook_execution_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::NotebookService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_notebook_execution_job({ name: name }) do |response, operation|
+      c.delete_notebook_execution_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_notebook_execution_job name: name do |response, operation|
+      c.delete_notebook_execution_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_notebook_execution_job ::Google::Cloud::AIPlatform::V1::DeleteNotebookExecutionJobRequest.new(name: name) do |response, operation|
+      c.delete_notebook_execution_job ::Google::Cloud::AIPlatform::V1::DeleteNotebookExecutionJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_notebook_execution_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_notebook_execution_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_notebook_execution_job(::Google::Cloud::AIPlatform::V1::DeleteNotebookExecutionJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_notebook_execution_job(::Google::Cloud::AIPlatform::V1::DeleteNotebookExecutionJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

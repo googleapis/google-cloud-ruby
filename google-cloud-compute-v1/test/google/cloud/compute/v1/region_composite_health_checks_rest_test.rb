@@ -104,32 +104,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_aggregated_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregated_list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
+        c.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRegionCompositeHealthChecksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
+        c.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRegionCompositeHealthChecksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
+        c.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRegionCompositeHealthChecksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
+        c.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRegionCompositeHealthChecksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project_number: service_project_number), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -161,32 +161,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ composite_health_check: composite_health_check, project: project, region: region, request_id: request_id }) do |_result, response|
+        c.delete({ composite_health_check: composite_health_check, project: project, region: region, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete composite_health_check: composite_health_check, project: project, region: region, request_id: request_id do |_result, response|
+        c.delete composite_health_check: composite_health_check, project: project, region: region, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region, request_id: request_id) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ composite_health_check: composite_health_check, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+        c.delete({ composite_health_check: composite_health_check, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -217,32 +217,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ composite_health_check: composite_health_check, project: project, region: region }) do |_result, response|
+        c.get({ composite_health_check: composite_health_check, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get composite_health_check: composite_health_check, project: project, region: region do |_result, response|
+        c.get composite_health_check: composite_health_check, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ composite_health_check: composite_health_check, project: project, region: region }, call_options) do |_result, response|
+        c.get({ composite_health_check: composite_health_check, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -273,32 +273,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_get_health_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_health_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_health({ composite_health_check: composite_health_check, project: project, region: region }) do |_result, response|
+        c.get_health({ composite_health_check: composite_health_check, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_health composite_health_check: composite_health_check, project: project, region: region do |_result, response|
+        c.get_health composite_health_check: composite_health_check, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_health ::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region) do |_result, response|
+        c.get_health ::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_health({ composite_health_check: composite_health_check, project: project, region: region }, call_options) do |_result, response|
+        c.get_health({ composite_health_check: composite_health_check, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_health(::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region), call_options) do |_result, response|
+        c.get_health(::Google::Cloud::Compute::V1::GetHealthRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -330,32 +330,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+        c.insert({ composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id do |_result, response|
+        c.insert composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertRegionCompositeHealthCheckRequest.new(composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertRegionCompositeHealthCheckRequest.new(composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+        c.insert({ composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertRegionCompositeHealthCheckRequest.new(composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertRegionCompositeHealthCheckRequest.new(composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -390,32 +390,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListRegionCompositeHealthChecksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRegionCompositeHealthChecksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListRegionCompositeHealthChecksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRegionCompositeHealthChecksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -448,32 +448,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, patch_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.patch({ composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+        c.patch({ composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id do |_result, response|
+        c.patch composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch ::Google::Cloud::Compute::V1::PatchRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id) do |_result, response|
+        c.patch ::Google::Cloud::Compute::V1::PatchRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch({ composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+        c.patch({ composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch(::Google::Cloud::Compute::V1::PatchRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Compute::V1::PatchRegionCompositeHealthCheckRequest.new(composite_health_check: composite_health_check, composite_health_check_resource: composite_health_check_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -505,32 +505,32 @@ class ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ClientTes
     ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionCompositeHealthChecks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
+        c.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
+        c.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsRegionCompositeHealthCheckRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
+        c.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsRegionCompositeHealthCheckRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
+        c.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsRegionCompositeHealthCheckRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsRegionCompositeHealthCheckRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

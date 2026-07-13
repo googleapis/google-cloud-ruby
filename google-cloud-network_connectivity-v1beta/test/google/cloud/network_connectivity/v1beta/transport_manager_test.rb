@@ -90,40 +90,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, list_remote_transport_profiles_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_remote_transport_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_remote_transport_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_remote_transport_profiles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_remote_transport_profiles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_remote_transport_profiles ::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_remote_transport_profiles ::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_remote_transport_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_remote_transport_profiles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_remote_transport_profiles(::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_remote_transport_profiles(::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, get_remote_transport_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_remote_transport_profile({ name: name }) do |response, operation|
+      c.get_remote_transport_profile({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_remote_transport_profile name: name do |response, operation|
+      c.get_remote_transport_profile name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_remote_transport_profile ::Google::Cloud::NetworkConnectivity::V1beta::GetRemoteTransportProfileRequest.new(name: name) do |response, operation|
+      c.get_remote_transport_profile ::Google::Cloud::NetworkConnectivity::V1beta::GetRemoteTransportProfileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_remote_transport_profile({ name: name }, grpc_options) do |response, operation|
+      c.get_remote_transport_profile({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_remote_transport_profile(::Google::Cloud::NetworkConnectivity::V1beta::GetRemoteTransportProfileRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_remote_transport_profile(::Google::Cloud::NetworkConnectivity::V1beta::GetRemoteTransportProfileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, list_transports_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_transports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_transports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_transports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_transports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_transports ::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_transports ::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_transports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_transports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_transports(::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_transports(::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -282,36 +282,36 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, get_transport_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_transport({ name: name }) do |response, operation|
+      c.get_transport({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_transport name: name do |response, operation|
+      c.get_transport name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_transport ::Google::Cloud::NetworkConnectivity::V1beta::GetTransportRequest.new(name: name) do |response, operation|
+      c.get_transport ::Google::Cloud::NetworkConnectivity::V1beta::GetTransportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_transport({ name: name }, grpc_options) do |response, operation|
+      c.get_transport({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_transport(::Google::Cloud::NetworkConnectivity::V1beta::GetTransportRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_transport(::Google::Cloud::NetworkConnectivity::V1beta::GetTransportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,36 +340,36 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, get_status_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_status({ name: name }) do |response, operation|
+      c.get_status({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_status name: name do |response, operation|
+      c.get_status name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_status ::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name) do |response, operation|
+      c.get_status ::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_status({ name: name }, grpc_options) do |response, operation|
+      c.get_status({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_status(::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_status(::Google::Cloud::NetworkConnectivity::V1beta::GetStatusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -404,40 +404,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, create_transport_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_transport({ parent: parent, transport_id: transport_id, transport: transport, request_id: request_id }) do |response, operation|
+      c.create_transport({ parent: parent, transport_id: transport_id, transport: transport, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_transport parent: parent, transport_id: transport_id, transport: transport, request_id: request_id do |response, operation|
+      c.create_transport parent: parent, transport_id: transport_id, transport: transport, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_transport ::Google::Cloud::NetworkConnectivity::V1beta::CreateTransportRequest.new(parent: parent, transport_id: transport_id, transport: transport, request_id: request_id) do |response, operation|
+      c.create_transport ::Google::Cloud::NetworkConnectivity::V1beta::CreateTransportRequest.new(parent: parent, transport_id: transport_id, transport: transport, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_transport({ parent: parent, transport_id: transport_id, transport: transport, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_transport({ parent: parent, transport_id: transport_id, transport: transport, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_transport(::Google::Cloud::NetworkConnectivity::V1beta::CreateTransportRequest.new(parent: parent, transport_id: transport_id, transport: transport, request_id: request_id), grpc_options) do |response, operation|
+      c.create_transport(::Google::Cloud::NetworkConnectivity::V1beta::CreateTransportRequest.new(parent: parent, transport_id: transport_id, transport: transport, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -471,40 +471,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, update_transport_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_transport({ update_mask: update_mask, transport: transport, request_id: request_id }) do |response, operation|
+      c.update_transport({ update_mask: update_mask, transport: transport, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_transport update_mask: update_mask, transport: transport, request_id: request_id do |response, operation|
+      c.update_transport update_mask: update_mask, transport: transport, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_transport ::Google::Cloud::NetworkConnectivity::V1beta::UpdateTransportRequest.new(update_mask: update_mask, transport: transport, request_id: request_id) do |response, operation|
+      c.update_transport ::Google::Cloud::NetworkConnectivity::V1beta::UpdateTransportRequest.new(update_mask: update_mask, transport: transport, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_transport({ update_mask: update_mask, transport: transport, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_transport({ update_mask: update_mask, transport: transport, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_transport(::Google::Cloud::NetworkConnectivity::V1beta::UpdateTransportRequest.new(update_mask: update_mask, transport: transport, request_id: request_id), grpc_options) do |response, operation|
+      c.update_transport(::Google::Cloud::NetworkConnectivity::V1beta::UpdateTransportRequest.new(update_mask: update_mask, transport: transport, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -536,40 +536,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientTest
 
     Gapic::ServiceStub.stub :new, delete_transport_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_transport({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_transport({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_transport name: name, request_id: request_id do |response, operation|
+      c.delete_transport name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_transport ::Google::Cloud::NetworkConnectivity::V1beta::DeleteTransportRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_transport ::Google::Cloud::NetworkConnectivity::V1beta::DeleteTransportRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_transport({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_transport({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_transport(::Google::Cloud::NetworkConnectivity::V1beta::DeleteTransportRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_transport(::Google::Cloud::NetworkConnectivity::V1beta::DeleteTransportRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

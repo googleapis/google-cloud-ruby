@@ -99,32 +99,32 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Clien
     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::ServiceStub.stub :transcode_create_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_dashboard({ parent: parent, dashboard: dashboard, validate_only: validate_only }) do |_result, response|
+        c.create_dashboard({ parent: parent, dashboard: dashboard, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_dashboard parent: parent, dashboard: dashboard, validate_only: validate_only do |_result, response|
+        c.create_dashboard parent: parent, dashboard: dashboard, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard, validate_only: validate_only) do |_result, response|
+        c.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_dashboard({ parent: parent, dashboard: dashboard, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_dashboard({ parent: parent, dashboard: dashboard, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard, validate_only: validate_only), call_options) do |_result, response|
+        c.create_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Clien
     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::ServiceStub.stub :transcode_list_dashboards_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_dashboards_client_stub do
         # Create client
-        client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_dashboards({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_dashboards({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_dashboards parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_dashboards parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_dashboards ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_dashboards ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_dashboards({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_dashboards({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_dashboards(::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_dashboards(::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Clien
     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::ServiceStub.stub :transcode_get_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dashboard({ name: name }) do |_result, response|
+        c.get_dashboard({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dashboard name: name do |_result, response|
+        c.get_dashboard name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name) do |_result, response|
+        c.get_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dashboard({ name: name }, call_options) do |_result, response|
+        c.get_dashboard({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name), call_options) do |_result, response|
+        c.get_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Clien
     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::ServiceStub.stub :transcode_delete_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_dashboard({ name: name }) do |_result, response|
+        c.delete_dashboard({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_dashboard name: name do |_result, response|
+        c.delete_dashboard name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name) do |_result, response|
+        c.delete_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_dashboard({ name: name }, call_options) do |_result, response|
+        c.delete_dashboard({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name), call_options) do |_result, response|
+        c.delete_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Clien
     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::ServiceStub.stub :transcode_update_dashboard_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dashboard_client_stub do
         # Create client
-        client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dashboard({ dashboard: dashboard, validate_only: validate_only }) do |_result, response|
+        c.update_dashboard({ dashboard: dashboard, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dashboard dashboard: dashboard, validate_only: validate_only do |_result, response|
+        c.update_dashboard dashboard: dashboard, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard, validate_only: validate_only) do |_result, response|
+        c.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dashboard({ dashboard: dashboard, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_dashboard({ dashboard: dashboard, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard, validate_only: validate_only), call_options) do |_result, response|
+        c.update_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

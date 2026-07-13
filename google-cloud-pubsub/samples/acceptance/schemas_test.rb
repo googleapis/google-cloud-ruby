@@ -29,6 +29,8 @@ require_relative "../pubsub_subscribe_avro_records"
 require_relative "../pubsub_publish_proto_messages"
 require_relative "../pubsub_subscribe_proto_messages"
 require_relative "../pubsub_subscribe_avro_records_with_revisions"
+require_relative "../pubsub_rollback_schema"
+require_relative "../pubsub_update_topic_schema"
 
 
 describe "schemas" do
@@ -166,11 +168,16 @@ describe "schemas" do
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
       publisher = pubsub.publisher @topic.name
-      publisher.publish buffer
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output "Received a binary-encoded message:\n{\"name\" => \"Alaska\", \"post_abbr\" => \"AK\"}\n" do
+        publisher.publish buffer
+        expected = /
+          Received\ a\ binary-encoded\ message:\n
+          \{"name"\s*=>\s*"Alaska",\s*
+          "post_abbr"\s*=>\s*"AK"\}
+        /x
+        assert_output expected do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: avsc_file
         end
       end
@@ -189,11 +196,16 @@ describe "schemas" do
                                                              ack_deadline_seconds: 60
 
       publisher = pubsub.publisher @topic.name
-      publisher.publish record.to_json
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output "Received a JSON-encoded message:\n{\"name\" => \"Alaska\", \"post_abbr\" => \"AK\"}\n" do
+        publisher.publish record.to_json
+        expected = /
+          Received\ a\ JSON-encoded\ message:\n
+          \{"name"\s*=>\s*"Alaska",\s*
+          "post_abbr"\s*=>\s*"AK"\}
+        /x
+        assert_output expected do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: nil
         end
       end
@@ -241,12 +253,12 @@ describe "schemas" do
                                                              topic: @topic.name,
                                                              ack_deadline_seconds: 60
 
+      publisher = pubsub.publisher @topic.name
+
       # Publish message 1 (Old format - valid for both).
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
-      publisher = pubsub.publisher @topic.name
-      publisher.publish buffer
 
       # Publish message 2 (New format - valid only for Rev B).
       avsc_definition_plus = File.read avsc_revision_file
@@ -256,13 +268,27 @@ describe "schemas" do
       writer_plus = Avro::IO::DatumWriter.new avro_schema_plus
       buffer_plus = StringIO.new
       writer_plus.write record_plus, Avro::IO::BinaryEncoder.new(buffer_plus)
-      publisher.publish buffer_plus
 
       # Verify we can subscribe and decode both.
       expect_with_retry "pubsub_subscribe_avro_records_with_revisions" do
-        assert_output /Received a binary-encoded message:.*Alaska.*Received a binary-encoded message:.*California/m do
+        publisher.publish buffer
+        publisher.publish buffer_plus
+        out, _err = capture_io do
           subscribe_avro_records_with_revisions subscription_id: @subscription.name
         end
+        expected_alaska = /
+          Received\ a\ binary-encoded\ message:\n
+          \{"name"\s*=>\s*"Alaska",\s*
+          "post_abbr"\s*=>\s*"AK"\}
+        /x
+        assert_match expected_alaska, out
+        expected_california = /
+          Received\ a\ binary-encoded\ message:\n
+          \{"name"\s*=>\s*"California",\s*
+          "post_abbr"\s*=>\s*"CA",\s*
+          "population"\s*=>\s*39000000\}
+        /x
+        assert_match expected_california, out
       end
     end
   end
@@ -408,6 +434,71 @@ describe "schemas" do
 
       assert_includes out, schema1.revision_id
       assert_includes out, schema2.revision_id
+    end
+
+    it "supports rollback_schema" do
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id,
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+
+      rev_1_id = @schema.revision_id
+
+      # Commit revision (Revision 2)
+      revised_schema = nil
+      capture_io do
+        revised_schema = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+      end
+      rev_2_id = revised_schema.revision_id
+
+      # Rollback to Revision 1
+      assert_output /Rolled back schema:.*#{schema_id}.*New revision ID/m do
+        rollback_schema project_id: pubsub.project, schema_id: schema_id, revision_id: rev_1_id
+      end
+
+      # Verify the current schema revision is indeed a copy of revision 1
+      current_schema = schemas.get_schema name: pubsub.schema_path(schema_id)
+      # Normalize definitions by stripping whitespace for comparison
+      assert_equal proto_definition.strip, current_schema.definition.strip
+      refute_equal rev_1_id, current_schema.revision_id
+      refute_equal rev_2_id, current_schema.revision_id
+    end
+
+    it "supports pubsub_update_topic_schema" do
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id,
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+      rev_1_id = @schema.revision_id
+
+      # Commit revision (Revision 2)
+      revised_schema = nil
+      capture_io do
+        revised_schema = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+      end
+      rev_2_id = revised_schema.revision_id
+
+      # Create topic with schema (Rev 1 to Rev 1 initially)
+      schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
+                                                                      encoding: :BINARY,
+                                                                      first_revision_id: rev_1_id,
+                                                                      last_revision_id: rev_1_id
+      @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id),
+                                        schema_settings: schema_settings
+
+      # Update topic schema settings (to allow Rev 2, i.e., first=Rev 2, last=Rev 2)
+      assert_output "Updated topic with schema: projects/#{pubsub.project}/topics/#{topic_id}\n" do
+        update_topic_schema topic_id: topic_id, first_revision_id: rev_2_id, last_revision_id: rev_2_id
+      end
+
+      # Verify topic schema settings on server
+      updated_topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+      assert_equal rev_2_id, updated_topic.schema_settings.first_revision_id
+      assert_equal rev_2_id, updated_topic.schema_settings.last_revision_id
     end
   end
 end

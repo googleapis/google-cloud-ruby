@@ -99,32 +99,32 @@ class ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ClientTest < Mini
     ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ServiceStub.stub :transcode_list_account_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_account_labels_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_account_labels({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_account_labels({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_account_labels parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_account_labels parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_account_labels ::Google::Shopping::Css::V1::ListAccountLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_account_labels ::Google::Shopping::Css::V1::ListAccountLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_account_labels({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_account_labels({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_account_labels(::Google::Shopping::Css::V1::ListAccountLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_account_labels(::Google::Shopping::Css::V1::ListAccountLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ClientTest < Mini
     ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ServiceStub.stub :transcode_create_account_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_account_label_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_account_label({ parent: parent, account_label: account_label }) do |_result, response|
+        c.create_account_label({ parent: parent, account_label: account_label }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_account_label parent: parent, account_label: account_label do |_result, response|
+        c.create_account_label parent: parent, account_label: account_label do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_account_label ::Google::Shopping::Css::V1::CreateAccountLabelRequest.new(parent: parent, account_label: account_label) do |_result, response|
+        c.create_account_label ::Google::Shopping::Css::V1::CreateAccountLabelRequest.new(parent: parent, account_label: account_label) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_account_label({ parent: parent, account_label: account_label }, call_options) do |_result, response|
+        c.create_account_label({ parent: parent, account_label: account_label }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_account_label(::Google::Shopping::Css::V1::CreateAccountLabelRequest.new(parent: parent, account_label: account_label), call_options) do |_result, response|
+        c.create_account_label(::Google::Shopping::Css::V1::CreateAccountLabelRequest.new(parent: parent, account_label: account_label), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ClientTest < Mini
     ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ServiceStub.stub :transcode_update_account_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_account_label_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_account_label({ account_label: account_label }) do |_result, response|
+        c.update_account_label({ account_label: account_label }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_account_label account_label: account_label do |_result, response|
+        c.update_account_label account_label: account_label do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_account_label ::Google::Shopping::Css::V1::UpdateAccountLabelRequest.new(account_label: account_label) do |_result, response|
+        c.update_account_label ::Google::Shopping::Css::V1::UpdateAccountLabelRequest.new(account_label: account_label) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_account_label({ account_label: account_label }, call_options) do |_result, response|
+        c.update_account_label({ account_label: account_label }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_account_label(::Google::Shopping::Css::V1::UpdateAccountLabelRequest.new(account_label: account_label), call_options) do |_result, response|
+        c.update_account_label(::Google::Shopping::Css::V1::UpdateAccountLabelRequest.new(account_label: account_label), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ClientTest < Mini
     ::Google::Shopping::Css::V1::AccountLabelsService::Rest::ServiceStub.stub :transcode_delete_account_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_account_label_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountLabelsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_account_label({ name: name }) do |_result, response|
+        c.delete_account_label({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_account_label name: name do |_result, response|
+        c.delete_account_label name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_account_label ::Google::Shopping::Css::V1::DeleteAccountLabelRequest.new(name: name) do |_result, response|
+        c.delete_account_label ::Google::Shopping::Css::V1::DeleteAccountLabelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_account_label({ name: name }, call_options) do |_result, response|
+        c.delete_account_label({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_account_label(::Google::Shopping::Css::V1::DeleteAccountLabelRequest.new(name: name), call_options) do |_result, response|
+        c.delete_account_label(::Google::Shopping::Css::V1::DeleteAccountLabelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

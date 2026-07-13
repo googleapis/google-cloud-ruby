@@ -90,40 +90,40 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_intents_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_intents({ parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_intents({ parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_intents parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_intents parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_intents ::Google::Cloud::Dialogflow::V2::ListIntentsRequest.new(parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_intents ::Google::Cloud::Dialogflow::V2::ListIntentsRequest.new(parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_intents({ parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_intents({ parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_intents(::Google::Cloud::Dialogflow::V2::ListIntentsRequest.new(parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_intents(::Google::Cloud::Dialogflow::V2::ListIntentsRequest.new(parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -157,36 +157,36 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_intent_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_intent({ name: name, language_code: language_code, intent_view: intent_view }) do |response, operation|
+      c.get_intent({ name: name, language_code: language_code, intent_view: intent_view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_intent name: name, language_code: language_code, intent_view: intent_view do |response, operation|
+      c.get_intent name: name, language_code: language_code, intent_view: intent_view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_intent ::Google::Cloud::Dialogflow::V2::GetIntentRequest.new(name: name, language_code: language_code, intent_view: intent_view) do |response, operation|
+      c.get_intent ::Google::Cloud::Dialogflow::V2::GetIntentRequest.new(name: name, language_code: language_code, intent_view: intent_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_intent({ name: name, language_code: language_code, intent_view: intent_view }, grpc_options) do |response, operation|
+      c.get_intent({ name: name, language_code: language_code, intent_view: intent_view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_intent(::Google::Cloud::Dialogflow::V2::GetIntentRequest.new(name: name, language_code: language_code, intent_view: intent_view), grpc_options) do |response, operation|
+      c.get_intent(::Google::Cloud::Dialogflow::V2::GetIntentRequest.new(name: name, language_code: language_code, intent_view: intent_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,36 +221,36 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_intent_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_intent({ parent: parent, intent: intent, language_code: language_code, intent_view: intent_view }) do |response, operation|
+      c.create_intent({ parent: parent, intent: intent, language_code: language_code, intent_view: intent_view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_intent parent: parent, intent: intent, language_code: language_code, intent_view: intent_view do |response, operation|
+      c.create_intent parent: parent, intent: intent, language_code: language_code, intent_view: intent_view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_intent ::Google::Cloud::Dialogflow::V2::CreateIntentRequest.new(parent: parent, intent: intent, language_code: language_code, intent_view: intent_view) do |response, operation|
+      c.create_intent ::Google::Cloud::Dialogflow::V2::CreateIntentRequest.new(parent: parent, intent: intent, language_code: language_code, intent_view: intent_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_intent({ parent: parent, intent: intent, language_code: language_code, intent_view: intent_view }, grpc_options) do |response, operation|
+      c.create_intent({ parent: parent, intent: intent, language_code: language_code, intent_view: intent_view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_intent(::Google::Cloud::Dialogflow::V2::CreateIntentRequest.new(parent: parent, intent: intent, language_code: language_code, intent_view: intent_view), grpc_options) do |response, operation|
+      c.create_intent(::Google::Cloud::Dialogflow::V2::CreateIntentRequest.new(parent: parent, intent: intent, language_code: language_code, intent_view: intent_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -285,36 +285,36 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_intent_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_intent({ intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view }) do |response, operation|
+      c.update_intent({ intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_intent intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view do |response, operation|
+      c.update_intent intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_intent ::Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new(intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view) do |response, operation|
+      c.update_intent ::Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new(intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_intent({ intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view }, grpc_options) do |response, operation|
+      c.update_intent({ intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_intent(::Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new(intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options) do |response, operation|
+      c.update_intent(::Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new(intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -343,36 +343,36 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_intent_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_intent({ name: name }) do |response, operation|
+      c.delete_intent({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_intent name: name do |response, operation|
+      c.delete_intent name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_intent ::Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new(name: name) do |response, operation|
+      c.delete_intent ::Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_intent({ name: name }, grpc_options) do |response, operation|
+      c.delete_intent({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_intent(::Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_intent(::Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -410,40 +410,40 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_update_intents_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_intents({ parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view }) do |response, operation|
+      c.batch_update_intents({ parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_intents parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view do |response, operation|
+      c.batch_update_intents parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_intents ::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new(parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view) do |response, operation|
+      c.batch_update_intents ::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new(parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_intents({ parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view }, grpc_options) do |response, operation|
+      c.batch_update_intents({ parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_intents(::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new(parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options) do |response, operation|
+      c.batch_update_intents(::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new(parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -475,40 +475,40 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_delete_intents_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_intents({ parent: parent, intents: intents }) do |response, operation|
+      c.batch_delete_intents({ parent: parent, intents: intents }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_intents parent: parent, intents: intents do |response, operation|
+      c.batch_delete_intents parent: parent, intents: intents do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_intents ::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new(parent: parent, intents: intents) do |response, operation|
+      c.batch_delete_intents ::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new(parent: parent, intents: intents) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_intents({ parent: parent, intents: intents }, grpc_options) do |response, operation|
+      c.batch_delete_intents({ parent: parent, intents: intents }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_intents(::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new(parent: parent, intents: intents), grpc_options) do |response, operation|
+      c.batch_delete_intents(::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new(parent: parent, intents: intents), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

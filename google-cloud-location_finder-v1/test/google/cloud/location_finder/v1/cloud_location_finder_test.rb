@@ -88,40 +88,40 @@ class ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_cloud_locations_client_stub do
       # Create client
-      client = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client.new do |config|
+      c = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_cloud_locations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_cloud_locations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_cloud_locations ::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_cloud_locations ::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_cloud_locations(::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_cloud_locations(::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, get_cloud_location_client_stub do
       # Create client
-      client = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client.new do |config|
+      c = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cloud_location({ name: name }) do |response, operation|
+      c.get_cloud_location({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cloud_location name: name do |response, operation|
+      c.get_cloud_location name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cloud_location ::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name) do |response, operation|
+      c.get_cloud_location ::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cloud_location({ name: name }, grpc_options) do |response, operation|
+      c.get_cloud_location({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cloud_location(::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cloud_location(::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, search_cloud_locations_client_stub do
       # Create client
-      client = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client.new do |config|
+      c = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }) do |response, operation|
+      c.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_cloud_locations parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query do |response, operation|
+      c.search_cloud_locations parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_cloud_locations ::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query) do |response, operation|
+      c.search_cloud_locations ::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }, grpc_options) do |response, operation|
+      c.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_cloud_locations(::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query), grpc_options) do |response, operation|
+      c.search_cloud_locations(::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

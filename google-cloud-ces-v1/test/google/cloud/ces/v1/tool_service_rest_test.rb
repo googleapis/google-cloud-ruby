@@ -90,6 +90,7 @@ class ::Google::Cloud::Ces::V1::ToolService::Rest::ClientTest < Minitest::Test
     variables = {}
     parent = "hello world"
     args = {}
+    mock_config = {}
 
     execute_tool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -100,32 +101,32 @@ class ::Google::Cloud::Ces::V1::ToolService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::ToolService::Rest::ServiceStub.stub :transcode_execute_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, execute_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::ToolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::ToolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.execute_tool({ tool: tool, variables: variables, parent: parent, args: args }) do |_result, response|
+        c.execute_tool({ tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_tool tool: tool, variables: variables, parent: parent, args: args do |_result, response|
+        c.execute_tool tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_tool ::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args) do |_result, response|
+        c.execute_tool ::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_tool({ tool: tool, variables: variables, parent: parent, args: args }, call_options) do |_result, response|
+        c.execute_tool({ tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_tool(::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args), call_options) do |_result, response|
+        c.execute_tool(::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +156,32 @@ class ::Google::Cloud::Ces::V1::ToolService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::ToolService::Rest::ServiceStub.stub :transcode_retrieve_tool_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_tool_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::ToolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::ToolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_tool_schema({ tool: tool, parent: parent }) do |_result, response|
+        c.retrieve_tool_schema({ tool: tool, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_tool_schema tool: tool, parent: parent do |_result, response|
+        c.retrieve_tool_schema tool: tool, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_tool_schema ::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent) do |_result, response|
+        c.retrieve_tool_schema ::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_tool_schema({ tool: tool, parent: parent }, call_options) do |_result, response|
+        c.retrieve_tool_schema({ tool: tool, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_tool_schema(::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent), call_options) do |_result, response|
+        c.retrieve_tool_schema(::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -200,6 +201,7 @@ class ::Google::Cloud::Ces::V1::ToolService::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     toolset = "hello world"
     tool_ids = ["hello world"]
+    bypass_persistence_config = true
 
     retrieve_tools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -210,32 +212,32 @@ class ::Google::Cloud::Ces::V1::ToolService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::ToolService::Rest::ServiceStub.stub :transcode_retrieve_tools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_tools_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::ToolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::ToolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }) do |_result, response|
+        c.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_tools toolset: toolset, tool_ids: tool_ids do |_result, response|
+        c.retrieve_tools toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_tools ::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids) do |_result, response|
+        c.retrieve_tools ::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }, call_options) do |_result, response|
+        c.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_tools(::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids), call_options) do |_result, response|
+        c.retrieve_tools(::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

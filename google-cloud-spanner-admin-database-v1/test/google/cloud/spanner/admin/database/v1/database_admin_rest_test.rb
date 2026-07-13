@@ -99,32 +99,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_databases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_databases_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_databases({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_databases({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_databases parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_databases parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_databases ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_databases ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_databases({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_databases({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_databases(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_databases(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_create_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors }) do |_result, response|
+        c.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_database parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors do |_result, response|
+        c.create_database parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors) do |_result, response|
+        c.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors }, call_options) do |_result, response|
+        c.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors), call_options) do |_result, response|
+        c.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect, proto_descriptors: proto_descriptors), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_get_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_database({ name: name }) do |_result, response|
+        c.get_database({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_database name: name do |_result, response|
+        c.get_database name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_database ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest.new(name: name) do |_result, response|
+        c.get_database ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_database({ name: name }, call_options) do |_result, response|
+        c.get_database({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_database(::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest.new(name: name), call_options) do |_result, response|
+        c.get_database(::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_update_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_database({ database: database, update_mask: update_mask }) do |_result, response|
+        c.update_database({ database: database, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_database database: database, update_mask: update_mask do |_result, response|
+        c.update_database database: database, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_database ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask) do |_result, response|
+        c.update_database ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_database({ database: database, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_database({ database: database, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_database(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask), call_options) do |_result, response|
+        c.update_database(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_update_database_ddl_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_database_ddl_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }) do |_result, response|
+        c.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_database_ddl database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode do |_result, response|
+        c.update_database_ddl database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode) do |_result, response|
+        c.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }, call_options) do |_result, response|
+        c.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode), call_options) do |_result, response|
+        c.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_drop_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, drop_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.drop_database({ database: database }) do |_result, response|
+        c.drop_database({ database: database }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.drop_database database: database do |_result, response|
+        c.drop_database database: database do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.drop_database ::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest.new(database: database) do |_result, response|
+        c.drop_database ::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest.new(database: database) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.drop_database({ database: database }, call_options) do |_result, response|
+        c.drop_database({ database: database }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.drop_database(::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest.new(database: database), call_options) do |_result, response|
+        c.drop_database(::Google::Cloud::Spanner::Admin::Database::V1::DropDatabaseRequest.new(database: database), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_get_database_ddl_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_database_ddl_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_database_ddl({ database: database }) do |_result, response|
+        c.get_database_ddl({ database: database }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_database_ddl database: database do |_result, response|
+        c.get_database_ddl database: database do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new(database: database) do |_result, response|
+        c.get_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new(database: database) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_database_ddl({ database: database }, call_options) do |_result, response|
+        c.get_database_ddl({ database: database }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new(database: database), call_options) do |_result, response|
+        c.get_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new(database: database), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -489,32 +489,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -544,32 +544,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -599,32 +599,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -656,32 +656,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_create_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config }) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config do |_result, response|
+        c.create_backup parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config) do |_result, response|
+        c.create_backup ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup({ parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config }, call_options) do |_result, response|
+        c.create_backup({ parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup(::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config), call_options) do |_result, response|
+        c.create_backup(::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest.new(parent: parent, backup_id: backup_id, backup: backup, encryption_config: encryption_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -714,32 +714,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_copy_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, copy_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.copy_backup({ parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config }) do |_result, response|
+        c.copy_backup({ parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.copy_backup parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config do |_result, response|
+        c.copy_backup parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.copy_backup ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new(parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config) do |_result, response|
+        c.copy_backup ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new(parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.copy_backup({ parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config }, call_options) do |_result, response|
+        c.copy_backup({ parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.copy_backup(::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new(parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config), call_options) do |_result, response|
+        c.copy_backup(::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new(parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -768,32 +768,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup({ name: name }) do |_result, response|
+        c.get_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup name: name do |_result, response|
+        c.get_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new(name: name) do |_result, response|
+        c.get_backup ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup({ name: name }, call_options) do |_result, response|
+        c.get_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup(::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup(::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -823,32 +823,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_update_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup({ backup: backup, update_mask: update_mask }) do |_result, response|
+        c.update_backup({ backup: backup, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup backup: backup, update_mask: update_mask do |_result, response|
+        c.update_backup backup: backup, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask) do |_result, response|
+        c.update_backup ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup({ backup: backup, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_backup({ backup: backup, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup(::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), call_options) do |_result, response|
+        c.update_backup(::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest.new(backup: backup, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -877,32 +877,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup({ name: name }) do |_result, response|
+        c.delete_backup({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup name: name do |_result, response|
+        c.delete_backup name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new(name: name) do |_result, response|
+        c.delete_backup ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup({ name: name }, call_options) do |_result, response|
+        c.delete_backup({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup(::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup(::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -934,32 +934,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_backups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_backups parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_backups ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_backups({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_backups(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -991,32 +991,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_restore_database_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_database_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }) do |_result, response|
+        c.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_database parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config do |_result, response|
+        c.restore_database parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_database ::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config) do |_result, response|
+        c.restore_database ::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }, call_options) do |_result, response|
+        c.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_database(::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config), call_options) do |_result, response|
+        c.restore_database(::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1048,32 +1048,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_database_operations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_database_operations_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_database_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_database_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_database_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_database_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_database_operations ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_database_operations ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_database_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_database_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_database_operations(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_database_operations(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1105,32 +1105,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_backup_operations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_operations_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_backup_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_backup_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_operations ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_backup_operations ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_backup_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_operations(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_backup_operations(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1161,32 +1161,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_database_roles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_database_roles_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_database_roles({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_database_roles({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_database_roles parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_database_roles parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_database_roles ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_database_roles ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_database_roles({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_database_roles({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_database_roles(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_database_roles(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1217,32 +1217,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_add_split_points_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_split_points_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_split_points({ database: database, split_points: split_points, initiator: initiator }) do |_result, response|
+        c.add_split_points({ database: database, split_points: split_points, initiator: initiator }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_split_points database: database, split_points: split_points, initiator: initiator do |_result, response|
+        c.add_split_points database: database, split_points: split_points, initiator: initiator do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_split_points ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator) do |_result, response|
+        c.add_split_points ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_split_points({ database: database, split_points: split_points, initiator: initiator }, call_options) do |_result, response|
+        c.add_split_points({ database: database, split_points: split_points, initiator: initiator }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_split_points(::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator), call_options) do |_result, response|
+        c.add_split_points(::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1273,32 +1273,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_create_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_backup_schedule({ parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule }) do |_result, response|
+        c.create_backup_schedule({ parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_backup_schedule parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule do |_result, response|
+        c.create_backup_schedule parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule) do |_result, response|
+        c.create_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_backup_schedule({ parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule }, call_options) do |_result, response|
+        c.create_backup_schedule({ parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule), call_options) do |_result, response|
+        c.create_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest.new(parent: parent, backup_schedule_id: backup_schedule_id, backup_schedule: backup_schedule), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1327,32 +1327,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_get_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_backup_schedule({ name: name }) do |_result, response|
+        c.get_backup_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_backup_schedule name: name do |_result, response|
+        c.get_backup_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest.new(name: name) do |_result, response|
+        c.get_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_backup_schedule({ name: name }, call_options) do |_result, response|
+        c.get_backup_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.get_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::GetBackupScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1382,32 +1382,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_update_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }) do |_result, response|
+        c.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_backup_schedule backup_schedule: backup_schedule, update_mask: update_mask do |_result, response|
+        c.update_backup_schedule backup_schedule: backup_schedule, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask) do |_result, response|
+        c.update_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_backup_schedule({ backup_schedule: backup_schedule, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask), call_options) do |_result, response|
+        c.update_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupScheduleRequest.new(backup_schedule: backup_schedule, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1436,32 +1436,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_delete_backup_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_backup_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_backup_schedule({ name: name }) do |_result, response|
+        c.delete_backup_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_schedule name: name do |_result, response|
+        c.delete_backup_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest.new(name: name) do |_result, response|
+        c.delete_backup_schedule ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_schedule({ name: name }, call_options) do |_result, response|
+        c.delete_backup_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.delete_backup_schedule(::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1492,32 +1492,32 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_list_backup_schedules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_backup_schedules_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_backup_schedules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_backup_schedules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backup_schedules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_backup_schedules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backup_schedules ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_backup_schedules ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backup_schedules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_backup_schedules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backup_schedules(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_backup_schedules(::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

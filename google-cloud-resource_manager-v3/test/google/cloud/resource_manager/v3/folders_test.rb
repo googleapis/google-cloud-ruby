@@ -82,36 +82,36 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_folder({ name: name }) do |response, operation|
+      c.get_folder({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_folder name: name do |response, operation|
+      c.get_folder name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_folder ::Google::Cloud::ResourceManager::V3::GetFolderRequest.new(name: name) do |response, operation|
+      c.get_folder ::Google::Cloud::ResourceManager::V3::GetFolderRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_folder({ name: name }, grpc_options) do |response, operation|
+      c.get_folder({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_folder(::Google::Cloud::ResourceManager::V3::GetFolderRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_folder(::Google::Cloud::ResourceManager::V3::GetFolderRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_folders_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_folders({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_folders({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_folders parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_folders parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_folders ::Google::Cloud::ResourceManager::V3::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_folders ::Google::Cloud::ResourceManager::V3::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_folders({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_folders({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_folders(::Google::Cloud::ResourceManager::V3::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_folders(::Google::Cloud::ResourceManager::V3::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,40 +213,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_folders_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_folders({ page_size: page_size, page_token: page_token, query: query }) do |response, operation|
+      c.search_folders({ page_size: page_size, page_token: page_token, query: query }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_folders page_size: page_size, page_token: page_token, query: query do |response, operation|
+      c.search_folders page_size: page_size, page_token: page_token, query: query do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_folders ::Google::Cloud::ResourceManager::V3::SearchFoldersRequest.new(page_size: page_size, page_token: page_token, query: query) do |response, operation|
+      c.search_folders ::Google::Cloud::ResourceManager::V3::SearchFoldersRequest.new(page_size: page_size, page_token: page_token, query: query) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_folders({ page_size: page_size, page_token: page_token, query: query }, grpc_options) do |response, operation|
+      c.search_folders({ page_size: page_size, page_token: page_token, query: query }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_folders(::Google::Cloud::ResourceManager::V3::SearchFoldersRequest.new(page_size: page_size, page_token: page_token, query: query), grpc_options) do |response, operation|
+      c.search_folders(::Google::Cloud::ResourceManager::V3::SearchFoldersRequest.new(page_size: page_size, page_token: page_token, query: query), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_folder({ folder: folder }) do |response, operation|
+      c.create_folder({ folder: folder }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_folder folder: folder do |response, operation|
+      c.create_folder folder: folder do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_folder ::Google::Cloud::ResourceManager::V3::CreateFolderRequest.new(folder: folder) do |response, operation|
+      c.create_folder ::Google::Cloud::ResourceManager::V3::CreateFolderRequest.new(folder: folder) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_folder({ folder: folder }, grpc_options) do |response, operation|
+      c.create_folder({ folder: folder }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_folder(::Google::Cloud::ResourceManager::V3::CreateFolderRequest.new(folder: folder), grpc_options) do |response, operation|
+      c.create_folder(::Google::Cloud::ResourceManager::V3::CreateFolderRequest.new(folder: folder), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -341,40 +341,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_folder({ folder: folder, update_mask: update_mask }) do |response, operation|
+      c.update_folder({ folder: folder, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_folder folder: folder, update_mask: update_mask do |response, operation|
+      c.update_folder folder: folder, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_folder ::Google::Cloud::ResourceManager::V3::UpdateFolderRequest.new(folder: folder, update_mask: update_mask) do |response, operation|
+      c.update_folder ::Google::Cloud::ResourceManager::V3::UpdateFolderRequest.new(folder: folder, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_folder({ folder: folder, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_folder({ folder: folder, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_folder(::Google::Cloud::ResourceManager::V3::UpdateFolderRequest.new(folder: folder, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_folder(::Google::Cloud::ResourceManager::V3::UpdateFolderRequest.new(folder: folder, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -406,40 +406,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, move_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.move_folder({ name: name, destination_parent: destination_parent }) do |response, operation|
+      c.move_folder({ name: name, destination_parent: destination_parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_folder name: name, destination_parent: destination_parent do |response, operation|
+      c.move_folder name: name, destination_parent: destination_parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_folder ::Google::Cloud::ResourceManager::V3::MoveFolderRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
+      c.move_folder ::Google::Cloud::ResourceManager::V3::MoveFolderRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_folder({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
+      c.move_folder({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_folder(::Google::Cloud::ResourceManager::V3::MoveFolderRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
+      c.move_folder(::Google::Cloud::ResourceManager::V3::MoveFolderRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -469,40 +469,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_folder({ name: name }) do |response, operation|
+      c.delete_folder({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_folder name: name do |response, operation|
+      c.delete_folder name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_folder ::Google::Cloud::ResourceManager::V3::DeleteFolderRequest.new(name: name) do |response, operation|
+      c.delete_folder ::Google::Cloud::ResourceManager::V3::DeleteFolderRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_folder({ name: name }, grpc_options) do |response, operation|
+      c.delete_folder({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_folder(::Google::Cloud::ResourceManager::V3::DeleteFolderRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_folder(::Google::Cloud::ResourceManager::V3::DeleteFolderRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -532,40 +532,40 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, undelete_folder_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undelete_folder({ name: name }) do |response, operation|
+      c.undelete_folder({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undelete_folder name: name do |response, operation|
+      c.undelete_folder name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undelete_folder ::Google::Cloud::ResourceManager::V3::UndeleteFolderRequest.new(name: name) do |response, operation|
+      c.undelete_folder ::Google::Cloud::ResourceManager::V3::UndeleteFolderRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undelete_folder({ name: name }, grpc_options) do |response, operation|
+      c.undelete_folder({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undelete_folder(::Google::Cloud::ResourceManager::V3::UndeleteFolderRequest.new(name: name), grpc_options) do |response, operation|
+      c.undelete_folder(::Google::Cloud::ResourceManager::V3::UndeleteFolderRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -597,36 +597,36 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -659,36 +659,36 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -719,36 +719,36 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Folders::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

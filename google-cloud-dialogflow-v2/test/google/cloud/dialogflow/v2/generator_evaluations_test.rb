@@ -84,40 +84,40 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_generator_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }) do |response, operation|
+      c.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_generator_evaluation parent: parent, generator_evaluation: generator_evaluation do |response, operation|
+      c.create_generator_evaluation parent: parent, generator_evaluation: generator_evaluation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_generator_evaluation ::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation) do |response, operation|
+      c.create_generator_evaluation ::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }, grpc_options) do |response, operation|
+      c.create_generator_evaluation({ parent: parent, generator_evaluation: generator_evaluation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_generator_evaluation(::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation), grpc_options) do |response, operation|
+      c.create_generator_evaluation(::Google::Cloud::Dialogflow::V2::CreateGeneratorEvaluationRequest.new(parent: parent, generator_evaluation: generator_evaluation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_generator_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_generator_evaluation({ name: name }) do |response, operation|
+      c.get_generator_evaluation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_generator_evaluation name: name do |response, operation|
+      c.get_generator_evaluation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_generator_evaluation ::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name) do |response, operation|
+      c.get_generator_evaluation ::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_generator_evaluation({ name: name }, grpc_options) do |response, operation|
+      c.get_generator_evaluation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_generator_evaluation(::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_generator_evaluation(::Google::Cloud::Dialogflow::V2::GetGeneratorEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -209,40 +209,40 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_generator_evaluations_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_generator_evaluations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_generator_evaluations parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_generator_evaluations ::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_generator_evaluations ::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_generator_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_generator_evaluations(::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_generator_evaluations(::Google::Cloud::Dialogflow::V2::ListGeneratorEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -272,36 +272,36 @@ class ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_generator_evaluation_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::GeneratorEvaluations::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_generator_evaluation({ name: name }) do |response, operation|
+      c.delete_generator_evaluation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_generator_evaluation name: name do |response, operation|
+      c.delete_generator_evaluation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_generator_evaluation ::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name) do |response, operation|
+      c.delete_generator_evaluation ::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_generator_evaluation({ name: name }, grpc_options) do |response, operation|
+      c.delete_generator_evaluation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_generator_evaluation(::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_generator_evaluation(::Google::Cloud::Dialogflow::V2::DeleteGeneratorEvaluationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

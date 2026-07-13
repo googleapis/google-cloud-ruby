@@ -37,10 +37,27 @@ module Google
         #     Optional. The DB_UNIQUE_NAME of the Oracle Database being backed up.
         # @!attribute [rw] admin_password
         #   @return [::String]
-        #     Required. The password for the default ADMIN user.
+        #     Optional. The password for the default ADMIN user.
+        #     Note: Only one of `admin_password_secret_version` or `admin_password` can
+        #     be populated.
+        # @!attribute [rw] admin_password_secret_version
+        #   @return [::String]
+        #     Optional. The resource name of a secret version in Secret Manager which
+        #     contains the database admin user's password. Format:
+        #     projects/\\{project}/secrets/\\{secret}/versions/\\{version}. Note: Only one of
+        #     `admin_password_secret_version` or `admin_password` can be populated.
         # @!attribute [rw] tde_wallet_password
         #   @return [::String]
         #     Optional. The TDE wallet password for the database.
+        #     Note: Only one of `tde_wallet_password_secret_version` or
+        #     `tde_wallet_password` can be populated.
+        # @!attribute [rw] tde_wallet_password_secret_version
+        #   @return [::String]
+        #     Optional. The resource name of a secret version in Secret Manager which
+        #     contains the TDE wallet password for the database. Format:
+        #     projects/\\{project}/secrets/\\{secret}/versions/\\{version}. Note: Only one of
+        #     `tde_wallet_password_secret_version` or `tde_wallet_password` can be
+        #     populated.
         # @!attribute [rw] character_set
         #   @return [::String]
         #     Optional. The character set for the database. The default is AL32UTF8.
@@ -70,6 +87,15 @@ module Google
         # @!attribute [r] ops_insights_status
         #   @return [::Google::Cloud::OracleDatabase::V1::Database::OperationsInsightsStatus]
         #     Output only. The Status of Operations Insights for this Database.
+        # @!attribute [rw] pluggable_database_id
+        #   @return [::String]
+        #     Optional. The ID of the pluggable database associated with the Database.
+        #     The ID must be unique within the project and location.
+        # @!attribute [rw] pluggable_database_name
+        #   @return [::String]
+        #     Optional. The pluggable database associated with the Database. The name
+        #     must begin with an alphabetic character and can contain a maximum of thirty
+        #     alphanumeric characters.
         class Database
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

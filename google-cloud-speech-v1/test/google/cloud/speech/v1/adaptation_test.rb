@@ -86,36 +86,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_phrase_set_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_phrase_set({ parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set }) do |response, operation|
+      c.create_phrase_set({ parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_phrase_set parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set do |response, operation|
+      c.create_phrase_set parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_phrase_set ::Google::Cloud::Speech::V1::CreatePhraseSetRequest.new(parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set) do |response, operation|
+      c.create_phrase_set ::Google::Cloud::Speech::V1::CreatePhraseSetRequest.new(parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_phrase_set({ parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set }, grpc_options) do |response, operation|
+      c.create_phrase_set({ parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_phrase_set(::Google::Cloud::Speech::V1::CreatePhraseSetRequest.new(parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set), grpc_options) do |response, operation|
+      c.create_phrase_set(::Google::Cloud::Speech::V1::CreatePhraseSetRequest.new(parent: parent, phrase_set_id: phrase_set_id, phrase_set: phrase_set), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_phrase_set_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_phrase_set({ name: name }) do |response, operation|
+      c.get_phrase_set({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_phrase_set name: name do |response, operation|
+      c.get_phrase_set name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_phrase_set ::Google::Cloud::Speech::V1::GetPhraseSetRequest.new(name: name) do |response, operation|
+      c.get_phrase_set ::Google::Cloud::Speech::V1::GetPhraseSetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_phrase_set({ name: name }, grpc_options) do |response, operation|
+      c.get_phrase_set({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_phrase_set(::Google::Cloud::Speech::V1::GetPhraseSetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_phrase_set(::Google::Cloud::Speech::V1::GetPhraseSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_phrase_set_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_phrase_set({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_phrase_set({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_phrase_set parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_phrase_set parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_phrase_set ::Google::Cloud::Speech::V1::ListPhraseSetRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_phrase_set ::Google::Cloud::Speech::V1::ListPhraseSetRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_phrase_set({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_phrase_set({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_phrase_set(::Google::Cloud::Speech::V1::ListPhraseSetRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_phrase_set(::Google::Cloud::Speech::V1::ListPhraseSetRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -271,36 +271,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_phrase_set_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask }) do |response, operation|
+      c.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_phrase_set phrase_set: phrase_set, update_mask: update_mask do |response, operation|
+      c.update_phrase_set phrase_set: phrase_set, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_phrase_set ::Google::Cloud::Speech::V1::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask) do |response, operation|
+      c.update_phrase_set ::Google::Cloud::Speech::V1::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_phrase_set({ phrase_set: phrase_set, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_phrase_set(::Google::Cloud::Speech::V1::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_phrase_set(::Google::Cloud::Speech::V1::UpdatePhraseSetRequest.new(phrase_set: phrase_set, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -329,36 +329,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_phrase_set_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_phrase_set({ name: name }) do |response, operation|
+      c.delete_phrase_set({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_phrase_set name: name do |response, operation|
+      c.delete_phrase_set name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_phrase_set ::Google::Cloud::Speech::V1::DeletePhraseSetRequest.new(name: name) do |response, operation|
+      c.delete_phrase_set ::Google::Cloud::Speech::V1::DeletePhraseSetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_phrase_set({ name: name }, grpc_options) do |response, operation|
+      c.delete_phrase_set({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_phrase_set(::Google::Cloud::Speech::V1::DeletePhraseSetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_phrase_set(::Google::Cloud::Speech::V1::DeletePhraseSetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,36 +391,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_custom_class_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_custom_class({ parent: parent, custom_class_id: custom_class_id, custom_class: custom_class }) do |response, operation|
+      c.create_custom_class({ parent: parent, custom_class_id: custom_class_id, custom_class: custom_class }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_custom_class parent: parent, custom_class_id: custom_class_id, custom_class: custom_class do |response, operation|
+      c.create_custom_class parent: parent, custom_class_id: custom_class_id, custom_class: custom_class do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_custom_class ::Google::Cloud::Speech::V1::CreateCustomClassRequest.new(parent: parent, custom_class_id: custom_class_id, custom_class: custom_class) do |response, operation|
+      c.create_custom_class ::Google::Cloud::Speech::V1::CreateCustomClassRequest.new(parent: parent, custom_class_id: custom_class_id, custom_class: custom_class) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_custom_class({ parent: parent, custom_class_id: custom_class_id, custom_class: custom_class }, grpc_options) do |response, operation|
+      c.create_custom_class({ parent: parent, custom_class_id: custom_class_id, custom_class: custom_class }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_custom_class(::Google::Cloud::Speech::V1::CreateCustomClassRequest.new(parent: parent, custom_class_id: custom_class_id, custom_class: custom_class), grpc_options) do |response, operation|
+      c.create_custom_class(::Google::Cloud::Speech::V1::CreateCustomClassRequest.new(parent: parent, custom_class_id: custom_class_id, custom_class: custom_class), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -449,36 +449,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_custom_class_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_custom_class({ name: name }) do |response, operation|
+      c.get_custom_class({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_custom_class name: name do |response, operation|
+      c.get_custom_class name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_custom_class ::Google::Cloud::Speech::V1::GetCustomClassRequest.new(name: name) do |response, operation|
+      c.get_custom_class ::Google::Cloud::Speech::V1::GetCustomClassRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_custom_class({ name: name }, grpc_options) do |response, operation|
+      c.get_custom_class({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_custom_class(::Google::Cloud::Speech::V1::GetCustomClassRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_custom_class(::Google::Cloud::Speech::V1::GetCustomClassRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -511,40 +511,40 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_custom_classes_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_custom_classes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_custom_classes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_custom_classes ::Google::Cloud::Speech::V1::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_custom_classes ::Google::Cloud::Speech::V1::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_custom_classes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_custom_classes(::Google::Cloud::Speech::V1::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_custom_classes(::Google::Cloud::Speech::V1::ListCustomClassesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -576,36 +576,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_custom_class_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_custom_class({ custom_class: custom_class, update_mask: update_mask }) do |response, operation|
+      c.update_custom_class({ custom_class: custom_class, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_custom_class custom_class: custom_class, update_mask: update_mask do |response, operation|
+      c.update_custom_class custom_class: custom_class, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_custom_class ::Google::Cloud::Speech::V1::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask) do |response, operation|
+      c.update_custom_class ::Google::Cloud::Speech::V1::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_custom_class({ custom_class: custom_class, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_custom_class({ custom_class: custom_class, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_custom_class(::Google::Cloud::Speech::V1::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_custom_class(::Google::Cloud::Speech::V1::UpdateCustomClassRequest.new(custom_class: custom_class, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -634,36 +634,36 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_custom_class_client_stub do
       # Create client
-      client = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+      c = ::Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_custom_class({ name: name }) do |response, operation|
+      c.delete_custom_class({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_custom_class name: name do |response, operation|
+      c.delete_custom_class name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_custom_class ::Google::Cloud::Speech::V1::DeleteCustomClassRequest.new(name: name) do |response, operation|
+      c.delete_custom_class ::Google::Cloud::Speech::V1::DeleteCustomClassRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_custom_class({ name: name }, grpc_options) do |response, operation|
+      c.delete_custom_class({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_custom_class(::Google::Cloud::Speech::V1::DeleteCustomClassRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_custom_class(::Google::Cloud::Speech::V1::DeleteCustomClassRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -86,40 +86,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, list_access_policies_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_access_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_access_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_access_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_access_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_access_policies ::Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_access_policies ::Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_access_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_access_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_access_policies(::Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_access_policies(::Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, get_access_policy_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_access_policy({ name: name }) do |response, operation|
+      c.get_access_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_access_policy name: name do |response, operation|
+      c.get_access_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_access_policy ::Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new(name: name) do |response, operation|
+      c.get_access_policy ::Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_access_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_access_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_access_policy(::Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_access_policy(::Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, create_access_policy_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_access_policy({ name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag }) do |response, operation|
+      c.create_access_policy({ name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_access_policy name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag do |response, operation|
+      c.create_access_policy name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_access_policy ::Google::Identity::AccessContextManager::V1::AccessPolicy.new(name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag) do |response, operation|
+      c.create_access_policy ::Google::Identity::AccessContextManager::V1::AccessPolicy.new(name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_access_policy({ name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag }, grpc_options) do |response, operation|
+      c.create_access_policy({ name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_access_policy(::Google::Identity::AccessContextManager::V1::AccessPolicy.new(name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag), grpc_options) do |response, operation|
+      c.create_access_policy(::Google::Identity::AccessContextManager::V1::AccessPolicy.new(name: name, parent: parent, title: title, scopes: scopes, create_time: create_time, update_time: update_time, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, update_access_policy_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_access_policy({ policy: policy, update_mask: update_mask }) do |response, operation|
+      c.update_access_policy({ policy: policy, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_access_policy policy: policy, update_mask: update_mask do |response, operation|
+      c.update_access_policy policy: policy, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_access_policy ::Google::Identity::AccessContextManager::V1::UpdateAccessPolicyRequest.new(policy: policy, update_mask: update_mask) do |response, operation|
+      c.update_access_policy ::Google::Identity::AccessContextManager::V1::UpdateAccessPolicyRequest.new(policy: policy, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_access_policy({ policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_access_policy({ policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_access_policy(::Google::Identity::AccessContextManager::V1::UpdateAccessPolicyRequest.new(policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_access_policy(::Google::Identity::AccessContextManager::V1::UpdateAccessPolicyRequest.new(policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -347,40 +347,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, delete_access_policy_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_access_policy({ name: name }) do |response, operation|
+      c.delete_access_policy({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_access_policy name: name do |response, operation|
+      c.delete_access_policy name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_access_policy ::Google::Identity::AccessContextManager::V1::DeleteAccessPolicyRequest.new(name: name) do |response, operation|
+      c.delete_access_policy ::Google::Identity::AccessContextManager::V1::DeleteAccessPolicyRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_access_policy({ name: name }, grpc_options) do |response, operation|
+      c.delete_access_policy({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_access_policy(::Google::Identity::AccessContextManager::V1::DeleteAccessPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_access_policy(::Google::Identity::AccessContextManager::V1::DeleteAccessPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -416,40 +416,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, list_access_levels_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_access_levels({ parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format }) do |response, operation|
+      c.list_access_levels({ parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_access_levels parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format do |response, operation|
+      c.list_access_levels parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_access_levels ::Google::Identity::AccessContextManager::V1::ListAccessLevelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format) do |response, operation|
+      c.list_access_levels ::Google::Identity::AccessContextManager::V1::ListAccessLevelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_access_levels({ parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format }, grpc_options) do |response, operation|
+      c.list_access_levels({ parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_access_levels(::Google::Identity::AccessContextManager::V1::ListAccessLevelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format), grpc_options) do |response, operation|
+      c.list_access_levels(::Google::Identity::AccessContextManager::V1::ListAccessLevelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, access_level_format: access_level_format), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -481,36 +481,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, get_access_level_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_access_level({ name: name, access_level_format: access_level_format }) do |response, operation|
+      c.get_access_level({ name: name, access_level_format: access_level_format }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_access_level name: name, access_level_format: access_level_format do |response, operation|
+      c.get_access_level name: name, access_level_format: access_level_format do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_access_level ::Google::Identity::AccessContextManager::V1::GetAccessLevelRequest.new(name: name, access_level_format: access_level_format) do |response, operation|
+      c.get_access_level ::Google::Identity::AccessContextManager::V1::GetAccessLevelRequest.new(name: name, access_level_format: access_level_format) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_access_level({ name: name, access_level_format: access_level_format }, grpc_options) do |response, operation|
+      c.get_access_level({ name: name, access_level_format: access_level_format }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_access_level(::Google::Identity::AccessContextManager::V1::GetAccessLevelRequest.new(name: name, access_level_format: access_level_format), grpc_options) do |response, operation|
+      c.get_access_level(::Google::Identity::AccessContextManager::V1::GetAccessLevelRequest.new(name: name, access_level_format: access_level_format), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -541,40 +541,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, create_access_level_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_access_level({ parent: parent, access_level: access_level }) do |response, operation|
+      c.create_access_level({ parent: parent, access_level: access_level }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_access_level parent: parent, access_level: access_level do |response, operation|
+      c.create_access_level parent: parent, access_level: access_level do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_access_level ::Google::Identity::AccessContextManager::V1::CreateAccessLevelRequest.new(parent: parent, access_level: access_level) do |response, operation|
+      c.create_access_level ::Google::Identity::AccessContextManager::V1::CreateAccessLevelRequest.new(parent: parent, access_level: access_level) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_access_level({ parent: parent, access_level: access_level }, grpc_options) do |response, operation|
+      c.create_access_level({ parent: parent, access_level: access_level }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_access_level(::Google::Identity::AccessContextManager::V1::CreateAccessLevelRequest.new(parent: parent, access_level: access_level), grpc_options) do |response, operation|
+      c.create_access_level(::Google::Identity::AccessContextManager::V1::CreateAccessLevelRequest.new(parent: parent, access_level: access_level), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -606,40 +606,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, update_access_level_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_access_level({ access_level: access_level, update_mask: update_mask }) do |response, operation|
+      c.update_access_level({ access_level: access_level, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_access_level access_level: access_level, update_mask: update_mask do |response, operation|
+      c.update_access_level access_level: access_level, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_access_level ::Google::Identity::AccessContextManager::V1::UpdateAccessLevelRequest.new(access_level: access_level, update_mask: update_mask) do |response, operation|
+      c.update_access_level ::Google::Identity::AccessContextManager::V1::UpdateAccessLevelRequest.new(access_level: access_level, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_access_level({ access_level: access_level, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_access_level({ access_level: access_level, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_access_level(::Google::Identity::AccessContextManager::V1::UpdateAccessLevelRequest.new(access_level: access_level, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_access_level(::Google::Identity::AccessContextManager::V1::UpdateAccessLevelRequest.new(access_level: access_level, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -669,40 +669,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, delete_access_level_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_access_level({ name: name }) do |response, operation|
+      c.delete_access_level({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_access_level name: name do |response, operation|
+      c.delete_access_level name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_access_level ::Google::Identity::AccessContextManager::V1::DeleteAccessLevelRequest.new(name: name) do |response, operation|
+      c.delete_access_level ::Google::Identity::AccessContextManager::V1::DeleteAccessLevelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_access_level({ name: name }, grpc_options) do |response, operation|
+      c.delete_access_level({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_access_level(::Google::Identity::AccessContextManager::V1::DeleteAccessLevelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_access_level(::Google::Identity::AccessContextManager::V1::DeleteAccessLevelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -736,40 +736,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, replace_access_levels_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.replace_access_levels({ parent: parent, access_levels: access_levels, etag: etag }) do |response, operation|
+      c.replace_access_levels({ parent: parent, access_levels: access_levels, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.replace_access_levels parent: parent, access_levels: access_levels, etag: etag do |response, operation|
+      c.replace_access_levels parent: parent, access_levels: access_levels, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.replace_access_levels ::Google::Identity::AccessContextManager::V1::ReplaceAccessLevelsRequest.new(parent: parent, access_levels: access_levels, etag: etag) do |response, operation|
+      c.replace_access_levels ::Google::Identity::AccessContextManager::V1::ReplaceAccessLevelsRequest.new(parent: parent, access_levels: access_levels, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.replace_access_levels({ parent: parent, access_levels: access_levels, etag: etag }, grpc_options) do |response, operation|
+      c.replace_access_levels({ parent: parent, access_levels: access_levels, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.replace_access_levels(::Google::Identity::AccessContextManager::V1::ReplaceAccessLevelsRequest.new(parent: parent, access_levels: access_levels, etag: etag), grpc_options) do |response, operation|
+      c.replace_access_levels(::Google::Identity::AccessContextManager::V1::ReplaceAccessLevelsRequest.new(parent: parent, access_levels: access_levels, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -803,40 +803,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, list_service_perimeters_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_service_perimeters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_service_perimeters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_service_perimeters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_service_perimeters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_service_perimeters ::Google::Identity::AccessContextManager::V1::ListServicePerimetersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_service_perimeters ::Google::Identity::AccessContextManager::V1::ListServicePerimetersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_service_perimeters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_service_perimeters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_service_perimeters(::Google::Identity::AccessContextManager::V1::ListServicePerimetersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_service_perimeters(::Google::Identity::AccessContextManager::V1::ListServicePerimetersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -866,36 +866,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, get_service_perimeter_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_service_perimeter({ name: name }) do |response, operation|
+      c.get_service_perimeter({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_service_perimeter name: name do |response, operation|
+      c.get_service_perimeter name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_service_perimeter ::Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new(name: name) do |response, operation|
+      c.get_service_perimeter ::Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_service_perimeter({ name: name }, grpc_options) do |response, operation|
+      c.get_service_perimeter({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_service_perimeter(::Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_service_perimeter(::Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -926,40 +926,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, create_service_perimeter_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_service_perimeter({ parent: parent, service_perimeter: service_perimeter }) do |response, operation|
+      c.create_service_perimeter({ parent: parent, service_perimeter: service_perimeter }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_service_perimeter parent: parent, service_perimeter: service_perimeter do |response, operation|
+      c.create_service_perimeter parent: parent, service_perimeter: service_perimeter do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_service_perimeter ::Google::Identity::AccessContextManager::V1::CreateServicePerimeterRequest.new(parent: parent, service_perimeter: service_perimeter) do |response, operation|
+      c.create_service_perimeter ::Google::Identity::AccessContextManager::V1::CreateServicePerimeterRequest.new(parent: parent, service_perimeter: service_perimeter) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_service_perimeter({ parent: parent, service_perimeter: service_perimeter }, grpc_options) do |response, operation|
+      c.create_service_perimeter({ parent: parent, service_perimeter: service_perimeter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_service_perimeter(::Google::Identity::AccessContextManager::V1::CreateServicePerimeterRequest.new(parent: parent, service_perimeter: service_perimeter), grpc_options) do |response, operation|
+      c.create_service_perimeter(::Google::Identity::AccessContextManager::V1::CreateServicePerimeterRequest.new(parent: parent, service_perimeter: service_perimeter), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -991,40 +991,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, update_service_perimeter_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_service_perimeter({ service_perimeter: service_perimeter, update_mask: update_mask }) do |response, operation|
+      c.update_service_perimeter({ service_perimeter: service_perimeter, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_service_perimeter service_perimeter: service_perimeter, update_mask: update_mask do |response, operation|
+      c.update_service_perimeter service_perimeter: service_perimeter, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_service_perimeter ::Google::Identity::AccessContextManager::V1::UpdateServicePerimeterRequest.new(service_perimeter: service_perimeter, update_mask: update_mask) do |response, operation|
+      c.update_service_perimeter ::Google::Identity::AccessContextManager::V1::UpdateServicePerimeterRequest.new(service_perimeter: service_perimeter, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_service_perimeter({ service_perimeter: service_perimeter, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_service_perimeter({ service_perimeter: service_perimeter, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_service_perimeter(::Google::Identity::AccessContextManager::V1::UpdateServicePerimeterRequest.new(service_perimeter: service_perimeter, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_service_perimeter(::Google::Identity::AccessContextManager::V1::UpdateServicePerimeterRequest.new(service_perimeter: service_perimeter, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1054,40 +1054,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, delete_service_perimeter_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_service_perimeter({ name: name }) do |response, operation|
+      c.delete_service_perimeter({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_service_perimeter name: name do |response, operation|
+      c.delete_service_perimeter name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_service_perimeter ::Google::Identity::AccessContextManager::V1::DeleteServicePerimeterRequest.new(name: name) do |response, operation|
+      c.delete_service_perimeter ::Google::Identity::AccessContextManager::V1::DeleteServicePerimeterRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_service_perimeter({ name: name }, grpc_options) do |response, operation|
+      c.delete_service_perimeter({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_service_perimeter(::Google::Identity::AccessContextManager::V1::DeleteServicePerimeterRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_service_perimeter(::Google::Identity::AccessContextManager::V1::DeleteServicePerimeterRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1121,40 +1121,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, replace_service_perimeters_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.replace_service_perimeters({ parent: parent, service_perimeters: service_perimeters, etag: etag }) do |response, operation|
+      c.replace_service_perimeters({ parent: parent, service_perimeters: service_perimeters, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.replace_service_perimeters parent: parent, service_perimeters: service_perimeters, etag: etag do |response, operation|
+      c.replace_service_perimeters parent: parent, service_perimeters: service_perimeters, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.replace_service_perimeters ::Google::Identity::AccessContextManager::V1::ReplaceServicePerimetersRequest.new(parent: parent, service_perimeters: service_perimeters, etag: etag) do |response, operation|
+      c.replace_service_perimeters ::Google::Identity::AccessContextManager::V1::ReplaceServicePerimetersRequest.new(parent: parent, service_perimeters: service_perimeters, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.replace_service_perimeters({ parent: parent, service_perimeters: service_perimeters, etag: etag }, grpc_options) do |response, operation|
+      c.replace_service_perimeters({ parent: parent, service_perimeters: service_perimeters, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.replace_service_perimeters(::Google::Identity::AccessContextManager::V1::ReplaceServicePerimetersRequest.new(parent: parent, service_perimeters: service_perimeters, etag: etag), grpc_options) do |response, operation|
+      c.replace_service_perimeters(::Google::Identity::AccessContextManager::V1::ReplaceServicePerimetersRequest.new(parent: parent, service_perimeters: service_perimeters, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1186,40 +1186,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, commit_service_perimeters_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.commit_service_perimeters({ parent: parent, etag: etag }) do |response, operation|
+      c.commit_service_perimeters({ parent: parent, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit_service_perimeters parent: parent, etag: etag do |response, operation|
+      c.commit_service_perimeters parent: parent, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit_service_perimeters ::Google::Identity::AccessContextManager::V1::CommitServicePerimetersRequest.new(parent: parent, etag: etag) do |response, operation|
+      c.commit_service_perimeters ::Google::Identity::AccessContextManager::V1::CommitServicePerimetersRequest.new(parent: parent, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit_service_perimeters({ parent: parent, etag: etag }, grpc_options) do |response, operation|
+      c.commit_service_perimeters({ parent: parent, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit_service_perimeters(::Google::Identity::AccessContextManager::V1::CommitServicePerimetersRequest.new(parent: parent, etag: etag), grpc_options) do |response, operation|
+      c.commit_service_perimeters(::Google::Identity::AccessContextManager::V1::CommitServicePerimetersRequest.new(parent: parent, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1253,40 +1253,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, list_gcp_user_access_bindings_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_gcp_user_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_gcp_user_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_gcp_user_access_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_gcp_user_access_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_gcp_user_access_bindings ::Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_gcp_user_access_bindings ::Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_gcp_user_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_gcp_user_access_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_gcp_user_access_bindings(::Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_gcp_user_access_bindings(::Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1316,36 +1316,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, get_gcp_user_access_binding_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_gcp_user_access_binding({ name: name }) do |response, operation|
+      c.get_gcp_user_access_binding({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_gcp_user_access_binding name: name do |response, operation|
+      c.get_gcp_user_access_binding name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::GetGcpUserAccessBindingRequest.new(name: name) do |response, operation|
+      c.get_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::GetGcpUserAccessBindingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_gcp_user_access_binding({ name: name }, grpc_options) do |response, operation|
+      c.get_gcp_user_access_binding({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::GetGcpUserAccessBindingRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::GetGcpUserAccessBindingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1376,40 +1376,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, create_gcp_user_access_binding_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_gcp_user_access_binding({ parent: parent, gcp_user_access_binding: gcp_user_access_binding }) do |response, operation|
+      c.create_gcp_user_access_binding({ parent: parent, gcp_user_access_binding: gcp_user_access_binding }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_gcp_user_access_binding parent: parent, gcp_user_access_binding: gcp_user_access_binding do |response, operation|
+      c.create_gcp_user_access_binding parent: parent, gcp_user_access_binding: gcp_user_access_binding do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::CreateGcpUserAccessBindingRequest.new(parent: parent, gcp_user_access_binding: gcp_user_access_binding) do |response, operation|
+      c.create_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::CreateGcpUserAccessBindingRequest.new(parent: parent, gcp_user_access_binding: gcp_user_access_binding) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_gcp_user_access_binding({ parent: parent, gcp_user_access_binding: gcp_user_access_binding }, grpc_options) do |response, operation|
+      c.create_gcp_user_access_binding({ parent: parent, gcp_user_access_binding: gcp_user_access_binding }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::CreateGcpUserAccessBindingRequest.new(parent: parent, gcp_user_access_binding: gcp_user_access_binding), grpc_options) do |response, operation|
+      c.create_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::CreateGcpUserAccessBindingRequest.new(parent: parent, gcp_user_access_binding: gcp_user_access_binding), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1441,40 +1441,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, update_gcp_user_access_binding_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_gcp_user_access_binding({ gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask }) do |response, operation|
+      c.update_gcp_user_access_binding({ gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_gcp_user_access_binding gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask do |response, operation|
+      c.update_gcp_user_access_binding gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::UpdateGcpUserAccessBindingRequest.new(gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask) do |response, operation|
+      c.update_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::UpdateGcpUserAccessBindingRequest.new(gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_gcp_user_access_binding({ gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_gcp_user_access_binding({ gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::UpdateGcpUserAccessBindingRequest.new(gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::UpdateGcpUserAccessBindingRequest.new(gcp_user_access_binding: gcp_user_access_binding, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1504,40 +1504,40 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, delete_gcp_user_access_binding_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_gcp_user_access_binding({ name: name }) do |response, operation|
+      c.delete_gcp_user_access_binding({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_gcp_user_access_binding name: name do |response, operation|
+      c.delete_gcp_user_access_binding name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::DeleteGcpUserAccessBindingRequest.new(name: name) do |response, operation|
+      c.delete_gcp_user_access_binding ::Google::Identity::AccessContextManager::V1::DeleteGcpUserAccessBindingRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_gcp_user_access_binding({ name: name }, grpc_options) do |response, operation|
+      c.delete_gcp_user_access_binding({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::DeleteGcpUserAccessBindingRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_gcp_user_access_binding(::Google::Identity::AccessContextManager::V1::DeleteGcpUserAccessBindingRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1571,36 +1571,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1631,36 +1631,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1691,36 +1691,36 @@ class ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
+      c = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

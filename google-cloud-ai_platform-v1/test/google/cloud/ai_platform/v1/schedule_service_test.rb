@@ -84,36 +84,36 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_schedule_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_schedule({ parent: parent, schedule: schedule }) do |response, operation|
+      c.create_schedule({ parent: parent, schedule: schedule }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_schedule parent: parent, schedule: schedule do |response, operation|
+      c.create_schedule parent: parent, schedule: schedule do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_schedule ::Google::Cloud::AIPlatform::V1::CreateScheduleRequest.new(parent: parent, schedule: schedule) do |response, operation|
+      c.create_schedule ::Google::Cloud::AIPlatform::V1::CreateScheduleRequest.new(parent: parent, schedule: schedule) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_schedule({ parent: parent, schedule: schedule }, grpc_options) do |response, operation|
+      c.create_schedule({ parent: parent, schedule: schedule }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_schedule(::Google::Cloud::AIPlatform::V1::CreateScheduleRequest.new(parent: parent, schedule: schedule), grpc_options) do |response, operation|
+      c.create_schedule(::Google::Cloud::AIPlatform::V1::CreateScheduleRequest.new(parent: parent, schedule: schedule), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,40 +142,40 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_schedule_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_schedule({ name: name }) do |response, operation|
+      c.delete_schedule({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_schedule name: name do |response, operation|
+      c.delete_schedule name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_schedule ::Google::Cloud::AIPlatform::V1::DeleteScheduleRequest.new(name: name) do |response, operation|
+      c.delete_schedule ::Google::Cloud::AIPlatform::V1::DeleteScheduleRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_schedule({ name: name }, grpc_options) do |response, operation|
+      c.delete_schedule({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_schedule(::Google::Cloud::AIPlatform::V1::DeleteScheduleRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_schedule(::Google::Cloud::AIPlatform::V1::DeleteScheduleRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -205,36 +205,36 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_schedule_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_schedule({ name: name }) do |response, operation|
+      c.get_schedule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_schedule name: name do |response, operation|
+      c.get_schedule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_schedule ::Google::Cloud::AIPlatform::V1::GetScheduleRequest.new(name: name) do |response, operation|
+      c.get_schedule ::Google::Cloud::AIPlatform::V1::GetScheduleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_schedule({ name: name }, grpc_options) do |response, operation|
+      c.get_schedule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_schedule(::Google::Cloud::AIPlatform::V1::GetScheduleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_schedule(::Google::Cloud::AIPlatform::V1::GetScheduleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,40 +271,40 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_schedules_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_schedules({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      c.list_schedules({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_schedules parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      c.list_schedules parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_schedules ::Google::Cloud::AIPlatform::V1::ListSchedulesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      c.list_schedules ::Google::Cloud::AIPlatform::V1::ListSchedulesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_schedules({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_schedules({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_schedules(::Google::Cloud::AIPlatform::V1::ListSchedulesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      c.list_schedules(::Google::Cloud::AIPlatform::V1::ListSchedulesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -334,36 +334,36 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, pause_schedule_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_schedule({ name: name }) do |response, operation|
+      c.pause_schedule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_schedule name: name do |response, operation|
+      c.pause_schedule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_schedule ::Google::Cloud::AIPlatform::V1::PauseScheduleRequest.new(name: name) do |response, operation|
+      c.pause_schedule ::Google::Cloud::AIPlatform::V1::PauseScheduleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_schedule({ name: name }, grpc_options) do |response, operation|
+      c.pause_schedule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_schedule(::Google::Cloud::AIPlatform::V1::PauseScheduleRequest.new(name: name), grpc_options) do |response, operation|
+      c.pause_schedule(::Google::Cloud::AIPlatform::V1::PauseScheduleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -394,36 +394,36 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, resume_schedule_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_schedule({ name: name, catch_up: catch_up }) do |response, operation|
+      c.resume_schedule({ name: name, catch_up: catch_up }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_schedule name: name, catch_up: catch_up do |response, operation|
+      c.resume_schedule name: name, catch_up: catch_up do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_schedule ::Google::Cloud::AIPlatform::V1::ResumeScheduleRequest.new(name: name, catch_up: catch_up) do |response, operation|
+      c.resume_schedule ::Google::Cloud::AIPlatform::V1::ResumeScheduleRequest.new(name: name, catch_up: catch_up) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_schedule({ name: name, catch_up: catch_up }, grpc_options) do |response, operation|
+      c.resume_schedule({ name: name, catch_up: catch_up }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_schedule(::Google::Cloud::AIPlatform::V1::ResumeScheduleRequest.new(name: name, catch_up: catch_up), grpc_options) do |response, operation|
+      c.resume_schedule(::Google::Cloud::AIPlatform::V1::ResumeScheduleRequest.new(name: name, catch_up: catch_up), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -454,36 +454,36 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_schedule_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::ScheduleService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_schedule({ schedule: schedule, update_mask: update_mask }) do |response, operation|
+      c.update_schedule({ schedule: schedule, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_schedule schedule: schedule, update_mask: update_mask do |response, operation|
+      c.update_schedule schedule: schedule, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_schedule ::Google::Cloud::AIPlatform::V1::UpdateScheduleRequest.new(schedule: schedule, update_mask: update_mask) do |response, operation|
+      c.update_schedule ::Google::Cloud::AIPlatform::V1::UpdateScheduleRequest.new(schedule: schedule, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_schedule({ schedule: schedule, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_schedule({ schedule: schedule, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_schedule(::Google::Cloud::AIPlatform::V1::UpdateScheduleRequest.new(schedule: schedule, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_schedule(::Google::Cloud::AIPlatform::V1::UpdateScheduleRequest.new(schedule: schedule, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -86,40 +86,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_clusters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_clusters parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_clusters ::Google::Cloud::Redis::Cluster::V1beta1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_clusters ::Google::Cloud::Redis::Cluster::V1beta1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_clusters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_clusters({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_clusters(::Google::Cloud::Redis::Cluster::V1beta1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_clusters(::Google::Cloud::Redis::Cluster::V1beta1::ListClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cluster({ name: name }) do |response, operation|
+      c.get_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cluster name: name do |response, operation|
+      c.get_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cluster ::Google::Cloud::Redis::Cluster::V1beta1::GetClusterRequest.new(name: name) do |response, operation|
+      c.get_cluster ::Google::Cloud::Redis::Cluster::V1beta1::GetClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cluster(::Google::Cloud::Redis::Cluster::V1beta1::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cluster(::Google::Cloud::Redis::Cluster::V1beta1::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }) do |response, operation|
+      c.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cluster update_mask: update_mask, cluster: cluster, request_id: request_id do |response, operation|
+      c.update_cluster update_mask: update_mask, cluster: cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cluster ::Google::Cloud::Redis::Cluster::V1beta1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id) do |response, operation|
+      c.update_cluster ::Google::Cloud::Redis::Cluster::V1beta1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_cluster({ update_mask: update_mask, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cluster(::Google::Cloud::Redis::Cluster::V1beta1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.update_cluster(::Google::Cloud::Redis::Cluster::V1beta1::UpdateClusterRequest.new(update_mask: update_mask, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_cluster({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_cluster({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_cluster name: name, request_id: request_id do |response, operation|
+      c.delete_cluster name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_cluster ::Google::Cloud::Redis::Cluster::V1beta1::DeleteClusterRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_cluster ::Google::Cloud::Redis::Cluster::V1beta1::DeleteClusterRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_cluster(::Google::Cloud::Redis::Cluster::V1beta1::DeleteClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_cluster(::Google::Cloud::Redis::Cluster::V1beta1::DeleteClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -345,40 +345,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id do |response, operation|
+      c.create_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_cluster ::Google::Cloud::Redis::Cluster::V1beta1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id) do |response, operation|
+      c.create_cluster ::Google::Cloud::Redis::Cluster::V1beta1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_cluster(::Google::Cloud::Redis::Cluster::V1beta1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.create_cluster(::Google::Cloud::Redis::Cluster::V1beta1::CreateClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -408,36 +408,36 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_cluster_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cluster_certificate_authority({ name: name }) do |response, operation|
+      c.get_cluster_certificate_authority({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cluster_certificate_authority name: name do |response, operation|
+      c.get_cluster_certificate_authority name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cluster_certificate_authority ::Google::Cloud::Redis::Cluster::V1beta1::GetClusterCertificateAuthorityRequest.new(name: name) do |response, operation|
+      c.get_cluster_certificate_authority ::Google::Cloud::Redis::Cluster::V1beta1::GetClusterCertificateAuthorityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cluster_certificate_authority({ name: name }, grpc_options) do |response, operation|
+      c.get_cluster_certificate_authority({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cluster_certificate_authority(::Google::Cloud::Redis::Cluster::V1beta1::GetClusterCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cluster_certificate_authority(::Google::Cloud::Redis::Cluster::V1beta1::GetClusterCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -466,36 +466,36 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_shared_regional_certificate_authority_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_shared_regional_certificate_authority({ name: name }) do |response, operation|
+      c.get_shared_regional_certificate_authority({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_shared_regional_certificate_authority name: name do |response, operation|
+      c.get_shared_regional_certificate_authority name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_shared_regional_certificate_authority ::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest.new(name: name) do |response, operation|
+      c.get_shared_regional_certificate_authority ::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_shared_regional_certificate_authority({ name: name }, grpc_options) do |response, operation|
+      c.get_shared_regional_certificate_authority({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_shared_regional_certificate_authority(::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_shared_regional_certificate_authority(::Google::Cloud::Redis::Cluster::V1beta1::GetSharedRegionalCertificateAuthorityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -528,40 +528,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, reschedule_cluster_maintenance_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reschedule_cluster_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
+      c.reschedule_cluster_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reschedule_cluster_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
+      c.reschedule_cluster_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reschedule_cluster_maintenance ::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
+      c.reschedule_cluster_maintenance ::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reschedule_cluster_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
+      c.reschedule_cluster_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reschedule_cluster_maintenance(::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
+      c.reschedule_cluster_maintenance(::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -595,40 +595,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_backup_collections_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backup_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_backup_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backup_collections ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_backup_collections ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backup_collections(::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_backup_collections(::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -658,36 +658,36 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_backup_collection_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup_collection({ name: name }) do |response, operation|
+      c.get_backup_collection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup_collection name: name do |response, operation|
+      c.get_backup_collection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup_collection ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest.new(name: name) do |response, operation|
+      c.get_backup_collection ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup_collection({ name: name }, grpc_options) do |response, operation|
+      c.get_backup_collection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup_collection(::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup_collection(::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -720,40 +720,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_backups_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_backups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backups ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_backups ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_backups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backups(::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_backups(::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -783,36 +783,36 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backup({ name: name }) do |response, operation|
+      c.get_backup({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backup name: name do |response, operation|
+      c.get_backup name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backup ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest.new(name: name) do |response, operation|
+      c.get_backup ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backup({ name: name }, grpc_options) do |response, operation|
+      c.get_backup({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backup(::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backup(::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -843,40 +843,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backup({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_backup({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backup name: name, request_id: request_id do |response, operation|
+      c.delete_backup name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backup ::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_backup ::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backup({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_backup({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backup(::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_backup(::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -909,40 +909,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, export_backup_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_backup({ gcs_bucket: gcs_bucket, name: name }) do |response, operation|
+      c.export_backup({ gcs_bucket: gcs_bucket, name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_backup gcs_bucket: gcs_bucket, name: name do |response, operation|
+      c.export_backup gcs_bucket: gcs_bucket, name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_backup ::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name) do |response, operation|
+      c.export_backup ::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_backup({ gcs_bucket: gcs_bucket, name: name }, grpc_options) do |response, operation|
+      c.export_backup({ gcs_bucket: gcs_bucket, name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_backup(::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name), grpc_options) do |response, operation|
+      c.export_backup(::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -977,40 +977,40 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
 
     Gapic::ServiceStub.stub :new, backup_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+      c = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.backup_cluster({ name: name, ttl: ttl, backup_id: backup_id }) do |response, operation|
+      c.backup_cluster({ name: name, ttl: ttl, backup_id: backup_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.backup_cluster name: name, ttl: ttl, backup_id: backup_id do |response, operation|
+      c.backup_cluster name: name, ttl: ttl, backup_id: backup_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.backup_cluster ::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest.new(name: name, ttl: ttl, backup_id: backup_id) do |response, operation|
+      c.backup_cluster ::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest.new(name: name, ttl: ttl, backup_id: backup_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.backup_cluster({ name: name, ttl: ttl, backup_id: backup_id }, grpc_options) do |response, operation|
+      c.backup_cluster({ name: name, ttl: ttl, backup_id: backup_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.backup_cluster(::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest.new(name: name, ttl: ttl, backup_id: backup_id), grpc_options) do |response, operation|
+      c.backup_cluster(::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest.new(name: name, ttl: ttl, backup_id: backup_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -99,32 +99,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_create_data_access_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_access_label_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }) do |_result, response|
+        c.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_access_label parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id do |_result, response|
+        c.create_data_access_label parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_access_label ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id) do |_result, response|
+        c.create_data_access_label ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }, call_options) do |_result, response|
+        c.create_data_access_label({ parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_access_label(::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id), call_options) do |_result, response|
+        c.create_data_access_label(::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new(parent: parent, data_access_label: data_access_label, data_access_label_id: data_access_label_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_get_data_access_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_access_label_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_access_label({ name: name }) do |_result, response|
+        c.get_data_access_label({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_access_label name: name do |_result, response|
+        c.get_data_access_label name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_access_label ::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name) do |_result, response|
+        c.get_data_access_label ::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_access_label({ name: name }, call_options) do |_result, response|
+        c.get_data_access_label({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_access_label(::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_access_label(::Google::Cloud::Chronicle::V1::GetDataAccessLabelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_list_data_access_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_access_labels_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_access_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_data_access_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_access_labels ::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_data_access_labels ::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_data_access_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_access_labels(::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_data_access_labels(::Google::Cloud::Chronicle::V1::ListDataAccessLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_update_data_access_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_access_label_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }) do |_result, response|
+        c.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_access_label data_access_label: data_access_label, update_mask: update_mask do |_result, response|
+        c.update_data_access_label data_access_label: data_access_label, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_access_label ::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask) do |_result, response|
+        c.update_data_access_label ::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_data_access_label({ data_access_label: data_access_label, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_access_label(::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask), call_options) do |_result, response|
+        c.update_data_access_label(::Google::Cloud::Chronicle::V1::UpdateDataAccessLabelRequest.new(data_access_label: data_access_label, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_delete_data_access_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_access_label_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_access_label({ name: name }) do |_result, response|
+        c.delete_data_access_label({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_access_label name: name do |_result, response|
+        c.delete_data_access_label name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_access_label ::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name) do |_result, response|
+        c.delete_data_access_label ::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_access_label({ name: name }, call_options) do |_result, response|
+        c.delete_data_access_label({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_access_label(::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name), call_options) do |_result, response|
+        c.delete_data_access_label(::Google::Cloud::Chronicle::V1::DeleteDataAccessLabelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_create_data_access_scope_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_access_scope_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }) do |_result, response|
+        c.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_access_scope parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id do |_result, response|
+        c.create_data_access_scope parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_access_scope ::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id) do |_result, response|
+        c.create_data_access_scope ::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }, call_options) do |_result, response|
+        c.create_data_access_scope({ parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_access_scope(::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id), call_options) do |_result, response|
+        c.create_data_access_scope(::Google::Cloud::Chronicle::V1::CreateDataAccessScopeRequest.new(parent: parent, data_access_scope: data_access_scope, data_access_scope_id: data_access_scope_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_get_data_access_scope_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_access_scope_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_access_scope({ name: name }) do |_result, response|
+        c.get_data_access_scope({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_access_scope name: name do |_result, response|
+        c.get_data_access_scope name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_access_scope ::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name) do |_result, response|
+        c.get_data_access_scope ::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_access_scope({ name: name }, call_options) do |_result, response|
+        c.get_data_access_scope({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_access_scope(::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_access_scope(::Google::Cloud::Chronicle::V1::GetDataAccessScopeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_list_data_access_scopes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_access_scopes_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_access_scopes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_data_access_scopes parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_access_scopes ::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_data_access_scopes ::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_data_access_scopes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_access_scopes(::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_data_access_scopes(::Google::Cloud::Chronicle::V1::ListDataAccessScopesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -541,32 +541,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_update_data_access_scope_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_access_scope_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }) do |_result, response|
+        c.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_access_scope data_access_scope: data_access_scope, update_mask: update_mask do |_result, response|
+        c.update_data_access_scope data_access_scope: data_access_scope, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_access_scope ::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask) do |_result, response|
+        c.update_data_access_scope ::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_data_access_scope({ data_access_scope: data_access_scope, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_access_scope(::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask), call_options) do |_result, response|
+        c.update_data_access_scope(::Google::Cloud::Chronicle::V1::UpdateDataAccessScopeRequest.new(data_access_scope: data_access_scope, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -595,32 +595,32 @@ class ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ClientTest
     ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::ServiceStub.stub :transcode_delete_data_access_scope_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_access_scope_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataAccessControlService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_access_scope({ name: name }) do |_result, response|
+        c.delete_data_access_scope({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_access_scope name: name do |_result, response|
+        c.delete_data_access_scope name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_access_scope ::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name) do |_result, response|
+        c.delete_data_access_scope ::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_access_scope({ name: name }, call_options) do |_result, response|
+        c.delete_data_access_scope({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_access_scope(::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name), call_options) do |_result, response|
+        c.delete_data_access_scope(::Google::Cloud::Chronicle::V1::DeleteDataAccessScopeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

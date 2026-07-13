@@ -86,36 +86,36 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
+      c = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_profile({ parent: parent, deployment: deployment, profile_type: profile_type }) do |response, operation|
+      c.create_profile({ parent: parent, deployment: deployment, profile_type: profile_type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_profile parent: parent, deployment: deployment, profile_type: profile_type do |response, operation|
+      c.create_profile parent: parent, deployment: deployment, profile_type: profile_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_profile ::Google::Cloud::Profiler::V2::CreateProfileRequest.new(parent: parent, deployment: deployment, profile_type: profile_type) do |response, operation|
+      c.create_profile ::Google::Cloud::Profiler::V2::CreateProfileRequest.new(parent: parent, deployment: deployment, profile_type: profile_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_profile({ parent: parent, deployment: deployment, profile_type: profile_type }, grpc_options) do |response, operation|
+      c.create_profile({ parent: parent, deployment: deployment, profile_type: profile_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_profile(::Google::Cloud::Profiler::V2::CreateProfileRequest.new(parent: parent, deployment: deployment, profile_type: profile_type), grpc_options) do |response, operation|
+      c.create_profile(::Google::Cloud::Profiler::V2::CreateProfileRequest.new(parent: parent, deployment: deployment, profile_type: profile_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,36 +146,36 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_offline_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
+      c = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_offline_profile({ parent: parent, profile: profile }) do |response, operation|
+      c.create_offline_profile({ parent: parent, profile: profile }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_offline_profile parent: parent, profile: profile do |response, operation|
+      c.create_offline_profile parent: parent, profile: profile do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_offline_profile ::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new(parent: parent, profile: profile) do |response, operation|
+      c.create_offline_profile ::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new(parent: parent, profile: profile) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_offline_profile({ parent: parent, profile: profile }, grpc_options) do |response, operation|
+      c.create_offline_profile({ parent: parent, profile: profile }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_offline_profile(::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new(parent: parent, profile: profile), grpc_options) do |response, operation|
+      c.create_offline_profile(::Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new(parent: parent, profile: profile), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,36 +206,36 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_profile_client_stub do
       # Create client
-      client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
+      c = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_profile({ profile: profile, update_mask: update_mask }) do |response, operation|
+      c.update_profile({ profile: profile, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_profile profile: profile, update_mask: update_mask do |response, operation|
+      c.update_profile profile: profile, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_profile ::Google::Cloud::Profiler::V2::UpdateProfileRequest.new(profile: profile, update_mask: update_mask) do |response, operation|
+      c.update_profile ::Google::Cloud::Profiler::V2::UpdateProfileRequest.new(profile: profile, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_profile({ profile: profile, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_profile({ profile: profile, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_profile(::Google::Cloud::Profiler::V2::UpdateProfileRequest.new(profile: profile, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_profile(::Google::Cloud::Profiler::V2::UpdateProfileRequest.new(profile: profile, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

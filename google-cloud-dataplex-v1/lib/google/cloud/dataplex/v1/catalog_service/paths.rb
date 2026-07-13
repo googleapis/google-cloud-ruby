@@ -160,6 +160,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MetadataFeed resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param metadata_feed [String]
+            #
+            # @return [::String]
+            def metadata_feed_path project:, location:, metadata_feed:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/metadataFeeds/#{metadata_feed}"
+            end
+
+            ##
             # Create a fully-qualified MetadataJob resource string.
             #
             # The resource will be in the following format:

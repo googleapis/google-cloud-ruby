@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ServiceStub.stub :transcode_get_private_auction_deal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_private_auction_deal_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_private_auction_deal({ name: name }) do |_result, response|
+        c.get_private_auction_deal({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_private_auction_deal name: name do |_result, response|
+        c.get_private_auction_deal name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_private_auction_deal ::Google::Ads::AdManager::V1::GetPrivateAuctionDealRequest.new(name: name) do |_result, response|
+        c.get_private_auction_deal ::Google::Ads::AdManager::V1::GetPrivateAuctionDealRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_private_auction_deal({ name: name }, call_options) do |_result, response|
+        c.get_private_auction_deal({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_private_auction_deal(::Google::Ads::AdManager::V1::GetPrivateAuctionDealRequest.new(name: name), call_options) do |_result, response|
+        c.get_private_auction_deal(::Google::Ads::AdManager::V1::GetPrivateAuctionDealRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ServiceStub.stub :transcode_list_private_auction_deals_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_private_auction_deals_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_private_auction_deals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_private_auction_deals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_private_auction_deals parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_private_auction_deals parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_private_auction_deals ::Google::Ads::AdManager::V1::ListPrivateAuctionDealsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_private_auction_deals ::Google::Ads::AdManager::V1::ListPrivateAuctionDealsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_private_auction_deals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_private_auction_deals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_private_auction_deals(::Google::Ads::AdManager::V1::ListPrivateAuctionDealsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_private_auction_deals(::Google::Ads::AdManager::V1::ListPrivateAuctionDealsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ServiceStub.stub :transcode_create_private_auction_deal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_private_auction_deal_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_private_auction_deal({ parent: parent, private_auction_deal: private_auction_deal }) do |_result, response|
+        c.create_private_auction_deal({ parent: parent, private_auction_deal: private_auction_deal }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_private_auction_deal parent: parent, private_auction_deal: private_auction_deal do |_result, response|
+        c.create_private_auction_deal parent: parent, private_auction_deal: private_auction_deal do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_private_auction_deal ::Google::Ads::AdManager::V1::CreatePrivateAuctionDealRequest.new(parent: parent, private_auction_deal: private_auction_deal) do |_result, response|
+        c.create_private_auction_deal ::Google::Ads::AdManager::V1::CreatePrivateAuctionDealRequest.new(parent: parent, private_auction_deal: private_auction_deal) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_private_auction_deal({ parent: parent, private_auction_deal: private_auction_deal }, call_options) do |_result, response|
+        c.create_private_auction_deal({ parent: parent, private_auction_deal: private_auction_deal }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_private_auction_deal(::Google::Ads::AdManager::V1::CreatePrivateAuctionDealRequest.new(parent: parent, private_auction_deal: private_auction_deal), call_options) do |_result, response|
+        c.create_private_auction_deal(::Google::Ads::AdManager::V1::CreatePrivateAuctionDealRequest.new(parent: parent, private_auction_deal: private_auction_deal), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::ServiceStub.stub :transcode_update_private_auction_deal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_private_auction_deal_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_private_auction_deal({ private_auction_deal: private_auction_deal, update_mask: update_mask }) do |_result, response|
+        c.update_private_auction_deal({ private_auction_deal: private_auction_deal, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_private_auction_deal private_auction_deal: private_auction_deal, update_mask: update_mask do |_result, response|
+        c.update_private_auction_deal private_auction_deal: private_auction_deal, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_private_auction_deal ::Google::Ads::AdManager::V1::UpdatePrivateAuctionDealRequest.new(private_auction_deal: private_auction_deal, update_mask: update_mask) do |_result, response|
+        c.update_private_auction_deal ::Google::Ads::AdManager::V1::UpdatePrivateAuctionDealRequest.new(private_auction_deal: private_auction_deal, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_private_auction_deal({ private_auction_deal: private_auction_deal, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_private_auction_deal({ private_auction_deal: private_auction_deal, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_private_auction_deal(::Google::Ads::AdManager::V1::UpdatePrivateAuctionDealRequest.new(private_auction_deal: private_auction_deal, update_mask: update_mask), call_options) do |_result, response|
+        c.update_private_auction_deal(::Google::Ads::AdManager::V1::UpdatePrivateAuctionDealRequest.new(private_auction_deal: private_auction_deal, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

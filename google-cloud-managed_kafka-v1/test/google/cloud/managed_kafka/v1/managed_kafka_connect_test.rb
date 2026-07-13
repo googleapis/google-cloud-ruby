@@ -90,40 +90,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_connect_clusters_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connect_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_connect_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connect_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_connect_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connect_clusters ::Google::Cloud::ManagedKafka::V1::ListConnectClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_connect_clusters ::Google::Cloud::ManagedKafka::V1::ListConnectClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connect_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_connect_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connect_clusters(::Google::Cloud::ManagedKafka::V1::ListConnectClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_connect_clusters(::Google::Cloud::ManagedKafka::V1::ListConnectClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_connect_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connect_cluster({ name: name }) do |response, operation|
+      c.get_connect_cluster({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connect_cluster name: name do |response, operation|
+      c.get_connect_cluster name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connect_cluster ::Google::Cloud::ManagedKafka::V1::GetConnectClusterRequest.new(name: name) do |response, operation|
+      c.get_connect_cluster ::Google::Cloud::ManagedKafka::V1::GetConnectClusterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connect_cluster({ name: name }, grpc_options) do |response, operation|
+      c.get_connect_cluster({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connect_cluster(::Google::Cloud::ManagedKafka::V1::GetConnectClusterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connect_cluster(::Google::Cloud::ManagedKafka::V1::GetConnectClusterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, create_connect_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connect_cluster({ parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id }) do |response, operation|
+      c.create_connect_cluster({ parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connect_cluster parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id do |response, operation|
+      c.create_connect_cluster parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connect_cluster ::Google::Cloud::ManagedKafka::V1::CreateConnectClusterRequest.new(parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id) do |response, operation|
+      c.create_connect_cluster ::Google::Cloud::ManagedKafka::V1::CreateConnectClusterRequest.new(parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connect_cluster({ parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_connect_cluster({ parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connect_cluster(::Google::Cloud::ManagedKafka::V1::CreateConnectClusterRequest.new(parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.create_connect_cluster(::Google::Cloud::ManagedKafka::V1::CreateConnectClusterRequest.new(parent: parent, connect_cluster_id: connect_cluster_id, connect_cluster: connect_cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, update_connect_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connect_cluster({ update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id }) do |response, operation|
+      c.update_connect_cluster({ update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connect_cluster update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id do |response, operation|
+      c.update_connect_cluster update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connect_cluster ::Google::Cloud::ManagedKafka::V1::UpdateConnectClusterRequest.new(update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id) do |response, operation|
+      c.update_connect_cluster ::Google::Cloud::ManagedKafka::V1::UpdateConnectClusterRequest.new(update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connect_cluster({ update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_connect_cluster({ update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connect_cluster(::Google::Cloud::ManagedKafka::V1::UpdateConnectClusterRequest.new(update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id), grpc_options) do |response, operation|
+      c.update_connect_cluster(::Google::Cloud::ManagedKafka::V1::UpdateConnectClusterRequest.new(update_mask: update_mask, connect_cluster: connect_cluster, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, delete_connect_cluster_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connect_cluster({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_connect_cluster({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connect_cluster name: name, request_id: request_id do |response, operation|
+      c.delete_connect_cluster name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connect_cluster ::Google::Cloud::ManagedKafka::V1::DeleteConnectClusterRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_connect_cluster ::Google::Cloud::ManagedKafka::V1::DeleteConnectClusterRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connect_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_connect_cluster({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connect_cluster(::Google::Cloud::ManagedKafka::V1::DeleteConnectClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_connect_cluster(::Google::Cloud::ManagedKafka::V1::DeleteConnectClusterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -416,40 +416,40 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, list_connectors_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connectors parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_connectors parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connectors ::Google::Cloud::ManagedKafka::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_connectors ::Google::Cloud::ManagedKafka::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_connectors({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connectors(::Google::Cloud::ManagedKafka::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_connectors(::Google::Cloud::ManagedKafka::V1::ListConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -479,36 +479,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connector({ name: name }) do |response, operation|
+      c.get_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connector name: name do |response, operation|
+      c.get_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connector ::Google::Cloud::ManagedKafka::V1::GetConnectorRequest.new(name: name) do |response, operation|
+      c.get_connector ::Google::Cloud::ManagedKafka::V1::GetConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connector({ name: name }, grpc_options) do |response, operation|
+      c.get_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connector(::Google::Cloud::ManagedKafka::V1::GetConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connector(::Google::Cloud::ManagedKafka::V1::GetConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -541,36 +541,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, create_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connector({ parent: parent, connector_id: connector_id, connector: connector }) do |response, operation|
+      c.create_connector({ parent: parent, connector_id: connector_id, connector: connector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connector parent: parent, connector_id: connector_id, connector: connector do |response, operation|
+      c.create_connector parent: parent, connector_id: connector_id, connector: connector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connector ::Google::Cloud::ManagedKafka::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector) do |response, operation|
+      c.create_connector ::Google::Cloud::ManagedKafka::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connector({ parent: parent, connector_id: connector_id, connector: connector }, grpc_options) do |response, operation|
+      c.create_connector({ parent: parent, connector_id: connector_id, connector: connector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connector(::Google::Cloud::ManagedKafka::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector), grpc_options) do |response, operation|
+      c.create_connector(::Google::Cloud::ManagedKafka::V1::CreateConnectorRequest.new(parent: parent, connector_id: connector_id, connector: connector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -601,36 +601,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, update_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connector({ update_mask: update_mask, connector: connector }) do |response, operation|
+      c.update_connector({ update_mask: update_mask, connector: connector }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connector update_mask: update_mask, connector: connector do |response, operation|
+      c.update_connector update_mask: update_mask, connector: connector do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connector ::Google::Cloud::ManagedKafka::V1::UpdateConnectorRequest.new(update_mask: update_mask, connector: connector) do |response, operation|
+      c.update_connector ::Google::Cloud::ManagedKafka::V1::UpdateConnectorRequest.new(update_mask: update_mask, connector: connector) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connector({ update_mask: update_mask, connector: connector }, grpc_options) do |response, operation|
+      c.update_connector({ update_mask: update_mask, connector: connector }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connector(::Google::Cloud::ManagedKafka::V1::UpdateConnectorRequest.new(update_mask: update_mask, connector: connector), grpc_options) do |response, operation|
+      c.update_connector(::Google::Cloud::ManagedKafka::V1::UpdateConnectorRequest.new(update_mask: update_mask, connector: connector), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -659,36 +659,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, delete_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connector({ name: name }) do |response, operation|
+      c.delete_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connector name: name do |response, operation|
+      c.delete_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connector ::Google::Cloud::ManagedKafka::V1::DeleteConnectorRequest.new(name: name) do |response, operation|
+      c.delete_connector ::Google::Cloud::ManagedKafka::V1::DeleteConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connector({ name: name }, grpc_options) do |response, operation|
+      c.delete_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connector(::Google::Cloud::ManagedKafka::V1::DeleteConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_connector(::Google::Cloud::ManagedKafka::V1::DeleteConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -717,36 +717,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, pause_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_connector({ name: name }) do |response, operation|
+      c.pause_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_connector name: name do |response, operation|
+      c.pause_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_connector ::Google::Cloud::ManagedKafka::V1::PauseConnectorRequest.new(name: name) do |response, operation|
+      c.pause_connector ::Google::Cloud::ManagedKafka::V1::PauseConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_connector({ name: name }, grpc_options) do |response, operation|
+      c.pause_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_connector(::Google::Cloud::ManagedKafka::V1::PauseConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.pause_connector(::Google::Cloud::ManagedKafka::V1::PauseConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -775,36 +775,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, resume_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_connector({ name: name }) do |response, operation|
+      c.resume_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_connector name: name do |response, operation|
+      c.resume_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_connector ::Google::Cloud::ManagedKafka::V1::ResumeConnectorRequest.new(name: name) do |response, operation|
+      c.resume_connector ::Google::Cloud::ManagedKafka::V1::ResumeConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_connector({ name: name }, grpc_options) do |response, operation|
+      c.resume_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_connector(::Google::Cloud::ManagedKafka::V1::ResumeConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_connector(::Google::Cloud::ManagedKafka::V1::ResumeConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -833,36 +833,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, restart_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restart_connector({ name: name }) do |response, operation|
+      c.restart_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restart_connector name: name do |response, operation|
+      c.restart_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restart_connector ::Google::Cloud::ManagedKafka::V1::RestartConnectorRequest.new(name: name) do |response, operation|
+      c.restart_connector ::Google::Cloud::ManagedKafka::V1::RestartConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restart_connector({ name: name }, grpc_options) do |response, operation|
+      c.restart_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restart_connector(::Google::Cloud::ManagedKafka::V1::RestartConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.restart_connector(::Google::Cloud::ManagedKafka::V1::RestartConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -891,36 +891,36 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, stop_connector_client_stub do
       # Create client
-      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
+      c = ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_connector({ name: name }) do |response, operation|
+      c.stop_connector({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_connector name: name do |response, operation|
+      c.stop_connector name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_connector ::Google::Cloud::ManagedKafka::V1::StopConnectorRequest.new(name: name) do |response, operation|
+      c.stop_connector ::Google::Cloud::ManagedKafka::V1::StopConnectorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_connector({ name: name }, grpc_options) do |response, operation|
+      c.stop_connector({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_connector(::Google::Cloud::ManagedKafka::V1::StopConnectorRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_connector(::Google::Cloud::ManagedKafka::V1::StopConnectorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

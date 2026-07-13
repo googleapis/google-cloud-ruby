@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ServiceStub.stub :transcode_list_contexts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_contexts_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_contexts parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_contexts parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_contexts ::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_contexts ::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_contexts({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_contexts(::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_contexts(::Google::Cloud::Dialogflow::V2::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ServiceStub.stub :transcode_get_context_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_context_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_context({ name: name }) do |_result, response|
+        c.get_context({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_context name: name do |_result, response|
+        c.get_context name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_context ::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name) do |_result, response|
+        c.get_context ::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_context({ name: name }, call_options) do |_result, response|
+        c.get_context({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_context(::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name), call_options) do |_result, response|
+        c.get_context(::Google::Cloud::Dialogflow::V2::GetContextRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ServiceStub.stub :transcode_create_context_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_context_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_context({ parent: parent, context: context }) do |_result, response|
+        c.create_context({ parent: parent, context: context }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_context parent: parent, context: context do |_result, response|
+        c.create_context parent: parent, context: context do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_context ::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context) do |_result, response|
+        c.create_context ::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_context({ parent: parent, context: context }, call_options) do |_result, response|
+        c.create_context({ parent: parent, context: context }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_context(::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context), call_options) do |_result, response|
+        c.create_context(::Google::Cloud::Dialogflow::V2::CreateContextRequest.new(parent: parent, context: context), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ServiceStub.stub :transcode_update_context_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_context_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_context({ context: context, update_mask: update_mask }) do |_result, response|
+        c.update_context({ context: context, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_context context: context, update_mask: update_mask do |_result, response|
+        c.update_context context: context, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_context ::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask) do |_result, response|
+        c.update_context ::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_context({ context: context, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_context({ context: context, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_context(::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask), call_options) do |_result, response|
+        c.update_context(::Google::Cloud::Dialogflow::V2::UpdateContextRequest.new(context: context, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ServiceStub.stub :transcode_delete_context_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_context_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_context({ name: name }) do |_result, response|
+        c.delete_context({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_context name: name do |_result, response|
+        c.delete_context name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_context ::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name) do |_result, response|
+        c.delete_context ::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_context({ name: name }, call_options) do |_result, response|
+        c.delete_context({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_context(::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name), call_options) do |_result, response|
+        c.delete_context(::Google::Cloud::Dialogflow::V2::DeleteContextRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -371,32 +371,32 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::Dialogflow::V2::Contexts::Rest::ServiceStub.stub :transcode_delete_all_contexts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_all_contexts_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_all_contexts({ parent: parent }) do |_result, response|
+        c.delete_all_contexts({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_all_contexts parent: parent do |_result, response|
+        c.delete_all_contexts parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_all_contexts ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent) do |_result, response|
+        c.delete_all_contexts ::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_all_contexts({ parent: parent }, call_options) do |_result, response|
+        c.delete_all_contexts({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_all_contexts(::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent), call_options) do |_result, response|
+        c.delete_all_contexts(::Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

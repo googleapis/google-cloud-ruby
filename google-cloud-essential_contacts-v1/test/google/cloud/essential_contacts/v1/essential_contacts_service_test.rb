@@ -84,36 +84,36 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, create_contact_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_contact({ parent: parent, contact: contact }) do |response, operation|
+      c.create_contact({ parent: parent, contact: contact }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_contact parent: parent, contact: contact do |response, operation|
+      c.create_contact parent: parent, contact: contact do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_contact ::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact) do |response, operation|
+      c.create_contact ::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_contact({ parent: parent, contact: contact }, grpc_options) do |response, operation|
+      c.create_contact({ parent: parent, contact: contact }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_contact(::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact), grpc_options) do |response, operation|
+      c.create_contact(::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new(parent: parent, contact: contact), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, update_contact_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_contact({ contact: contact, update_mask: update_mask }) do |response, operation|
+      c.update_contact({ contact: contact, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_contact contact: contact, update_mask: update_mask do |response, operation|
+      c.update_contact contact: contact, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_contact ::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask) do |response, operation|
+      c.update_contact ::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_contact({ contact: contact, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_contact({ contact: contact, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_contact(::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_contact(::Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new(contact: contact, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, list_contacts_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_contacts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_contacts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_contacts ::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_contacts ::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_contacts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_contacts(::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_contacts(::Google::Cloud::EssentialContacts::V1::ListContactsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -269,36 +269,36 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, get_contact_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_contact({ name: name }) do |response, operation|
+      c.get_contact({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_contact name: name do |response, operation|
+      c.get_contact name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_contact ::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name) do |response, operation|
+      c.get_contact ::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_contact({ name: name }, grpc_options) do |response, operation|
+      c.get_contact({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_contact(::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_contact(::Google::Cloud::EssentialContacts::V1::GetContactRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, delete_contact_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_contact({ name: name }) do |response, operation|
+      c.delete_contact({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_contact name: name do |response, operation|
+      c.delete_contact name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_contact ::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name) do |response, operation|
+      c.delete_contact ::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_contact({ name: name }, grpc_options) do |response, operation|
+      c.delete_contact({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_contact(::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_contact(::Google::Cloud::EssentialContacts::V1::DeleteContactRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,40 +391,40 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, compute_contacts_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.compute_contacts parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token do |response, operation|
+      c.compute_contacts parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.compute_contacts ::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token) do |response, operation|
+      c.compute_contacts ::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.compute_contacts({ parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.compute_contacts(::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.compute_contacts(::Google::Cloud::EssentialContacts::V1::ComputeContactsRequest.new(parent: parent, notification_categories: notification_categories, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -458,36 +458,36 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTe
 
     Gapic::ServiceStub.stub :new, send_test_message_client_stub do
       # Create client
-      client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
+      c = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }) do |response, operation|
+      c.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.send_test_message contacts: contacts, resource: resource, notification_category: notification_category do |response, operation|
+      c.send_test_message contacts: contacts, resource: resource, notification_category: notification_category do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.send_test_message ::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category) do |response, operation|
+      c.send_test_message ::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }, grpc_options) do |response, operation|
+      c.send_test_message({ contacts: contacts, resource: resource, notification_category: notification_category }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.send_test_message(::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category), grpc_options) do |response, operation|
+      c.send_test_message(::Google::Cloud::EssentialContacts::V1::SendTestMessageRequest.new(contacts: contacts, resource: resource, notification_category: notification_category), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

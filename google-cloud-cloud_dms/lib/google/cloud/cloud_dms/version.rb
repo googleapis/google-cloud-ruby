@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module CloudDMS
-      VERSION = "1.5.0"
+      VERSION = "1.6.0"
     end
   end
 end

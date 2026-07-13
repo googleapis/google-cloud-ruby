@@ -1185,19 +1185,24 @@ module Google
         #     The agent resource to be used by the LLM assistant, can be empty for
         #     generating a new agent.
         #
-        #     Note: The following fields are mutually exclusive: `agent`, `tool`, `toolset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `agent`, `tool`, `toolset`, `app_version_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool
         #   @return [::Google::Cloud::Ces::V1beta::Tool]
         #     The tool resource to be used by the LLM assistant, can be empty for
         #     generating a new tool.
         #
-        #     Note: The following fields are mutually exclusive: `tool`, `agent`, `toolset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `tool`, `agent`, `toolset`, `app_version_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] toolset
         #   @return [::Google::Cloud::Ces::V1beta::Toolset]
         #     The toolset resource to be used by the LLM assistant, can be empty for
         #     generating a new toolset.
         #
-        #     Note: The following fields are mutually exclusive: `toolset`, `agent`, `tool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `toolset`, `agent`, `tool`, `app_version_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] app_version_context
+        #   @return [::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest::AppVersionContext]
+        #     The app version context specifying the base snapshot and target agent.
+        #
+        #     Note: The following fields are mutually exclusive: `app_version_context`, `agent`, `tool`, `toolset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the app to generate the resource for.
@@ -1225,6 +1230,22 @@ module Google
         class GenerateAppResourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The app version context specifying the base snapshot and target agent.
+          # @!attribute [rw] app_version
+          #   @return [::String]
+          #     The resource name of the app version to be used by the LLM assistant.
+          #     Format:
+          #     `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
+          # @!attribute [rw] agent_resource_name
+          #   @return [::String]
+          #     The resource name of the target agent to be used by the LLM assistant.
+          #     Format:
+          #     `projects/{project}/locations/{location}/apps/{app}/agents/{agent}`
+          class AppVersionContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The instructions to be used to refine a part of the resource. The part of
           # the resource can be specified  with a start index, end index and a field
@@ -1353,9 +1374,24 @@ module Google
           # @!attribute [rw] evaluation_run
           #   @return [::String]
           #     Required. The evaluation run used to inform quality report analysis.
+          # @!attribute [rw] algorithm
+          #   @return [::Google::Cloud::Ces::V1beta::GenerateAppResourceRequest::QualityReportGenerationConfig::LossAttributionAlgorithm]
+          #     Optional. The loss attribution algorithm to use.
           class QualityReportGenerationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The algorithm to use for loss attribution.
+            module LossAttributionAlgorithm
+              # Unspecified.
+              LOSS_ATTRIBUTION_ALGORITHM_UNSPECIFIED = 0
+
+              # App-centric loss attribution. Treats the app as a single unit.
+              APP_CENTRIC = 1
+
+              # Agent-centric loss attribution. Attributes loss to individual agents.
+              AGENT_CENTRIC = 2
+            end
           end
 
           # The configuration to be used for hill climbing fixes.

@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::C
 
     Gapic::ServiceStub.stub :new, get_autofeed_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_autofeed_settings({ name: name }) do |response, operation|
+      c.get_autofeed_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_autofeed_settings name: name do |response, operation|
+      c.get_autofeed_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_autofeed_settings ::Google::Shopping::Merchant::Accounts::V1beta::GetAutofeedSettingsRequest.new(name: name) do |response, operation|
+      c.get_autofeed_settings ::Google::Shopping::Merchant::Accounts::V1beta::GetAutofeedSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_autofeed_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_autofeed_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_autofeed_settings(::Google::Shopping::Merchant::Accounts::V1beta::GetAutofeedSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_autofeed_settings(::Google::Shopping::Merchant::Accounts::V1beta::GetAutofeedSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::C
 
     Gapic::ServiceStub.stub :new, update_autofeed_settings_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_autofeed_settings({ autofeed_settings: autofeed_settings, update_mask: update_mask }) do |response, operation|
+      c.update_autofeed_settings({ autofeed_settings: autofeed_settings, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_autofeed_settings autofeed_settings: autofeed_settings, update_mask: update_mask do |response, operation|
+      c.update_autofeed_settings autofeed_settings: autofeed_settings, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_autofeed_settings ::Google::Shopping::Merchant::Accounts::V1beta::UpdateAutofeedSettingsRequest.new(autofeed_settings: autofeed_settings, update_mask: update_mask) do |response, operation|
+      c.update_autofeed_settings ::Google::Shopping::Merchant::Accounts::V1beta::UpdateAutofeedSettingsRequest.new(autofeed_settings: autofeed_settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_autofeed_settings({ autofeed_settings: autofeed_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_autofeed_settings({ autofeed_settings: autofeed_settings, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_autofeed_settings(::Google::Shopping::Merchant::Accounts::V1beta::UpdateAutofeedSettingsRequest.new(autofeed_settings: autofeed_settings, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_autofeed_settings(::Google::Shopping::Merchant::Accounts::V1beta::UpdateAutofeedSettingsRequest.new(autofeed_settings: autofeed_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

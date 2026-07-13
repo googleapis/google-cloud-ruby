@@ -100,32 +100,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_list_approval_requests_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_approval_requests_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_approval_requests({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_approval_requests({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_approval_requests parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_approval_requests parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_approval_requests ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_approval_requests ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_approval_requests({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_approval_requests({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_approval_requests(::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_approval_requests(::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_get_approval_request_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_approval_request_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_approval_request({ name: name }) do |_result, response|
+        c.get_approval_request({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_approval_request name: name do |_result, response|
+        c.get_approval_request name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_approval_request ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name) do |_result, response|
+        c.get_approval_request ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_approval_request({ name: name }, call_options) do |_result, response|
+        c.get_approval_request({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_approval_request(::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name), call_options) do |_result, response|
+        c.get_approval_request(::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_approve_approval_request_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, approve_approval_request_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.approve_approval_request({ name: name, expire_time: expire_time }) do |_result, response|
+        c.approve_approval_request({ name: name, expire_time: expire_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.approve_approval_request name: name, expire_time: expire_time do |_result, response|
+        c.approve_approval_request name: name, expire_time: expire_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.approve_approval_request ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time) do |_result, response|
+        c.approve_approval_request ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.approve_approval_request({ name: name, expire_time: expire_time }, call_options) do |_result, response|
+        c.approve_approval_request({ name: name, expire_time: expire_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.approve_approval_request(::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time), call_options) do |_result, response|
+        c.approve_approval_request(::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_dismiss_approval_request_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, dismiss_approval_request_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.dismiss_approval_request({ name: name }) do |_result, response|
+        c.dismiss_approval_request({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.dismiss_approval_request name: name do |_result, response|
+        c.dismiss_approval_request name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.dismiss_approval_request ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name) do |_result, response|
+        c.dismiss_approval_request ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.dismiss_approval_request({ name: name }, call_options) do |_result, response|
+        c.dismiss_approval_request({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.dismiss_approval_request(::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name), call_options) do |_result, response|
+        c.dismiss_approval_request(::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_invalidate_approval_request_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, invalidate_approval_request_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.invalidate_approval_request({ name: name }) do |_result, response|
+        c.invalidate_approval_request({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.invalidate_approval_request name: name do |_result, response|
+        c.invalidate_approval_request name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.invalidate_approval_request ::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage.new(name: name) do |_result, response|
+        c.invalidate_approval_request ::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.invalidate_approval_request({ name: name }, call_options) do |_result, response|
+        c.invalidate_approval_request({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.invalidate_approval_request(::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage.new(name: name), call_options) do |_result, response|
+        c.invalidate_approval_request(::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -371,32 +371,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_get_access_approval_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_access_approval_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_access_approval_settings({ name: name }) do |_result, response|
+        c.get_access_approval_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_access_approval_settings name: name do |_result, response|
+        c.get_access_approval_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_access_approval_settings ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name) do |_result, response|
+        c.get_access_approval_settings ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_access_approval_settings({ name: name }, call_options) do |_result, response|
+        c.get_access_approval_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_access_approval_settings(::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name), call_options) do |_result, response|
+        c.get_access_approval_settings(::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -426,32 +426,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_update_access_approval_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_access_approval_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_access_approval_settings({ settings: settings, update_mask: update_mask }) do |_result, response|
+        c.update_access_approval_settings({ settings: settings, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_access_approval_settings settings: settings, update_mask: update_mask do |_result, response|
+        c.update_access_approval_settings settings: settings, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_access_approval_settings ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask) do |_result, response|
+        c.update_access_approval_settings ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_access_approval_settings({ settings: settings, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_access_approval_settings({ settings: settings, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_access_approval_settings(::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask), call_options) do |_result, response|
+        c.update_access_approval_settings(::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -480,32 +480,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_delete_access_approval_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_access_approval_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_access_approval_settings({ name: name }) do |_result, response|
+        c.delete_access_approval_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_access_approval_settings name: name do |_result, response|
+        c.delete_access_approval_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_access_approval_settings ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name) do |_result, response|
+        c.delete_access_approval_settings ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_access_approval_settings({ name: name }, call_options) do |_result, response|
+        c.delete_access_approval_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_access_approval_settings(::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name), call_options) do |_result, response|
+        c.delete_access_approval_settings(::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -534,32 +534,32 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ClientTest < Mi
     ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::ServiceStub.stub :transcode_get_access_approval_service_account_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_access_approval_service_account_client_stub do
         # Create client
-        client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
+        c = ::Google::Cloud::AccessApproval::V1::AccessApproval::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_access_approval_service_account({ name: name }) do |_result, response|
+        c.get_access_approval_service_account({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_access_approval_service_account name: name do |_result, response|
+        c.get_access_approval_service_account name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_access_approval_service_account ::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage.new(name: name) do |_result, response|
+        c.get_access_approval_service_account ::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_access_approval_service_account({ name: name }, call_options) do |_result, response|
+        c.get_access_approval_service_account({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_access_approval_service_account(::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage.new(name: name), call_options) do |_result, response|
+        c.get_access_approval_service_account(::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

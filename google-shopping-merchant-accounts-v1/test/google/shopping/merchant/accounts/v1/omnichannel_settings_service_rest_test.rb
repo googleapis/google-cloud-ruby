@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Re
     ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::ServiceStub.stub :transcode_get_omnichannel_setting_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_omnichannel_setting_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_omnichannel_setting({ name: name }) do |_result, response|
+        c.get_omnichannel_setting({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_omnichannel_setting name: name do |_result, response|
+        c.get_omnichannel_setting name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_omnichannel_setting ::Google::Shopping::Merchant::Accounts::V1::GetOmnichannelSettingRequest.new(name: name) do |_result, response|
+        c.get_omnichannel_setting ::Google::Shopping::Merchant::Accounts::V1::GetOmnichannelSettingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_omnichannel_setting({ name: name }, call_options) do |_result, response|
+        c.get_omnichannel_setting({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_omnichannel_setting(::Google::Shopping::Merchant::Accounts::V1::GetOmnichannelSettingRequest.new(name: name), call_options) do |_result, response|
+        c.get_omnichannel_setting(::Google::Shopping::Merchant::Accounts::V1::GetOmnichannelSettingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Re
     ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::ServiceStub.stub :transcode_list_omnichannel_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_omnichannel_settings_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_omnichannel_settings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_omnichannel_settings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_omnichannel_settings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_omnichannel_settings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_omnichannel_settings ::Google::Shopping::Merchant::Accounts::V1::ListOmnichannelSettingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_omnichannel_settings ::Google::Shopping::Merchant::Accounts::V1::ListOmnichannelSettingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_omnichannel_settings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_omnichannel_settings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_omnichannel_settings(::Google::Shopping::Merchant::Accounts::V1::ListOmnichannelSettingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_omnichannel_settings(::Google::Shopping::Merchant::Accounts::V1::ListOmnichannelSettingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Re
     ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::ServiceStub.stub :transcode_create_omnichannel_setting_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_omnichannel_setting_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_omnichannel_setting({ parent: parent, omnichannel_setting: omnichannel_setting }) do |_result, response|
+        c.create_omnichannel_setting({ parent: parent, omnichannel_setting: omnichannel_setting }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_omnichannel_setting parent: parent, omnichannel_setting: omnichannel_setting do |_result, response|
+        c.create_omnichannel_setting parent: parent, omnichannel_setting: omnichannel_setting do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_omnichannel_setting ::Google::Shopping::Merchant::Accounts::V1::CreateOmnichannelSettingRequest.new(parent: parent, omnichannel_setting: omnichannel_setting) do |_result, response|
+        c.create_omnichannel_setting ::Google::Shopping::Merchant::Accounts::V1::CreateOmnichannelSettingRequest.new(parent: parent, omnichannel_setting: omnichannel_setting) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_omnichannel_setting({ parent: parent, omnichannel_setting: omnichannel_setting }, call_options) do |_result, response|
+        c.create_omnichannel_setting({ parent: parent, omnichannel_setting: omnichannel_setting }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_omnichannel_setting(::Google::Shopping::Merchant::Accounts::V1::CreateOmnichannelSettingRequest.new(parent: parent, omnichannel_setting: omnichannel_setting), call_options) do |_result, response|
+        c.create_omnichannel_setting(::Google::Shopping::Merchant::Accounts::V1::CreateOmnichannelSettingRequest.new(parent: parent, omnichannel_setting: omnichannel_setting), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Re
     ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::ServiceStub.stub :transcode_update_omnichannel_setting_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_omnichannel_setting_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_omnichannel_setting({ omnichannel_setting: omnichannel_setting, update_mask: update_mask }) do |_result, response|
+        c.update_omnichannel_setting({ omnichannel_setting: omnichannel_setting, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_omnichannel_setting omnichannel_setting: omnichannel_setting, update_mask: update_mask do |_result, response|
+        c.update_omnichannel_setting omnichannel_setting: omnichannel_setting, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_omnichannel_setting ::Google::Shopping::Merchant::Accounts::V1::UpdateOmnichannelSettingRequest.new(omnichannel_setting: omnichannel_setting, update_mask: update_mask) do |_result, response|
+        c.update_omnichannel_setting ::Google::Shopping::Merchant::Accounts::V1::UpdateOmnichannelSettingRequest.new(omnichannel_setting: omnichannel_setting, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_omnichannel_setting({ omnichannel_setting: omnichannel_setting, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_omnichannel_setting({ omnichannel_setting: omnichannel_setting, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_omnichannel_setting(::Google::Shopping::Merchant::Accounts::V1::UpdateOmnichannelSettingRequest.new(omnichannel_setting: omnichannel_setting, update_mask: update_mask), call_options) do |_result, response|
+        c.update_omnichannel_setting(::Google::Shopping::Merchant::Accounts::V1::UpdateOmnichannelSettingRequest.new(omnichannel_setting: omnichannel_setting, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Re
     ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::ServiceStub.stub :transcode_request_inventory_verification_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, request_inventory_verification_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.request_inventory_verification({ name: name }) do |_result, response|
+        c.request_inventory_verification({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.request_inventory_verification name: name do |_result, response|
+        c.request_inventory_verification name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.request_inventory_verification ::Google::Shopping::Merchant::Accounts::V1::RequestInventoryVerificationRequest.new(name: name) do |_result, response|
+        c.request_inventory_verification ::Google::Shopping::Merchant::Accounts::V1::RequestInventoryVerificationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.request_inventory_verification({ name: name }, call_options) do |_result, response|
+        c.request_inventory_verification({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.request_inventory_verification(::Google::Shopping::Merchant::Accounts::V1::RequestInventoryVerificationRequest.new(name: name), call_options) do |_result, response|
+        c.request_inventory_verification(::Google::Shopping::Merchant::Accounts::V1::RequestInventoryVerificationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

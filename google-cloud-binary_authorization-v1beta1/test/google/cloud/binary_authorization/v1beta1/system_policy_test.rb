@@ -82,36 +82,36 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_system_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client.new do |config|
+      c = ::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_system_policy({ name: name }) do |response, operation|
+      c.get_system_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_system_policy name: name do |response, operation|
+      c.get_system_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_system_policy ::Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new(name: name) do |response, operation|
+      c.get_system_policy ::Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_system_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_system_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_system_policy(::Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_system_policy(::Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

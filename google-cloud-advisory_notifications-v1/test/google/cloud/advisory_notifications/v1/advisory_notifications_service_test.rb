@@ -90,40 +90,40 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
     Gapic::ServiceStub.stub :new, list_notifications_client_stub do
       # Create client
-      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+      c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }) do |response, operation|
+      c.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notifications parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code do |response, operation|
+      c.list_notifications parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notifications ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code) do |response, operation|
+      c.list_notifications ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }, grpc_options) do |response, operation|
+      c.list_notifications({ parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notifications(::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code), grpc_options) do |response, operation|
+      c.list_notifications(::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -155,36 +155,36 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
     Gapic::ServiceStub.stub :new, get_notification_client_stub do
       # Create client
-      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+      c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notification({ name: name, language_code: language_code }) do |response, operation|
+      c.get_notification({ name: name, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notification name: name, language_code: language_code do |response, operation|
+      c.get_notification name: name, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notification ::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code) do |response, operation|
+      c.get_notification ::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notification({ name: name, language_code: language_code }, grpc_options) do |response, operation|
+      c.get_notification({ name: name, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notification(::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
+      c.get_notification(::Google::Cloud::AdvisoryNotifications::V1::GetNotificationRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,36 +213,36 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
     Gapic::ServiceStub.stub :new, get_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+      c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_settings({ name: name }) do |response, operation|
+      c.get_settings({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_settings name: name do |response, operation|
+      c.get_settings name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_settings ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name) do |response, operation|
+      c.get_settings ::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_settings({ name: name }, grpc_options) do |response, operation|
+      c.get_settings({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_settings(::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_settings(::Google::Cloud::AdvisoryNotifications::V1::GetSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
 
     Gapic::ServiceStub.stub :new, update_settings_client_stub do
       # Create client
-      client = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
+      c = ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_settings({ settings: settings }) do |response, operation|
+      c.update_settings({ settings: settings }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_settings settings: settings do |response, operation|
+      c.update_settings settings: settings do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_settings ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings) do |response, operation|
+      c.update_settings ::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_settings({ settings: settings }, grpc_options) do |response, operation|
+      c.update_settings({ settings: settings }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_settings(::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings), grpc_options) do |response, operation|
+      c.update_settings(::Google::Cloud::AdvisoryNotifications::V1::UpdateSettingsRequest.new(settings: settings), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

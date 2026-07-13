@@ -90,36 +90,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, complete_query_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }) do |response, operation|
+      c.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.complete_query data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions do |response, operation|
+      c.complete_query data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.complete_query ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions) do |response, operation|
+      c.complete_query ::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }, grpc_options) do |response, operation|
+      c.complete_query({ data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.complete_query(::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions), grpc_options) do |response, operation|
+      c.complete_query(::Google::Cloud::DiscoveryEngine::V1::CompleteQueryRequest.new(data_store: data_store, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, include_tail_suggestions: include_tail_suggestions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -151,40 +151,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, import_suggestion_deny_list_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }) do |response, operation|
+      c.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_suggestion_deny_list_entries inline_source: inline_source, parent: parent do |response, operation|
+      c.import_suggestion_deny_list_entries inline_source: inline_source, parent: parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent) do |response, operation|
+      c.import_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }, grpc_options) do |response, operation|
+      c.import_suggestion_deny_list_entries({ inline_source: inline_source, parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent), grpc_options) do |response, operation|
+      c.import_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest.new(inline_source: inline_source, parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -214,40 +214,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, purge_suggestion_deny_list_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_suggestion_deny_list_entries({ parent: parent }) do |response, operation|
+      c.purge_suggestion_deny_list_entries({ parent: parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_suggestion_deny_list_entries parent: parent do |response, operation|
+      c.purge_suggestion_deny_list_entries parent: parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new(parent: parent) do |response, operation|
+      c.purge_suggestion_deny_list_entries ::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_suggestion_deny_list_entries({ parent: parent }, grpc_options) do |response, operation|
+      c.purge_suggestion_deny_list_entries({ parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.purge_suggestion_deny_list_entries(::Google::Cloud::DiscoveryEngine::V1::PurgeSuggestionDenyListEntriesRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -282,40 +282,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, import_completion_suggestions_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }) do |response, operation|
+      c.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_completion_suggestions inline_source: inline_source, parent: parent, error_config: error_config do |response, operation|
+      c.import_completion_suggestions inline_source: inline_source, parent: parent, error_config: error_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config) do |response, operation|
+      c.import_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }, grpc_options) do |response, operation|
+      c.import_completion_suggestions({ inline_source: inline_source, parent: parent, error_config: error_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config), grpc_options) do |response, operation|
+      c.import_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -345,40 +345,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, purge_completion_suggestions_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.purge_completion_suggestions({ parent: parent }) do |response, operation|
+      c.purge_completion_suggestions({ parent: parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_completion_suggestions parent: parent do |response, operation|
+      c.purge_completion_suggestions parent: parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest.new(parent: parent) do |response, operation|
+      c.purge_completion_suggestions ::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest.new(parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_completion_suggestions({ parent: parent }, grpc_options) do |response, operation|
+      c.purge_completion_suggestions({ parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.purge_completion_suggestions(::Google::Cloud::DiscoveryEngine::V1::PurgeCompletionSuggestionsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

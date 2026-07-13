@@ -97,32 +97,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_project_intelligence_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_project_intelligence_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_project_intelligence_config({ name: name }) do |_result, response|
+        c.get_project_intelligence_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_project_intelligence_config name: name do |_result, response|
+        c.get_project_intelligence_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_project_intelligence_config ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name) do |_result, response|
+        c.get_project_intelligence_config ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_project_intelligence_config({ name: name }, call_options) do |_result, response|
+        c.get_project_intelligence_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_project_intelligence_config(::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_project_intelligence_config(::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_update_project_intelligence_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_project_intelligence_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_project_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_project_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_project_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_project_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_project_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_project_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_folder_intelligence_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_folder_intelligence_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_folder_intelligence_config({ name: name }) do |_result, response|
+        c.get_folder_intelligence_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_folder_intelligence_config name: name do |_result, response|
+        c.get_folder_intelligence_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name) do |_result, response|
+        c.get_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_folder_intelligence_config({ name: name }, call_options) do |_result, response|
+        c.get_folder_intelligence_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_update_folder_intelligence_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_folder_intelligence_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_folder_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_folder_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_organization_intelligence_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_organization_intelligence_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_organization_intelligence_config({ name: name }) do |_result, response|
+        c.get_organization_intelligence_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_organization_intelligence_config name: name do |_result, response|
+        c.get_organization_intelligence_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name) do |_result, response|
+        c.get_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_organization_intelligence_config({ name: name }, call_options) do |_result, response|
+        c.get_organization_intelligence_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_update_organization_intelligence_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_organization_intelligence_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_organization_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_organization_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -427,32 +427,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_intelligence_finding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_intelligence_finding_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_intelligence_finding({ name: name }) do |_result, response|
+        c.get_intelligence_finding({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_intelligence_finding name: name do |_result, response|
+        c.get_intelligence_finding name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_intelligence_finding ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name) do |_result, response|
+        c.get_intelligence_finding ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_intelligence_finding({ name: name }, call_options) do |_result, response|
+        c.get_intelligence_finding({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_intelligence_finding(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name), call_options) do |_result, response|
+        c.get_intelligence_finding(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -484,32 +484,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_list_intelligence_findings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_intelligence_findings_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_intelligence_findings parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_intelligence_findings parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_intelligence_findings ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_intelligence_findings ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_intelligence_findings({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_intelligence_findings(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_intelligence_findings(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_summarize_intelligence_findings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, summarize_intelligence_findings_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.summarize_intelligence_findings parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.summarize_intelligence_findings parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.summarize_intelligence_findings ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.summarize_intelligence_findings ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.summarize_intelligence_findings({ parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.summarize_intelligence_findings(::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.summarize_intelligence_findings(::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest.new(parent: parent, resource_scope: resource_scope, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -596,32 +596,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_intelligence_finding_revision_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_intelligence_finding_revision_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_intelligence_finding_revision({ name: name }) do |_result, response|
+        c.get_intelligence_finding_revision({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_intelligence_finding_revision name: name do |_result, response|
+        c.get_intelligence_finding_revision name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_intelligence_finding_revision ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name) do |_result, response|
+        c.get_intelligence_finding_revision ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_intelligence_finding_revision({ name: name }, call_options) do |_result, response|
+        c.get_intelligence_finding_revision({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_intelligence_finding_revision(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name), call_options) do |_result, response|
+        c.get_intelligence_finding_revision(::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -652,32 +652,32 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_list_intelligence_finding_revisions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_intelligence_finding_revisions_client_stub do
         # Create client
-        client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_intelligence_finding_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_intelligence_finding_revisions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_intelligence_finding_revisions ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_intelligence_finding_revisions ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_intelligence_finding_revisions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_intelligence_finding_revisions(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_intelligence_finding_revisions(::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

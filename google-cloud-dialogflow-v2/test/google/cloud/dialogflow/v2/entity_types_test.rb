@@ -88,40 +88,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_entity_types_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_entity_types parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_entity_types parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_entity_types ::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_entity_types ::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_entity_types({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_entity_types(::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_entity_types(::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_entity_type_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_entity_type({ name: name, language_code: language_code }) do |response, operation|
+      c.get_entity_type({ name: name, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_entity_type name: name, language_code: language_code do |response, operation|
+      c.get_entity_type name: name, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_entity_type ::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new(name: name, language_code: language_code) do |response, operation|
+      c.get_entity_type ::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new(name: name, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_entity_type({ name: name, language_code: language_code }, grpc_options) do |response, operation|
+      c.get_entity_type({ name: name, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_entity_type(::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
+      c.get_entity_type(::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_entity_type_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }) do |response, operation|
+      c.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_entity_type parent: parent, entity_type: entity_type, language_code: language_code do |response, operation|
+      c.create_entity_type parent: parent, entity_type: entity_type, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_entity_type ::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code) do |response, operation|
+      c.create_entity_type ::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }, grpc_options) do |response, operation|
+      c.create_entity_type({ parent: parent, entity_type: entity_type, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_entity_type(::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code), grpc_options) do |response, operation|
+      c.create_entity_type(::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,36 +277,36 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_entity_type_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }) do |response, operation|
+      c.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_entity_type entity_type: entity_type, language_code: language_code, update_mask: update_mask do |response, operation|
+      c.update_entity_type entity_type: entity_type, language_code: language_code, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_entity_type ::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask) do |response, operation|
+      c.update_entity_type ::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_entity_type({ entity_type: entity_type, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_entity_type(::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_entity_type(::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,36 +335,36 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_entity_type_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_entity_type({ name: name }) do |response, operation|
+      c.delete_entity_type({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_entity_type name: name do |response, operation|
+      c.delete_entity_type name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_entity_type ::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new(name: name) do |response, operation|
+      c.delete_entity_type ::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_entity_type({ name: name }, grpc_options) do |response, operation|
+      c.delete_entity_type({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_entity_type(::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_entity_type(::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -400,40 +400,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_update_entity_types_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_entity_types({ parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask }) do |response, operation|
+      c.batch_update_entity_types({ parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_entity_types parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask do |response, operation|
+      c.batch_update_entity_types parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_entity_types ::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new(parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask) do |response, operation|
+      c.batch_update_entity_types ::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new(parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_entity_types({ parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.batch_update_entity_types({ parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_entity_types(::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new(parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
+      c.batch_update_entity_types(::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new(parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -465,40 +465,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_delete_entity_types_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_entity_types({ parent: parent, entity_type_names: entity_type_names }) do |response, operation|
+      c.batch_delete_entity_types({ parent: parent, entity_type_names: entity_type_names }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_entity_types parent: parent, entity_type_names: entity_type_names do |response, operation|
+      c.batch_delete_entity_types parent: parent, entity_type_names: entity_type_names do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_entity_types ::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new(parent: parent, entity_type_names: entity_type_names) do |response, operation|
+      c.batch_delete_entity_types ::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new(parent: parent, entity_type_names: entity_type_names) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_entity_types({ parent: parent, entity_type_names: entity_type_names }, grpc_options) do |response, operation|
+      c.batch_delete_entity_types({ parent: parent, entity_type_names: entity_type_names }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_entity_types(::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new(parent: parent, entity_type_names: entity_type_names), grpc_options) do |response, operation|
+      c.batch_delete_entity_types(::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new(parent: parent, entity_type_names: entity_type_names), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -532,40 +532,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_create_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_entities({ parent: parent, entities: entities, language_code: language_code }) do |response, operation|
+      c.batch_create_entities({ parent: parent, entities: entities, language_code: language_code }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_entities parent: parent, entities: entities, language_code: language_code do |response, operation|
+      c.batch_create_entities parent: parent, entities: entities, language_code: language_code do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_entities ::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code) do |response, operation|
+      c.batch_create_entities ::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_entities({ parent: parent, entities: entities, language_code: language_code }, grpc_options) do |response, operation|
+      c.batch_create_entities({ parent: parent, entities: entities, language_code: language_code }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_entities(::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code), grpc_options) do |response, operation|
+      c.batch_create_entities(::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -601,40 +601,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_update_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_update_entities({ parent: parent, entities: entities, language_code: language_code, update_mask: update_mask }) do |response, operation|
+      c.batch_update_entities({ parent: parent, entities: entities, language_code: language_code, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_update_entities parent: parent, entities: entities, language_code: language_code, update_mask: update_mask do |response, operation|
+      c.batch_update_entities parent: parent, entities: entities, language_code: language_code, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_update_entities ::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code, update_mask: update_mask) do |response, operation|
+      c.batch_update_entities ::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_update_entities({ parent: parent, entities: entities, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.batch_update_entities({ parent: parent, entities: entities, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_update_entities(::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
+      c.batch_update_entities(::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -668,40 +668,40 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, batch_delete_entities_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_entities({ parent: parent, entity_values: entity_values, language_code: language_code }) do |response, operation|
+      c.batch_delete_entities({ parent: parent, entity_values: entity_values, language_code: language_code }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_entities parent: parent, entity_values: entity_values, language_code: language_code do |response, operation|
+      c.batch_delete_entities parent: parent, entity_values: entity_values, language_code: language_code do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_entities ::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new(parent: parent, entity_values: entity_values, language_code: language_code) do |response, operation|
+      c.batch_delete_entities ::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new(parent: parent, entity_values: entity_values, language_code: language_code) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_entities({ parent: parent, entity_values: entity_values, language_code: language_code }, grpc_options) do |response, operation|
+      c.batch_delete_entities({ parent: parent, entity_values: entity_values, language_code: language_code }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_entities(::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new(parent: parent, entity_values: entity_values, language_code: language_code), grpc_options) do |response, operation|
+      c.batch_delete_entities(::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new(parent: parent, entity_values: entity_values, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -84,36 +84,36 @@ class ::Google::Cloud::Talent::V4::TenantService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tenant({ parent: parent, tenant: tenant }) do |response, operation|
+      c.create_tenant({ parent: parent, tenant: tenant }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tenant parent: parent, tenant: tenant do |response, operation|
+      c.create_tenant parent: parent, tenant: tenant do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tenant ::Google::Cloud::Talent::V4::CreateTenantRequest.new(parent: parent, tenant: tenant) do |response, operation|
+      c.create_tenant ::Google::Cloud::Talent::V4::CreateTenantRequest.new(parent: parent, tenant: tenant) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tenant({ parent: parent, tenant: tenant }, grpc_options) do |response, operation|
+      c.create_tenant({ parent: parent, tenant: tenant }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tenant(::Google::Cloud::Talent::V4::CreateTenantRequest.new(parent: parent, tenant: tenant), grpc_options) do |response, operation|
+      c.create_tenant(::Google::Cloud::Talent::V4::CreateTenantRequest.new(parent: parent, tenant: tenant), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Talent::V4::TenantService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_tenant({ name: name }) do |response, operation|
+      c.get_tenant({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_tenant name: name do |response, operation|
+      c.get_tenant name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_tenant ::Google::Cloud::Talent::V4::GetTenantRequest.new(name: name) do |response, operation|
+      c.get_tenant ::Google::Cloud::Talent::V4::GetTenantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_tenant({ name: name }, grpc_options) do |response, operation|
+      c.get_tenant({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_tenant(::Google::Cloud::Talent::V4::GetTenantRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_tenant(::Google::Cloud::Talent::V4::GetTenantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Cloud::Talent::V4::TenantService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_tenant({ tenant: tenant, update_mask: update_mask }) do |response, operation|
+      c.update_tenant({ tenant: tenant, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_tenant tenant: tenant, update_mask: update_mask do |response, operation|
+      c.update_tenant tenant: tenant, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_tenant ::Google::Cloud::Talent::V4::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask) do |response, operation|
+      c.update_tenant ::Google::Cloud::Talent::V4::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_tenant({ tenant: tenant, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_tenant({ tenant: tenant, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_tenant(::Google::Cloud::Talent::V4::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_tenant(::Google::Cloud::Talent::V4::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Cloud::Talent::V4::TenantService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_tenant_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tenant({ name: name }) do |response, operation|
+      c.delete_tenant({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tenant name: name do |response, operation|
+      c.delete_tenant name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tenant ::Google::Cloud::Talent::V4::DeleteTenantRequest.new(name: name) do |response, operation|
+      c.delete_tenant ::Google::Cloud::Talent::V4::DeleteTenantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tenant({ name: name }, grpc_options) do |response, operation|
+      c.delete_tenant({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tenant(::Google::Cloud::Talent::V4::DeleteTenantRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tenant(::Google::Cloud::Talent::V4::DeleteTenantRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,40 +322,40 @@ class ::Google::Cloud::Talent::V4::TenantService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tenants_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tenants parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_tenants parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tenants ::Google::Cloud::Talent::V4::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_tenants ::Google::Cloud::Talent::V4::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tenants(::Google::Cloud::Talent::V4::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_tenants(::Google::Cloud::Talent::V4::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

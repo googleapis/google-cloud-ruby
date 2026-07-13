@@ -75,6 +75,7 @@ class ::Google::Cloud::Ces::V1::ToolService::ClientTest < Minitest::Test
     variables = {}
     parent = "hello world"
     args = {}
+    mock_config = {}
 
     execute_tool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :execute_tool, name
@@ -85,41 +86,42 @@ class ::Google::Cloud::Ces::V1::ToolService::ClientTest < Minitest::Test
       assert_equal :variables, request.tool_execution_context
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["args"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1::MockConfig), request["mock_config"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, execute_tool_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::ToolService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::ToolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_tool({ tool: tool, variables: variables, parent: parent, args: args }) do |response, operation|
+      c.execute_tool({ tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_tool tool: tool, variables: variables, parent: parent, args: args do |response, operation|
+      c.execute_tool tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_tool ::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args) do |response, operation|
+      c.execute_tool ::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_tool({ tool: tool, variables: variables, parent: parent, args: args }, grpc_options) do |response, operation|
+      c.execute_tool({ tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_tool(::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args), grpc_options) do |response, operation|
+      c.execute_tool(::Google::Cloud::Ces::V1::ExecuteToolRequest.new(tool: tool, variables: variables, parent: parent, args: args, mock_config: mock_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -151,36 +153,36 @@ class ::Google::Cloud::Ces::V1::ToolService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, retrieve_tool_schema_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::ToolService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::ToolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.retrieve_tool_schema({ tool: tool, parent: parent }) do |response, operation|
+      c.retrieve_tool_schema({ tool: tool, parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.retrieve_tool_schema tool: tool, parent: parent do |response, operation|
+      c.retrieve_tool_schema tool: tool, parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.retrieve_tool_schema ::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent) do |response, operation|
+      c.retrieve_tool_schema ::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.retrieve_tool_schema({ tool: tool, parent: parent }, grpc_options) do |response, operation|
+      c.retrieve_tool_schema({ tool: tool, parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.retrieve_tool_schema(::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent), grpc_options) do |response, operation|
+      c.retrieve_tool_schema(::Google::Cloud::Ces::V1::RetrieveToolSchemaRequest.new(tool: tool, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,47 +202,49 @@ class ::Google::Cloud::Ces::V1::ToolService::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     toolset = "hello world"
     tool_ids = ["hello world"]
+    bypass_persistence_config = true
 
     retrieve_tools_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :retrieve_tools, name
       assert_kind_of ::Google::Cloud::Ces::V1::RetrieveToolsRequest, request
       assert_equal "hello world", request["toolset"]
       assert_equal ["hello world"], request["tool_ids"]
+      assert_equal true, request["bypass_persistence_config"]
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, retrieve_tools_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::ToolService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::ToolService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }) do |response, operation|
+      c.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.retrieve_tools toolset: toolset, tool_ids: tool_ids do |response, operation|
+      c.retrieve_tools toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.retrieve_tools ::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids) do |response, operation|
+      c.retrieve_tools ::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.retrieve_tools({ toolset: toolset, tool_ids: tool_ids }, grpc_options) do |response, operation|
+      c.retrieve_tools({ toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.retrieve_tools(::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids), grpc_options) do |response, operation|
+      c.retrieve_tools(::Google::Cloud::Ces::V1::RetrieveToolsRequest.new(toolset: toolset, tool_ids: tool_ids, bypass_persistence_config: bypass_persistence_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

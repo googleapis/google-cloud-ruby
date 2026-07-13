@@ -1,5 +1,23 @@
 # Release History
 
+### 1.17.0 (2026-07-07)
+
+#### Features
+
+* Add `DiskConfig` to instance selection to support disk config overrides for flexible VMs ([#34704](https://github.com/googleapis/google-cloud-ruby/issues/34704)) 
+
+### 1.16.0 (2026-06-22)
+
+#### Features
+
+* Add `ConfidentialInstanceType` field to support selection of confidential compute technology ([#34642](https://github.com/googleapis/google-cloud-ruby/issues/34642)) 
+
+### 1.15.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34044](https://github.com/googleapis/google-cloud-ruby/issues/34044)) 
+
 ### 1.14.0 (2026-06-03)
 
 #### Features

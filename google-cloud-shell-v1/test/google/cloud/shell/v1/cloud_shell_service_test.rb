@@ -82,36 +82,36 @@ class ::Google::Cloud::Shell::V1::CloudShellService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+      c = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_environment({ name: name }) do |response, operation|
+      c.get_environment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_environment name: name do |response, operation|
+      c.get_environment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_environment ::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name) do |response, operation|
+      c.get_environment ::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_environment({ name: name }, grpc_options) do |response, operation|
+      c.get_environment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_environment(::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_environment(::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,40 +144,40 @@ class ::Google::Cloud::Shell::V1::CloudShellService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, start_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+      c = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_environment({ name: name, access_token: access_token, public_keys: public_keys }) do |response, operation|
+      c.start_environment({ name: name, access_token: access_token, public_keys: public_keys }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_environment name: name, access_token: access_token, public_keys: public_keys do |response, operation|
+      c.start_environment name: name, access_token: access_token, public_keys: public_keys do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_environment ::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys) do |response, operation|
+      c.start_environment ::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_environment({ name: name, access_token: access_token, public_keys: public_keys }, grpc_options) do |response, operation|
+      c.start_environment({ name: name, access_token: access_token, public_keys: public_keys }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_environment(::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys), grpc_options) do |response, operation|
+      c.start_environment(::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -213,40 +213,40 @@ class ::Google::Cloud::Shell::V1::CloudShellService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, authorize_environment_client_stub do
       # Create client
-      client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+      c = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }) do |response, operation|
+      c.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.authorize_environment name: name, access_token: access_token, id_token: id_token, expire_time: expire_time do |response, operation|
+      c.authorize_environment name: name, access_token: access_token, id_token: id_token, expire_time: expire_time do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.authorize_environment ::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time) do |response, operation|
+      c.authorize_environment ::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }, grpc_options) do |response, operation|
+      c.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.authorize_environment(::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time), grpc_options) do |response, operation|
+      c.authorize_environment(::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -278,40 +278,40 @@ class ::Google::Cloud::Shell::V1::CloudShellService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, add_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+      c = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_public_key({ environment: environment, key: key }) do |response, operation|
+      c.add_public_key({ environment: environment, key: key }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_public_key environment: environment, key: key do |response, operation|
+      c.add_public_key environment: environment, key: key do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_public_key ::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key) do |response, operation|
+      c.add_public_key ::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_public_key({ environment: environment, key: key }, grpc_options) do |response, operation|
+      c.add_public_key({ environment: environment, key: key }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_public_key(::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key), grpc_options) do |response, operation|
+      c.add_public_key(::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::Shell::V1::CloudShellService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_public_key_client_stub do
       # Create client
-      client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
+      c = ::Google::Cloud::Shell::V1::CloudShellService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_public_key({ environment: environment, key: key }) do |response, operation|
+      c.remove_public_key({ environment: environment, key: key }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_public_key environment: environment, key: key do |response, operation|
+      c.remove_public_key environment: environment, key: key do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_public_key ::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key) do |response, operation|
+      c.remove_public_key ::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_public_key({ environment: environment, key: key }, grpc_options) do |response, operation|
+      c.remove_public_key({ environment: environment, key: key }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_public_key(::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key), grpc_options) do |response, operation|
+      c.remove_public_key(::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

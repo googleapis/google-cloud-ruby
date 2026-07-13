@@ -53,6 +53,12 @@ module Google
             # [CompletionSuggestion][google.cloud.discoveryengine.v1beta.CompletionSuggestion]s
             # for a DataStore.
             rpc :PurgeCompletionSuggestions, ::Google::Cloud::DiscoveryEngine::V1beta::PurgeCompletionSuggestionsRequest, ::Google::Longrunning::Operation
+            # Removes the search history suggestion in an engine for a user. This will
+            # remove the suggestion from being returned in the
+            # [AdvancedCompleteQueryResponse.recent_search_suggestions][google.cloud.discoveryengine.v1beta.AdvancedCompleteQueryResponse.recent_search_suggestions]
+            # for this user. If the user searches the same suggestion again, the new
+            # history will override and suggest this suggestion again.
+            rpc :RemoveSuggestion, ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest, ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionResponse
           end
 
           Stub = Service.rpc_stub_class

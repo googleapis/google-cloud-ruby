@@ -100,32 +100,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ServiceStub.stub :transcode_list_user_licenses_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_user_licenses_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_user_licenses parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_user_licenses ::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_user_licenses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_user_licenses(::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ClientTest
     ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::ServiceStub.stub :transcode_batch_update_user_licenses_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_user_licenses_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }) do |_result, response|
+        c.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_user_licenses inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses do |_result, response|
+        c.batch_update_user_licenses inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_user_licenses ::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses) do |_result, response|
+        c.batch_update_user_licenses ::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }, call_options) do |_result, response|
+        c.batch_update_user_licenses({ inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_user_licenses(::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses), call_options) do |_result, response|
+        c.batch_update_user_licenses(::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest.new(inline_source: inline_source, parent: parent, delete_unassigned_user_licenses: delete_unassigned_user_licenses), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

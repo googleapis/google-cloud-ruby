@@ -101,32 +101,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_list_public_operators_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_public_operators_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_public_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_public_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_public_operators parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_public_operators parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_public_operators ::Google::Cloud::VisionAI::V1::ListPublicOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_public_operators ::Google::Cloud::VisionAI::V1::ListPublicOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_public_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_public_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_public_operators(::Google::Cloud::VisionAI::V1::ListPublicOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_public_operators(::Google::Cloud::VisionAI::V1::ListPublicOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_resolve_operator_info_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resolve_operator_info_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resolve_operator_info({ parent: parent, queries: queries }) do |_result, response|
+        c.resolve_operator_info({ parent: parent, queries: queries }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resolve_operator_info parent: parent, queries: queries do |_result, response|
+        c.resolve_operator_info parent: parent, queries: queries do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resolve_operator_info ::Google::Cloud::VisionAI::V1::ResolveOperatorInfoRequest.new(parent: parent, queries: queries) do |_result, response|
+        c.resolve_operator_info ::Google::Cloud::VisionAI::V1::ResolveOperatorInfoRequest.new(parent: parent, queries: queries) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resolve_operator_info({ parent: parent, queries: queries }, call_options) do |_result, response|
+        c.resolve_operator_info({ parent: parent, queries: queries }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resolve_operator_info(::Google::Cloud::VisionAI::V1::ResolveOperatorInfoRequest.new(parent: parent, queries: queries), call_options) do |_result, response|
+        c.resolve_operator_info(::Google::Cloud::VisionAI::V1::ResolveOperatorInfoRequest.new(parent: parent, queries: queries), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_list_operators_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_operators_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_operators parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_operators parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_operators ::Google::Cloud::VisionAI::V1::ListOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_operators ::Google::Cloud::VisionAI::V1::ListOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_operators({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_operators(::Google::Cloud::VisionAI::V1::ListOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_operators(::Google::Cloud::VisionAI::V1::ListOperatorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_get_operator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_operator_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_operator({ name: name }) do |_result, response|
+        c.get_operator({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_operator name: name do |_result, response|
+        c.get_operator name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_operator ::Google::Cloud::VisionAI::V1::GetOperatorRequest.new(name: name) do |_result, response|
+        c.get_operator ::Google::Cloud::VisionAI::V1::GetOperatorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_operator({ name: name }, call_options) do |_result, response|
+        c.get_operator({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_operator(::Google::Cloud::VisionAI::V1::GetOperatorRequest.new(name: name), call_options) do |_result, response|
+        c.get_operator(::Google::Cloud::VisionAI::V1::GetOperatorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_create_operator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_operator_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_operator({ parent: parent, operator_id: operator_id, operator: operator, request_id: request_id }) do |_result, response|
+        c.create_operator({ parent: parent, operator_id: operator_id, operator: operator, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_operator parent: parent, operator_id: operator_id, operator: operator, request_id: request_id do |_result, response|
+        c.create_operator parent: parent, operator_id: operator_id, operator: operator, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_operator ::Google::Cloud::VisionAI::V1::CreateOperatorRequest.new(parent: parent, operator_id: operator_id, operator: operator, request_id: request_id) do |_result, response|
+        c.create_operator ::Google::Cloud::VisionAI::V1::CreateOperatorRequest.new(parent: parent, operator_id: operator_id, operator: operator, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_operator({ parent: parent, operator_id: operator_id, operator: operator, request_id: request_id }, call_options) do |_result, response|
+        c.create_operator({ parent: parent, operator_id: operator_id, operator: operator, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_operator(::Google::Cloud::VisionAI::V1::CreateOperatorRequest.new(parent: parent, operator_id: operator_id, operator: operator, request_id: request_id), call_options) do |_result, response|
+        c.create_operator(::Google::Cloud::VisionAI::V1::CreateOperatorRequest.new(parent: parent, operator_id: operator_id, operator: operator, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -381,32 +381,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_update_operator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_operator_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_operator({ update_mask: update_mask, operator: operator, request_id: request_id }) do |_result, response|
+        c.update_operator({ update_mask: update_mask, operator: operator, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_operator update_mask: update_mask, operator: operator, request_id: request_id do |_result, response|
+        c.update_operator update_mask: update_mask, operator: operator, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_operator ::Google::Cloud::VisionAI::V1::UpdateOperatorRequest.new(update_mask: update_mask, operator: operator, request_id: request_id) do |_result, response|
+        c.update_operator ::Google::Cloud::VisionAI::V1::UpdateOperatorRequest.new(update_mask: update_mask, operator: operator, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_operator({ update_mask: update_mask, operator: operator, request_id: request_id }, call_options) do |_result, response|
+        c.update_operator({ update_mask: update_mask, operator: operator, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_operator(::Google::Cloud::VisionAI::V1::UpdateOperatorRequest.new(update_mask: update_mask, operator: operator, request_id: request_id), call_options) do |_result, response|
+        c.update_operator(::Google::Cloud::VisionAI::V1::UpdateOperatorRequest.new(update_mask: update_mask, operator: operator, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_delete_operator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_operator_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_operator({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_operator({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_operator name: name, request_id: request_id do |_result, response|
+        c.delete_operator name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_operator ::Google::Cloud::VisionAI::V1::DeleteOperatorRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_operator ::Google::Cloud::VisionAI::V1::DeleteOperatorRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_operator({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_operator({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_operator(::Google::Cloud::VisionAI::V1::DeleteOperatorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_operator(::Google::Cloud::VisionAI::V1::DeleteOperatorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -494,32 +494,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_list_analyses_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_analyses_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_analyses parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_analyses parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_analyses ::Google::Cloud::VisionAI::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_analyses ::Google::Cloud::VisionAI::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_analyses({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_analyses(::Google::Cloud::VisionAI::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_analyses(::Google::Cloud::VisionAI::V1::ListAnalysesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -548,32 +548,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_get_analysis_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_analysis_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_analysis({ name: name }) do |_result, response|
+        c.get_analysis({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_analysis name: name do |_result, response|
+        c.get_analysis name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_analysis ::Google::Cloud::VisionAI::V1::GetAnalysisRequest.new(name: name) do |_result, response|
+        c.get_analysis ::Google::Cloud::VisionAI::V1::GetAnalysisRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_analysis({ name: name }, call_options) do |_result, response|
+        c.get_analysis({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_analysis(::Google::Cloud::VisionAI::V1::GetAnalysisRequest.new(name: name), call_options) do |_result, response|
+        c.get_analysis(::Google::Cloud::VisionAI::V1::GetAnalysisRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_create_analysis_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_analysis_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_analysis({ parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id }) do |_result, response|
+        c.create_analysis({ parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_analysis parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id do |_result, response|
+        c.create_analysis parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_analysis ::Google::Cloud::VisionAI::V1::CreateAnalysisRequest.new(parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id) do |_result, response|
+        c.create_analysis ::Google::Cloud::VisionAI::V1::CreateAnalysisRequest.new(parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_analysis({ parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id }, call_options) do |_result, response|
+        c.create_analysis({ parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_analysis(::Google::Cloud::VisionAI::V1::CreateAnalysisRequest.new(parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id), call_options) do |_result, response|
+        c.create_analysis(::Google::Cloud::VisionAI::V1::CreateAnalysisRequest.new(parent: parent, analysis_id: analysis_id, analysis: analysis, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -661,32 +661,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_update_analysis_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_analysis_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_analysis({ update_mask: update_mask, analysis: analysis, request_id: request_id }) do |_result, response|
+        c.update_analysis({ update_mask: update_mask, analysis: analysis, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_analysis update_mask: update_mask, analysis: analysis, request_id: request_id do |_result, response|
+        c.update_analysis update_mask: update_mask, analysis: analysis, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_analysis ::Google::Cloud::VisionAI::V1::UpdateAnalysisRequest.new(update_mask: update_mask, analysis: analysis, request_id: request_id) do |_result, response|
+        c.update_analysis ::Google::Cloud::VisionAI::V1::UpdateAnalysisRequest.new(update_mask: update_mask, analysis: analysis, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_analysis({ update_mask: update_mask, analysis: analysis, request_id: request_id }, call_options) do |_result, response|
+        c.update_analysis({ update_mask: update_mask, analysis: analysis, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_analysis(::Google::Cloud::VisionAI::V1::UpdateAnalysisRequest.new(update_mask: update_mask, analysis: analysis, request_id: request_id), call_options) do |_result, response|
+        c.update_analysis(::Google::Cloud::VisionAI::V1::UpdateAnalysisRequest.new(update_mask: update_mask, analysis: analysis, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -716,32 +716,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_delete_analysis_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_analysis_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_analysis({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_analysis({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_analysis name: name, request_id: request_id do |_result, response|
+        c.delete_analysis name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_analysis ::Google::Cloud::VisionAI::V1::DeleteAnalysisRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_analysis ::Google::Cloud::VisionAI::V1::DeleteAnalysisRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_analysis({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_analysis({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_analysis(::Google::Cloud::VisionAI::V1::DeleteAnalysisRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_analysis(::Google::Cloud::VisionAI::V1::DeleteAnalysisRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -774,32 +774,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_list_processes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_processes_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_processes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_processes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_processes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_processes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_processes ::Google::Cloud::VisionAI::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_processes ::Google::Cloud::VisionAI::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_processes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_processes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_processes(::Google::Cloud::VisionAI::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_processes(::Google::Cloud::VisionAI::V1::ListProcessesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -828,32 +828,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_get_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_process_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_process({ name: name }) do |_result, response|
+        c.get_process({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_process name: name do |_result, response|
+        c.get_process name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_process ::Google::Cloud::VisionAI::V1::GetProcessRequest.new(name: name) do |_result, response|
+        c.get_process ::Google::Cloud::VisionAI::V1::GetProcessRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_process({ name: name }, call_options) do |_result, response|
+        c.get_process({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_process(::Google::Cloud::VisionAI::V1::GetProcessRequest.new(name: name), call_options) do |_result, response|
+        c.get_process(::Google::Cloud::VisionAI::V1::GetProcessRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -885,32 +885,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_create_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_process_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_process({ parent: parent, process_id: process_id, process: process, request_id: request_id }) do |_result, response|
+        c.create_process({ parent: parent, process_id: process_id, process: process, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_process parent: parent, process_id: process_id, process: process, request_id: request_id do |_result, response|
+        c.create_process parent: parent, process_id: process_id, process: process, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_process ::Google::Cloud::VisionAI::V1::CreateProcessRequest.new(parent: parent, process_id: process_id, process: process, request_id: request_id) do |_result, response|
+        c.create_process ::Google::Cloud::VisionAI::V1::CreateProcessRequest.new(parent: parent, process_id: process_id, process: process, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_process({ parent: parent, process_id: process_id, process: process, request_id: request_id }, call_options) do |_result, response|
+        c.create_process({ parent: parent, process_id: process_id, process: process, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_process(::Google::Cloud::VisionAI::V1::CreateProcessRequest.new(parent: parent, process_id: process_id, process: process, request_id: request_id), call_options) do |_result, response|
+        c.create_process(::Google::Cloud::VisionAI::V1::CreateProcessRequest.new(parent: parent, process_id: process_id, process: process, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -941,32 +941,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_update_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_process_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_process({ update_mask: update_mask, process: process, request_id: request_id }) do |_result, response|
+        c.update_process({ update_mask: update_mask, process: process, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_process update_mask: update_mask, process: process, request_id: request_id do |_result, response|
+        c.update_process update_mask: update_mask, process: process, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_process ::Google::Cloud::VisionAI::V1::UpdateProcessRequest.new(update_mask: update_mask, process: process, request_id: request_id) do |_result, response|
+        c.update_process ::Google::Cloud::VisionAI::V1::UpdateProcessRequest.new(update_mask: update_mask, process: process, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_process({ update_mask: update_mask, process: process, request_id: request_id }, call_options) do |_result, response|
+        c.update_process({ update_mask: update_mask, process: process, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_process(::Google::Cloud::VisionAI::V1::UpdateProcessRequest.new(update_mask: update_mask, process: process, request_id: request_id), call_options) do |_result, response|
+        c.update_process(::Google::Cloud::VisionAI::V1::UpdateProcessRequest.new(update_mask: update_mask, process: process, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -996,32 +996,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_delete_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_process_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_process({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_process({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_process name: name, request_id: request_id do |_result, response|
+        c.delete_process name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_process ::Google::Cloud::VisionAI::V1::DeleteProcessRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_process ::Google::Cloud::VisionAI::V1::DeleteProcessRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_process({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_process({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_process(::Google::Cloud::VisionAI::V1::DeleteProcessRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_process(::Google::Cloud::VisionAI::V1::DeleteProcessRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1053,32 +1053,32 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ServiceStub.stub :transcode_batch_run_process_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_run_process_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_run_process({ parent: parent, requests: requests, options: options, batch_id: batch_id }) do |_result, response|
+        c.batch_run_process({ parent: parent, requests: requests, options: options, batch_id: batch_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_run_process parent: parent, requests: requests, options: options, batch_id: batch_id do |_result, response|
+        c.batch_run_process parent: parent, requests: requests, options: options, batch_id: batch_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_run_process ::Google::Cloud::VisionAI::V1::BatchRunProcessRequest.new(parent: parent, requests: requests, options: options, batch_id: batch_id) do |_result, response|
+        c.batch_run_process ::Google::Cloud::VisionAI::V1::BatchRunProcessRequest.new(parent: parent, requests: requests, options: options, batch_id: batch_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_run_process({ parent: parent, requests: requests, options: options, batch_id: batch_id }, call_options) do |_result, response|
+        c.batch_run_process({ parent: parent, requests: requests, options: options, batch_id: batch_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_run_process(::Google::Cloud::VisionAI::V1::BatchRunProcessRequest.new(parent: parent, requests: requests, options: options, batch_id: batch_id), call_options) do |_result, response|
+        c.batch_run_process(::Google::Cloud::VisionAI::V1::BatchRunProcessRequest.new(parent: parent, requests: requests, options: options, batch_id: batch_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

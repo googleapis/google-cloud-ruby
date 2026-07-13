@@ -42,7 +42,8 @@ module Google
         #     Output only. Represents the relevance score based on similarity.
         #     Higher score indicates higher chunk relevance.
         #     The score is in range [-1.0, 1.0].
-        #     Only populated on [SearchService.SearchResponse][].
+        #     Only populated on
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse SearchResponse}.
         # @!attribute [rw] document_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Chunk::DocumentMetadata]
         #     Metadata of the document from the current chunk.
@@ -56,6 +57,20 @@ module Google
         # @!attribute [r] chunk_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Chunk::ChunkMetadata]
         #     Output only. Metadata of the current chunk.
+        # @!attribute [r] data_urls
+        #   @return [::Array<::String>]
+        #     Output only. Image Data URLs if the current chunk contains images.
+        #     Data URLs are composed of four parts: a prefix (data:), a MIME type
+        #     indicating the type of data, an optional base64 token if non-textual,
+        #     and the data itself:
+        #     data:[<mediatype>][;base64],<data>
+        # @!attribute [r] annotation_contents
+        #   @return [::Array<::String>]
+        #     Output only. Annotation contents if the current chunk contains annotations.
+        # @!attribute [r] annotation_metadata
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Chunk::AnnotationMetadata>]
+        #     Output only. The annotation metadata includes structured content in the
+        #     current chunk.
         class Chunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -68,6 +83,10 @@ module Google
           # @!attribute [rw] title
           #   @return [::String]
           #     Title of the document.
+          # @!attribute [rw] mime_type
+          #   @return [::String]
+          #     The mime type of the document.
+          #     https://www.iana.org/assignments/media-types/media-types.xhtml.
           # @!attribute [rw] struct_data
           #   @return [::Google::Protobuf::Struct]
           #     Data representation.
@@ -111,6 +130,46 @@ module Google
           class ChunkMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The structured content information.
+          # @!attribute [r] structure_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Chunk::StructureType]
+          #     Output only. The structure type of the structured content.
+          # @!attribute [r] content
+          #   @return [::String]
+          #     Output only. The content of the structured content.
+          class StructuredContent
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The annotation metadata includes structured content in the current chunk.
+          # @!attribute [r] structured_content
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Chunk::StructuredContent]
+          #     Output only. The structured content information.
+          # @!attribute [r] image_id
+          #   @return [::String]
+          #     Output only. Image id is provided if the structured content is based on
+          #     an image.
+          class AnnotationMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Defines the types of the structured content that can be extracted.
+          module StructureType
+            # Default value.
+            STRUCTURE_TYPE_UNSPECIFIED = 0
+
+            # Shareholder structure.
+            SHAREHOLDER_STRUCTURE = 1
+
+            # Signature structure.
+            SIGNATURE_STRUCTURE = 2
+
+            # Checkbox structure.
+            CHECKBOX_STRUCTURE = 3
           end
         end
       end

@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_entry_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entry_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entry_type({ parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only }) do |_result, response|
+        c.create_entry_type({ parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entry_type parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only do |_result, response|
+        c.create_entry_type parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entry_type ::Google::Cloud::Dataplex::V1::CreateEntryTypeRequest.new(parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only) do |_result, response|
+        c.create_entry_type ::Google::Cloud::Dataplex::V1::CreateEntryTypeRequest.new(parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entry_type({ parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_entry_type({ parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entry_type(::Google::Cloud::Dataplex::V1::CreateEntryTypeRequest.new(parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only), call_options) do |_result, response|
+        c.create_entry_type(::Google::Cloud::Dataplex::V1::CreateEntryTypeRequest.new(parent: parent, entry_type_id: entry_type_id, entry_type: entry_type, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_entry_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entry_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entry_type({ entry_type: entry_type, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_entry_type({ entry_type: entry_type, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entry_type entry_type: entry_type, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_entry_type entry_type: entry_type, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entry_type ::Google::Cloud::Dataplex::V1::UpdateEntryTypeRequest.new(entry_type: entry_type, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_entry_type ::Google::Cloud::Dataplex::V1::UpdateEntryTypeRequest.new(entry_type: entry_type, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entry_type({ entry_type: entry_type, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_entry_type({ entry_type: entry_type, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entry_type(::Google::Cloud::Dataplex::V1::UpdateEntryTypeRequest.new(entry_type: entry_type, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_entry_type(::Google::Cloud::Dataplex::V1::UpdateEntryTypeRequest.new(entry_type: entry_type, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_entry_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entry_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entry_type({ name: name, etag: etag }) do |_result, response|
+        c.delete_entry_type({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entry_type name: name, etag: etag do |_result, response|
+        c.delete_entry_type name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entry_type ::Google::Cloud::Dataplex::V1::DeleteEntryTypeRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_entry_type ::Google::Cloud::Dataplex::V1::DeleteEntryTypeRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entry_type({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_entry_type({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entry_type(::Google::Cloud::Dataplex::V1::DeleteEntryTypeRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_entry_type(::Google::Cloud::Dataplex::V1::DeleteEntryTypeRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_entry_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entry_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entry_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_entry_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entry_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_entry_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entry_types ::Google::Cloud::Dataplex::V1::ListEntryTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_entry_types ::Google::Cloud::Dataplex::V1::ListEntryTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entry_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_entry_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entry_types(::Google::Cloud::Dataplex::V1::ListEntryTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_entry_types(::Google::Cloud::Dataplex::V1::ListEntryTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_entry_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entry_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entry_type({ name: name }) do |_result, response|
+        c.get_entry_type({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entry_type name: name do |_result, response|
+        c.get_entry_type name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entry_type ::Google::Cloud::Dataplex::V1::GetEntryTypeRequest.new(name: name) do |_result, response|
+        c.get_entry_type ::Google::Cloud::Dataplex::V1::GetEntryTypeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entry_type({ name: name }, call_options) do |_result, response|
+        c.get_entry_type({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entry_type(::Google::Cloud::Dataplex::V1::GetEntryTypeRequest.new(name: name), call_options) do |_result, response|
+        c.get_entry_type(::Google::Cloud::Dataplex::V1::GetEntryTypeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -380,32 +380,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_aspect_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_aspect_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_aspect_type({ parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only }) do |_result, response|
+        c.create_aspect_type({ parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_aspect_type parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only do |_result, response|
+        c.create_aspect_type parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_aspect_type ::Google::Cloud::Dataplex::V1::CreateAspectTypeRequest.new(parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only) do |_result, response|
+        c.create_aspect_type ::Google::Cloud::Dataplex::V1::CreateAspectTypeRequest.new(parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_aspect_type({ parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_aspect_type({ parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_aspect_type(::Google::Cloud::Dataplex::V1::CreateAspectTypeRequest.new(parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only), call_options) do |_result, response|
+        c.create_aspect_type(::Google::Cloud::Dataplex::V1::CreateAspectTypeRequest.new(parent: parent, aspect_type_id: aspect_type_id, aspect_type: aspect_type, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_aspect_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_aspect_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_aspect_type({ aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_aspect_type({ aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_aspect_type aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_aspect_type aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_aspect_type ::Google::Cloud::Dataplex::V1::UpdateAspectTypeRequest.new(aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_aspect_type ::Google::Cloud::Dataplex::V1::UpdateAspectTypeRequest.new(aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_aspect_type({ aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_aspect_type({ aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_aspect_type(::Google::Cloud::Dataplex::V1::UpdateAspectTypeRequest.new(aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_aspect_type(::Google::Cloud::Dataplex::V1::UpdateAspectTypeRequest.new(aspect_type: aspect_type, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -491,32 +491,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_aspect_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_aspect_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_aspect_type({ name: name, etag: etag }) do |_result, response|
+        c.delete_aspect_type({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_aspect_type name: name, etag: etag do |_result, response|
+        c.delete_aspect_type name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_aspect_type ::Google::Cloud::Dataplex::V1::DeleteAspectTypeRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_aspect_type ::Google::Cloud::Dataplex::V1::DeleteAspectTypeRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_aspect_type({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_aspect_type({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_aspect_type(::Google::Cloud::Dataplex::V1::DeleteAspectTypeRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_aspect_type(::Google::Cloud::Dataplex::V1::DeleteAspectTypeRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_aspect_types_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_aspect_types_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_aspect_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_aspect_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_aspect_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_aspect_types parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_aspect_types ::Google::Cloud::Dataplex::V1::ListAspectTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_aspect_types ::Google::Cloud::Dataplex::V1::ListAspectTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_aspect_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_aspect_types({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_aspect_types(::Google::Cloud::Dataplex::V1::ListAspectTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_aspect_types(::Google::Cloud::Dataplex::V1::ListAspectTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -603,32 +603,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_aspect_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_aspect_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_aspect_type({ name: name }) do |_result, response|
+        c.get_aspect_type({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_aspect_type name: name do |_result, response|
+        c.get_aspect_type name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_aspect_type ::Google::Cloud::Dataplex::V1::GetAspectTypeRequest.new(name: name) do |_result, response|
+        c.get_aspect_type ::Google::Cloud::Dataplex::V1::GetAspectTypeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_aspect_type({ name: name }, call_options) do |_result, response|
+        c.get_aspect_type({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_aspect_type(::Google::Cloud::Dataplex::V1::GetAspectTypeRequest.new(name: name), call_options) do |_result, response|
+        c.get_aspect_type(::Google::Cloud::Dataplex::V1::GetAspectTypeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -660,32 +660,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only }) do |_result, response|
+        c.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entry_group parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only do |_result, response|
+        c.create_entry_group parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entry_group ::Google::Cloud::Dataplex::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only) do |_result, response|
+        c.create_entry_group ::Google::Cloud::Dataplex::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entry_group(::Google::Cloud::Dataplex::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only), call_options) do |_result, response|
+        c.create_entry_group(::Google::Cloud::Dataplex::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -716,32 +716,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entry_group({ entry_group: entry_group, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_entry_group({ entry_group: entry_group, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entry_group entry_group: entry_group, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_entry_group entry_group: entry_group, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entry_group ::Google::Cloud::Dataplex::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_entry_group ::Google::Cloud::Dataplex::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entry_group({ entry_group: entry_group, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_entry_group({ entry_group: entry_group, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entry_group(::Google::Cloud::Dataplex::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_entry_group(::Google::Cloud::Dataplex::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -771,32 +771,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entry_group({ name: name, etag: etag }) do |_result, response|
+        c.delete_entry_group({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entry_group name: name, etag: etag do |_result, response|
+        c.delete_entry_group name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entry_group ::Google::Cloud::Dataplex::V1::DeleteEntryGroupRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_entry_group ::Google::Cloud::Dataplex::V1::DeleteEntryGroupRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entry_group({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_entry_group({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entry_group(::Google::Cloud::Dataplex::V1::DeleteEntryGroupRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_entry_group(::Google::Cloud::Dataplex::V1::DeleteEntryGroupRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -829,32 +829,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_entry_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entry_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entry_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_entry_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entry_groups ::Google::Cloud::Dataplex::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_entry_groups ::Google::Cloud::Dataplex::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entry_groups(::Google::Cloud::Dataplex::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_entry_groups(::Google::Cloud::Dataplex::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -883,32 +883,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entry_group({ name: name }) do |_result, response|
+        c.get_entry_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entry_group name: name do |_result, response|
+        c.get_entry_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entry_group ::Google::Cloud::Dataplex::V1::GetEntryGroupRequest.new(name: name) do |_result, response|
+        c.get_entry_group ::Google::Cloud::Dataplex::V1::GetEntryGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entry_group({ name: name }, call_options) do |_result, response|
+        c.get_entry_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entry_group(::Google::Cloud::Dataplex::V1::GetEntryGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_entry_group(::Google::Cloud::Dataplex::V1::GetEntryGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -939,32 +939,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entry({ parent: parent, entry_id: entry_id, entry: entry }) do |_result, response|
+        c.create_entry({ parent: parent, entry_id: entry_id, entry: entry }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entry parent: parent, entry_id: entry_id, entry: entry do |_result, response|
+        c.create_entry parent: parent, entry_id: entry_id, entry: entry do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entry ::Google::Cloud::Dataplex::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry) do |_result, response|
+        c.create_entry ::Google::Cloud::Dataplex::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entry({ parent: parent, entry_id: entry_id, entry: entry }, call_options) do |_result, response|
+        c.create_entry({ parent: parent, entry_id: entry_id, entry: entry }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entry(::Google::Cloud::Dataplex::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), call_options) do |_result, response|
+        c.create_entry(::Google::Cloud::Dataplex::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -997,32 +997,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entry({ entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }) do |_result, response|
+        c.update_entry({ entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entry entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys do |_result, response|
+        c.update_entry entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entry ::Google::Cloud::Dataplex::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys) do |_result, response|
+        c.update_entry ::Google::Cloud::Dataplex::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entry({ entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }, call_options) do |_result, response|
+        c.update_entry({ entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entry(::Google::Cloud::Dataplex::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys), call_options) do |_result, response|
+        c.update_entry(::Google::Cloud::Dataplex::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask, allow_missing: allow_missing, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1051,32 +1051,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entry({ name: name }) do |_result, response|
+        c.delete_entry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entry name: name do |_result, response|
+        c.delete_entry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entry ::Google::Cloud::Dataplex::V1::DeleteEntryRequest.new(name: name) do |_result, response|
+        c.delete_entry ::Google::Cloud::Dataplex::V1::DeleteEntryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entry({ name: name }, call_options) do |_result, response|
+        c.delete_entry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entry(::Google::Cloud::Dataplex::V1::DeleteEntryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_entry(::Google::Cloud::Dataplex::V1::DeleteEntryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1108,32 +1108,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_entries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entries_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entries parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_entries parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entries ::Google::Cloud::Dataplex::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_entries ::Google::Cloud::Dataplex::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_entries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entries(::Google::Cloud::Dataplex::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_entries(::Google::Cloud::Dataplex::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1165,32 +1165,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths }) do |_result, response|
+        c.get_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entry name: name, view: view, aspect_types: aspect_types, paths: paths do |_result, response|
+        c.get_entry name: name, view: view, aspect_types: aspect_types, paths: paths do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entry ::Google::Cloud::Dataplex::V1::GetEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths) do |_result, response|
+        c.get_entry ::Google::Cloud::Dataplex::V1::GetEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths }, call_options) do |_result, response|
+        c.get_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entry(::Google::Cloud::Dataplex::V1::GetEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths), call_options) do |_result, response|
+        c.get_entry(::Google::Cloud::Dataplex::V1::GetEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1223,37 +1223,95 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_lookup_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry }) do |_result, response|
+        c.lookup_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_entry name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry do |_result, response|
+        c.lookup_entry name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_entry ::Google::Cloud::Dataplex::V1::LookupEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry) do |_result, response|
+        c.lookup_entry ::Google::Cloud::Dataplex::V1::LookupEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry }, call_options) do |_result, response|
+        c.lookup_entry({ name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_entry(::Google::Cloud::Dataplex::V1::LookupEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry), call_options) do |_result, response|
+        c.lookup_entry(::Google::Cloud::Dataplex::V1::LookupEntryRequest.new(name: name, view: view, aspect_types: aspect_types, paths: paths, entry: entry), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, lookup_entry_client_stub.call_count
+      end
+    end
+  end
+
+  def test_modify_entry
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::Entry.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    entry = {}
+    update_mask = {}
+    delete_missing_aspects = true
+    aspect_keys = ["hello world"]
+
+    modify_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_modify_entry_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, modify_entry_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.modify_entry({ name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.modify_entry name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.modify_entry ::Google::Cloud::Dataplex::V1::ModifyEntryRequest.new(name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.modify_entry({ name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.modify_entry(::Google::Cloud::Dataplex::V1::ModifyEntryRequest.new(name: name, entry: entry, update_mask: update_mask, delete_missing_aspects: delete_missing_aspects, aspect_keys: aspect_keys), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, modify_entry_client_stub.call_count
       end
     end
   end
@@ -1283,32 +1341,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_search_entries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_entries_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }) do |_result, response|
+        c.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_entries name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search do |_result, response|
+        c.search_entries name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_entries ::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search) do |_result, response|
+        c.search_entries ::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }, call_options) do |_result, response|
+        c.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_entries(::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search), call_options) do |_result, response|
+        c.search_entries(::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1340,32 +1398,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_metadata_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_metadata_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_metadata_job({ parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only }) do |_result, response|
+        c.create_metadata_job({ parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_metadata_job parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only do |_result, response|
+        c.create_metadata_job parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_metadata_job ::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new(parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only) do |_result, response|
+        c.create_metadata_job ::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new(parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_metadata_job({ parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_metadata_job({ parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_metadata_job(::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new(parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only), call_options) do |_result, response|
+        c.create_metadata_job(::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new(parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1394,32 +1452,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_metadata_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_metadata_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_metadata_job({ name: name }) do |_result, response|
+        c.get_metadata_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_metadata_job name: name do |_result, response|
+        c.get_metadata_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_metadata_job ::Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new(name: name) do |_result, response|
+        c.get_metadata_job ::Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_metadata_job({ name: name }, call_options) do |_result, response|
+        c.get_metadata_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_metadata_job(::Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_metadata_job(::Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1452,32 +1510,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_metadata_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_metadata_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_metadata_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_metadata_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_metadata_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_metadata_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_metadata_jobs ::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_metadata_jobs ::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_metadata_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_metadata_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_metadata_jobs(::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_metadata_jobs(::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1506,32 +1564,32 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_cancel_metadata_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_metadata_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_metadata_job({ name: name }) do |_result, response|
+        c.cancel_metadata_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_metadata_job name: name do |_result, response|
+        c.cancel_metadata_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_metadata_job ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new(name: name) do |_result, response|
+        c.cancel_metadata_job ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_metadata_job({ name: name }, call_options) do |_result, response|
+        c.cancel_metadata_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_metadata_job(::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_metadata_job(::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1562,37 +1620,93 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_entry_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entry_link_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entry_link({ parent: parent, entry_link_id: entry_link_id, entry_link: entry_link }) do |_result, response|
+        c.create_entry_link({ parent: parent, entry_link_id: entry_link_id, entry_link: entry_link }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entry_link parent: parent, entry_link_id: entry_link_id, entry_link: entry_link do |_result, response|
+        c.create_entry_link parent: parent, entry_link_id: entry_link_id, entry_link: entry_link do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entry_link ::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new(parent: parent, entry_link_id: entry_link_id, entry_link: entry_link) do |_result, response|
+        c.create_entry_link ::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new(parent: parent, entry_link_id: entry_link_id, entry_link: entry_link) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entry_link({ parent: parent, entry_link_id: entry_link_id, entry_link: entry_link }, call_options) do |_result, response|
+        c.create_entry_link({ parent: parent, entry_link_id: entry_link_id, entry_link: entry_link }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entry_link(::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new(parent: parent, entry_link_id: entry_link_id, entry_link: entry_link), call_options) do |_result, response|
+        c.create_entry_link(::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new(parent: parent, entry_link_id: entry_link_id, entry_link: entry_link), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, create_entry_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_entry_link
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    entry_link = {}
+    allow_missing = true
+    aspect_keys = ["hello world"]
+
+    update_entry_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_entry_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_entry_link_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_entry_link({ entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_entry_link entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_entry_link ::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest.new(entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_entry_link({ entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_entry_link(::Google::Cloud::Dataplex::V1::UpdateEntryLinkRequest.new(entry_link: entry_link, allow_missing: allow_missing, aspect_keys: aspect_keys), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_entry_link_client_stub.call_count
       end
     end
   end
@@ -1616,37 +1730,153 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_entry_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entry_link_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entry_link({ name: name }) do |_result, response|
+        c.delete_entry_link({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entry_link name: name do |_result, response|
+        c.delete_entry_link name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entry_link ::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new(name: name) do |_result, response|
+        c.delete_entry_link ::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entry_link({ name: name }, call_options) do |_result, response|
+        c.delete_entry_link({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entry_link(::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new(name: name), call_options) do |_result, response|
+        c.delete_entry_link(::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, delete_entry_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_lookup_entry_links
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::LookupEntryLinksResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    entry = "hello world"
+    entry_mode = :ENTRY_MODE_UNSPECIFIED
+    entry_link_types = ["hello world"]
+    page_size = 42
+    page_token = "hello world"
+
+    lookup_entry_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_lookup_entry_links_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, lookup_entry_links_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.lookup_entry_links({ name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.lookup_entry_links name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.lookup_entry_links ::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest.new(name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.lookup_entry_links({ name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.lookup_entry_links(::Google::Cloud::Dataplex::V1::LookupEntryLinksRequest.new(name: name, entry: entry, entry_mode: entry_mode, entry_link_types: entry_link_types, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, lookup_entry_links_client_stub.call_count
+      end
+    end
+  end
+
+  def test_lookup_context
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::LookupContextResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    resources = ["hello world"]
+    context = "hello world"
+    options = {}
+
+    lookup_context_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_lookup_context_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, lookup_context_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.lookup_context({ name: name, resources: resources, context: context, options: options }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.lookup_context name: name, resources: resources, context: context, options: options do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.lookup_context ::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, context: context, options: options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.lookup_context({ name: name, resources: resources, context: context, options: options }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.lookup_context(::Google::Cloud::Dataplex::V1::LookupContextRequest.new(name: name, resources: resources, context: context, options: options), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, lookup_context_client_stub.call_count
       end
     end
   end
@@ -1670,37 +1900,316 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_entry_link_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entry_link_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entry_link({ name: name }) do |_result, response|
+        c.get_entry_link({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entry_link name: name do |_result, response|
+        c.get_entry_link name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entry_link ::Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new(name: name) do |_result, response|
+        c.get_entry_link ::Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entry_link({ name: name }, call_options) do |_result, response|
+        c.get_entry_link({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entry_link(::Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new(name: name), call_options) do |_result, response|
+        c.get_entry_link(::Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, get_entry_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    metadata_feed = {}
+    metadata_feed_id = "hello world"
+    validate_only = true
+
+    create_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_metadata_feed_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_metadata_feed({ parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_metadata_feed parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_metadata_feed ::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest.new(parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_metadata_feed({ parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_metadata_feed(::Google::Cloud::Dataplex::V1::CreateMetadataFeedRequest.new(parent: parent, metadata_feed: metadata_feed, metadata_feed_id: metadata_feed_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_metadata_feed_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::MetadataFeed.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_metadata_feed_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_metadata_feed({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_metadata_feed name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_metadata_feed ::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_metadata_feed({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_metadata_feed(::Google::Cloud::Dataplex::V1::GetMetadataFeedRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_metadata_feed_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_metadata_feeds
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::ListMetadataFeedsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_metadata_feeds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_metadata_feeds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_metadata_feeds_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_metadata_feeds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_metadata_feeds parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_metadata_feeds ::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_metadata_feeds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_metadata_feeds(::Google::Cloud::Dataplex::V1::ListMetadataFeedsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_metadata_feeds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_metadata_feed_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_metadata_feed({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_metadata_feed name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_metadata_feed ::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_metadata_feed({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_metadata_feed(::Google::Cloud::Dataplex::V1::DeleteMetadataFeedRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_metadata_feed_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_metadata_feed
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    metadata_feed = {}
+    update_mask = {}
+    validate_only = true
+
+    update_metadata_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_update_metadata_feed_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_metadata_feed_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_metadata_feed({ metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_metadata_feed metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_metadata_feed ::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest.new(metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_metadata_feed({ metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_metadata_feed(::Google::Cloud::Dataplex::V1::UpdateMetadataFeedRequest.new(metadata_feed: metadata_feed, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_metadata_feed_client_stub.call_count
       end
     end
   end

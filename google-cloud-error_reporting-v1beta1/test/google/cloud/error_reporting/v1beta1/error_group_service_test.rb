@@ -82,36 +82,36 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_group_client_stub do
       # Create client
-      client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new do |config|
+      c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_group({ group_name: group_name }) do |response, operation|
+      c.get_group({ group_name: group_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_group group_name: group_name do |response, operation|
+      c.get_group group_name: group_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_group ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name) do |response, operation|
+      c.get_group ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_group({ group_name: group_name }, grpc_options) do |response, operation|
+      c.get_group({ group_name: group_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_group(::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name), grpc_options) do |response, operation|
+      c.get_group(::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -140,36 +140,36 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_group_client_stub do
       # Create client
-      client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new do |config|
+      c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_group({ group: group }) do |response, operation|
+      c.update_group({ group: group }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_group group: group do |response, operation|
+      c.update_group group: group do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_group ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group) do |response, operation|
+      c.update_group ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_group({ group: group }, grpc_options) do |response, operation|
+      c.update_group({ group: group }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_group(::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group), grpc_options) do |response, operation|
+      c.update_group(::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -98,32 +98,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_create_migration_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_migration_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }) do |_result, response|
+        c.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_migration_workflow parent: parent, migration_workflow: migration_workflow do |_result, response|
+        c.create_migration_workflow parent: parent, migration_workflow: migration_workflow do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow) do |_result, response|
+        c.create_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }, call_options) do |_result, response|
+        c.create_migration_workflow({ parent: parent, migration_workflow: migration_workflow }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow), call_options) do |_result, response|
+        c.create_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::CreateMigrationWorkflowRequest.new(parent: parent, migration_workflow: migration_workflow), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_get_migration_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_migration_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_migration_workflow({ name: name, read_mask: read_mask }) do |_result, response|
+        c.get_migration_workflow({ name: name, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_migration_workflow name: name, read_mask: read_mask do |_result, response|
+        c.get_migration_workflow name: name, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask) do |_result, response|
+        c.get_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_migration_workflow({ name: name, read_mask: read_mask }, call_options) do |_result, response|
+        c.get_migration_workflow({ name: name, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask), call_options) do |_result, response|
+        c.get_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::GetMigrationWorkflowRequest.new(name: name, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_list_migration_workflows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_migration_workflows_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_migration_workflows parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_migration_workflows parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_migration_workflows ::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_migration_workflows ::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_migration_workflows({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_migration_workflows(::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_migration_workflows(::Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_delete_migration_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_migration_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_migration_workflow({ name: name }) do |_result, response|
+        c.delete_migration_workflow({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_migration_workflow name: name do |_result, response|
+        c.delete_migration_workflow name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name) do |_result, response|
+        c.delete_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_migration_workflow({ name: name }, call_options) do |_result, response|
+        c.delete_migration_workflow({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name), call_options) do |_result, response|
+        c.delete_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::DeleteMigrationWorkflowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_start_migration_workflow_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_migration_workflow_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_migration_workflow({ name: name }) do |_result, response|
+        c.start_migration_workflow({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_migration_workflow name: name do |_result, response|
+        c.start_migration_workflow name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name) do |_result, response|
+        c.start_migration_workflow ::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_migration_workflow({ name: name }, call_options) do |_result, response|
+        c.start_migration_workflow({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name), call_options) do |_result, response|
+        c.start_migration_workflow(::Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_get_migration_subtask_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_migration_subtask_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_migration_subtask({ name: name, read_mask: read_mask }) do |_result, response|
+        c.get_migration_subtask({ name: name, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_migration_subtask name: name, read_mask: read_mask do |_result, response|
+        c.get_migration_subtask name: name, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_migration_subtask ::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask) do |_result, response|
+        c.get_migration_subtask ::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_migration_subtask({ name: name, read_mask: read_mask }, call_options) do |_result, response|
+        c.get_migration_subtask({ name: name, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_migration_subtask(::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask), call_options) do |_result, response|
+        c.get_migration_subtask(::Google::Cloud::Bigquery::Migration::V2::GetMigrationSubtaskRequest.new(name: name, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ClientTe
     ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::ServiceStub.stub :transcode_list_migration_subtasks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_migration_subtasks_client_stub do
         # Create client
-        client = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Bigquery::Migration::V2::MigrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_migration_subtasks parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_migration_subtasks parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_migration_subtasks ::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_migration_subtasks ::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_migration_subtasks({ parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_migration_subtasks(::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_migration_subtasks(::Google::Cloud::Bigquery::Migration::V2::ListMigrationSubtasksRequest.new(parent: parent, read_mask: read_mask, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

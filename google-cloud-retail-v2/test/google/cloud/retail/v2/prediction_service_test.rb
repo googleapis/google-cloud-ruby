@@ -96,36 +96,36 @@ class ::Google::Cloud::Retail::V2::PredictionService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, predict_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }) do |response, operation|
+      c.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.predict placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels do |response, operation|
+      c.predict placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.predict ::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels) do |response, operation|
+      c.predict ::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }, grpc_options) do |response, operation|
+      c.predict({ placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.predict(::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels), grpc_options) do |response, operation|
+      c.predict(::Google::Cloud::Retail::V2::PredictRequest.new(placement: placement, user_event: user_event, page_size: page_size, page_token: page_token, filter: filter, validate_only: validate_only, params: params, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

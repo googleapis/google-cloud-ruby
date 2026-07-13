@@ -99,32 +99,32 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::ServiceStub.stub :transcode_create_deployment_resource_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_deployment_resource_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_deployment_resource_pool({ parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id }) do |_result, response|
+        c.create_deployment_resource_pool({ parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_deployment_resource_pool parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id do |_result, response|
+        c.create_deployment_resource_pool parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::CreateDeploymentResourcePoolRequest.new(parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id) do |_result, response|
+        c.create_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::CreateDeploymentResourcePoolRequest.new(parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_deployment_resource_pool({ parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id }, call_options) do |_result, response|
+        c.create_deployment_resource_pool({ parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::CreateDeploymentResourcePoolRequest.new(parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id), call_options) do |_result, response|
+        c.create_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::CreateDeploymentResourcePoolRequest.new(parent: parent, deployment_resource_pool: deployment_resource_pool, deployment_resource_pool_id: deployment_resource_pool_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::ServiceStub.stub :transcode_get_deployment_resource_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_deployment_resource_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_deployment_resource_pool({ name: name }) do |_result, response|
+        c.get_deployment_resource_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_deployment_resource_pool name: name do |_result, response|
+        c.get_deployment_resource_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::GetDeploymentResourcePoolRequest.new(name: name) do |_result, response|
+        c.get_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::GetDeploymentResourcePoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_deployment_resource_pool({ name: name }, call_options) do |_result, response|
+        c.get_deployment_resource_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::GetDeploymentResourcePoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::GetDeploymentResourcePoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::ServiceStub.stub :transcode_list_deployment_resource_pools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_deployment_resource_pools_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_deployment_resource_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_deployment_resource_pools({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_deployment_resource_pools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_deployment_resource_pools parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_deployment_resource_pools ::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_deployment_resource_pools ::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_deployment_resource_pools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_deployment_resource_pools({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_deployment_resource_pools(::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_deployment_resource_pools(::Google::Cloud::AIPlatform::V1::ListDeploymentResourcePoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::ServiceStub.stub :transcode_update_deployment_resource_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_deployment_resource_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_deployment_resource_pool({ deployment_resource_pool: deployment_resource_pool, update_mask: update_mask }) do |_result, response|
+        c.update_deployment_resource_pool({ deployment_resource_pool: deployment_resource_pool, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_deployment_resource_pool deployment_resource_pool: deployment_resource_pool, update_mask: update_mask do |_result, response|
+        c.update_deployment_resource_pool deployment_resource_pool: deployment_resource_pool, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::UpdateDeploymentResourcePoolRequest.new(deployment_resource_pool: deployment_resource_pool, update_mask: update_mask) do |_result, response|
+        c.update_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::UpdateDeploymentResourcePoolRequest.new(deployment_resource_pool: deployment_resource_pool, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_deployment_resource_pool({ deployment_resource_pool: deployment_resource_pool, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_deployment_resource_pool({ deployment_resource_pool: deployment_resource_pool, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::UpdateDeploymentResourcePoolRequest.new(deployment_resource_pool: deployment_resource_pool, update_mask: update_mask), call_options) do |_result, response|
+        c.update_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::UpdateDeploymentResourcePoolRequest.new(deployment_resource_pool: deployment_resource_pool, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::ServiceStub.stub :transcode_delete_deployment_resource_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_deployment_resource_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_deployment_resource_pool({ name: name }) do |_result, response|
+        c.delete_deployment_resource_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_deployment_resource_pool name: name do |_result, response|
+        c.delete_deployment_resource_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::DeleteDeploymentResourcePoolRequest.new(name: name) do |_result, response|
+        c.delete_deployment_resource_pool ::Google::Cloud::AIPlatform::V1::DeleteDeploymentResourcePoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_deployment_resource_pool({ name: name }, call_options) do |_result, response|
+        c.delete_deployment_resource_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::DeleteDeploymentResourcePoolRequest.new(name: name), call_options) do |_result, response|
+        c.delete_deployment_resource_pool(::Google::Cloud::AIPlatform::V1::DeleteDeploymentResourcePoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::ServiceStub.stub :transcode_query_deployed_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_deployed_models_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_deployed_models({ deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_deployed_models({ deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_deployed_models deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_deployed_models deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_deployed_models ::Google::Cloud::AIPlatform::V1::QueryDeployedModelsRequest.new(deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_deployed_models ::Google::Cloud::AIPlatform::V1::QueryDeployedModelsRequest.new(deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_deployed_models({ deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_deployed_models({ deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_deployed_models(::Google::Cloud::AIPlatform::V1::QueryDeployedModelsRequest.new(deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_deployed_models(::Google::Cloud::AIPlatform::V1::QueryDeployedModelsRequest.new(deployment_resource_pool: deployment_resource_pool, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

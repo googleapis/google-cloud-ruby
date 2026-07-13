@@ -82,36 +82,36 @@ class ::Google::Cloud::Run::V2::Executions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_execution({ name: name }) do |response, operation|
+      c.get_execution({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_execution name: name do |response, operation|
+      c.get_execution name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_execution ::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name) do |response, operation|
+      c.get_execution ::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_execution({ name: name }, grpc_options) do |response, operation|
+      c.get_execution({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_execution(::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_execution(::Google::Cloud::Run::V2::GetExecutionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Run::V2::Executions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_executions_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_executions parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_executions parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_executions ::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_executions ::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_executions(::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_executions(::Google::Cloud::Run::V2::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,40 +213,40 @@ class ::Google::Cloud::Run::V2::Executions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_execution({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_execution({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_execution name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_execution name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_execution ::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_execution ::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_execution({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_execution({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_execution(::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_execution(::Google::Cloud::Run::V2::DeleteExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::Run::V2::Executions::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_execution_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::Executions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_execution({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.cancel_execution({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_execution name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.cancel_execution name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_execution ::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.cancel_execution ::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_execution({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.cancel_execution({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_execution(::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.cancel_execution(::Google::Cloud::Run::V2::CancelExecutionRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -71,12 +71,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Options for a transaction that can be used to read and write documents.
-          #
-          # Firestore does not allow 3rd party auth requests to create read-write.
-          # transactions.
           # @!attribute [rw] retry_transaction
           #   @return [::String]
           #     An optional transaction to retry.
+          # @!attribute [rw] concurrency_mode
+          #   @return [::Google::Cloud::Firestore::V1::TransactionOptions::ConcurrencyMode]
+          #     Optional. The concurrency control mode to use for this transaction.
+          #
+          #     A database is able to use different concurrency modes for different
+          #     transactions simultaneously.
+          #
+          #     3rd party auth requests are only allowed to create optimistic
+          #     read-write transactions and must specify that here even if the
+          #     database-level setting is already configured to optimistic.
           class ReadWrite
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,6 +100,18 @@ module Google
           class ReadOnly
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of concurrency control mode for transactions.
+          module ConcurrencyMode
+            # Start the transaction with the database-level default concurrency mode.
+            CONCURRENCY_MODE_UNSPECIFIED = 0
+
+            # Use optimistic concurrency control for the new transaction.
+            OPTIMISTIC = 1
+
+            # Use pessimistic concurrency control for the new transaction.
+            PESSIMISTIC = 2
           end
         end
       end

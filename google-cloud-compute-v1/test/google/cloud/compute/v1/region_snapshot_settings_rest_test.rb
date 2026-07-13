@@ -98,32 +98,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::ClientTest < M
     ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, region: region }) do |_result, response|
+        c.get({ project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, region: region do |_result, response|
+        c.get project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetRegionSnapshotSettingRequest.new(project: project, region: region) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetRegionSnapshotSettingRequest.new(project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, region: region }, call_options) do |_result, response|
+        c.get({ project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetRegionSnapshotSettingRequest.new(project: project, region: region), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetRegionSnapshotSettingRequest.new(project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::ClientTest < M
     ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::ServiceStub.stub :transcode_patch_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, patch_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionSnapshotSettings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.patch({ project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask }) do |_result, response|
+        c.patch({ project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask do |_result, response|
+        c.patch project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch ::Google::Cloud::Compute::V1::PatchRegionSnapshotSettingRequest.new(project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask) do |_result, response|
+        c.patch ::Google::Cloud::Compute::V1::PatchRegionSnapshotSettingRequest.new(project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch({ project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask }, call_options) do |_result, response|
+        c.patch({ project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch(::Google::Cloud::Compute::V1::PatchRegionSnapshotSettingRequest.new(project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask), call_options) do |_result, response|
+        c.patch(::Google::Cloud::Compute::V1::PatchRegionSnapshotSettingRequest.new(project: project, region: region, request_id: request_id, snapshot_settings_resource: snapshot_settings_resource, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

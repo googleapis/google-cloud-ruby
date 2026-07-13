@@ -88,36 +88,36 @@ class ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, launch_flex_template_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }) do |response, operation|
+      c.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.launch_flex_template project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only do |response, operation|
+      c.launch_flex_template project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.launch_flex_template ::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only) do |response, operation|
+      c.launch_flex_template ::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.launch_flex_template({ project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.launch_flex_template(::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only), grpc_options) do |response, operation|
+      c.launch_flex_template(::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new(project_id: project_id, launch_parameter: launch_parameter, location: location, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

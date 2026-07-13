@@ -88,40 +88,40 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_worker_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }) do |response, operation|
+      c.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_worker_pool parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only do |response, operation|
+      c.create_worker_pool parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_worker_pool ::Google::Cloud::Run::V2::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only) do |response, operation|
+      c.create_worker_pool ::Google::Cloud::Run::V2::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_worker_pool({ parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_worker_pool(::Google::Cloud::Run::V2::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_worker_pool(::Google::Cloud::Run::V2::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool, worker_pool_id: worker_pool_id, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_worker_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_worker_pool({ name: name }) do |response, operation|
+      c.get_worker_pool({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_worker_pool name: name do |response, operation|
+      c.get_worker_pool name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_worker_pool ::Google::Cloud::Run::V2::GetWorkerPoolRequest.new(name: name) do |response, operation|
+      c.get_worker_pool ::Google::Cloud::Run::V2::GetWorkerPoolRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_worker_pool({ name: name }, grpc_options) do |response, operation|
+      c.get_worker_pool({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_worker_pool(::Google::Cloud::Run::V2::GetWorkerPoolRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_worker_pool(::Google::Cloud::Run::V2::GetWorkerPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_worker_pools_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
+      c.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_worker_pools parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
+      c.list_worker_pools parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_worker_pools ::Google::Cloud::Run::V2::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
+      c.list_worker_pools ::Google::Cloud::Run::V2::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_worker_pools({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_worker_pools(::Google::Cloud::Run::V2::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_worker_pools(::Google::Cloud::Run::V2::ListWorkerPoolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -286,40 +286,40 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_worker_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_worker_pool({ update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }) do |response, operation|
+      c.update_worker_pool({ update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_worker_pool update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision do |response, operation|
+      c.update_worker_pool update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_worker_pool ::Google::Cloud::Run::V2::UpdateWorkerPoolRequest.new(update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision) do |response, operation|
+      c.update_worker_pool ::Google::Cloud::Run::V2::UpdateWorkerPoolRequest.new(update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_worker_pool({ update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }, grpc_options) do |response, operation|
+      c.update_worker_pool({ update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_worker_pool(::Google::Cloud::Run::V2::UpdateWorkerPoolRequest.new(update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision), grpc_options) do |response, operation|
+      c.update_worker_pool(::Google::Cloud::Run::V2::UpdateWorkerPoolRequest.new(update_mask: update_mask, worker_pool: worker_pool, validate_only: validate_only, allow_missing: allow_missing, force_new_revision: force_new_revision), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -353,40 +353,40 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_worker_pool_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_worker_pool({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
+      c.delete_worker_pool({ name: name, validate_only: validate_only, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_worker_pool name: name, validate_only: validate_only, etag: etag do |response, operation|
+      c.delete_worker_pool name: name, validate_only: validate_only, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_worker_pool ::Google::Cloud::Run::V2::DeleteWorkerPoolRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
+      c.delete_worker_pool ::Google::Cloud::Run::V2::DeleteWorkerPoolRequest.new(name: name, validate_only: validate_only, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_worker_pool({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+      c.delete_worker_pool({ name: name, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_worker_pool(::Google::Cloud::Run::V2::DeleteWorkerPoolRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+      c.delete_worker_pool(::Google::Cloud::Run::V2::DeleteWorkerPoolRequest.new(name: name, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -418,36 +418,36 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -480,36 +480,36 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -540,36 +540,36 @@ class ::Google::Cloud::Run::V2::WorkerPools::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
+      c = ::Google::Cloud::Run::V2::WorkerPools::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

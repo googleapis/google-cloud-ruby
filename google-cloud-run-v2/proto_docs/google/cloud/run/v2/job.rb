@@ -335,9 +335,9 @@ module Google
         #     The sum of job name and token length must be fewer than 63 characters.
         #
         #     Note: The following fields are mutually exclusive: `run_execution_token`, `start_execution_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [r] etag
+        # @!attribute [rw] etag
         #   @return [::String]
-        #     Output only. A system-generated fingerprint for this version of the
+        #     Optional. A system-generated fingerprint for this version of the
         #     resource. May be used to detect modification conflict during updates.
         class Job
           include ::Google::Protobuf::MessageExts

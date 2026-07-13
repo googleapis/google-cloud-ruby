@@ -86,40 +86,40 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_tag_bindings_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tag_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_tag_bindings parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tag_bindings ::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_tag_bindings ::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tag_bindings(::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_tag_bindings(::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,40 +151,40 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_tag_binding_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }) do |response, operation|
+      c.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_tag_binding tag_binding: tag_binding, validate_only: validate_only do |response, operation|
+      c.create_tag_binding tag_binding: tag_binding, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_tag_binding ::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only) do |response, operation|
+      c.create_tag_binding ::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_tag_binding(::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_tag_binding(::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -214,40 +214,40 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_tag_binding_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_tag_binding({ name: name }) do |response, operation|
+      c.delete_tag_binding({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_tag_binding name: name do |response, operation|
+      c.delete_tag_binding name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_tag_binding ::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name) do |response, operation|
+      c.delete_tag_binding ::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_tag_binding({ name: name }, grpc_options) do |response, operation|
+      c.delete_tag_binding({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_tag_binding(::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_tag_binding(::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -281,40 +281,40 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_effective_tags_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::TagBindings::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_effective_tags parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_effective_tags parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_effective_tags ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_effective_tags ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_effective_tags(::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_effective_tags(::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

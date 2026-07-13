@@ -102,32 +102,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_search_catalog_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_catalog_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search }) do |_result, response|
+        c.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_catalog scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search do |_result, response|
+        c.search_catalog scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_catalog ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search) do |_result, response|
+        c.search_catalog ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search }, call_options) do |_result, response|
+        c.search_catalog({ scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_catalog(::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search), call_options) do |_result, response|
+        c.search_catalog(::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, order_by: order_by, admin_search: admin_search), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_create_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }) do |_result, response|
+        c.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entry_group parent: parent, entry_group_id: entry_group_id, entry_group: entry_group do |_result, response|
+        c.create_entry_group parent: parent, entry_group_id: entry_group_id, entry_group: entry_group do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entry_group ::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group) do |_result, response|
+        c.create_entry_group ::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }, call_options) do |_result, response|
+        c.create_entry_group({ parent: parent, entry_group_id: entry_group_id, entry_group: entry_group }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entry_group(::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group), call_options) do |_result, response|
+        c.create_entry_group(::Google::Cloud::DataCatalog::V1::CreateEntryGroupRequest.new(parent: parent, entry_group_id: entry_group_id, entry_group: entry_group), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_get_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entry_group({ name: name, read_mask: read_mask }) do |_result, response|
+        c.get_entry_group({ name: name, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entry_group name: name, read_mask: read_mask do |_result, response|
+        c.get_entry_group name: name, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entry_group ::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest.new(name: name, read_mask: read_mask) do |_result, response|
+        c.get_entry_group ::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest.new(name: name, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entry_group({ name: name, read_mask: read_mask }, call_options) do |_result, response|
+        c.get_entry_group({ name: name, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entry_group(::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest.new(name: name, read_mask: read_mask), call_options) do |_result, response|
+        c.get_entry_group(::Google::Cloud::DataCatalog::V1::GetEntryGroupRequest.new(name: name, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_update_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entry_group({ entry_group: entry_group, update_mask: update_mask }) do |_result, response|
+        c.update_entry_group({ entry_group: entry_group, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entry_group entry_group: entry_group, update_mask: update_mask do |_result, response|
+        c.update_entry_group entry_group: entry_group, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entry_group ::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask) do |_result, response|
+        c.update_entry_group ::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entry_group({ entry_group: entry_group, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_entry_group({ entry_group: entry_group, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entry_group(::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask), call_options) do |_result, response|
+        c.update_entry_group(::Google::Cloud::DataCatalog::V1::UpdateEntryGroupRequest.new(entry_group: entry_group, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_delete_entry_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entry_group_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entry_group({ name: name, force: force }) do |_result, response|
+        c.delete_entry_group({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entry_group name: name, force: force do |_result, response|
+        c.delete_entry_group name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entry_group ::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new(name: name, force: force) do |_result, response|
+        c.delete_entry_group ::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entry_group({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_entry_group({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entry_group(::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_entry_group(::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_list_entry_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entry_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entry_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_entry_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entry_groups ::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_entry_groups ::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_entry_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entry_groups(::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_entry_groups(::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -435,32 +435,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_create_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entry({ parent: parent, entry_id: entry_id, entry: entry }) do |_result, response|
+        c.create_entry({ parent: parent, entry_id: entry_id, entry: entry }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entry parent: parent, entry_id: entry_id, entry: entry do |_result, response|
+        c.create_entry parent: parent, entry_id: entry_id, entry: entry do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entry ::Google::Cloud::DataCatalog::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry) do |_result, response|
+        c.create_entry ::Google::Cloud::DataCatalog::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entry({ parent: parent, entry_id: entry_id, entry: entry }, call_options) do |_result, response|
+        c.create_entry({ parent: parent, entry_id: entry_id, entry: entry }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entry(::Google::Cloud::DataCatalog::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), call_options) do |_result, response|
+        c.create_entry(::Google::Cloud::DataCatalog::V1::CreateEntryRequest.new(parent: parent, entry_id: entry_id, entry: entry), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -490,32 +490,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_update_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entry({ entry: entry, update_mask: update_mask }) do |_result, response|
+        c.update_entry({ entry: entry, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entry entry: entry, update_mask: update_mask do |_result, response|
+        c.update_entry entry: entry, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entry ::Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask) do |_result, response|
+        c.update_entry ::Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entry({ entry: entry, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_entry({ entry: entry, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entry(::Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask), call_options) do |_result, response|
+        c.update_entry(::Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new(entry: entry, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -544,32 +544,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_delete_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entry({ name: name }) do |_result, response|
+        c.delete_entry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entry name: name do |_result, response|
+        c.delete_entry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entry ::Google::Cloud::DataCatalog::V1::DeleteEntryRequest.new(name: name) do |_result, response|
+        c.delete_entry ::Google::Cloud::DataCatalog::V1::DeleteEntryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entry({ name: name }, call_options) do |_result, response|
+        c.delete_entry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entry(::Google::Cloud::DataCatalog::V1::DeleteEntryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_entry(::Google::Cloud::DataCatalog::V1::DeleteEntryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -598,32 +598,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_get_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entry({ name: name }) do |_result, response|
+        c.get_entry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entry name: name do |_result, response|
+        c.get_entry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entry ::Google::Cloud::DataCatalog::V1::GetEntryRequest.new(name: name) do |_result, response|
+        c.get_entry ::Google::Cloud::DataCatalog::V1::GetEntryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entry({ name: name }, call_options) do |_result, response|
+        c.get_entry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entry(::Google::Cloud::DataCatalog::V1::GetEntryRequest.new(name: name), call_options) do |_result, response|
+        c.get_entry(::Google::Cloud::DataCatalog::V1::GetEntryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -654,32 +654,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_lookup_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_entry({ linked_resource: linked_resource, project: project, location: location }) do |_result, response|
+        c.lookup_entry({ linked_resource: linked_resource, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_entry linked_resource: linked_resource, project: project, location: location do |_result, response|
+        c.lookup_entry linked_resource: linked_resource, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_entry ::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource, project: project, location: location) do |_result, response|
+        c.lookup_entry ::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_entry({ linked_resource: linked_resource, project: project, location: location }, call_options) do |_result, response|
+        c.lookup_entry({ linked_resource: linked_resource, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_entry(::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource, project: project, location: location), call_options) do |_result, response|
+        c.lookup_entry(::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -711,32 +711,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_list_entries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entries_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entries parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_entries parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entries ::Google::Cloud::DataCatalog::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_entries ::Google::Cloud::DataCatalog::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_entries({ parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entries(::Google::Cloud::DataCatalog::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_entries(::Google::Cloud::DataCatalog::V1::ListEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -766,32 +766,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_modify_entry_overview_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, modify_entry_overview_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.modify_entry_overview({ name: name, entry_overview: entry_overview }) do |_result, response|
+        c.modify_entry_overview({ name: name, entry_overview: entry_overview }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.modify_entry_overview name: name, entry_overview: entry_overview do |_result, response|
+        c.modify_entry_overview name: name, entry_overview: entry_overview do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.modify_entry_overview ::Google::Cloud::DataCatalog::V1::ModifyEntryOverviewRequest.new(name: name, entry_overview: entry_overview) do |_result, response|
+        c.modify_entry_overview ::Google::Cloud::DataCatalog::V1::ModifyEntryOverviewRequest.new(name: name, entry_overview: entry_overview) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.modify_entry_overview({ name: name, entry_overview: entry_overview }, call_options) do |_result, response|
+        c.modify_entry_overview({ name: name, entry_overview: entry_overview }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.modify_entry_overview(::Google::Cloud::DataCatalog::V1::ModifyEntryOverviewRequest.new(name: name, entry_overview: entry_overview), call_options) do |_result, response|
+        c.modify_entry_overview(::Google::Cloud::DataCatalog::V1::ModifyEntryOverviewRequest.new(name: name, entry_overview: entry_overview), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -821,32 +821,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_modify_entry_contacts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, modify_entry_contacts_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.modify_entry_contacts({ name: name, contacts: contacts }) do |_result, response|
+        c.modify_entry_contacts({ name: name, contacts: contacts }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.modify_entry_contacts name: name, contacts: contacts do |_result, response|
+        c.modify_entry_contacts name: name, contacts: contacts do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.modify_entry_contacts ::Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest.new(name: name, contacts: contacts) do |_result, response|
+        c.modify_entry_contacts ::Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest.new(name: name, contacts: contacts) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.modify_entry_contacts({ name: name, contacts: contacts }, call_options) do |_result, response|
+        c.modify_entry_contacts({ name: name, contacts: contacts }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.modify_entry_contacts(::Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest.new(name: name, contacts: contacts), call_options) do |_result, response|
+        c.modify_entry_contacts(::Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest.new(name: name, contacts: contacts), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -877,32 +877,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_create_tag_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tag_template_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }) do |_result, response|
+        c.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tag_template parent: parent, tag_template_id: tag_template_id, tag_template: tag_template do |_result, response|
+        c.create_tag_template parent: parent, tag_template_id: tag_template_id, tag_template: tag_template do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tag_template ::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template) do |_result, response|
+        c.create_tag_template ::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }, call_options) do |_result, response|
+        c.create_tag_template({ parent: parent, tag_template_id: tag_template_id, tag_template: tag_template }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tag_template(::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template), call_options) do |_result, response|
+        c.create_tag_template(::Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new(parent: parent, tag_template_id: tag_template_id, tag_template: tag_template), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -931,32 +931,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_get_tag_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tag_template_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tag_template({ name: name }) do |_result, response|
+        c.get_tag_template({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tag_template name: name do |_result, response|
+        c.get_tag_template name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tag_template ::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest.new(name: name) do |_result, response|
+        c.get_tag_template ::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tag_template({ name: name }, call_options) do |_result, response|
+        c.get_tag_template({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tag_template(::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest.new(name: name), call_options) do |_result, response|
+        c.get_tag_template(::Google::Cloud::DataCatalog::V1::GetTagTemplateRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -986,32 +986,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_update_tag_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tag_template_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tag_template({ tag_template: tag_template, update_mask: update_mask }) do |_result, response|
+        c.update_tag_template({ tag_template: tag_template, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tag_template tag_template: tag_template, update_mask: update_mask do |_result, response|
+        c.update_tag_template tag_template: tag_template, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tag_template ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask) do |_result, response|
+        c.update_tag_template ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tag_template({ tag_template: tag_template, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tag_template({ tag_template: tag_template, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tag_template(::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tag_template(::Google::Cloud::DataCatalog::V1::UpdateTagTemplateRequest.new(tag_template: tag_template, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1041,32 +1041,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_delete_tag_template_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tag_template_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tag_template({ name: name, force: force }) do |_result, response|
+        c.delete_tag_template({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tag_template name: name, force: force do |_result, response|
+        c.delete_tag_template name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tag_template ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest.new(name: name, force: force) do |_result, response|
+        c.delete_tag_template ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tag_template({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_tag_template({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tag_template(::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_tag_template(::Google::Cloud::DataCatalog::V1::DeleteTagTemplateRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1097,32 +1097,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_create_tag_template_field_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tag_template_field_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }) do |_result, response|
+        c.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tag_template_field parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field do |_result, response|
+        c.create_tag_template_field parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tag_template_field ::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field) do |_result, response|
+        c.create_tag_template_field ::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }, call_options) do |_result, response|
+        c.create_tag_template_field({ parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tag_template_field(::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field), call_options) do |_result, response|
+        c.create_tag_template_field(::Google::Cloud::DataCatalog::V1::CreateTagTemplateFieldRequest.new(parent: parent, tag_template_field_id: tag_template_field_id, tag_template_field: tag_template_field), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1153,32 +1153,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_update_tag_template_field_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tag_template_field_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }) do |_result, response|
+        c.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tag_template_field name: name, tag_template_field: tag_template_field, update_mask: update_mask do |_result, response|
+        c.update_tag_template_field name: name, tag_template_field: tag_template_field, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tag_template_field ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask) do |_result, response|
+        c.update_tag_template_field ::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tag_template_field({ name: name, tag_template_field: tag_template_field, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tag_template_field(::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tag_template_field(::Google::Cloud::DataCatalog::V1::UpdateTagTemplateFieldRequest.new(name: name, tag_template_field: tag_template_field, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1208,32 +1208,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_rename_tag_template_field_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rename_tag_template_field_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }) do |_result, response|
+        c.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rename_tag_template_field name: name, new_tag_template_field_id: new_tag_template_field_id do |_result, response|
+        c.rename_tag_template_field name: name, new_tag_template_field_id: new_tag_template_field_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rename_tag_template_field ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id) do |_result, response|
+        c.rename_tag_template_field ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }, call_options) do |_result, response|
+        c.rename_tag_template_field({ name: name, new_tag_template_field_id: new_tag_template_field_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rename_tag_template_field(::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id), call_options) do |_result, response|
+        c.rename_tag_template_field(::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest.new(name: name, new_tag_template_field_id: new_tag_template_field_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1263,32 +1263,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_rename_tag_template_field_enum_value_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rename_tag_template_field_enum_value_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }) do |_result, response|
+        c.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rename_tag_template_field_enum_value name: name, new_enum_value_display_name: new_enum_value_display_name do |_result, response|
+        c.rename_tag_template_field_enum_value name: name, new_enum_value_display_name: new_enum_value_display_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rename_tag_template_field_enum_value ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name) do |_result, response|
+        c.rename_tag_template_field_enum_value ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }, call_options) do |_result, response|
+        c.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rename_tag_template_field_enum_value(::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name), call_options) do |_result, response|
+        c.rename_tag_template_field_enum_value(::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1318,32 +1318,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_delete_tag_template_field_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tag_template_field_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tag_template_field({ name: name, force: force }) do |_result, response|
+        c.delete_tag_template_field({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tag_template_field name: name, force: force do |_result, response|
+        c.delete_tag_template_field name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tag_template_field ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest.new(name: name, force: force) do |_result, response|
+        c.delete_tag_template_field ::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tag_template_field({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_tag_template_field({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tag_template_field(::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_tag_template_field(::Google::Cloud::DataCatalog::V1::DeleteTagTemplateFieldRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1373,32 +1373,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_create_tag_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tag_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tag({ parent: parent, tag: tag }) do |_result, response|
+        c.create_tag({ parent: parent, tag: tag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tag parent: parent, tag: tag do |_result, response|
+        c.create_tag parent: parent, tag: tag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tag ::Google::Cloud::DataCatalog::V1::CreateTagRequest.new(parent: parent, tag: tag) do |_result, response|
+        c.create_tag ::Google::Cloud::DataCatalog::V1::CreateTagRequest.new(parent: parent, tag: tag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tag({ parent: parent, tag: tag }, call_options) do |_result, response|
+        c.create_tag({ parent: parent, tag: tag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tag(::Google::Cloud::DataCatalog::V1::CreateTagRequest.new(parent: parent, tag: tag), call_options) do |_result, response|
+        c.create_tag(::Google::Cloud::DataCatalog::V1::CreateTagRequest.new(parent: parent, tag: tag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1428,32 +1428,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_update_tag_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tag_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tag({ tag: tag, update_mask: update_mask }) do |_result, response|
+        c.update_tag({ tag: tag, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tag tag: tag, update_mask: update_mask do |_result, response|
+        c.update_tag tag: tag, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tag ::Google::Cloud::DataCatalog::V1::UpdateTagRequest.new(tag: tag, update_mask: update_mask) do |_result, response|
+        c.update_tag ::Google::Cloud::DataCatalog::V1::UpdateTagRequest.new(tag: tag, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tag({ tag: tag, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tag({ tag: tag, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tag(::Google::Cloud::DataCatalog::V1::UpdateTagRequest.new(tag: tag, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tag(::Google::Cloud::DataCatalog::V1::UpdateTagRequest.new(tag: tag, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1482,32 +1482,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_delete_tag_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tag_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tag({ name: name }) do |_result, response|
+        c.delete_tag({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tag name: name do |_result, response|
+        c.delete_tag name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tag ::Google::Cloud::DataCatalog::V1::DeleteTagRequest.new(name: name) do |_result, response|
+        c.delete_tag ::Google::Cloud::DataCatalog::V1::DeleteTagRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tag({ name: name }, call_options) do |_result, response|
+        c.delete_tag({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tag(::Google::Cloud::DataCatalog::V1::DeleteTagRequest.new(name: name), call_options) do |_result, response|
+        c.delete_tag(::Google::Cloud::DataCatalog::V1::DeleteTagRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1538,32 +1538,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_list_tags_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tags_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tags parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tags parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tags ::Google::Cloud::DataCatalog::V1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tags ::Google::Cloud::DataCatalog::V1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tags({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tags({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tags(::Google::Cloud::DataCatalog::V1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tags(::Google::Cloud::DataCatalog::V1::ListTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1595,32 +1595,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_reconcile_tags_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reconcile_tags_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reconcile_tags({ parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags }) do |_result, response|
+        c.reconcile_tags({ parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reconcile_tags parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags do |_result, response|
+        c.reconcile_tags parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reconcile_tags ::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest.new(parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags) do |_result, response|
+        c.reconcile_tags ::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest.new(parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reconcile_tags({ parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags }, call_options) do |_result, response|
+        c.reconcile_tags({ parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reconcile_tags(::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest.new(parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags), call_options) do |_result, response|
+        c.reconcile_tags(::Google::Cloud::DataCatalog::V1::ReconcileTagsRequest.new(parent: parent, tag_template: tag_template, force_delete_missing: force_delete_missing, tags: tags), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1649,32 +1649,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_star_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, star_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.star_entry({ name: name }) do |_result, response|
+        c.star_entry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.star_entry name: name do |_result, response|
+        c.star_entry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.star_entry ::Google::Cloud::DataCatalog::V1::StarEntryRequest.new(name: name) do |_result, response|
+        c.star_entry ::Google::Cloud::DataCatalog::V1::StarEntryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.star_entry({ name: name }, call_options) do |_result, response|
+        c.star_entry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.star_entry(::Google::Cloud::DataCatalog::V1::StarEntryRequest.new(name: name), call_options) do |_result, response|
+        c.star_entry(::Google::Cloud::DataCatalog::V1::StarEntryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1703,32 +1703,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_unstar_entry_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, unstar_entry_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.unstar_entry({ name: name }) do |_result, response|
+        c.unstar_entry({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unstar_entry name: name do |_result, response|
+        c.unstar_entry name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unstar_entry ::Google::Cloud::DataCatalog::V1::UnstarEntryRequest.new(name: name) do |_result, response|
+        c.unstar_entry ::Google::Cloud::DataCatalog::V1::UnstarEntryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unstar_entry({ name: name }, call_options) do |_result, response|
+        c.unstar_entry({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unstar_entry(::Google::Cloud::DataCatalog::V1::UnstarEntryRequest.new(name: name), call_options) do |_result, response|
+        c.unstar_entry(::Google::Cloud::DataCatalog::V1::UnstarEntryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1759,32 +1759,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1814,32 +1814,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1869,32 +1869,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1925,32 +1925,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_import_entries_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_entries_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id }) do |_result, response|
+        c.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_entries parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id do |_result, response|
+        c.import_entries parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_entries ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id) do |_result, response|
+        c.import_entries ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id }, call_options) do |_result, response|
+        c.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_entries(::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id), call_options) do |_result, response|
+        c.import_entries(::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1980,32 +1980,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_set_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_config({ name: name, tag_template_migration: tag_template_migration }) do |_result, response|
+        c.set_config({ name: name, tag_template_migration: tag_template_migration }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_config name: name, tag_template_migration: tag_template_migration do |_result, response|
+        c.set_config name: name, tag_template_migration: tag_template_migration do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_config ::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration) do |_result, response|
+        c.set_config ::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_config({ name: name, tag_template_migration: tag_template_migration }, call_options) do |_result, response|
+        c.set_config({ name: name, tag_template_migration: tag_template_migration }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_config(::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration), call_options) do |_result, response|
+        c.set_config(::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2034,32 +2034,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_retrieve_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_config({ name: name }) do |_result, response|
+        c.retrieve_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_config name: name do |_result, response|
+        c.retrieve_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_config ::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name) do |_result, response|
+        c.retrieve_config ::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_config({ name: name }, call_options) do |_result, response|
+        c.retrieve_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_config(::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name), call_options) do |_result, response|
+        c.retrieve_config(::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2088,32 +2088,32 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_retrieve_effective_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_effective_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_effective_config({ name: name }) do |_result, response|
+        c.retrieve_effective_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_effective_config name: name do |_result, response|
+        c.retrieve_effective_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_effective_config ::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name) do |_result, response|
+        c.retrieve_effective_config ::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_effective_config({ name: name }, call_options) do |_result, response|
+        c.retrieve_effective_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_effective_config(::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name), call_options) do |_result, response|
+        c.retrieve_effective_config(::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

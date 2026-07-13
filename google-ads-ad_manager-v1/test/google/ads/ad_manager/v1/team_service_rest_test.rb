@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_get_team_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_team_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_team({ name: name }) do |_result, response|
+        c.get_team({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_team name: name do |_result, response|
+        c.get_team name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_team ::Google::Ads::AdManager::V1::GetTeamRequest.new(name: name) do |_result, response|
+        c.get_team ::Google::Ads::AdManager::V1::GetTeamRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_team({ name: name }, call_options) do |_result, response|
+        c.get_team({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_team(::Google::Ads::AdManager::V1::GetTeamRequest.new(name: name), call_options) do |_result, response|
+        c.get_team(::Google::Ads::AdManager::V1::GetTeamRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_list_teams_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_teams_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_teams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_teams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_teams parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_teams parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_teams ::Google::Ads::AdManager::V1::ListTeamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_teams ::Google::Ads::AdManager::V1::ListTeamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_teams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_teams({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_teams(::Google::Ads::AdManager::V1::ListTeamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_teams(::Google::Ads::AdManager::V1::ListTeamsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_create_team_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_team_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_team({ parent: parent, team: team }) do |_result, response|
+        c.create_team({ parent: parent, team: team }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_team parent: parent, team: team do |_result, response|
+        c.create_team parent: parent, team: team do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_team ::Google::Ads::AdManager::V1::CreateTeamRequest.new(parent: parent, team: team) do |_result, response|
+        c.create_team ::Google::Ads::AdManager::V1::CreateTeamRequest.new(parent: parent, team: team) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_team({ parent: parent, team: team }, call_options) do |_result, response|
+        c.create_team({ parent: parent, team: team }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_team(::Google::Ads::AdManager::V1::CreateTeamRequest.new(parent: parent, team: team), call_options) do |_result, response|
+        c.create_team(::Google::Ads::AdManager::V1::CreateTeamRequest.new(parent: parent, team: team), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_batch_create_teams_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_teams_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_teams({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_teams({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_teams parent: parent, requests: requests do |_result, response|
+        c.batch_create_teams parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_teams ::Google::Ads::AdManager::V1::BatchCreateTeamsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_teams ::Google::Ads::AdManager::V1::BatchCreateTeamsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_teams({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_teams({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_teams(::Google::Ads::AdManager::V1::BatchCreateTeamsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_teams(::Google::Ads::AdManager::V1::BatchCreateTeamsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_update_team_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_team_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_team({ team: team, update_mask: update_mask }) do |_result, response|
+        c.update_team({ team: team, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_team team: team, update_mask: update_mask do |_result, response|
+        c.update_team team: team, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_team ::Google::Ads::AdManager::V1::UpdateTeamRequest.new(team: team, update_mask: update_mask) do |_result, response|
+        c.update_team ::Google::Ads::AdManager::V1::UpdateTeamRequest.new(team: team, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_team({ team: team, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_team({ team: team, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_team(::Google::Ads::AdManager::V1::UpdateTeamRequest.new(team: team, update_mask: update_mask), call_options) do |_result, response|
+        c.update_team(::Google::Ads::AdManager::V1::UpdateTeamRequest.new(team: team, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_batch_update_teams_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_teams_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_teams({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_teams({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_teams parent: parent, requests: requests do |_result, response|
+        c.batch_update_teams parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_teams ::Google::Ads::AdManager::V1::BatchUpdateTeamsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_teams ::Google::Ads::AdManager::V1::BatchUpdateTeamsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_teams({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_teams({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_teams(::Google::Ads::AdManager::V1::BatchUpdateTeamsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_teams(::Google::Ads::AdManager::V1::BatchUpdateTeamsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_batch_activate_teams_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_activate_teams_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_activate_teams({ parent: parent, names: names }) do |_result, response|
+        c.batch_activate_teams({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_activate_teams parent: parent, names: names do |_result, response|
+        c.batch_activate_teams parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_activate_teams ::Google::Ads::AdManager::V1::BatchActivateTeamsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_activate_teams ::Google::Ads::AdManager::V1::BatchActivateTeamsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_activate_teams({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_activate_teams({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_activate_teams(::Google::Ads::AdManager::V1::BatchActivateTeamsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_activate_teams(::Google::Ads::AdManager::V1::BatchActivateTeamsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Ads::AdManager::V1::TeamService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::TeamService::Rest::ServiceStub.stub :transcode_batch_deactivate_teams_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_deactivate_teams_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::TeamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_deactivate_teams({ parent: parent, names: names }) do |_result, response|
+        c.batch_deactivate_teams({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_deactivate_teams parent: parent, names: names do |_result, response|
+        c.batch_deactivate_teams parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_deactivate_teams ::Google::Ads::AdManager::V1::BatchDeactivateTeamsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_deactivate_teams ::Google::Ads::AdManager::V1::BatchDeactivateTeamsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_deactivate_teams({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_deactivate_teams({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_deactivate_teams(::Google::Ads::AdManager::V1::BatchDeactivateTeamsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_deactivate_teams(::Google::Ads::AdManager::V1::BatchDeactivateTeamsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

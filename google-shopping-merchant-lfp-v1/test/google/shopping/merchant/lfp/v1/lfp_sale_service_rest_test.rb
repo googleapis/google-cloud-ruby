@@ -98,32 +98,32 @@ class ::Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Rest::ClientTest < 
     ::Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Rest::ServiceStub.stub :transcode_insert_lfp_sale_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_lfp_sale_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Lfp::V1::LfpSaleService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert_lfp_sale({ parent: parent, lfp_sale: lfp_sale }) do |_result, response|
+        c.insert_lfp_sale({ parent: parent, lfp_sale: lfp_sale }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert_lfp_sale parent: parent, lfp_sale: lfp_sale do |_result, response|
+        c.insert_lfp_sale parent: parent, lfp_sale: lfp_sale do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert_lfp_sale ::Google::Shopping::Merchant::Lfp::V1::InsertLfpSaleRequest.new(parent: parent, lfp_sale: lfp_sale) do |_result, response|
+        c.insert_lfp_sale ::Google::Shopping::Merchant::Lfp::V1::InsertLfpSaleRequest.new(parent: parent, lfp_sale: lfp_sale) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert_lfp_sale({ parent: parent, lfp_sale: lfp_sale }, call_options) do |_result, response|
+        c.insert_lfp_sale({ parent: parent, lfp_sale: lfp_sale }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert_lfp_sale(::Google::Shopping::Merchant::Lfp::V1::InsertLfpSaleRequest.new(parent: parent, lfp_sale: lfp_sale), call_options) do |_result, response|
+        c.insert_lfp_sale(::Google::Shopping::Merchant::Lfp::V1::InsertLfpSaleRequest.new(parent: parent, lfp_sale: lfp_sale), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

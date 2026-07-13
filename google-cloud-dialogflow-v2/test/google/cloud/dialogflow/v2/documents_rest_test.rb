@@ -100,32 +100,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_list_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_documents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_documents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_documents parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_documents parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_documents ::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_documents ::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_documents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_documents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_documents(::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_documents(::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_get_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_document_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_document({ name: name }) do |_result, response|
+        c.get_document({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_document name: name do |_result, response|
+        c.get_document name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_document ::Google::Cloud::Dialogflow::V2::GetDocumentRequest.new(name: name) do |_result, response|
+        c.get_document ::Google::Cloud::Dialogflow::V2::GetDocumentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_document({ name: name }, call_options) do |_result, response|
+        c.get_document({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_document(::Google::Cloud::Dialogflow::V2::GetDocumentRequest.new(name: name), call_options) do |_result, response|
+        c.get_document(::Google::Cloud::Dialogflow::V2::GetDocumentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_create_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_document_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_document({ parent: parent, document: document }) do |_result, response|
+        c.create_document({ parent: parent, document: document }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_document parent: parent, document: document do |_result, response|
+        c.create_document parent: parent, document: document do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_document ::Google::Cloud::Dialogflow::V2::CreateDocumentRequest.new(parent: parent, document: document) do |_result, response|
+        c.create_document ::Google::Cloud::Dialogflow::V2::CreateDocumentRequest.new(parent: parent, document: document) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_document({ parent: parent, document: document }, call_options) do |_result, response|
+        c.create_document({ parent: parent, document: document }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_document(::Google::Cloud::Dialogflow::V2::CreateDocumentRequest.new(parent: parent, document: document), call_options) do |_result, response|
+        c.create_document(::Google::Cloud::Dialogflow::V2::CreateDocumentRequest.new(parent: parent, document: document), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_import_documents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_documents_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }) do |_result, response|
+        c.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata do |_result, response|
+        c.import_documents parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata) do |_result, response|
+        c.import_documents ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }, call_options) do |_result, response|
+        c.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata), call_options) do |_result, response|
+        c.import_documents(::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_delete_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_document_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_document({ name: name }) do |_result, response|
+        c.delete_document({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_document name: name do |_result, response|
+        c.delete_document name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_document ::Google::Cloud::Dialogflow::V2::DeleteDocumentRequest.new(name: name) do |_result, response|
+        c.delete_document ::Google::Cloud::Dialogflow::V2::DeleteDocumentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_document({ name: name }, call_options) do |_result, response|
+        c.delete_document({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_document(::Google::Cloud::Dialogflow::V2::DeleteDocumentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_document(::Google::Cloud::Dialogflow::V2::DeleteDocumentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_update_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_document_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_document({ document: document, update_mask: update_mask }) do |_result, response|
+        c.update_document({ document: document, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_document document: document, update_mask: update_mask do |_result, response|
+        c.update_document document: document, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_document ::Google::Cloud::Dialogflow::V2::UpdateDocumentRequest.new(document: document, update_mask: update_mask) do |_result, response|
+        c.update_document ::Google::Cloud::Dialogflow::V2::UpdateDocumentRequest.new(document: document, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_document({ document: document, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_document({ document: document, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_document(::Google::Cloud::Dialogflow::V2::UpdateDocumentRequest.new(document: document, update_mask: update_mask), call_options) do |_result, response|
+        c.update_document(::Google::Cloud::Dialogflow::V2::UpdateDocumentRequest.new(document: document, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_reload_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reload_document_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reload_document({ name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update }) do |_result, response|
+        c.reload_document({ name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reload_document name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update do |_result, response|
+        c.reload_document name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reload_document ::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update) do |_result, response|
+        c.reload_document ::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reload_document({ name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update }, call_options) do |_result, response|
+        c.reload_document({ name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reload_document(::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update), call_options) do |_result, response|
+        c.reload_document(::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -489,32 +489,32 @@ class ::Google::Cloud::Dialogflow::V2::Documents::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dialogflow::V2::Documents::Rest::ServiceStub.stub :transcode_export_document_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_document_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Documents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_document({ name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update }) do |_result, response|
+        c.export_document({ name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_document name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update do |_result, response|
+        c.export_document name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_document ::Google::Cloud::Dialogflow::V2::ExportDocumentRequest.new(name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update) do |_result, response|
+        c.export_document ::Google::Cloud::Dialogflow::V2::ExportDocumentRequest.new(name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_document({ name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update }, call_options) do |_result, response|
+        c.export_document({ name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_document(::Google::Cloud::Dialogflow::V2::ExportDocumentRequest.new(name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update), call_options) do |_result, response|
+        c.export_document(::Google::Cloud::Dialogflow::V2::ExportDocumentRequest.new(name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

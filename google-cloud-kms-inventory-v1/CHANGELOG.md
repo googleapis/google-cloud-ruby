@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.22.0 (2026-06-30)
+
+#### Features
+
+* add support for post-quantum (PQ) import methods ([#34677](https://github.com/googleapis/google-cloud-ruby/issues/34677)) 
+
+### 0.21.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34048](https://github.com/googleapis/google-cloud-ruby/issues/34048)) 
+
 ### 0.20.0 (2026-04-15)
 
 #### Features

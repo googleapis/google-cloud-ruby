@@ -27,6 +27,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the MCP tool.
+        # @!attribute [rw] name_override
+        #   @return [::String]
+        #     Optional. The name override of the MCP tool.
+        #     This is populated if the name was overridden by a Toolset override.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The description of the MCP tool.
@@ -66,6 +70,10 @@ module Google
         #     can be set in the session variables. See
         #     https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool/open-api#openapi-injection
         #     for more details.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Ces::V1beta::McpTool::State]
+        #     Output only. The dynamic availability state of the tool on the external
+        #     server.
         class McpTool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -77,6 +85,23 @@ module Google
           class CustomHeadersEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents the dynamic availability state of the tool.
+          module State
+            # Default state.
+            STATE_UNSPECIFIED = 0
+
+            # The tool is available and actively offered by the server.
+            ACTIVE = 1
+
+            # The tool is configured or pinned, but currently not offered by the
+            # server.
+            INACTIVE = 2
+
+            # The tool exists on the server, but does not match the version on the
+            # server.
+            STALE = 3
           end
         end
       end

@@ -99,32 +99,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::Redis::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_instances ::Google::Cloud::Redis::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::Redis::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::Redis::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::Redis::V1::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::Redis::V1::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::Redis::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::Redis::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_get_instance_auth_string_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_auth_string_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance_auth_string({ name: name }) do |_result, response|
+        c.get_instance_auth_string({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance_auth_string name: name do |_result, response|
+        c.get_instance_auth_string name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance_auth_string ::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest.new(name: name) do |_result, response|
+        c.get_instance_auth_string ::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance_auth_string({ name: name }, call_options) do |_result, response|
+        c.get_instance_auth_string({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance_auth_string(::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance_auth_string(::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::Redis::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
+        c.create_instance ::Google::Cloud::Redis::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::Redis::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::Redis::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ update_mask: update_mask, instance: instance }) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance update_mask: update_mask, instance: instance do |_result, response|
+        c.update_instance update_mask: update_mask, instance: instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::Redis::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |_result, response|
+        c.update_instance ::Google::Cloud::Redis::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ update_mask: update_mask, instance: instance }, call_options) do |_result, response|
+        c.update_instance({ update_mask: update_mask, instance: instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::Redis::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::Redis::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_upgrade_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upgrade_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upgrade_instance({ name: name, redis_version: redis_version }) do |_result, response|
+        c.upgrade_instance({ name: name, redis_version: redis_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upgrade_instance name: name, redis_version: redis_version do |_result, response|
+        c.upgrade_instance name: name, redis_version: redis_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upgrade_instance ::Google::Cloud::Redis::V1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version) do |_result, response|
+        c.upgrade_instance ::Google::Cloud::Redis::V1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upgrade_instance({ name: name, redis_version: redis_version }, call_options) do |_result, response|
+        c.upgrade_instance({ name: name, redis_version: redis_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upgrade_instance(::Google::Cloud::Redis::V1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), call_options) do |_result, response|
+        c.upgrade_instance(::Google::Cloud::Redis::V1::UpgradeInstanceRequest.new(name: name, redis_version: redis_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_import_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_instance({ name: name, input_config: input_config }) do |_result, response|
+        c.import_instance({ name: name, input_config: input_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_instance name: name, input_config: input_config do |_result, response|
+        c.import_instance name: name, input_config: input_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_instance ::Google::Cloud::Redis::V1::ImportInstanceRequest.new(name: name, input_config: input_config) do |_result, response|
+        c.import_instance ::Google::Cloud::Redis::V1::ImportInstanceRequest.new(name: name, input_config: input_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_instance({ name: name, input_config: input_config }, call_options) do |_result, response|
+        c.import_instance({ name: name, input_config: input_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_instance(::Google::Cloud::Redis::V1::ImportInstanceRequest.new(name: name, input_config: input_config), call_options) do |_result, response|
+        c.import_instance(::Google::Cloud::Redis::V1::ImportInstanceRequest.new(name: name, input_config: input_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_export_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_instance({ name: name, output_config: output_config }) do |_result, response|
+        c.export_instance({ name: name, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_instance name: name, output_config: output_config do |_result, response|
+        c.export_instance name: name, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_instance ::Google::Cloud::Redis::V1::ExportInstanceRequest.new(name: name, output_config: output_config) do |_result, response|
+        c.export_instance ::Google::Cloud::Redis::V1::ExportInstanceRequest.new(name: name, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_instance({ name: name, output_config: output_config }, call_options) do |_result, response|
+        c.export_instance({ name: name, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_instance(::Google::Cloud::Redis::V1::ExportInstanceRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
+        c.export_instance(::Google::Cloud::Redis::V1::ExportInstanceRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -538,32 +538,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_failover_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, failover_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.failover_instance({ name: name, data_protection_mode: data_protection_mode }) do |_result, response|
+        c.failover_instance({ name: name, data_protection_mode: data_protection_mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.failover_instance name: name, data_protection_mode: data_protection_mode do |_result, response|
+        c.failover_instance name: name, data_protection_mode: data_protection_mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.failover_instance ::Google::Cloud::Redis::V1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode) do |_result, response|
+        c.failover_instance ::Google::Cloud::Redis::V1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.failover_instance({ name: name, data_protection_mode: data_protection_mode }, call_options) do |_result, response|
+        c.failover_instance({ name: name, data_protection_mode: data_protection_mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.failover_instance(::Google::Cloud::Redis::V1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode), call_options) do |_result, response|
+        c.failover_instance(::Google::Cloud::Redis::V1::FailoverInstanceRequest.new(name: name, data_protection_mode: data_protection_mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -592,32 +592,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name }) do |_result, response|
+        c.delete_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name do |_result, response|
+        c.delete_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::Redis::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
+        c.delete_instance ::Google::Cloud::Redis::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name }, call_options) do |_result, response|
+        c.delete_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::Redis::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Redis::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -648,32 +648,32 @@ class ::Google::Cloud::Redis::V1::CloudRedis::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Redis::V1::CloudRedis::Rest::ServiceStub.stub :transcode_reschedule_maintenance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reschedule_maintenance_client_stub do
         # Create client
-        client = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
+        c = ::Google::Cloud::Redis::V1::CloudRedis::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |_result, response|
+        c.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reschedule_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |_result, response|
+        c.reschedule_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reschedule_maintenance ::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |_result, response|
+        c.reschedule_maintenance ::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, call_options) do |_result, response|
+        c.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reschedule_maintenance(::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), call_options) do |_result, response|
+        c.reschedule_maintenance(::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

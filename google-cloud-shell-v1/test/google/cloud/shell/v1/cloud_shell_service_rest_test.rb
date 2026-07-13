@@ -97,32 +97,32 @@ class ::Google::Cloud::Shell::V1::CloudShellService::Rest::ClientTest < Minitest
     ::Google::Cloud::Shell::V1::CloudShellService::Rest::ServiceStub.stub :transcode_get_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_environment({ name: name }) do |_result, response|
+        c.get_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_environment name: name do |_result, response|
+        c.get_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_environment ::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
+        c.get_environment ::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_environment({ name: name }, call_options) do |_result, response|
+        c.get_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_environment(::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_environment(::Google::Cloud::Shell::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Shell::V1::CloudShellService::Rest::ClientTest < Minitest
     ::Google::Cloud::Shell::V1::CloudShellService::Rest::ServiceStub.stub :transcode_start_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_environment({ name: name, access_token: access_token, public_keys: public_keys }) do |_result, response|
+        c.start_environment({ name: name, access_token: access_token, public_keys: public_keys }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_environment name: name, access_token: access_token, public_keys: public_keys do |_result, response|
+        c.start_environment name: name, access_token: access_token, public_keys: public_keys do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_environment ::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys) do |_result, response|
+        c.start_environment ::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_environment({ name: name, access_token: access_token, public_keys: public_keys }, call_options) do |_result, response|
+        c.start_environment({ name: name, access_token: access_token, public_keys: public_keys }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_environment(::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys), call_options) do |_result, response|
+        c.start_environment(::Google::Cloud::Shell::V1::StartEnvironmentRequest.new(name: name, access_token: access_token, public_keys: public_keys), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Shell::V1::CloudShellService::Rest::ClientTest < Minitest
     ::Google::Cloud::Shell::V1::CloudShellService::Rest::ServiceStub.stub :transcode_authorize_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, authorize_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }) do |_result, response|
+        c.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.authorize_environment name: name, access_token: access_token, id_token: id_token, expire_time: expire_time do |_result, response|
+        c.authorize_environment name: name, access_token: access_token, id_token: id_token, expire_time: expire_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.authorize_environment ::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time) do |_result, response|
+        c.authorize_environment ::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }, call_options) do |_result, response|
+        c.authorize_environment({ name: name, access_token: access_token, id_token: id_token, expire_time: expire_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.authorize_environment(::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time), call_options) do |_result, response|
+        c.authorize_environment(::Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new(name: name, access_token: access_token, id_token: id_token, expire_time: expire_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Shell::V1::CloudShellService::Rest::ClientTest < Minitest
     ::Google::Cloud::Shell::V1::CloudShellService::Rest::ServiceStub.stub :transcode_add_public_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_public_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_public_key({ environment: environment, key: key }) do |_result, response|
+        c.add_public_key({ environment: environment, key: key }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_public_key environment: environment, key: key do |_result, response|
+        c.add_public_key environment: environment, key: key do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_public_key ::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key) do |_result, response|
+        c.add_public_key ::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_public_key({ environment: environment, key: key }, call_options) do |_result, response|
+        c.add_public_key({ environment: environment, key: key }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_public_key(::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key), call_options) do |_result, response|
+        c.add_public_key(::Google::Cloud::Shell::V1::AddPublicKeyRequest.new(environment: environment, key: key), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Shell::V1::CloudShellService::Rest::ClientTest < Minitest
     ::Google::Cloud::Shell::V1::CloudShellService::Rest::ServiceStub.stub :transcode_remove_public_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_public_key_client_stub do
         # Create client
-        client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_public_key({ environment: environment, key: key }) do |_result, response|
+        c.remove_public_key({ environment: environment, key: key }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_public_key environment: environment, key: key do |_result, response|
+        c.remove_public_key environment: environment, key: key do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_public_key ::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key) do |_result, response|
+        c.remove_public_key ::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_public_key({ environment: environment, key: key }, call_options) do |_result, response|
+        c.remove_public_key({ environment: environment, key: key }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_public_key(::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key), call_options) do |_result, response|
+        c.remove_public_key(::Google::Cloud::Shell::V1::RemovePublicKeyRequest.new(environment: environment, key: key), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

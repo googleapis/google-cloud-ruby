@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.6.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34059](https://github.com/googleapis/google-cloud-ruby/issues/34059)) 
+
+### 1.5.0 (2026-06-08)
+
+#### Features
+
+* Custom domain and HTTP/2 support for Workstation Clusters ([#34009](https://github.com/googleapis/google-cloud-ruby/issues/34009)) 
+
 ### 1.4.1 (2026-04-03)
 
 #### Documentation

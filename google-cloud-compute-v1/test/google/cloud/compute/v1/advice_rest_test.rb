@@ -99,32 +99,32 @@ class ::Google::Cloud::Compute::V1::Advice::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Compute::V1::Advice::Rest::ServiceStub.stub :transcode_calendar_mode_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, calendar_mode_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Advice::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::Advice::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.calendar_mode({ calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region }) do |_result, response|
+        c.calendar_mode({ calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.calendar_mode calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region do |_result, response|
+        c.calendar_mode calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.calendar_mode ::Google::Cloud::Compute::V1::CalendarModeAdviceRpcRequest.new(calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region) do |_result, response|
+        c.calendar_mode ::Google::Cloud::Compute::V1::CalendarModeAdviceRpcRequest.new(calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.calendar_mode({ calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region }, call_options) do |_result, response|
+        c.calendar_mode({ calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.calendar_mode(::Google::Cloud::Compute::V1::CalendarModeAdviceRpcRequest.new(calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region), call_options) do |_result, response|
+        c.calendar_mode(::Google::Cloud::Compute::V1::CalendarModeAdviceRpcRequest.new(calendar_mode_advice_request_resource: calendar_mode_advice_request_resource, project: project, region: region), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

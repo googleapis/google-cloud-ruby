@@ -99,32 +99,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_create_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_serving_config({ parent: parent, serving_config: serving_config, serving_config_id: serving_config_id }) do |_result, response|
+        c.create_serving_config({ parent: parent, serving_config: serving_config, serving_config_id: serving_config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_serving_config parent: parent, serving_config: serving_config, serving_config_id: serving_config_id do |_result, response|
+        c.create_serving_config parent: parent, serving_config: serving_config, serving_config_id: serving_config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_serving_config ::Google::Cloud::Retail::V2::CreateServingConfigRequest.new(parent: parent, serving_config: serving_config, serving_config_id: serving_config_id) do |_result, response|
+        c.create_serving_config ::Google::Cloud::Retail::V2::CreateServingConfigRequest.new(parent: parent, serving_config: serving_config, serving_config_id: serving_config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_serving_config({ parent: parent, serving_config: serving_config, serving_config_id: serving_config_id }, call_options) do |_result, response|
+        c.create_serving_config({ parent: parent, serving_config: serving_config, serving_config_id: serving_config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_serving_config(::Google::Cloud::Retail::V2::CreateServingConfigRequest.new(parent: parent, serving_config: serving_config, serving_config_id: serving_config_id), call_options) do |_result, response|
+        c.create_serving_config(::Google::Cloud::Retail::V2::CreateServingConfigRequest.new(parent: parent, serving_config: serving_config, serving_config_id: serving_config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_delete_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_serving_config({ name: name }) do |_result, response|
+        c.delete_serving_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_serving_config name: name do |_result, response|
+        c.delete_serving_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_serving_config ::Google::Cloud::Retail::V2::DeleteServingConfigRequest.new(name: name) do |_result, response|
+        c.delete_serving_config ::Google::Cloud::Retail::V2::DeleteServingConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_serving_config({ name: name }, call_options) do |_result, response|
+        c.delete_serving_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_serving_config(::Google::Cloud::Retail::V2::DeleteServingConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_serving_config(::Google::Cloud::Retail::V2::DeleteServingConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_update_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |_result, response|
+        c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_serving_config serving_config: serving_config, update_mask: update_mask do |_result, response|
+        c.update_serving_config serving_config: serving_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_serving_config ::Google::Cloud::Retail::V2::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |_result, response|
+        c.update_serving_config ::Google::Cloud::Retail::V2::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_serving_config({ serving_config: serving_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_serving_config(::Google::Cloud::Retail::V2::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_serving_config(::Google::Cloud::Retail::V2::UpdateServingConfigRequest.new(serving_config: serving_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_get_serving_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_serving_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_serving_config({ name: name }) do |_result, response|
+        c.get_serving_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_serving_config name: name do |_result, response|
+        c.get_serving_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_serving_config ::Google::Cloud::Retail::V2::GetServingConfigRequest.new(name: name) do |_result, response|
+        c.get_serving_config ::Google::Cloud::Retail::V2::GetServingConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_serving_config({ name: name }, call_options) do |_result, response|
+        c.get_serving_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_serving_config(::Google::Cloud::Retail::V2::GetServingConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_serving_config(::Google::Cloud::Retail::V2::GetServingConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_list_serving_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_serving_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_serving_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_serving_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_serving_configs ::Google::Cloud::Retail::V2::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_serving_configs ::Google::Cloud::Retail::V2::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_serving_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_serving_configs(::Google::Cloud::Retail::V2::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_serving_configs(::Google::Cloud::Retail::V2::ListServingConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_add_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_control_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_control({ serving_config: serving_config, control_id: control_id }) do |_result, response|
+        c.add_control({ serving_config: serving_config, control_id: control_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_control serving_config: serving_config, control_id: control_id do |_result, response|
+        c.add_control serving_config: serving_config, control_id: control_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_control ::Google::Cloud::Retail::V2::AddControlRequest.new(serving_config: serving_config, control_id: control_id) do |_result, response|
+        c.add_control ::Google::Cloud::Retail::V2::AddControlRequest.new(serving_config: serving_config, control_id: control_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_control({ serving_config: serving_config, control_id: control_id }, call_options) do |_result, response|
+        c.add_control({ serving_config: serving_config, control_id: control_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_control(::Google::Cloud::Retail::V2::AddControlRequest.new(serving_config: serving_config, control_id: control_id), call_options) do |_result, response|
+        c.add_control(::Google::Cloud::Retail::V2::AddControlRequest.new(serving_config: serving_config, control_id: control_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ServiceStub.stub :transcode_remove_control_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_control_client_stub do
         # Create client
-        client = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Retail::V2::ServingConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_control({ serving_config: serving_config, control_id: control_id }) do |_result, response|
+        c.remove_control({ serving_config: serving_config, control_id: control_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_control serving_config: serving_config, control_id: control_id do |_result, response|
+        c.remove_control serving_config: serving_config, control_id: control_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_control ::Google::Cloud::Retail::V2::RemoveControlRequest.new(serving_config: serving_config, control_id: control_id) do |_result, response|
+        c.remove_control ::Google::Cloud::Retail::V2::RemoveControlRequest.new(serving_config: serving_config, control_id: control_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_control({ serving_config: serving_config, control_id: control_id }, call_options) do |_result, response|
+        c.remove_control({ serving_config: serving_config, control_id: control_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_control(::Google::Cloud::Retail::V2::RemoveControlRequest.new(serving_config: serving_config, control_id: control_id), call_options) do |_result, response|
+        c.remove_control(::Google::Cloud::Retail::V2::RemoveControlRequest.new(serving_config: serving_config, control_id: control_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -100,32 +100,32 @@ class ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::ClientTest
     ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::ServiceStub.stub :transcode_list_cloud_locations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cloud_locations_client_stub do
         # Create client
-        client = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::Client.new do |config|
+        c = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cloud_locations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_cloud_locations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cloud_locations ::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_cloud_locations ::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_cloud_locations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cloud_locations(::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_cloud_locations(::Google::Cloud::LocationFinder::V1::ListCloudLocationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::ClientTest
     ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::ServiceStub.stub :transcode_get_cloud_location_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cloud_location_client_stub do
         # Create client
-        client = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::Client.new do |config|
+        c = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cloud_location({ name: name }) do |_result, response|
+        c.get_cloud_location({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cloud_location name: name do |_result, response|
+        c.get_cloud_location name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cloud_location ::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name) do |_result, response|
+        c.get_cloud_location ::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cloud_location({ name: name }, call_options) do |_result, response|
+        c.get_cloud_location({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cloud_location(::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name), call_options) do |_result, response|
+        c.get_cloud_location(::Google::Cloud::LocationFinder::V1::GetCloudLocationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::ClientTest
     ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::ServiceStub.stub :transcode_search_cloud_locations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_cloud_locations_client_stub do
         # Create client
-        client = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::Client.new do |config|
+        c = ::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }) do |_result, response|
+        c.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_cloud_locations parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query do |_result, response|
+        c.search_cloud_locations parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_cloud_locations ::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query) do |_result, response|
+        c.search_cloud_locations ::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }, call_options) do |_result, response|
+        c.search_cloud_locations({ parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_cloud_locations(::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query), call_options) do |_result, response|
+        c.search_cloud_locations(::Google::Cloud::LocationFinder::V1::SearchCloudLocationsRequest.new(parent: parent, source_cloud_location: source_cloud_location, page_size: page_size, page_token: page_token, query: query), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

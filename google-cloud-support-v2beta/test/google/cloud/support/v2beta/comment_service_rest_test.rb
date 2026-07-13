@@ -99,32 +99,32 @@ class ::Google::Cloud::Support::V2beta::CommentService::Rest::ClientTest < Minit
     ::Google::Cloud::Support::V2beta::CommentService::Rest::ServiceStub.stub :transcode_list_comments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_comments_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CommentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CommentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_comments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_comments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_comments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_comments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_comments ::Google::Cloud::Support::V2beta::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_comments ::Google::Cloud::Support::V2beta::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_comments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_comments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_comments(::Google::Cloud::Support::V2beta::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_comments(::Google::Cloud::Support::V2beta::ListCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Support::V2beta::CommentService::Rest::ClientTest < Minit
     ::Google::Cloud::Support::V2beta::CommentService::Rest::ServiceStub.stub :transcode_create_comment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_comment_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CommentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CommentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_comment({ parent: parent, comment: comment }) do |_result, response|
+        c.create_comment({ parent: parent, comment: comment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_comment parent: parent, comment: comment do |_result, response|
+        c.create_comment parent: parent, comment: comment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_comment ::Google::Cloud::Support::V2beta::CreateCommentRequest.new(parent: parent, comment: comment) do |_result, response|
+        c.create_comment ::Google::Cloud::Support::V2beta::CreateCommentRequest.new(parent: parent, comment: comment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_comment({ parent: parent, comment: comment }, call_options) do |_result, response|
+        c.create_comment({ parent: parent, comment: comment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_comment(::Google::Cloud::Support::V2beta::CreateCommentRequest.new(parent: parent, comment: comment), call_options) do |_result, response|
+        c.create_comment(::Google::Cloud::Support::V2beta::CreateCommentRequest.new(parent: parent, comment: comment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Support::V2beta::CommentService::Rest::ClientTest < Minit
     ::Google::Cloud::Support::V2beta::CommentService::Rest::ServiceStub.stub :transcode_get_comment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_comment_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CommentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CommentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_comment({ name: name }) do |_result, response|
+        c.get_comment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_comment name: name do |_result, response|
+        c.get_comment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_comment ::Google::Cloud::Support::V2beta::GetCommentRequest.new(name: name) do |_result, response|
+        c.get_comment ::Google::Cloud::Support::V2beta::GetCommentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_comment({ name: name }, call_options) do |_result, response|
+        c.get_comment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_comment(::Google::Cloud::Support::V2beta::GetCommentRequest.new(name: name), call_options) do |_result, response|
+        c.get_comment(::Google::Cloud::Support::V2beta::GetCommentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -82,36 +82,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Clien
 
     Gapic::ServiceStub.stub :new, get_business_identity_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_business_identity({ name: name }) do |response, operation|
+      c.get_business_identity({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_business_identity name: name do |response, operation|
+      c.get_business_identity name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_business_identity ::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name) do |response, operation|
+      c.get_business_identity ::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_business_identity({ name: name }, grpc_options) do |response, operation|
+      c.get_business_identity({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_business_identity(::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_business_identity(::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Clien
 
     Gapic::ServiceStub.stub :new, update_business_identity_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_business_identity({ business_identity: business_identity, update_mask: update_mask }) do |response, operation|
+      c.update_business_identity({ business_identity: business_identity, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_business_identity business_identity: business_identity, update_mask: update_mask do |response, operation|
+      c.update_business_identity business_identity: business_identity, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_business_identity ::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask) do |response, operation|
+      c.update_business_identity ::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_business_identity({ business_identity: business_identity, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_business_identity({ business_identity: business_identity, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_business_identity(::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_business_identity(::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest.new(business_identity: business_identity, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

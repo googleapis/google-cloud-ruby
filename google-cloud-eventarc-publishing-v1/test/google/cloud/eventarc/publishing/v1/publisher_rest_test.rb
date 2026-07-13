@@ -99,32 +99,32 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ClientTest < M
     ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ServiceStub.stub :transcode_publish_channel_connection_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, publish_channel_connection_events_client_stub do
         # Create client
-        client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new do |config|
+        c = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }) do |_result, response|
+        c.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.publish_channel_connection_events channel_connection: channel_connection, events: events, text_events: text_events do |_result, response|
+        c.publish_channel_connection_events channel_connection: channel_connection, events: events, text_events: text_events do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.publish_channel_connection_events ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events) do |_result, response|
+        c.publish_channel_connection_events ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }, call_options) do |_result, response|
+        c.publish_channel_connection_events({ channel_connection: channel_connection, events: events, text_events: text_events }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.publish_channel_connection_events(::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events), call_options) do |_result, response|
+        c.publish_channel_connection_events(::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new(channel_connection: channel_connection, events: events, text_events: text_events), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ClientTest < M
     ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ServiceStub.stub :transcode_publish_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, publish_events_client_stub do
         # Create client
-        client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new do |config|
+        c = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.publish_events({ channel: channel, events: events, text_events: text_events }) do |_result, response|
+        c.publish_events({ channel: channel, events: events, text_events: text_events }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.publish_events channel: channel, events: events, text_events: text_events do |_result, response|
+        c.publish_events channel: channel, events: events, text_events: text_events do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.publish_events ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events) do |_result, response|
+        c.publish_events ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.publish_events({ channel: channel, events: events, text_events: text_events }, call_options) do |_result, response|
+        c.publish_events({ channel: channel, events: events, text_events: text_events }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.publish_events(::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events), call_options) do |_result, response|
+        c.publish_events(::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new(channel: channel, events: events, text_events: text_events), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ClientTest < M
     ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ServiceStub.stub :transcode_publish_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, publish_client_stub do
         # Create client
-        client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new do |config|
+        c = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.publish({ message_bus: message_bus, proto_message: proto_message }) do |_result, response|
+        c.publish({ message_bus: message_bus, proto_message: proto_message }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.publish message_bus: message_bus, proto_message: proto_message do |_result, response|
+        c.publish message_bus: message_bus, proto_message: proto_message do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.publish ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message) do |_result, response|
+        c.publish ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.publish({ message_bus: message_bus, proto_message: proto_message }, call_options) do |_result, response|
+        c.publish({ message_bus: message_bus, proto_message: proto_message }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.publish(::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message), call_options) do |_result, response|
+        c.publish(::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

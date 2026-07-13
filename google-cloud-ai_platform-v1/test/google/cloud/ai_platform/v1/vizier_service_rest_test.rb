@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_create_study_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_study_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_study({ parent: parent, study: study }) do |_result, response|
+        c.create_study({ parent: parent, study: study }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_study parent: parent, study: study do |_result, response|
+        c.create_study parent: parent, study: study do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_study ::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study) do |_result, response|
+        c.create_study ::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_study({ parent: parent, study: study }, call_options) do |_result, response|
+        c.create_study({ parent: parent, study: study }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_study(::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study), call_options) do |_result, response|
+        c.create_study(::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_get_study_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_study_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_study({ name: name }) do |_result, response|
+        c.get_study({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_study name: name do |_result, response|
+        c.get_study name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_study ::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name) do |_result, response|
+        c.get_study ::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_study({ name: name }, call_options) do |_result, response|
+        c.get_study({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_study(::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name), call_options) do |_result, response|
+        c.get_study(::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_list_studies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_studies_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_studies({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_studies({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_studies parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_studies parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_studies ::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_studies ::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_studies({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_studies({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_studies(::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_studies(::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_delete_study_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_study_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_study({ name: name }) do |_result, response|
+        c.delete_study({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_study name: name do |_result, response|
+        c.delete_study name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_study ::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name) do |_result, response|
+        c.delete_study ::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_study({ name: name }, call_options) do |_result, response|
+        c.delete_study({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_study(::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name), call_options) do |_result, response|
+        c.delete_study(::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_lookup_study_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_study_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_study({ parent: parent, display_name: display_name }) do |_result, response|
+        c.lookup_study({ parent: parent, display_name: display_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_study parent: parent, display_name: display_name do |_result, response|
+        c.lookup_study parent: parent, display_name: display_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_study ::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name) do |_result, response|
+        c.lookup_study ::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_study({ parent: parent, display_name: display_name }, call_options) do |_result, response|
+        c.lookup_study({ parent: parent, display_name: display_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_study(::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name), call_options) do |_result, response|
+        c.lookup_study(::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_suggest_trials_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, suggest_trials_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }) do |_result, response|
+        c.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.suggest_trials parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts do |_result, response|
+        c.suggest_trials parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.suggest_trials ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts) do |_result, response|
+        c.suggest_trials ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }, call_options) do |_result, response|
+        c.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.suggest_trials(::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts), call_options) do |_result, response|
+        c.suggest_trials(::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_create_trial_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_trial_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_trial({ parent: parent, trial: trial }) do |_result, response|
+        c.create_trial({ parent: parent, trial: trial }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_trial parent: parent, trial: trial do |_result, response|
+        c.create_trial parent: parent, trial: trial do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_trial ::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial) do |_result, response|
+        c.create_trial ::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_trial({ parent: parent, trial: trial }, call_options) do |_result, response|
+        c.create_trial({ parent: parent, trial: trial }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_trial(::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial), call_options) do |_result, response|
+        c.create_trial(::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_get_trial_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_trial_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_trial({ name: name }) do |_result, response|
+        c.get_trial({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_trial name: name do |_result, response|
+        c.get_trial name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_trial ::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name) do |_result, response|
+        c.get_trial ::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_trial({ name: name }, call_options) do |_result, response|
+        c.get_trial({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_trial(::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name), call_options) do |_result, response|
+        c.get_trial(::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -539,32 +539,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_list_trials_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_trials_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_trials({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_trials({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_trials parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_trials parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_trials ::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_trials ::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_trials({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_trials({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_trials(::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_trials(::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -594,32 +594,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_add_trial_measurement_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_trial_measurement_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_trial_measurement({ trial_name: trial_name, measurement: measurement }) do |_result, response|
+        c.add_trial_measurement({ trial_name: trial_name, measurement: measurement }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_trial_measurement trial_name: trial_name, measurement: measurement do |_result, response|
+        c.add_trial_measurement trial_name: trial_name, measurement: measurement do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_trial_measurement ::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement) do |_result, response|
+        c.add_trial_measurement ::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_trial_measurement({ trial_name: trial_name, measurement: measurement }, call_options) do |_result, response|
+        c.add_trial_measurement({ trial_name: trial_name, measurement: measurement }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_trial_measurement(::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement), call_options) do |_result, response|
+        c.add_trial_measurement(::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -651,32 +651,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_complete_trial_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, complete_trial_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }) do |_result, response|
+        c.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.complete_trial name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason do |_result, response|
+        c.complete_trial name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.complete_trial ::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason) do |_result, response|
+        c.complete_trial ::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }, call_options) do |_result, response|
+        c.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.complete_trial(::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason), call_options) do |_result, response|
+        c.complete_trial(::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -705,32 +705,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_delete_trial_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_trial_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_trial({ name: name }) do |_result, response|
+        c.delete_trial({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_trial name: name do |_result, response|
+        c.delete_trial name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_trial ::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name) do |_result, response|
+        c.delete_trial ::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_trial({ name: name }, call_options) do |_result, response|
+        c.delete_trial({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_trial(::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name), call_options) do |_result, response|
+        c.delete_trial(::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -759,32 +759,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_check_trial_early_stopping_state_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, check_trial_early_stopping_state_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.check_trial_early_stopping_state({ trial_name: trial_name }) do |_result, response|
+        c.check_trial_early_stopping_state({ trial_name: trial_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check_trial_early_stopping_state trial_name: trial_name do |_result, response|
+        c.check_trial_early_stopping_state trial_name: trial_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check_trial_early_stopping_state ::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name) do |_result, response|
+        c.check_trial_early_stopping_state ::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check_trial_early_stopping_state({ trial_name: trial_name }, call_options) do |_result, response|
+        c.check_trial_early_stopping_state({ trial_name: trial_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check_trial_early_stopping_state(::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name), call_options) do |_result, response|
+        c.check_trial_early_stopping_state(::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -813,32 +813,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_stop_trial_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_trial_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_trial({ name: name }) do |_result, response|
+        c.stop_trial({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_trial name: name do |_result, response|
+        c.stop_trial name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_trial ::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name) do |_result, response|
+        c.stop_trial ::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_trial({ name: name }, call_options) do |_result, response|
+        c.stop_trial({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_trial(::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name), call_options) do |_result, response|
+        c.stop_trial(::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -867,32 +867,32 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ServiceStub.stub :transcode_list_optimal_trials_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_optimal_trials_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::VizierService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_optimal_trials({ parent: parent }) do |_result, response|
+        c.list_optimal_trials({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_optimal_trials parent: parent do |_result, response|
+        c.list_optimal_trials parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_optimal_trials ::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent) do |_result, response|
+        c.list_optimal_trials ::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_optimal_trials({ parent: parent }, call_options) do |_result, response|
+        c.list_optimal_trials({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_optimal_trials(::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_optimal_trials(::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -25,6 +25,11 @@
                 "ingest_events"
               ]
             },
+            "IngestAdEvents": {
+              "methods": [
+                "ingest_ad_events"
+              ]
+            },
             "RetrieveRequestStatus": {
               "methods": [
                 "retrieve_request_status"

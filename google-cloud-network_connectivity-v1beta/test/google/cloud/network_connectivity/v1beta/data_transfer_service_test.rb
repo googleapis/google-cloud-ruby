@@ -92,40 +92,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, list_multicloud_data_transfer_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_multicloud_data_transfer_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }) do |response, operation|
+      c.list_multicloud_data_transfer_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_multicloud_data_transfer_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success do |response, operation|
+      c.list_multicloud_data_transfer_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_multicloud_data_transfer_configs ::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success) do |response, operation|
+      c.list_multicloud_data_transfer_configs ::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_multicloud_data_transfer_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
+      c.list_multicloud_data_transfer_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_multicloud_data_transfer_configs(::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success), grpc_options) do |response, operation|
+      c.list_multicloud_data_transfer_configs(::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -155,36 +155,36 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, get_multicloud_data_transfer_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_multicloud_data_transfer_config({ name: name }) do |response, operation|
+      c.get_multicloud_data_transfer_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_multicloud_data_transfer_config name: name do |response, operation|
+      c.get_multicloud_data_transfer_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferConfigRequest.new(name: name) do |response, operation|
+      c.get_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_multicloud_data_transfer_config({ name: name }, grpc_options) do |response, operation|
+      c.get_multicloud_data_transfer_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, create_multicloud_data_transfer_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_multicloud_data_transfer_config({ parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }) do |response, operation|
+      c.create_multicloud_data_transfer_config({ parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_multicloud_data_transfer_config parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id do |response, operation|
+      c.create_multicloud_data_transfer_config parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::CreateMulticloudDataTransferConfigRequest.new(parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id) do |response, operation|
+      c.create_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::CreateMulticloudDataTransferConfigRequest.new(parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_multicloud_data_transfer_config({ parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_multicloud_data_transfer_config({ parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::CreateMulticloudDataTransferConfigRequest.new(parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id), grpc_options) do |response, operation|
+      c.create_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::CreateMulticloudDataTransferConfigRequest.new(parent: parent, multicloud_data_transfer_config_id: multicloud_data_transfer_config_id, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -286,40 +286,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, update_multicloud_data_transfer_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_multicloud_data_transfer_config({ update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }) do |response, operation|
+      c.update_multicloud_data_transfer_config({ update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_multicloud_data_transfer_config update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id do |response, operation|
+      c.update_multicloud_data_transfer_config update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::UpdateMulticloudDataTransferConfigRequest.new(update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id) do |response, operation|
+      c.update_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::UpdateMulticloudDataTransferConfigRequest.new(update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_multicloud_data_transfer_config({ update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_multicloud_data_transfer_config({ update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::UpdateMulticloudDataTransferConfigRequest.new(update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id), grpc_options) do |response, operation|
+      c.update_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::UpdateMulticloudDataTransferConfigRequest.new(update_mask: update_mask, multicloud_data_transfer_config: multicloud_data_transfer_config, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -353,40 +353,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, delete_multicloud_data_transfer_config_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_multicloud_data_transfer_config({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+      c.delete_multicloud_data_transfer_config({ name: name, request_id: request_id, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_multicloud_data_transfer_config name: name, request_id: request_id, etag: etag do |response, operation|
+      c.delete_multicloud_data_transfer_config name: name, request_id: request_id, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::DeleteMulticloudDataTransferConfigRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+      c.delete_multicloud_data_transfer_config ::Google::Cloud::NetworkConnectivity::V1beta::DeleteMulticloudDataTransferConfigRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_multicloud_data_transfer_config({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+      c.delete_multicloud_data_transfer_config({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::DeleteMulticloudDataTransferConfigRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+      c.delete_multicloud_data_transfer_config(::Google::Cloud::NetworkConnectivity::V1beta::DeleteMulticloudDataTransferConfigRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -426,40 +426,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, list_destinations_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_destinations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }) do |response, operation|
+      c.list_destinations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_destinations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success do |response, operation|
+      c.list_destinations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_destinations ::Google::Cloud::NetworkConnectivity::V1beta::ListDestinationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success) do |response, operation|
+      c.list_destinations ::Google::Cloud::NetworkConnectivity::V1beta::ListDestinationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_destinations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
+      c.list_destinations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_destinations(::Google::Cloud::NetworkConnectivity::V1beta::ListDestinationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success), grpc_options) do |response, operation|
+      c.list_destinations(::Google::Cloud::NetworkConnectivity::V1beta::ListDestinationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -489,36 +489,36 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, get_destination_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_destination({ name: name }) do |response, operation|
+      c.get_destination({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_destination name: name do |response, operation|
+      c.get_destination name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_destination ::Google::Cloud::NetworkConnectivity::V1beta::GetDestinationRequest.new(name: name) do |response, operation|
+      c.get_destination ::Google::Cloud::NetworkConnectivity::V1beta::GetDestinationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_destination({ name: name }, grpc_options) do |response, operation|
+      c.get_destination({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_destination(::Google::Cloud::NetworkConnectivity::V1beta::GetDestinationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_destination(::Google::Cloud::NetworkConnectivity::V1beta::GetDestinationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -553,40 +553,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, create_destination_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_destination({ parent: parent, destination_id: destination_id, destination: destination, request_id: request_id }) do |response, operation|
+      c.create_destination({ parent: parent, destination_id: destination_id, destination: destination, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_destination parent: parent, destination_id: destination_id, destination: destination, request_id: request_id do |response, operation|
+      c.create_destination parent: parent, destination_id: destination_id, destination: destination, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_destination ::Google::Cloud::NetworkConnectivity::V1beta::CreateDestinationRequest.new(parent: parent, destination_id: destination_id, destination: destination, request_id: request_id) do |response, operation|
+      c.create_destination ::Google::Cloud::NetworkConnectivity::V1beta::CreateDestinationRequest.new(parent: parent, destination_id: destination_id, destination: destination, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_destination({ parent: parent, destination_id: destination_id, destination: destination, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_destination({ parent: parent, destination_id: destination_id, destination: destination, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_destination(::Google::Cloud::NetworkConnectivity::V1beta::CreateDestinationRequest.new(parent: parent, destination_id: destination_id, destination: destination, request_id: request_id), grpc_options) do |response, operation|
+      c.create_destination(::Google::Cloud::NetworkConnectivity::V1beta::CreateDestinationRequest.new(parent: parent, destination_id: destination_id, destination: destination, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -620,40 +620,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, update_destination_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_destination({ update_mask: update_mask, destination: destination, request_id: request_id }) do |response, operation|
+      c.update_destination({ update_mask: update_mask, destination: destination, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_destination update_mask: update_mask, destination: destination, request_id: request_id do |response, operation|
+      c.update_destination update_mask: update_mask, destination: destination, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_destination ::Google::Cloud::NetworkConnectivity::V1beta::UpdateDestinationRequest.new(update_mask: update_mask, destination: destination, request_id: request_id) do |response, operation|
+      c.update_destination ::Google::Cloud::NetworkConnectivity::V1beta::UpdateDestinationRequest.new(update_mask: update_mask, destination: destination, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_destination({ update_mask: update_mask, destination: destination, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_destination({ update_mask: update_mask, destination: destination, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_destination(::Google::Cloud::NetworkConnectivity::V1beta::UpdateDestinationRequest.new(update_mask: update_mask, destination: destination, request_id: request_id), grpc_options) do |response, operation|
+      c.update_destination(::Google::Cloud::NetworkConnectivity::V1beta::UpdateDestinationRequest.new(update_mask: update_mask, destination: destination, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -687,40 +687,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, delete_destination_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_destination({ name: name, request_id: request_id, etag: etag }) do |response, operation|
+      c.delete_destination({ name: name, request_id: request_id, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_destination name: name, request_id: request_id, etag: etag do |response, operation|
+      c.delete_destination name: name, request_id: request_id, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_destination ::Google::Cloud::NetworkConnectivity::V1beta::DeleteDestinationRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
+      c.delete_destination ::Google::Cloud::NetworkConnectivity::V1beta::DeleteDestinationRequest.new(name: name, request_id: request_id, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_destination({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
+      c.delete_destination({ name: name, request_id: request_id, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_destination(::Google::Cloud::NetworkConnectivity::V1beta::DeleteDestinationRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
+      c.delete_destination(::Google::Cloud::NetworkConnectivity::V1beta::DeleteDestinationRequest.new(name: name, request_id: request_id, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -750,36 +750,36 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, get_multicloud_data_transfer_supported_service_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_multicloud_data_transfer_supported_service({ name: name }) do |response, operation|
+      c.get_multicloud_data_transfer_supported_service({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_multicloud_data_transfer_supported_service name: name do |response, operation|
+      c.get_multicloud_data_transfer_supported_service name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_multicloud_data_transfer_supported_service ::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferSupportedServiceRequest.new(name: name) do |response, operation|
+      c.get_multicloud_data_transfer_supported_service ::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferSupportedServiceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_multicloud_data_transfer_supported_service({ name: name }, grpc_options) do |response, operation|
+      c.get_multicloud_data_transfer_supported_service({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_multicloud_data_transfer_supported_service(::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferSupportedServiceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_multicloud_data_transfer_supported_service(::Google::Cloud::NetworkConnectivity::V1beta::GetMulticloudDataTransferSupportedServiceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -812,40 +812,40 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::ClientT
 
     Gapic::ServiceStub.stub :new, list_multicloud_data_transfer_supported_services_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1beta::DataTransferService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_multicloud_data_transfer_supported_services({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_multicloud_data_transfer_supported_services({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_multicloud_data_transfer_supported_services parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_multicloud_data_transfer_supported_services parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_multicloud_data_transfer_supported_services ::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferSupportedServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_multicloud_data_transfer_supported_services ::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferSupportedServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_multicloud_data_transfer_supported_services({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_multicloud_data_transfer_supported_services({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_multicloud_data_transfer_supported_services(::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferSupportedServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_multicloud_data_transfer_supported_services(::Google::Cloud::NetworkConnectivity::V1beta::ListMulticloudDataTransferSupportedServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

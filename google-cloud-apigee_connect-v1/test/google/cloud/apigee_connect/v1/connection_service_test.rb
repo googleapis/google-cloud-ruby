@@ -86,40 +86,40 @@ class ::Google::Cloud::ApigeeConnect::V1::ConnectionService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_connections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connections ::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_connections ::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connections(::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_connections(::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

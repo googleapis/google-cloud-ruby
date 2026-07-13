@@ -98,12 +98,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, read_rows_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_rows({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }) do |response, operation|
+      c.read_rows({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -112,7 +112,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.read_rows table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed do |response, operation|
+      c.read_rows table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -121,7 +121,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed) do |response, operation|
+      c.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -130,7 +130,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.read_rows({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }, grpc_options) do |response, operation|
+      c.read_rows({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -139,7 +139,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed), grpc_options) do |response, operation|
+      c.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view, reversed: reversed), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -179,12 +179,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, sample_row_keys_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range }) do |response, operation|
+      c.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -193,7 +193,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.sample_row_keys table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range do |response, operation|
+      c.sample_row_keys table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -202,7 +202,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range) do |response, operation|
+      c.sample_row_keys ::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -211,7 +211,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range }, grpc_options) do |response, operation|
+      c.sample_row_keys({ table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -220,7 +220,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range), grpc_options) do |response, operation|
+      c.sample_row_keys(::Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, materialized_view_name: materialized_view_name, app_profile_id: app_profile_id, row_range: row_range), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse, r
@@ -262,36 +262,36 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mutate_row_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency }) do |response, operation|
+      c.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency do |response, operation|
+      c.mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency) do |response, operation|
+      c.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency }, grpc_options) do |response, operation|
+      c.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency), grpc_options) do |response, operation|
+      c.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -326,12 +326,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, mutate_rows_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mutate_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries }) do |response, operation|
+      c.mutate_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -340,7 +340,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.mutate_rows table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries do |response, operation|
+      c.mutate_rows table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -349,7 +349,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.mutate_rows ::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries) do |response, operation|
+      c.mutate_rows ::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -358,7 +358,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.mutate_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries }, grpc_options) do |response, operation|
+      c.mutate_rows({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -367,7 +367,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.mutate_rows(::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries), grpc_options) do |response, operation|
+      c.mutate_rows(::Google::Cloud::Bigtable::V2::MutateRowsRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, entries: entries), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::MutateRowsResponse, r
@@ -411,36 +411,36 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, check_and_mutate_row_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.check_and_mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }) do |response, operation|
+      c.check_and_mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_and_mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations do |response, operation|
+      c.check_and_mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_and_mutate_row ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations) do |response, operation|
+      c.check_and_mutate_row ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_and_mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }, grpc_options) do |response, operation|
+      c.check_and_mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_and_mutate_row(::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations), grpc_options) do |response, operation|
+      c.check_and_mutate_row(::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, predicate_filter: predicate_filter, true_mutations: true_mutations, false_mutations: false_mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -471,36 +471,36 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, ping_and_warm_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.ping_and_warm({ name: name, app_profile_id: app_profile_id }) do |response, operation|
+      c.ping_and_warm({ name: name, app_profile_id: app_profile_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.ping_and_warm name: name, app_profile_id: app_profile_id do |response, operation|
+      c.ping_and_warm name: name, app_profile_id: app_profile_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.ping_and_warm ::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id) do |response, operation|
+      c.ping_and_warm ::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.ping_and_warm({ name: name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+      c.ping_and_warm({ name: name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.ping_and_warm(::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+      c.ping_and_warm(::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -537,36 +537,36 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, read_modify_write_row_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_modify_write_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }) do |response, operation|
+      c.read_modify_write_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_modify_write_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules do |response, operation|
+      c.read_modify_write_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_modify_write_row ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules) do |response, operation|
+      c.read_modify_write_row ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_modify_write_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }, grpc_options) do |response, operation|
+      c.read_modify_write_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_modify_write_row(::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules), grpc_options) do |response, operation|
+      c.read_modify_write_row(::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, rules: rules), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -597,12 +597,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, generate_initial_change_stream_partitions_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_initial_change_stream_partitions({ table_name: table_name, app_profile_id: app_profile_id }) do |response, operation|
+      c.generate_initial_change_stream_partitions({ table_name: table_name, app_profile_id: app_profile_id }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
@@ -611,7 +611,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.generate_initial_change_stream_partitions table_name: table_name, app_profile_id: app_profile_id do |response, operation|
+      c.generate_initial_change_stream_partitions table_name: table_name, app_profile_id: app_profile_id do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
@@ -620,7 +620,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.generate_initial_change_stream_partitions ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new(table_name: table_name, app_profile_id: app_profile_id) do |response, operation|
+      c.generate_initial_change_stream_partitions ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new(table_name: table_name, app_profile_id: app_profile_id) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
@@ -629,7 +629,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.generate_initial_change_stream_partitions({ table_name: table_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+      c.generate_initial_change_stream_partitions({ table_name: table_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
@@ -638,7 +638,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.generate_initial_change_stream_partitions(::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new(table_name: table_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+      c.generate_initial_change_stream_partitions(::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new(table_name: table_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
@@ -681,12 +681,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, read_change_stream_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.read_change_stream({ table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration }) do |response, operation|
+      c.read_change_stream({ table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
@@ -695,7 +695,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.read_change_stream table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration do |response, operation|
+      c.read_change_stream table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
@@ -704,7 +704,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.read_change_stream ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new(table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration) do |response, operation|
+      c.read_change_stream ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new(table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
@@ -713,7 +713,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.read_change_stream({ table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration }, grpc_options) do |response, operation|
+      c.read_change_stream({ table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
@@ -722,7 +722,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_change_stream(::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new(table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration), grpc_options) do |response, operation|
+      c.read_change_stream(::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new(table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
@@ -763,36 +763,36 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, prepare_query_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.prepare_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types }) do |response, operation|
+      c.prepare_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.prepare_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types do |response, operation|
+      c.prepare_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.prepare_query ::Google::Cloud::Bigtable::V2::PrepareQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types) do |response, operation|
+      c.prepare_query ::Google::Cloud::Bigtable::V2::PrepareQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.prepare_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types }, grpc_options) do |response, operation|
+      c.prepare_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.prepare_query(::Google::Cloud::Bigtable::V2::PrepareQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types), grpc_options) do |response, operation|
+      c.prepare_query(::Google::Cloud::Bigtable::V2::PrepareQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, proto_format: proto_format, param_types: param_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -836,12 +836,12 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, execute_query_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }) do |response, operation|
+      c.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -850,7 +850,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters do |response, operation|
+      c.execute_query instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -859,7 +859,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters) do |response, operation|
+      c.execute_query ::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -868,7 +868,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }, grpc_options) do |response, operation|
+      c.execute_query({ instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -877,7 +877,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters), grpc_options) do |response, operation|
+      c.execute_query(::Google::Cloud::Bigtable::V2::ExecuteQueryRequest.new(instance_name: instance_name, app_profile_id: app_profile_id, query: query, prepared_query: prepared_query, proto_format: proto_format, resume_token: resume_token, params: params, view_parameters: view_parameters), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ExecuteQueryResponse, r
@@ -911,36 +911,36 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_client_configuration_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_client_configuration({ instance_name: instance_name, app_profile_id: app_profile_id }) do |response, operation|
+      c.get_client_configuration({ instance_name: instance_name, app_profile_id: app_profile_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_client_configuration instance_name: instance_name, app_profile_id: app_profile_id do |response, operation|
+      c.get_client_configuration instance_name: instance_name, app_profile_id: app_profile_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_client_configuration ::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new(instance_name: instance_name, app_profile_id: app_profile_id) do |response, operation|
+      c.get_client_configuration ::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new(instance_name: instance_name, app_profile_id: app_profile_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_client_configuration({ instance_name: instance_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+      c.get_client_configuration({ instance_name: instance_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_client_configuration(::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new(instance_name: instance_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+      c.get_client_configuration(::Google::Cloud::Bigtable::V2::GetClientConfigurationRequest.new(instance_name: instance_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -969,7 +969,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, open_table_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -977,7 +977,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       enum_input = [request_hash, request_proto].to_enum
-      client.open_table enum_input do |response, operation|
+      c.open_table enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -989,7 +989,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       stream_input = Gapic::StreamInput.new
-      client.open_table stream_input do |response, operation|
+      c.open_table stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1004,7 +1004,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       enum_input = [request_hash, request_proto].to_enum
-      client.open_table enum_input, grpc_options do |response, operation|
+      c.open_table enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1016,7 +1016,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       stream_input = Gapic::StreamInput.new
-      client.open_table stream_input, grpc_options do |response, operation|
+      c.open_table stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1058,7 +1058,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, open_authorized_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1066,7 +1066,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       enum_input = [request_hash, request_proto].to_enum
-      client.open_authorized_view enum_input do |response, operation|
+      c.open_authorized_view enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1078,7 +1078,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       stream_input = Gapic::StreamInput.new
-      client.open_authorized_view stream_input do |response, operation|
+      c.open_authorized_view stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1093,7 +1093,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       enum_input = [request_hash, request_proto].to_enum
-      client.open_authorized_view enum_input, grpc_options do |response, operation|
+      c.open_authorized_view enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1105,7 +1105,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       stream_input = Gapic::StreamInput.new
-      client.open_authorized_view stream_input, grpc_options do |response, operation|
+      c.open_authorized_view stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1147,7 +1147,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, open_materialized_view_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+      c = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1155,7 +1155,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       enum_input = [request_hash, request_proto].to_enum
-      client.open_materialized_view enum_input do |response, operation|
+      c.open_materialized_view enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1167,7 +1167,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       stream_input = Gapic::StreamInput.new
-      client.open_materialized_view stream_input do |response, operation|
+      c.open_materialized_view stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1182,7 +1182,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       enum_input = [request_hash, request_proto].to_enum
-      client.open_materialized_view enum_input, grpc_options do |response, operation|
+      c.open_materialized_view enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r
@@ -1194,7 +1194,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       request_hash = { open_session: open_session }
       request_proto = ::Google::Cloud::Bigtable::V2::SessionRequest.new open_session: open_session
       stream_input = Gapic::StreamInput.new
-      client.open_materialized_view stream_input, grpc_options do |response, operation|
+      c.open_materialized_view stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::SessionResponse, r

@@ -97,32 +97,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_get_workstation_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workstation_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workstation_cluster({ name: name }) do |_result, response|
+        c.get_workstation_cluster({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workstation_cluster name: name do |_result, response|
+        c.get_workstation_cluster name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workstation_cluster ::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name) do |_result, response|
+        c.get_workstation_cluster ::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workstation_cluster({ name: name }, call_options) do |_result, response|
+        c.get_workstation_cluster({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workstation_cluster(::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name), call_options) do |_result, response|
+        c.get_workstation_cluster(::Google::Cloud::Workstations::V1::GetWorkstationClusterRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_list_workstation_clusters_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workstation_clusters_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workstation_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_workstation_clusters parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workstation_clusters ::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_workstation_clusters ::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_workstation_clusters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workstation_clusters(::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_workstation_clusters(::Google::Cloud::Workstations::V1::ListWorkstationClustersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_create_workstation_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workstation_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }) do |_result, response|
+        c.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workstation_cluster parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only do |_result, response|
+        c.create_workstation_cluster parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workstation_cluster ::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only) do |_result, response|
+        c.create_workstation_cluster ::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_workstation_cluster({ parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workstation_cluster(::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only), call_options) do |_result, response|
+        c.create_workstation_cluster(::Google::Cloud::Workstations::V1::CreateWorkstationClusterRequest.new(parent: parent, workstation_cluster_id: workstation_cluster_id, workstation_cluster: workstation_cluster, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_update_workstation_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_workstation_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_workstation_cluster workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_workstation_cluster workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_workstation_cluster ::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_workstation_cluster ::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_workstation_cluster({ workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_workstation_cluster(::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_workstation_cluster(::Google::Cloud::Workstations::V1::UpdateWorkstationClusterRequest.new(workstation_cluster: workstation_cluster, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -325,32 +325,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_delete_workstation_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workstation_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }) do |_result, response|
+        c.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workstation_cluster name: name, validate_only: validate_only, etag: etag, force: force do |_result, response|
+        c.delete_workstation_cluster name: name, validate_only: validate_only, etag: etag, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workstation_cluster ::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |_result, response|
+        c.delete_workstation_cluster ::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }, call_options) do |_result, response|
+        c.delete_workstation_cluster({ name: name, validate_only: validate_only, etag: etag, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workstation_cluster(::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), call_options) do |_result, response|
+        c.delete_workstation_cluster(::Google::Cloud::Workstations::V1::DeleteWorkstationClusterRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_get_workstation_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workstation_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workstation_config({ name: name }) do |_result, response|
+        c.get_workstation_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workstation_config name: name do |_result, response|
+        c.get_workstation_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workstation_config ::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name) do |_result, response|
+        c.get_workstation_config ::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workstation_config({ name: name }, call_options) do |_result, response|
+        c.get_workstation_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workstation_config(::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_workstation_config(::Google::Cloud::Workstations::V1::GetWorkstationConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_list_workstation_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workstation_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workstation_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_workstation_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workstation_configs ::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_workstation_configs ::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workstation_configs(::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_workstation_configs(::Google::Cloud::Workstations::V1::ListWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +492,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_list_usable_workstation_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_usable_workstation_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_usable_workstation_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_usable_workstation_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_usable_workstation_configs ::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_usable_workstation_configs ::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_usable_workstation_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_usable_workstation_configs(::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_usable_workstation_configs(::Google::Cloud::Workstations::V1::ListUsableWorkstationConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_create_workstation_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workstation_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }) do |_result, response|
+        c.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workstation_config parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only do |_result, response|
+        c.create_workstation_config parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workstation_config ::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only) do |_result, response|
+        c.create_workstation_config ::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_workstation_config({ parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workstation_config(::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only), call_options) do |_result, response|
+        c.create_workstation_config(::Google::Cloud::Workstations::V1::CreateWorkstationConfigRequest.new(parent: parent, workstation_config_id: workstation_config_id, workstation_config: workstation_config, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -606,32 +606,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_update_workstation_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_workstation_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_workstation_config workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_workstation_config workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_workstation_config ::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_workstation_config ::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_workstation_config({ workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_workstation_config(::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_workstation_config(::Google::Cloud::Workstations::V1::UpdateWorkstationConfigRequest.new(workstation_config: workstation_config, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -663,32 +663,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_delete_workstation_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workstation_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }) do |_result, response|
+        c.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workstation_config name: name, validate_only: validate_only, etag: etag, force: force do |_result, response|
+        c.delete_workstation_config name: name, validate_only: validate_only, etag: etag, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workstation_config ::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |_result, response|
+        c.delete_workstation_config ::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }, call_options) do |_result, response|
+        c.delete_workstation_config({ name: name, validate_only: validate_only, etag: etag, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workstation_config(::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), call_options) do |_result, response|
+        c.delete_workstation_config(::Google::Cloud::Workstations::V1::DeleteWorkstationConfigRequest.new(name: name, validate_only: validate_only, etag: etag, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -717,32 +717,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_get_workstation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_workstation_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_workstation({ name: name }) do |_result, response|
+        c.get_workstation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_workstation name: name do |_result, response|
+        c.get_workstation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_workstation ::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name) do |_result, response|
+        c.get_workstation ::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_workstation({ name: name }, call_options) do |_result, response|
+        c.get_workstation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_workstation(::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name), call_options) do |_result, response|
+        c.get_workstation(::Google::Cloud::Workstations::V1::GetWorkstationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -774,32 +774,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_list_workstations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_workstations_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_workstations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_workstations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_workstations ::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_workstations ::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_workstations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_workstations(::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_workstations(::Google::Cloud::Workstations::V1::ListWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -830,32 +830,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_list_usable_workstations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_usable_workstations_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_usable_workstations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_usable_workstations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_usable_workstations ::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_usable_workstations ::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_usable_workstations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_usable_workstations(::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_usable_workstations(::Google::Cloud::Workstations::V1::ListUsableWorkstationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -887,32 +887,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_create_workstation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_workstation_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }) do |_result, response|
+        c.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_workstation parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only do |_result, response|
+        c.create_workstation parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_workstation ::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only) do |_result, response|
+        c.create_workstation ::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_workstation({ parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_workstation(::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only), call_options) do |_result, response|
+        c.create_workstation(::Google::Cloud::Workstations::V1::CreateWorkstationRequest.new(parent: parent, workstation_id: workstation_id, workstation: workstation, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -944,32 +944,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_update_workstation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_workstation_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        c.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_workstation workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        c.update_workstation workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_workstation ::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        c.update_workstation ::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        c.update_workstation({ workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_workstation(::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        c.update_workstation(::Google::Cloud::Workstations::V1::UpdateWorkstationRequest.new(workstation: workstation, update_mask: update_mask, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1000,32 +1000,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_delete_workstation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_workstation_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_workstation({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.delete_workstation({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_workstation name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.delete_workstation name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_workstation ::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.delete_workstation ::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_workstation({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.delete_workstation({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_workstation(::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.delete_workstation(::Google::Cloud::Workstations::V1::DeleteWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1057,32 +1057,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_start_workstation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_workstation_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }) do |_result, response|
+        c.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_workstation name: name, validate_only: validate_only, etag: etag, boost_config: boost_config do |_result, response|
+        c.start_workstation name: name, validate_only: validate_only, etag: etag, boost_config: boost_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_workstation ::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config) do |_result, response|
+        c.start_workstation ::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }, call_options) do |_result, response|
+        c.start_workstation({ name: name, validate_only: validate_only, etag: etag, boost_config: boost_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_workstation(::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config), call_options) do |_result, response|
+        c.start_workstation(::Google::Cloud::Workstations::V1::StartWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag, boost_config: boost_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1113,32 +1113,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_stop_workstation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_workstation_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_workstation({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
+        c.stop_workstation({ name: name, validate_only: validate_only, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_workstation name: name, validate_only: validate_only, etag: etag do |_result, response|
+        c.stop_workstation name: name, validate_only: validate_only, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_workstation ::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
+        c.stop_workstation ::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_workstation({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+        c.stop_workstation({ name: name, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_workstation(::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+        c.stop_workstation(::Google::Cloud::Workstations::V1::StopWorkstationRequest.new(name: name, validate_only: validate_only, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1169,32 +1169,32 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     ::Google::Cloud::Workstations::V1::Workstations::Rest::ServiceStub.stub :transcode_generate_access_token_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_access_token_client_stub do
         # Create client
-        client = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workstations::V1::Workstations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }) do |_result, response|
+        c.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_access_token expire_time: expire_time, workstation: workstation, port: port do |_result, response|
+        c.generate_access_token expire_time: expire_time, workstation: workstation, port: port do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_access_token ::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port) do |_result, response|
+        c.generate_access_token ::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }, call_options) do |_result, response|
+        c.generate_access_token({ expire_time: expire_time, workstation: workstation, port: port }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_access_token(::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port), call_options) do |_result, response|
+        c.generate_access_token(::Google::Cloud::Workstations::V1::GenerateAccessTokenRequest.new(expire_time: expire_time, workstation: workstation, port: port), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

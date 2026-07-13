@@ -82,36 +82,36 @@ class ::Google::Cloud::Chronicle::V1::DashboardChartService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_dashboard_chart_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DashboardChartService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DashboardChartService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dashboard_chart({ name: name }) do |response, operation|
+      c.get_dashboard_chart({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dashboard_chart name: name do |response, operation|
+      c.get_dashboard_chart name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dashboard_chart ::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name) do |response, operation|
+      c.get_dashboard_chart ::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dashboard_chart({ name: name }, grpc_options) do |response, operation|
+      c.get_dashboard_chart({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dashboard_chart(::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dashboard_chart(::Google::Cloud::Chronicle::V1::GetDashboardChartRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Chronicle::V1::DashboardChartService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, batch_get_dashboard_charts_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DashboardChartService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DashboardChartService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_get_dashboard_charts({ parent: parent, names: names }) do |response, operation|
+      c.batch_get_dashboard_charts({ parent: parent, names: names }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_get_dashboard_charts parent: parent, names: names do |response, operation|
+      c.batch_get_dashboard_charts parent: parent, names: names do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_get_dashboard_charts ::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names) do |response, operation|
+      c.batch_get_dashboard_charts ::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_get_dashboard_charts({ parent: parent, names: names }, grpc_options) do |response, operation|
+      c.batch_get_dashboard_charts({ parent: parent, names: names }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_get_dashboard_charts(::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+      c.batch_get_dashboard_charts(::Google::Cloud::Chronicle::V1::BatchGetDashboardChartsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

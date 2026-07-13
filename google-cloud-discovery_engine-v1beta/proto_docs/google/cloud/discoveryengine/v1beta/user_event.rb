@@ -34,7 +34,6 @@ module Google
         #     * `view-item-list`: View of a panel or ordered list of Documents.
         #     * `view-home-page`: View of the home page.
         #     * `view-category-page`: View of a category page, e.g. Home > Men > Jeans
-        #     * `add-feedback`: Add a user feedback.
         #
         #     Retail-related values:
         #
@@ -45,6 +44,23 @@ module Google
         #
         #     * `media-play`: Start/resume watching a video, playing a song, etc.
         #     * `media-complete`: Finished or stopped midway through a video, song, etc.
+        #
+        #     Custom conversion value:
+        #
+        #     * `conversion`: Customer defined conversion event.
+        # @!attribute [rw] conversion_type
+        #   @return [::String]
+        #     Optional. Conversion type.
+        #
+        #     Required if
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#event_type UserEvent.event_type}
+        #     is `conversion`. This is a customer-defined conversion name in lowercase
+        #     letters or numbers separated by "-", such as "watch", "good-visit" etc.
+        #
+        #     Do not set the field if
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#event_type UserEvent.event_type}
+        #     is not `conversion`. This mixes the custom conversion event with predefined
+        #     events like `search`, `view-item` etc.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
         #     Required. A unique identifier for tracking visitors.
@@ -149,8 +165,9 @@ module Google
         #     to this field.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     The filter syntax consists of an expression language for constructing a
-        #     predicate from one or more fields of the documents being filtered.
+        #     Optional. The filter syntax consists of an expression language for
+        #     constructing a predicate from one or more fields of the documents being
+        #     filtered.
         #
         #     One example is for `search` events, the associated
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest SearchRequest} may
@@ -249,6 +266,16 @@ module Google
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::PanelInfo>]
         #     Optional. List of panels associated with this event.
         #     Used for page-level impression data.
+        # @!attribute [rw] feedback
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Feedback]
+        #     Optional. This field is optional except for the `add-feedback` event types.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     Optional. Represents the entity for customers that may run multiple
+        #     different entities, domains, sites or regions, for example, `Google US`,
+        #     `Google Ads`, `Waymo`, `google.com`, `youtube.com`, etc. We recommend that
+        #     you set `entity` to get better per-entity search, completion, and
+        #     prediction results.
         class UserEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -465,6 +492,15 @@ module Google
         #   @return [::Boolean]
         #     Output only. Whether the referenced Document can be found in the data
         #     store.
+        # @!attribute [rw] conversion_value
+        #   @return [::Float]
+        #     Optional. The conversion value associated with this Document.
+        #     Must be set if
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#event_type UserEvent.event_type}
+        #     is "conversion".
+        #
+        #     For example, a value of 1000 signifies that 1000 seconds were spent viewing
+        #     a Document for the `watch` conversion type.
         class DocumentInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

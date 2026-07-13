@@ -99,32 +99,32 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::R
     ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::ServiceStub.stub :transcode_list_org_policy_violations_previews_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_org_policy_violations_previews_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_org_policy_violations_previews parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_org_policy_violations_previews parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_org_policy_violations_previews ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_org_policy_violations_previews ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_org_policy_violations_previews({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_org_policy_violations_previews(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_org_policy_violations_previews(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::R
     ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::ServiceStub.stub :transcode_get_org_policy_violations_preview_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_org_policy_violations_preview_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_org_policy_violations_preview({ name: name }) do |_result, response|
+        c.get_org_policy_violations_preview({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_org_policy_violations_preview name: name do |_result, response|
+        c.get_org_policy_violations_preview name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name) do |_result, response|
+        c.get_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_org_policy_violations_preview({ name: name }, call_options) do |_result, response|
+        c.get_org_policy_violations_preview({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name), call_options) do |_result, response|
+        c.get_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::GetOrgPolicyViolationsPreviewRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::R
     ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::ServiceStub.stub :transcode_create_org_policy_violations_preview_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_org_policy_violations_preview_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }) do |_result, response|
+        c.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_org_policy_violations_preview parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id do |_result, response|
+        c.create_org_policy_violations_preview parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id) do |_result, response|
+        c.create_org_policy_violations_preview ::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }, call_options) do |_result, response|
+        c.create_org_policy_violations_preview({ parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id), call_options) do |_result, response|
+        c.create_org_policy_violations_preview(::Google::Cloud::PolicySimulator::V1::CreateOrgPolicyViolationsPreviewRequest.new(parent: parent, org_policy_violations_preview: org_policy_violations_preview, org_policy_violations_preview_id: org_policy_violations_preview_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::R
     ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::ServiceStub.stub :transcode_list_org_policy_violations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_org_policy_violations_client_stub do
         # Create client
-        client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
+        c = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_org_policy_violations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_org_policy_violations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_org_policy_violations ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_org_policy_violations ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_org_policy_violations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_org_policy_violations(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_org_policy_violations(::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

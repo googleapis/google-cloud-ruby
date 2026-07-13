@@ -214,12 +214,19 @@ module Google
             # Defines an automated backup policy for a table
             # @!attribute [rw] retention_period
             #   @return [::Google::Protobuf::Duration]
-            #     Required. How long the automated backups should be retained. The only
-            #     supported value at this time is 3 days.
+            #     Required. How long the automated backups should be retained. Values must
+            #     be at least 3 days and at most 90 days.
             # @!attribute [rw] frequency
             #   @return [::Google::Protobuf::Duration]
-            #     Required. How frequently automated backups should occur. The only
-            #     supported value at this time is 24 hours.
+            #     How frequently automated backups should occur. The only supported value
+            #     at this time is 24 hours. An undefined frequency is treated as 24 hours.
+            # @!attribute [rw] locations
+            #   @return [::Array<::String>]
+            #     Optional. A list of Cloud Bigtable zones where automated backups are
+            #     allowed to be created. If empty, automated backups will be created in all
+            #     zones of the instance. Locations are in the format
+            #     `projects/{project}/locations/{zone}`.
+            #     This field can only set for tables in Enterprise Plus instances.
             class AutomatedBackupPolicy
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

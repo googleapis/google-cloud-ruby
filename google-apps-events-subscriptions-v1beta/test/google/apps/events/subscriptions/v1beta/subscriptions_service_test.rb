@@ -84,40 +84,40 @@ class ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Clien
 
     Gapic::ServiceStub.stub :new, create_subscription_client_stub do
       # Create client
-      client = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
+      c = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_subscription({ subscription: subscription, validate_only: validate_only }) do |response, operation|
+      c.create_subscription({ subscription: subscription, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_subscription subscription: subscription, validate_only: validate_only do |response, operation|
+      c.create_subscription subscription: subscription, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_subscription ::Google::Apps::Events::Subscriptions::V1beta::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only) do |response, operation|
+      c.create_subscription ::Google::Apps::Events::Subscriptions::V1beta::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_subscription({ subscription: subscription, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_subscription({ subscription: subscription, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_subscription(::Google::Apps::Events::Subscriptions::V1beta::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_subscription(::Google::Apps::Events::Subscriptions::V1beta::CreateSubscriptionRequest.new(subscription: subscription, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -153,40 +153,40 @@ class ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Clien
 
     Gapic::ServiceStub.stub :new, delete_subscription_client_stub do
       # Create client
-      client = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
+      c = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |response, operation|
+      c.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_subscription name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |response, operation|
+      c.delete_subscription name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_subscription ::Google::Apps::Events::Subscriptions::V1beta::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |response, operation|
+      c.delete_subscription ::Google::Apps::Events::Subscriptions::V1beta::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
+      c.delete_subscription({ name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_subscription(::Google::Apps::Events::Subscriptions::V1beta::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
+      c.delete_subscription(::Google::Apps::Events::Subscriptions::V1beta::DeleteSubscriptionRequest.new(name: name, validate_only: validate_only, allow_missing: allow_missing, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -216,36 +216,36 @@ class ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Clien
 
     Gapic::ServiceStub.stub :new, get_subscription_client_stub do
       # Create client
-      client = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
+      c = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_subscription({ name: name }) do |response, operation|
+      c.get_subscription({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_subscription name: name do |response, operation|
+      c.get_subscription name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_subscription ::Google::Apps::Events::Subscriptions::V1beta::GetSubscriptionRequest.new(name: name) do |response, operation|
+      c.get_subscription ::Google::Apps::Events::Subscriptions::V1beta::GetSubscriptionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_subscription({ name: name }, grpc_options) do |response, operation|
+      c.get_subscription({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_subscription(::Google::Apps::Events::Subscriptions::V1beta::GetSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_subscription(::Google::Apps::Events::Subscriptions::V1beta::GetSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -278,40 +278,40 @@ class ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Clien
 
     Gapic::ServiceStub.stub :new, list_subscriptions_client_stub do
       # Create client
-      client = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
+      c = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_subscriptions page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_subscriptions page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_subscriptions ::Google::Apps::Events::Subscriptions::V1beta::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_subscriptions ::Google::Apps::Events::Subscriptions::V1beta::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_subscriptions({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_subscriptions(::Google::Apps::Events::Subscriptions::V1beta::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_subscriptions(::Google::Apps::Events::Subscriptions::V1beta::ListSubscriptionsRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -345,40 +345,40 @@ class ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Clien
 
     Gapic::ServiceStub.stub :new, update_subscription_client_stub do
       # Create client
-      client = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
+      c = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+      c.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_subscription subscription: subscription, update_mask: update_mask, validate_only: validate_only do |response, operation|
+      c.update_subscription subscription: subscription, update_mask: update_mask, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_subscription ::Google::Apps::Events::Subscriptions::V1beta::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+      c.update_subscription ::Google::Apps::Events::Subscriptions::V1beta::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_subscription({ subscription: subscription, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_subscription(::Google::Apps::Events::Subscriptions::V1beta::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_subscription(::Google::Apps::Events::Subscriptions::V1beta::UpdateSubscriptionRequest.new(subscription: subscription, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -408,40 +408,40 @@ class ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Clien
 
     Gapic::ServiceStub.stub :new, reactivate_subscription_client_stub do
       # Create client
-      client = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
+      c = ::Google::Apps::Events::Subscriptions::V1beta::SubscriptionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reactivate_subscription({ name: name }) do |response, operation|
+      c.reactivate_subscription({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reactivate_subscription name: name do |response, operation|
+      c.reactivate_subscription name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reactivate_subscription ::Google::Apps::Events::Subscriptions::V1beta::ReactivateSubscriptionRequest.new(name: name) do |response, operation|
+      c.reactivate_subscription ::Google::Apps::Events::Subscriptions::V1beta::ReactivateSubscriptionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reactivate_subscription({ name: name }, grpc_options) do |response, operation|
+      c.reactivate_subscription({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reactivate_subscription(::Google::Apps::Events::Subscriptions::V1beta::ReactivateSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+      c.reactivate_subscription(::Google::Apps::Events::Subscriptions::V1beta::ReactivateSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

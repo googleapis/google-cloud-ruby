@@ -84,36 +84,36 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, enroll_resource_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.enroll_resource({ scope: scope, destinations: destinations }) do |response, operation|
+      c.enroll_resource({ scope: scope, destinations: destinations }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.enroll_resource scope: scope, destinations: destinations do |response, operation|
+      c.enroll_resource scope: scope, destinations: destinations do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.enroll_resource ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations) do |response, operation|
+      c.enroll_resource ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.enroll_resource({ scope: scope, destinations: destinations }, grpc_options) do |response, operation|
+      c.enroll_resource({ scope: scope, destinations: destinations }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.enroll_resource(::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations), grpc_options) do |response, operation|
+      c.enroll_resource(::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, generate_audit_scope_report_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
+      c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_audit_scope_report scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
+      c.generate_audit_scope_report scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_audit_scope_report ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
+      c.generate_audit_scope_report ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
+      c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_audit_scope_report(::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
+      c.generate_audit_scope_report(::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, generate_audit_report_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
+      c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
+      c.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
+      c.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
+      c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
+      c.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -282,40 +282,40 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_audit_reports_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_audit_reports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_audit_reports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_audit_reports ::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_audit_reports ::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_audit_reports(::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_audit_reports(::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -345,36 +345,36 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_audit_report_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_audit_report({ name: name }) do |response, operation|
+      c.get_audit_report({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_audit_report name: name do |response, operation|
+      c.get_audit_report name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_audit_report ::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name) do |response, operation|
+      c.get_audit_report ::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_audit_report({ name: name }, grpc_options) do |response, operation|
+      c.get_audit_report({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_audit_report(::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_audit_report(::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -403,36 +403,36 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_resource_enrollment_status_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_resource_enrollment_status({ name: name }) do |response, operation|
+      c.get_resource_enrollment_status({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_resource_enrollment_status name: name do |response, operation|
+      c.get_resource_enrollment_status name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_resource_enrollment_status ::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name) do |response, operation|
+      c.get_resource_enrollment_status ::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_resource_enrollment_status({ name: name }, grpc_options) do |response, operation|
+      c.get_resource_enrollment_status({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_resource_enrollment_status(::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_resource_enrollment_status(::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -465,40 +465,40 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_resource_enrollment_statuses_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_resource_enrollment_statuses parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_resource_enrollment_statuses parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_resource_enrollment_statuses ::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_resource_enrollment_statuses ::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_resource_enrollment_statuses(::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_resource_enrollment_statuses(::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -532,40 +532,40 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_controls_client_stub do
       # Create client
-      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+      c = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_controls({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_controls({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_controls parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_controls parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_controls ::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_controls ::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_controls({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_controls({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_controls(::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_controls(::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

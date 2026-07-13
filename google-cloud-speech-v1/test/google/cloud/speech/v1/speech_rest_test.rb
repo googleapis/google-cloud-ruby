@@ -98,32 +98,32 @@ class ::Google::Cloud::Speech::V1::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V1::Speech::Rest::ServiceStub.stub :transcode_recognize_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, recognize_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V1::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V1::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.recognize({ config: config, audio: audio }) do |_result, response|
+        c.recognize({ config: config, audio: audio }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.recognize config: config, audio: audio do |_result, response|
+        c.recognize config: config, audio: audio do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.recognize ::Google::Cloud::Speech::V1::RecognizeRequest.new(config: config, audio: audio) do |_result, response|
+        c.recognize ::Google::Cloud::Speech::V1::RecognizeRequest.new(config: config, audio: audio) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.recognize({ config: config, audio: audio }, call_options) do |_result, response|
+        c.recognize({ config: config, audio: audio }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.recognize(::Google::Cloud::Speech::V1::RecognizeRequest.new(config: config, audio: audio), call_options) do |_result, response|
+        c.recognize(::Google::Cloud::Speech::V1::RecognizeRequest.new(config: config, audio: audio), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Speech::V1::Speech::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Speech::V1::Speech::Rest::ServiceStub.stub :transcode_long_running_recognize_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, long_running_recognize_client_stub do
         # Create client
-        client = ::Google::Cloud::Speech::V1::Speech::Rest::Client.new do |config|
+        c = ::Google::Cloud::Speech::V1::Speech::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.long_running_recognize({ config: config, audio: audio, output_config: output_config }) do |_result, response|
+        c.long_running_recognize({ config: config, audio: audio, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.long_running_recognize config: config, audio: audio, output_config: output_config do |_result, response|
+        c.long_running_recognize config: config, audio: audio, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.long_running_recognize ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config) do |_result, response|
+        c.long_running_recognize ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.long_running_recognize({ config: config, audio: audio, output_config: output_config }, call_options) do |_result, response|
+        c.long_running_recognize({ config: config, audio: audio, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.long_running_recognize(::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config), call_options) do |_result, response|
+        c.long_running_recognize(::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

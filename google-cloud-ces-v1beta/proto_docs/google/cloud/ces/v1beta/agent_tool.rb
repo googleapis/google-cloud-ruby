@@ -28,12 +28,6 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. Description of the tool's purpose.
-        # @!attribute [rw] root_agent
-        #   @deprecated This field is deprecated and may be removed in the next major version update.
-        #   @return [::String]
-        #     Optional. Deprecated: Use `agent` instead.
-        #     The resource name of the root agent that is the entry point of the tool.
-        #     Format: `projects/{project}/locations/{location}/agents/{agent}`
         # @!attribute [rw] agent
         #   @return [::String]
         #     Optional. The resource name of the agent that is the entry point of the

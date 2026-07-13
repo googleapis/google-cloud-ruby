@@ -99,32 +99,32 @@ class ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ClientTest < Minites
     ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ServiceStub.stub :transcode_create_tag_hold_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tag_hold_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tag_hold({ parent: parent, tag_hold: tag_hold, validate_only: validate_only }) do |_result, response|
+        c.create_tag_hold({ parent: parent, tag_hold: tag_hold, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tag_hold parent: parent, tag_hold: tag_hold, validate_only: validate_only do |_result, response|
+        c.create_tag_hold parent: parent, tag_hold: tag_hold, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tag_hold ::Google::Cloud::ResourceManager::V3::CreateTagHoldRequest.new(parent: parent, tag_hold: tag_hold, validate_only: validate_only) do |_result, response|
+        c.create_tag_hold ::Google::Cloud::ResourceManager::V3::CreateTagHoldRequest.new(parent: parent, tag_hold: tag_hold, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tag_hold({ parent: parent, tag_hold: tag_hold, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_tag_hold({ parent: parent, tag_hold: tag_hold, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tag_hold(::Google::Cloud::ResourceManager::V3::CreateTagHoldRequest.new(parent: parent, tag_hold: tag_hold, validate_only: validate_only), call_options) do |_result, response|
+        c.create_tag_hold(::Google::Cloud::ResourceManager::V3::CreateTagHoldRequest.new(parent: parent, tag_hold: tag_hold, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ClientTest < Minites
     ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ServiceStub.stub :transcode_delete_tag_hold_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tag_hold_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tag_hold({ name: name, validate_only: validate_only }) do |_result, response|
+        c.delete_tag_hold({ name: name, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tag_hold name: name, validate_only: validate_only do |_result, response|
+        c.delete_tag_hold name: name, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tag_hold ::Google::Cloud::ResourceManager::V3::DeleteTagHoldRequest.new(name: name, validate_only: validate_only) do |_result, response|
+        c.delete_tag_hold ::Google::Cloud::ResourceManager::V3::DeleteTagHoldRequest.new(name: name, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tag_hold({ name: name, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_tag_hold({ name: name, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tag_hold(::Google::Cloud::ResourceManager::V3::DeleteTagHoldRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_tag_hold(::Google::Cloud::ResourceManager::V3::DeleteTagHoldRequest.new(name: name, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ClientTest < Minites
     ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ServiceStub.stub :transcode_list_tag_holds_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tag_holds_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tag_holds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_tag_holds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tag_holds parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_tag_holds parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tag_holds ::Google::Cloud::ResourceManager::V3::ListTagHoldsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_tag_holds ::Google::Cloud::ResourceManager::V3::ListTagHoldsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tag_holds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_tag_holds({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tag_holds(::Google::Cloud::ResourceManager::V3::ListTagHoldsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_tag_holds(::Google::Cloud::ResourceManager::V3::ListTagHoldsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

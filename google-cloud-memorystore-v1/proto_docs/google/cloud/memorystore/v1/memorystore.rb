@@ -115,7 +115,7 @@ module Google
         #     Optional. Endpoints for the instance.
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1::Instance::Mode]
-        #     Optional. The mode config for the instance.
+        #     Optional. Immutable. The mode config for the instance.
         # @!attribute [rw] simulate_maintenance_event
         #   @return [::Boolean]
         #     Optional. Input only. Simulate a maintenance event.
@@ -187,6 +187,9 @@ module Google
         # @!attribute [rw] rotate_server_certificate
         #   @return [::Boolean]
         #     Optional. Input only. Rotate the server certificates.
+        # @!attribute [r] migration_config
+        #   @return [::Google::Cloud::Memorystore::V1::MigrationConfig]
+        #     Output only. Migration config for the instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,6 +308,9 @@ module Google
 
             # Instance is being deleted.
             DELETING = 4
+
+            # Instance is being migrated.
+            MIGRATING = 6
           end
 
           # Possible authorization modes of the instance.
@@ -362,7 +368,7 @@ module Google
             # Standard large.
             STANDARD_LARGE = 8
 
-            # High memory 2x large.
+            # High memory 2xlarge.
             HIGHMEM_2XLARGE = 9
 
             # Custom pico.
@@ -406,6 +412,107 @@ module Google
 
             # Deprecated: Use CUSTOMER_MANAGED_CAS_CA instead.
             SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA = 3
+          end
+        end
+
+        # Request for `StartMigration`.
+        # @!attribute [rw] self_managed_source
+        #   @return [::Google::Cloud::Memorystore::V1::SelfManagedSource]
+        #     Required. Configuration for migrating from a self-managed Valkey/Redis
+        #     instance
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the instance to start migration on.
+        #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        class StartMigrationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for `FinishMigration`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the instance to finalize migration on.
+        #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. By default, the `FinishMigration` operation ensures the target
+        #     replication offset to catch up to the source offset as of the time of the
+        #     call. Set this field to `true` to bypass this offset verification check.
+        class FinishMigrationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of the self-managed source instance.
+        # @!attribute [rw] ip_address
+        #   @return [::String]
+        #     Required. The IP address of the source instance.
+        #     This IP address should be a stable IP address that can be accessed by the
+        #     Memorystore instance throughout the migration process.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Required. The port of the source instance.
+        #     This port should be a stable port that can be accessed by the Memorystore
+        #     instance throughout the migration process.
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     Required. The resource name of the Private Service Connect Network
+        #     Attachment used to establish connectivity to the source instance. This
+        #     network attachment has the following requirements:
+        #     1. It must be in the same project as the Memorystore instance.
+        #     2. It must be in the same region as the Memorystore instance.
+        #     3. The subnet attached to the network attachment must be in the same VPC
+        #     network as the source instance nodes.
+        #
+        #     Format:
+        #     projects/\\{project}/regions/\\{region}/networkAttachments/\\{network_attachment}
+        class SelfManagedSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the migration of an instance.
+        # @!attribute [r] self_managed_source
+        #   @return [::Google::Cloud::Memorystore::V1::SelfManagedSource]
+        #     Output only. Configuration for migrating from a self-managed Valkey/Redis
+        #     instance
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::MigrationConfig::State]
+        #     Output only. Migration state of the instance.
+        # @!attribute [r] force_finish_migration
+        #   @return [::Boolean]
+        #     Output only. Represents a boolean flag to force migration finalization
+        #     without offset catch up validation between source and target before
+        #     stopping replication.
+        class MigrationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Migration state of the instance.
+          # New values may be added in the future.
+          module State
+            # Instance has no migration related activity. This is the initial state.
+            STATE_UNSPECIFIED = 0
+
+            # Instance is not currently migrating. The instance underwent a migration
+            # attempt that failed, and the subsequent rollback was successful. The
+            # instance is now ready for a new migration attempt if desired.
+            ROLLED_BACK = 1
+
+            # Indicates a previous migration attempt failed. The high-level instance
+            # state will be `MIGRATING`. The instance is not ready for a new migration
+            # attempt. Rollback is in progress to restore the instance to its original
+            # state. The instance will remain in this state until rollback is
+            # successful.
+            ROLLING_BACK = 5
+
+            # Instance is in the process of migration. Instance has established
+            # successful replication and is ready for cutover.
+            REPLICATION_ESTABLISHED = 6
+
+            # Instance is successfully migrated.
+            MIGRATED = 4
           end
         end
 
@@ -753,7 +860,7 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. The network where the PSC endpoints are created, in the form of
-        #     projects/\\{project_id}/global/networks/\\{network_id}.
+        #     projects/\\{project_id}/global/networks/\\{network_name}.
         # @!attribute [r] service_attachment
         #   @return [::String]
         #     Output only. The service attachment which is the target of the PSC
@@ -797,7 +904,7 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. The consumer network where the IP address resides, in the form of
-        #     projects/\\{project_id}/global/networks/\\{network_id}.
+        #     projects/\\{project_id}/global/networks/\\{network_name}.
         # @!attribute [rw] service_attachment
         #   @return [::String]
         #     Required. The service attachment which is the target of the PSC connection,
@@ -828,7 +935,7 @@ module Google
         #   @return [::String]
         #     Output only. The network where the IP address of the discovery endpoint
         #     will be reserved, in the form of
-        #     projects/\\{network_project}/global/networks/\\{network_id}.
+        #     projects/\\{network_project}/global/networks/\\{network_name}.
         class DiscoveryEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1012,7 +1119,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [ListInstances][].
+        # Response message for `ListInstances`.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Memorystore::V1::Instance>]
         #     If the \\{location} requested was "-" the response contains a list of
@@ -1133,7 +1240,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [ListBackupCollections]
+        # Request for `ListBackupCollections`.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the backupCollection location using the
@@ -1147,18 +1254,18 @@ module Google
         #     If not specified, a default value of 1000 will be used by the service.
         #     Regardless of the page_size value, the response may include a partial list
         #     and a caller should only rely on response's
-        #     {::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse#next_page_token `next_page_token`}
+        #     `next_page_token`
         #     to determine if there are more clusters left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The `next_page_token` value returned from a previous
-        #     [ListBackupCollections] request, if any.
+        #     `ListBackupCollections` request, if any.
         class ListBackupCollectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for [ListBackupCollections].
+        # Response for `ListBackupCollections`.
         # @!attribute [rw] backup_collections
         #   @return [::Array<::Google::Cloud::Memorystore::V1::BackupCollection>]
         #     A list of backupCollections in the project.
@@ -1183,7 +1290,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [GetBackupCollection].
+        # Request for `GetBackupCollection`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance backupCollection resource name using the form:
@@ -1194,7 +1301,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [ListBackups].
+        # Request for `ListBackups`.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the backupCollection using the form:
@@ -1206,18 +1313,18 @@ module Google
         #     If not specified, a default value of 1000 will be used by the service.
         #     Regardless of the page_size value, the response may include a partial list
         #     and a caller should only rely on response's
-        #     {::Google::Cloud::Memorystore::V1::ListBackupsResponse#next_page_token `next_page_token`}
+        #     `next_page_token`
         #     to determine if there are more clusters left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The `next_page_token` value returned from a previous
-        #     [ListBackupCollections] request, if any.
+        #     `ListBackupCollections` request, if any.
         class ListBackupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for [ListBackups].
+        # Response for `ListBackups`.
         # @!attribute [rw] backups
         #   @return [::Array<::Google::Cloud::Memorystore::V1::Backup>]
         #     A list of backups in the project.
@@ -1233,7 +1340,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [GetBackup].
+        # Request for `GetBackup`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance backup resource name using the form:
@@ -1243,7 +1350,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [DeleteBackup].
+        # Request for `DeleteBackup`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance backup resource name using the form:
@@ -1256,7 +1363,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [ExportBackup].
+        # Request for `ExportBackup`.
         # @!attribute [rw] gcs_bucket
         #   @return [::String]
         #     Google Cloud Storage bucket, like "my-bucket".
@@ -1269,7 +1376,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [BackupInstance].
+        # Request for `BackupInstance`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance resource name using the form:
@@ -1288,7 +1395,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [GetCertificateAuthority][].
+        # Request message for `GetCertificateAuthority`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the certificate authority.
@@ -1364,8 +1471,7 @@ module Google
           end
         end
 
-        # Request for
-        # {::Google::Cloud::Memorystore::V1::Memorystore::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
+        # Request for `GetSharedRegionalCertificateAuthority`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Regional certificate authority resource name using the form:

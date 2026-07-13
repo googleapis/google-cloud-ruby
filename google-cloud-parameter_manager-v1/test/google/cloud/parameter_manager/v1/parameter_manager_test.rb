@@ -90,40 +90,40 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_parameters_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_parameters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_parameters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_parameters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_parameters parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_parameters ::Google::Cloud::ParameterManager::V1::ListParametersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_parameters ::Google::Cloud::ParameterManager::V1::ListParametersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_parameters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_parameters({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_parameters(::Google::Cloud::ParameterManager::V1::ListParametersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_parameters(::Google::Cloud::ParameterManager::V1::ListParametersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_parameter_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_parameter({ name: name }) do |response, operation|
+      c.get_parameter({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_parameter name: name do |response, operation|
+      c.get_parameter name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_parameter ::Google::Cloud::ParameterManager::V1::GetParameterRequest.new(name: name) do |response, operation|
+      c.get_parameter ::Google::Cloud::ParameterManager::V1::GetParameterRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_parameter({ name: name }, grpc_options) do |response, operation|
+      c.get_parameter({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_parameter(::Google::Cloud::ParameterManager::V1::GetParameterRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_parameter(::Google::Cloud::ParameterManager::V1::GetParameterRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,36 +217,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_parameter_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_parameter({ parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id }) do |response, operation|
+      c.create_parameter({ parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_parameter parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id do |response, operation|
+      c.create_parameter parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_parameter ::Google::Cloud::ParameterManager::V1::CreateParameterRequest.new(parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id) do |response, operation|
+      c.create_parameter ::Google::Cloud::ParameterManager::V1::CreateParameterRequest.new(parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_parameter({ parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_parameter({ parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_parameter(::Google::Cloud::ParameterManager::V1::CreateParameterRequest.new(parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id), grpc_options) do |response, operation|
+      c.create_parameter(::Google::Cloud::ParameterManager::V1::CreateParameterRequest.new(parent: parent, parameter_id: parameter_id, parameter: parameter, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -279,36 +279,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_parameter_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_parameter({ update_mask: update_mask, parameter: parameter, request_id: request_id }) do |response, operation|
+      c.update_parameter({ update_mask: update_mask, parameter: parameter, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_parameter update_mask: update_mask, parameter: parameter, request_id: request_id do |response, operation|
+      c.update_parameter update_mask: update_mask, parameter: parameter, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_parameter ::Google::Cloud::ParameterManager::V1::UpdateParameterRequest.new(update_mask: update_mask, parameter: parameter, request_id: request_id) do |response, operation|
+      c.update_parameter ::Google::Cloud::ParameterManager::V1::UpdateParameterRequest.new(update_mask: update_mask, parameter: parameter, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_parameter({ update_mask: update_mask, parameter: parameter, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_parameter({ update_mask: update_mask, parameter: parameter, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_parameter(::Google::Cloud::ParameterManager::V1::UpdateParameterRequest.new(update_mask: update_mask, parameter: parameter, request_id: request_id), grpc_options) do |response, operation|
+      c.update_parameter(::Google::Cloud::ParameterManager::V1::UpdateParameterRequest.new(update_mask: update_mask, parameter: parameter, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,36 +339,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_parameter_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_parameter({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_parameter({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_parameter name: name, request_id: request_id do |response, operation|
+      c.delete_parameter name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_parameter ::Google::Cloud::ParameterManager::V1::DeleteParameterRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_parameter ::Google::Cloud::ParameterManager::V1::DeleteParameterRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_parameter({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_parameter({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_parameter(::Google::Cloud::ParameterManager::V1::DeleteParameterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_parameter(::Google::Cloud::ParameterManager::V1::DeleteParameterRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -405,40 +405,40 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_parameter_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_parameter_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_parameter_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_parameter_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_parameter_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_parameter_versions ::Google::Cloud::ParameterManager::V1::ListParameterVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_parameter_versions ::Google::Cloud::ParameterManager::V1::ListParameterVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_parameter_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_parameter_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_parameter_versions(::Google::Cloud::ParameterManager::V1::ListParameterVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_parameter_versions(::Google::Cloud::ParameterManager::V1::ListParameterVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -470,36 +470,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_parameter_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_parameter_version({ name: name, view: view }) do |response, operation|
+      c.get_parameter_version({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_parameter_version name: name, view: view do |response, operation|
+      c.get_parameter_version name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_parameter_version ::Google::Cloud::ParameterManager::V1::GetParameterVersionRequest.new(name: name, view: view) do |response, operation|
+      c.get_parameter_version ::Google::Cloud::ParameterManager::V1::GetParameterVersionRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_parameter_version({ name: name, view: view }, grpc_options) do |response, operation|
+      c.get_parameter_version({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_parameter_version(::Google::Cloud::ParameterManager::V1::GetParameterVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
+      c.get_parameter_version(::Google::Cloud::ParameterManager::V1::GetParameterVersionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -528,36 +528,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, render_parameter_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.render_parameter_version({ name: name }) do |response, operation|
+      c.render_parameter_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.render_parameter_version name: name do |response, operation|
+      c.render_parameter_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.render_parameter_version ::Google::Cloud::ParameterManager::V1::RenderParameterVersionRequest.new(name: name) do |response, operation|
+      c.render_parameter_version ::Google::Cloud::ParameterManager::V1::RenderParameterVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.render_parameter_version({ name: name }, grpc_options) do |response, operation|
+      c.render_parameter_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.render_parameter_version(::Google::Cloud::ParameterManager::V1::RenderParameterVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.render_parameter_version(::Google::Cloud::ParameterManager::V1::RenderParameterVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -592,36 +592,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, create_parameter_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_parameter_version({ parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id }) do |response, operation|
+      c.create_parameter_version({ parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_parameter_version parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id do |response, operation|
+      c.create_parameter_version parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_parameter_version ::Google::Cloud::ParameterManager::V1::CreateParameterVersionRequest.new(parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id) do |response, operation|
+      c.create_parameter_version ::Google::Cloud::ParameterManager::V1::CreateParameterVersionRequest.new(parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_parameter_version({ parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_parameter_version({ parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_parameter_version(::Google::Cloud::ParameterManager::V1::CreateParameterVersionRequest.new(parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id), grpc_options) do |response, operation|
+      c.create_parameter_version(::Google::Cloud::ParameterManager::V1::CreateParameterVersionRequest.new(parent: parent, parameter_version_id: parameter_version_id, parameter_version: parameter_version, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -654,36 +654,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_parameter_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_parameter_version({ update_mask: update_mask, parameter_version: parameter_version, request_id: request_id }) do |response, operation|
+      c.update_parameter_version({ update_mask: update_mask, parameter_version: parameter_version, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_parameter_version update_mask: update_mask, parameter_version: parameter_version, request_id: request_id do |response, operation|
+      c.update_parameter_version update_mask: update_mask, parameter_version: parameter_version, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_parameter_version ::Google::Cloud::ParameterManager::V1::UpdateParameterVersionRequest.new(update_mask: update_mask, parameter_version: parameter_version, request_id: request_id) do |response, operation|
+      c.update_parameter_version ::Google::Cloud::ParameterManager::V1::UpdateParameterVersionRequest.new(update_mask: update_mask, parameter_version: parameter_version, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_parameter_version({ update_mask: update_mask, parameter_version: parameter_version, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_parameter_version({ update_mask: update_mask, parameter_version: parameter_version, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_parameter_version(::Google::Cloud::ParameterManager::V1::UpdateParameterVersionRequest.new(update_mask: update_mask, parameter_version: parameter_version, request_id: request_id), grpc_options) do |response, operation|
+      c.update_parameter_version(::Google::Cloud::ParameterManager::V1::UpdateParameterVersionRequest.new(update_mask: update_mask, parameter_version: parameter_version, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -714,36 +714,36 @@ class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_parameter_version_client_stub do
       # Create client
-      client = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
+      c = ::Google::Cloud::ParameterManager::V1::ParameterManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_parameter_version({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_parameter_version({ name: name, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_parameter_version name: name, request_id: request_id do |response, operation|
+      c.delete_parameter_version name: name, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_parameter_version ::Google::Cloud::ParameterManager::V1::DeleteParameterVersionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_parameter_version ::Google::Cloud::ParameterManager::V1::DeleteParameterVersionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_parameter_version({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_parameter_version({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_parameter_version(::Google::Cloud::ParameterManager::V1::DeleteParameterVersionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_parameter_version(::Google::Cloud::ParameterManager::V1::DeleteParameterVersionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

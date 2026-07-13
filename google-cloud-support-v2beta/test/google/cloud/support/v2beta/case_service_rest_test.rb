@@ -97,32 +97,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_get_case_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_case_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_case({ name: name }) do |_result, response|
+        c.get_case({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_case name: name do |_result, response|
+        c.get_case name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_case ::Google::Cloud::Support::V2beta::GetCaseRequest.new(name: name) do |_result, response|
+        c.get_case ::Google::Cloud::Support::V2beta::GetCaseRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_case({ name: name }, call_options) do |_result, response|
+        c.get_case({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_case(::Google::Cloud::Support::V2beta::GetCaseRequest.new(name: name), call_options) do |_result, response|
+        c.get_case(::Google::Cloud::Support::V2beta::GetCaseRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_list_cases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cases_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line }) do |_result, response|
+        c.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cases parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line do |_result, response|
+        c.list_cases parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cases ::Google::Cloud::Support::V2beta::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line) do |_result, response|
+        c.list_cases ::Google::Cloud::Support::V2beta::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line }, call_options) do |_result, response|
+        c.list_cases({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cases(::Google::Cloud::Support::V2beta::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line), call_options) do |_result, response|
+        c.list_cases(::Google::Cloud::Support::V2beta::ListCasesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, product_line: product_line), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_search_cases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_cases_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_cases parent: parent, query: query, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_cases parent: parent, query: query, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_cases ::Google::Cloud::Support::V2beta::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_cases ::Google::Cloud::Support::V2beta::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_cases({ parent: parent, query: query, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_cases(::Google::Cloud::Support::V2beta::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_cases(::Google::Cloud::Support::V2beta::SearchCasesRequest.new(parent: parent, query: query, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_create_case_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_case_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_case({ parent: parent, case: case_param }) do |_result, response|
+        c.create_case({ parent: parent, case: case_param }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_case parent: parent, case: case_param do |_result, response|
+        c.create_case parent: parent, case: case_param do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_case ::Google::Cloud::Support::V2beta::CreateCaseRequest.new(parent: parent, case: case_param) do |_result, response|
+        c.create_case ::Google::Cloud::Support::V2beta::CreateCaseRequest.new(parent: parent, case: case_param) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_case({ parent: parent, case: case_param }, call_options) do |_result, response|
+        c.create_case({ parent: parent, case: case_param }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_case(::Google::Cloud::Support::V2beta::CreateCaseRequest.new(parent: parent, case: case_param), call_options) do |_result, response|
+        c.create_case(::Google::Cloud::Support::V2beta::CreateCaseRequest.new(parent: parent, case: case_param), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_update_case_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_case_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_case({ case: case_param, update_mask: update_mask }) do |_result, response|
+        c.update_case({ case: case_param, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_case case: case_param, update_mask: update_mask do |_result, response|
+        c.update_case case: case_param, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_case ::Google::Cloud::Support::V2beta::UpdateCaseRequest.new(case: case_param, update_mask: update_mask) do |_result, response|
+        c.update_case ::Google::Cloud::Support::V2beta::UpdateCaseRequest.new(case: case_param, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_case({ case: case_param, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_case({ case: case_param, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_case(::Google::Cloud::Support::V2beta::UpdateCaseRequest.new(case: case_param, update_mask: update_mask), call_options) do |_result, response|
+        c.update_case(::Google::Cloud::Support::V2beta::UpdateCaseRequest.new(case: case_param, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_escalate_case_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, escalate_case_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.escalate_case({ name: name, escalation: escalation }) do |_result, response|
+        c.escalate_case({ name: name, escalation: escalation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.escalate_case name: name, escalation: escalation do |_result, response|
+        c.escalate_case name: name, escalation: escalation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.escalate_case ::Google::Cloud::Support::V2beta::EscalateCaseRequest.new(name: name, escalation: escalation) do |_result, response|
+        c.escalate_case ::Google::Cloud::Support::V2beta::EscalateCaseRequest.new(name: name, escalation: escalation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.escalate_case({ name: name, escalation: escalation }, call_options) do |_result, response|
+        c.escalate_case({ name: name, escalation: escalation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.escalate_case(::Google::Cloud::Support::V2beta::EscalateCaseRequest.new(name: name, escalation: escalation), call_options) do |_result, response|
+        c.escalate_case(::Google::Cloud::Support::V2beta::EscalateCaseRequest.new(name: name, escalation: escalation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_close_case_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, close_case_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.close_case({ name: name }) do |_result, response|
+        c.close_case({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.close_case name: name do |_result, response|
+        c.close_case name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.close_case ::Google::Cloud::Support::V2beta::CloseCaseRequest.new(name: name) do |_result, response|
+        c.close_case ::Google::Cloud::Support::V2beta::CloseCaseRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.close_case({ name: name }, call_options) do |_result, response|
+        c.close_case({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.close_case(::Google::Cloud::Support::V2beta::CloseCaseRequest.new(name: name), call_options) do |_result, response|
+        c.close_case(::Google::Cloud::Support::V2beta::CloseCaseRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::Support::V2beta::CaseService::Rest::ClientTest < Minitest
     ::Google::Cloud::Support::V2beta::CaseService::Rest::ServiceStub.stub :transcode_search_case_classifications_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_case_classifications_client_stub do
         # Create client
-        client = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Support::V2beta::CaseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_case_classifications({ query: query, page_size: page_size, page_token: page_token, product: product }) do |_result, response|
+        c.search_case_classifications({ query: query, page_size: page_size, page_token: page_token, product: product }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_case_classifications query: query, page_size: page_size, page_token: page_token, product: product do |_result, response|
+        c.search_case_classifications query: query, page_size: page_size, page_token: page_token, product: product do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_case_classifications ::Google::Cloud::Support::V2beta::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token, product: product) do |_result, response|
+        c.search_case_classifications ::Google::Cloud::Support::V2beta::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token, product: product) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_case_classifications({ query: query, page_size: page_size, page_token: page_token, product: product }, call_options) do |_result, response|
+        c.search_case_classifications({ query: query, page_size: page_size, page_token: page_token, product: product }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_case_classifications(::Google::Cloud::Support::V2beta::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token, product: product), call_options) do |_result, response|
+        c.search_case_classifications(::Google::Cloud::Support::V2beta::SearchCaseClassificationsRequest.new(query: query, page_size: page_size, page_token: page_token, product: product), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

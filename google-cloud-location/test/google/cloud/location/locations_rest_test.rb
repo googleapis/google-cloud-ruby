@@ -100,32 +100,32 @@ class ::Google::Cloud::Location::Locations::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Location::Locations::Rest::ServiceStub.stub :transcode_list_locations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_locations_client_stub do
         # Create client
-        client = ::Google::Cloud::Location::Locations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Location::Locations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_locations({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_locations({ name: name, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_locations name: name, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_locations name: name, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_locations ::Google::Cloud::Location::ListLocationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_locations ::Google::Cloud::Location::ListLocationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_locations({ name: name, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_locations({ name: name, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_locations(::Google::Cloud::Location::ListLocationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_locations(::Google::Cloud::Location::ListLocationsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Location::Locations::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Location::Locations::Rest::ServiceStub.stub :transcode_get_location_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_location_client_stub do
         # Create client
-        client = ::Google::Cloud::Location::Locations::Rest::Client.new do |config|
+        c = ::Google::Cloud::Location::Locations::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_location({ name: name }) do |_result, response|
+        c.get_location({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_location name: name do |_result, response|
+        c.get_location name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_location ::Google::Cloud::Location::GetLocationRequest.new(name: name) do |_result, response|
+        c.get_location ::Google::Cloud::Location::GetLocationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_location({ name: name }, call_options) do |_result, response|
+        c.get_location({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_location(::Google::Cloud::Location::GetLocationRequest.new(name: name), call_options) do |_result, response|
+        c.get_location(::Google::Cloud::Location::GetLocationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

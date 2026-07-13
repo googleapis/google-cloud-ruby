@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_create_conversation_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_conversation_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_conversation_model({ parent: parent, conversation_model: conversation_model }) do |_result, response|
+        c.create_conversation_model({ parent: parent, conversation_model: conversation_model }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_conversation_model parent: parent, conversation_model: conversation_model do |_result, response|
+        c.create_conversation_model parent: parent, conversation_model: conversation_model do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_conversation_model ::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model) do |_result, response|
+        c.create_conversation_model ::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_conversation_model({ parent: parent, conversation_model: conversation_model }, call_options) do |_result, response|
+        c.create_conversation_model({ parent: parent, conversation_model: conversation_model }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_conversation_model(::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model), call_options) do |_result, response|
+        c.create_conversation_model(::Google::Cloud::Dialogflow::V2::CreateConversationModelRequest.new(parent: parent, conversation_model: conversation_model), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_get_conversation_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conversation_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conversation_model({ name: name }) do |_result, response|
+        c.get_conversation_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conversation_model name: name do |_result, response|
+        c.get_conversation_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conversation_model ::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name) do |_result, response|
+        c.get_conversation_model ::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conversation_model({ name: name }, call_options) do |_result, response|
+        c.get_conversation_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conversation_model(::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name), call_options) do |_result, response|
+        c.get_conversation_model(::Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_list_conversation_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conversation_models_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversation_models parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_conversation_models parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversation_models ::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_conversation_models ::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_conversation_models({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversation_models(::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_conversation_models(::Google::Cloud::Dialogflow::V2::ListConversationModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_delete_conversation_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_conversation_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_conversation_model({ name: name }) do |_result, response|
+        c.delete_conversation_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_conversation_model name: name do |_result, response|
+        c.delete_conversation_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_conversation_model ::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name) do |_result, response|
+        c.delete_conversation_model ::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_conversation_model({ name: name }, call_options) do |_result, response|
+        c.delete_conversation_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_conversation_model(::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name), call_options) do |_result, response|
+        c.delete_conversation_model(::Google::Cloud::Dialogflow::V2::DeleteConversationModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -316,32 +316,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_deploy_conversation_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deploy_conversation_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deploy_conversation_model({ name: name }) do |_result, response|
+        c.deploy_conversation_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deploy_conversation_model name: name do |_result, response|
+        c.deploy_conversation_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deploy_conversation_model ::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name) do |_result, response|
+        c.deploy_conversation_model ::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deploy_conversation_model({ name: name }, call_options) do |_result, response|
+        c.deploy_conversation_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deploy_conversation_model(::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name), call_options) do |_result, response|
+        c.deploy_conversation_model(::Google::Cloud::Dialogflow::V2::DeployConversationModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -370,32 +370,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_undeploy_conversation_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undeploy_conversation_model_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undeploy_conversation_model({ name: name }) do |_result, response|
+        c.undeploy_conversation_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undeploy_conversation_model name: name do |_result, response|
+        c.undeploy_conversation_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undeploy_conversation_model ::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name) do |_result, response|
+        c.undeploy_conversation_model ::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undeploy_conversation_model({ name: name }, call_options) do |_result, response|
+        c.undeploy_conversation_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undeploy_conversation_model(::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name), call_options) do |_result, response|
+        c.undeploy_conversation_model(::Google::Cloud::Dialogflow::V2::UndeployConversationModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -424,32 +424,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_get_conversation_model_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conversation_model_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conversation_model_evaluation({ name: name }) do |_result, response|
+        c.get_conversation_model_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conversation_model_evaluation name: name do |_result, response|
+        c.get_conversation_model_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name) do |_result, response|
+        c.get_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conversation_model_evaluation({ name: name }, call_options) do |_result, response|
+        c.get_conversation_model_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.get_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::GetConversationModelEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -480,32 +480,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_list_conversation_model_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conversation_model_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversation_model_evaluations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_conversation_model_evaluations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversation_model_evaluations ::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_conversation_model_evaluations ::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_conversation_model_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversation_model_evaluations(::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_conversation_model_evaluations(::Google::Cloud::Dialogflow::V2::ListConversationModelEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -535,32 +535,32 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ClientTest < Mi
     ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::ServiceStub.stub :transcode_create_conversation_model_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_conversation_model_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }) do |_result, response|
+        c.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_conversation_model_evaluation parent: parent, conversation_model_evaluation: conversation_model_evaluation do |_result, response|
+        c.create_conversation_model_evaluation parent: parent, conversation_model_evaluation: conversation_model_evaluation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation) do |_result, response|
+        c.create_conversation_model_evaluation ::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }, call_options) do |_result, response|
+        c.create_conversation_model_evaluation({ parent: parent, conversation_model_evaluation: conversation_model_evaluation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation), call_options) do |_result, response|
+        c.create_conversation_model_evaluation(::Google::Cloud::Dialogflow::V2::CreateConversationModelEvaluationRequest.new(parent: parent, conversation_model_evaluation: conversation_model_evaluation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

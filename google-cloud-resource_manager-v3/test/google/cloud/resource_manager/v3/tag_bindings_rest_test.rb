@@ -99,32 +99,32 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ClientTest < Mini
     ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ServiceStub.stub :transcode_list_tag_bindings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tag_bindings_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tag_bindings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tag_bindings parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tag_bindings ::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tag_bindings ::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tag_bindings({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tag_bindings(::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tag_bindings(::Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ClientTest < Mini
     ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ServiceStub.stub :transcode_create_tag_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tag_binding_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }) do |_result, response|
+        c.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tag_binding tag_binding: tag_binding, validate_only: validate_only do |_result, response|
+        c.create_tag_binding tag_binding: tag_binding, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tag_binding ::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only) do |_result, response|
+        c.create_tag_binding ::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_tag_binding({ tag_binding: tag_binding, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tag_binding(::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only), call_options) do |_result, response|
+        c.create_tag_binding(::Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new(tag_binding: tag_binding, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ClientTest < Mini
     ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ServiceStub.stub :transcode_delete_tag_binding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tag_binding_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tag_binding({ name: name }) do |_result, response|
+        c.delete_tag_binding({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tag_binding name: name do |_result, response|
+        c.delete_tag_binding name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tag_binding ::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name) do |_result, response|
+        c.delete_tag_binding ::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tag_binding({ name: name }, call_options) do |_result, response|
+        c.delete_tag_binding({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tag_binding(::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name), call_options) do |_result, response|
+        c.delete_tag_binding(::Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ClientTest < Mini
     ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ServiceStub.stub :transcode_list_effective_tags_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_effective_tags_client_stub do
         # Create client
-        client = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
+        c = ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_effective_tags parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_effective_tags parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_effective_tags ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_effective_tags ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_effective_tags({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_effective_tags(::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_effective_tags(::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

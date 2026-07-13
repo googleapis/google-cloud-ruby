@@ -86,40 +86,40 @@ class ::Google::Cloud::Kms::V1::Autokey::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_key_handle_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::Autokey::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::Autokey::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }) do |response, operation|
+      c.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_key_handle parent: parent, key_handle_id: key_handle_id, key_handle: key_handle do |response, operation|
+      c.create_key_handle parent: parent, key_handle_id: key_handle_id, key_handle: key_handle do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_key_handle ::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle) do |response, operation|
+      c.create_key_handle ::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }, grpc_options) do |response, operation|
+      c.create_key_handle({ parent: parent, key_handle_id: key_handle_id, key_handle: key_handle }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_key_handle(::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle), grpc_options) do |response, operation|
+      c.create_key_handle(::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new(parent: parent, key_handle_id: key_handle_id, key_handle: key_handle), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Kms::V1::Autokey::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_key_handle_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::Autokey::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::Autokey::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_key_handle({ name: name }) do |response, operation|
+      c.get_key_handle({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_key_handle name: name do |response, operation|
+      c.get_key_handle name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_key_handle ::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name) do |response, operation|
+      c.get_key_handle ::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_key_handle({ name: name }, grpc_options) do |response, operation|
+      c.get_key_handle({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_key_handle(::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_key_handle(::Google::Cloud::Kms::V1::GetKeyHandleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Cloud::Kms::V1::Autokey::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_key_handles_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::Autokey::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::Autokey::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_key_handles parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_key_handles parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_key_handles ::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_key_handles ::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_key_handles(::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_key_handles(::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

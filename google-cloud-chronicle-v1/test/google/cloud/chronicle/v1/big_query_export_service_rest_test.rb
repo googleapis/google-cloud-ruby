@@ -97,32 +97,32 @@ class ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::ServiceStub.stub :transcode_get_big_query_export_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_big_query_export_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_big_query_export({ name: name }) do |_result, response|
+        c.get_big_query_export({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_big_query_export name: name do |_result, response|
+        c.get_big_query_export name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_big_query_export ::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name) do |_result, response|
+        c.get_big_query_export ::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_big_query_export({ name: name }, call_options) do |_result, response|
+        c.get_big_query_export({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_big_query_export(::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name), call_options) do |_result, response|
+        c.get_big_query_export(::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::ServiceStub.stub :transcode_update_big_query_export_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_big_query_export_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |_result, response|
+        c.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |_result, response|
+        c.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_big_query_export ::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |_result, response|
+        c.update_big_query_export ::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_big_query_export(::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), call_options) do |_result, response|
+        c.update_big_query_export(::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::ClientTest < 
     ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::ServiceStub.stub :transcode_provision_big_query_export_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, provision_big_query_export_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.provision_big_query_export({ parent: parent }) do |_result, response|
+        c.provision_big_query_export({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.provision_big_query_export parent: parent do |_result, response|
+        c.provision_big_query_export parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.provision_big_query_export ::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent) do |_result, response|
+        c.provision_big_query_export ::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.provision_big_query_export({ parent: parent }, call_options) do |_result, response|
+        c.provision_big_query_export({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.provision_big_query_export(::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent), call_options) do |_result, response|
+        c.provision_big_query_export(::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

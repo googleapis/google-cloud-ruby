@@ -1022,6 +1022,9 @@ module Google
         # @!attribute [rw] service_latency
         #   @return [::Google::Cloud::Dialogflow::V2::ServiceLatency]
         #     The latency of the service.
+        # @!attribute [rw] ces_debug_info
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Debug info from the Customer Engagement Suite (CES) execution.
         class SearchKnowledgeDebugInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1112,6 +1115,12 @@ module Google
 
             # The answer is from intent matching.
             INTENT = 3
+
+            # The answer is from Playbook.
+            PLAYBOOK = 4
+
+            # The answer is from event.
+            EVENT = 5
           end
         end
 

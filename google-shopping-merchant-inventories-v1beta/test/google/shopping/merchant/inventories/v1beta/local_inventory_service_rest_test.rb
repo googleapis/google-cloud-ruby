@@ -99,32 +99,32 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
     ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::ServiceStub.stub :transcode_list_local_inventories_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_local_inventories_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_local_inventories parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_local_inventories parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_local_inventories ::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_local_inventories({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_local_inventories(::Google::Shopping::Merchant::Inventories::V1beta::ListLocalInventoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
     ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::ServiceStub.stub :transcode_insert_local_inventory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_local_inventory_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }) do |_result, response|
+        c.insert_local_inventory({ parent: parent, local_inventory: local_inventory }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert_local_inventory parent: parent, local_inventory: local_inventory do |_result, response|
+        c.insert_local_inventory parent: parent, local_inventory: local_inventory do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory) do |_result, response|
+        c.insert_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert_local_inventory({ parent: parent, local_inventory: local_inventory }, call_options) do |_result, response|
+        c.insert_local_inventory({ parent: parent, local_inventory: local_inventory }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory), call_options) do |_result, response|
+        c.insert_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::InsertLocalInventoryRequest.new(parent: parent, local_inventory: local_inventory), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
     ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::ServiceStub.stub :transcode_delete_local_inventory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_local_inventory_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_local_inventory({ name: name }) do |_result, response|
+        c.delete_local_inventory({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_local_inventory name: name do |_result, response|
+        c.delete_local_inventory name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name) do |_result, response|
+        c.delete_local_inventory ::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_local_inventory({ name: name }, call_options) do |_result, response|
+        c.delete_local_inventory({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name), call_options) do |_result, response|
+        c.delete_local_inventory(::Google::Shopping::Merchant::Inventories::V1beta::DeleteLocalInventoryRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

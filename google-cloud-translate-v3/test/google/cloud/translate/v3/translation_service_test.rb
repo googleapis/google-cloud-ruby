@@ -98,36 +98,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, translate_text_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.translate_text({ contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels }) do |response, operation|
+      c.translate_text({ contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.translate_text contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels do |response, operation|
+      c.translate_text contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.translate_text ::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels) do |response, operation|
+      c.translate_text ::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.translate_text({ contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels }, grpc_options) do |response, operation|
+      c.translate_text({ contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.translate_text(::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels), grpc_options) do |response, operation|
+      c.translate_text(::Google::Cloud::Translate::V3::TranslateTextRequest.new(contents: contents, mime_type: mime_type, source_language_code: source_language_code, target_language_code: target_language_code, parent: parent, model: model, glossary_config: glossary_config, transliteration_config: transliteration_config, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -160,36 +160,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, romanize_text_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.romanize_text({ parent: parent, contents: contents, source_language_code: source_language_code }) do |response, operation|
+      c.romanize_text({ parent: parent, contents: contents, source_language_code: source_language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.romanize_text parent: parent, contents: contents, source_language_code: source_language_code do |response, operation|
+      c.romanize_text parent: parent, contents: contents, source_language_code: source_language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.romanize_text ::Google::Cloud::Translate::V3::RomanizeTextRequest.new(parent: parent, contents: contents, source_language_code: source_language_code) do |response, operation|
+      c.romanize_text ::Google::Cloud::Translate::V3::RomanizeTextRequest.new(parent: parent, contents: contents, source_language_code: source_language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.romanize_text({ parent: parent, contents: contents, source_language_code: source_language_code }, grpc_options) do |response, operation|
+      c.romanize_text({ parent: parent, contents: contents, source_language_code: source_language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.romanize_text(::Google::Cloud::Translate::V3::RomanizeTextRequest.new(parent: parent, contents: contents, source_language_code: source_language_code), grpc_options) do |response, operation|
+      c.romanize_text(::Google::Cloud::Translate::V3::RomanizeTextRequest.new(parent: parent, contents: contents, source_language_code: source_language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -227,36 +227,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, detect_language_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.detect_language({ parent: parent, model: model, content: content, mime_type: mime_type, labels: labels }) do |response, operation|
+      c.detect_language({ parent: parent, model: model, content: content, mime_type: mime_type, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.detect_language parent: parent, model: model, content: content, mime_type: mime_type, labels: labels do |response, operation|
+      c.detect_language parent: parent, model: model, content: content, mime_type: mime_type, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.detect_language ::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent, model: model, content: content, mime_type: mime_type, labels: labels) do |response, operation|
+      c.detect_language ::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent, model: model, content: content, mime_type: mime_type, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.detect_language({ parent: parent, model: model, content: content, mime_type: mime_type, labels: labels }, grpc_options) do |response, operation|
+      c.detect_language({ parent: parent, model: model, content: content, mime_type: mime_type, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.detect_language(::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent, model: model, content: content, mime_type: mime_type, labels: labels), grpc_options) do |response, operation|
+      c.detect_language(::Google::Cloud::Translate::V3::DetectLanguageRequest.new(parent: parent, model: model, content: content, mime_type: mime_type, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -289,36 +289,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_supported_languages_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_supported_languages({ parent: parent, display_language_code: display_language_code, model: model }) do |response, operation|
+      c.get_supported_languages({ parent: parent, display_language_code: display_language_code, model: model }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_supported_languages parent: parent, display_language_code: display_language_code, model: model do |response, operation|
+      c.get_supported_languages parent: parent, display_language_code: display_language_code, model: model do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_supported_languages ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model) do |response, operation|
+      c.get_supported_languages ::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_supported_languages({ parent: parent, display_language_code: display_language_code, model: model }, grpc_options) do |response, operation|
+      c.get_supported_languages({ parent: parent, display_language_code: display_language_code, model: model }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_supported_languages(::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model), grpc_options) do |response, operation|
+      c.get_supported_languages(::Google::Cloud::Translate::V3::GetSupportedLanguagesRequest.new(parent: parent, display_language_code: display_language_code, model: model), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -369,36 +369,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, translate_document_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }) do |response, operation|
+      c.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.translate_document parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction do |response, operation|
+      c.translate_document parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.translate_document ::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction) do |response, operation|
+      c.translate_document ::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }, grpc_options) do |response, operation|
+      c.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.translate_document(::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction), grpc_options) do |response, operation|
+      c.translate_document(::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -441,40 +441,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, batch_translate_text_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_translate_text({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels }) do |response, operation|
+      c.batch_translate_text({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_translate_text parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels do |response, operation|
+      c.batch_translate_text parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_translate_text ::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels) do |response, operation|
+      c.batch_translate_text ::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_translate_text({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels }, grpc_options) do |response, operation|
+      c.batch_translate_text({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_translate_text(::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels), grpc_options) do |response, operation|
+      c.batch_translate_text(::Google::Cloud::Translate::V3::BatchTranslateTextRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, models: models, input_configs: input_configs, output_config: output_config, glossaries: glossaries, labels: labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -524,40 +524,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, batch_translate_document_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }) do |response, operation|
+      c.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_translate_document parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction do |response, operation|
+      c.batch_translate_document parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_translate_document ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction) do |response, operation|
+      c.batch_translate_document ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }, grpc_options) do |response, operation|
+      c.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_translate_document(::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction), grpc_options) do |response, operation|
+      c.batch_translate_document(::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -589,40 +589,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_glossary_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_glossary({ parent: parent, glossary: glossary }) do |response, operation|
+      c.create_glossary({ parent: parent, glossary: glossary }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_glossary parent: parent, glossary: glossary do |response, operation|
+      c.create_glossary parent: parent, glossary: glossary do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_glossary ::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary) do |response, operation|
+      c.create_glossary ::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_glossary({ parent: parent, glossary: glossary }, grpc_options) do |response, operation|
+      c.create_glossary({ parent: parent, glossary: glossary }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_glossary(::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary), grpc_options) do |response, operation|
+      c.create_glossary(::Google::Cloud::Translate::V3::CreateGlossaryRequest.new(parent: parent, glossary: glossary), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -654,40 +654,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_glossary_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_glossary({ glossary: glossary, update_mask: update_mask }) do |response, operation|
+      c.update_glossary({ glossary: glossary, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_glossary glossary: glossary, update_mask: update_mask do |response, operation|
+      c.update_glossary glossary: glossary, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_glossary ::Google::Cloud::Translate::V3::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask) do |response, operation|
+      c.update_glossary ::Google::Cloud::Translate::V3::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_glossary({ glossary: glossary, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_glossary({ glossary: glossary, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_glossary(::Google::Cloud::Translate::V3::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_glossary(::Google::Cloud::Translate::V3::UpdateGlossaryRequest.new(glossary: glossary, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -723,40 +723,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_glossaries_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_glossaries parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_glossaries parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_glossaries ::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_glossaries ::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_glossaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_glossaries(::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_glossaries(::Google::Cloud::Translate::V3::ListGlossariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -786,36 +786,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_glossary_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_glossary({ name: name }) do |response, operation|
+      c.get_glossary({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_glossary name: name do |response, operation|
+      c.get_glossary name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_glossary ::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name) do |response, operation|
+      c.get_glossary ::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_glossary({ name: name }, grpc_options) do |response, operation|
+      c.get_glossary({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_glossary(::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_glossary(::Google::Cloud::Translate::V3::GetGlossaryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -844,40 +844,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_glossary_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_glossary({ name: name }) do |response, operation|
+      c.delete_glossary({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_glossary name: name do |response, operation|
+      c.delete_glossary name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_glossary ::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name) do |response, operation|
+      c.delete_glossary ::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_glossary({ name: name }, grpc_options) do |response, operation|
+      c.delete_glossary({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_glossary(::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_glossary(::Google::Cloud::Translate::V3::DeleteGlossaryRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -907,36 +907,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_glossary_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_glossary_entry({ name: name }) do |response, operation|
+      c.get_glossary_entry({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_glossary_entry name: name do |response, operation|
+      c.get_glossary_entry name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_glossary_entry ::Google::Cloud::Translate::V3::GetGlossaryEntryRequest.new(name: name) do |response, operation|
+      c.get_glossary_entry ::Google::Cloud::Translate::V3::GetGlossaryEntryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_glossary_entry({ name: name }, grpc_options) do |response, operation|
+      c.get_glossary_entry({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_glossary_entry(::Google::Cloud::Translate::V3::GetGlossaryEntryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_glossary_entry(::Google::Cloud::Translate::V3::GetGlossaryEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -969,40 +969,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_glossary_entries_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_glossary_entries({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_glossary_entries({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_glossary_entries parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_glossary_entries parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_glossary_entries ::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_glossary_entries ::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_glossary_entries({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_glossary_entries({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_glossary_entries(::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_glossary_entries(::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1034,36 +1034,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_glossary_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_glossary_entry({ parent: parent, glossary_entry: glossary_entry }) do |response, operation|
+      c.create_glossary_entry({ parent: parent, glossary_entry: glossary_entry }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_glossary_entry parent: parent, glossary_entry: glossary_entry do |response, operation|
+      c.create_glossary_entry parent: parent, glossary_entry: glossary_entry do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_glossary_entry ::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest.new(parent: parent, glossary_entry: glossary_entry) do |response, operation|
+      c.create_glossary_entry ::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest.new(parent: parent, glossary_entry: glossary_entry) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_glossary_entry({ parent: parent, glossary_entry: glossary_entry }, grpc_options) do |response, operation|
+      c.create_glossary_entry({ parent: parent, glossary_entry: glossary_entry }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_glossary_entry(::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest.new(parent: parent, glossary_entry: glossary_entry), grpc_options) do |response, operation|
+      c.create_glossary_entry(::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest.new(parent: parent, glossary_entry: glossary_entry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1092,36 +1092,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_glossary_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_glossary_entry({ glossary_entry: glossary_entry }) do |response, operation|
+      c.update_glossary_entry({ glossary_entry: glossary_entry }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_glossary_entry glossary_entry: glossary_entry do |response, operation|
+      c.update_glossary_entry glossary_entry: glossary_entry do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_glossary_entry ::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest.new(glossary_entry: glossary_entry) do |response, operation|
+      c.update_glossary_entry ::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest.new(glossary_entry: glossary_entry) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_glossary_entry({ glossary_entry: glossary_entry }, grpc_options) do |response, operation|
+      c.update_glossary_entry({ glossary_entry: glossary_entry }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_glossary_entry(::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest.new(glossary_entry: glossary_entry), grpc_options) do |response, operation|
+      c.update_glossary_entry(::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest.new(glossary_entry: glossary_entry), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1150,36 +1150,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_glossary_entry_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_glossary_entry({ name: name }) do |response, operation|
+      c.delete_glossary_entry({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_glossary_entry name: name do |response, operation|
+      c.delete_glossary_entry name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_glossary_entry ::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest.new(name: name) do |response, operation|
+      c.delete_glossary_entry ::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_glossary_entry({ name: name }, grpc_options) do |response, operation|
+      c.delete_glossary_entry({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_glossary_entry(::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_glossary_entry(::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1210,40 +1210,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dataset parent: parent, dataset: dataset do |response, operation|
+      c.create_dataset parent: parent, dataset: dataset do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dataset ::Google::Cloud::Translate::V3::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
+      c.create_dataset ::Google::Cloud::Translate::V3::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
+      c.create_dataset({ parent: parent, dataset: dataset }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dataset(::Google::Cloud::Translate::V3::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
+      c.create_dataset(::Google::Cloud::Translate::V3::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1273,36 +1273,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dataset({ name: name }) do |response, operation|
+      c.get_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dataset name: name do |response, operation|
+      c.get_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dataset ::Google::Cloud::Translate::V3::GetDatasetRequest.new(name: name) do |response, operation|
+      c.get_dataset ::Google::Cloud::Translate::V3::GetDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dataset(::Google::Cloud::Translate::V3::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dataset(::Google::Cloud::Translate::V3::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1335,40 +1335,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_datasets({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_datasets({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_datasets parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_datasets parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_datasets ::Google::Cloud::Translate::V3::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_datasets ::Google::Cloud::Translate::V3::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_datasets({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_datasets({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_datasets(::Google::Cloud::Translate::V3::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_datasets(::Google::Cloud::Translate::V3::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1398,40 +1398,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dataset({ name: name }) do |response, operation|
+      c.delete_dataset({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dataset name: name do |response, operation|
+      c.delete_dataset name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dataset ::Google::Cloud::Translate::V3::DeleteDatasetRequest.new(name: name) do |response, operation|
+      c.delete_dataset ::Google::Cloud::Translate::V3::DeleteDatasetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_dataset({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dataset(::Google::Cloud::Translate::V3::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_dataset(::Google::Cloud::Translate::V3::DeleteDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1463,36 +1463,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_adaptive_mt_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }) do |response, operation|
+      c.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_adaptive_mt_dataset parent: parent, adaptive_mt_dataset: adaptive_mt_dataset do |response, operation|
+      c.create_adaptive_mt_dataset parent: parent, adaptive_mt_dataset: adaptive_mt_dataset do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_adaptive_mt_dataset ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset) do |response, operation|
+      c.create_adaptive_mt_dataset ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }, grpc_options) do |response, operation|
+      c.create_adaptive_mt_dataset({ parent: parent, adaptive_mt_dataset: adaptive_mt_dataset }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_adaptive_mt_dataset(::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset), grpc_options) do |response, operation|
+      c.create_adaptive_mt_dataset(::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest.new(parent: parent, adaptive_mt_dataset: adaptive_mt_dataset), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1521,36 +1521,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_adaptive_mt_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_adaptive_mt_dataset({ name: name }) do |response, operation|
+      c.delete_adaptive_mt_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_adaptive_mt_dataset name: name do |response, operation|
+      c.delete_adaptive_mt_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_adaptive_mt_dataset ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name) do |response, operation|
+      c.delete_adaptive_mt_dataset ::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_adaptive_mt_dataset({ name: name }, grpc_options) do |response, operation|
+      c.delete_adaptive_mt_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_adaptive_mt_dataset(::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_adaptive_mt_dataset(::Google::Cloud::Translate::V3::DeleteAdaptiveMtDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1579,36 +1579,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_adaptive_mt_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_adaptive_mt_dataset({ name: name }) do |response, operation|
+      c.get_adaptive_mt_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_adaptive_mt_dataset name: name do |response, operation|
+      c.get_adaptive_mt_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_adaptive_mt_dataset ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name) do |response, operation|
+      c.get_adaptive_mt_dataset ::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_adaptive_mt_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_adaptive_mt_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_adaptive_mt_dataset(::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_adaptive_mt_dataset(::Google::Cloud::Translate::V3::GetAdaptiveMtDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1643,40 +1643,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_adaptive_mt_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_adaptive_mt_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_adaptive_mt_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_adaptive_mt_datasets ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_adaptive_mt_datasets ::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_adaptive_mt_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_adaptive_mt_datasets(::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_adaptive_mt_datasets(::Google::Cloud::Translate::V3::ListAdaptiveMtDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1718,36 +1718,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, adaptive_mt_translate_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }) do |response, operation|
+      c.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.adaptive_mt_translate parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config do |response, operation|
+      c.adaptive_mt_translate parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config) do |response, operation|
+      c.adaptive_mt_translate ::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }, grpc_options) do |response, operation|
+      c.adaptive_mt_translate({ parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config), grpc_options) do |response, operation|
+      c.adaptive_mt_translate(::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest.new(parent: parent, dataset: dataset, content: content, mime_type: mime_type, reference_sentence_config: reference_sentence_config, glossary_config: glossary_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1776,36 +1776,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_adaptive_mt_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_adaptive_mt_file({ name: name }) do |response, operation|
+      c.get_adaptive_mt_file({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_adaptive_mt_file name: name do |response, operation|
+      c.get_adaptive_mt_file name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_adaptive_mt_file ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name) do |response, operation|
+      c.get_adaptive_mt_file ::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_adaptive_mt_file({ name: name }, grpc_options) do |response, operation|
+      c.get_adaptive_mt_file({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_adaptive_mt_file(::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_adaptive_mt_file(::Google::Cloud::Translate::V3::GetAdaptiveMtFileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1834,36 +1834,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_adaptive_mt_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_adaptive_mt_file({ name: name }) do |response, operation|
+      c.delete_adaptive_mt_file({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_adaptive_mt_file name: name do |response, operation|
+      c.delete_adaptive_mt_file name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_adaptive_mt_file ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name) do |response, operation|
+      c.delete_adaptive_mt_file ::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_adaptive_mt_file({ name: name }, grpc_options) do |response, operation|
+      c.delete_adaptive_mt_file({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_adaptive_mt_file(::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_adaptive_mt_file(::Google::Cloud::Translate::V3::DeleteAdaptiveMtFileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1895,36 +1895,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, import_adaptive_mt_file_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }) do |response, operation|
+      c.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_adaptive_mt_file parent: parent, file_input_source: file_input_source do |response, operation|
+      c.import_adaptive_mt_file parent: parent, file_input_source: file_input_source do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_adaptive_mt_file ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source) do |response, operation|
+      c.import_adaptive_mt_file ::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }, grpc_options) do |response, operation|
+      c.import_adaptive_mt_file({ parent: parent, file_input_source: file_input_source }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_adaptive_mt_file(::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source), grpc_options) do |response, operation|
+      c.import_adaptive_mt_file(::Google::Cloud::Translate::V3::ImportAdaptiveMtFileRequest.new(parent: parent, file_input_source: file_input_source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1957,40 +1957,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_adaptive_mt_files_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_adaptive_mt_files parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_adaptive_mt_files parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_adaptive_mt_files ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_adaptive_mt_files ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_adaptive_mt_files({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_adaptive_mt_files(::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_adaptive_mt_files(::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2024,40 +2024,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_adaptive_mt_sentences_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_adaptive_mt_sentences parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_adaptive_mt_sentences parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_adaptive_mt_sentences ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_adaptive_mt_sentences ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_adaptive_mt_sentences({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_adaptive_mt_sentences(::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_adaptive_mt_sentences(::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2089,40 +2089,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, import_data_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_data({ dataset: dataset, input_config: input_config }) do |response, operation|
+      c.import_data({ dataset: dataset, input_config: input_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_data dataset: dataset, input_config: input_config do |response, operation|
+      c.import_data dataset: dataset, input_config: input_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_data ::Google::Cloud::Translate::V3::ImportDataRequest.new(dataset: dataset, input_config: input_config) do |response, operation|
+      c.import_data ::Google::Cloud::Translate::V3::ImportDataRequest.new(dataset: dataset, input_config: input_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_data({ dataset: dataset, input_config: input_config }, grpc_options) do |response, operation|
+      c.import_data({ dataset: dataset, input_config: input_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_data(::Google::Cloud::Translate::V3::ImportDataRequest.new(dataset: dataset, input_config: input_config), grpc_options) do |response, operation|
+      c.import_data(::Google::Cloud::Translate::V3::ImportDataRequest.new(dataset: dataset, input_config: input_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2154,40 +2154,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, export_data_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_data({ dataset: dataset, output_config: output_config }) do |response, operation|
+      c.export_data({ dataset: dataset, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_data dataset: dataset, output_config: output_config do |response, operation|
+      c.export_data dataset: dataset, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_data ::Google::Cloud::Translate::V3::ExportDataRequest.new(dataset: dataset, output_config: output_config) do |response, operation|
+      c.export_data ::Google::Cloud::Translate::V3::ExportDataRequest.new(dataset: dataset, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_data({ dataset: dataset, output_config: output_config }, grpc_options) do |response, operation|
+      c.export_data({ dataset: dataset, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_data(::Google::Cloud::Translate::V3::ExportDataRequest.new(dataset: dataset, output_config: output_config), grpc_options) do |response, operation|
+      c.export_data(::Google::Cloud::Translate::V3::ExportDataRequest.new(dataset: dataset, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2223,40 +2223,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_examples_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_examples parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_examples parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_examples ::Google::Cloud::Translate::V3::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_examples ::Google::Cloud::Translate::V3::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_examples({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_examples(::Google::Cloud::Translate::V3::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_examples(::Google::Cloud::Translate::V3::ListExamplesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2288,40 +2288,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_model({ parent: parent, model: model }) do |response, operation|
+      c.create_model({ parent: parent, model: model }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_model parent: parent, model: model do |response, operation|
+      c.create_model parent: parent, model: model do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_model ::Google::Cloud::Translate::V3::CreateModelRequest.new(parent: parent, model: model) do |response, operation|
+      c.create_model ::Google::Cloud::Translate::V3::CreateModelRequest.new(parent: parent, model: model) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_model({ parent: parent, model: model }, grpc_options) do |response, operation|
+      c.create_model({ parent: parent, model: model }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_model(::Google::Cloud::Translate::V3::CreateModelRequest.new(parent: parent, model: model), grpc_options) do |response, operation|
+      c.create_model(::Google::Cloud::Translate::V3::CreateModelRequest.new(parent: parent, model: model), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2357,40 +2357,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_models_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_models ::Google::Cloud::Translate::V3::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_models ::Google::Cloud::Translate::V3::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_models(::Google::Cloud::Translate::V3::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_models(::Google::Cloud::Translate::V3::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2420,36 +2420,36 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_model({ name: name }) do |response, operation|
+      c.get_model({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_model name: name do |response, operation|
+      c.get_model name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_model ::Google::Cloud::Translate::V3::GetModelRequest.new(name: name) do |response, operation|
+      c.get_model ::Google::Cloud::Translate::V3::GetModelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_model({ name: name }, grpc_options) do |response, operation|
+      c.get_model({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_model(::Google::Cloud::Translate::V3::GetModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_model(::Google::Cloud::Translate::V3::GetModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2478,40 +2478,40 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_model_client_stub do
       # Create client
-      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+      c = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_model({ name: name }) do |response, operation|
+      c.delete_model({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_model name: name do |response, operation|
+      c.delete_model name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_model ::Google::Cloud::Translate::V3::DeleteModelRequest.new(name: name) do |response, operation|
+      c.delete_model ::Google::Cloud::Translate::V3::DeleteModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_model({ name: name }, grpc_options) do |response, operation|
+      c.delete_model({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_model(::Google::Cloud::Translate::V3::DeleteModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_model(::Google::Cloud::Translate::V3::DeleteModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

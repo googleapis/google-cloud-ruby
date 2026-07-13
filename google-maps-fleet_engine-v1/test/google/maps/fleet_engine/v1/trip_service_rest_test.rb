@@ -100,32 +100,32 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     ::Google::Maps::FleetEngine::V1::TripService::Rest::ServiceStub.stub :transcode_create_trip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_trip_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_trip({ header: header, parent: parent, trip_id: trip_id, trip: trip }) do |_result, response|
+        c.create_trip({ header: header, parent: parent, trip_id: trip_id, trip: trip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_trip header: header, parent: parent, trip_id: trip_id, trip: trip do |_result, response|
+        c.create_trip header: header, parent: parent, trip_id: trip_id, trip: trip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_trip ::Google::Maps::FleetEngine::V1::CreateTripRequest.new(header: header, parent: parent, trip_id: trip_id, trip: trip) do |_result, response|
+        c.create_trip ::Google::Maps::FleetEngine::V1::CreateTripRequest.new(header: header, parent: parent, trip_id: trip_id, trip: trip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_trip({ header: header, parent: parent, trip_id: trip_id, trip: trip }, call_options) do |_result, response|
+        c.create_trip({ header: header, parent: parent, trip_id: trip_id, trip: trip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_trip(::Google::Maps::FleetEngine::V1::CreateTripRequest.new(header: header, parent: parent, trip_id: trip_id, trip: trip), call_options) do |_result, response|
+        c.create_trip(::Google::Maps::FleetEngine::V1::CreateTripRequest.new(header: header, parent: parent, trip_id: trip_id, trip: trip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -161,32 +161,32 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     ::Google::Maps::FleetEngine::V1::TripService::Rest::ServiceStub.stub :transcode_get_trip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_trip_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_trip({ header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version }) do |_result, response|
+        c.get_trip({ header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_trip header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version do |_result, response|
+        c.get_trip header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_trip ::Google::Maps::FleetEngine::V1::GetTripRequest.new(header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version) do |_result, response|
+        c.get_trip ::Google::Maps::FleetEngine::V1::GetTripRequest.new(header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_trip({ header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version }, call_options) do |_result, response|
+        c.get_trip({ header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_trip(::Google::Maps::FleetEngine::V1::GetTripRequest.new(header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version), call_options) do |_result, response|
+        c.get_trip(::Google::Maps::FleetEngine::V1::GetTripRequest.new(header: header, name: name, view: view, current_route_segment_version: current_route_segment_version, remaining_waypoints_version: remaining_waypoints_version, route_format_type: route_format_type, current_route_segment_traffic_version: current_route_segment_traffic_version, remaining_waypoints_route_version: remaining_waypoints_route_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -216,32 +216,32 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     ::Google::Maps::FleetEngine::V1::TripService::Rest::ServiceStub.stub :transcode_delete_trip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_trip_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_trip({ header: header, name: name }) do |_result, response|
+        c.delete_trip({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_trip header: header, name: name do |_result, response|
+        c.delete_trip header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_trip ::Google::Maps::FleetEngine::V1::DeleteTripRequest.new(header: header, name: name) do |_result, response|
+        c.delete_trip ::Google::Maps::FleetEngine::V1::DeleteTripRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_trip({ header: header, name: name }, call_options) do |_result, response|
+        c.delete_trip({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_trip(::Google::Maps::FleetEngine::V1::DeleteTripRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.delete_trip(::Google::Maps::FleetEngine::V1::DeleteTripRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -274,32 +274,32 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     ::Google::Maps::FleetEngine::V1::TripService::Rest::ServiceStub.stub :transcode_report_billable_trip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_billable_trip_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report_billable_trip({ name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type }) do |_result, response|
+        c.report_billable_trip({ name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report_billable_trip name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type do |_result, response|
+        c.report_billable_trip name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report_billable_trip ::Google::Maps::FleetEngine::V1::ReportBillableTripRequest.new(name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type) do |_result, response|
+        c.report_billable_trip ::Google::Maps::FleetEngine::V1::ReportBillableTripRequest.new(name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report_billable_trip({ name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type }, call_options) do |_result, response|
+        c.report_billable_trip({ name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report_billable_trip(::Google::Maps::FleetEngine::V1::ReportBillableTripRequest.new(name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type), call_options) do |_result, response|
+        c.report_billable_trip(::Google::Maps::FleetEngine::V1::ReportBillableTripRequest.new(name: name, country_code: country_code, platform: platform, related_ids: related_ids, solution_type: solution_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -334,32 +334,32 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     ::Google::Maps::FleetEngine::V1::TripService::Rest::ServiceStub.stub :transcode_search_trips_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_trips_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_trips({ header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness }) do |_result, response|
+        c.search_trips({ header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_trips header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness do |_result, response|
+        c.search_trips header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_trips ::Google::Maps::FleetEngine::V1::SearchTripsRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness) do |_result, response|
+        c.search_trips ::Google::Maps::FleetEngine::V1::SearchTripsRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_trips({ header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness }, call_options) do |_result, response|
+        c.search_trips({ header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_trips(::Google::Maps::FleetEngine::V1::SearchTripsRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness), call_options) do |_result, response|
+        c.search_trips(::Google::Maps::FleetEngine::V1::SearchTripsRequest.new(header: header, parent: parent, vehicle_id: vehicle_id, active_trips_only: active_trips_only, page_size: page_size, page_token: page_token, minimum_staleness: minimum_staleness), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -391,32 +391,32 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     ::Google::Maps::FleetEngine::V1::TripService::Rest::ServiceStub.stub :transcode_update_trip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_trip_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::V1::TripService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_trip({ header: header, name: name, trip: trip, update_mask: update_mask }) do |_result, response|
+        c.update_trip({ header: header, name: name, trip: trip, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_trip header: header, name: name, trip: trip, update_mask: update_mask do |_result, response|
+        c.update_trip header: header, name: name, trip: trip, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_trip ::Google::Maps::FleetEngine::V1::UpdateTripRequest.new(header: header, name: name, trip: trip, update_mask: update_mask) do |_result, response|
+        c.update_trip ::Google::Maps::FleetEngine::V1::UpdateTripRequest.new(header: header, name: name, trip: trip, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_trip({ header: header, name: name, trip: trip, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_trip({ header: header, name: name, trip: trip, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_trip(::Google::Maps::FleetEngine::V1::UpdateTripRequest.new(header: header, name: name, trip: trip, update_mask: update_mask), call_options) do |_result, response|
+        c.update_trip(::Google::Maps::FleetEngine::V1::UpdateTripRequest.new(header: header, name: name, trip: trip, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

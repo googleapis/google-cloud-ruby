@@ -99,32 +99,32 @@ class ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::ClientTest < 
     ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::ServiceStub.stub :transcode_list_connections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connections_client_stub do
         # Create client
-        client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connections parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_connections parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connections ::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_connections ::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connections(::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_connections(::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

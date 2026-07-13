@@ -84,36 +84,36 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_sip_trunk_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }) do |response, operation|
+      c.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_sip_trunk parent: parent, sip_trunk: sip_trunk do |response, operation|
+      c.create_sip_trunk parent: parent, sip_trunk: sip_trunk do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_sip_trunk ::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk) do |response, operation|
+      c.create_sip_trunk ::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }, grpc_options) do |response, operation|
+      c.create_sip_trunk({ parent: parent, sip_trunk: sip_trunk }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_sip_trunk(::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk), grpc_options) do |response, operation|
+      c.create_sip_trunk(::Google::Cloud::Dialogflow::V2::CreateSipTrunkRequest.new(parent: parent, sip_trunk: sip_trunk), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_sip_trunk_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_sip_trunk({ name: name }) do |response, operation|
+      c.delete_sip_trunk({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_sip_trunk name: name do |response, operation|
+      c.delete_sip_trunk name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_sip_trunk ::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name) do |response, operation|
+      c.delete_sip_trunk ::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_sip_trunk({ name: name }, grpc_options) do |response, operation|
+      c.delete_sip_trunk({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_sip_trunk(::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_sip_trunk(::Google::Cloud::Dialogflow::V2::DeleteSipTrunkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,40 +204,40 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_sip_trunks_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_sip_trunks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_sip_trunks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_sip_trunks ::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_sip_trunks ::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_sip_trunks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_sip_trunks(::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_sip_trunks(::Google::Cloud::Dialogflow::V2::ListSipTrunksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -267,36 +267,36 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_sip_trunk_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_sip_trunk({ name: name }) do |response, operation|
+      c.get_sip_trunk({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_sip_trunk name: name do |response, operation|
+      c.get_sip_trunk name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_sip_trunk ::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name) do |response, operation|
+      c.get_sip_trunk ::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_sip_trunk({ name: name }, grpc_options) do |response, operation|
+      c.get_sip_trunk({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_sip_trunk(::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_sip_trunk(::Google::Cloud::Dialogflow::V2::GetSipTrunkRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::Dialogflow::V2::SipTrunks::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_sip_trunk_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::SipTrunks::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }) do |response, operation|
+      c.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_sip_trunk sip_trunk: sip_trunk, update_mask: update_mask do |response, operation|
+      c.update_sip_trunk sip_trunk: sip_trunk, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_sip_trunk ::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask) do |response, operation|
+      c.update_sip_trunk ::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_sip_trunk({ sip_trunk: sip_trunk, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_sip_trunk(::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_sip_trunk(::Google::Cloud::Dialogflow::V2::UpdateSipTrunkRequest.new(sip_trunk: sip_trunk, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

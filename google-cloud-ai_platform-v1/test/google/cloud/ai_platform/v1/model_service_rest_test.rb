@@ -101,32 +101,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_upload_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upload_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }) do |_result, response|
+        c.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upload_model parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account do |_result, response|
+        c.upload_model parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upload_model ::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account) do |_result, response|
+        c.upload_model ::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }, call_options) do |_result, response|
+        c.upload_model({ parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upload_model(::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account), call_options) do |_result, response|
+        c.upload_model(::Google::Cloud::AIPlatform::V1::UploadModelRequest.new(parent: parent, parent_model: parent_model, model_id: model_id, model: model, service_account: service_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_get_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model({ name: name }) do |_result, response|
+        c.get_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model name: name do |_result, response|
+        c.get_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model ::Google::Cloud::AIPlatform::V1::GetModelRequest.new(name: name) do |_result, response|
+        c.get_model ::Google::Cloud::AIPlatform::V1::GetModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model({ name: name }, call_options) do |_result, response|
+        c.get_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model(::Google::Cloud::AIPlatform::V1::GetModelRequest.new(name: name), call_options) do |_result, response|
+        c.get_model(::Google::Cloud::AIPlatform::V1::GetModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_list_models_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_models_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |_result, response|
+        c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |_result, response|
+        c.list_models parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_models ::Google::Cloud::AIPlatform::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |_result, response|
+        c.list_models ::Google::Cloud::AIPlatform::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
+        c.list_models({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_models(::Google::Cloud::AIPlatform::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
+        c.list_models(::Google::Cloud::AIPlatform::V1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -273,32 +273,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_list_model_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_model_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }) do |_result, response|
+        c.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_model_versions name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by do |_result, response|
+        c.list_model_versions name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_model_versions ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by) do |_result, response|
+        c.list_model_versions ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
+        c.list_model_versions({ name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_model_versions(::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
+        c.list_model_versions(::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new(name: name, page_size: page_size, page_token: page_token, filter: filter, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -329,32 +329,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_list_model_version_checkpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_model_version_checkpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_model_version_checkpoints({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_model_version_checkpoints({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_model_version_checkpoints name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_model_version_checkpoints name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_model_version_checkpoints ::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_model_version_checkpoints ::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_model_version_checkpoints({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_model_version_checkpoints({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_model_version_checkpoints(::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_model_version_checkpoints(::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -384,32 +384,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_update_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_model({ model: model, update_mask: update_mask }) do |_result, response|
+        c.update_model({ model: model, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_model model: model, update_mask: update_mask do |_result, response|
+        c.update_model model: model, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_model ::Google::Cloud::AIPlatform::V1::UpdateModelRequest.new(model: model, update_mask: update_mask) do |_result, response|
+        c.update_model ::Google::Cloud::AIPlatform::V1::UpdateModelRequest.new(model: model, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_model({ model: model, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_model({ model: model, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_model(::Google::Cloud::AIPlatform::V1::UpdateModelRequest.new(model: model, update_mask: update_mask), call_options) do |_result, response|
+        c.update_model(::Google::Cloud::AIPlatform::V1::UpdateModelRequest.new(model: model, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -439,32 +439,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_update_explanation_dataset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_explanation_dataset_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_explanation_dataset({ model: model, examples: examples }) do |_result, response|
+        c.update_explanation_dataset({ model: model, examples: examples }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_explanation_dataset model: model, examples: examples do |_result, response|
+        c.update_explanation_dataset model: model, examples: examples do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_explanation_dataset ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new(model: model, examples: examples) do |_result, response|
+        c.update_explanation_dataset ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new(model: model, examples: examples) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_explanation_dataset({ model: model, examples: examples }, call_options) do |_result, response|
+        c.update_explanation_dataset({ model: model, examples: examples }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_explanation_dataset(::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new(model: model, examples: examples), call_options) do |_result, response|
+        c.update_explanation_dataset(::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new(model: model, examples: examples), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -493,32 +493,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_delete_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_model({ name: name }) do |_result, response|
+        c.delete_model({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_model name: name do |_result, response|
+        c.delete_model name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_model ::Google::Cloud::AIPlatform::V1::DeleteModelRequest.new(name: name) do |_result, response|
+        c.delete_model ::Google::Cloud::AIPlatform::V1::DeleteModelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_model({ name: name }, call_options) do |_result, response|
+        c.delete_model({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_model(::Google::Cloud::AIPlatform::V1::DeleteModelRequest.new(name: name), call_options) do |_result, response|
+        c.delete_model(::Google::Cloud::AIPlatform::V1::DeleteModelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -547,32 +547,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_delete_model_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_model_version_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_model_version({ name: name }) do |_result, response|
+        c.delete_model_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_model_version name: name do |_result, response|
+        c.delete_model_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_model_version ::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest.new(name: name) do |_result, response|
+        c.delete_model_version ::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_model_version({ name: name }, call_options) do |_result, response|
+        c.delete_model_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_model_version(::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_model_version(::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -602,32 +602,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_merge_version_aliases_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, merge_version_aliases_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.merge_version_aliases({ name: name, version_aliases: version_aliases }) do |_result, response|
+        c.merge_version_aliases({ name: name, version_aliases: version_aliases }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.merge_version_aliases name: name, version_aliases: version_aliases do |_result, response|
+        c.merge_version_aliases name: name, version_aliases: version_aliases do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.merge_version_aliases ::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest.new(name: name, version_aliases: version_aliases) do |_result, response|
+        c.merge_version_aliases ::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest.new(name: name, version_aliases: version_aliases) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.merge_version_aliases({ name: name, version_aliases: version_aliases }, call_options) do |_result, response|
+        c.merge_version_aliases({ name: name, version_aliases: version_aliases }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.merge_version_aliases(::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest.new(name: name, version_aliases: version_aliases), call_options) do |_result, response|
+        c.merge_version_aliases(::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest.new(name: name, version_aliases: version_aliases), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -657,32 +657,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_export_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_model({ name: name, output_config: output_config }) do |_result, response|
+        c.export_model({ name: name, output_config: output_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_model name: name, output_config: output_config do |_result, response|
+        c.export_model name: name, output_config: output_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_model ::Google::Cloud::AIPlatform::V1::ExportModelRequest.new(name: name, output_config: output_config) do |_result, response|
+        c.export_model ::Google::Cloud::AIPlatform::V1::ExportModelRequest.new(name: name, output_config: output_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_model({ name: name, output_config: output_config }, call_options) do |_result, response|
+        c.export_model({ name: name, output_config: output_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_model(::Google::Cloud::AIPlatform::V1::ExportModelRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
+        c.export_model(::Google::Cloud::AIPlatform::V1::ExportModelRequest.new(name: name, output_config: output_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -715,32 +715,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_copy_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, copy_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }) do |_result, response|
+        c.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account do |_result, response|
+        c.copy_model model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account) do |_result, response|
+        c.copy_model ::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }, call_options) do |_result, response|
+        c.copy_model({ model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account), call_options) do |_result, response|
+        c.copy_model(::Google::Cloud::AIPlatform::V1::CopyModelRequest.new(model_id: model_id, parent: parent, source_model: source_model, encryption_spec: encryption_spec, custom_service_account: custom_service_account), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -770,32 +770,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_import_model_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_model_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_model_evaluation({ parent: parent, model_evaluation: model_evaluation }) do |_result, response|
+        c.import_model_evaluation({ parent: parent, model_evaluation: model_evaluation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_model_evaluation parent: parent, model_evaluation: model_evaluation do |_result, response|
+        c.import_model_evaluation parent: parent, model_evaluation: model_evaluation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_model_evaluation ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest.new(parent: parent, model_evaluation: model_evaluation) do |_result, response|
+        c.import_model_evaluation ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest.new(parent: parent, model_evaluation: model_evaluation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_model_evaluation({ parent: parent, model_evaluation: model_evaluation }, call_options) do |_result, response|
+        c.import_model_evaluation({ parent: parent, model_evaluation: model_evaluation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_model_evaluation(::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest.new(parent: parent, model_evaluation: model_evaluation), call_options) do |_result, response|
+        c.import_model_evaluation(::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest.new(parent: parent, model_evaluation: model_evaluation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -825,32 +825,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_batch_import_model_evaluation_slices_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_import_model_evaluation_slices_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_import_model_evaluation_slices({ parent: parent, model_evaluation_slices: model_evaluation_slices }) do |_result, response|
+        c.batch_import_model_evaluation_slices({ parent: parent, model_evaluation_slices: model_evaluation_slices }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_import_model_evaluation_slices parent: parent, model_evaluation_slices: model_evaluation_slices do |_result, response|
+        c.batch_import_model_evaluation_slices parent: parent, model_evaluation_slices: model_evaluation_slices do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_import_model_evaluation_slices ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new(parent: parent, model_evaluation_slices: model_evaluation_slices) do |_result, response|
+        c.batch_import_model_evaluation_slices ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new(parent: parent, model_evaluation_slices: model_evaluation_slices) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_import_model_evaluation_slices({ parent: parent, model_evaluation_slices: model_evaluation_slices }, call_options) do |_result, response|
+        c.batch_import_model_evaluation_slices({ parent: parent, model_evaluation_slices: model_evaluation_slices }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_import_model_evaluation_slices(::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new(parent: parent, model_evaluation_slices: model_evaluation_slices), call_options) do |_result, response|
+        c.batch_import_model_evaluation_slices(::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new(parent: parent, model_evaluation_slices: model_evaluation_slices), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -880,32 +880,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_batch_import_evaluated_annotations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_import_evaluated_annotations_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_import_evaluated_annotations({ parent: parent, evaluated_annotations: evaluated_annotations }) do |_result, response|
+        c.batch_import_evaluated_annotations({ parent: parent, evaluated_annotations: evaluated_annotations }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_import_evaluated_annotations parent: parent, evaluated_annotations: evaluated_annotations do |_result, response|
+        c.batch_import_evaluated_annotations parent: parent, evaluated_annotations: evaluated_annotations do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_import_evaluated_annotations ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest.new(parent: parent, evaluated_annotations: evaluated_annotations) do |_result, response|
+        c.batch_import_evaluated_annotations ::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest.new(parent: parent, evaluated_annotations: evaluated_annotations) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_import_evaluated_annotations({ parent: parent, evaluated_annotations: evaluated_annotations }, call_options) do |_result, response|
+        c.batch_import_evaluated_annotations({ parent: parent, evaluated_annotations: evaluated_annotations }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_import_evaluated_annotations(::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest.new(parent: parent, evaluated_annotations: evaluated_annotations), call_options) do |_result, response|
+        c.batch_import_evaluated_annotations(::Google::Cloud::AIPlatform::V1::BatchImportEvaluatedAnnotationsRequest.new(parent: parent, evaluated_annotations: evaluated_annotations), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -934,32 +934,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_get_model_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model_evaluation({ name: name }) do |_result, response|
+        c.get_model_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model_evaluation name: name do |_result, response|
+        c.get_model_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model_evaluation ::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest.new(name: name) do |_result, response|
+        c.get_model_evaluation ::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model_evaluation({ name: name }, call_options) do |_result, response|
+        c.get_model_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model_evaluation(::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.get_model_evaluation(::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -992,32 +992,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_list_model_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_model_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_model_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_model_evaluations parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_model_evaluations ::Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_model_evaluations ::Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_model_evaluations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_model_evaluations(::Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_model_evaluations(::Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1046,32 +1046,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_get_model_evaluation_slice_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_evaluation_slice_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model_evaluation_slice({ name: name }) do |_result, response|
+        c.get_model_evaluation_slice({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model_evaluation_slice name: name do |_result, response|
+        c.get_model_evaluation_slice name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model_evaluation_slice ::Google::Cloud::AIPlatform::V1::GetModelEvaluationSliceRequest.new(name: name) do |_result, response|
+        c.get_model_evaluation_slice ::Google::Cloud::AIPlatform::V1::GetModelEvaluationSliceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model_evaluation_slice({ name: name }, call_options) do |_result, response|
+        c.get_model_evaluation_slice({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model_evaluation_slice(::Google::Cloud::AIPlatform::V1::GetModelEvaluationSliceRequest.new(name: name), call_options) do |_result, response|
+        c.get_model_evaluation_slice(::Google::Cloud::AIPlatform::V1::GetModelEvaluationSliceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1104,32 +1104,32 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ClientTest < Minitest
     ::Google::Cloud::AIPlatform::V1::ModelService::Rest::ServiceStub.stub :transcode_list_model_evaluation_slices_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_model_evaluation_slices_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::ModelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_model_evaluation_slices({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_model_evaluation_slices({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_model_evaluation_slices parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_model_evaluation_slices parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_model_evaluation_slices ::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_model_evaluation_slices ::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_model_evaluation_slices({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_model_evaluation_slices({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_model_evaluation_slices(::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_model_evaluation_slices(::Google::Cloud::AIPlatform::V1::ListModelEvaluationSlicesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

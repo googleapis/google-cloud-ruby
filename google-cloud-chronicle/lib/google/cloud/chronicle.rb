@@ -608,6 +608,78 @@ module Google
       end
 
       ##
+      # Create a new client object for FindingsRefinementService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::FindingsRefinementService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-FindingsRefinementService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the FindingsRefinementService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the FindingsRefinementService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.findings_refinement_service_available?}.
+      #
+      # ## About FindingsRefinementService
+      #
+      # FindingsRefinementService provides an interface for filtering out
+      # findings that are unlikely to be real threats to prevent them
+      # from triggering alerts or notifications.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.findings_refinement_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:FindingsRefinementService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the FindingsRefinementService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.findings_refinement_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the FindingsRefinementService service,
+      # or if the versioned client gem needs an update to support the FindingsRefinementService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.findings_refinement_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :FindingsRefinementService
+        service_module = service_module.const_get :FindingsRefinementService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for InstanceService.
       #
       # By default, this returns an instance of
@@ -818,6 +890,77 @@ module Google
       end
 
       ##
+      # Create a new client object for RuleExecutionErrorService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-chronicle-v1/latest/Google-Cloud-Chronicle-V1-RuleExecutionErrorService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RuleExecutionErrorService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the RuleExecutionErrorService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Chronicle.rule_execution_error_service_available?}.
+      #
+      # ## About RuleExecutionErrorService
+      #
+      # RuleExecutionErrorService contains endpoints related to rule execution
+      # errors.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.rule_execution_error_service version: :v1, transport: :grpc, &block
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Chronicle.const_get(package_name).const_get(:RuleExecutionErrorService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RuleExecutionErrorService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Chronicle.rule_execution_error_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RuleExecutionErrorService service,
+      # or if the versioned client gem needs an update to support the RuleExecutionErrorService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.rule_execution_error_service_available? version: :v1, transport: :grpc
+        require "google/cloud/chronicle/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Chronicle
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Chronicle.const_get package_name
+        return false unless service_module.const_defined? :RuleExecutionErrorService
+        service_module = service_module.const_get :RuleExecutionErrorService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Configure the google-cloud-chronicle library.
       #
       # The following configuration parameters are supported:
@@ -840,6 +983,7 @@ module Google
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
       #     * `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
       #     * `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+      #     * `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
       #     * `:retry_codes` (*type:* `Array<String>`) -
       #       The error codes that should trigger a retry.
       #

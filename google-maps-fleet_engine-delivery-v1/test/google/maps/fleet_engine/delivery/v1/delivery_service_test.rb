@@ -88,36 +88,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, create_delivery_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }) do |response, operation|
+      c.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_delivery_vehicle header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle do |response, operation|
+      c.create_delivery_vehicle header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle) do |response, operation|
+      c.create_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }, grpc_options) do |response, operation|
+      c.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle), grpc_options) do |response, operation|
+      c.create_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_delivery_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_delivery_vehicle({ header: header, name: name }) do |response, operation|
+      c.get_delivery_vehicle({ header: header, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_delivery_vehicle header: header, name: name do |response, operation|
+      c.get_delivery_vehicle header: header, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name) do |response, operation|
+      c.get_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_delivery_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
+      c.get_delivery_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
+      c.get_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,36 +208,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, delete_delivery_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_delivery_vehicle({ header: header, name: name }) do |response, operation|
+      c.delete_delivery_vehicle({ header: header, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_delivery_vehicle header: header, name: name do |response, operation|
+      c.delete_delivery_vehicle header: header, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name) do |response, operation|
+      c.delete_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_delivery_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
+      c.delete_delivery_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
+      c.delete_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -270,36 +270,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, update_delivery_vehicle_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }) do |response, operation|
+      c.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_delivery_vehicle header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask do |response, operation|
+      c.update_delivery_vehicle header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask) do |response, operation|
+      c.update_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -332,36 +332,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, batch_create_tasks_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_tasks({ header: header, parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_tasks({ header: header, parent: parent, requests: requests }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_tasks header: header, parent: parent, requests: requests do |response, operation|
+      c.batch_create_tasks header: header, parent: parent, requests: requests do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_tasks ::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests) do |response, operation|
+      c.batch_create_tasks ::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_tasks({ header: header, parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_tasks({ header: header, parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_tasks(::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_tasks(::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -396,36 +396,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, create_task_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_task({ header: header, parent: parent, task_id: task_id, task: task }) do |response, operation|
+      c.create_task({ header: header, parent: parent, task_id: task_id, task: task }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_task header: header, parent: parent, task_id: task_id, task: task do |response, operation|
+      c.create_task header: header, parent: parent, task_id: task_id, task: task do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_task ::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task) do |response, operation|
+      c.create_task ::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_task({ header: header, parent: parent, task_id: task_id, task: task }, grpc_options) do |response, operation|
+      c.create_task({ header: header, parent: parent, task_id: task_id, task: task }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_task(::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task), grpc_options) do |response, operation|
+      c.create_task(::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -456,36 +456,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_task_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_task({ header: header, name: name }) do |response, operation|
+      c.get_task({ header: header, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_task header: header, name: name do |response, operation|
+      c.get_task header: header, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_task ::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name) do |response, operation|
+      c.get_task ::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_task({ header: header, name: name }, grpc_options) do |response, operation|
+      c.get_task({ header: header, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_task(::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name), grpc_options) do |response, operation|
+      c.get_task(::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -516,36 +516,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, delete_task_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_task({ header: header, name: name }) do |response, operation|
+      c.delete_task({ header: header, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_task header: header, name: name do |response, operation|
+      c.delete_task header: header, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_task ::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name) do |response, operation|
+      c.delete_task ::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_task({ header: header, name: name }, grpc_options) do |response, operation|
+      c.delete_task({ header: header, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_task(::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name), grpc_options) do |response, operation|
+      c.delete_task(::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -578,36 +578,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, update_task_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_task({ header: header, task: task, update_mask: update_mask }) do |response, operation|
+      c.update_task({ header: header, task: task, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_task header: header, task: task, update_mask: update_mask do |response, operation|
+      c.update_task header: header, task: task, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_task ::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask) do |response, operation|
+      c.update_task ::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_task({ header: header, task: task, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_task({ header: header, task: task, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_task(::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_task(::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -644,40 +644,40 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_tasks_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tasks header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_tasks header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tasks ::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_tasks ::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tasks(::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_tasks(::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -709,36 +709,36 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, get_task_tracking_info_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_task_tracking_info({ header: header, name: name }) do |response, operation|
+      c.get_task_tracking_info({ header: header, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_task_tracking_info header: header, name: name do |response, operation|
+      c.get_task_tracking_info header: header, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_task_tracking_info ::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name) do |response, operation|
+      c.get_task_tracking_info ::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_task_tracking_info({ header: header, name: name }, grpc_options) do |response, operation|
+      c.get_task_tracking_info({ header: header, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_task_tracking_info(::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name), grpc_options) do |response, operation|
+      c.get_task_tracking_info(::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -777,40 +777,40 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
     Gapic::ServiceStub.stub :new, list_delivery_vehicles_client_stub do
       # Create client
-      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+      c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }) do |response, operation|
+      c.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_delivery_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport do |response, operation|
+      c.list_delivery_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_delivery_vehicles ::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport) do |response, operation|
+      c.list_delivery_vehicles ::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }, grpc_options) do |response, operation|
+      c.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_delivery_vehicles(::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport), grpc_options) do |response, operation|
+      c.list_delivery_vehicles(::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

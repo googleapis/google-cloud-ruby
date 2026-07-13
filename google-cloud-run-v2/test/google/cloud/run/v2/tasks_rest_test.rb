@@ -97,32 +97,32 @@ class ::Google::Cloud::Run::V2::Tasks::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Tasks::Rest::ServiceStub.stub :transcode_get_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_task_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Tasks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Tasks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_task({ name: name }) do |_result, response|
+        c.get_task({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_task name: name do |_result, response|
+        c.get_task name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_task ::Google::Cloud::Run::V2::GetTaskRequest.new(name: name) do |_result, response|
+        c.get_task ::Google::Cloud::Run::V2::GetTaskRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_task({ name: name }, call_options) do |_result, response|
+        c.get_task({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_task(::Google::Cloud::Run::V2::GetTaskRequest.new(name: name), call_options) do |_result, response|
+        c.get_task(::Google::Cloud::Run::V2::GetTaskRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Run::V2::Tasks::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Run::V2::Tasks::Rest::ServiceStub.stub :transcode_list_tasks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tasks_client_stub do
         # Create client
-        client = ::Google::Cloud::Run::V2::Tasks::Rest::Client.new do |config|
+        c = ::Google::Cloud::Run::V2::Tasks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
+        c.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tasks parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
+        c.list_tasks parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tasks ::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
+        c.list_tasks ::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
+        c.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tasks(::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
+        c.list_tasks(::Google::Cloud::Run::V2::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, show_deleted: show_deleted), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -100,32 +100,32 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ClientTest
     ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ServiceStub.stub :transcode_run_report_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_report_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }) do |_result, response|
+        c.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_report_job name: name, date_range: date_range, filter: filter, language_code: language_code do |_result, response|
+        c.run_report_job name: name, date_range: date_range, filter: filter, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_report_job ::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code) do |_result, response|
+        c.run_report_job ::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }, call_options) do |_result, response|
+        c.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_report_job(::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code), call_options) do |_result, response|
+        c.run_report_job(::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ClientTest
     ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ServiceStub.stub :transcode_fetch_report_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_report_results_client_stub do
         # Create client
-        client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }) do |_result, response|
+        c.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys do |_result, response|
+        c.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys) do |_result, response|
+        c.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }, call_options) do |_result, response|
+        c.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys), call_options) do |_result, response|
+        c.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ClientTest
     ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ServiceStub.stub :transcode_list_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_reports parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |_result, response|
+        c.list_reports parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_reports ::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |_result, response|
+        c.list_reports ::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, call_options) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_reports(::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), call_options) do |_result, response|
+        c.list_reports(::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

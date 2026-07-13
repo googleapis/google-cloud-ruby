@@ -99,32 +99,32 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_query_products_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_products_client_stub do
         # Create client
-        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_products({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_products({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_products parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_products parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_products ::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_products ::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_products({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_products({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_products(::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_products(::Google::Cloud::DatabaseCenter::V1beta::QueryProductsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_aggregate_fleet_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregate_fleet_client_stub do
         # Create client
-        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }) do |_result, response|
+        c.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregate_fleet parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date do |_result, response|
+        c.aggregate_fleet parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregate_fleet ::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date) do |_result, response|
+        c.aggregate_fleet ::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }, call_options) do |_result, response|
+        c.aggregate_fleet({ parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregate_fleet(::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date), call_options) do |_result, response|
+        c.aggregate_fleet(::Google::Cloud::DatabaseCenter::V1beta::AggregateFleetRequest.new(parent: parent, filter: filter, group_by: group_by, order_by: order_by, page_size: page_size, page_token: page_token, baseline_date: baseline_date), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -219,32 +219,32 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_query_database_resource_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_database_resource_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_database_resource_groups parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_database_resource_groups parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_database_resource_groups ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_database_resource_groups ::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_database_resource_groups({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_database_resource_groups(::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_database_resource_groups(::Google::Cloud::DatabaseCenter::V1beta::QueryDatabaseResourceGroupsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, signal_filters: signal_filters, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -276,32 +276,32 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_aggregate_issue_stats_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregate_issue_stats_client_stub do
         # Create client
-        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }) do |_result, response|
+        c.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregate_issue_stats parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date do |_result, response|
+        c.aggregate_issue_stats parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregate_issue_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date) do |_result, response|
+        c.aggregate_issue_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }, call_options) do |_result, response|
+        c.aggregate_issue_stats({ parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregate_issue_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date), call_options) do |_result, response|
+        c.aggregate_issue_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateIssueStatsRequest.new(parent: parent, filter: filter, signal_type_groups: signal_type_groups, baseline_date: baseline_date), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -334,32 +334,32 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_aggregate_query_stats_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, aggregate_query_stats_client_stub do
         # Create client
-        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregate_query_stats parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.aggregate_query_stats parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregate_query_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.aggregate_query_stats ::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.aggregate_query_stats({ parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregate_query_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.aggregate_query_stats(::Google::Cloud::DatabaseCenter::V1beta::AggregateQueryStatsRequest.new(parent: parent, order_by: order_by, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -393,32 +393,32 @@ class ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ClientTest 
     ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::ServiceStub.stub :transcode_query_issues_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, query_issues_client_stub do
         # Create client
-        client = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::DatabaseCenter::V1beta::DatabaseCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.query_issues parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_issues parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.query_issues ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_issues ::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_issues({ parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.query_issues(::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_issues(::Google::Cloud::DatabaseCenter::V1beta::QueryIssuesRequest.new(parent: parent, filter: filter, signal_products_filters: signal_products_filters, order_by: order_by, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

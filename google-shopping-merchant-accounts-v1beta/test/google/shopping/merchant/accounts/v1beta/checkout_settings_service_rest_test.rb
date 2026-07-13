@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::R
     ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::ServiceStub.stub :transcode_get_checkout_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_checkout_settings_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_checkout_settings({ name: name }) do |_result, response|
+        c.get_checkout_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_checkout_settings name: name do |_result, response|
+        c.get_checkout_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::GetCheckoutSettingsRequest.new(name: name) do |_result, response|
+        c.get_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::GetCheckoutSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_checkout_settings({ name: name }, call_options) do |_result, response|
+        c.get_checkout_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::GetCheckoutSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::GetCheckoutSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::R
     ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::ServiceStub.stub :transcode_create_checkout_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_checkout_settings_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }) do |_result, response|
+        c.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_checkout_settings parent: parent, checkout_settings: checkout_settings do |_result, response|
+        c.create_checkout_settings parent: parent, checkout_settings: checkout_settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings) do |_result, response|
+        c.create_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }, call_options) do |_result, response|
+        c.create_checkout_settings({ parent: parent, checkout_settings: checkout_settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings), call_options) do |_result, response|
+        c.create_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::CreateCheckoutSettingsRequest.new(parent: parent, checkout_settings: checkout_settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::R
     ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::ServiceStub.stub :transcode_update_checkout_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_checkout_settings_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }) do |_result, response|
+        c.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_checkout_settings checkout_settings: checkout_settings, update_mask: update_mask do |_result, response|
+        c.update_checkout_settings checkout_settings: checkout_settings, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask) do |_result, response|
+        c.update_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_checkout_settings({ checkout_settings: checkout_settings, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask), call_options) do |_result, response|
+        c.update_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::UpdateCheckoutSettingsRequest.new(checkout_settings: checkout_settings, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::R
     ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::ServiceStub.stub :transcode_delete_checkout_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_checkout_settings_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_checkout_settings({ name: name }) do |_result, response|
+        c.delete_checkout_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_checkout_settings name: name do |_result, response|
+        c.delete_checkout_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::DeleteCheckoutSettingsRequest.new(name: name) do |_result, response|
+        c.delete_checkout_settings ::Google::Shopping::Merchant::Accounts::V1beta::DeleteCheckoutSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_checkout_settings({ name: name }, call_options) do |_result, response|
+        c.delete_checkout_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::DeleteCheckoutSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.delete_checkout_settings(::Google::Shopping::Merchant::Accounts::V1beta::DeleteCheckoutSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

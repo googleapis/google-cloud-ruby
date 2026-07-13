@@ -101,32 +101,32 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Re
     ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::ServiceStub.stub :transcode_cancel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }) do |_result, response|
+        c.cancel({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request do |_result, response|
+        c.cancel instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel ::Google::Cloud::Compute::V1::CancelRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request) do |_result, response|
+        c.cancel ::Google::Cloud::Compute::V1::CancelRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }, call_options) do |_result, response|
+        c.cancel({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel(::Google::Cloud::Compute::V1::CancelRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request), call_options) do |_result, response|
+        c.cancel(::Google::Cloud::Compute::V1::CancelRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Re
     ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::ServiceStub.stub :transcode_delete_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }) do |_result, response|
+        c.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request do |_result, response|
+        c.delete instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }, call_options) do |_result, response|
+        c.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete(::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id, resize_request: resize_request), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -216,32 +216,32 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Re
     ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request }) do |_result, response|
+        c.get({ instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request do |_result, response|
+        c.get instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request }, call_options) do |_result, response|
+        c.get({ instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, resize_request: resize_request), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -274,32 +274,32 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Re
     ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::ServiceStub.stub :transcode_insert_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert({ instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id }) do |_result, response|
+        c.insert({ instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id do |_result, response|
+        c.insert instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert ::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id) do |_result, response|
+        c.insert ::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert({ instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+        c.insert({ instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert(::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+        c.insert(::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerResizeRequestRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resize_request_resource: instance_group_manager_resize_request_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -335,32 +335,32 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Re
     ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
+        c = ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerResizeRequests::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        c.list({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        c.list filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagerResizeRequestsRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        c.list ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagerResizeRequestsRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        c.list({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagerResizeRequestsRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        c.list(::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagerResizeRequestsRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

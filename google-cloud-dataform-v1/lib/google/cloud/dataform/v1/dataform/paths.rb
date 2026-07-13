@@ -107,6 +107,46 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Folder resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/folders/{folder}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param folder [String]
+            #
+            # @return [::String]
+            def folder_path project:, location:, folder:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/folders/#{folder}"
+            end
+
+            ##
+            # Create a fully-qualified GitRepositoryLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param connection [String]
+            # @param git_repository_link [String]
+            #
+            # @return [::String]
+            def git_repository_link_path project:, location:, connection:, git_repository_link:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "connection cannot contain /" if connection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/connections/#{connection}/gitRepositoryLinks/#{git_repository_link}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -199,6 +239,25 @@ module Google
               raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
 
               "projects/#{project}/secrets/#{secret}/versions/#{version}"
+            end
+
+            ##
+            # Create a fully-qualified TeamFolder resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/teamFolders/{team_folder}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param team_folder [String]
+            #
+            # @return [::String]
+            def team_folder_path project:, location:, team_folder:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/teamFolders/#{team_folder}"
             end
 
             ##

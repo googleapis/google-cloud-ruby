@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.25.0 (2026-07-09)
+
+#### Features
+
+* Add Availability Api's ([#34718](https://github.com/googleapis/google-cloud-ruby/issues/34718)) 
+
+### 0.24.0 (2026-06-18)
+
+#### Features
+
+* add new FORWARD QuoteType enum in the QuotedMessageMetadata proto ([#34630](https://github.com/googleapis/google-cloud-ruby/issues/34630)) 
+
+### 0.23.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#33876](https://github.com/googleapis/google-cloud-ruby/issues/33876)) 
+
 ### 0.22.0 (2026-04-03)
 
 #### Features

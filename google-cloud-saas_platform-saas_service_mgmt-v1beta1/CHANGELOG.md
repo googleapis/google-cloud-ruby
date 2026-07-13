@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.8.0 (2026-06-29)
+
+### ⚠ BREAKING CHANGES
+
+* Existing value `TYPE_APP_CREATED_OR_ALREADY_EXISTS = 5` is changed to `TYPE_APP_CREATED_OR_ALREADY_EXISTS = 6` in enum `Type` ([#34667](https://github.com/googleapis/google-cloud-ruby/issues/34667))
+
+#### Bug Fixes
+
+* Existing value `TYPE_APP_CREATED_OR_ALREADY_EXISTS = 5` is changed to `TYPE_APP_CREATED_OR_ALREADY_EXISTS = 6` in enum `Type` ([#34667](https://github.com/googleapis/google-cloud-ruby/issues/34667)) 
+
+### 0.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34054](https://github.com/googleapis/google-cloud-ruby/issues/34054)) 
+
 ### 0.6.0 (2026-06-03)
 
 #### Features

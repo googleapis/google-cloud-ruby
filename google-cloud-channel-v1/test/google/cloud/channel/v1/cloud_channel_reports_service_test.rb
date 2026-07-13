@@ -88,40 +88,40 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, run_report_job_client_stub do
       # Create client
-      client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
+      c = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }) do |response, operation|
+      c.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_report_job name: name, date_range: date_range, filter: filter, language_code: language_code do |response, operation|
+      c.run_report_job name: name, date_range: date_range, filter: filter, language_code: language_code do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_report_job ::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code) do |response, operation|
+      c.run_report_job ::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }, grpc_options) do |response, operation|
+      c.run_report_job({ name: name, date_range: date_range, filter: filter, language_code: language_code }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_report_job(::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code), grpc_options) do |response, operation|
+      c.run_report_job(::Google::Cloud::Channel::V1::RunReportJobRequest.new(name: name, date_range: date_range, filter: filter, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -157,40 +157,40 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, fetch_report_results_client_stub do
       # Create client
-      client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
+      c = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }) do |response, operation|
+      c.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys do |response, operation|
+      c.fetch_report_results report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys) do |response, operation|
+      c.fetch_report_results ::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }, grpc_options) do |response, operation|
+      c.fetch_report_results({ report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys), grpc_options) do |response, operation|
+      c.fetch_report_results(::Google::Cloud::Channel::V1::FetchReportResultsRequest.new(report_job: report_job, page_size: page_size, page_token: page_token, partition_keys: partition_keys), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -226,40 +226,40 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_reports_client_stub do
       # Create client
-      client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
+      c = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |response, operation|
+      c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_reports parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |response, operation|
+      c.list_reports parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_reports ::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |response, operation|
+      c.list_reports ::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, grpc_options) do |response, operation|
+      c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_reports(::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
+      c.list_reports(::Google::Cloud::Channel::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

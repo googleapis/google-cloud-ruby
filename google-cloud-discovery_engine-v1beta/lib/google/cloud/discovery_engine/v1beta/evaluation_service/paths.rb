@@ -276,6 +276,18 @@ module Google
             #   @param engine [String]
             #   @param session [String]
             #
+            # @overload session_path(project:, location:, collection:, engine:, collaborative_project:, session:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param engine [String]
+            #   @param collaborative_project [String]
+            #   @param session [String]
+            #
             # @return [::String]
             def session_path **args
               resources = {
@@ -301,6 +313,15 @@ module Google
                   raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/sessions/#{session}"
+                end),
+                "collaborative_project:collection:engine:location:project:session" => (proc do |project:, location:, collection:, engine:, collaborative_project:, session:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "engine cannot contain /" if engine.to_s.include? "/"
+                  raise ::ArgumentError, "collaborative_project cannot contain /" if collaborative_project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/engines/#{engine}/collaborativeProjects/#{collaborative_project}/sessions/#{session}"
                 end)
               }
 

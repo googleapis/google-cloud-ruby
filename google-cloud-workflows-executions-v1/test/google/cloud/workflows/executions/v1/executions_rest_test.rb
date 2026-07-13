@@ -102,32 +102,32 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ClientTest <
     ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ServiceStub.stub :transcode_list_executions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_executions_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_executions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |_result, response|
+        c.list_executions parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_executions ::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |_result, response|
+        c.list_executions ::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_executions(::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_executions(::Google::Cloud::Workflows::Executions::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ClientTest <
     ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ServiceStub.stub :transcode_create_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_execution({ parent: parent, execution: execution }) do |_result, response|
+        c.create_execution({ parent: parent, execution: execution }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_execution parent: parent, execution: execution do |_result, response|
+        c.create_execution parent: parent, execution: execution do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_execution ::Google::Cloud::Workflows::Executions::V1::CreateExecutionRequest.new(parent: parent, execution: execution) do |_result, response|
+        c.create_execution ::Google::Cloud::Workflows::Executions::V1::CreateExecutionRequest.new(parent: parent, execution: execution) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_execution({ parent: parent, execution: execution }, call_options) do |_result, response|
+        c.create_execution({ parent: parent, execution: execution }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_execution(::Google::Cloud::Workflows::Executions::V1::CreateExecutionRequest.new(parent: parent, execution: execution), call_options) do |_result, response|
+        c.create_execution(::Google::Cloud::Workflows::Executions::V1::CreateExecutionRequest.new(parent: parent, execution: execution), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ClientTest <
     ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ServiceStub.stub :transcode_get_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_execution({ name: name, view: view }) do |_result, response|
+        c.get_execution({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_execution name: name, view: view do |_result, response|
+        c.get_execution name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_execution ::Google::Cloud::Workflows::Executions::V1::GetExecutionRequest.new(name: name, view: view) do |_result, response|
+        c.get_execution ::Google::Cloud::Workflows::Executions::V1::GetExecutionRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_execution({ name: name, view: view }, call_options) do |_result, response|
+        c.get_execution({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_execution(::Google::Cloud::Workflows::Executions::V1::GetExecutionRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_execution(::Google::Cloud::Workflows::Executions::V1::GetExecutionRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ClientTest <
     ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::ServiceStub.stub :transcode_cancel_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Workflows::Executions::V1::Executions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_execution({ name: name }) do |_result, response|
+        c.cancel_execution({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_execution name: name do |_result, response|
+        c.cancel_execution name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_execution ::Google::Cloud::Workflows::Executions::V1::CancelExecutionRequest.new(name: name) do |_result, response|
+        c.cancel_execution ::Google::Cloud::Workflows::Executions::V1::CancelExecutionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_execution({ name: name }, call_options) do |_result, response|
+        c.cancel_execution({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_execution(::Google::Cloud::Workflows::Executions::V1::CancelExecutionRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_execution(::Google::Cloud::Workflows::Executions::V1::CancelExecutionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

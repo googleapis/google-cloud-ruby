@@ -101,32 +101,32 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ClientT
     ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ServiceStub.stub :transcode_list_connectivity_tests_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_connectivity_tests_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_connectivity_tests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_connectivity_tests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_connectivity_tests parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_connectivity_tests parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_connectivity_tests ::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_connectivity_tests ::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_connectivity_tests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_connectivity_tests({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_connectivity_tests(::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_connectivity_tests(::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ClientT
     ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ServiceStub.stub :transcode_get_connectivity_test_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_connectivity_test_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_connectivity_test({ name: name }) do |_result, response|
+        c.get_connectivity_test({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_connectivity_test name: name do |_result, response|
+        c.get_connectivity_test name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_connectivity_test ::Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new(name: name) do |_result, response|
+        c.get_connectivity_test ::Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_connectivity_test({ name: name }, call_options) do |_result, response|
+        c.get_connectivity_test({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_connectivity_test(::Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new(name: name), call_options) do |_result, response|
+        c.get_connectivity_test(::Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ClientT
     ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ServiceStub.stub :transcode_create_connectivity_test_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_connectivity_test_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_connectivity_test({ parent: parent, test_id: test_id, resource: resource }) do |_result, response|
+        c.create_connectivity_test({ parent: parent, test_id: test_id, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_connectivity_test parent: parent, test_id: test_id, resource: resource do |_result, response|
+        c.create_connectivity_test parent: parent, test_id: test_id, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_connectivity_test ::Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest.new(parent: parent, test_id: test_id, resource: resource) do |_result, response|
+        c.create_connectivity_test ::Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest.new(parent: parent, test_id: test_id, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_connectivity_test({ parent: parent, test_id: test_id, resource: resource }, call_options) do |_result, response|
+        c.create_connectivity_test({ parent: parent, test_id: test_id, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_connectivity_test(::Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest.new(parent: parent, test_id: test_id, resource: resource), call_options) do |_result, response|
+        c.create_connectivity_test(::Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest.new(parent: parent, test_id: test_id, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ClientT
     ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ServiceStub.stub :transcode_update_connectivity_test_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_connectivity_test_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_connectivity_test({ update_mask: update_mask, resource: resource }) do |_result, response|
+        c.update_connectivity_test({ update_mask: update_mask, resource: resource }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_connectivity_test update_mask: update_mask, resource: resource do |_result, response|
+        c.update_connectivity_test update_mask: update_mask, resource: resource do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_connectivity_test ::Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest.new(update_mask: update_mask, resource: resource) do |_result, response|
+        c.update_connectivity_test ::Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest.new(update_mask: update_mask, resource: resource) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_connectivity_test({ update_mask: update_mask, resource: resource }, call_options) do |_result, response|
+        c.update_connectivity_test({ update_mask: update_mask, resource: resource }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_connectivity_test(::Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest.new(update_mask: update_mask, resource: resource), call_options) do |_result, response|
+        c.update_connectivity_test(::Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest.new(update_mask: update_mask, resource: resource), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ClientT
     ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ServiceStub.stub :transcode_rerun_connectivity_test_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rerun_connectivity_test_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rerun_connectivity_test({ name: name }) do |_result, response|
+        c.rerun_connectivity_test({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rerun_connectivity_test name: name do |_result, response|
+        c.rerun_connectivity_test name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rerun_connectivity_test ::Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest.new(name: name) do |_result, response|
+        c.rerun_connectivity_test ::Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rerun_connectivity_test({ name: name }, call_options) do |_result, response|
+        c.rerun_connectivity_test({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rerun_connectivity_test(::Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest.new(name: name), call_options) do |_result, response|
+        c.rerun_connectivity_test(::Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ClientT
     ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::ServiceStub.stub :transcode_delete_connectivity_test_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_connectivity_test_client_stub do
         # Create client
-        client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
+        c = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_connectivity_test({ name: name }) do |_result, response|
+        c.delete_connectivity_test({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_connectivity_test name: name do |_result, response|
+        c.delete_connectivity_test name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_connectivity_test ::Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest.new(name: name) do |_result, response|
+        c.delete_connectivity_test ::Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_connectivity_test({ name: name }, call_options) do |_result, response|
+        c.delete_connectivity_test({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_connectivity_test(::Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest.new(name: name), call_options) do |_result, response|
+        c.delete_connectivity_test(::Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

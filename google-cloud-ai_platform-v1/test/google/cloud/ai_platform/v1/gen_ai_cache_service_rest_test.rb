@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ServiceStub.stub :transcode_create_cached_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_cached_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_cached_content({ parent: parent, cached_content: cached_content }) do |_result, response|
+        c.create_cached_content({ parent: parent, cached_content: cached_content }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_cached_content parent: parent, cached_content: cached_content do |_result, response|
+        c.create_cached_content parent: parent, cached_content: cached_content do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_cached_content ::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content) do |_result, response|
+        c.create_cached_content ::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_cached_content({ parent: parent, cached_content: cached_content }, call_options) do |_result, response|
+        c.create_cached_content({ parent: parent, cached_content: cached_content }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_cached_content(::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content), call_options) do |_result, response|
+        c.create_cached_content(::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest.new(parent: parent, cached_content: cached_content), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ServiceStub.stub :transcode_get_cached_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cached_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cached_content({ name: name }) do |_result, response|
+        c.get_cached_content({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cached_content name: name do |_result, response|
+        c.get_cached_content name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cached_content ::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name) do |_result, response|
+        c.get_cached_content ::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cached_content({ name: name }, call_options) do |_result, response|
+        c.get_cached_content({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cached_content(::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name), call_options) do |_result, response|
+        c.get_cached_content(::Google::Cloud::AIPlatform::V1::GetCachedContentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ServiceStub.stub :transcode_update_cached_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_cached_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_cached_content({ cached_content: cached_content, update_mask: update_mask }) do |_result, response|
+        c.update_cached_content({ cached_content: cached_content, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_cached_content cached_content: cached_content, update_mask: update_mask do |_result, response|
+        c.update_cached_content cached_content: cached_content, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_cached_content ::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask) do |_result, response|
+        c.update_cached_content ::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_cached_content({ cached_content: cached_content, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_cached_content({ cached_content: cached_content, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_cached_content(::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask), call_options) do |_result, response|
+        c.update_cached_content(::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest.new(cached_content: cached_content, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ServiceStub.stub :transcode_delete_cached_content_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_cached_content_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_cached_content({ name: name }) do |_result, response|
+        c.delete_cached_content({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_cached_content name: name do |_result, response|
+        c.delete_cached_content name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_cached_content ::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name) do |_result, response|
+        c.delete_cached_content ::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_cached_content({ name: name }, call_options) do |_result, response|
+        c.delete_cached_content({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_cached_content(::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_cached_content(::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ClientTest < Min
     ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::ServiceStub.stub :transcode_list_cached_contents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cached_contents_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cached_contents parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_cached_contents parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cached_contents ::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_cached_contents ::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_cached_contents({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cached_contents(::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_cached_contents(::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

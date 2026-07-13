@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::ServiceStub.stub :transcode_get_device_manufacturer_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_device_manufacturer_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_device_manufacturer({ name: name }) do |_result, response|
+        c.get_device_manufacturer({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_device_manufacturer name: name do |_result, response|
+        c.get_device_manufacturer name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_device_manufacturer ::Google::Ads::AdManager::V1::GetDeviceManufacturerRequest.new(name: name) do |_result, response|
+        c.get_device_manufacturer ::Google::Ads::AdManager::V1::GetDeviceManufacturerRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_device_manufacturer({ name: name }, call_options) do |_result, response|
+        c.get_device_manufacturer({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_device_manufacturer(::Google::Ads::AdManager::V1::GetDeviceManufacturerRequest.new(name: name), call_options) do |_result, response|
+        c.get_device_manufacturer(::Google::Ads::AdManager::V1::GetDeviceManufacturerRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::ClientTest 
     ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::ServiceStub.stub :transcode_list_device_manufacturers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_device_manufacturers_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::DeviceManufacturerService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_device_manufacturers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_device_manufacturers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_device_manufacturers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_device_manufacturers parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_device_manufacturers ::Google::Ads::AdManager::V1::ListDeviceManufacturersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_device_manufacturers ::Google::Ads::AdManager::V1::ListDeviceManufacturersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_device_manufacturers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_device_manufacturers({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_device_manufacturers(::Google::Ads::AdManager::V1::ListDeviceManufacturersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_device_manufacturers(::Google::Ads::AdManager::V1::ListDeviceManufacturersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

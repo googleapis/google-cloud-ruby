@@ -1,5 +1,12 @@
 # Release History
 
+### 1.18.0 (2026-06-11)
+
+#### Features
+
+* add locations field to AutomatedBackupPolicy 
+* update gapic-common dependency to 1.3 and document retry jitter ([#33329](https://github.com/googleapis/google-cloud-ruby/issues/33329)) 
+
 ### 1.17.0 (2026-03-19)
 
 #### Features

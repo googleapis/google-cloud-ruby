@@ -99,32 +99,32 @@ class ::Google::Ads::DataManager::V1::MarketingDataInsightsService::Rest::Client
     ::Google::Ads::DataManager::V1::MarketingDataInsightsService::Rest::ServiceStub.stub :transcode_retrieve_insights_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, retrieve_insights_client_stub do
         # Create client
-        client = ::Google::Ads::DataManager::V1::MarketingDataInsightsService::Rest::Client.new do |config|
+        c = ::Google::Ads::DataManager::V1::MarketingDataInsightsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }) do |_result, response|
+        c.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.retrieve_insights parent: parent, baseline: baseline, user_list_id: user_list_id do |_result, response|
+        c.retrieve_insights parent: parent, baseline: baseline, user_list_id: user_list_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.retrieve_insights ::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id) do |_result, response|
+        c.retrieve_insights ::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }, call_options) do |_result, response|
+        c.retrieve_insights({ parent: parent, baseline: baseline, user_list_id: user_list_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.retrieve_insights(::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id), call_options) do |_result, response|
+        c.retrieve_insights(::Google::Ads::DataManager::V1::RetrieveInsightsRequest.new(parent: parent, baseline: baseline, user_list_id: user_list_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -97,32 +97,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ClientT
     ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_get_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_evaluation({ name: name }) do |_result, response|
+        c.get_evaluation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_evaluation name: name do |_result, response|
+        c.get_evaluation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name) do |_result, response|
+        c.get_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_evaluation({ name: name }, call_options) do |_result, response|
+        c.get_evaluation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name), call_options) do |_result, response|
+        c.get_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ClientT
     ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluations_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_evaluations parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluations ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_evaluations ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_evaluations({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluations(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_evaluations(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ClientT
     ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_create_evaluation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_evaluation_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_evaluation({ parent: parent, evaluation: evaluation }) do |_result, response|
+        c.create_evaluation({ parent: parent, evaluation: evaluation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_evaluation parent: parent, evaluation: evaluation do |_result, response|
+        c.create_evaluation parent: parent, evaluation: evaluation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation) do |_result, response|
+        c.create_evaluation ::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_evaluation({ parent: parent, evaluation: evaluation }, call_options) do |_result, response|
+        c.create_evaluation({ parent: parent, evaluation: evaluation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation), call_options) do |_result, response|
+        c.create_evaluation(::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest.new(parent: parent, evaluation: evaluation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ClientT
     ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::ServiceStub.stub :transcode_list_evaluation_results_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_evaluation_results_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_evaluation_results evaluation: evaluation, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_evaluation_results evaluation: evaluation, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_evaluation_results ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_evaluation_results ::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_evaluation_results({ evaluation: evaluation, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_evaluation_results(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_evaluation_results(::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest.new(evaluation: evaluation, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

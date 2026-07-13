@@ -88,40 +88,40 @@ class ::Google::Cloud::Support::V2beta::FeedService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, show_feed_client_stub do
       # Create client
-      client = ::Google::Cloud::Support::V2beta::FeedService::Client.new do |config|
+      c = ::Google::Cloud::Support::V2beta::FeedService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.show_feed parent: parent, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.show_feed parent: parent, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.show_feed ::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.show_feed ::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.show_feed({ parent: parent, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.show_feed(::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.show_feed(::Google::Cloud::Support::V2beta::ShowFeedRequest.new(parent: parent, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -88,40 +88,40 @@ class ::Google::Cloud::Dialogflow::CX::V3::Pages::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_pages_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_pages({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_pages({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_pages parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_pages parent: parent, language_code: language_code, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_pages ::Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_pages ::Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_pages({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_pages({ parent: parent, language_code: language_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_pages(::Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_pages(::Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Pages::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_page_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_page({ name: name, language_code: language_code }) do |response, operation|
+      c.get_page({ name: name, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_page name: name, language_code: language_code do |response, operation|
+      c.get_page name: name, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_page ::Google::Cloud::Dialogflow::CX::V3::GetPageRequest.new(name: name, language_code: language_code) do |response, operation|
+      c.get_page ::Google::Cloud::Dialogflow::CX::V3::GetPageRequest.new(name: name, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_page({ name: name, language_code: language_code }, grpc_options) do |response, operation|
+      c.get_page({ name: name, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_page(::Google::Cloud::Dialogflow::CX::V3::GetPageRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
+      c.get_page(::Google::Cloud::Dialogflow::CX::V3::GetPageRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Pages::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_page_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_page({ parent: parent, page: page, language_code: language_code }) do |response, operation|
+      c.create_page({ parent: parent, page: page, language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_page parent: parent, page: page, language_code: language_code do |response, operation|
+      c.create_page parent: parent, page: page, language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_page ::Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new(parent: parent, page: page, language_code: language_code) do |response, operation|
+      c.create_page ::Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new(parent: parent, page: page, language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_page({ parent: parent, page: page, language_code: language_code }, grpc_options) do |response, operation|
+      c.create_page({ parent: parent, page: page, language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_page(::Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new(parent: parent, page: page, language_code: language_code), grpc_options) do |response, operation|
+      c.create_page(::Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new(parent: parent, page: page, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -277,36 +277,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Pages::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_page_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_page({ page: page, language_code: language_code, update_mask: update_mask }) do |response, operation|
+      c.update_page({ page: page, language_code: language_code, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_page page: page, language_code: language_code, update_mask: update_mask do |response, operation|
+      c.update_page page: page, language_code: language_code, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_page ::Google::Cloud::Dialogflow::CX::V3::UpdatePageRequest.new(page: page, language_code: language_code, update_mask: update_mask) do |response, operation|
+      c.update_page ::Google::Cloud::Dialogflow::CX::V3::UpdatePageRequest.new(page: page, language_code: language_code, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_page({ page: page, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_page({ page: page, language_code: language_code, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_page(::Google::Cloud::Dialogflow::CX::V3::UpdatePageRequest.new(page: page, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_page(::Google::Cloud::Dialogflow::CX::V3::UpdatePageRequest.new(page: page, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -337,36 +337,36 @@ class ::Google::Cloud::Dialogflow::CX::V3::Pages::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_page_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_page({ name: name, force: force }) do |response, operation|
+      c.delete_page({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_page name: name, force: force do |response, operation|
+      c.delete_page name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_page ::Google::Cloud::Dialogflow::CX::V3::DeletePageRequest.new(name: name, force: force) do |response, operation|
+      c.delete_page ::Google::Cloud::Dialogflow::CX::V3::DeletePageRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_page({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_page({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_page(::Google::Cloud::Dialogflow::CX::V3::DeletePageRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_page(::Google::Cloud::Dialogflow::CX::V3::DeletePageRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

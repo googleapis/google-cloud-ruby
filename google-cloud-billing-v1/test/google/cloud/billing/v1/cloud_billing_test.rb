@@ -82,36 +82,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_billing_account_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_billing_account({ name: name }) do |response, operation|
+      c.get_billing_account({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_billing_account name: name do |response, operation|
+      c.get_billing_account name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_billing_account ::Google::Cloud::Billing::V1::GetBillingAccountRequest.new(name: name) do |response, operation|
+      c.get_billing_account ::Google::Cloud::Billing::V1::GetBillingAccountRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_billing_account({ name: name }, grpc_options) do |response, operation|
+      c.get_billing_account({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_billing_account(::Google::Cloud::Billing::V1::GetBillingAccountRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_billing_account(::Google::Cloud::Billing::V1::GetBillingAccountRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_billing_accounts_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }) do |response, operation|
+      c.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_billing_accounts page_size: page_size, page_token: page_token, filter: filter, parent: parent do |response, operation|
+      c.list_billing_accounts page_size: page_size, page_token: page_token, filter: filter, parent: parent do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent) do |response, operation|
+      c.list_billing_accounts ::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }, grpc_options) do |response, operation|
+      c.list_billing_accounts({ page_size: page_size, page_token: page_token, filter: filter, parent: parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent), grpc_options) do |response, operation|
+      c.list_billing_accounts(::Google::Cloud::Billing::V1::ListBillingAccountsRequest.new(page_size: page_size, page_token: page_token, filter: filter, parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,36 +213,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_billing_account_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_billing_account({ name: name, account: account, update_mask: update_mask }) do |response, operation|
+      c.update_billing_account({ name: name, account: account, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_billing_account name: name, account: account, update_mask: update_mask do |response, operation|
+      c.update_billing_account name: name, account: account, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_billing_account ::Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new(name: name, account: account, update_mask: update_mask) do |response, operation|
+      c.update_billing_account ::Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new(name: name, account: account, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_billing_account({ name: name, account: account, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_billing_account({ name: name, account: account, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_billing_account(::Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new(name: name, account: account, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_billing_account(::Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new(name: name, account: account, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,36 +273,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_billing_account_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_billing_account({ billing_account: billing_account, parent: parent }) do |response, operation|
+      c.create_billing_account({ billing_account: billing_account, parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_billing_account billing_account: billing_account, parent: parent do |response, operation|
+      c.create_billing_account billing_account: billing_account, parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent) do |response, operation|
+      c.create_billing_account ::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_billing_account({ billing_account: billing_account, parent: parent }, grpc_options) do |response, operation|
+      c.create_billing_account({ billing_account: billing_account, parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent), grpc_options) do |response, operation|
+      c.create_billing_account(::Google::Cloud::Billing::V1::CreateBillingAccountRequest.new(billing_account: billing_account, parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -335,40 +335,40 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_project_billing_info_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_project_billing_info({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_project_billing_info({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_project_billing_info name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_project_billing_info name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_project_billing_info ::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_project_billing_info ::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_project_billing_info({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_project_billing_info({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_project_billing_info(::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_project_billing_info(::Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -398,36 +398,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_project_billing_info_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_project_billing_info({ name: name }) do |response, operation|
+      c.get_project_billing_info({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_project_billing_info name: name do |response, operation|
+      c.get_project_billing_info name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_project_billing_info ::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new(name: name) do |response, operation|
+      c.get_project_billing_info ::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_project_billing_info({ name: name }, grpc_options) do |response, operation|
+      c.get_project_billing_info({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_project_billing_info(::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_project_billing_info(::Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,36 +458,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_project_billing_info_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_project_billing_info({ name: name, project_billing_info: project_billing_info }) do |response, operation|
+      c.update_project_billing_info({ name: name, project_billing_info: project_billing_info }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_project_billing_info name: name, project_billing_info: project_billing_info do |response, operation|
+      c.update_project_billing_info name: name, project_billing_info: project_billing_info do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_project_billing_info ::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new(name: name, project_billing_info: project_billing_info) do |response, operation|
+      c.update_project_billing_info ::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new(name: name, project_billing_info: project_billing_info) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_project_billing_info({ name: name, project_billing_info: project_billing_info }, grpc_options) do |response, operation|
+      c.update_project_billing_info({ name: name, project_billing_info: project_billing_info }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_project_billing_info(::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new(name: name, project_billing_info: project_billing_info), grpc_options) do |response, operation|
+      c.update_project_billing_info(::Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new(name: name, project_billing_info: project_billing_info), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -518,36 +518,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -580,36 +580,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -640,36 +640,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -700,36 +700,36 @@ class ::Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, move_billing_account_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.move_billing_account({ name: name, destination_parent: destination_parent }) do |response, operation|
+      c.move_billing_account({ name: name, destination_parent: destination_parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_billing_account name: name, destination_parent: destination_parent do |response, operation|
+      c.move_billing_account name: name, destination_parent: destination_parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_billing_account ::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
+      c.move_billing_account ::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_billing_account({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
+      c.move_billing_account({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_billing_account(::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
+      c.move_billing_account(::Google::Cloud::Billing::V1::MoveBillingAccountRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

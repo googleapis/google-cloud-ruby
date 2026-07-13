@@ -5,9 +5,10 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+require 'google/cloud/ces/v1/common_pb'
 
 
-descriptor_data = "\n)google/cloud/ces/v1/python_function.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\"W\n\x0ePythonFunction\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0bpython_code\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tB\x03\xe0\x41\x03\x42[\n\x17\x63om.google.cloud.ces.v1B\x13PythonFunctionProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
+descriptor_data = "\n)google/cloud/ces/v1/python_function.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a google/cloud/ces/v1/common.proto\"\xab\x01\n\x0ePythonFunction\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0bpython_code\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x64\x65scription\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12R\n\x18service_directory_config\x18\x04 \x01(\x0b\x32+.google.cloud.ces.v1.ServiceDirectoryConfigB\x03\xe0\x41\x01\x42[\n\x17\x63om.google.cloud.ces.v1B\x13PythonFunctionProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

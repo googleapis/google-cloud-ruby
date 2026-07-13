@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.45.0 (2026-07-09)
+
+#### Features
+
+* Add identity_type to Reasoning Engine public protos ([#34717](https://github.com/googleapis/google-cloud-ruby/issues/34717)) 
+
+### 1.44.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34038](https://github.com/googleapis/google-cloud-ruby/issues/34038)) 
+
 ### 1.43.0 (2026-05-08)
 
 #### Features

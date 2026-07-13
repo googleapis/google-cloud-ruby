@@ -100,32 +100,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id }) do |_result, response|
+        c.list_services({ producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id do |_result, response|
+        c.list_services producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::ServiceManagement::V1::ListServicesRequest.new(producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id) do |_result, response|
+        c.list_services ::Google::Cloud::ServiceManagement::V1::ListServicesRequest.new(producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id }, call_options) do |_result, response|
+        c.list_services({ producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::ServiceManagement::V1::ListServicesRequest.new(producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::ServiceManagement::V1::ListServicesRequest.new(producer_project_id: producer_project_id, page_size: page_size, page_token: page_token, consumer_id: consumer_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_get_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service({ service_name: service_name }) do |_result, response|
+        c.get_service({ service_name: service_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service service_name: service_name do |_result, response|
+        c.get_service service_name: service_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service ::Google::Cloud::ServiceManagement::V1::GetServiceRequest.new(service_name: service_name) do |_result, response|
+        c.get_service ::Google::Cloud::ServiceManagement::V1::GetServiceRequest.new(service_name: service_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service({ service_name: service_name }, call_options) do |_result, response|
+        c.get_service({ service_name: service_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service(::Google::Cloud::ServiceManagement::V1::GetServiceRequest.new(service_name: service_name), call_options) do |_result, response|
+        c.get_service(::Google::Cloud::ServiceManagement::V1::GetServiceRequest.new(service_name: service_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_create_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service({ service: service }) do |_result, response|
+        c.create_service({ service: service }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service service: service do |_result, response|
+        c.create_service service: service do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service ::Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new(service: service) do |_result, response|
+        c.create_service ::Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new(service: service) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service({ service: service }, call_options) do |_result, response|
+        c.create_service({ service: service }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service(::Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new(service: service), call_options) do |_result, response|
+        c.create_service(::Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new(service: service), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_delete_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service({ service_name: service_name }) do |_result, response|
+        c.delete_service({ service_name: service_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service service_name: service_name do |_result, response|
+        c.delete_service service_name: service_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service ::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new(service_name: service_name) do |_result, response|
+        c.delete_service ::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new(service_name: service_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service({ service_name: service_name }, call_options) do |_result, response|
+        c.delete_service({ service_name: service_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service(::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new(service_name: service_name), call_options) do |_result, response|
+        c.delete_service(::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new(service_name: service_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -316,32 +316,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_undelete_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undelete_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undelete_service({ service_name: service_name }) do |_result, response|
+        c.undelete_service({ service_name: service_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undelete_service service_name: service_name do |_result, response|
+        c.undelete_service service_name: service_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undelete_service ::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new(service_name: service_name) do |_result, response|
+        c.undelete_service ::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new(service_name: service_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undelete_service({ service_name: service_name }, call_options) do |_result, response|
+        c.undelete_service({ service_name: service_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undelete_service(::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new(service_name: service_name), call_options) do |_result, response|
+        c.undelete_service(::Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new(service_name: service_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_list_service_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_service_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_service_configs({ service_name: service_name, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_service_configs({ service_name: service_name, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_service_configs service_name: service_name, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_service_configs service_name: service_name, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_service_configs ::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_service_configs ::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_service_configs({ service_name: service_name, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_service_configs({ service_name: service_name, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_service_configs(::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_service_configs(::Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_get_service_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service_config({ service_name: service_name, config_id: config_id, view: view }) do |_result, response|
+        c.get_service_config({ service_name: service_name, config_id: config_id, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service_config service_name: service_name, config_id: config_id, view: view do |_result, response|
+        c.get_service_config service_name: service_name, config_id: config_id, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service_config ::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new(service_name: service_name, config_id: config_id, view: view) do |_result, response|
+        c.get_service_config ::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new(service_name: service_name, config_id: config_id, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service_config({ service_name: service_name, config_id: config_id, view: view }, call_options) do |_result, response|
+        c.get_service_config({ service_name: service_name, config_id: config_id, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service_config(::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new(service_name: service_name, config_id: config_id, view: view), call_options) do |_result, response|
+        c.get_service_config(::Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new(service_name: service_name, config_id: config_id, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_create_service_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service_config({ service_name: service_name, service_config: service_config }) do |_result, response|
+        c.create_service_config({ service_name: service_name, service_config: service_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service_config service_name: service_name, service_config: service_config do |_result, response|
+        c.create_service_config service_name: service_name, service_config: service_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service_config ::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new(service_name: service_name, service_config: service_config) do |_result, response|
+        c.create_service_config ::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new(service_name: service_name, service_config: service_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service_config({ service_name: service_name, service_config: service_config }, call_options) do |_result, response|
+        c.create_service_config({ service_name: service_name, service_config: service_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service_config(::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new(service_name: service_name, service_config: service_config), call_options) do |_result, response|
+        c.create_service_config(::Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new(service_name: service_name, service_config: service_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -539,32 +539,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_submit_config_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, submit_config_source_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.submit_config_source({ service_name: service_name, config_source: config_source, validate_only: validate_only }) do |_result, response|
+        c.submit_config_source({ service_name: service_name, config_source: config_source, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_config_source service_name: service_name, config_source: config_source, validate_only: validate_only do |_result, response|
+        c.submit_config_source service_name: service_name, config_source: config_source, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_config_source ::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new(service_name: service_name, config_source: config_source, validate_only: validate_only) do |_result, response|
+        c.submit_config_source ::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new(service_name: service_name, config_source: config_source, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_config_source({ service_name: service_name, config_source: config_source, validate_only: validate_only }, call_options) do |_result, response|
+        c.submit_config_source({ service_name: service_name, config_source: config_source, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_config_source(::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new(service_name: service_name, config_source: config_source, validate_only: validate_only), call_options) do |_result, response|
+        c.submit_config_source(::Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new(service_name: service_name, config_source: config_source, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -596,32 +596,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_list_service_rollouts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_service_rollouts_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_service_rollouts({ service_name: service_name, page_token: page_token, page_size: page_size, filter: filter }) do |_result, response|
+        c.list_service_rollouts({ service_name: service_name, page_token: page_token, page_size: page_size, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_service_rollouts service_name: service_name, page_token: page_token, page_size: page_size, filter: filter do |_result, response|
+        c.list_service_rollouts service_name: service_name, page_token: page_token, page_size: page_size, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_service_rollouts ::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size, filter: filter) do |_result, response|
+        c.list_service_rollouts ::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_service_rollouts({ service_name: service_name, page_token: page_token, page_size: page_size, filter: filter }, call_options) do |_result, response|
+        c.list_service_rollouts({ service_name: service_name, page_token: page_token, page_size: page_size, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_service_rollouts(::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size, filter: filter), call_options) do |_result, response|
+        c.list_service_rollouts(::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new(service_name: service_name, page_token: page_token, page_size: page_size, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -651,32 +651,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_get_service_rollout_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_rollout_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service_rollout({ service_name: service_name, rollout_id: rollout_id }) do |_result, response|
+        c.get_service_rollout({ service_name: service_name, rollout_id: rollout_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service_rollout service_name: service_name, rollout_id: rollout_id do |_result, response|
+        c.get_service_rollout service_name: service_name, rollout_id: rollout_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service_rollout ::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new(service_name: service_name, rollout_id: rollout_id) do |_result, response|
+        c.get_service_rollout ::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new(service_name: service_name, rollout_id: rollout_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service_rollout({ service_name: service_name, rollout_id: rollout_id }, call_options) do |_result, response|
+        c.get_service_rollout({ service_name: service_name, rollout_id: rollout_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service_rollout(::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new(service_name: service_name, rollout_id: rollout_id), call_options) do |_result, response|
+        c.get_service_rollout(::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new(service_name: service_name, rollout_id: rollout_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -706,32 +706,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_create_service_rollout_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_rollout_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service_rollout({ service_name: service_name, rollout: rollout }) do |_result, response|
+        c.create_service_rollout({ service_name: service_name, rollout: rollout }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service_rollout service_name: service_name, rollout: rollout do |_result, response|
+        c.create_service_rollout service_name: service_name, rollout: rollout do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service_rollout ::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new(service_name: service_name, rollout: rollout) do |_result, response|
+        c.create_service_rollout ::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new(service_name: service_name, rollout: rollout) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service_rollout({ service_name: service_name, rollout: rollout }, call_options) do |_result, response|
+        c.create_service_rollout({ service_name: service_name, rollout: rollout }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service_rollout(::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new(service_name: service_name, rollout: rollout), call_options) do |_result, response|
+        c.create_service_rollout(::Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new(service_name: service_name, rollout: rollout), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,32 +761,32 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ServiceStub.stub :transcode_generate_config_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_config_report_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_config_report({ new_config: new_config, old_config: old_config }) do |_result, response|
+        c.generate_config_report({ new_config: new_config, old_config: old_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_config_report new_config: new_config, old_config: old_config do |_result, response|
+        c.generate_config_report new_config: new_config, old_config: old_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_config_report ::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new(new_config: new_config, old_config: old_config) do |_result, response|
+        c.generate_config_report ::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new(new_config: new_config, old_config: old_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_config_report({ new_config: new_config, old_config: old_config }, call_options) do |_result, response|
+        c.generate_config_report({ new_config: new_config, old_config: old_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_config_report(::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new(new_config: new_config, old_config: old_config), call_options) do |_result, response|
+        c.generate_config_report(::Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new(new_config: new_config, old_config: old_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

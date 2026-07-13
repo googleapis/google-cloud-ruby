@@ -86,40 +86,40 @@ class ::Google::Cloud::Dataplex::V1::CmekService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_encryption_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }) do |response, operation|
+      c.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_encryption_config parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config do |response, operation|
+      c.create_encryption_config parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_encryption_config ::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config) do |response, operation|
+      c.create_encryption_config ::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }, grpc_options) do |response, operation|
+      c.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_encryption_config(::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config), grpc_options) do |response, operation|
+      c.create_encryption_config(::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,40 +151,40 @@ class ::Google::Cloud::Dataplex::V1::CmekService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_encryption_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }) do |response, operation|
+      c.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_encryption_config encryption_config: encryption_config, update_mask: update_mask do |response, operation|
+      c.update_encryption_config encryption_config: encryption_config, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_encryption_config ::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask) do |response, operation|
+      c.update_encryption_config ::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_encryption_config(::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_encryption_config(::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -216,40 +216,40 @@ class ::Google::Cloud::Dataplex::V1::CmekService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_encryption_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_encryption_config({ name: name, etag: etag }) do |response, operation|
+      c.delete_encryption_config({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_encryption_config name: name, etag: etag do |response, operation|
+      c.delete_encryption_config name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_encryption_config ::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_encryption_config ::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_encryption_config({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_encryption_config({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_encryption_config(::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_encryption_config(::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -287,40 +287,40 @@ class ::Google::Cloud::Dataplex::V1::CmekService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_encryption_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_encryption_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_encryption_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_encryption_configs ::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_encryption_configs ::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_encryption_configs(::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_encryption_configs(::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -350,36 +350,36 @@ class ::Google::Cloud::Dataplex::V1::CmekService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_encryption_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::CmekService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_encryption_config({ name: name }) do |response, operation|
+      c.get_encryption_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_encryption_config name: name do |response, operation|
+      c.get_encryption_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_encryption_config ::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name) do |response, operation|
+      c.get_encryption_config ::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_encryption_config({ name: name }, grpc_options) do |response, operation|
+      c.get_encryption_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_encryption_config(::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_encryption_config(::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

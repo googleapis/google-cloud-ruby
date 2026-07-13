@@ -6,33 +6,13 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/protobuf/duration_pb'
 
 
-descriptor_data = "\n)google/cloud/dataplex/v1/processing.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xbd\x01\n\x07Trigger\x12?\n\ton_demand\x18\x64 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.OnDemandH\x00\x12>\n\x08schedule\x18\x65 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.ScheduleH\x00\x1a\n\n\x08OnDemand\x1a\x1d\n\x08Schedule\x12\x11\n\x04\x63ron\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\x06\n\x04mode\"i\n\nDataSource\x12\x38\n\x06\x65ntity\x18\x64 \x01(\tB&\xe0\x41\x05\xfa\x41 \n\x1e\x64\x61taplex.googleapis.com/EntityH\x00\x12\x17\n\x08resource\x18\x65 \x01(\tB\x03\xe0\x41\x05H\x00\x42\x08\n\x06source\"\xbe\x01\n\x0bScannedData\x12S\n\x11incremental_field\x18\x01 \x01(\x0b\x32\x36.google.cloud.dataplex.v1.ScannedData.IncrementalFieldH\x00\x1aL\n\x10IncrementalField\x12\x12\n\x05\x66ield\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x12\n\x05start\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x10\n\x03\x65nd\x18\x03 \x01(\tB\x03\xe0\x41\x03\x42\x0c\n\ndata_rangeBk\n\x1c\x63om.google.cloud.dataplex.v1B\x0fProcessingProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
+descriptor_data = "\n)google/cloud/dataplex/v1/processing.proto\x12\x18google.cloud.dataplex.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1egoogle/protobuf/duration.proto\"\xca\x02\n\x07Trigger\x12?\n\ton_demand\x18\x64 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.OnDemandH\x00\x12>\n\x08schedule\x18\x65 \x01(\x0b\x32*.google.cloud.dataplex.v1.Trigger.ScheduleH\x00\x12=\n\x08one_time\x18\x66 \x01(\x0b\x32).google.cloud.dataplex.v1.Trigger.OneTimeH\x00\x1a\n\n\x08OnDemand\x1a\x1d\n\x08Schedule\x12\x11\n\x04\x63ron\x18\x01 \x01(\tB\x03\xe0\x41\x02\x1aL\n\x07OneTime\x12\x41\n\x19ttl_after_scan_completion\x18\x01 \x01(\x0b\x32\x19.google.protobuf.DurationB\x03\xe0\x41\x01\x42\x06\n\x04mode\"i\n\nDataSource\x12\x38\n\x06\x65ntity\x18\x64 \x01(\tB&\xe0\x41\x05\xfa\x41 \n\x1e\x64\x61taplex.googleapis.com/EntityH\x00\x12\x17\n\x08resource\x18\x65 \x01(\tB\x03\xe0\x41\x05H\x00\x42\x08\n\x06source\"\xbe\x01\n\x0bScannedData\x12S\n\x11incremental_field\x18\x01 \x01(\x0b\x32\x36.google.cloud.dataplex.v1.ScannedData.IncrementalFieldH\x00\x1aL\n\x10IncrementalField\x12\x12\n\x05\x66ield\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x12\n\x05start\x18\x02 \x01(\tB\x03\xe0\x41\x03\x12\x10\n\x03\x65nd\x18\x03 \x01(\tB\x03\xe0\x41\x03\x42\x0c\n\ndata_rangeBk\n\x1c\x63om.google.cloud.dataplex.v1B\x0fProcessingProtoP\x01Z8cloud.google.com/go/dataplex/apiv1/dataplexpb;dataplexpbb\x06proto3"
 
-pool = Google::Protobuf::DescriptorPool.generated_pool
-
-begin
-  pool.add_serialized_file(descriptor_data)
-rescue TypeError
-  # Compatibility code: will be removed in the next major version.
-  require 'google/protobuf/descriptor_pb'
-  parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
-  parsed.clear_dependency
-  serialized = parsed.class.encode(parsed)
-  file = pool.add_serialized_file(serialized)
-  warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
-  imports = [
-  ]
-  imports.each do |type_name, expected_filename|
-    import_file = pool.lookup(type_name).file_descriptor
-    if import_file.name != expected_filename
-      warn "- #{file.name} imports #{expected_filename}, but that import was loaded as #{import_file.name}"
-    end
-  end
-  warn "Each proto file must use a consistent fully-qualified name."
-  warn "This will become an error in the next major version."
-end
+pool = ::Google::Protobuf::DescriptorPool.generated_pool
+pool.add_serialized_file(descriptor_data)
 
 module Google
   module Cloud
@@ -41,6 +21,7 @@ module Google
         Trigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Trigger").msgclass
         Trigger::OnDemand = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Trigger.OnDemand").msgclass
         Trigger::Schedule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Trigger.Schedule").msgclass
+        Trigger::OneTime = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Trigger.OneTime").msgclass
         DataSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DataSource").msgclass
         ScannedData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ScannedData").msgclass
         ScannedData::IncrementalField = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ScannedData.IncrementalField").msgclass

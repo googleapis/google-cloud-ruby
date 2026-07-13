@@ -96,40 +96,40 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_traces_client_stub do
       # Create client
-      client = ::Google::Cloud::Trace::V1::TraceService::Client.new do |config|
+      c = ::Google::Cloud::Trace::V1::TraceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_traces project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by do |response, operation|
+      c.list_traces project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_traces ::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by) do |response, operation|
+      c.list_traces ::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_traces(::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_traces(::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -161,36 +161,36 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_trace_client_stub do
       # Create client
-      client = ::Google::Cloud::Trace::V1::TraceService::Client.new do |config|
+      c = ::Google::Cloud::Trace::V1::TraceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_trace({ project_id: project_id, trace_id: trace_id }) do |response, operation|
+      c.get_trace({ project_id: project_id, trace_id: trace_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_trace project_id: project_id, trace_id: trace_id do |response, operation|
+      c.get_trace project_id: project_id, trace_id: trace_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_trace ::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id) do |response, operation|
+      c.get_trace ::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_trace({ project_id: project_id, trace_id: trace_id }, grpc_options) do |response, operation|
+      c.get_trace({ project_id: project_id, trace_id: trace_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_trace(::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id), grpc_options) do |response, operation|
+      c.get_trace(::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,36 +221,36 @@ class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, patch_traces_client_stub do
       # Create client
-      client = ::Google::Cloud::Trace::V1::TraceService::Client.new do |config|
+      c = ::Google::Cloud::Trace::V1::TraceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.patch_traces({ project_id: project_id, traces: traces }) do |response, operation|
+      c.patch_traces({ project_id: project_id, traces: traces }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.patch_traces project_id: project_id, traces: traces do |response, operation|
+      c.patch_traces project_id: project_id, traces: traces do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.patch_traces ::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces) do |response, operation|
+      c.patch_traces ::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.patch_traces({ project_id: project_id, traces: traces }, grpc_options) do |response, operation|
+      c.patch_traces({ project_id: project_id, traces: traces }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.patch_traces(::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces), grpc_options) do |response, operation|
+      c.patch_traces(::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

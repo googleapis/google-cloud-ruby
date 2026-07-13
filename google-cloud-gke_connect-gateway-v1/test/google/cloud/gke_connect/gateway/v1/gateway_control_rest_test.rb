@@ -101,32 +101,32 @@ class ::Google::Cloud::GkeConnect::Gateway::V1::GatewayControl::Rest::ClientTest
     ::Google::Cloud::GkeConnect::Gateway::V1::GatewayControl::Rest::ServiceStub.stub :transcode_generate_credentials_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_credentials_client_stub do
         # Create client
-        client = ::Google::Cloud::GkeConnect::Gateway::V1::GatewayControl::Rest::Client.new do |config|
+        c = ::Google::Cloud::GkeConnect::Gateway::V1::GatewayControl::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_credentials({ name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system }) do |_result, response|
+        c.generate_credentials({ name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_credentials name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system do |_result, response|
+        c.generate_credentials name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_credentials ::Google::Cloud::GkeConnect::Gateway::V1::GenerateCredentialsRequest.new(name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system) do |_result, response|
+        c.generate_credentials ::Google::Cloud::GkeConnect::Gateway::V1::GenerateCredentialsRequest.new(name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_credentials({ name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system }, call_options) do |_result, response|
+        c.generate_credentials({ name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_credentials(::Google::Cloud::GkeConnect::Gateway::V1::GenerateCredentialsRequest.new(name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system), call_options) do |_result, response|
+        c.generate_credentials(::Google::Cloud::GkeConnect::Gateway::V1::GenerateCredentialsRequest.new(name: name, force_use_agent: force_use_agent, version: version, kubernetes_namespace: kubernetes_namespace, operating_system: operating_system), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -114,32 +114,32 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::Rest::ClientTest < Minite
     ::Google::Cloud::Optimization::V1::FleetRouting::Rest::ServiceStub.stub :transcode_optimize_tours_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, optimize_tours_client_stub do
         # Create client
-        client = ::Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new do |config|
+        c = ::Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines }) do |_result, response|
+        c.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.optimize_tours parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines do |_result, response|
+        c.optimize_tours parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.optimize_tours ::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines) do |_result, response|
+        c.optimize_tours ::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines }, call_options) do |_result, response|
+        c.optimize_tours({ parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.optimize_tours(::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines), call_options) do |_result, response|
+        c.optimize_tours(::Google::Cloud::Optimization::V1::OptimizeToursRequest.new(parent: parent, timeout: timeout, model: model, solving_mode: solving_mode, search_mode: search_mode, injected_first_solution_routes: injected_first_solution_routes, injected_solution_constraint: injected_solution_constraint, refresh_details_routes: refresh_details_routes, interpret_injected_solutions_using_labels: interpret_injected_solutions_using_labels, consider_road_traffic: consider_road_traffic, populate_polylines: populate_polylines, populate_transition_polylines: populate_transition_polylines, allow_large_deadline_despite_interruption_risk: allow_large_deadline_despite_interruption_risk, use_geodesic_distances: use_geodesic_distances, geodesic_meters_per_second: geodesic_meters_per_second, max_validation_errors: max_validation_errors, label: label, populate_travel_step_polylines: populate_travel_step_polylines), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -169,32 +169,32 @@ class ::Google::Cloud::Optimization::V1::FleetRouting::Rest::ClientTest < Minite
     ::Google::Cloud::Optimization::V1::FleetRouting::Rest::ServiceStub.stub :transcode_batch_optimize_tours_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_optimize_tours_client_stub do
         # Create client
-        client = ::Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new do |config|
+        c = ::Google::Cloud::Optimization::V1::FleetRouting::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_optimize_tours({ parent: parent, model_configs: model_configs }) do |_result, response|
+        c.batch_optimize_tours({ parent: parent, model_configs: model_configs }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_optimize_tours parent: parent, model_configs: model_configs do |_result, response|
+        c.batch_optimize_tours parent: parent, model_configs: model_configs do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_optimize_tours ::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new(parent: parent, model_configs: model_configs) do |_result, response|
+        c.batch_optimize_tours ::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new(parent: parent, model_configs: model_configs) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_optimize_tours({ parent: parent, model_configs: model_configs }, call_options) do |_result, response|
+        c.batch_optimize_tours({ parent: parent, model_configs: model_configs }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_optimize_tours(::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new(parent: parent, model_configs: model_configs), call_options) do |_result, response|
+        c.batch_optimize_tours(::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new(parent: parent, model_configs: model_configs), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -100,32 +100,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_channel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_channel_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_channel({ parent: parent, channel: channel, channel_id: channel_id, request_id: request_id }) do |_result, response|
+        c.create_channel({ parent: parent, channel: channel, channel_id: channel_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_channel parent: parent, channel: channel, channel_id: channel_id, request_id: request_id do |_result, response|
+        c.create_channel parent: parent, channel: channel, channel_id: channel_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_channel ::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest.new(parent: parent, channel: channel, channel_id: channel_id, request_id: request_id) do |_result, response|
+        c.create_channel ::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest.new(parent: parent, channel: channel, channel_id: channel_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_channel({ parent: parent, channel: channel, channel_id: channel_id, request_id: request_id }, call_options) do |_result, response|
+        c.create_channel({ parent: parent, channel: channel, channel_id: channel_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_channel(::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest.new(parent: parent, channel: channel, channel_id: channel_id, request_id: request_id), call_options) do |_result, response|
+        c.create_channel(::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest.new(parent: parent, channel: channel, channel_id: channel_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_channels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_channels_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_channels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_channels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_channels parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_channels parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_channels ::Google::Cloud::Video::LiveStream::V1::ListChannelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_channels ::Google::Cloud::Video::LiveStream::V1::ListChannelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_channels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_channels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_channels(::Google::Cloud::Video::LiveStream::V1::ListChannelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_channels(::Google::Cloud::Video::LiveStream::V1::ListChannelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_channel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_channel_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_channel({ name: name }) do |_result, response|
+        c.get_channel({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_channel name: name do |_result, response|
+        c.get_channel name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_channel ::Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new(name: name) do |_result, response|
+        c.get_channel ::Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_channel({ name: name }, call_options) do |_result, response|
+        c.get_channel({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_channel(::Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new(name: name), call_options) do |_result, response|
+        c.get_channel(::Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_channel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_channel_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_channel({ name: name, request_id: request_id, force: force }) do |_result, response|
+        c.delete_channel({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_channel name: name, request_id: request_id, force: force do |_result, response|
+        c.delete_channel name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_channel ::Google::Cloud::Video::LiveStream::V1::DeleteChannelRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
+        c.delete_channel ::Google::Cloud::Video::LiveStream::V1::DeleteChannelRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_channel({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
+        c.delete_channel({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_channel(::Google::Cloud::Video::LiveStream::V1::DeleteChannelRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
+        c.delete_channel(::Google::Cloud::Video::LiveStream::V1::DeleteChannelRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_update_channel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_channel_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_channel({ update_mask: update_mask, channel: channel, request_id: request_id }) do |_result, response|
+        c.update_channel({ update_mask: update_mask, channel: channel, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_channel update_mask: update_mask, channel: channel, request_id: request_id do |_result, response|
+        c.update_channel update_mask: update_mask, channel: channel, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_channel ::Google::Cloud::Video::LiveStream::V1::UpdateChannelRequest.new(update_mask: update_mask, channel: channel, request_id: request_id) do |_result, response|
+        c.update_channel ::Google::Cloud::Video::LiveStream::V1::UpdateChannelRequest.new(update_mask: update_mask, channel: channel, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_channel({ update_mask: update_mask, channel: channel, request_id: request_id }, call_options) do |_result, response|
+        c.update_channel({ update_mask: update_mask, channel: channel, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_channel(::Google::Cloud::Video::LiveStream::V1::UpdateChannelRequest.new(update_mask: update_mask, channel: channel, request_id: request_id), call_options) do |_result, response|
+        c.update_channel(::Google::Cloud::Video::LiveStream::V1::UpdateChannelRequest.new(update_mask: update_mask, channel: channel, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_start_channel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_channel_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_channel({ name: name, request_id: request_id }) do |_result, response|
+        c.start_channel({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_channel name: name, request_id: request_id do |_result, response|
+        c.start_channel name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_channel ::Google::Cloud::Video::LiveStream::V1::StartChannelRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.start_channel ::Google::Cloud::Video::LiveStream::V1::StartChannelRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_channel({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.start_channel({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_channel(::Google::Cloud::Video::LiveStream::V1::StartChannelRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.start_channel(::Google::Cloud::Video::LiveStream::V1::StartChannelRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +434,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_stop_channel_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_channel_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_channel({ name: name, request_id: request_id }) do |_result, response|
+        c.stop_channel({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_channel name: name, request_id: request_id do |_result, response|
+        c.stop_channel name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_channel ::Google::Cloud::Video::LiveStream::V1::StopChannelRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.stop_channel ::Google::Cloud::Video::LiveStream::V1::StopChannelRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_channel({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.stop_channel({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_channel(::Google::Cloud::Video::LiveStream::V1::StopChannelRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.stop_channel(::Google::Cloud::Video::LiveStream::V1::StopChannelRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -490,32 +490,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_start_distribution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_distribution_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |_result, response|
+        c.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |_result, response|
+        c.start_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_distribution ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |_result, response|
+        c.start_distribution ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, call_options) do |_result, response|
+        c.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_distribution(::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), call_options) do |_result, response|
+        c.start_distribution(::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -546,32 +546,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_stop_distribution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_distribution_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |_result, response|
+        c.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |_result, response|
+        c.stop_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_distribution ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |_result, response|
+        c.stop_distribution ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, call_options) do |_result, response|
+        c.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_distribution(::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), call_options) do |_result, response|
+        c.stop_distribution(::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -603,32 +603,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_input_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_input({ parent: parent, input: input, input_id: input_id, request_id: request_id }) do |_result, response|
+        c.create_input({ parent: parent, input: input, input_id: input_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_input parent: parent, input: input, input_id: input_id, request_id: request_id do |_result, response|
+        c.create_input parent: parent, input: input, input_id: input_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_input ::Google::Cloud::Video::LiveStream::V1::CreateInputRequest.new(parent: parent, input: input, input_id: input_id, request_id: request_id) do |_result, response|
+        c.create_input ::Google::Cloud::Video::LiveStream::V1::CreateInputRequest.new(parent: parent, input: input, input_id: input_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_input({ parent: parent, input: input, input_id: input_id, request_id: request_id }, call_options) do |_result, response|
+        c.create_input({ parent: parent, input: input, input_id: input_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_input(::Google::Cloud::Video::LiveStream::V1::CreateInputRequest.new(parent: parent, input: input, input_id: input_id, request_id: request_id), call_options) do |_result, response|
+        c.create_input(::Google::Cloud::Video::LiveStream::V1::CreateInputRequest.new(parent: parent, input: input, input_id: input_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -661,32 +661,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_inputs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_inputs_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_inputs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_inputs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_inputs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_inputs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_inputs ::Google::Cloud::Video::LiveStream::V1::ListInputsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_inputs ::Google::Cloud::Video::LiveStream::V1::ListInputsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_inputs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_inputs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_inputs(::Google::Cloud::Video::LiveStream::V1::ListInputsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_inputs(::Google::Cloud::Video::LiveStream::V1::ListInputsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -715,32 +715,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_input_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_input({ name: name }) do |_result, response|
+        c.get_input({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_input name: name do |_result, response|
+        c.get_input name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_input ::Google::Cloud::Video::LiveStream::V1::GetInputRequest.new(name: name) do |_result, response|
+        c.get_input ::Google::Cloud::Video::LiveStream::V1::GetInputRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_input({ name: name }, call_options) do |_result, response|
+        c.get_input({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_input(::Google::Cloud::Video::LiveStream::V1::GetInputRequest.new(name: name), call_options) do |_result, response|
+        c.get_input(::Google::Cloud::Video::LiveStream::V1::GetInputRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -770,32 +770,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_input_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_input({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_input({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_input name: name, request_id: request_id do |_result, response|
+        c.delete_input name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_input ::Google::Cloud::Video::LiveStream::V1::DeleteInputRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_input ::Google::Cloud::Video::LiveStream::V1::DeleteInputRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_input({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_input({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_input(::Google::Cloud::Video::LiveStream::V1::DeleteInputRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_input(::Google::Cloud::Video::LiveStream::V1::DeleteInputRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -826,32 +826,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_update_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_input_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_input({ update_mask: update_mask, input: input, request_id: request_id }) do |_result, response|
+        c.update_input({ update_mask: update_mask, input: input, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_input update_mask: update_mask, input: input, request_id: request_id do |_result, response|
+        c.update_input update_mask: update_mask, input: input, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_input ::Google::Cloud::Video::LiveStream::V1::UpdateInputRequest.new(update_mask: update_mask, input: input, request_id: request_id) do |_result, response|
+        c.update_input ::Google::Cloud::Video::LiveStream::V1::UpdateInputRequest.new(update_mask: update_mask, input: input, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_input({ update_mask: update_mask, input: input, request_id: request_id }, call_options) do |_result, response|
+        c.update_input({ update_mask: update_mask, input: input, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_input(::Google::Cloud::Video::LiveStream::V1::UpdateInputRequest.new(update_mask: update_mask, input: input, request_id: request_id), call_options) do |_result, response|
+        c.update_input(::Google::Cloud::Video::LiveStream::V1::UpdateInputRequest.new(update_mask: update_mask, input: input, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -880,32 +880,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_preview_input_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, preview_input_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.preview_input({ name: name }) do |_result, response|
+        c.preview_input({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.preview_input name: name do |_result, response|
+        c.preview_input name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.preview_input ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name) do |_result, response|
+        c.preview_input ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.preview_input({ name: name }, call_options) do |_result, response|
+        c.preview_input({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.preview_input(::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name), call_options) do |_result, response|
+        c.preview_input(::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -937,32 +937,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_event({ parent: parent, event: event, event_id: event_id, request_id: request_id }) do |_result, response|
+        c.create_event({ parent: parent, event: event, event_id: event_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_event parent: parent, event: event, event_id: event_id, request_id: request_id do |_result, response|
+        c.create_event parent: parent, event: event, event_id: event_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_event ::Google::Cloud::Video::LiveStream::V1::CreateEventRequest.new(parent: parent, event: event, event_id: event_id, request_id: request_id) do |_result, response|
+        c.create_event ::Google::Cloud::Video::LiveStream::V1::CreateEventRequest.new(parent: parent, event: event, event_id: event_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_event({ parent: parent, event: event, event_id: event_id, request_id: request_id }, call_options) do |_result, response|
+        c.create_event({ parent: parent, event: event, event_id: event_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_event(::Google::Cloud::Video::LiveStream::V1::CreateEventRequest.new(parent: parent, event: event, event_id: event_id, request_id: request_id), call_options) do |_result, response|
+        c.create_event(::Google::Cloud::Video::LiveStream::V1::CreateEventRequest.new(parent: parent, event: event, event_id: event_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -995,32 +995,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_events_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_events_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_events parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_events parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_events ::Google::Cloud::Video::LiveStream::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_events ::Google::Cloud::Video::LiveStream::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_events(::Google::Cloud::Video::LiveStream::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_events(::Google::Cloud::Video::LiveStream::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1049,32 +1049,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_event({ name: name }) do |_result, response|
+        c.get_event({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_event name: name do |_result, response|
+        c.get_event name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_event ::Google::Cloud::Video::LiveStream::V1::GetEventRequest.new(name: name) do |_result, response|
+        c.get_event ::Google::Cloud::Video::LiveStream::V1::GetEventRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_event({ name: name }, call_options) do |_result, response|
+        c.get_event({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_event(::Google::Cloud::Video::LiveStream::V1::GetEventRequest.new(name: name), call_options) do |_result, response|
+        c.get_event(::Google::Cloud::Video::LiveStream::V1::GetEventRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1104,32 +1104,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_event({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_event({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_event name: name, request_id: request_id do |_result, response|
+        c.delete_event name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_event ::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_event ::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_event({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_event({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_event(::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_event(::Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1162,32 +1162,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_clips_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_clips_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_clips({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_clips({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_clips parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_clips parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_clips ::Google::Cloud::Video::LiveStream::V1::ListClipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_clips ::Google::Cloud::Video::LiveStream::V1::ListClipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_clips({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_clips({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_clips(::Google::Cloud::Video::LiveStream::V1::ListClipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_clips(::Google::Cloud::Video::LiveStream::V1::ListClipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1216,32 +1216,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_clip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_clip_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_clip({ name: name }) do |_result, response|
+        c.get_clip({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_clip name: name do |_result, response|
+        c.get_clip name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_clip ::Google::Cloud::Video::LiveStream::V1::GetClipRequest.new(name: name) do |_result, response|
+        c.get_clip ::Google::Cloud::Video::LiveStream::V1::GetClipRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_clip({ name: name }, call_options) do |_result, response|
+        c.get_clip({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_clip(::Google::Cloud::Video::LiveStream::V1::GetClipRequest.new(name: name), call_options) do |_result, response|
+        c.get_clip(::Google::Cloud::Video::LiveStream::V1::GetClipRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1273,32 +1273,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_clip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_clip_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_clip({ parent: parent, clip_id: clip_id, clip: clip, request_id: request_id }) do |_result, response|
+        c.create_clip({ parent: parent, clip_id: clip_id, clip: clip, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_clip parent: parent, clip_id: clip_id, clip: clip, request_id: request_id do |_result, response|
+        c.create_clip parent: parent, clip_id: clip_id, clip: clip, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_clip ::Google::Cloud::Video::LiveStream::V1::CreateClipRequest.new(parent: parent, clip_id: clip_id, clip: clip, request_id: request_id) do |_result, response|
+        c.create_clip ::Google::Cloud::Video::LiveStream::V1::CreateClipRequest.new(parent: parent, clip_id: clip_id, clip: clip, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_clip({ parent: parent, clip_id: clip_id, clip: clip, request_id: request_id }, call_options) do |_result, response|
+        c.create_clip({ parent: parent, clip_id: clip_id, clip: clip, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_clip(::Google::Cloud::Video::LiveStream::V1::CreateClipRequest.new(parent: parent, clip_id: clip_id, clip: clip, request_id: request_id), call_options) do |_result, response|
+        c.create_clip(::Google::Cloud::Video::LiveStream::V1::CreateClipRequest.new(parent: parent, clip_id: clip_id, clip: clip, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1328,32 +1328,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_clip_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_clip_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_clip({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_clip({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_clip name: name, request_id: request_id do |_result, response|
+        c.delete_clip name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_clip ::Google::Cloud::Video::LiveStream::V1::DeleteClipRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_clip ::Google::Cloud::Video::LiveStream::V1::DeleteClipRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_clip({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_clip({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_clip(::Google::Cloud::Video::LiveStream::V1::DeleteClipRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_clip(::Google::Cloud::Video::LiveStream::V1::DeleteClipRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1385,32 +1385,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_dvr_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_dvr_session_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_dvr_session({ parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id }) do |_result, response|
+        c.create_dvr_session({ parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_dvr_session parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id do |_result, response|
+        c.create_dvr_session parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_dvr_session ::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest.new(parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id) do |_result, response|
+        c.create_dvr_session ::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest.new(parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_dvr_session({ parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id }, call_options) do |_result, response|
+        c.create_dvr_session({ parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_dvr_session(::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest.new(parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id), call_options) do |_result, response|
+        c.create_dvr_session(::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest.new(parent: parent, dvr_session_id: dvr_session_id, dvr_session: dvr_session, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1443,32 +1443,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_dvr_sessions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_dvr_sessions_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_dvr_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_dvr_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_dvr_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_dvr_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_dvr_sessions ::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_dvr_sessions ::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_dvr_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_dvr_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_dvr_sessions(::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_dvr_sessions(::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1497,32 +1497,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_dvr_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_dvr_session_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_dvr_session({ name: name }) do |_result, response|
+        c.get_dvr_session({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_dvr_session name: name do |_result, response|
+        c.get_dvr_session name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_dvr_session ::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest.new(name: name) do |_result, response|
+        c.get_dvr_session ::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_dvr_session({ name: name }, call_options) do |_result, response|
+        c.get_dvr_session({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_dvr_session(::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest.new(name: name), call_options) do |_result, response|
+        c.get_dvr_session(::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1552,32 +1552,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_dvr_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_dvr_session_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_dvr_session({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_dvr_session({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_dvr_session name: name, request_id: request_id do |_result, response|
+        c.delete_dvr_session name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_dvr_session ::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_dvr_session ::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_dvr_session({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_dvr_session({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_dvr_session(::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_dvr_session(::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1608,32 +1608,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_update_dvr_session_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_dvr_session_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_dvr_session({ update_mask: update_mask, dvr_session: dvr_session, request_id: request_id }) do |_result, response|
+        c.update_dvr_session({ update_mask: update_mask, dvr_session: dvr_session, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_dvr_session update_mask: update_mask, dvr_session: dvr_session, request_id: request_id do |_result, response|
+        c.update_dvr_session update_mask: update_mask, dvr_session: dvr_session, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_dvr_session ::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest.new(update_mask: update_mask, dvr_session: dvr_session, request_id: request_id) do |_result, response|
+        c.update_dvr_session ::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest.new(update_mask: update_mask, dvr_session: dvr_session, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_dvr_session({ update_mask: update_mask, dvr_session: dvr_session, request_id: request_id }, call_options) do |_result, response|
+        c.update_dvr_session({ update_mask: update_mask, dvr_session: dvr_session, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_dvr_session(::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest.new(update_mask: update_mask, dvr_session: dvr_session, request_id: request_id), call_options) do |_result, response|
+        c.update_dvr_session(::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest.new(update_mask: update_mask, dvr_session: dvr_session, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1665,32 +1665,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_create_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_asset({ parent: parent, asset: asset, asset_id: asset_id, request_id: request_id }) do |_result, response|
+        c.create_asset({ parent: parent, asset: asset, asset_id: asset_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_asset parent: parent, asset: asset, asset_id: asset_id, request_id: request_id do |_result, response|
+        c.create_asset parent: parent, asset: asset, asset_id: asset_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_asset ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id, request_id: request_id) do |_result, response|
+        c.create_asset ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_asset({ parent: parent, asset: asset, asset_id: asset_id, request_id: request_id }, call_options) do |_result, response|
+        c.create_asset({ parent: parent, asset: asset, asset_id: asset_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_asset(::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id, request_id: request_id), call_options) do |_result, response|
+        c.create_asset(::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1720,32 +1720,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_delete_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_asset({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_asset({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_asset name: name, request_id: request_id do |_result, response|
+        c.delete_asset name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_asset ::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_asset ::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_asset({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_asset({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_asset(::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_asset(::Google::Cloud::Video::LiveStream::V1::DeleteAssetRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1774,32 +1774,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_asset({ name: name }) do |_result, response|
+        c.get_asset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_asset name: name do |_result, response|
+        c.get_asset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_asset ::Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new(name: name) do |_result, response|
+        c.get_asset ::Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_asset({ name: name }, call_options) do |_result, response|
+        c.get_asset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_asset(::Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
+        c.get_asset(::Google::Cloud::Video::LiveStream::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1832,32 +1832,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_assets ::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_assets ::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_assets(::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_assets(::Google::Cloud::Video::LiveStream::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1886,32 +1886,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_get_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_pool({ name: name }) do |_result, response|
+        c.get_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_pool name: name do |_result, response|
+        c.get_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_pool ::Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new(name: name) do |_result, response|
+        c.get_pool ::Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_pool({ name: name }, call_options) do |_result, response|
+        c.get_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_pool(::Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_pool(::Google::Cloud::Video::LiveStream::V1::GetPoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1942,32 +1942,32 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_update_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_pool({ update_mask: update_mask, pool: pool, request_id: request_id }) do |_result, response|
+        c.update_pool({ update_mask: update_mask, pool: pool, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_pool update_mask: update_mask, pool: pool, request_id: request_id do |_result, response|
+        c.update_pool update_mask: update_mask, pool: pool, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_pool ::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new(update_mask: update_mask, pool: pool, request_id: request_id) do |_result, response|
+        c.update_pool ::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new(update_mask: update_mask, pool: pool, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_pool({ update_mask: update_mask, pool: pool, request_id: request_id }, call_options) do |_result, response|
+        c.update_pool({ update_mask: update_mask, pool: pool, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_pool(::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new(update_mask: update_mask, pool: pool, request_id: request_id), call_options) do |_result, response|
+        c.update_pool(::Google::Cloud::Video::LiveStream::V1::UpdatePoolRequest.new(update_mask: update_mask, pool: pool, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

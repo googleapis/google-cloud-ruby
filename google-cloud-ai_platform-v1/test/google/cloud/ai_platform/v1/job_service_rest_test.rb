@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_create_custom_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_custom_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_custom_job({ parent: parent, custom_job: custom_job }) do |_result, response|
+        c.create_custom_job({ parent: parent, custom_job: custom_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_custom_job parent: parent, custom_job: custom_job do |_result, response|
+        c.create_custom_job parent: parent, custom_job: custom_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_custom_job ::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job) do |_result, response|
+        c.create_custom_job ::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_custom_job({ parent: parent, custom_job: custom_job }, call_options) do |_result, response|
+        c.create_custom_job({ parent: parent, custom_job: custom_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_custom_job(::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job), call_options) do |_result, response|
+        c.create_custom_job(::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_custom_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_custom_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_custom_job({ name: name }) do |_result, response|
+        c.get_custom_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_custom_job name: name do |_result, response|
+        c.get_custom_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_custom_job ::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name) do |_result, response|
+        c.get_custom_job ::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_custom_job({ name: name }, call_options) do |_result, response|
+        c.get_custom_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_custom_job(::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_custom_job(::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_custom_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_custom_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_custom_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_custom_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_custom_jobs ::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_custom_jobs ::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_custom_jobs(::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_custom_jobs(::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_delete_custom_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_custom_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_custom_job({ name: name }) do |_result, response|
+        c.delete_custom_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_custom_job name: name do |_result, response|
+        c.delete_custom_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_custom_job ::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name) do |_result, response|
+        c.delete_custom_job ::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_custom_job({ name: name }, call_options) do |_result, response|
+        c.delete_custom_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_custom_job(::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_custom_job(::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_cancel_custom_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_custom_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_custom_job({ name: name }) do |_result, response|
+        c.cancel_custom_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_custom_job name: name do |_result, response|
+        c.cancel_custom_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_custom_job ::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name) do |_result, response|
+        c.cancel_custom_job ::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_custom_job({ name: name }, call_options) do |_result, response|
+        c.cancel_custom_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_custom_job(::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_custom_job(::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_create_data_labeling_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_labeling_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }) do |_result, response|
+        c.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_labeling_job parent: parent, data_labeling_job: data_labeling_job do |_result, response|
+        c.create_data_labeling_job parent: parent, data_labeling_job: data_labeling_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_labeling_job ::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job) do |_result, response|
+        c.create_data_labeling_job ::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }, call_options) do |_result, response|
+        c.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_labeling_job(::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job), call_options) do |_result, response|
+        c.create_data_labeling_job(::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -427,32 +427,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_data_labeling_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_labeling_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_labeling_job({ name: name }) do |_result, response|
+        c.get_data_labeling_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_labeling_job name: name do |_result, response|
+        c.get_data_labeling_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_labeling_job ::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name) do |_result, response|
+        c.get_data_labeling_job ::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_labeling_job({ name: name }, call_options) do |_result, response|
+        c.get_data_labeling_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_labeling_job(::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_labeling_job(::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_data_labeling_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_labeling_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |_result, response|
+        c.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_labeling_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |_result, response|
+        c.list_data_labeling_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_labeling_jobs ::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |_result, response|
+        c.list_data_labeling_jobs ::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
+        c.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_labeling_jobs(::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
+        c.list_data_labeling_jobs(::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -540,32 +540,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_delete_data_labeling_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_labeling_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_labeling_job({ name: name }) do |_result, response|
+        c.delete_data_labeling_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_labeling_job name: name do |_result, response|
+        c.delete_data_labeling_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_labeling_job ::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name) do |_result, response|
+        c.delete_data_labeling_job ::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_labeling_job({ name: name }, call_options) do |_result, response|
+        c.delete_data_labeling_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_labeling_job(::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_data_labeling_job(::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -594,32 +594,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_cancel_data_labeling_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_data_labeling_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_data_labeling_job({ name: name }) do |_result, response|
+        c.cancel_data_labeling_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_data_labeling_job name: name do |_result, response|
+        c.cancel_data_labeling_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_data_labeling_job ::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name) do |_result, response|
+        c.cancel_data_labeling_job ::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_data_labeling_job({ name: name }, call_options) do |_result, response|
+        c.cancel_data_labeling_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_data_labeling_job(::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_data_labeling_job(::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -649,32 +649,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_create_hyperparameter_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_hyperparameter_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }) do |_result, response|
+        c.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_hyperparameter_tuning_job parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job do |_result, response|
+        c.create_hyperparameter_tuning_job parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job) do |_result, response|
+        c.create_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }, call_options) do |_result, response|
+        c.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job), call_options) do |_result, response|
+        c.create_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -703,32 +703,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_hyperparameter_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_hyperparameter_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_hyperparameter_tuning_job({ name: name }) do |_result, response|
+        c.get_hyperparameter_tuning_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_hyperparameter_tuning_job name: name do |_result, response|
+        c.get_hyperparameter_tuning_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name) do |_result, response|
+        c.get_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_hyperparameter_tuning_job({ name: name }, call_options) do |_result, response|
+        c.get_hyperparameter_tuning_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,32 +761,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_hyperparameter_tuning_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_hyperparameter_tuning_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_hyperparameter_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_hyperparameter_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_hyperparameter_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_hyperparameter_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_hyperparameter_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_hyperparameter_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -815,32 +815,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_delete_hyperparameter_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_hyperparameter_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_hyperparameter_tuning_job({ name: name }) do |_result, response|
+        c.delete_hyperparameter_tuning_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_hyperparameter_tuning_job name: name do |_result, response|
+        c.delete_hyperparameter_tuning_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name) do |_result, response|
+        c.delete_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_hyperparameter_tuning_job({ name: name }, call_options) do |_result, response|
+        c.delete_hyperparameter_tuning_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -869,32 +869,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_cancel_hyperparameter_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_hyperparameter_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_hyperparameter_tuning_job({ name: name }) do |_result, response|
+        c.cancel_hyperparameter_tuning_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_hyperparameter_tuning_job name: name do |_result, response|
+        c.cancel_hyperparameter_tuning_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name) do |_result, response|
+        c.cancel_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_hyperparameter_tuning_job({ name: name }, call_options) do |_result, response|
+        c.cancel_hyperparameter_tuning_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -924,32 +924,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_create_nas_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_nas_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_nas_job({ parent: parent, nas_job: nas_job }) do |_result, response|
+        c.create_nas_job({ parent: parent, nas_job: nas_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_nas_job parent: parent, nas_job: nas_job do |_result, response|
+        c.create_nas_job parent: parent, nas_job: nas_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_nas_job ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job) do |_result, response|
+        c.create_nas_job ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_nas_job({ parent: parent, nas_job: nas_job }, call_options) do |_result, response|
+        c.create_nas_job({ parent: parent, nas_job: nas_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_nas_job(::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job), call_options) do |_result, response|
+        c.create_nas_job(::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -978,32 +978,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_nas_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_nas_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_nas_job({ name: name }) do |_result, response|
+        c.get_nas_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_nas_job name: name do |_result, response|
+        c.get_nas_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_nas_job ::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name) do |_result, response|
+        c.get_nas_job ::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_nas_job({ name: name }, call_options) do |_result, response|
+        c.get_nas_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_nas_job(::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_nas_job(::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1036,32 +1036,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_nas_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_nas_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_nas_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_nas_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_nas_jobs ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_nas_jobs ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_nas_jobs(::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_nas_jobs(::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1090,32 +1090,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_delete_nas_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_nas_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_nas_job({ name: name }) do |_result, response|
+        c.delete_nas_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_nas_job name: name do |_result, response|
+        c.delete_nas_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_nas_job ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name) do |_result, response|
+        c.delete_nas_job ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_nas_job({ name: name }, call_options) do |_result, response|
+        c.delete_nas_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_nas_job(::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_nas_job(::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1144,32 +1144,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_cancel_nas_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_nas_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_nas_job({ name: name }) do |_result, response|
+        c.cancel_nas_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_nas_job name: name do |_result, response|
+        c.cancel_nas_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_nas_job ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name) do |_result, response|
+        c.cancel_nas_job ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_nas_job({ name: name }, call_options) do |_result, response|
+        c.cancel_nas_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_nas_job(::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_nas_job(::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1198,32 +1198,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_nas_trial_detail_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_nas_trial_detail_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_nas_trial_detail({ name: name }) do |_result, response|
+        c.get_nas_trial_detail({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_nas_trial_detail name: name do |_result, response|
+        c.get_nas_trial_detail name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_nas_trial_detail ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name) do |_result, response|
+        c.get_nas_trial_detail ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_nas_trial_detail({ name: name }, call_options) do |_result, response|
+        c.get_nas_trial_detail({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_nas_trial_detail(::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name), call_options) do |_result, response|
+        c.get_nas_trial_detail(::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1254,32 +1254,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_nas_trial_details_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_nas_trial_details_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_nas_trial_details parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_nas_trial_details parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_nas_trial_details ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_nas_trial_details ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_nas_trial_details(::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_nas_trial_details(::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1309,32 +1309,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_create_batch_prediction_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_batch_prediction_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }) do |_result, response|
+        c.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_batch_prediction_job parent: parent, batch_prediction_job: batch_prediction_job do |_result, response|
+        c.create_batch_prediction_job parent: parent, batch_prediction_job: batch_prediction_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job) do |_result, response|
+        c.create_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }, call_options) do |_result, response|
+        c.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job), call_options) do |_result, response|
+        c.create_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1363,32 +1363,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_batch_prediction_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_batch_prediction_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_batch_prediction_job({ name: name }) do |_result, response|
+        c.get_batch_prediction_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_batch_prediction_job name: name do |_result, response|
+        c.get_batch_prediction_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_batch_prediction_job ::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name) do |_result, response|
+        c.get_batch_prediction_job ::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_batch_prediction_job({ name: name }, call_options) do |_result, response|
+        c.get_batch_prediction_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_batch_prediction_job(::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_batch_prediction_job(::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1421,32 +1421,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_batch_prediction_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_batch_prediction_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_batch_prediction_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_batch_prediction_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_batch_prediction_jobs ::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_batch_prediction_jobs ::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_batch_prediction_jobs(::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_batch_prediction_jobs(::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1475,32 +1475,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_delete_batch_prediction_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_batch_prediction_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_batch_prediction_job({ name: name }) do |_result, response|
+        c.delete_batch_prediction_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_batch_prediction_job name: name do |_result, response|
+        c.delete_batch_prediction_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_batch_prediction_job ::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name) do |_result, response|
+        c.delete_batch_prediction_job ::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_batch_prediction_job({ name: name }, call_options) do |_result, response|
+        c.delete_batch_prediction_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_batch_prediction_job(::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_batch_prediction_job(::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1529,32 +1529,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_cancel_batch_prediction_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_batch_prediction_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_batch_prediction_job({ name: name }) do |_result, response|
+        c.cancel_batch_prediction_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_batch_prediction_job name: name do |_result, response|
+        c.cancel_batch_prediction_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name) do |_result, response|
+        c.cancel_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_batch_prediction_job({ name: name }, call_options) do |_result, response|
+        c.cancel_batch_prediction_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1584,32 +1584,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_create_model_deployment_monitoring_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_model_deployment_monitoring_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }) do |_result, response|
+        c.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_model_deployment_monitoring_job parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job do |_result, response|
+        c.create_model_deployment_monitoring_job parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job) do |_result, response|
+        c.create_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }, call_options) do |_result, response|
+        c.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job), call_options) do |_result, response|
+        c.create_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1645,32 +1645,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_search_model_deployment_monitoring_stats_anomalies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_model_deployment_monitoring_stats_anomalies_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |_result, response|
+        c.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_model_deployment_monitoring_stats_anomalies model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |_result, response|
+        c.search_model_deployment_monitoring_stats_anomalies model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_model_deployment_monitoring_stats_anomalies ::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |_result, response|
+        c.search_model_deployment_monitoring_stats_anomalies ::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
+        c.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_model_deployment_monitoring_stats_anomalies(::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), call_options) do |_result, response|
+        c.search_model_deployment_monitoring_stats_anomalies(::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1699,32 +1699,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_get_model_deployment_monitoring_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_model_deployment_monitoring_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_model_deployment_monitoring_job({ name: name }) do |_result, response|
+        c.get_model_deployment_monitoring_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_model_deployment_monitoring_job name: name do |_result, response|
+        c.get_model_deployment_monitoring_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
+        c.get_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
+        c.get_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1757,32 +1757,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_list_model_deployment_monitoring_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_model_deployment_monitoring_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
+        c.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_model_deployment_monitoring_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
+        c.list_model_deployment_monitoring_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_model_deployment_monitoring_jobs ::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
+        c.list_model_deployment_monitoring_jobs ::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
+        c.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_model_deployment_monitoring_jobs(::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
+        c.list_model_deployment_monitoring_jobs(::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1812,32 +1812,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_update_model_deployment_monitoring_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_model_deployment_monitoring_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }) do |_result, response|
+        c.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_model_deployment_monitoring_job model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask do |_result, response|
+        c.update_model_deployment_monitoring_job model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask) do |_result, response|
+        c.update_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask), call_options) do |_result, response|
+        c.update_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1866,32 +1866,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_delete_model_deployment_monitoring_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_model_deployment_monitoring_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_model_deployment_monitoring_job({ name: name }) do |_result, response|
+        c.delete_model_deployment_monitoring_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_model_deployment_monitoring_job name: name do |_result, response|
+        c.delete_model_deployment_monitoring_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
+        c.delete_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
+        c.delete_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1920,32 +1920,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_pause_model_deployment_monitoring_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_model_deployment_monitoring_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_model_deployment_monitoring_job({ name: name }) do |_result, response|
+        c.pause_model_deployment_monitoring_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_model_deployment_monitoring_job name: name do |_result, response|
+        c.pause_model_deployment_monitoring_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
+        c.pause_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
+        c.pause_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
+        c.pause_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1974,32 +1974,32 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     ::Google::Cloud::AIPlatform::V1::JobService::Rest::ServiceStub.stub :transcode_resume_model_deployment_monitoring_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_model_deployment_monitoring_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::JobService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_model_deployment_monitoring_job({ name: name }) do |_result, response|
+        c.resume_model_deployment_monitoring_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_model_deployment_monitoring_job name: name do |_result, response|
+        c.resume_model_deployment_monitoring_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
+        c.resume_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
+        c.resume_model_deployment_monitoring_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
+        c.resume_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

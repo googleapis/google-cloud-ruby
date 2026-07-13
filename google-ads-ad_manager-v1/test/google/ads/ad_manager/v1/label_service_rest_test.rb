@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_get_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_label_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_label({ name: name }) do |_result, response|
+        c.get_label({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_label name: name do |_result, response|
+        c.get_label name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_label ::Google::Ads::AdManager::V1::GetLabelRequest.new(name: name) do |_result, response|
+        c.get_label ::Google::Ads::AdManager::V1::GetLabelRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_label({ name: name }, call_options) do |_result, response|
+        c.get_label({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_label(::Google::Ads::AdManager::V1::GetLabelRequest.new(name: name), call_options) do |_result, response|
+        c.get_label(::Google::Ads::AdManager::V1::GetLabelRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_list_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_labels_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_labels ::Google::Ads::AdManager::V1::ListLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_labels ::Google::Ads::AdManager::V1::ListLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_labels(::Google::Ads::AdManager::V1::ListLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_labels(::Google::Ads::AdManager::V1::ListLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_create_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_label_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_label({ parent: parent, label: label }) do |_result, response|
+        c.create_label({ parent: parent, label: label }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_label parent: parent, label: label do |_result, response|
+        c.create_label parent: parent, label: label do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_label ::Google::Ads::AdManager::V1::CreateLabelRequest.new(parent: parent, label: label) do |_result, response|
+        c.create_label ::Google::Ads::AdManager::V1::CreateLabelRequest.new(parent: parent, label: label) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_label({ parent: parent, label: label }, call_options) do |_result, response|
+        c.create_label({ parent: parent, label: label }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_label(::Google::Ads::AdManager::V1::CreateLabelRequest.new(parent: parent, label: label), call_options) do |_result, response|
+        c.create_label(::Google::Ads::AdManager::V1::CreateLabelRequest.new(parent: parent, label: label), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_batch_create_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_labels_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_labels({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_labels({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_labels parent: parent, requests: requests do |_result, response|
+        c.batch_create_labels parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_labels ::Google::Ads::AdManager::V1::BatchCreateLabelsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_labels ::Google::Ads::AdManager::V1::BatchCreateLabelsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_labels({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_labels({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_labels(::Google::Ads::AdManager::V1::BatchCreateLabelsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_labels(::Google::Ads::AdManager::V1::BatchCreateLabelsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_update_label_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_label_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_label({ label: label, update_mask: update_mask }) do |_result, response|
+        c.update_label({ label: label, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_label label: label, update_mask: update_mask do |_result, response|
+        c.update_label label: label, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_label ::Google::Ads::AdManager::V1::UpdateLabelRequest.new(label: label, update_mask: update_mask) do |_result, response|
+        c.update_label ::Google::Ads::AdManager::V1::UpdateLabelRequest.new(label: label, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_label({ label: label, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_label({ label: label, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_label(::Google::Ads::AdManager::V1::UpdateLabelRequest.new(label: label, update_mask: update_mask), call_options) do |_result, response|
+        c.update_label(::Google::Ads::AdManager::V1::UpdateLabelRequest.new(label: label, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_batch_update_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_labels_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_labels({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_labels({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_labels parent: parent, requests: requests do |_result, response|
+        c.batch_update_labels parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_labels ::Google::Ads::AdManager::V1::BatchUpdateLabelsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_labels ::Google::Ads::AdManager::V1::BatchUpdateLabelsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_labels({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_labels({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_labels(::Google::Ads::AdManager::V1::BatchUpdateLabelsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_labels(::Google::Ads::AdManager::V1::BatchUpdateLabelsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_batch_activate_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_activate_labels_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_activate_labels({ parent: parent, names: names }) do |_result, response|
+        c.batch_activate_labels({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_activate_labels parent: parent, names: names do |_result, response|
+        c.batch_activate_labels parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_activate_labels ::Google::Ads::AdManager::V1::BatchActivateLabelsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_activate_labels ::Google::Ads::AdManager::V1::BatchActivateLabelsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_activate_labels({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_activate_labels({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_activate_labels(::Google::Ads::AdManager::V1::BatchActivateLabelsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_activate_labels(::Google::Ads::AdManager::V1::BatchActivateLabelsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Ads::AdManager::V1::LabelService::Rest::ClientTest < Minitest::T
     ::Google::Ads::AdManager::V1::LabelService::Rest::ServiceStub.stub :transcode_batch_deactivate_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_deactivate_labels_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::LabelService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_deactivate_labels({ parent: parent, names: names }) do |_result, response|
+        c.batch_deactivate_labels({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_deactivate_labels parent: parent, names: names do |_result, response|
+        c.batch_deactivate_labels parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_deactivate_labels ::Google::Ads::AdManager::V1::BatchDeactivateLabelsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_deactivate_labels ::Google::Ads::AdManager::V1::BatchDeactivateLabelsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_deactivate_labels({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_deactivate_labels({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_deactivate_labels(::Google::Ads::AdManager::V1::BatchDeactivateLabelsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_deactivate_labels(::Google::Ads::AdManager::V1::BatchDeactivateLabelsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

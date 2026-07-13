@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::
     ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::ServiceStub.stub :transcode_get_account_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_account_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_account_service({ name: name }) do |_result, response|
+        c.get_account_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_account_service name: name do |_result, response|
+        c.get_account_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_account_service ::Google::Shopping::Merchant::Accounts::V1::GetAccountServiceRequest.new(name: name) do |_result, response|
+        c.get_account_service ::Google::Shopping::Merchant::Accounts::V1::GetAccountServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_account_service({ name: name }, call_options) do |_result, response|
+        c.get_account_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_account_service(::Google::Shopping::Merchant::Accounts::V1::GetAccountServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_account_service(::Google::Shopping::Merchant::Accounts::V1::GetAccountServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::
     ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::ServiceStub.stub :transcode_list_account_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_account_services_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_account_services({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_account_services({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_account_services parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_account_services parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_account_services ::Google::Shopping::Merchant::Accounts::V1::ListAccountServicesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_account_services ::Google::Shopping::Merchant::Accounts::V1::ListAccountServicesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_account_services({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_account_services({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_account_services(::Google::Shopping::Merchant::Accounts::V1::ListAccountServicesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_account_services(::Google::Shopping::Merchant::Accounts::V1::ListAccountServicesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::
     ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::ServiceStub.stub :transcode_propose_account_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, propose_account_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.propose_account_service({ parent: parent, provider: provider, account_service: account_service }) do |_result, response|
+        c.propose_account_service({ parent: parent, provider: provider, account_service: account_service }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.propose_account_service parent: parent, provider: provider, account_service: account_service do |_result, response|
+        c.propose_account_service parent: parent, provider: provider, account_service: account_service do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.propose_account_service ::Google::Shopping::Merchant::Accounts::V1::ProposeAccountServiceRequest.new(parent: parent, provider: provider, account_service: account_service) do |_result, response|
+        c.propose_account_service ::Google::Shopping::Merchant::Accounts::V1::ProposeAccountServiceRequest.new(parent: parent, provider: provider, account_service: account_service) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.propose_account_service({ parent: parent, provider: provider, account_service: account_service }, call_options) do |_result, response|
+        c.propose_account_service({ parent: parent, provider: provider, account_service: account_service }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.propose_account_service(::Google::Shopping::Merchant::Accounts::V1::ProposeAccountServiceRequest.new(parent: parent, provider: provider, account_service: account_service), call_options) do |_result, response|
+        c.propose_account_service(::Google::Shopping::Merchant::Accounts::V1::ProposeAccountServiceRequest.new(parent: parent, provider: provider, account_service: account_service), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::
     ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::ServiceStub.stub :transcode_approve_account_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, approve_account_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.approve_account_service({ name: name }) do |_result, response|
+        c.approve_account_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.approve_account_service name: name do |_result, response|
+        c.approve_account_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.approve_account_service ::Google::Shopping::Merchant::Accounts::V1::ApproveAccountServiceRequest.new(name: name) do |_result, response|
+        c.approve_account_service ::Google::Shopping::Merchant::Accounts::V1::ApproveAccountServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.approve_account_service({ name: name }, call_options) do |_result, response|
+        c.approve_account_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.approve_account_service(::Google::Shopping::Merchant::Accounts::V1::ApproveAccountServiceRequest.new(name: name), call_options) do |_result, response|
+        c.approve_account_service(::Google::Shopping::Merchant::Accounts::V1::ApproveAccountServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::
     ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::ServiceStub.stub :transcode_reject_account_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reject_account_service_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reject_account_service({ name: name }) do |_result, response|
+        c.reject_account_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reject_account_service name: name do |_result, response|
+        c.reject_account_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reject_account_service ::Google::Shopping::Merchant::Accounts::V1::RejectAccountServiceRequest.new(name: name) do |_result, response|
+        c.reject_account_service ::Google::Shopping::Merchant::Accounts::V1::RejectAccountServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reject_account_service({ name: name }, call_options) do |_result, response|
+        c.reject_account_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reject_account_service(::Google::Shopping::Merchant::Accounts::V1::RejectAccountServiceRequest.new(name: name), call_options) do |_result, response|
+        c.reject_account_service(::Google::Shopping::Merchant::Accounts::V1::RejectAccountServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

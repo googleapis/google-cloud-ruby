@@ -100,32 +100,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_create_lake_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_lake_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_lake({ parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only }) do |_result, response|
+        c.create_lake({ parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_lake parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only do |_result, response|
+        c.create_lake parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_lake ::Google::Cloud::Dataplex::V1::CreateLakeRequest.new(parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only) do |_result, response|
+        c.create_lake ::Google::Cloud::Dataplex::V1::CreateLakeRequest.new(parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_lake({ parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_lake({ parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_lake(::Google::Cloud::Dataplex::V1::CreateLakeRequest.new(parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only), call_options) do |_result, response|
+        c.create_lake(::Google::Cloud::Dataplex::V1::CreateLakeRequest.new(parent: parent, lake_id: lake_id, lake: lake, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_update_lake_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_lake_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_lake({ update_mask: update_mask, lake: lake, validate_only: validate_only }) do |_result, response|
+        c.update_lake({ update_mask: update_mask, lake: lake, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_lake update_mask: update_mask, lake: lake, validate_only: validate_only do |_result, response|
+        c.update_lake update_mask: update_mask, lake: lake, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_lake ::Google::Cloud::Dataplex::V1::UpdateLakeRequest.new(update_mask: update_mask, lake: lake, validate_only: validate_only) do |_result, response|
+        c.update_lake ::Google::Cloud::Dataplex::V1::UpdateLakeRequest.new(update_mask: update_mask, lake: lake, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_lake({ update_mask: update_mask, lake: lake, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_lake({ update_mask: update_mask, lake: lake, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_lake(::Google::Cloud::Dataplex::V1::UpdateLakeRequest.new(update_mask: update_mask, lake: lake, validate_only: validate_only), call_options) do |_result, response|
+        c.update_lake(::Google::Cloud::Dataplex::V1::UpdateLakeRequest.new(update_mask: update_mask, lake: lake, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_delete_lake_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_lake_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_lake({ name: name }) do |_result, response|
+        c.delete_lake({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_lake name: name do |_result, response|
+        c.delete_lake name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_lake ::Google::Cloud::Dataplex::V1::DeleteLakeRequest.new(name: name) do |_result, response|
+        c.delete_lake ::Google::Cloud::Dataplex::V1::DeleteLakeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_lake({ name: name }, call_options) do |_result, response|
+        c.delete_lake({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_lake(::Google::Cloud::Dataplex::V1::DeleteLakeRequest.new(name: name), call_options) do |_result, response|
+        c.delete_lake(::Google::Cloud::Dataplex::V1::DeleteLakeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_lakes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_lakes_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_lakes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_lakes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_lakes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_lakes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_lakes ::Google::Cloud::Dataplex::V1::ListLakesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_lakes ::Google::Cloud::Dataplex::V1::ListLakesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_lakes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_lakes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_lakes(::Google::Cloud::Dataplex::V1::ListLakesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_lakes(::Google::Cloud::Dataplex::V1::ListLakesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_get_lake_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_lake_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_lake({ name: name }) do |_result, response|
+        c.get_lake({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_lake name: name do |_result, response|
+        c.get_lake name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_lake ::Google::Cloud::Dataplex::V1::GetLakeRequest.new(name: name) do |_result, response|
+        c.get_lake ::Google::Cloud::Dataplex::V1::GetLakeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_lake({ name: name }, call_options) do |_result, response|
+        c.get_lake({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_lake(::Google::Cloud::Dataplex::V1::GetLakeRequest.new(name: name), call_options) do |_result, response|
+        c.get_lake(::Google::Cloud::Dataplex::V1::GetLakeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_lake_actions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_lake_actions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_lake_actions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_lake_actions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_lake_actions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_lake_actions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_lake_actions ::Google::Cloud::Dataplex::V1::ListLakeActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_lake_actions ::Google::Cloud::Dataplex::V1::ListLakeActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_lake_actions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_lake_actions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_lake_actions(::Google::Cloud::Dataplex::V1::ListLakeActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_lake_actions(::Google::Cloud::Dataplex::V1::ListLakeActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -435,32 +435,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_create_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_zone({ parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only }) do |_result, response|
+        c.create_zone({ parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_zone parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only do |_result, response|
+        c.create_zone parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_zone ::Google::Cloud::Dataplex::V1::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only) do |_result, response|
+        c.create_zone ::Google::Cloud::Dataplex::V1::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_zone({ parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_zone({ parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_zone(::Google::Cloud::Dataplex::V1::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only), call_options) do |_result, response|
+        c.create_zone(::Google::Cloud::Dataplex::V1::CreateZoneRequest.new(parent: parent, zone_id: zone_id, zone: zone, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -491,32 +491,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_update_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_zone({ update_mask: update_mask, zone: zone, validate_only: validate_only }) do |_result, response|
+        c.update_zone({ update_mask: update_mask, zone: zone, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_zone update_mask: update_mask, zone: zone, validate_only: validate_only do |_result, response|
+        c.update_zone update_mask: update_mask, zone: zone, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_zone ::Google::Cloud::Dataplex::V1::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, validate_only: validate_only) do |_result, response|
+        c.update_zone ::Google::Cloud::Dataplex::V1::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_zone({ update_mask: update_mask, zone: zone, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_zone({ update_mask: update_mask, zone: zone, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_zone(::Google::Cloud::Dataplex::V1::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, validate_only: validate_only), call_options) do |_result, response|
+        c.update_zone(::Google::Cloud::Dataplex::V1::UpdateZoneRequest.new(update_mask: update_mask, zone: zone, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_delete_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_zone({ name: name }) do |_result, response|
+        c.delete_zone({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_zone name: name do |_result, response|
+        c.delete_zone name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_zone ::Google::Cloud::Dataplex::V1::DeleteZoneRequest.new(name: name) do |_result, response|
+        c.delete_zone ::Google::Cloud::Dataplex::V1::DeleteZoneRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_zone({ name: name }, call_options) do |_result, response|
+        c.delete_zone({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_zone(::Google::Cloud::Dataplex::V1::DeleteZoneRequest.new(name: name), call_options) do |_result, response|
+        c.delete_zone(::Google::Cloud::Dataplex::V1::DeleteZoneRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -603,32 +603,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_zones_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_zones_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_zones parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_zones ::Google::Cloud::Dataplex::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_zones ::Google::Cloud::Dataplex::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_zones({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_zones(::Google::Cloud::Dataplex::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_zones(::Google::Cloud::Dataplex::V1::ListZonesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -657,32 +657,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_get_zone_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_zone_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_zone({ name: name }) do |_result, response|
+        c.get_zone({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_zone name: name do |_result, response|
+        c.get_zone name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_zone ::Google::Cloud::Dataplex::V1::GetZoneRequest.new(name: name) do |_result, response|
+        c.get_zone ::Google::Cloud::Dataplex::V1::GetZoneRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_zone({ name: name }, call_options) do |_result, response|
+        c.get_zone({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_zone(::Google::Cloud::Dataplex::V1::GetZoneRequest.new(name: name), call_options) do |_result, response|
+        c.get_zone(::Google::Cloud::Dataplex::V1::GetZoneRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -713,32 +713,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_zone_actions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_zone_actions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_zone_actions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_zone_actions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_zone_actions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_zone_actions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_zone_actions ::Google::Cloud::Dataplex::V1::ListZoneActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_zone_actions ::Google::Cloud::Dataplex::V1::ListZoneActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_zone_actions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_zone_actions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_zone_actions(::Google::Cloud::Dataplex::V1::ListZoneActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_zone_actions(::Google::Cloud::Dataplex::V1::ListZoneActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -770,32 +770,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_create_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_asset({ parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only }) do |_result, response|
+        c.create_asset({ parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_asset parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only do |_result, response|
+        c.create_asset parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_asset ::Google::Cloud::Dataplex::V1::CreateAssetRequest.new(parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only) do |_result, response|
+        c.create_asset ::Google::Cloud::Dataplex::V1::CreateAssetRequest.new(parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_asset({ parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_asset({ parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_asset(::Google::Cloud::Dataplex::V1::CreateAssetRequest.new(parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only), call_options) do |_result, response|
+        c.create_asset(::Google::Cloud::Dataplex::V1::CreateAssetRequest.new(parent: parent, asset_id: asset_id, asset: asset, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -826,32 +826,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_update_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_asset({ update_mask: update_mask, asset: asset, validate_only: validate_only }) do |_result, response|
+        c.update_asset({ update_mask: update_mask, asset: asset, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_asset update_mask: update_mask, asset: asset, validate_only: validate_only do |_result, response|
+        c.update_asset update_mask: update_mask, asset: asset, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_asset ::Google::Cloud::Dataplex::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, validate_only: validate_only) do |_result, response|
+        c.update_asset ::Google::Cloud::Dataplex::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_asset({ update_mask: update_mask, asset: asset, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_asset({ update_mask: update_mask, asset: asset, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_asset(::Google::Cloud::Dataplex::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, validate_only: validate_only), call_options) do |_result, response|
+        c.update_asset(::Google::Cloud::Dataplex::V1::UpdateAssetRequest.new(update_mask: update_mask, asset: asset, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -880,32 +880,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_delete_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_asset({ name: name }) do |_result, response|
+        c.delete_asset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_asset name: name do |_result, response|
+        c.delete_asset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_asset ::Google::Cloud::Dataplex::V1::DeleteAssetRequest.new(name: name) do |_result, response|
+        c.delete_asset ::Google::Cloud::Dataplex::V1::DeleteAssetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_asset({ name: name }, call_options) do |_result, response|
+        c.delete_asset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_asset(::Google::Cloud::Dataplex::V1::DeleteAssetRequest.new(name: name), call_options) do |_result, response|
+        c.delete_asset(::Google::Cloud::Dataplex::V1::DeleteAssetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -938,32 +938,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_assets ::Google::Cloud::Dataplex::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_assets ::Google::Cloud::Dataplex::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_assets(::Google::Cloud::Dataplex::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_assets(::Google::Cloud::Dataplex::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -992,32 +992,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_get_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_asset({ name: name }) do |_result, response|
+        c.get_asset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_asset name: name do |_result, response|
+        c.get_asset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_asset ::Google::Cloud::Dataplex::V1::GetAssetRequest.new(name: name) do |_result, response|
+        c.get_asset ::Google::Cloud::Dataplex::V1::GetAssetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_asset({ name: name }, call_options) do |_result, response|
+        c.get_asset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_asset(::Google::Cloud::Dataplex::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
+        c.get_asset(::Google::Cloud::Dataplex::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1048,32 +1048,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_asset_actions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_asset_actions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_asset_actions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_asset_actions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_asset_actions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_asset_actions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_asset_actions ::Google::Cloud::Dataplex::V1::ListAssetActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_asset_actions ::Google::Cloud::Dataplex::V1::ListAssetActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_asset_actions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_asset_actions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_asset_actions(::Google::Cloud::Dataplex::V1::ListAssetActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_asset_actions(::Google::Cloud::Dataplex::V1::ListAssetActionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1105,32 +1105,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_create_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_task_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_task({ parent: parent, task_id: task_id, task: task, validate_only: validate_only }) do |_result, response|
+        c.create_task({ parent: parent, task_id: task_id, task: task, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_task parent: parent, task_id: task_id, task: task, validate_only: validate_only do |_result, response|
+        c.create_task parent: parent, task_id: task_id, task: task, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_task ::Google::Cloud::Dataplex::V1::CreateTaskRequest.new(parent: parent, task_id: task_id, task: task, validate_only: validate_only) do |_result, response|
+        c.create_task ::Google::Cloud::Dataplex::V1::CreateTaskRequest.new(parent: parent, task_id: task_id, task: task, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_task({ parent: parent, task_id: task_id, task: task, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_task({ parent: parent, task_id: task_id, task: task, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_task(::Google::Cloud::Dataplex::V1::CreateTaskRequest.new(parent: parent, task_id: task_id, task: task, validate_only: validate_only), call_options) do |_result, response|
+        c.create_task(::Google::Cloud::Dataplex::V1::CreateTaskRequest.new(parent: parent, task_id: task_id, task: task, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1161,32 +1161,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_update_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_task_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_task({ update_mask: update_mask, task: task, validate_only: validate_only }) do |_result, response|
+        c.update_task({ update_mask: update_mask, task: task, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_task update_mask: update_mask, task: task, validate_only: validate_only do |_result, response|
+        c.update_task update_mask: update_mask, task: task, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_task ::Google::Cloud::Dataplex::V1::UpdateTaskRequest.new(update_mask: update_mask, task: task, validate_only: validate_only) do |_result, response|
+        c.update_task ::Google::Cloud::Dataplex::V1::UpdateTaskRequest.new(update_mask: update_mask, task: task, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_task({ update_mask: update_mask, task: task, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_task({ update_mask: update_mask, task: task, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_task(::Google::Cloud::Dataplex::V1::UpdateTaskRequest.new(update_mask: update_mask, task: task, validate_only: validate_only), call_options) do |_result, response|
+        c.update_task(::Google::Cloud::Dataplex::V1::UpdateTaskRequest.new(update_mask: update_mask, task: task, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1215,32 +1215,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_delete_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_task_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_task({ name: name }) do |_result, response|
+        c.delete_task({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_task name: name do |_result, response|
+        c.delete_task name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_task ::Google::Cloud::Dataplex::V1::DeleteTaskRequest.new(name: name) do |_result, response|
+        c.delete_task ::Google::Cloud::Dataplex::V1::DeleteTaskRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_task({ name: name }, call_options) do |_result, response|
+        c.delete_task({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_task(::Google::Cloud::Dataplex::V1::DeleteTaskRequest.new(name: name), call_options) do |_result, response|
+        c.delete_task(::Google::Cloud::Dataplex::V1::DeleteTaskRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1273,32 +1273,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_tasks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tasks_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tasks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_tasks parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tasks ::Google::Cloud::Dataplex::V1::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_tasks ::Google::Cloud::Dataplex::V1::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_tasks({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tasks(::Google::Cloud::Dataplex::V1::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_tasks(::Google::Cloud::Dataplex::V1::ListTasksRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1327,32 +1327,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_get_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_task_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_task({ name: name }) do |_result, response|
+        c.get_task({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_task name: name do |_result, response|
+        c.get_task name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_task ::Google::Cloud::Dataplex::V1::GetTaskRequest.new(name: name) do |_result, response|
+        c.get_task ::Google::Cloud::Dataplex::V1::GetTaskRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_task({ name: name }, call_options) do |_result, response|
+        c.get_task({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_task(::Google::Cloud::Dataplex::V1::GetTaskRequest.new(name: name), call_options) do |_result, response|
+        c.get_task(::Google::Cloud::Dataplex::V1::GetTaskRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1383,32 +1383,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_jobs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_jobs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_jobs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_jobs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_jobs ::Google::Cloud::Dataplex::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_jobs ::Google::Cloud::Dataplex::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_jobs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_jobs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_jobs(::Google::Cloud::Dataplex::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_jobs(::Google::Cloud::Dataplex::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1439,32 +1439,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_run_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_task_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_task({ name: name, labels: labels, args: args }) do |_result, response|
+        c.run_task({ name: name, labels: labels, args: args }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_task name: name, labels: labels, args: args do |_result, response|
+        c.run_task name: name, labels: labels, args: args do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_task ::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args) do |_result, response|
+        c.run_task ::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_task({ name: name, labels: labels, args: args }, call_options) do |_result, response|
+        c.run_task({ name: name, labels: labels, args: args }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_task(::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args), call_options) do |_result, response|
+        c.run_task(::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1493,32 +1493,32 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_get_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job({ name: name }) do |_result, response|
+        c.get_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job name: name do |_result, response|
+        c.get_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job ::Google::Cloud::Dataplex::V1::GetJobRequest.new(name: name) do |_result, response|
+        c.get_job ::Google::Cloud::Dataplex::V1::GetJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job({ name: name }, call_options) do |_result, response|
+        c.get_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job(::Google::Cloud::Dataplex::V1::GetJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_job(::Google::Cloud::Dataplex::V1::GetJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1547,373 +1547,37 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_cancel_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_job({ name: name }) do |_result, response|
+        c.cancel_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_job name: name do |_result, response|
+        c.cancel_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_job ::Google::Cloud::Dataplex::V1::CancelJobRequest.new(name: name) do |_result, response|
+        c.cancel_job ::Google::Cloud::Dataplex::V1::CancelJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_job({ name: name }, call_options) do |_result, response|
+        c.cancel_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_job(::Google::Cloud::Dataplex::V1::CancelJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_job(::Google::Cloud::Dataplex::V1::CancelJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, cancel_job_client_stub.call_count
-      end
-    end
-  end
-
-  def test_create_environment
-    # Create test objects.
-    client_result = ::Google::Longrunning::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    environment_id = "hello world"
-    environment = {}
-    validate_only = true
-
-    create_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_create_environment_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, create_environment_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.create_environment({ parent: parent, environment_id: environment_id, environment: environment, validate_only: validate_only }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.create_environment parent: parent, environment_id: environment_id, environment: environment, validate_only: validate_only do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.create_environment ::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment, validate_only: validate_only) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.create_environment({ parent: parent, environment_id: environment_id, environment: environment, validate_only: validate_only }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.create_environment(::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment, validate_only: validate_only), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, create_environment_client_stub.call_count
-      end
-    end
-  end
-
-  def test_update_environment
-    # Create test objects.
-    client_result = ::Google::Longrunning::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    update_mask = {}
-    environment = {}
-    validate_only = true
-
-    update_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_update_environment_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, update_environment_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.update_environment({ update_mask: update_mask, environment: environment, validate_only: validate_only }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.update_environment update_mask: update_mask, environment: environment, validate_only: validate_only do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.update_environment ::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest.new(update_mask: update_mask, environment: environment, validate_only: validate_only) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.update_environment({ update_mask: update_mask, environment: environment, validate_only: validate_only }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.update_environment(::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest.new(update_mask: update_mask, environment: environment, validate_only: validate_only), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, update_environment_client_stub.call_count
-      end
-    end
-  end
-
-  def test_delete_environment
-    # Create test objects.
-    client_result = ::Google::Longrunning::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_delete_environment_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, delete_environment_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.delete_environment({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.delete_environment name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.delete_environment ::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.delete_environment({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.delete_environment(::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, delete_environment_client_stub.call_count
-      end
-    end
-  end
-
-  def test_list_environments
-    # Create test objects.
-    client_result = ::Google::Cloud::Dataplex::V1::ListEnvironmentsResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-    filter = "hello world"
-    order_by = "hello world"
-
-    list_environments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_environments_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, list_environments_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.list_environments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.list_environments ::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.list_environments(::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, list_environments_client_stub.call_count
-      end
-    end
-  end
-
-  def test_get_environment
-    # Create test objects.
-    client_result = ::Google::Cloud::Dataplex::V1::Environment.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_get_environment_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, get_environment_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.get_environment({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.get_environment name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.get_environment ::Google::Cloud::Dataplex::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.get_environment({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.get_environment(::Google::Cloud::Dataplex::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, get_environment_client_stub.call_count
-      end
-    end
-  end
-
-  def test_list_sessions
-    # Create test objects.
-    client_result = ::Google::Cloud::Dataplex::V1::ListSessionsResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-    filter = "hello world"
-
-    list_sessions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ServiceStub.stub :transcode_list_sessions_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, list_sessions_client_stub do
-        # Create client
-        client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.list_sessions ::Google::Cloud::Dataplex::V1::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.list_sessions(::Google::Cloud::Dataplex::V1::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, list_sessions_client_stub.call_count
       end
     end
   end

@@ -98,32 +98,32 @@ class ::Google::Cloud::Trace::V2::TraceService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Trace::V2::TraceService::Rest::ServiceStub.stub :transcode_batch_write_spans_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_write_spans_client_stub do
         # Create client
-        client = ::Google::Cloud::Trace::V2::TraceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Trace::V2::TraceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_write_spans({ name: name, spans: spans }) do |_result, response|
+        c.batch_write_spans({ name: name, spans: spans }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_write_spans name: name, spans: spans do |_result, response|
+        c.batch_write_spans name: name, spans: spans do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_write_spans ::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new(name: name, spans: spans) do |_result, response|
+        c.batch_write_spans ::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new(name: name, spans: spans) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_write_spans({ name: name, spans: spans }, call_options) do |_result, response|
+        c.batch_write_spans({ name: name, spans: spans }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_write_spans(::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new(name: name, spans: spans), call_options) do |_result, response|
+        c.batch_write_spans(::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new(name: name, spans: spans), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -165,32 +165,32 @@ class ::Google::Cloud::Trace::V2::TraceService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Trace::V2::TraceService::Rest::ServiceStub.stub :transcode_create_span_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_span_client_stub do
         # Create client
-        client = ::Google::Cloud::Trace::V2::TraceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Trace::V2::TraceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind }) do |_result, response|
+        c.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_span name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind do |_result, response|
+        c.create_span name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind) do |_result, response|
+        c.create_span ::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind }, call_options) do |_result, response|
+        c.create_span({ name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_span(::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind), call_options) do |_result, response|
+        c.create_span(::Google::Cloud::Trace::V2::Span.new(name: name, span_id: span_id, parent_span_id: parent_span_id, display_name: display_name, start_time: start_time, end_time: end_time, attributes: attributes, stack_trace: stack_trace, time_events: time_events, links: links, status: status, same_process_as_parent_span: same_process_as_parent_span, child_span_count: child_span_count, span_kind: span_kind), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

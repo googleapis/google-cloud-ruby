@@ -1,5 +1,17 @@
 # Release History
 
+### 1.8.0 (2026-06-30)
+
+#### Features
+
+* introduce RequestOptions message and request_options field on Datastore v1 request messages to enable request tagging ([#34668](https://github.com/googleapis/google-cloud-ruby/issues/34668)) 
+
+### 1.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
 ### 1.6.0 (2026-03-31)
 
 #### Features

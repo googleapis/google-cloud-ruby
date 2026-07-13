@@ -100,40 +100,40 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_group_stats_client_stub do
       # Create client
-      client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
+      c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_group_stats project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_group_stats project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_group_stats ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_group_stats ::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_group_stats({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_group_stats(::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_group_stats(::Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, timed_count_duration: timed_count_duration, alignment: alignment, alignment_time: alignment_time, order: order, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -173,40 +173,40 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_events_client_stub do
       # Create client
-      client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
+      c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_events project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_events project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_events ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_events ::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_events({ project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_events(::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_events(::Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new(project_name: project_name, group_id: group_id, service_filter: service_filter, time_range: time_range, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -236,36 +236,36 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_events_client_stub do
       # Create client
-      client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
+      c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_events({ project_name: project_name }) do |response, operation|
+      c.delete_events({ project_name: project_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_events project_name: project_name do |response, operation|
+      c.delete_events project_name: project_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_events ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name) do |response, operation|
+      c.delete_events ::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_events({ project_name: project_name }, grpc_options) do |response, operation|
+      c.delete_events({ project_name: project_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_events(::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name), grpc_options) do |response, operation|
+      c.delete_events(::Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new(project_name: project_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

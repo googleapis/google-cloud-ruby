@@ -97,32 +97,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::ServiceStub.stub :transcode_get_license_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_license_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_license_pool({ name: name }) do |_result, response|
+        c.get_license_pool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_license_pool name: name do |_result, response|
+        c.get_license_pool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_license_pool ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest.new(name: name) do |_result, response|
+        c.get_license_pool ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_license_pool({ name: name }, call_options) do |_result, response|
+        c.get_license_pool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_license_pool(::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest.new(name: name), call_options) do |_result, response|
+        c.get_license_pool(::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::ServiceStub.stub :transcode_update_license_pool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_license_pool_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_license_pool({ license_pool: license_pool, update_mask: update_mask }) do |_result, response|
+        c.update_license_pool({ license_pool: license_pool, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_license_pool license_pool: license_pool, update_mask: update_mask do |_result, response|
+        c.update_license_pool license_pool: license_pool, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_license_pool ::Google::Cloud::Commerce::Consumer::Procurement::V1::UpdateLicensePoolRequest.new(license_pool: license_pool, update_mask: update_mask) do |_result, response|
+        c.update_license_pool ::Google::Cloud::Commerce::Consumer::Procurement::V1::UpdateLicensePoolRequest.new(license_pool: license_pool, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_license_pool({ license_pool: license_pool, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_license_pool({ license_pool: license_pool, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_license_pool(::Google::Cloud::Commerce::Consumer::Procurement::V1::UpdateLicensePoolRequest.new(license_pool: license_pool, update_mask: update_mask), call_options) do |_result, response|
+        c.update_license_pool(::Google::Cloud::Commerce::Consumer::Procurement::V1::UpdateLicensePoolRequest.new(license_pool: license_pool, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::ServiceStub.stub :transcode_assign_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, assign_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.assign({ parent: parent, usernames: usernames }) do |_result, response|
+        c.assign({ parent: parent, usernames: usernames }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.assign parent: parent, usernames: usernames do |_result, response|
+        c.assign parent: parent, usernames: usernames do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.assign ::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignRequest.new(parent: parent, usernames: usernames) do |_result, response|
+        c.assign ::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignRequest.new(parent: parent, usernames: usernames) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.assign({ parent: parent, usernames: usernames }, call_options) do |_result, response|
+        c.assign({ parent: parent, usernames: usernames }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.assign(::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignRequest.new(parent: parent, usernames: usernames), call_options) do |_result, response|
+        c.assign(::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignRequest.new(parent: parent, usernames: usernames), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::ServiceStub.stub :transcode_unassign_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, unassign_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.unassign({ parent: parent, usernames: usernames }) do |_result, response|
+        c.unassign({ parent: parent, usernames: usernames }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.unassign parent: parent, usernames: usernames do |_result, response|
+        c.unassign parent: parent, usernames: usernames do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.unassign ::Google::Cloud::Commerce::Consumer::Procurement::V1::UnassignRequest.new(parent: parent, usernames: usernames) do |_result, response|
+        c.unassign ::Google::Cloud::Commerce::Consumer::Procurement::V1::UnassignRequest.new(parent: parent, usernames: usernames) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.unassign({ parent: parent, usernames: usernames }, call_options) do |_result, response|
+        c.unassign({ parent: parent, usernames: usernames }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.unassign(::Google::Cloud::Commerce::Consumer::Procurement::V1::UnassignRequest.new(parent: parent, usernames: usernames), call_options) do |_result, response|
+        c.unassign(::Google::Cloud::Commerce::Consumer::Procurement::V1::UnassignRequest.new(parent: parent, usernames: usernames), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::ServiceStub.stub :transcode_enumerate_licensed_users_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enumerate_licensed_users_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enumerate_licensed_users({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.enumerate_licensed_users({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enumerate_licensed_users parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.enumerate_licensed_users parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enumerate_licensed_users ::Google::Cloud::Commerce::Consumer::Procurement::V1::EnumerateLicensedUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.enumerate_licensed_users ::Google::Cloud::Commerce::Consumer::Procurement::V1::EnumerateLicensedUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enumerate_licensed_users({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.enumerate_licensed_users({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enumerate_licensed_users(::Google::Cloud::Commerce::Consumer::Procurement::V1::EnumerateLicensedUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.enumerate_licensed_users(::Google::Cloud::Commerce::Consumer::Procurement::V1::EnumerateLicensedUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ClientTe
     ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ServiceStub.stub :transcode_get_lfp_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_lfp_store_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_lfp_store({ name: name }) do |_result, response|
+        c.get_lfp_store({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_lfp_store name: name do |_result, response|
+        c.get_lfp_store name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_lfp_store ::Google::Shopping::Merchant::Lfp::V1beta::GetLfpStoreRequest.new(name: name) do |_result, response|
+        c.get_lfp_store ::Google::Shopping::Merchant::Lfp::V1beta::GetLfpStoreRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_lfp_store({ name: name }, call_options) do |_result, response|
+        c.get_lfp_store({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_lfp_store(::Google::Shopping::Merchant::Lfp::V1beta::GetLfpStoreRequest.new(name: name), call_options) do |_result, response|
+        c.get_lfp_store(::Google::Shopping::Merchant::Lfp::V1beta::GetLfpStoreRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ClientTe
     ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ServiceStub.stub :transcode_insert_lfp_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, insert_lfp_store_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.insert_lfp_store({ parent: parent, lfp_store: lfp_store }) do |_result, response|
+        c.insert_lfp_store({ parent: parent, lfp_store: lfp_store }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.insert_lfp_store parent: parent, lfp_store: lfp_store do |_result, response|
+        c.insert_lfp_store parent: parent, lfp_store: lfp_store do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.insert_lfp_store ::Google::Shopping::Merchant::Lfp::V1beta::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store) do |_result, response|
+        c.insert_lfp_store ::Google::Shopping::Merchant::Lfp::V1beta::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.insert_lfp_store({ parent: parent, lfp_store: lfp_store }, call_options) do |_result, response|
+        c.insert_lfp_store({ parent: parent, lfp_store: lfp_store }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.insert_lfp_store(::Google::Shopping::Merchant::Lfp::V1beta::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store), call_options) do |_result, response|
+        c.insert_lfp_store(::Google::Shopping::Merchant::Lfp::V1beta::InsertLfpStoreRequest.new(parent: parent, lfp_store: lfp_store), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ClientTe
     ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ServiceStub.stub :transcode_delete_lfp_store_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_lfp_store_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_lfp_store({ name: name }) do |_result, response|
+        c.delete_lfp_store({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_lfp_store name: name do |_result, response|
+        c.delete_lfp_store name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_lfp_store ::Google::Shopping::Merchant::Lfp::V1beta::DeleteLfpStoreRequest.new(name: name) do |_result, response|
+        c.delete_lfp_store ::Google::Shopping::Merchant::Lfp::V1beta::DeleteLfpStoreRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_lfp_store({ name: name }, call_options) do |_result, response|
+        c.delete_lfp_store({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_lfp_store(::Google::Shopping::Merchant::Lfp::V1beta::DeleteLfpStoreRequest.new(name: name), call_options) do |_result, response|
+        c.delete_lfp_store(::Google::Shopping::Merchant::Lfp::V1beta::DeleteLfpStoreRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ClientTe
     ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ServiceStub.stub :transcode_list_lfp_stores_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_lfp_stores_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_lfp_stores parent: parent, target_account: target_account, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_lfp_stores parent: parent, target_account: target_account, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_lfp_stores ::Google::Shopping::Merchant::Lfp::V1beta::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_lfp_stores ::Google::Shopping::Merchant::Lfp::V1beta::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_lfp_stores({ parent: parent, target_account: target_account, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_lfp_stores(::Google::Shopping::Merchant::Lfp::V1beta::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_lfp_stores(::Google::Shopping::Merchant::Lfp::V1beta::ListLfpStoresRequest.new(parent: parent, target_account: target_account, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

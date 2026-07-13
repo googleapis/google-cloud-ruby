@@ -86,40 +86,40 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_functions_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_functions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_functions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_functions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_functions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_functions ::Google::Cloud::Functions::V1::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_functions ::Google::Cloud::Functions::V1::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_functions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_functions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_functions(::Google::Cloud::Functions::V1::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_functions(::Google::Cloud::Functions::V1::ListFunctionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_function_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_function({ name: name, version_id: version_id }) do |response, operation|
+      c.get_function({ name: name, version_id: version_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_function name: name, version_id: version_id do |response, operation|
+      c.get_function name: name, version_id: version_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id) do |response, operation|
+      c.get_function ::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_function({ name: name, version_id: version_id }, grpc_options) do |response, operation|
+      c.get_function({ name: name, version_id: version_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id), grpc_options) do |response, operation|
+      c.get_function(::Google::Cloud::Functions::V1::GetFunctionRequest.new(name: name, version_id: version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,40 +211,40 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_function_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_function({ location: location, function: function }) do |response, operation|
+      c.create_function({ location: location, function: function }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_function location: location, function: function do |response, operation|
+      c.create_function location: location, function: function do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_function ::Google::Cloud::Functions::V1::CreateFunctionRequest.new(location: location, function: function) do |response, operation|
+      c.create_function ::Google::Cloud::Functions::V1::CreateFunctionRequest.new(location: location, function: function) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_function({ location: location, function: function }, grpc_options) do |response, operation|
+      c.create_function({ location: location, function: function }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_function(::Google::Cloud::Functions::V1::CreateFunctionRequest.new(location: location, function: function), grpc_options) do |response, operation|
+      c.create_function(::Google::Cloud::Functions::V1::CreateFunctionRequest.new(location: location, function: function), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_function_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_function({ function: function, update_mask: update_mask }) do |response, operation|
+      c.update_function({ function: function, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_function function: function, update_mask: update_mask do |response, operation|
+      c.update_function function: function, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_function ::Google::Cloud::Functions::V1::UpdateFunctionRequest.new(function: function, update_mask: update_mask) do |response, operation|
+      c.update_function ::Google::Cloud::Functions::V1::UpdateFunctionRequest.new(function: function, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_function({ function: function, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_function({ function: function, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_function(::Google::Cloud::Functions::V1::UpdateFunctionRequest.new(function: function, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_function(::Google::Cloud::Functions::V1::UpdateFunctionRequest.new(function: function, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -339,40 +339,40 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_function_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_function({ name: name }) do |response, operation|
+      c.delete_function({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_function name: name do |response, operation|
+      c.delete_function name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_function ::Google::Cloud::Functions::V1::DeleteFunctionRequest.new(name: name) do |response, operation|
+      c.delete_function ::Google::Cloud::Functions::V1::DeleteFunctionRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_function({ name: name }, grpc_options) do |response, operation|
+      c.delete_function({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_function(::Google::Cloud::Functions::V1::DeleteFunctionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_function(::Google::Cloud::Functions::V1::DeleteFunctionRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -404,36 +404,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, call_function_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.call_function({ name: name, data: data }) do |response, operation|
+      c.call_function({ name: name, data: data }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.call_function name: name, data: data do |response, operation|
+      c.call_function name: name, data: data do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.call_function ::Google::Cloud::Functions::V1::CallFunctionRequest.new(name: name, data: data) do |response, operation|
+      c.call_function ::Google::Cloud::Functions::V1::CallFunctionRequest.new(name: name, data: data) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.call_function({ name: name, data: data }, grpc_options) do |response, operation|
+      c.call_function({ name: name, data: data }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.call_function(::Google::Cloud::Functions::V1::CallFunctionRequest.new(name: name, data: data), grpc_options) do |response, operation|
+      c.call_function(::Google::Cloud::Functions::V1::CallFunctionRequest.new(name: name, data: data), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,36 +464,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, generate_upload_url_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }) do |response, operation|
+      c.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_upload_url parent: parent, kms_key_name: kms_key_name do |response, operation|
+      c.generate_upload_url parent: parent, kms_key_name: kms_key_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_upload_url ::Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name) do |response, operation|
+      c.generate_upload_url ::Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }, grpc_options) do |response, operation|
+      c.generate_upload_url({ parent: parent, kms_key_name: kms_key_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_upload_url(::Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name), grpc_options) do |response, operation|
+      c.generate_upload_url(::Google::Cloud::Functions::V1::GenerateUploadUrlRequest.new(parent: parent, kms_key_name: kms_key_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -524,36 +524,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, generate_download_url_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_download_url({ name: name, version_id: version_id }) do |response, operation|
+      c.generate_download_url({ name: name, version_id: version_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_download_url name: name, version_id: version_id do |response, operation|
+      c.generate_download_url name: name, version_id: version_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_download_url ::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new(name: name, version_id: version_id) do |response, operation|
+      c.generate_download_url ::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new(name: name, version_id: version_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_download_url({ name: name, version_id: version_id }, grpc_options) do |response, operation|
+      c.generate_download_url({ name: name, version_id: version_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_download_url(::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new(name: name, version_id: version_id), grpc_options) do |response, operation|
+      c.generate_download_url(::Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new(name: name, version_id: version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -586,36 +586,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -646,36 +646,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -706,36 +706,36 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+      c = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

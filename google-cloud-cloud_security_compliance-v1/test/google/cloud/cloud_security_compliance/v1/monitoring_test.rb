@@ -90,40 +90,40 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_framework_compliance_summaries_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |response, operation|
+      c.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_framework_compliance_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |response, operation|
+      c.list_framework_compliance_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_framework_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |response, operation|
+      c.list_framework_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, grpc_options) do |response, operation|
+      c.list_framework_compliance_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_framework_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), grpc_options) do |response, operation|
+      c.list_framework_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkComplianceSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -161,40 +161,40 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_finding_summaries_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }) do |response, operation|
+      c.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_finding_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time do |response, operation|
+      c.list_finding_summaries parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_finding_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time) do |response, operation|
+      c.list_finding_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }, grpc_options) do |response, operation|
+      c.list_finding_summaries({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_finding_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time), grpc_options) do |response, operation|
+      c.list_finding_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListFindingSummariesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, end_time: end_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -228,36 +228,36 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, fetch_framework_compliance_report_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_framework_compliance_report({ name: name, end_time: end_time, filter: filter }) do |response, operation|
+      c.fetch_framework_compliance_report({ name: name, end_time: end_time, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_framework_compliance_report name: name, end_time: end_time, filter: filter do |response, operation|
+      c.fetch_framework_compliance_report name: name, end_time: end_time, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time, filter: filter) do |response, operation|
+      c.fetch_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_framework_compliance_report({ name: name, end_time: end_time, filter: filter }, grpc_options) do |response, operation|
+      c.fetch_framework_compliance_report({ name: name, end_time: end_time, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time, filter: filter), grpc_options) do |response, operation|
+      c.fetch_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::FetchFrameworkComplianceReportRequest.new(name: name, end_time: end_time, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -294,40 +294,40 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, list_control_compliance_summaries_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_control_compliance_summaries parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_control_compliance_summaries parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_control_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_control_compliance_summaries ::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_control_compliance_summaries({ parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_control_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_control_compliance_summaries(::Google::Cloud::CloudSecurityCompliance::V1::ListControlComplianceSummariesRequest.new(parent: parent, end_time: end_time, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -361,36 +361,36 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::ClientTest < Min
 
     Gapic::ServiceStub.stub :new, aggregate_framework_compliance_report_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Monitoring::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }) do |response, operation|
+      c.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.aggregate_framework_compliance_report name: name, interval: interval, filter: filter do |response, operation|
+      c.aggregate_framework_compliance_report name: name, interval: interval, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.aggregate_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter) do |response, operation|
+      c.aggregate_framework_compliance_report ::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }, grpc_options) do |response, operation|
+      c.aggregate_framework_compliance_report({ name: name, interval: interval, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.aggregate_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter), grpc_options) do |response, operation|
+      c.aggregate_framework_compliance_report(::Google::Cloud::CloudSecurityCompliance::V1::AggregateFrameworkComplianceReportRequest.new(name: name, interval: interval, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

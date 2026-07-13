@@ -101,32 +101,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_create_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers }) do |_result, response|
+        c.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_cluster project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers do |_result, response|
+        c.create_cluster project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_cluster ::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers) do |_result, response|
+        c.create_cluster ::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers }, call_options) do |_result, response|
+        c.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_cluster(::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers), call_options) do |_result, response|
+        c.create_cluster(::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -161,32 +161,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_update_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_cluster ::Google::Cloud::Dataproc::V1::UpdateClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_cluster ::Google::Cloud::Dataproc::V1::UpdateClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_cluster(::Google::Cloud::Dataproc::V1::UpdateClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_cluster(::Google::Cloud::Dataproc::V1::UpdateClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster: cluster, graceful_decommission_timeout: graceful_decommission_timeout, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -219,32 +219,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_stop_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |_result, response|
+        c.stop_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |_result, response|
+        c.stop_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_cluster ::Google::Cloud::Dataproc::V1::StopClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |_result, response|
+        c.stop_cluster ::Google::Cloud::Dataproc::V1::StopClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, call_options) do |_result, response|
+        c.stop_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_cluster(::Google::Cloud::Dataproc::V1::StopClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), call_options) do |_result, response|
+        c.stop_cluster(::Google::Cloud::Dataproc::V1::StopClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -277,32 +277,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_start_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |_result, response|
+        c.start_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |_result, response|
+        c.start_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_cluster ::Google::Cloud::Dataproc::V1::StartClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |_result, response|
+        c.start_cluster ::Google::Cloud::Dataproc::V1::StartClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, call_options) do |_result, response|
+        c.start_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_cluster(::Google::Cloud::Dataproc::V1::StartClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), call_options) do |_result, response|
+        c.start_cluster(::Google::Cloud::Dataproc::V1::StartClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -335,32 +335,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_delete_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |_result, response|
+        c.delete_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |_result, response|
+        c.delete_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_cluster ::Google::Cloud::Dataproc::V1::DeleteClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |_result, response|
+        c.delete_cluster ::Google::Cloud::Dataproc::V1::DeleteClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, call_options) do |_result, response|
+        c.delete_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_cluster(::Google::Cloud::Dataproc::V1::DeleteClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), call_options) do |_result, response|
+        c.delete_cluster(::Google::Cloud::Dataproc::V1::DeleteClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -391,32 +391,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_get_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cluster({ project_id: project_id, region: region, cluster_name: cluster_name }) do |_result, response|
+        c.get_cluster({ project_id: project_id, region: region, cluster_name: cluster_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cluster project_id: project_id, region: region, cluster_name: cluster_name do |_result, response|
+        c.get_cluster project_id: project_id, region: region, cluster_name: cluster_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cluster ::Google::Cloud::Dataproc::V1::GetClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name) do |_result, response|
+        c.get_cluster ::Google::Cloud::Dataproc::V1::GetClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cluster({ project_id: project_id, region: region, cluster_name: cluster_name }, call_options) do |_result, response|
+        c.get_cluster({ project_id: project_id, region: region, cluster_name: cluster_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cluster(::Google::Cloud::Dataproc::V1::GetClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), call_options) do |_result, response|
+        c.get_cluster(::Google::Cloud::Dataproc::V1::GetClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -449,32 +449,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_list_clusters_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_clusters_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_clusters({ project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_clusters({ project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_clusters project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_clusters project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_clusters ::Google::Cloud::Dataproc::V1::ListClustersRequest.new(project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_clusters ::Google::Cloud::Dataproc::V1::ListClustersRequest.new(project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_clusters({ project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_clusters({ project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_clusters(::Google::Cloud::Dataproc::V1::ListClustersRequest.new(project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_clusters(::Google::Cloud::Dataproc::V1::ListClustersRequest.new(project_id: project_id, region: region, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -510,32 +510,32 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ClientTest < Minit
     ::Google::Cloud::Dataproc::V1::ClusterController::Rest::ServiceStub.stub :transcode_diagnose_cluster_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, diagnose_cluster_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataproc::V1::ClusterController::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }) do |_result, response|
+        c.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_cluster project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids do |_result, response|
+        c.diagnose_cluster project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_cluster ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids) do |_result, response|
+        c.diagnose_cluster ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }, call_options) do |_result, response|
+        c.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_cluster(::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids), call_options) do |_result, response|
+        c.diagnose_cluster(::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

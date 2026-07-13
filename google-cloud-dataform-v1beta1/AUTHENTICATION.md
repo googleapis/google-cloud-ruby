@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/dataform/v1beta1"
 
-client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+client = ::Google::Longrunning::Operations::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/cloud/dataform/v1beta1"
 
-::Google::Cloud::Dataform::V1beta1::Dataform::Client.configure do |config|
+::Google::Longrunning::Operations::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+client = ::Google::Longrunning::Operations::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/dataform/v1beta1"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+client = ::Google::Longrunning::Operations::Client.new
 ```
 
 ### Local ADC file

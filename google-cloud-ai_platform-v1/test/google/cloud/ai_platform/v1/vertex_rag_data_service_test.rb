@@ -84,40 +84,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_rag_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }) do |response, operation|
+      c.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_rag_corpus parent: parent, rag_corpus: rag_corpus do |response, operation|
+      c.create_rag_corpus parent: parent, rag_corpus: rag_corpus do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_rag_corpus ::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus) do |response, operation|
+      c.create_rag_corpus ::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }, grpc_options) do |response, operation|
+      c.create_rag_corpus({ parent: parent, rag_corpus: rag_corpus }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_rag_corpus(::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus), grpc_options) do |response, operation|
+      c.create_rag_corpus(::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest.new(parent: parent, rag_corpus: rag_corpus), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,40 +147,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_rag_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_rag_corpus({ rag_corpus: rag_corpus }) do |response, operation|
+      c.update_rag_corpus({ rag_corpus: rag_corpus }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_rag_corpus rag_corpus: rag_corpus do |response, operation|
+      c.update_rag_corpus rag_corpus: rag_corpus do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_rag_corpus ::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus) do |response, operation|
+      c.update_rag_corpus ::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_rag_corpus({ rag_corpus: rag_corpus }, grpc_options) do |response, operation|
+      c.update_rag_corpus({ rag_corpus: rag_corpus }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_rag_corpus(::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus), grpc_options) do |response, operation|
+      c.update_rag_corpus(::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest.new(rag_corpus: rag_corpus), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -210,36 +210,36 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_rag_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rag_corpus({ name: name }) do |response, operation|
+      c.get_rag_corpus({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rag_corpus name: name do |response, operation|
+      c.get_rag_corpus name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rag_corpus ::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name) do |response, operation|
+      c.get_rag_corpus ::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rag_corpus({ name: name }, grpc_options) do |response, operation|
+      c.get_rag_corpus({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rag_corpus(::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_rag_corpus(::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -272,40 +272,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_rag_corpora_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rag_corpora parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_rag_corpora parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rag_corpora ::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_rag_corpora ::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_rag_corpora({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rag_corpora(::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_rag_corpora(::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -337,40 +337,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_rag_corpus_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_rag_corpus({ name: name, force: force }) do |response, operation|
+      c.delete_rag_corpus({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_rag_corpus name: name, force: force do |response, operation|
+      c.delete_rag_corpus name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_rag_corpus ::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force) do |response, operation|
+      c.delete_rag_corpus ::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_rag_corpus({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_rag_corpus({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_rag_corpus(::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_rag_corpus(::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -404,36 +404,36 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, upload_rag_file_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }) do |response, operation|
+      c.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upload_rag_file parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config do |response, operation|
+      c.upload_rag_file parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upload_rag_file ::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config) do |response, operation|
+      c.upload_rag_file ::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }, grpc_options) do |response, operation|
+      c.upload_rag_file({ parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upload_rag_file(::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config), grpc_options) do |response, operation|
+      c.upload_rag_file(::Google::Cloud::AIPlatform::V1::UploadRagFileRequest.new(parent: parent, rag_file: rag_file, upload_rag_file_config: upload_rag_file_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -464,40 +464,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, import_rag_files_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }) do |response, operation|
+      c.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_rag_files parent: parent, import_rag_files_config: import_rag_files_config do |response, operation|
+      c.import_rag_files parent: parent, import_rag_files_config: import_rag_files_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_rag_files ::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config) do |response, operation|
+      c.import_rag_files ::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }, grpc_options) do |response, operation|
+      c.import_rag_files({ parent: parent, import_rag_files_config: import_rag_files_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_rag_files(::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config), grpc_options) do |response, operation|
+      c.import_rag_files(::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest.new(parent: parent, import_rag_files_config: import_rag_files_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -527,36 +527,36 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_rag_file_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rag_file({ name: name }) do |response, operation|
+      c.get_rag_file({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rag_file name: name do |response, operation|
+      c.get_rag_file name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rag_file ::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name) do |response, operation|
+      c.get_rag_file ::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rag_file({ name: name }, grpc_options) do |response, operation|
+      c.get_rag_file({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rag_file(::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_rag_file(::Google::Cloud::AIPlatform::V1::GetRagFileRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -589,40 +589,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_rag_files_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_rag_files parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_rag_files parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_rag_files ::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_rag_files ::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_rag_files({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_rag_files(::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_rag_files(::Google::Cloud::AIPlatform::V1::ListRagFilesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -652,40 +652,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_rag_file_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_rag_file({ name: name }) do |response, operation|
+      c.delete_rag_file({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_rag_file name: name do |response, operation|
+      c.delete_rag_file name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_rag_file ::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name) do |response, operation|
+      c.delete_rag_file ::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_rag_file({ name: name }, grpc_options) do |response, operation|
+      c.delete_rag_file({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_rag_file(::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_rag_file(::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -715,40 +715,40 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_rag_engine_config_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_rag_engine_config({ rag_engine_config: rag_engine_config }) do |response, operation|
+      c.update_rag_engine_config({ rag_engine_config: rag_engine_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_rag_engine_config rag_engine_config: rag_engine_config do |response, operation|
+      c.update_rag_engine_config rag_engine_config: rag_engine_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_rag_engine_config ::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config) do |response, operation|
+      c.update_rag_engine_config ::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_rag_engine_config({ rag_engine_config: rag_engine_config }, grpc_options) do |response, operation|
+      c.update_rag_engine_config({ rag_engine_config: rag_engine_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_rag_engine_config(::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config), grpc_options) do |response, operation|
+      c.update_rag_engine_config(::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new(rag_engine_config: rag_engine_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -778,36 +778,36 @@ class ::Google::Cloud::AIPlatform::V1::VertexRagDataService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_rag_engine_config_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_rag_engine_config({ name: name }) do |response, operation|
+      c.get_rag_engine_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_rag_engine_config name: name do |response, operation|
+      c.get_rag_engine_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_rag_engine_config ::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name) do |response, operation|
+      c.get_rag_engine_config ::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_rag_engine_config({ name: name }, grpc_options) do |response, operation|
+      c.get_rag_engine_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_rag_engine_config(::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_rag_engine_config(::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

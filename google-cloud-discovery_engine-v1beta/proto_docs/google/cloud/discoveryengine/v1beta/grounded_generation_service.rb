@@ -114,15 +114,36 @@ module Google
           # @!attribute [rw] frequency_penalty
           #   @return [::Float]
           #     If specified, custom value for frequency penalty will be used.
+          # @!attribute [rw] seed
+          #   @return [::Integer]
+          #     If specified, custom value for the seed will be used.
           # @!attribute [rw] presence_penalty
           #   @return [::Float]
           #     If specified, custom value for presence penalty will be used.
           # @!attribute [rw] max_output_tokens
           #   @return [::Integer]
           #     If specified, custom value for max output tokens will be used.
+          # @!attribute [rw] provisioned_throughput_setting
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GenerationSpec::ProvisionedThroughputSetting]
+          #     Optional. Setting for provisioned throughput.
           class GenerationSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Setting for provisioned throughput.
+            module ProvisionedThroughputSetting
+              # Default value. If the user has remaining provisioned throughput,
+              # provisioned throughput will be used. Otherwise, pay as you go will be
+              # used.
+              PROVISIONED_THROUGHPUT_SETTING_UNSPECIFIED = 0
+
+              # Only use provisioned throughput. If the user has no remaining
+              # provisioned throughput, an error will be returned.
+              PROVISIONED_THROUGHPUT_ONLY = 1
+
+              # Disables provisioned throughput.
+              PAY_AS_YOU_GO_ONLY = 2
+            end
           end
 
           # Describes the options to customize dynamic retrieval.
@@ -161,17 +182,22 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::InlineSource]
           #     If set, grounding is performed with inline content.
           #
-          #     Note: The following fields are mutually exclusive: `inline_source`, `search_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `inline_source`, `search_source`, `google_search_source`, `enterprise_web_retrieval_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] search_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::SearchSource]
           #     If set, grounding is performed with Vertex AI Search.
           #
-          #     Note: The following fields are mutually exclusive: `search_source`, `inline_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `search_source`, `inline_source`, `google_search_source`, `enterprise_web_retrieval_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] google_search_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::GoogleSearchSource]
           #     If set, grounding is performed with Google Search.
           #
-          #     Note: The following fields are mutually exclusive: `google_search_source`, `inline_source`, `search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `google_search_source`, `inline_source`, `search_source`, `enterprise_web_retrieval_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] enterprise_web_retrieval_source
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::EnterpriseWebRetrievalSource]
+          #     If set, grounding is performed with enterprise web retrieval.
+          #
+          #     Note: The following fields are mutually exclusive: `enterprise_web_retrieval_source`, `inline_source`, `search_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class GroundingSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -231,7 +257,27 @@ module Google
             #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::DynamicRetrievalConfiguration]
             #     Optional. Specifies the dynamic retrieval configuration for the given
             #     source.
+            # @!attribute [rw] exclude_domains
+            #   @return [::Array<::String>]
+            #     Optional. List of domains to be excluded from the search results.
+            # @!attribute [rw] blocking_confidence
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Citation::PhishBlockThreshold]
+            #     Optional. Sites with confidence level chosen & above this value will be
+            #     blocked from the search results.
             class GoogleSearchSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Params for using enterprise web retrieval as grounding source.
+            # @!attribute [rw] exclude_domains
+            #   @return [::Array<::String>]
+            #     Optional. List of domains to be excluded from the search results.
+            # @!attribute [rw] blocking_confidence
+            #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Citation::PhishBlockThreshold]
+            #     Optional. Sites with confidence level chosen & above this value will be
+            #     blocked from the search results.
+            class EnterpriseWebRetrievalSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -303,6 +349,12 @@ module Google
             #     GroundingSupport across all claims in the answer candidate.
             #     An support to a fact indicates that the claim is supported by
             #     the fact.
+            # @!attribute [rw] images
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata>]
+            #     Images from the web search.
+            # @!attribute [rw] videos
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse::Candidate::GroundingMetadata::VideoMetadata>]
+            #     Videos from the web search.
             class GroundingMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -405,6 +457,60 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+
+              # Metadata about an image from the web search.
+              # @!attribute [rw] image
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata::Image]
+              #     Metadata about the full size image.
+              # @!attribute [rw] thumbnail
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata::Image]
+              #     Metadata about the thumbnail.
+              # @!attribute [rw] source
+              #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata::WebsiteInfo]
+              #     The details about the website that the image is from.
+              class ImageMetadata
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Metadata about the website that the image is from.
+                # @!attribute [rw] uri
+                #   @return [::String]
+                #     The url of the website.
+                # @!attribute [rw] title
+                #   @return [::String]
+                #     The title of the website.
+                # @!attribute [rw] site_display_name
+                #   @return [::String]
+                #     The display name of the website.
+                class WebsiteInfo
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # Metadata about the image.
+                # @!attribute [rw] uri
+                #   @return [::String]
+                #     The url of the image.
+                # @!attribute [rw] width
+                #   @return [::Integer]
+                #     The width of the image in pixels.
+                # @!attribute [rw] height
+                #   @return [::Integer]
+                #     The height of the image in pixels.
+                class Image
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
+
+              # Metadata about a video from the web search.
+              # @!attribute [rw] youtube_external_id
+              #   @return [::String]
+              #     The external id of the video.
+              class VideoMetadata
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
         end
@@ -417,6 +523,9 @@ module Google
         #     will lead to fewer but very strong citations, while choosing a lower
         #     threshold may lead to more but somewhat weaker citations. If unset, the
         #     threshold will default to 0.6.
+        # @!attribute [rw] enable_claim_level_score
+        #   @return [::Boolean]
+        #     The control flag that enables claim-level grounding score in the response.
         class CheckGroundingSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -508,11 +617,21 @@ module Google
           # @!attribute [rw] start_pos
           #   @return [::Integer]
           #     Position indicating the start of the claim in the answer candidate,
-          #     measured in bytes.
+          #     measured in bytes. Note that this is not measured in characters and,
+          #     therefore, must be rendered in the user interface keeping in mind that
+          #     some characters may take more than one byte. For example,
+          #     if the claim text contains non-ASCII characters, the start and end
+          #     positions vary when measured in characters
+          #     (programming-language-dependent) and when measured in bytes
+          #     (programming-language-independent).
           # @!attribute [rw] end_pos
           #   @return [::Integer]
           #     Position indicating the end of the claim in the answer candidate,
-          #     exclusive.
+          #     exclusive, in bytes. Note that this is not measured in characters and,
+          #     therefore, must be rendered as such. For example, if the claim text
+          #     contains non-ASCII characters, the start and end positions vary when
+          #     measured in characters (programming-language-dependent) and when measured
+          #     in bytes (programming-language-independent).
           # @!attribute [rw] claim_text
           #   @return [::String]
           #     Text for the claim in the answer candidate. Always provided regardless of
@@ -530,14 +649,76 @@ module Google
           #     decided this claim doesn't require attribution/grounding check, this
           #     field will be set to false. In that case, no grounding check was done for
           #     the claim and therefore
-          #     {::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingResponse::Claim#citation_indices citation_indices},
-          #     [anti_citation_indices][google.cloud.discoveryengine.v1beta.CheckGroundingResponse.Claim.anti_citation_indices],
-          #     and
-          #     [score][google.cloud.discoveryengine.v1beta.CheckGroundingResponse.Claim.score]
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingResponse::Claim#citation_indices citation_indices}
           #     should not be returned.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     Confidence score for the claim in the answer candidate, in the range of
+          #     [0, 1]. This is set only when
+          #     `CheckGroundingRequest.grounding_spec.enable_claim_level_score` is true.
           class Claim
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A collection of source attributions for a piece of content.
+        # @!attribute [r] citations
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Citation>]
+        #     Output only. List of citations.
+        class CitationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Source attributions for content.
+        # @!attribute [r] start_index
+        #   @return [::Integer]
+        #     Output only. Start index into the content.
+        # @!attribute [r] end_index
+        #   @return [::Integer]
+        #     Output only. End index into the content.
+        # @!attribute [r] uri
+        #   @return [::String]
+        #     Output only. Url reference of the attribution.
+        # @!attribute [r] title
+        #   @return [::String]
+        #     Output only. Title of the attribution.
+        # @!attribute [r] license
+        #   @return [::String]
+        #     Output only. License of the attribution.
+        # @!attribute [r] publication_date
+        #   @return [::Google::Type::Date]
+        #     Output only. Publication date of the attribution.
+        class Citation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # These are available confidence level user can set to block malicious urls
+          # with chosen confidence and above. For understanding different confidence of
+          # webrisk, please refer to
+          # https://cloud.google.com/web-risk/docs/reference/rpc/google.cloud.webrisk.v1eap1#confidencelevel
+          module PhishBlockThreshold
+            # Defaults to unspecified.
+            PHISH_BLOCK_THRESHOLD_UNSPECIFIED = 0
+
+            # Blocks Low and above confidence URL that is risky.
+            BLOCK_LOW_AND_ABOVE = 30
+
+            # Blocks Medium and above confidence URL that is risky.
+            BLOCK_MEDIUM_AND_ABOVE = 40
+
+            # Blocks High and above confidence URL that is risky.
+            BLOCK_HIGH_AND_ABOVE = 50
+
+            # Blocks Higher and above confidence URL that is risky.
+            BLOCK_HIGHER_AND_ABOVE = 55
+
+            # Blocks Very high and above confidence URL that is risky.
+            BLOCK_VERY_HIGH_AND_ABOVE = 60
+
+            # Blocks Extremely high confidence URL that is risky.
+            BLOCK_ONLY_EXTREMELY_HIGH = 100
           end
         end
       end

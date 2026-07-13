@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_list_agents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_agents_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_agents({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_agents({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_agents parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_agents parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_agents ::Google::Cloud::Dialogflow::CX::V3::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_agents ::Google::Cloud::Dialogflow::CX::V3::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_agents({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_agents({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_agents(::Google::Cloud::Dialogflow::CX::V3::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_agents(::Google::Cloud::Dialogflow::CX::V3::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_get_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_agent({ name: name }) do |_result, response|
+        c.get_agent({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_agent name: name do |_result, response|
+        c.get_agent name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_agent ::Google::Cloud::Dialogflow::CX::V3::GetAgentRequest.new(name: name) do |_result, response|
+        c.get_agent ::Google::Cloud::Dialogflow::CX::V3::GetAgentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_agent({ name: name }, call_options) do |_result, response|
+        c.get_agent({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_agent(::Google::Cloud::Dialogflow::CX::V3::GetAgentRequest.new(name: name), call_options) do |_result, response|
+        c.get_agent(::Google::Cloud::Dialogflow::CX::V3::GetAgentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_create_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_agent({ parent: parent, agent: agent }) do |_result, response|
+        c.create_agent({ parent: parent, agent: agent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_agent parent: parent, agent: agent do |_result, response|
+        c.create_agent parent: parent, agent: agent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_agent ::Google::Cloud::Dialogflow::CX::V3::CreateAgentRequest.new(parent: parent, agent: agent) do |_result, response|
+        c.create_agent ::Google::Cloud::Dialogflow::CX::V3::CreateAgentRequest.new(parent: parent, agent: agent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_agent({ parent: parent, agent: agent }, call_options) do |_result, response|
+        c.create_agent({ parent: parent, agent: agent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_agent(::Google::Cloud::Dialogflow::CX::V3::CreateAgentRequest.new(parent: parent, agent: agent), call_options) do |_result, response|
+        c.create_agent(::Google::Cloud::Dialogflow::CX::V3::CreateAgentRequest.new(parent: parent, agent: agent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_update_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_agent({ agent: agent, update_mask: update_mask }) do |_result, response|
+        c.update_agent({ agent: agent, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_agent agent: agent, update_mask: update_mask do |_result, response|
+        c.update_agent agent: agent, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_agent ::Google::Cloud::Dialogflow::CX::V3::UpdateAgentRequest.new(agent: agent, update_mask: update_mask) do |_result, response|
+        c.update_agent ::Google::Cloud::Dialogflow::CX::V3::UpdateAgentRequest.new(agent: agent, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_agent({ agent: agent, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_agent({ agent: agent, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_agent(::Google::Cloud::Dialogflow::CX::V3::UpdateAgentRequest.new(agent: agent, update_mask: update_mask), call_options) do |_result, response|
+        c.update_agent(::Google::Cloud::Dialogflow::CX::V3::UpdateAgentRequest.new(agent: agent, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_delete_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_agent({ name: name }) do |_result, response|
+        c.delete_agent({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_agent name: name do |_result, response|
+        c.delete_agent name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_agent ::Google::Cloud::Dialogflow::CX::V3::DeleteAgentRequest.new(name: name) do |_result, response|
+        c.delete_agent ::Google::Cloud::Dialogflow::CX::V3::DeleteAgentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_agent({ name: name }, call_options) do |_result, response|
+        c.delete_agent({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_agent(::Google::Cloud::Dialogflow::CX::V3::DeleteAgentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_agent(::Google::Cloud::Dialogflow::CX::V3::DeleteAgentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_export_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }) do |_result, response|
+        c.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_agent name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings do |_result, response|
+        c.export_agent name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_agent ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings) do |_result, response|
+        c.export_agent ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }, call_options) do |_result, response|
+        c.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_agent(::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings), call_options) do |_result, response|
+        c.export_agent(::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_restore_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_agent({ name: name, agent_uri: agent_uri, restore_option: restore_option }) do |_result, response|
+        c.restore_agent({ name: name, agent_uri: agent_uri, restore_option: restore_option }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_agent name: name, agent_uri: agent_uri, restore_option: restore_option do |_result, response|
+        c.restore_agent name: name, agent_uri: agent_uri, restore_option: restore_option do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_agent ::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest.new(name: name, agent_uri: agent_uri, restore_option: restore_option) do |_result, response|
+        c.restore_agent ::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest.new(name: name, agent_uri: agent_uri, restore_option: restore_option) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_agent({ name: name, agent_uri: agent_uri, restore_option: restore_option }, call_options) do |_result, response|
+        c.restore_agent({ name: name, agent_uri: agent_uri, restore_option: restore_option }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_agent(::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest.new(name: name, agent_uri: agent_uri, restore_option: restore_option), call_options) do |_result, response|
+        c.restore_agent(::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest.new(name: name, agent_uri: agent_uri, restore_option: restore_option), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_validate_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, validate_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.validate_agent({ name: name, language_code: language_code }) do |_result, response|
+        c.validate_agent({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.validate_agent name: name, language_code: language_code do |_result, response|
+        c.validate_agent name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.validate_agent ::Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.validate_agent ::Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.validate_agent({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.validate_agent({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.validate_agent(::Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.validate_agent(::Google::Cloud::Dialogflow::CX::V3::ValidateAgentRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_get_agent_validation_result_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_agent_validation_result_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_agent_validation_result({ name: name, language_code: language_code }) do |_result, response|
+        c.get_agent_validation_result({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_agent_validation_result name: name, language_code: language_code do |_result, response|
+        c.get_agent_validation_result name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_agent_validation_result ::Google::Cloud::Dialogflow::CX::V3::GetAgentValidationResultRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.get_agent_validation_result ::Google::Cloud::Dialogflow::CX::V3::GetAgentValidationResultRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_agent_validation_result({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.get_agent_validation_result({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_agent_validation_result(::Google::Cloud::Dialogflow::CX::V3::GetAgentValidationResultRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.get_agent_validation_result(::Google::Cloud::Dialogflow::CX::V3::GetAgentValidationResultRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -597,32 +597,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_get_generative_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_generative_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_generative_settings({ name: name, language_code: language_code }) do |_result, response|
+        c.get_generative_settings({ name: name, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_generative_settings name: name, language_code: language_code do |_result, response|
+        c.get_generative_settings name: name, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_generative_settings ::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest.new(name: name, language_code: language_code) do |_result, response|
+        c.get_generative_settings ::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest.new(name: name, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_generative_settings({ name: name, language_code: language_code }, call_options) do |_result, response|
+        c.get_generative_settings({ name: name, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_generative_settings(::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
+        c.get_generative_settings(::Google::Cloud::Dialogflow::CX::V3::GetGenerativeSettingsRequest.new(name: name, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -652,32 +652,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ClientTest < Minitest::
     ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::ServiceStub.stub :transcode_update_generative_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_generative_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Agents::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_generative_settings({ generative_settings: generative_settings, update_mask: update_mask }) do |_result, response|
+        c.update_generative_settings({ generative_settings: generative_settings, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_generative_settings generative_settings: generative_settings, update_mask: update_mask do |_result, response|
+        c.update_generative_settings generative_settings: generative_settings, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_generative_settings ::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest.new(generative_settings: generative_settings, update_mask: update_mask) do |_result, response|
+        c.update_generative_settings ::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest.new(generative_settings: generative_settings, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_generative_settings({ generative_settings: generative_settings, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_generative_settings({ generative_settings: generative_settings, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_generative_settings(::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest.new(generative_settings: generative_settings, update_mask: update_mask), call_options) do |_result, response|
+        c.update_generative_settings(::Google::Cloud::Dialogflow::CX::V3::UpdateGenerativeSettingsRequest.new(generative_settings: generative_settings, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

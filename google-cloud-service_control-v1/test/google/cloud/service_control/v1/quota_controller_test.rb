@@ -86,36 +86,36 @@ class ::Google::Cloud::ServiceControl::V1::QuotaController::ClientTest < Minites
 
     Gapic::ServiceStub.stub :new, allocate_quota_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceControl::V1::QuotaController::Client.new do |config|
+      c = ::Google::Cloud::ServiceControl::V1::QuotaController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.allocate_quota({ service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id }) do |response, operation|
+      c.allocate_quota({ service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.allocate_quota service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id do |response, operation|
+      c.allocate_quota service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.allocate_quota ::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new(service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id) do |response, operation|
+      c.allocate_quota ::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new(service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.allocate_quota({ service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id }, grpc_options) do |response, operation|
+      c.allocate_quota({ service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.allocate_quota(::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new(service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id), grpc_options) do |response, operation|
+      c.allocate_quota(::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new(service_name: service_name, allocate_operation: allocate_operation, service_config_id: service_config_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -84,36 +84,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_study_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_study({ parent: parent, study: study }) do |response, operation|
+      c.create_study({ parent: parent, study: study }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_study parent: parent, study: study do |response, operation|
+      c.create_study parent: parent, study: study do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_study ::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study) do |response, operation|
+      c.create_study ::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_study({ parent: parent, study: study }, grpc_options) do |response, operation|
+      c.create_study({ parent: parent, study: study }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_study(::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study), grpc_options) do |response, operation|
+      c.create_study(::Google::Cloud::AIPlatform::V1::CreateStudyRequest.new(parent: parent, study: study), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_study_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_study({ name: name }) do |response, operation|
+      c.get_study({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_study name: name do |response, operation|
+      c.get_study name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_study ::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name) do |response, operation|
+      c.get_study ::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_study({ name: name }, grpc_options) do |response, operation|
+      c.get_study({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_study(::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_study(::Google::Cloud::AIPlatform::V1::GetStudyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -204,40 +204,40 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_studies_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_studies({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_studies({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_studies parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_studies parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_studies ::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_studies ::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_studies({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_studies({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_studies(::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_studies(::Google::Cloud::AIPlatform::V1::ListStudiesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -267,36 +267,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_study_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_study({ name: name }) do |response, operation|
+      c.delete_study({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_study name: name do |response, operation|
+      c.delete_study name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_study ::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name) do |response, operation|
+      c.delete_study ::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_study({ name: name }, grpc_options) do |response, operation|
+      c.delete_study({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_study(::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_study(::Google::Cloud::AIPlatform::V1::DeleteStudyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -327,36 +327,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, lookup_study_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.lookup_study({ parent: parent, display_name: display_name }) do |response, operation|
+      c.lookup_study({ parent: parent, display_name: display_name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.lookup_study parent: parent, display_name: display_name do |response, operation|
+      c.lookup_study parent: parent, display_name: display_name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.lookup_study ::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name) do |response, operation|
+      c.lookup_study ::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.lookup_study({ parent: parent, display_name: display_name }, grpc_options) do |response, operation|
+      c.lookup_study({ parent: parent, display_name: display_name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.lookup_study(::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name), grpc_options) do |response, operation|
+      c.lookup_study(::Google::Cloud::AIPlatform::V1::LookupStudyRequest.new(parent: parent, display_name: display_name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,40 +391,40 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, suggest_trials_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }) do |response, operation|
+      c.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.suggest_trials parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts do |response, operation|
+      c.suggest_trials parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.suggest_trials ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts) do |response, operation|
+      c.suggest_trials ::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }, grpc_options) do |response, operation|
+      c.suggest_trials({ parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.suggest_trials(::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts), grpc_options) do |response, operation|
+      c.suggest_trials(::Google::Cloud::AIPlatform::V1::SuggestTrialsRequest.new(parent: parent, suggestion_count: suggestion_count, client_id: client_id, contexts: contexts), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -456,36 +456,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_trial_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_trial({ parent: parent, trial: trial }) do |response, operation|
+      c.create_trial({ parent: parent, trial: trial }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_trial parent: parent, trial: trial do |response, operation|
+      c.create_trial parent: parent, trial: trial do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_trial ::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial) do |response, operation|
+      c.create_trial ::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_trial({ parent: parent, trial: trial }, grpc_options) do |response, operation|
+      c.create_trial({ parent: parent, trial: trial }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_trial(::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial), grpc_options) do |response, operation|
+      c.create_trial(::Google::Cloud::AIPlatform::V1::CreateTrialRequest.new(parent: parent, trial: trial), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -514,36 +514,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_trial_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_trial({ name: name }) do |response, operation|
+      c.get_trial({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_trial name: name do |response, operation|
+      c.get_trial name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_trial ::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name) do |response, operation|
+      c.get_trial ::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_trial({ name: name }, grpc_options) do |response, operation|
+      c.get_trial({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_trial(::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_trial(::Google::Cloud::AIPlatform::V1::GetTrialRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -576,40 +576,40 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_trials_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_trials({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_trials({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_trials parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_trials parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_trials ::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_trials ::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_trials({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_trials({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_trials(::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_trials(::Google::Cloud::AIPlatform::V1::ListTrialsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -641,36 +641,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, add_trial_measurement_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_trial_measurement({ trial_name: trial_name, measurement: measurement }) do |response, operation|
+      c.add_trial_measurement({ trial_name: trial_name, measurement: measurement }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_trial_measurement trial_name: trial_name, measurement: measurement do |response, operation|
+      c.add_trial_measurement trial_name: trial_name, measurement: measurement do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_trial_measurement ::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement) do |response, operation|
+      c.add_trial_measurement ::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_trial_measurement({ trial_name: trial_name, measurement: measurement }, grpc_options) do |response, operation|
+      c.add_trial_measurement({ trial_name: trial_name, measurement: measurement }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_trial_measurement(::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement), grpc_options) do |response, operation|
+      c.add_trial_measurement(::Google::Cloud::AIPlatform::V1::AddTrialMeasurementRequest.new(trial_name: trial_name, measurement: measurement), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -705,36 +705,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, complete_trial_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }) do |response, operation|
+      c.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.complete_trial name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason do |response, operation|
+      c.complete_trial name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.complete_trial ::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason) do |response, operation|
+      c.complete_trial ::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }, grpc_options) do |response, operation|
+      c.complete_trial({ name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.complete_trial(::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason), grpc_options) do |response, operation|
+      c.complete_trial(::Google::Cloud::AIPlatform::V1::CompleteTrialRequest.new(name: name, final_measurement: final_measurement, trial_infeasible: trial_infeasible, infeasible_reason: infeasible_reason), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -763,36 +763,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_trial_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_trial({ name: name }) do |response, operation|
+      c.delete_trial({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_trial name: name do |response, operation|
+      c.delete_trial name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_trial ::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name) do |response, operation|
+      c.delete_trial ::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_trial({ name: name }, grpc_options) do |response, operation|
+      c.delete_trial({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_trial(::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_trial(::Google::Cloud::AIPlatform::V1::DeleteTrialRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -821,40 +821,40 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, check_trial_early_stopping_state_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.check_trial_early_stopping_state({ trial_name: trial_name }) do |response, operation|
+      c.check_trial_early_stopping_state({ trial_name: trial_name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.check_trial_early_stopping_state trial_name: trial_name do |response, operation|
+      c.check_trial_early_stopping_state trial_name: trial_name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.check_trial_early_stopping_state ::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name) do |response, operation|
+      c.check_trial_early_stopping_state ::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.check_trial_early_stopping_state({ trial_name: trial_name }, grpc_options) do |response, operation|
+      c.check_trial_early_stopping_state({ trial_name: trial_name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.check_trial_early_stopping_state(::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name), grpc_options) do |response, operation|
+      c.check_trial_early_stopping_state(::Google::Cloud::AIPlatform::V1::CheckTrialEarlyStoppingStateRequest.new(trial_name: trial_name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -884,36 +884,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, stop_trial_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_trial({ name: name }) do |response, operation|
+      c.stop_trial({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_trial name: name do |response, operation|
+      c.stop_trial name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_trial ::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name) do |response, operation|
+      c.stop_trial ::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_trial({ name: name }, grpc_options) do |response, operation|
+      c.stop_trial({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_trial(::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_trial(::Google::Cloud::AIPlatform::V1::StopTrialRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -942,36 +942,36 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_optimal_trials_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::VizierService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_optimal_trials({ parent: parent }) do |response, operation|
+      c.list_optimal_trials({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_optimal_trials parent: parent do |response, operation|
+      c.list_optimal_trials parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_optimal_trials ::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent) do |response, operation|
+      c.list_optimal_trials ::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_optimal_trials({ parent: parent }, grpc_options) do |response, operation|
+      c.list_optimal_trials({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_optimal_trials(::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_optimal_trials(::Google::Cloud::AIPlatform::V1::ListOptimalTrialsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

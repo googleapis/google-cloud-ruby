@@ -50,6 +50,28 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set, the latest DataScan job result will be published as
         #     Dataplex Universal Catalog metadata.
+        # @!attribute [rw] enable_catalog_based_rules
+        #   @return [::Boolean]
+        #     Optional. If enabled, the data scan will retrieve rules defined in the
+        #     dataplex-types.global.data-rules aspect on all paths of the catalog entry
+        #     corresponding to the BigQuery table resource and all attached glossary
+        #     terms. The path that data-rules aspect is attached on the table entry
+        #     defines the column that the rule will be evaluated against. For glossary
+        #     terms, the path that the terms are attached on the table entry defines the
+        #     column that the rule will be evaluated against. At the start of scan
+        #     execution, the rules reflect the latest state retrieved from the catalog
+        #     entry and any updates on the rules thereafter are ignored for that
+        #     execution. The updates will be reflected from the next execution. Rules
+        #     defined in the datascan must be empty if this field is enabled.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter for selectively running a subset of rules. You can filter
+        #     the request by the name or attribute key-value pairs defined on the rule.
+        #     If not specified, all rules are run. The filter is applicable to both, the
+        #     rules retrieved from catalog and explicitly defined rules in the scan.
+        #     Please see [filter
+        #     syntax](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview#rule-filtering)
+        #     for more details.
         class DataQualitySpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -293,9 +315,41 @@ module Google
         #     assertion rule.
         #
         #     This field is only valid for SQL assertion rules.
+        # @!attribute [r] debug_queries_result_sets
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult::DebugQueryResultSet>]
+        #     Output only. Contains the results of all debug queries for this rule.
+        #     The number of result sets will correspond to the number of
+        #     {::Google::Cloud::Dataplex::V1::DataQualityRule#debug_queries debug_queries}.
         class DataQualityRuleResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Contains a single result from the debug query.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Specifies the name of the result. Available if provided with an explicit
+          #     alias using `[AS] alias`.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     Indicates the data type of the result. For more information, see
+          #     [BigQuery data
+          #     types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types).
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     Represents the value of the result as a string.
+          class DebugQueryResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Contains all results from a debug query.
+          # @!attribute [r] results
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult::DebugQueryResult>]
+          #     Output only. Contains all results. Up to 10 results can be returned.
+          class DebugQueryResultSet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # DataQualityDimensionResult provides a more detailed, per-dimension view of
@@ -335,53 +389,60 @@ module Google
         #     Row-level rule which evaluates whether each column value lies between a
         #     specified range.
         #
-        #     Note: The following fields are mutually exclusive: `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] non_null_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::NonNullExpectation]
         #     Row-level rule which evaluates whether each column value is null.
         #
-        #     Note: The following fields are mutually exclusive: `non_null_expectation`, `range_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `non_null_expectation`, `range_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] set_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::SetExpectation]
         #     Row-level rule which evaluates whether each column value is contained by
         #     a specified set.
         #
-        #     Note: The following fields are mutually exclusive: `set_expectation`, `range_expectation`, `non_null_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `set_expectation`, `range_expectation`, `non_null_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RegexExpectation]
         #     Row-level rule which evaluates whether each column value matches a
         #     specified regex.
         #
-        #     Note: The following fields are mutually exclusive: `regex_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `regex_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uniqueness_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::UniquenessExpectation]
         #     Row-level rule which evaluates whether each column value is unique.
         #
-        #     Note: The following fields are mutually exclusive: `uniqueness_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `uniqueness_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] statistic_range_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::StatisticRangeExpectation]
         #     Aggregate rule which evaluates whether the column aggregate
         #     statistic lies between a specified range.
         #
-        #     Note: The following fields are mutually exclusive: `statistic_range_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `statistic_range_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_condition_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RowConditionExpectation]
         #     Row-level rule which evaluates whether each row in a table passes the
         #     specified condition.
         #
-        #     Note: The following fields are mutually exclusive: `row_condition_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `row_condition_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `table_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table_condition_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::TableConditionExpectation]
         #     Aggregate rule which evaluates whether the provided expression is true
         #     for a table.
         #
-        #     Note: The following fields are mutually exclusive: `table_condition_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `table_condition_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `sql_assertion`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_assertion
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::SqlAssertion]
         #     Aggregate rule which evaluates the number of rows returned for the
         #     provided statement. If any rows are returned, this rule fails.
         #
-        #     Note: The following fields are mutually exclusive: `sql_assertion`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_assertion`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `template_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] template_reference
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::TemplateReference]
+        #     Aggregate rule which references a rule template and provides the
+        #     parameters to be substituted in the template. If any rows are returned,
+        #     this rule fails.
+        #
+        #     Note: The following fields are mutually exclusive: `template_reference`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] column
         #   @return [::String]
         #     Optional. The unnested column which this rule is evaluated against.
@@ -399,7 +460,7 @@ module Google
         #     * UniquenessExpectation
         # @!attribute [rw] dimension
         #   @return [::String]
-        #     Required. The dimension a rule belongs to. Results are also aggregated at
+        #     Optional. The dimension a rule belongs to. Results are also aggregated at
         #     the dimension level. Custom dimension name is supported with all uppercase
         #     letters and maximum length of 30 characters.
         # @!attribute [rw] threshold
@@ -428,6 +489,20 @@ module Google
         #   @return [::Boolean]
         #     Optional. Whether the Rule is active or suspended.
         #     Default is false.
+        # @!attribute [rw] attributes
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Map of attribute name and value linked to the rule. The rules to
+        #     evaluate can be filtered based on attributes provided here and a filter
+        #     expression provided in the DataQualitySpec.filter field.
+        # @!attribute [r] rule_source
+        #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RuleSource]
+        #     Output only. Contains information about the source of the rule and its
+        #     relationship with the BigQuery table, where applicable.
+        # @!attribute [rw] debug_queries
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRule::DebugQuery>]
+        #     Optional. Specifies the debug queries for this rule.
+        #     Currently, only one query is supported, but this may be expanded in the
+        #     future.
         class DataQualityRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -587,6 +662,161 @@ module Google
           #   @return [::String]
           #     Optional. The SQL statement.
           class SqlAssertion
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A rule that constructs a SQL statement to evaluate using a rule template
+          # and parameter values. If the constructed statement returns any rows, this
+          # rule fails
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The template entry name. Entry must be of EntryType
+          #     `projects/dataplex-types/locations/global/entryTypes/data-quality-rule-template`
+          #     and contains top-level aspect of AspectType
+          #     `projects/dataplex-types/locations/global/aspectTypes/data-quality-rule-template`.
+          #     The format is:
+          #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`
+          # @!attribute [rw] values
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataplex::V1::DataQualityRule::TemplateReference::ParameterValue}]
+          #     Optional. Provides the map of parameter name and value.
+          #     The maximum size of the field is 120KB (encoded as UTF-8).
+          # @!attribute [r] resolved_sql
+          #   @return [::String]
+          #     Output only. The resolved SQL statement generated from the template with
+          #     parameters substituted. It is only populated in the result.
+          # @!attribute [r] rule_template
+          #   @return [::Google::Cloud::Dataplex::V1::DataQualityRuleTemplate]
+          #     Output only. The rule template used to resolve the rule. It is only
+          #     populated in the result.
+          class TemplateReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents a parameter value.
+            # @!attribute [rw] value
+            #   @return [::String]
+            #     Required. Represents the string value of the parameter.
+            class ParameterValue
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::TemplateReference::ParameterValue]
+            class ValuesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Represents the rule source information from Catalog.
+          # @!attribute [r] rule_path_elements
+          #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRule::RuleSource::RulePathElement>]
+          #     Output only. Rule path elements represent information about the
+          #     individual items in the relationship path between the scan resource and
+          #     rule origin in that order.
+          class RuleSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Path Element represents the direct relationship between the rule origin
+            # (aspects) to the BigQuery Entry. Ordering of the rule relationship will
+            # be maintained such that the first entry in the list is the closest
+            # ancestor (BigQuery table itself). A blank source denotes that the rule is
+            # derived directly from the DataScan itself.
+            # @!attribute [r] entry_source
+            #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RuleSource::RulePathElement::EntrySource]
+            #     Output only. Entry source represents information about the related
+            #     source entry.
+            #
+            #     Note: The following fields are mutually exclusive: `entry_source`, `entry_link_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] entry_link_source
+            #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RuleSource::RulePathElement::EntryLinkSource]
+            #     Output only. Entry link source represents information about the entry
+            #     link.
+            #
+            #     Note: The following fields are mutually exclusive: `entry_link_source`, `entry_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class RulePathElement
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Entry source represents information about the related source entry.
+              # @!attribute [r] entry_type
+              #   @return [::String]
+              #     Output only. The entry type to represent the current characteristics
+              #     of the entry in the form of:
+              #     `projects/{project_id_or_number}/locations/{location_id}/entryTypes/{entry-type-id}`.
+              # @!attribute [r] entry
+              #   @return [::String]
+              #     Output only. The entry name in the form of:
+              #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`
+              # @!attribute [r] display_name
+              #   @return [::String]
+              #     Output only. The display name of the entry.
+              class EntrySource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Entry link source represents information about the entry link.
+              # @!attribute [r] entry_link_type
+              #   @return [::String]
+              #     Output only. The entry link type to represent the current
+              #     relationship between the entry and the next entry in the path.
+              #     In the form of:
+              #     `projects/{project_id_or_number}/locations/{location_id}/entryLinkTypes/{entry_link_type_id}`
+              # @!attribute [r] entry_link
+              #   @return [::String]
+              #     Output only. The entry link name in the form of:
+              #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`
+              class EntryLinkSource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # Specifies a SQL statement that is evaluated to return up to 10 scalar
+          # values that are used to debug rules. If the rule fails, the values can help
+          # diagnose the cause of the failure.
+          #
+          # The SQL statement must use [GoogleSQL
+          # syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax),
+          # and must not contain any semicolons.
+          #
+          # You can use the data reference parameter `${data()}` to reference the
+          # source table with all of its precondition filters applied. Examples of
+          # precondition filters include row filters, incremental data filters, and
+          # sampling. For more information, see [Data reference
+          # parameter](https://cloud.google.com/dataplex/docs/auto-data-quality-overview#data-reference-parameter).
+          #
+          # You can also name results with an explicit alias using `[AS] alias`. For
+          # more information, see [BigQuery explicit
+          # aliases](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#explicit_alias_syntax).
+          #
+          # Example: `SELECT MIN(col1) AS min_col1, MAX(col1) AS max_col1 FROM
+          # $\\{data()}`
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     Optional. Specifies the description of the debug query.
+          #
+          #     * The maximum length is 1,024 characters.
+          # @!attribute [rw] sql_statement
+          #   @return [::String]
+          #     Required. Specifies the SQL statement to be executed.
+          class DebugQuery
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AttributesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

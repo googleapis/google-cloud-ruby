@@ -1,5 +1,23 @@
 # Release History
 
+### 1.17.0 (2026-06-30)
+
+#### Features
+
+* speech activity event is configurable through InputAudioConfig.enable_voice_activity_events ([#34671](https://github.com/googleapis/google-cloud-ruby/issues/34671)) 
+
+### 1.16.1 (2026-06-22)
+
+#### Documentation
+
+* clarified OUTPUT_AUDIO_ENCODING_MP3 ([#34638](https://github.com/googleapis/google-cloud-ruby/issues/34638)) 
+
+### 1.16.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
 ### 1.15.0 (2026-03-31)
 
 #### Features

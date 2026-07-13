@@ -86,36 +86,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, create_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_connection({ parent: parent, connection_id: connection_id, connection: connection }) do |response, operation|
+      c.create_connection({ parent: parent, connection_id: connection_id, connection: connection }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_connection parent: parent, connection_id: connection_id, connection: connection do |response, operation|
+      c.create_connection parent: parent, connection_id: connection_id, connection: connection do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_connection ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection) do |response, operation|
+      c.create_connection ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_connection({ parent: parent, connection_id: connection_id, connection: connection }, grpc_options) do |response, operation|
+      c.create_connection({ parent: parent, connection_id: connection_id, connection: connection }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_connection(::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), grpc_options) do |response, operation|
+      c.create_connection(::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new(parent: parent, connection_id: connection_id, connection: connection), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_connection({ name: name }) do |response, operation|
+      c.get_connection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_connection name: name do |response, operation|
+      c.get_connection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_connection ::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new(name: name) do |response, operation|
+      c.get_connection ::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_connection({ name: name }, grpc_options) do |response, operation|
+      c.get_connection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_connection(::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_connection(::Google::Cloud::Bigquery::Connection::V1::GetConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,40 +206,40 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, list_connections_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_connections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_connections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_connections ::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_connections ::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_connections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_connections(::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_connections(::Google::Cloud::Bigquery::Connection::V1::ListConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -273,36 +273,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, update_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_connection({ name: name, connection: connection, update_mask: update_mask }) do |response, operation|
+      c.update_connection({ name: name, connection: connection, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_connection name: name, connection: connection, update_mask: update_mask do |response, operation|
+      c.update_connection name: name, connection: connection, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_connection ::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask) do |response, operation|
+      c.update_connection ::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_connection({ name: name, connection: connection, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_connection({ name: name, connection: connection, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_connection(::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_connection(::Google::Cloud::Bigquery::Connection::V1::UpdateConnectionRequest.new(name: name, connection: connection, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, delete_connection_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_connection({ name: name }) do |response, operation|
+      c.delete_connection({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_connection name: name do |response, operation|
+      c.delete_connection name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_connection ::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new(name: name) do |response, operation|
+      c.delete_connection ::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_connection({ name: name }, grpc_options) do |response, operation|
+      c.delete_connection({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_connection(::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_connection(::Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,36 +391,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -453,36 +453,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -513,36 +513,36 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

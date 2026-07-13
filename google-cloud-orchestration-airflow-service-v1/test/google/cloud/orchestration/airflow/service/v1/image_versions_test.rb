@@ -88,40 +88,40 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Clien
 
     Gapic::ServiceStub.stub :new, list_image_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client.new do |config|
+      c = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }) do |response, operation|
+      c.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_image_versions parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases do |response, operation|
+      c.list_image_versions parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_image_versions ::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases) do |response, operation|
+      c.list_image_versions ::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }, grpc_options) do |response, operation|
+      c.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_image_versions(::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases), grpc_options) do |response, operation|
+      c.list_image_versions(::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

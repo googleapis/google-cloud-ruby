@@ -98,32 +98,32 @@ class ::Google::Cloud::Talent::V4beta1::EventService::Rest::ClientTest < Minites
     ::Google::Cloud::Talent::V4beta1::EventService::Rest::ServiceStub.stub :transcode_create_client_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_client_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::EventService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::EventService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_client_event({ parent: parent, client_event: client_event }) do |_result, response|
+        c.create_client_event({ parent: parent, client_event: client_event }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_client_event parent: parent, client_event: client_event do |_result, response|
+        c.create_client_event parent: parent, client_event: client_event do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event) do |_result, response|
+        c.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_client_event({ parent: parent, client_event: client_event }, call_options) do |_result, response|
+        c.create_client_event({ parent: parent, client_event: client_event }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_client_event(::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), call_options) do |_result, response|
+        c.create_client_event(::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

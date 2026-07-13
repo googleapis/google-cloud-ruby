@@ -82,36 +82,36 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_project_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_project({ name: name }) do |response, operation|
+      c.get_project({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_project name: name do |response, operation|
+      c.get_project name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_project ::Google::Cloud::ResourceManager::V3::GetProjectRequest.new(name: name) do |response, operation|
+      c.get_project ::Google::Cloud::ResourceManager::V3::GetProjectRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_project({ name: name }, grpc_options) do |response, operation|
+      c.get_project({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_project(::Google::Cloud::ResourceManager::V3::GetProjectRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_project(::Google::Cloud::ResourceManager::V3::GetProjectRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,40 +146,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, list_projects_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_projects({ parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted }) do |response, operation|
+      c.list_projects({ parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_projects parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted do |response, operation|
+      c.list_projects parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_projects ::Google::Cloud::ResourceManager::V3::ListProjectsRequest.new(parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted) do |response, operation|
+      c.list_projects ::Google::Cloud::ResourceManager::V3::ListProjectsRequest.new(parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_projects({ parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_projects({ parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_projects(::Google::Cloud::ResourceManager::V3::ListProjectsRequest.new(parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_projects(::Google::Cloud::ResourceManager::V3::ListProjectsRequest.new(parent: parent, page_token: page_token, page_size: page_size, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -213,40 +213,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, search_projects_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_projects({ query: query, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.search_projects({ query: query, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_projects query: query, page_token: page_token, page_size: page_size do |response, operation|
+      c.search_projects query: query, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_projects ::Google::Cloud::ResourceManager::V3::SearchProjectsRequest.new(query: query, page_token: page_token, page_size: page_size) do |response, operation|
+      c.search_projects ::Google::Cloud::ResourceManager::V3::SearchProjectsRequest.new(query: query, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_projects({ query: query, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.search_projects({ query: query, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_projects(::Google::Cloud::ResourceManager::V3::SearchProjectsRequest.new(query: query, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.search_projects(::Google::Cloud::ResourceManager::V3::SearchProjectsRequest.new(query: query, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -276,40 +276,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, create_project_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_project({ project: project }) do |response, operation|
+      c.create_project({ project: project }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_project project: project do |response, operation|
+      c.create_project project: project do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_project ::Google::Cloud::ResourceManager::V3::CreateProjectRequest.new(project: project) do |response, operation|
+      c.create_project ::Google::Cloud::ResourceManager::V3::CreateProjectRequest.new(project: project) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_project({ project: project }, grpc_options) do |response, operation|
+      c.create_project({ project: project }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_project(::Google::Cloud::ResourceManager::V3::CreateProjectRequest.new(project: project), grpc_options) do |response, operation|
+      c.create_project(::Google::Cloud::ResourceManager::V3::CreateProjectRequest.new(project: project), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -341,40 +341,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, update_project_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_project({ project: project, update_mask: update_mask }) do |response, operation|
+      c.update_project({ project: project, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_project project: project, update_mask: update_mask do |response, operation|
+      c.update_project project: project, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_project ::Google::Cloud::ResourceManager::V3::UpdateProjectRequest.new(project: project, update_mask: update_mask) do |response, operation|
+      c.update_project ::Google::Cloud::ResourceManager::V3::UpdateProjectRequest.new(project: project, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_project({ project: project, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_project({ project: project, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_project(::Google::Cloud::ResourceManager::V3::UpdateProjectRequest.new(project: project, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_project(::Google::Cloud::ResourceManager::V3::UpdateProjectRequest.new(project: project, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -406,40 +406,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, move_project_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.move_project({ name: name, destination_parent: destination_parent }) do |response, operation|
+      c.move_project({ name: name, destination_parent: destination_parent }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.move_project name: name, destination_parent: destination_parent do |response, operation|
+      c.move_project name: name, destination_parent: destination_parent do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.move_project ::Google::Cloud::ResourceManager::V3::MoveProjectRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
+      c.move_project ::Google::Cloud::ResourceManager::V3::MoveProjectRequest.new(name: name, destination_parent: destination_parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.move_project({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
+      c.move_project({ name: name, destination_parent: destination_parent }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.move_project(::Google::Cloud::ResourceManager::V3::MoveProjectRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
+      c.move_project(::Google::Cloud::ResourceManager::V3::MoveProjectRequest.new(name: name, destination_parent: destination_parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -469,40 +469,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, delete_project_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_project({ name: name }) do |response, operation|
+      c.delete_project({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_project name: name do |response, operation|
+      c.delete_project name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_project ::Google::Cloud::ResourceManager::V3::DeleteProjectRequest.new(name: name) do |response, operation|
+      c.delete_project ::Google::Cloud::ResourceManager::V3::DeleteProjectRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_project({ name: name }, grpc_options) do |response, operation|
+      c.delete_project({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_project(::Google::Cloud::ResourceManager::V3::DeleteProjectRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_project(::Google::Cloud::ResourceManager::V3::DeleteProjectRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -532,40 +532,40 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, undelete_project_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undelete_project({ name: name }) do |response, operation|
+      c.undelete_project({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undelete_project name: name do |response, operation|
+      c.undelete_project name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undelete_project ::Google::Cloud::ResourceManager::V3::UndeleteProjectRequest.new(name: name) do |response, operation|
+      c.undelete_project ::Google::Cloud::ResourceManager::V3::UndeleteProjectRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undelete_project({ name: name }, grpc_options) do |response, operation|
+      c.undelete_project({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undelete_project(::Google::Cloud::ResourceManager::V3::UndeleteProjectRequest.new(name: name), grpc_options) do |response, operation|
+      c.undelete_project(::Google::Cloud::ResourceManager::V3::UndeleteProjectRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -597,36 +597,36 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -659,36 +659,36 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -719,36 +719,36 @@ class ::Google::Cloud::ResourceManager::V3::Projects::ClientTest < Minitest::Tes
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
+      c = ::Google::Cloud::ResourceManager::V3::Projects::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

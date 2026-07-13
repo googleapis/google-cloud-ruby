@@ -98,32 +98,32 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
     ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::ServiceStub.stub :transcode_create_assessment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_assessment_client_stub do
         # Create client
-        client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_assessment({ parent: parent, assessment: assessment }) do |_result, response|
+        c.create_assessment({ parent: parent, assessment: assessment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_assessment parent: parent, assessment: assessment do |_result, response|
+        c.create_assessment parent: parent, assessment: assessment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateAssessmentRequest.new(parent: parent, assessment: assessment) do |_result, response|
+        c.create_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateAssessmentRequest.new(parent: parent, assessment: assessment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_assessment({ parent: parent, assessment: assessment }, call_options) do |_result, response|
+        c.create_assessment({ parent: parent, assessment: assessment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateAssessmentRequest.new(parent: parent, assessment: assessment), call_options) do |_result, response|
+        c.create_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateAssessmentRequest.new(parent: parent, assessment: assessment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
     ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::ServiceStub.stub :transcode_annotate_assessment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, annotate_assessment_client_stub do
         # Create client
-        client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::Client.new do |config|
+        c = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }) do |_result, response|
+        c.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.annotate_assessment name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event do |_result, response|
+        c.annotate_assessment name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event) do |_result, response|
+        c.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }, call_options) do |_result, response|
+        c.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event), call_options) do |_result, response|
+        c.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

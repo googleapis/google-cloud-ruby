@@ -88,36 +88,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }) do |response, operation|
+      c.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.predict endpoint: endpoint, instances: instances, parameters: parameters, labels: labels do |response, operation|
+      c.predict endpoint: endpoint, instances: instances, parameters: parameters, labels: labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels) do |response, operation|
+      c.predict ::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }, grpc_options) do |response, operation|
+      c.predict({ endpoint: endpoint, instances: instances, parameters: parameters, labels: labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels), grpc_options) do |response, operation|
+      c.predict(::Google::Cloud::AIPlatform::V1::PredictRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, raw_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.raw_predict({ endpoint: endpoint, http_body: http_body }) do |response, operation|
+      c.raw_predict({ endpoint: endpoint, http_body: http_body }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.raw_predict endpoint: endpoint, http_body: http_body do |response, operation|
+      c.raw_predict endpoint: endpoint, http_body: http_body do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.raw_predict ::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |response, operation|
+      c.raw_predict ::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.raw_predict({ endpoint: endpoint, http_body: http_body }, grpc_options) do |response, operation|
+      c.raw_predict({ endpoint: endpoint, http_body: http_body }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.raw_predict(::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body), grpc_options) do |response, operation|
+      c.raw_predict(::Google::Cloud::AIPlatform::V1::RawPredictRequest.new(endpoint: endpoint, http_body: http_body), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,12 +208,12 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, stream_raw_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stream_raw_predict({ endpoint: endpoint, http_body: http_body }) do |response, operation|
+      c.stream_raw_predict({ endpoint: endpoint, http_body: http_body }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Api::HttpBody, r
@@ -222,7 +222,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use named arguments
-      client.stream_raw_predict endpoint: endpoint, http_body: http_body do |response, operation|
+      c.stream_raw_predict endpoint: endpoint, http_body: http_body do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Api::HttpBody, r
@@ -231,7 +231,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object
-      client.stream_raw_predict ::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |response, operation|
+      c.stream_raw_predict ::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Api::HttpBody, r
@@ -240,7 +240,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object with options
-      client.stream_raw_predict({ endpoint: endpoint, http_body: http_body }, grpc_options) do |response, operation|
+      c.stream_raw_predict({ endpoint: endpoint, http_body: http_body }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Api::HttpBody, r
@@ -249,7 +249,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.stream_raw_predict(::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body), grpc_options) do |response, operation|
+      c.stream_raw_predict(::Google::Cloud::AIPlatform::V1::StreamRawPredictRequest.new(endpoint: endpoint, http_body: http_body), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Api::HttpBody, r
@@ -285,36 +285,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, direct_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |response, operation|
+      c.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.direct_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |response, operation|
+      c.direct_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.direct_predict ::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |response, operation|
+      c.direct_predict ::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, grpc_options) do |response, operation|
+      c.direct_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.direct_predict(::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), grpc_options) do |response, operation|
+      c.direct_predict(::Google::Cloud::AIPlatform::V1::DirectPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -347,36 +347,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, direct_raw_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }) do |response, operation|
+      c.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.direct_raw_predict endpoint: endpoint, method_name: method_name, input: input do |response, operation|
+      c.direct_raw_predict endpoint: endpoint, method_name: method_name, input: input do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.direct_raw_predict ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input) do |response, operation|
+      c.direct_raw_predict ::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }, grpc_options) do |response, operation|
+      c.direct_raw_predict({ endpoint: endpoint, method_name: method_name, input: input }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.direct_raw_predict(::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input), grpc_options) do |response, operation|
+      c.direct_raw_predict(::Google::Cloud::AIPlatform::V1::DirectRawPredictRequest.new(endpoint: endpoint, method_name: method_name, input: input), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -407,7 +407,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, stream_direct_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -415,7 +415,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       enum_input = [request_hash, request_proto].to_enum
-      client.stream_direct_predict enum_input do |response, operation|
+      c.stream_direct_predict enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse, r
@@ -427,7 +427,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       stream_input = Gapic::StreamInput.new
-      client.stream_direct_predict stream_input do |response, operation|
+      c.stream_direct_predict stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse, r
@@ -442,7 +442,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       enum_input = [request_hash, request_proto].to_enum
-      client.stream_direct_predict enum_input, grpc_options do |response, operation|
+      c.stream_direct_predict enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse, r
@@ -454,7 +454,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       stream_input = Gapic::StreamInput.new
-      client.stream_direct_predict stream_input, grpc_options do |response, operation|
+      c.stream_direct_predict stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectPredictResponse, r
@@ -499,7 +499,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, stream_direct_raw_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -507,7 +507,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       enum_input = [request_hash, request_proto].to_enum
-      client.stream_direct_raw_predict enum_input do |response, operation|
+      c.stream_direct_raw_predict enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse, r
@@ -519,7 +519,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       stream_input = Gapic::StreamInput.new
-      client.stream_direct_raw_predict stream_input do |response, operation|
+      c.stream_direct_raw_predict stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse, r
@@ -534,7 +534,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       enum_input = [request_hash, request_proto].to_enum
-      client.stream_direct_raw_predict enum_input, grpc_options do |response, operation|
+      c.stream_direct_raw_predict enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse, r
@@ -546,7 +546,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       stream_input = Gapic::StreamInput.new
-      client.stream_direct_raw_predict stream_input, grpc_options do |response, operation|
+      c.stream_direct_raw_predict stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamDirectRawPredictResponse, r
@@ -591,7 +591,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, streaming_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -599,7 +599,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_predict enum_input do |response, operation|
+      c.streaming_predict enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -611,7 +611,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       stream_input = Gapic::StreamInput.new
-      client.streaming_predict stream_input do |response, operation|
+      c.streaming_predict stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -626,7 +626,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_predict enum_input, grpc_options do |response, operation|
+      c.streaming_predict enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -638,7 +638,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, inputs: inputs, parameters: parameters }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new endpoint: endpoint, inputs: inputs, parameters: parameters
       stream_input = Gapic::StreamInput.new
-      client.streaming_predict stream_input, grpc_options do |response, operation|
+      c.streaming_predict stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -685,12 +685,12 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, server_streaming_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |response, operation|
+      c.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -699,7 +699,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use named arguments
-      client.server_streaming_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |response, operation|
+      c.server_streaming_predict endpoint: endpoint, inputs: inputs, parameters: parameters do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -708,7 +708,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object
-      client.server_streaming_predict ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |response, operation|
+      c.server_streaming_predict ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -717,7 +717,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object with options
-      client.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, grpc_options) do |response, operation|
+      c.server_streaming_predict({ endpoint: endpoint, inputs: inputs, parameters: parameters }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -726,7 +726,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.server_streaming_predict(::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), grpc_options) do |response, operation|
+      c.server_streaming_predict(::Google::Cloud::AIPlatform::V1::StreamingPredictRequest.new(endpoint: endpoint, inputs: inputs, parameters: parameters), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingPredictResponse, r
@@ -760,7 +760,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, streaming_raw_predict_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -768,7 +768,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_raw_predict enum_input do |response, operation|
+      c.streaming_raw_predict enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
@@ -780,7 +780,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       stream_input = Gapic::StreamInput.new
-      client.streaming_raw_predict stream_input do |response, operation|
+      c.streaming_raw_predict stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
@@ -795,7 +795,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_raw_predict enum_input, grpc_options do |response, operation|
+      c.streaming_raw_predict enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
@@ -807,7 +807,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       request_hash = { endpoint: endpoint, method_name: method_name, input: input }
       request_proto = ::Google::Cloud::AIPlatform::V1::StreamingRawPredictRequest.new endpoint: endpoint, method_name: method_name, input: input
       stream_input = Gapic::StreamInput.new
-      client.streaming_raw_predict stream_input, grpc_options do |response, operation|
+      c.streaming_raw_predict stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::StreamingRawPredictResponse, r
@@ -858,36 +858,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, explain_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }) do |response, operation|
+      c.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.explain endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id do |response, operation|
+      c.explain endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.explain ::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id) do |response, operation|
+      c.explain ::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }, grpc_options) do |response, operation|
+      c.explain({ endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.explain(::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id), grpc_options) do |response, operation|
+      c.explain(::Google::Cloud::AIPlatform::V1::ExplainRequest.new(endpoint: endpoint, instances: instances, parameters: parameters, explanation_spec_override: explanation_spec_override, deployed_model_id: deployed_model_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -935,36 +935,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, generate_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |response, operation|
+      c.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |response, operation|
+      c.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |response, operation|
+      c.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, grpc_options) do |response, operation|
+      c.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), grpc_options) do |response, operation|
+      c.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1012,12 +1012,12 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, stream_generate_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |response, operation|
+      c.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1026,7 +1026,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use named arguments
-      client.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |response, operation|
+      c.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1035,7 +1035,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object
-      client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |response, operation|
+      c.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1044,7 +1044,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object with options
-      client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, grpc_options) do |response, operation|
+      c.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1053,7 +1053,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), grpc_options) do |response, operation|
+      c.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1104,36 +1104,36 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, embed_content_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }) do |response, operation|
+      c.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config do |response, operation|
+      c.embed_content model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config) do |response, operation|
+      c.embed_content ::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }, grpc_options) do |response, operation|
+      c.embed_content({ model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config), grpc_options) do |response, operation|
+      c.embed_content(::Google::Cloud::AIPlatform::V1::EmbedContentRequest.new(model: model, content: content, title: title, task_type: task_type, output_dimensionality: output_dimensionality, auto_truncate: auto_truncate, embed_content_config: embed_content_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

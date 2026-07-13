@@ -84,40 +84,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, update_cmek_config_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_cmek_config({ config: config, set_default: set_default }) do |response, operation|
+      c.update_cmek_config({ config: config, set_default: set_default }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cmek_config config: config, set_default: set_default do |response, operation|
+      c.update_cmek_config config: config, set_default: set_default do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cmek_config ::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default) do |response, operation|
+      c.update_cmek_config ::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cmek_config({ config: config, set_default: set_default }, grpc_options) do |response, operation|
+      c.update_cmek_config({ config: config, set_default: set_default }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cmek_config(::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default), grpc_options) do |response, operation|
+      c.update_cmek_config(::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, get_cmek_config_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_cmek_config({ name: name }) do |response, operation|
+      c.get_cmek_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cmek_config name: name do |response, operation|
+      c.get_cmek_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cmek_config ::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name) do |response, operation|
+      c.get_cmek_config ::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cmek_config({ name: name }, grpc_options) do |response, operation|
+      c.get_cmek_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cmek_config(::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_cmek_config(::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -205,36 +205,36 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, list_cmek_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_cmek_configs({ parent: parent }) do |response, operation|
+      c.list_cmek_configs({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_cmek_configs parent: parent do |response, operation|
+      c.list_cmek_configs parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_cmek_configs ::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent) do |response, operation|
+      c.list_cmek_configs ::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_cmek_configs({ parent: parent }, grpc_options) do |response, operation|
+      c.list_cmek_configs({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_cmek_configs(::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_cmek_configs(::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -263,40 +263,40 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, delete_cmek_config_client_stub do
       # Create client
-      client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
+      c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_cmek_config({ name: name }) do |response, operation|
+      c.delete_cmek_config({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_cmek_config name: name do |response, operation|
+      c.delete_cmek_config name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_cmek_config ::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name) do |response, operation|
+      c.delete_cmek_config ::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_cmek_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_cmek_config({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_cmek_config(::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_cmek_config(::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

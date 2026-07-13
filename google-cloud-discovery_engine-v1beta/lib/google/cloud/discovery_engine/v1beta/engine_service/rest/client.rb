@@ -208,7 +208,7 @@ module Google
               # Service calls
 
               ##
-              # Creates a {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
+              # Creates an {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
               #
               # @overload create_engine(request, options = nil)
               #   Pass arguments to `create_engine` via a request object, either of type
@@ -308,7 +308,7 @@ module Google
               end
 
               ##
-              # Deletes a {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
+              # Deletes an {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
               #
               # @overload delete_engine(request, options = nil)
               #   Pass arguments to `delete_engine` via a request object, either of type
@@ -496,7 +496,7 @@ module Google
               end
 
               ##
-              # Gets a {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
+              # Gets an {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
               #
               # @overload get_engine(request, options = nil)
               #   Pass arguments to `get_engine` via a request object, either of type
@@ -669,7 +669,8 @@ module Google
               end
 
               ##
-              # Pauses the training of an existing engine. Only applicable if
+              # Pauses the training of an existing
+              # {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}. Only applicable if
               # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType SolutionType} is
               # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
               #
@@ -751,7 +752,8 @@ module Google
               end
 
               ##
-              # Resumes the training of an existing engine. Only applicable if
+              # Resumes the training of an existing
+              # {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}. Only applicable if
               # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType SolutionType} is
               # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
               #
@@ -833,7 +835,8 @@ module Google
               end
 
               ##
-              # Tunes an existing engine. Only applicable if
+              # Tunes an existing {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}.
+              # Only applicable if
               # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType SolutionType} is
               # {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
               #
@@ -924,6 +927,193 @@ module Google
               end
 
               ##
+              # Gets the IAM access control policy for an
+              # {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}. A `NOT_FOUND` error
+              # is returned if the resource does not exist. An empty policy is returned if
+              # the resource exists but does not have a policy set on it.
+              #
+              # @overload get_iam_policy(request, options = nil)
+              #   Pass arguments to `get_iam_policy` via a request object, either of type
+              #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_iam_policy(resource: nil, options: nil)
+              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy is being requested.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+              #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+              #     `GetIamPolicy`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Iam::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Iam::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::EngineService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
+              def get_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @engine_service_stub.get_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Sets the IAM access control policy for an
+              # {::Google::Cloud::DiscoveryEngine::V1beta::Engine Engine}. A `NOT_FOUND` error
+              # is returned if the resource does not exist.
+              #
+              # **Important:** When setting a policy directly on an Engine resource,
+              # the only recommended roles in the bindings are:
+              # `roles/discoveryengine.admin`,
+              # `roles/discoveryengine.agentspaceAdmin`,
+              # `roles/discoveryengine.user`,
+              # `roles/discoveryengine.agentspaceUser`,
+              # `roles/discoveryengine.viewer`,
+              # `roles/discoveryengine.agentspaceViewer`.
+              # Attempting to grant any other role will result in a warning in logging.
+              #
+              # @overload set_iam_policy(request, options = nil)
+              #   Pass arguments to `set_iam_policy` via a request object, either of type
+              #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy is being specified.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+              #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+              #     the policy is limited to a few 10s of KB. An empty policy is a
+              #     valid policy but certain Cloud Platform services (such as Projects)
+              #     might reject them.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+              #     the fields in the mask will be modified. If no mask is provided, the
+              #     following default mask is used:
+              #
+              #     `paths: "bindings, etag"`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Iam::V1::Policy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Iam::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::EngineService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
+              def set_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @engine_service_stub.set_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the EngineService REST API.
               #
               # This class represents the configuration for EngineService REST,
@@ -993,6 +1183,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -1065,6 +1256,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #
@@ -1109,6 +1301,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :tune_engine
+                  ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1128,6 +1330,10 @@ module Google
                     @resume_engine = ::Gapic::Config::Method.new resume_engine_config
                     tune_engine_config = parent_rpcs.tune_engine if parent_rpcs.respond_to? :tune_engine
                     @tune_engine = ::Gapic::Config::Method.new tune_engine_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
 
                     yield self if block_given?
                   end

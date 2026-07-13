@@ -90,40 +90,40 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_workflows_client_stub do
       # Create client
-      client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
+      c = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_workflows parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_workflows parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_workflows ::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_workflows ::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_workflows({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_workflows(::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_workflows(::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
+      c = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_workflow({ name: name }) do |response, operation|
+      c.get_workflow({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_workflow name: name do |response, operation|
+      c.get_workflow name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_workflow ::Google::Cloud::Workflows::V1beta::GetWorkflowRequest.new(name: name) do |response, operation|
+      c.get_workflow ::Google::Cloud::Workflows::V1beta::GetWorkflowRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_workflow({ name: name }, grpc_options) do |response, operation|
+      c.get_workflow({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_workflow(::Google::Cloud::Workflows::V1beta::GetWorkflowRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_workflow(::Google::Cloud::Workflows::V1beta::GetWorkflowRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
+      c = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }) do |response, operation|
+      c.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_workflow parent: parent, workflow: workflow, workflow_id: workflow_id do |response, operation|
+      c.create_workflow parent: parent, workflow: workflow, workflow_id: workflow_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_workflow ::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id) do |response, operation|
+      c.create_workflow ::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }, grpc_options) do |response, operation|
+      c.create_workflow({ parent: parent, workflow: workflow, workflow_id: workflow_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_workflow(::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id), grpc_options) do |response, operation|
+      c.create_workflow(::Google::Cloud::Workflows::V1beta::CreateWorkflowRequest.new(parent: parent, workflow: workflow, workflow_id: workflow_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -278,40 +278,40 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
+      c = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_workflow({ name: name }) do |response, operation|
+      c.delete_workflow({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_workflow name: name do |response, operation|
+      c.delete_workflow name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_workflow ::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest.new(name: name) do |response, operation|
+      c.delete_workflow ::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_workflow({ name: name }, grpc_options) do |response, operation|
+      c.delete_workflow({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_workflow(::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_workflow(::Google::Cloud::Workflows::V1beta::DeleteWorkflowRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -343,40 +343,40 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_workflow_client_stub do
       # Create client
-      client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
+      c = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_workflow({ workflow: workflow, update_mask: update_mask }) do |response, operation|
+      c.update_workflow({ workflow: workflow, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_workflow workflow: workflow, update_mask: update_mask do |response, operation|
+      c.update_workflow workflow: workflow, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_workflow ::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask) do |response, operation|
+      c.update_workflow ::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_workflow({ workflow: workflow, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_workflow({ workflow: workflow, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_workflow(::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_workflow(::Google::Cloud::Workflows::V1beta::UpdateWorkflowRequest.new(workflow: workflow, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

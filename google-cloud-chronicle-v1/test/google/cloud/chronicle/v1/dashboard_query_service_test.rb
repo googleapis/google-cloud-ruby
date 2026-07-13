@@ -82,36 +82,36 @@ class ::Google::Cloud::Chronicle::V1::DashboardQueryService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_dashboard_query_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dashboard_query({ name: name }) do |response, operation|
+      c.get_dashboard_query({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dashboard_query name: name do |response, operation|
+      c.get_dashboard_query name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dashboard_query ::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name) do |response, operation|
+      c.get_dashboard_query ::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dashboard_query({ name: name }, grpc_options) do |response, operation|
+      c.get_dashboard_query({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dashboard_query(::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dashboard_query(::Google::Cloud::Chronicle::V1::GetDashboardQueryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,36 +148,36 @@ class ::Google::Cloud::Chronicle::V1::DashboardQueryService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, execute_dashboard_query_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::DashboardQueryService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }) do |response, operation|
+      c.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_dashboard_query parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range do |response, operation|
+      c.execute_dashboard_query parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_dashboard_query ::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range) do |response, operation|
+      c.execute_dashboard_query ::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }, grpc_options) do |response, operation|
+      c.execute_dashboard_query({ parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_dashboard_query(::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range), grpc_options) do |response, operation|
+      c.execute_dashboard_query(::Google::Cloud::Chronicle::V1::ExecuteDashboardQueryRequest.new(parent: parent, query: query, filters: filters, clear_cache: clear_cache, use_previous_time_range: use_previous_time_range), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -91,6 +91,10 @@ module Google
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+        #
+        #     Represents an opaque ID to the Search API. The Search API doesn't
+        #     interpret the value in any way. This field is used to associate events
+        #     with a user across sessions if the events are being uploaded.
         # @!attribute [rw] user_agent
         #   @return [::String]
         #     User agent as included in the HTTP header.
@@ -104,9 +108,35 @@ module Google
         #     or if
         #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#direct_user_request UserEvent.direct_user_request}
         #     is set.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     Optional. IANA time zone, e.g. Europe/Budapest.
+        # @!attribute [rw] precise_location
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo::PreciseLocation]
+        #     Optional. Input only. Precise location of the user.
+        #     It is used in Custom Ranking to calculate the distance between the user and
+        #     the relevant documents.
         class UserInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Precise location info with multiple representation options.
+          # Currently only latitude and longitude point is supported.
+          # @!attribute [rw] point
+          #   @return [::Google::Type::LatLng]
+          #     Optional. Location represented by a latitude/longitude point.
+          #
+          #     Note: The following fields are mutually exclusive: `point`, `address`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] address
+          #   @return [::String]
+          #     Optional. Location represented by a natural language address. Will
+          #     later be geocoded and converted to either a point or a polygon.
+          #
+          #     Note: The following fields are mutually exclusive: `address`, `point`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class PreciseLocation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Defines embedding config, used for bring your own embeddings feature.
@@ -123,6 +153,131 @@ module Google
         #   @return [::Array<::Float>]
         #     Double values.
         class DoubleList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identity Provider Config.
+        # @!attribute [rw] idp_type
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::IdpConfig::IdpType]
+        #     Identity provider type configured.
+        # @!attribute [rw] external_idp_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::IdpConfig::ExternalIdpConfig]
+        #     External Identity provider config.
+        class IdpConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Third party IDP Config.
+          # @!attribute [rw] workforce_pool_name
+          #   @return [::String]
+          #     Workforce pool name.
+          #     Example: "locations/global/workforcePools/pool_id"
+          class ExternalIdpConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Identity Provider Type.
+          module IdpType
+            # Default value. ACL search not enabled.
+            IDP_TYPE_UNSPECIFIED = 0
+
+            # Google 1P provider.
+            GSUITE = 1
+
+            # Third party provider.
+            THIRD_PARTY = 2
+          end
+        end
+
+        # Principal identifier of a user or a group.
+        # @!attribute [rw] user_id
+        #   @return [::String]
+        #     User identifier.
+        #     For Google Workspace user account, user_id should be the google workspace
+        #     user email.
+        #     For non-google identity provider user account, user_id is the mapped user
+        #     identifier configured during the workforcepool config.
+        #
+        #     Note: The following fields are mutually exclusive: `user_id`, `group_id`, `external_entity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] group_id
+        #   @return [::String]
+        #     Group identifier.
+        #     For Google Workspace user account, group_id should be the google
+        #     workspace group email.
+        #     For non-google identity provider user account, group_id is the mapped
+        #     group identifier configured during the workforcepool config.
+        #
+        #     Note: The following fields are mutually exclusive: `group_id`, `user_id`, `external_entity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] external_entity_id
+        #   @return [::String]
+        #     For 3P application identities which are not present in the customer
+        #     identity provider.
+        #
+        #     Note: The following fields are mutually exclusive: `external_entity_id`, `user_id`, `group_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class Principal
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Config to data store for `HEALTHCARE_FHIR` vertical.
+        # @!attribute [rw] enable_configurable_schema
+        #   @return [::Boolean]
+        #     Whether to enable configurable schema for `HEALTHCARE_FHIR` vertical.
+        #
+        #     If set to `true`, the predefined healthcare fhir schema can be extended
+        #     for more customized searching and filtering.
+        # @!attribute [rw] enable_static_indexing_for_batch_ingestion
+        #   @return [::Boolean]
+        #     Whether to enable static indexing for `HEALTHCARE_FHIR` batch
+        #     ingestion.
+        #
+        #     If set to `true`, the batch ingestion will be processed in a static
+        #     indexing mode which is slower but more capable of handling larger
+        #     volume.
+        # @!attribute [rw] initial_filter_groups
+        #   @return [::Array<::String>]
+        #     Optional. Names of the Group resources to use as a basis for the initial
+        #     patient filter, in format
+        #     `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}/fhir/Group/{group_id}`.
+        #     The filter group must be a FHIR resource name of
+        #     type Group, and the filter will be constructed from the direct members of
+        #     the group which are Patient resources.
+        class HealthcareFhirConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Promotion proto includes uri and other helping information to display the
+        # promotion.
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Required. The title of the promotion.
+        #     Maximum length: 160 characters.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Optional. The URL for the page the user wants to promote. Must be set for
+        #     site search. For other verticals, this is optional.
+        # @!attribute [rw] document
+        #   @return [::String]
+        #     Optional. The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} the
+        #     user wants to promote. For site search, leave unset and only populate uri.
+        #     Can be set along with uri.
+        # @!attribute [rw] image_uri
+        #   @return [::String]
+        #     Optional. The promotion thumbnail image url.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. The Promotion description.
+        #     Maximum length: 200 characters.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. The enabled promotion will be returned for any serving configs
+        #     associated with the parent of the control this promotion is attached to.
+        #
+        #     This flag is used for basic site search only.
+        class SearchLinkPromotion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -162,6 +317,9 @@ module Google
           # It's used for Generative chat engine only, the associated data stores
           # must enrolled with `SOLUTION_TYPE_CHAT` solution.
           SOLUTION_TYPE_GENERATIVE_CHAT = 4
+
+          # Used for AI Mode.
+          SOLUTION_TYPE_AI_MODE = 5
         end
 
         # Defines a further subdivision of `SolutionType`.
@@ -200,6 +358,71 @@ module Google
 
           # Large language model add-on.
           SEARCH_ADD_ON_LLM = 1
+        end
+
+        # Subscription tier information.
+        module SubscriptionTier
+          # Default value.
+          SUBSCRIPTION_TIER_UNSPECIFIED = 0
+
+          # Search tier.
+          # Search tier can access Vertex AI Search features and NotebookLM features.
+          SUBSCRIPTION_TIER_SEARCH = 1
+
+          # Gemini Enterprise Plus tier.
+          SUBSCRIPTION_TIER_SEARCH_AND_ASSISTANT = 2
+
+          # NotebookLM tier.
+          # NotebookLM is a subscription tier can only access NotebookLM features.
+          SUBSCRIPTION_TIER_NOTEBOOK_LM = 3
+
+          # Gemini Frontline worker tier.
+          SUBSCRIPTION_TIER_FRONTLINE_WORKER = 4
+
+          # Gemini Business Starter tier.
+          SUBSCRIPTION_TIER_AGENTSPACE_STARTER = 10
+
+          # Gemini Business tier.
+          SUBSCRIPTION_TIER_AGENTSPACE_BUSINESS = 6
+
+          # Gemini Enterprise Standard tier.
+          SUBSCRIPTION_TIER_ENTERPRISE = 7
+
+          # Gemini Enterprise Standard tier for emerging markets.
+          SUBSCRIPTION_TIER_ENTERPRISE_EMERGING = 15
+
+          # Gemini Enterprise EDU tier.
+          SUBSCRIPTION_TIER_EDU = 8
+
+          # Gemini Enterprise EDU Pro tier.
+          SUBSCRIPTION_TIER_EDU_PRO = 9
+
+          # Gemini Enterprise EDU tier for emerging market only.
+          SUBSCRIPTION_TIER_EDU_EMERGING = 11
+
+          # Gemini Enterprise EDU Pro tier for emerging market.
+          SUBSCRIPTION_TIER_EDU_PRO_EMERGING = 12
+
+          # Gemini Frontline Starter tier.
+          SUBSCRIPTION_TIER_FRONTLINE_STARTER = 13
+        end
+
+        # Subscription term.
+        module SubscriptionTerm
+          # Default value, do not use.
+          SUBSCRIPTION_TERM_UNSPECIFIED = 0
+
+          # 1 month.
+          SUBSCRIPTION_TERM_ONE_MONTH = 1
+
+          # 1 year.
+          SUBSCRIPTION_TERM_ONE_YEAR = 2
+
+          # 3 years.
+          SUBSCRIPTION_TERM_THREE_YEARS = 3
+
+          # Custom term. Must set the end_date.
+          SUBSCRIPTION_TERM_CUSTOM = 6
         end
       end
     end

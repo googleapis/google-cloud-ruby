@@ -98,32 +98,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ServiceStub.stub :transcode_create_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tuning_job({ parent: parent, tuning_job: tuning_job }) do |_result, response|
+        c.create_tuning_job({ parent: parent, tuning_job: tuning_job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tuning_job parent: parent, tuning_job: tuning_job do |_result, response|
+        c.create_tuning_job parent: parent, tuning_job: tuning_job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tuning_job ::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job) do |_result, response|
+        c.create_tuning_job ::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tuning_job({ parent: parent, tuning_job: tuning_job }, call_options) do |_result, response|
+        c.create_tuning_job({ parent: parent, tuning_job: tuning_job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tuning_job(::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job), call_options) do |_result, response|
+        c.create_tuning_job(::Google::Cloud::AIPlatform::V1::CreateTuningJobRequest.new(parent: parent, tuning_job: tuning_job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ServiceStub.stub :transcode_get_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tuning_job({ name: name }) do |_result, response|
+        c.get_tuning_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tuning_job name: name do |_result, response|
+        c.get_tuning_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tuning_job ::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name) do |_result, response|
+        c.get_tuning_job ::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tuning_job({ name: name }, call_options) do |_result, response|
+        c.get_tuning_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tuning_job(::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_tuning_job(::Google::Cloud::AIPlatform::V1::GetTuningJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ServiceStub.stub :transcode_list_tuning_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tuning_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ServiceStub.stub :transcode_cancel_tuning_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_tuning_job_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_tuning_job({ name: name }) do |_result, response|
+        c.cancel_tuning_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_tuning_job name: name do |_result, response|
+        c.cancel_tuning_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_tuning_job ::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name) do |_result, response|
+        c.cancel_tuning_job ::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_tuning_job({ name: name }, call_options) do |_result, response|
+        c.cancel_tuning_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_tuning_job(::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_tuning_job(::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ClientTest < Mi
     ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ServiceStub.stub :transcode_rebase_tuned_model_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rebase_tuned_model_client_stub do
         # Create client
-        client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
+        c = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }) do |_result, response|
+        c.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rebase_tuned_model parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint do |_result, response|
+        c.rebase_tuned_model parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rebase_tuned_model ::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint) do |_result, response|
+        c.rebase_tuned_model ::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }, call_options) do |_result, response|
+        c.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rebase_tuned_model(::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint), call_options) do |_result, response|
+        c.rebase_tuned_model(::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -92,40 +92,40 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_single_tenant_hsm_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |response, operation|
+      c.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_single_tenant_hsm_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |response, operation|
+      c.list_single_tenant_hsm_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_single_tenant_hsm_instances ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |response, operation|
+      c.list_single_tenant_hsm_instances ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_single_tenant_hsm_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_single_tenant_hsm_instances(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_single_tenant_hsm_instances(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -155,36 +155,36 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_single_tenant_hsm_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_single_tenant_hsm_instance({ name: name }) do |response, operation|
+      c.get_single_tenant_hsm_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_single_tenant_hsm_instance name: name do |response, operation|
+      c.get_single_tenant_hsm_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name) do |response, operation|
+      c.get_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_single_tenant_hsm_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_single_tenant_hsm_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_single_tenant_hsm_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }) do |response, operation|
+      c.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_single_tenant_hsm_instance parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance do |response, operation|
+      c.create_single_tenant_hsm_instance parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance) do |response, operation|
+      c.create_single_tenant_hsm_instance ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }, grpc_options) do |response, operation|
+      c.create_single_tenant_hsm_instance({ parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance), grpc_options) do |response, operation|
+      c.create_single_tenant_hsm_instance(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceRequest.new(parent: parent, single_tenant_hsm_instance_id: single_tenant_hsm_instance_id, single_tenant_hsm_instance: single_tenant_hsm_instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_single_tenant_hsm_instance_proposal_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }) do |response, operation|
+      c.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_single_tenant_hsm_instance_proposal parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal do |response, operation|
+      c.create_single_tenant_hsm_instance_proposal parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal) do |response, operation|
+      c.create_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }, grpc_options) do |response, operation|
+      c.create_single_tenant_hsm_instance_proposal({ parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal), grpc_options) do |response, operation|
+      c.create_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::CreateSingleTenantHsmInstanceProposalRequest.new(parent: parent, single_tenant_hsm_instance_proposal_id: single_tenant_hsm_instance_proposal_id, single_tenant_hsm_instance_proposal: single_tenant_hsm_instance_proposal), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -350,36 +350,36 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, approve_single_tenant_hsm_instance_proposal_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }) do |response, operation|
+      c.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.approve_single_tenant_hsm_instance_proposal name: name, quorum_reply: quorum_reply do |response, operation|
+      c.approve_single_tenant_hsm_instance_proposal name: name, quorum_reply: quorum_reply do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.approve_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply) do |response, operation|
+      c.approve_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }, grpc_options) do |response, operation|
+      c.approve_single_tenant_hsm_instance_proposal({ name: name, quorum_reply: quorum_reply }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.approve_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply), grpc_options) do |response, operation|
+      c.approve_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ApproveSingleTenantHsmInstanceProposalRequest.new(name: name, quorum_reply: quorum_reply), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -408,40 +408,40 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, execute_single_tenant_hsm_instance_proposal_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.execute_single_tenant_hsm_instance_proposal({ name: name }) do |response, operation|
+      c.execute_single_tenant_hsm_instance_proposal({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_single_tenant_hsm_instance_proposal name: name do |response, operation|
+      c.execute_single_tenant_hsm_instance_proposal name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name) do |response, operation|
+      c.execute_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_single_tenant_hsm_instance_proposal({ name: name }, grpc_options) do |response, operation|
+      c.execute_single_tenant_hsm_instance_proposal({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name), grpc_options) do |response, operation|
+      c.execute_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::ExecuteSingleTenantHsmInstanceProposalRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -471,36 +471,36 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_single_tenant_hsm_instance_proposal_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_single_tenant_hsm_instance_proposal({ name: name }) do |response, operation|
+      c.get_single_tenant_hsm_instance_proposal({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_single_tenant_hsm_instance_proposal name: name do |response, operation|
+      c.get_single_tenant_hsm_instance_proposal name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name) do |response, operation|
+      c.get_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_single_tenant_hsm_instance_proposal({ name: name }, grpc_options) do |response, operation|
+      c.get_single_tenant_hsm_instance_proposal({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::GetSingleTenantHsmInstanceProposalRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -539,40 +539,40 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_single_tenant_hsm_instance_proposals_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |response, operation|
+      c.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_single_tenant_hsm_instance_proposals parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |response, operation|
+      c.list_single_tenant_hsm_instance_proposals parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_single_tenant_hsm_instance_proposals ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |response, operation|
+      c.list_single_tenant_hsm_instance_proposals ::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_single_tenant_hsm_instance_proposals({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_single_tenant_hsm_instance_proposals(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_single_tenant_hsm_instance_proposals(::Google::Cloud::Kms::V1::ListSingleTenantHsmInstanceProposalsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -602,36 +602,36 @@ class ::Google::Cloud::Kms::V1::HsmManagement::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_single_tenant_hsm_instance_proposal_client_stub do
       # Create client
-      client = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
+      c = ::Google::Cloud::Kms::V1::HsmManagement::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_single_tenant_hsm_instance_proposal({ name: name }) do |response, operation|
+      c.delete_single_tenant_hsm_instance_proposal({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_single_tenant_hsm_instance_proposal name: name do |response, operation|
+      c.delete_single_tenant_hsm_instance_proposal name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name) do |response, operation|
+      c.delete_single_tenant_hsm_instance_proposal ::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_single_tenant_hsm_instance_proposal({ name: name }, grpc_options) do |response, operation|
+      c.delete_single_tenant_hsm_instance_proposal({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_single_tenant_hsm_instance_proposal(::Google::Cloud::Kms::V1::DeleteSingleTenantHsmInstanceProposalRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -106,36 +106,36 @@ class ::Google::Cloud::CapacityPlanner::V1beta::UsageService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, query_usage_histories_client_stub do
       # Create client
-      client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
+      c = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_usage_histories({ parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date }) do |response, operation|
+      c.query_usage_histories({ parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_usage_histories parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date do |response, operation|
+      c.query_usage_histories parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_usage_histories ::Google::Cloud::CapacityPlanner::V1beta::QueryUsageHistoriesRequest.new(parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date) do |response, operation|
+      c.query_usage_histories ::Google::Cloud::CapacityPlanner::V1beta::QueryUsageHistoriesRequest.new(parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_usage_histories({ parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date }, grpc_options) do |response, operation|
+      c.query_usage_histories({ parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_usage_histories(::Google::Cloud::CapacityPlanner::V1beta::QueryUsageHistoriesRequest.new(parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date), grpc_options) do |response, operation|
+      c.query_usage_histories(::Google::Cloud::CapacityPlanner::V1beta::QueryUsageHistoriesRequest.new(parent: parent, location_level: location_level, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -184,36 +184,36 @@ class ::Google::Cloud::CapacityPlanner::V1beta::UsageService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, query_forecasts_client_stub do
       # Create client
-      client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
+      c = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method }) do |response, operation|
+      c.query_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_forecasts parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method do |response, operation|
+      c.query_forecasts parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_forecasts ::Google::Cloud::CapacityPlanner::V1beta::QueryForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method) do |response, operation|
+      c.query_forecasts ::Google::Cloud::CapacityPlanner::V1beta::QueryForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method }, grpc_options) do |response, operation|
+      c.query_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_forecasts(::Google::Cloud::CapacityPlanner::V1beta::QueryForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method), grpc_options) do |response, operation|
+      c.query_forecasts(::Google::Cloud::CapacityPlanner::V1beta::QueryForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, confidential_mode: confidential_mode, gpu_type: gpu_type, tpu_type: tpu_type, cloud_resource_type: cloud_resource_type, forecast_type: forecast_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -268,36 +268,36 @@ class ::Google::Cloud::CapacityPlanner::V1beta::UsageService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, query_reservations_client_stub do
       # Create client
-      client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
+      c = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.query_reservations({ parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date }) do |response, operation|
+      c.query_reservations({ parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.query_reservations parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date do |response, operation|
+      c.query_reservations parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.query_reservations ::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest.new(parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date) do |response, operation|
+      c.query_reservations ::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest.new(parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.query_reservations({ parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date }, grpc_options) do |response, operation|
+      c.query_reservations({ parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.query_reservations(::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest.new(parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date), grpc_options) do |response, operation|
+      c.query_reservations(::Google::Cloud::CapacityPlanner::V1beta::QueryReservationsRequest.new(parent: parent, location_level: location_level, machine_family: machine_family, machine_shape: machine_shape, gpu_type: gpu_type, cloud_resource_type: cloud_resource_type, reservation_type: reservation_type, share_type: share_type, ownership_type: ownership_type, reservation_data_level: reservation_data_level, include_unapproved_reservations: include_unapproved_reservations, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -348,40 +348,40 @@ class ::Google::Cloud::CapacityPlanner::V1beta::UsageService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, export_usage_histories_client_stub do
       # Create client
-      client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
+      c = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_usage_histories({ parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }) do |response, operation|
+      c.export_usage_histories({ parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_usage_histories parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config do |response, operation|
+      c.export_usage_histories parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_usage_histories ::Google::Cloud::CapacityPlanner::V1beta::ExportUsageHistoriesRequest.new(parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config) do |response, operation|
+      c.export_usage_histories ::Google::Cloud::CapacityPlanner::V1beta::ExportUsageHistoriesRequest.new(parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_usage_histories({ parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }, grpc_options) do |response, operation|
+      c.export_usage_histories({ parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_usage_histories(::Google::Cloud::CapacityPlanner::V1beta::ExportUsageHistoriesRequest.new(parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config), grpc_options) do |response, operation|
+      c.export_usage_histories(::Google::Cloud::CapacityPlanner::V1beta::ExportUsageHistoriesRequest.new(parent: parent, is_spot: is_spot, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, usage_aggregation_method: usage_aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -433,40 +433,40 @@ class ::Google::Cloud::CapacityPlanner::V1beta::UsageService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, export_forecasts_client_stub do
       # Create client
-      client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
+      c = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }) do |response, operation|
+      c.export_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_forecasts parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config do |response, operation|
+      c.export_forecasts parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_forecasts ::Google::Cloud::CapacityPlanner::V1beta::ExportForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config) do |response, operation|
+      c.export_forecasts ::Google::Cloud::CapacityPlanner::V1beta::ExportForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }, grpc_options) do |response, operation|
+      c.export_forecasts({ parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_forecasts(::Google::Cloud::CapacityPlanner::V1beta::ExportForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config), grpc_options) do |response, operation|
+      c.export_forecasts(::Google::Cloud::CapacityPlanner::V1beta::ExportForecastsRequest.new(parent: parent, machine_family: machine_family, machine_shape: machine_shape, disk_type: disk_type, gpu_type: gpu_type, tpu_type: tpu_type, resource_type: resource_type, prediction_interval: prediction_interval, aggregation_method: aggregation_method, start_date: start_date, end_date: end_date, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -513,40 +513,40 @@ class ::Google::Cloud::CapacityPlanner::V1beta::UsageService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, export_reservations_usage_client_stub do
       # Create client
-      client = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
+      c = ::Google::Cloud::CapacityPlanner::V1beta::UsageService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_reservations_usage({ machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config }) do |response, operation|
+      c.export_reservations_usage({ machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_reservations_usage machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config do |response, operation|
+      c.export_reservations_usage machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_reservations_usage ::Google::Cloud::CapacityPlanner::V1beta::ExportReservationsUsageRequest.new(machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config) do |response, operation|
+      c.export_reservations_usage ::Google::Cloud::CapacityPlanner::V1beta::ExportReservationsUsageRequest.new(machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_reservations_usage({ machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config }, grpc_options) do |response, operation|
+      c.export_reservations_usage({ machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_reservations_usage(::Google::Cloud::CapacityPlanner::V1beta::ExportReservationsUsageRequest.new(machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config), grpc_options) do |response, operation|
+      c.export_reservations_usage(::Google::Cloud::CapacityPlanner::V1beta::ExportReservationsUsageRequest.new(machine_family: machine_family, parent: parent, location_level: location_level, cloud_resource_type: cloud_resource_type, usage_aggregation_method: usage_aggregation_method, share_type: share_type, start_date: start_date, end_date: end_date, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

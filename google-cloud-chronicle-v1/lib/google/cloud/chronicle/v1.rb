@@ -24,9 +24,11 @@ require "google/cloud/chronicle/v1/data_table_service"
 require "google/cloud/chronicle/v1/entity_service"
 require "google/cloud/chronicle/v1/native_dashboard_service"
 require "google/cloud/chronicle/v1/featured_content_native_dashboard_service"
+require "google/cloud/chronicle/v1/findings_refinement_service"
 require "google/cloud/chronicle/v1/instance_service"
 require "google/cloud/chronicle/v1/reference_list_service"
 require "google/cloud/chronicle/v1/rule_service"
+require "google/cloud/chronicle/v1/rule_execution_error_service"
 require "google/cloud/chronicle/v1/version"
 
 module Google

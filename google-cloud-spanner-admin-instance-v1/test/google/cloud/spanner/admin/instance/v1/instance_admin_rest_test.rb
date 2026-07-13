@@ -99,32 +99,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_list_instance_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instance_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instance_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_instance_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instance_configs ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_instance_configs ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_instance_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instance_configs(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_instance_configs(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_get_instance_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance_config({ name: name }) do |_result, response|
+        c.get_instance_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance_config name: name do |_result, response|
+        c.get_instance_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name) do |_result, response|
+        c.get_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance_config({ name: name }, call_options) do |_result, response|
+        c.get_instance_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_create_instance_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }) do |_result, response|
+        c.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance_config parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only do |_result, response|
+        c.create_instance_config parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only) do |_result, response|
+        c.create_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_instance_config({ parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only), call_options) do |_result, response|
+        c.create_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest.new(parent: parent, instance_config_id: instance_config_id, instance_config: instance_config, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_update_instance_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance_config instance_config: instance_config, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_instance_config instance_config: instance_config, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_instance_config({ instance_config: instance_config, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigRequest.new(instance_config: instance_config, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_delete_instance_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }) do |_result, response|
+        c.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance_config name: name, etag: etag, validate_only: validate_only do |_result, response|
+        c.delete_instance_config name: name, etag: etag, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only) do |_result, response|
+        c.delete_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
+        c.delete_instance_config({ name: name, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only), call_options) do |_result, response|
+        c.delete_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new(name: name, etag: etag, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_list_instance_config_operations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instance_config_operations_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instance_config_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_instance_config_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instance_config_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_instance_config_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_instance_config_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instance_config_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_instance_config_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline) do |_result, response|
+        c.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance_deadline: instance_deadline), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -494,32 +494,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_list_instance_partitions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instance_partitions_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |_result, response|
+        c.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instance_partitions parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |_result, response|
+        c.list_instance_partitions parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instance_partitions ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |_result, response|
+        c.list_instance_partitions ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, call_options) do |_result, response|
+        c.list_instance_partitions({ parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instance_partitions(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), call_options) do |_result, response|
+        c.list_instance_partitions(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name, field_mask: field_mask }) do |_result, response|
+        c.get_instance({ name: name, field_mask: field_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name, field_mask: field_mask do |_result, response|
+        c.get_instance name: name, field_mask: field_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask) do |_result, response|
+        c.get_instance ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name, field_mask: field_mask }, call_options) do |_result, response|
+        c.get_instance({ name: name, field_mask: field_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
+        c.create_instance ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -660,32 +660,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance({ instance: instance, field_mask: field_mask }) do |_result, response|
+        c.update_instance({ instance: instance, field_mask: field_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance instance: instance, field_mask: field_mask do |_result, response|
+        c.update_instance instance: instance, field_mask: field_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask) do |_result, response|
+        c.update_instance ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance({ instance: instance, field_mask: field_mask }, call_options) do |_result, response|
+        c.update_instance({ instance: instance, field_mask: field_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask), call_options) do |_result, response|
+        c.update_instance(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -714,32 +714,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name }) do |_result, response|
+        c.delete_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name do |_result, response|
+        c.delete_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
+        c.delete_instance ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name }, call_options) do |_result, response|
+        c.delete_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -770,32 +770,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -825,32 +825,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -880,32 +880,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -934,32 +934,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_get_instance_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance_partition({ name: name }) do |_result, response|
+        c.get_instance_partition({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance_partition name: name do |_result, response|
+        c.get_instance_partition name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name) do |_result, response|
+        c.get_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance_partition({ name: name }, call_options) do |_result, response|
+        c.get_instance_partition({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -990,32 +990,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_create_instance_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }) do |_result, response|
+        c.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance_partition parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition do |_result, response|
+        c.create_instance_partition parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition) do |_result, response|
+        c.create_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }, call_options) do |_result, response|
+        c.create_instance_partition({ parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition), call_options) do |_result, response|
+        c.create_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest.new(parent: parent, instance_partition_id: instance_partition_id, instance_partition: instance_partition), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1045,32 +1045,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_delete_instance_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance_partition({ name: name, etag: etag }) do |_result, response|
+        c.delete_instance_partition({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance_partition name: name, etag: etag do |_result, response|
+        c.delete_instance_partition name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance_partition({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_instance_partition({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1100,32 +1100,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_update_instance_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }) do |_result, response|
+        c.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance_partition instance_partition: instance_partition, field_mask: field_mask do |_result, response|
+        c.update_instance_partition instance_partition: instance_partition, field_mask: field_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask) do |_result, response|
+        c.update_instance_partition ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }, call_options) do |_result, response|
+        c.update_instance_partition({ instance_partition: instance_partition, field_mask: field_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask), call_options) do |_result, response|
+        c.update_instance_partition(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest.new(instance_partition: instance_partition, field_mask: field_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1158,32 +1158,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_list_instance_partition_operations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instance_partition_operations_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |_result, response|
+        c.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instance_partition_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |_result, response|
+        c.list_instance_partition_operations parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instance_partition_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |_result, response|
+        c.list_instance_partition_operations ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, call_options) do |_result, response|
+        c.list_instance_partition_operations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instance_partition_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), call_options) do |_result, response|
+        c.list_instance_partition_operations(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, instance_partition_deadline: instance_partition_deadline), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1213,32 +1213,32 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::ServiceStub.stub :transcode_move_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, move_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
+        c = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.move_instance({ name: name, target_config: target_config }) do |_result, response|
+        c.move_instance({ name: name, target_config: target_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.move_instance name: name, target_config: target_config do |_result, response|
+        c.move_instance name: name, target_config: target_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.move_instance ::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config) do |_result, response|
+        c.move_instance ::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.move_instance({ name: name, target_config: target_config }, call_options) do |_result, response|
+        c.move_instance({ name: name, target_config: target_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.move_instance(::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config), call_options) do |_result, response|
+        c.move_instance(::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceRequest.new(name: name, target_config: target_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

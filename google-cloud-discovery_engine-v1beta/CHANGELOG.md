@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.28.0 (2026-06-17)
+
+#### Features
+
+* regenerate v1beta proto snapshot for feature parity with v1 ([#34615](https://github.com/googleapis/google-cloud-ruby/issues/34615)) 
+
+### 0.27.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34045](https://github.com/googleapis/google-cloud-ruby/issues/34045)) 
+
 ### 0.26.0 (2026-04-15)
 
 #### Features

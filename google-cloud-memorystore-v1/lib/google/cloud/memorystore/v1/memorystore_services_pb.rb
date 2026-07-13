@@ -79,6 +79,22 @@ module Google
             # require critical update. After preview, there will be no critical update
             # needed for backup.
             rpc :BackupInstance, ::Google::Cloud::Memorystore::V1::BackupInstanceRequest, ::Google::Longrunning::Operation
+            # Initiates the migration of a source instance to the target Memorystore
+            # instance.
+            #
+            # After the successful completion of this operation, the target instance
+            # will:
+            # 1. Set up replication with the source instance and replicate any writes to
+            # the source instance.
+            # 2. Only allow reads.
+            rpc :StartMigration, ::Google::Cloud::Memorystore::V1::StartMigrationRequest, ::Google::Longrunning::Operation
+            # Finalizes the migration process.
+            #
+            # After the successful completion of this operation, the target instance
+            # will:
+            # 1. Stop replicating from the source instance.
+            # 2. Allow both reads and writes.
+            rpc :FinishMigration, ::Google::Cloud::Memorystore::V1::FinishMigrationRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

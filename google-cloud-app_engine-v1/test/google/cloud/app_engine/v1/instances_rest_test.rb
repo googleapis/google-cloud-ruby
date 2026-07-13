@@ -99,32 +99,32 @@ class ::Google::Cloud::AppEngine::V1::Instances::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::AppEngine::V1::Instances::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::AppEngine::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_instances ::Google::Cloud::AppEngine::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::AppEngine::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::AppEngine::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::AppEngine::V1::Instances::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::AppEngine::V1::Instances::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::AppEngine::V1::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::AppEngine::V1::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::AppEngine::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::AppEngine::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::AppEngine::V1::Instances::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::AppEngine::V1::Instances::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name }) do |_result, response|
+        c.delete_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name do |_result, response|
+        c.delete_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::AppEngine::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
+        c.delete_instance ::Google::Cloud::AppEngine::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name }, call_options) do |_result, response|
+        c.delete_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::AppEngine::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::AppEngine::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,32 +262,32 @@ class ::Google::Cloud::AppEngine::V1::Instances::Rest::ClientTest < Minitest::Te
     ::Google::Cloud::AppEngine::V1::Instances::Rest::ServiceStub.stub :transcode_debug_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, debug_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
+        c = ::Google::Cloud::AppEngine::V1::Instances::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.debug_instance({ name: name, ssh_key: ssh_key }) do |_result, response|
+        c.debug_instance({ name: name, ssh_key: ssh_key }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.debug_instance name: name, ssh_key: ssh_key do |_result, response|
+        c.debug_instance name: name, ssh_key: ssh_key do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.debug_instance ::Google::Cloud::AppEngine::V1::DebugInstanceRequest.new(name: name, ssh_key: ssh_key) do |_result, response|
+        c.debug_instance ::Google::Cloud::AppEngine::V1::DebugInstanceRequest.new(name: name, ssh_key: ssh_key) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.debug_instance({ name: name, ssh_key: ssh_key }, call_options) do |_result, response|
+        c.debug_instance({ name: name, ssh_key: ssh_key }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.debug_instance(::Google::Cloud::AppEngine::V1::DebugInstanceRequest.new(name: name, ssh_key: ssh_key), call_options) do |_result, response|
+        c.debug_instance(::Google::Cloud::AppEngine::V1::DebugInstanceRequest.new(name: name, ssh_key: ssh_key), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

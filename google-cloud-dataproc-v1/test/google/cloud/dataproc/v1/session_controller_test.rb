@@ -88,40 +88,40 @@ class ::Google::Cloud::Dataproc::V1::SessionController::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_session({ parent: parent, session: session, session_id: session_id, request_id: request_id }) do |response, operation|
+      c.create_session({ parent: parent, session: session, session_id: session_id, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_session parent: parent, session: session, session_id: session_id, request_id: request_id do |response, operation|
+      c.create_session parent: parent, session: session, session_id: session_id, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_session ::Google::Cloud::Dataproc::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id, request_id: request_id) do |response, operation|
+      c.create_session ::Google::Cloud::Dataproc::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_session({ parent: parent, session: session, session_id: session_id, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_session({ parent: parent, session: session, session_id: session_id, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_session(::Google::Cloud::Dataproc::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id, request_id: request_id), grpc_options) do |response, operation|
+      c.create_session(::Google::Cloud::Dataproc::V1::CreateSessionRequest.new(parent: parent, session: session, session_id: session_id, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Dataproc::V1::SessionController::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_session({ name: name }) do |response, operation|
+      c.get_session({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_session name: name do |response, operation|
+      c.get_session name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_session ::Google::Cloud::Dataproc::V1::GetSessionRequest.new(name: name) do |response, operation|
+      c.get_session ::Google::Cloud::Dataproc::V1::GetSessionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_session({ name: name }, grpc_options) do |response, operation|
+      c.get_session({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_session(::Google::Cloud::Dataproc::V1::GetSessionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_session(::Google::Cloud::Dataproc::V1::GetSessionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Dataproc::V1::SessionController::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_sessions_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_sessions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_sessions ::Google::Cloud::Dataproc::V1::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_sessions ::Google::Cloud::Dataproc::V1::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_sessions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_sessions(::Google::Cloud::Dataproc::V1::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_sessions(::Google::Cloud::Dataproc::V1::ListSessionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::Dataproc::V1::SessionController::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, terminate_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.terminate_session({ name: name, request_id: request_id }) do |response, operation|
+      c.terminate_session({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.terminate_session name: name, request_id: request_id do |response, operation|
+      c.terminate_session name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.terminate_session ::Google::Cloud::Dataproc::V1::TerminateSessionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.terminate_session ::Google::Cloud::Dataproc::V1::TerminateSessionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.terminate_session({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.terminate_session({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.terminate_session(::Google::Cloud::Dataproc::V1::TerminateSessionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.terminate_session(::Google::Cloud::Dataproc::V1::TerminateSessionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -345,40 +345,40 @@ class ::Google::Cloud::Dataproc::V1::SessionController::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
+      c = ::Google::Cloud::Dataproc::V1::SessionController::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_session({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_session({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_session name: name, request_id: request_id do |response, operation|
+      c.delete_session name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_session ::Google::Cloud::Dataproc::V1::DeleteSessionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_session ::Google::Cloud::Dataproc::V1::DeleteSessionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_session({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_session({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_session(::Google::Cloud::Dataproc::V1::DeleteSessionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_session(::Google::Cloud::Dataproc::V1::DeleteSessionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

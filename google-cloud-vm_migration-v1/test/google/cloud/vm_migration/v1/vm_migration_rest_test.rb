@@ -101,32 +101,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_sources parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sources ::Google::Cloud::VMMigration::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_sources ::Google::Cloud::VMMigration::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_sources({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sources(::Google::Cloud::VMMigration::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_sources(::Google::Cloud::VMMigration::V1::ListSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_source_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_source({ name: name }) do |_result, response|
+        c.get_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_source name: name do |_result, response|
+        c.get_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_source ::Google::Cloud::VMMigration::V1::GetSourceRequest.new(name: name) do |_result, response|
+        c.get_source ::Google::Cloud::VMMigration::V1::GetSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_source({ name: name }, call_options) do |_result, response|
+        c.get_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_source(::Google::Cloud::VMMigration::V1::GetSourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_source(::Google::Cloud::VMMigration::V1::GetSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_source_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }) do |_result, response|
+        c.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_source parent: parent, source_id: source_id, source: source, request_id: request_id do |_result, response|
+        c.create_source parent: parent, source_id: source_id, source: source, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_source ::Google::Cloud::VMMigration::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id) do |_result, response|
+        c.create_source ::Google::Cloud::VMMigration::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }, call_options) do |_result, response|
+        c.create_source({ parent: parent, source_id: source_id, source: source, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_source(::Google::Cloud::VMMigration::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id), call_options) do |_result, response|
+        c.create_source(::Google::Cloud::VMMigration::V1::CreateSourceRequest.new(parent: parent, source_id: source_id, source: source, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_update_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_source_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_source({ update_mask: update_mask, source: source, request_id: request_id }) do |_result, response|
+        c.update_source({ update_mask: update_mask, source: source, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_source update_mask: update_mask, source: source, request_id: request_id do |_result, response|
+        c.update_source update_mask: update_mask, source: source, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_source ::Google::Cloud::VMMigration::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id) do |_result, response|
+        c.update_source ::Google::Cloud::VMMigration::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_source({ update_mask: update_mask, source: source, request_id: request_id }, call_options) do |_result, response|
+        c.update_source({ update_mask: update_mask, source: source, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_source(::Google::Cloud::VMMigration::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id), call_options) do |_result, response|
+        c.update_source(::Google::Cloud::VMMigration::V1::UpdateSourceRequest.new(update_mask: update_mask, source: source, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_source_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_source({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_source({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_source name: name, request_id: request_id do |_result, response|
+        c.delete_source name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_source ::Google::Cloud::VMMigration::V1::DeleteSourceRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_source ::Google::Cloud::VMMigration::V1::DeleteSourceRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_source({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_source({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_source(::Google::Cloud::VMMigration::V1::DeleteSourceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_source(::Google::Cloud::VMMigration::V1::DeleteSourceRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_fetch_inventory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_inventory_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_inventory({ source: source, force_refresh: force_refresh }) do |_result, response|
+        c.fetch_inventory({ source: source, force_refresh: force_refresh }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_inventory source: source, force_refresh: force_refresh do |_result, response|
+        c.fetch_inventory source: source, force_refresh: force_refresh do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_inventory ::Google::Cloud::VMMigration::V1::FetchInventoryRequest.new(source: source, force_refresh: force_refresh) do |_result, response|
+        c.fetch_inventory ::Google::Cloud::VMMigration::V1::FetchInventoryRequest.new(source: source, force_refresh: force_refresh) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_inventory({ source: source, force_refresh: force_refresh }, call_options) do |_result, response|
+        c.fetch_inventory({ source: source, force_refresh: force_refresh }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_inventory(::Google::Cloud::VMMigration::V1::FetchInventoryRequest.new(source: source, force_refresh: force_refresh), call_options) do |_result, response|
+        c.fetch_inventory(::Google::Cloud::VMMigration::V1::FetchInventoryRequest.new(source: source, force_refresh: force_refresh), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_fetch_storage_inventory_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_storage_inventory_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_storage_inventory source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_storage_inventory source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_storage_inventory ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_storage_inventory ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_storage_inventory(::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_storage_inventory(::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -495,32 +495,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_utilization_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_utilization_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_utilization_reports({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_utilization_reports({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_utilization_reports parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_utilization_reports parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_utilization_reports ::Google::Cloud::VMMigration::V1::ListUtilizationReportsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_utilization_reports ::Google::Cloud::VMMigration::V1::ListUtilizationReportsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_utilization_reports({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_utilization_reports({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_utilization_reports(::Google::Cloud::VMMigration::V1::ListUtilizationReportsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_utilization_reports(::Google::Cloud::VMMigration::V1::ListUtilizationReportsRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -550,32 +550,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_utilization_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_utilization_report_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_utilization_report({ name: name, view: view }) do |_result, response|
+        c.get_utilization_report({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_utilization_report name: name, view: view do |_result, response|
+        c.get_utilization_report name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_utilization_report ::Google::Cloud::VMMigration::V1::GetUtilizationReportRequest.new(name: name, view: view) do |_result, response|
+        c.get_utilization_report ::Google::Cloud::VMMigration::V1::GetUtilizationReportRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_utilization_report({ name: name, view: view }, call_options) do |_result, response|
+        c.get_utilization_report({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_utilization_report(::Google::Cloud::VMMigration::V1::GetUtilizationReportRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_utilization_report(::Google::Cloud::VMMigration::V1::GetUtilizationReportRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -607,32 +607,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_utilization_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_utilization_report_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_utilization_report({ parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id }) do |_result, response|
+        c.create_utilization_report({ parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_utilization_report parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id do |_result, response|
+        c.create_utilization_report parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_utilization_report ::Google::Cloud::VMMigration::V1::CreateUtilizationReportRequest.new(parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id) do |_result, response|
+        c.create_utilization_report ::Google::Cloud::VMMigration::V1::CreateUtilizationReportRequest.new(parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_utilization_report({ parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id }, call_options) do |_result, response|
+        c.create_utilization_report({ parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_utilization_report(::Google::Cloud::VMMigration::V1::CreateUtilizationReportRequest.new(parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id), call_options) do |_result, response|
+        c.create_utilization_report(::Google::Cloud::VMMigration::V1::CreateUtilizationReportRequest.new(parent: parent, utilization_report: utilization_report, utilization_report_id: utilization_report_id, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_utilization_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_utilization_report_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_utilization_report({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_utilization_report({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_utilization_report name: name, request_id: request_id do |_result, response|
+        c.delete_utilization_report name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_utilization_report ::Google::Cloud::VMMigration::V1::DeleteUtilizationReportRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_utilization_report ::Google::Cloud::VMMigration::V1::DeleteUtilizationReportRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_utilization_report({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_utilization_report({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_utilization_report(::Google::Cloud::VMMigration::V1::DeleteUtilizationReportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_utilization_report(::Google::Cloud::VMMigration::V1::DeleteUtilizationReportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -720,32 +720,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_datacenter_connectors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_datacenter_connectors_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_datacenter_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_datacenter_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_datacenter_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_datacenter_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_datacenter_connectors ::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_datacenter_connectors ::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_datacenter_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_datacenter_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_datacenter_connectors(::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_datacenter_connectors(::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -774,32 +774,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_datacenter_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_datacenter_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_datacenter_connector({ name: name }) do |_result, response|
+        c.get_datacenter_connector({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_datacenter_connector name: name do |_result, response|
+        c.get_datacenter_connector name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_datacenter_connector ::Google::Cloud::VMMigration::V1::GetDatacenterConnectorRequest.new(name: name) do |_result, response|
+        c.get_datacenter_connector ::Google::Cloud::VMMigration::V1::GetDatacenterConnectorRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_datacenter_connector({ name: name }, call_options) do |_result, response|
+        c.get_datacenter_connector({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_datacenter_connector(::Google::Cloud::VMMigration::V1::GetDatacenterConnectorRequest.new(name: name), call_options) do |_result, response|
+        c.get_datacenter_connector(::Google::Cloud::VMMigration::V1::GetDatacenterConnectorRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -831,32 +831,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_datacenter_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_datacenter_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_datacenter_connector({ parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id }) do |_result, response|
+        c.create_datacenter_connector({ parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_datacenter_connector parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id do |_result, response|
+        c.create_datacenter_connector parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_datacenter_connector ::Google::Cloud::VMMigration::V1::CreateDatacenterConnectorRequest.new(parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id) do |_result, response|
+        c.create_datacenter_connector ::Google::Cloud::VMMigration::V1::CreateDatacenterConnectorRequest.new(parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_datacenter_connector({ parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id }, call_options) do |_result, response|
+        c.create_datacenter_connector({ parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_datacenter_connector(::Google::Cloud::VMMigration::V1::CreateDatacenterConnectorRequest.new(parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id), call_options) do |_result, response|
+        c.create_datacenter_connector(::Google::Cloud::VMMigration::V1::CreateDatacenterConnectorRequest.new(parent: parent, datacenter_connector_id: datacenter_connector_id, datacenter_connector: datacenter_connector, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,32 +886,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_datacenter_connector_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_datacenter_connector_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_datacenter_connector({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_datacenter_connector({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_datacenter_connector name: name, request_id: request_id do |_result, response|
+        c.delete_datacenter_connector name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_datacenter_connector ::Google::Cloud::VMMigration::V1::DeleteDatacenterConnectorRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_datacenter_connector ::Google::Cloud::VMMigration::V1::DeleteDatacenterConnectorRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_datacenter_connector({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_datacenter_connector({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_datacenter_connector(::Google::Cloud::VMMigration::V1::DeleteDatacenterConnectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_datacenter_connector(::Google::Cloud::VMMigration::V1::DeleteDatacenterConnectorRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -941,32 +941,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_upgrade_appliance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upgrade_appliance_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upgrade_appliance({ datacenter_connector: datacenter_connector, request_id: request_id }) do |_result, response|
+        c.upgrade_appliance({ datacenter_connector: datacenter_connector, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upgrade_appliance datacenter_connector: datacenter_connector, request_id: request_id do |_result, response|
+        c.upgrade_appliance datacenter_connector: datacenter_connector, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upgrade_appliance ::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new(datacenter_connector: datacenter_connector, request_id: request_id) do |_result, response|
+        c.upgrade_appliance ::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new(datacenter_connector: datacenter_connector, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upgrade_appliance({ datacenter_connector: datacenter_connector, request_id: request_id }, call_options) do |_result, response|
+        c.upgrade_appliance({ datacenter_connector: datacenter_connector, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upgrade_appliance(::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new(datacenter_connector: datacenter_connector, request_id: request_id), call_options) do |_result, response|
+        c.upgrade_appliance(::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new(datacenter_connector: datacenter_connector, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -998,32 +998,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_migrating_vm_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_migrating_vm_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_migrating_vm({ parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id }) do |_result, response|
+        c.create_migrating_vm({ parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_migrating_vm parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id do |_result, response|
+        c.create_migrating_vm parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_migrating_vm ::Google::Cloud::VMMigration::V1::CreateMigratingVmRequest.new(parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id) do |_result, response|
+        c.create_migrating_vm ::Google::Cloud::VMMigration::V1::CreateMigratingVmRequest.new(parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_migrating_vm({ parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id }, call_options) do |_result, response|
+        c.create_migrating_vm({ parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_migrating_vm(::Google::Cloud::VMMigration::V1::CreateMigratingVmRequest.new(parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id), call_options) do |_result, response|
+        c.create_migrating_vm(::Google::Cloud::VMMigration::V1::CreateMigratingVmRequest.new(parent: parent, migrating_vm_id: migrating_vm_id, migrating_vm: migrating_vm, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1057,32 +1057,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_migrating_vms_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_migrating_vms_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
+        c.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_migrating_vms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
+        c.list_migrating_vms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_migrating_vms ::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
+        c.list_migrating_vms ::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
+        c.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_migrating_vms(::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
+        c.list_migrating_vms(::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1112,32 +1112,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_migrating_vm_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_migrating_vm_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_migrating_vm({ name: name, view: view }) do |_result, response|
+        c.get_migrating_vm({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_migrating_vm name: name, view: view do |_result, response|
+        c.get_migrating_vm name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_migrating_vm ::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name, view: view) do |_result, response|
+        c.get_migrating_vm ::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_migrating_vm({ name: name, view: view }, call_options) do |_result, response|
+        c.get_migrating_vm({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_migrating_vm(::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_migrating_vm(::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1168,32 +1168,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_update_migrating_vm_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_migrating_vm_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_migrating_vm({ update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id }) do |_result, response|
+        c.update_migrating_vm({ update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_migrating_vm update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id do |_result, response|
+        c.update_migrating_vm update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_migrating_vm ::Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new(update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id) do |_result, response|
+        c.update_migrating_vm ::Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new(update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_migrating_vm({ update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id }, call_options) do |_result, response|
+        c.update_migrating_vm({ update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_migrating_vm(::Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new(update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id), call_options) do |_result, response|
+        c.update_migrating_vm(::Google::Cloud::VMMigration::V1::UpdateMigratingVmRequest.new(update_mask: update_mask, migrating_vm: migrating_vm, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1222,32 +1222,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_migrating_vm_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_migrating_vm_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_migrating_vm({ name: name }) do |_result, response|
+        c.delete_migrating_vm({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_migrating_vm name: name do |_result, response|
+        c.delete_migrating_vm name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_migrating_vm ::Google::Cloud::VMMigration::V1::DeleteMigratingVmRequest.new(name: name) do |_result, response|
+        c.delete_migrating_vm ::Google::Cloud::VMMigration::V1::DeleteMigratingVmRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_migrating_vm({ name: name }, call_options) do |_result, response|
+        c.delete_migrating_vm({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_migrating_vm(::Google::Cloud::VMMigration::V1::DeleteMigratingVmRequest.new(name: name), call_options) do |_result, response|
+        c.delete_migrating_vm(::Google::Cloud::VMMigration::V1::DeleteMigratingVmRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1276,32 +1276,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_start_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_migration({ migrating_vm: migrating_vm }) do |_result, response|
+        c.start_migration({ migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_migration migrating_vm: migrating_vm do |_result, response|
+        c.start_migration migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_migration ::Google::Cloud::VMMigration::V1::StartMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
+        c.start_migration ::Google::Cloud::VMMigration::V1::StartMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.start_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_migration(::Google::Cloud::VMMigration::V1::StartMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.start_migration(::Google::Cloud::VMMigration::V1::StartMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1330,32 +1330,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_resume_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_migration({ migrating_vm: migrating_vm }) do |_result, response|
+        c.resume_migration({ migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_migration migrating_vm: migrating_vm do |_result, response|
+        c.resume_migration migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_migration ::Google::Cloud::VMMigration::V1::ResumeMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
+        c.resume_migration ::Google::Cloud::VMMigration::V1::ResumeMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.resume_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_migration(::Google::Cloud::VMMigration::V1::ResumeMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.resume_migration(::Google::Cloud::VMMigration::V1::ResumeMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1384,32 +1384,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_pause_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_migration({ migrating_vm: migrating_vm }) do |_result, response|
+        c.pause_migration({ migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_migration migrating_vm: migrating_vm do |_result, response|
+        c.pause_migration migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_migration ::Google::Cloud::VMMigration::V1::PauseMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
+        c.pause_migration ::Google::Cloud::VMMigration::V1::PauseMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.pause_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_migration(::Google::Cloud::VMMigration::V1::PauseMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.pause_migration(::Google::Cloud::VMMigration::V1::PauseMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1438,32 +1438,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_finalize_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, finalize_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.finalize_migration({ migrating_vm: migrating_vm }) do |_result, response|
+        c.finalize_migration({ migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.finalize_migration migrating_vm: migrating_vm do |_result, response|
+        c.finalize_migration migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.finalize_migration ::Google::Cloud::VMMigration::V1::FinalizeMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
+        c.finalize_migration ::Google::Cloud::VMMigration::V1::FinalizeMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.finalize_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.finalize_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.finalize_migration(::Google::Cloud::VMMigration::V1::FinalizeMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.finalize_migration(::Google::Cloud::VMMigration::V1::FinalizeMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1492,32 +1492,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_extend_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, extend_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.extend_migration({ migrating_vm: migrating_vm }) do |_result, response|
+        c.extend_migration({ migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.extend_migration migrating_vm: migrating_vm do |_result, response|
+        c.extend_migration migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.extend_migration ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
+        c.extend_migration ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.extend_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.extend_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.extend_migration(::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.extend_migration(::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1549,32 +1549,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_clone_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_clone_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_clone_job({ parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id }) do |_result, response|
+        c.create_clone_job({ parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_clone_job parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id do |_result, response|
+        c.create_clone_job parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_clone_job ::Google::Cloud::VMMigration::V1::CreateCloneJobRequest.new(parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id) do |_result, response|
+        c.create_clone_job ::Google::Cloud::VMMigration::V1::CreateCloneJobRequest.new(parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_clone_job({ parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id }, call_options) do |_result, response|
+        c.create_clone_job({ parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_clone_job(::Google::Cloud::VMMigration::V1::CreateCloneJobRequest.new(parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id), call_options) do |_result, response|
+        c.create_clone_job(::Google::Cloud::VMMigration::V1::CreateCloneJobRequest.new(parent: parent, clone_job_id: clone_job_id, clone_job: clone_job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1603,32 +1603,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_cancel_clone_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_clone_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_clone_job({ name: name }) do |_result, response|
+        c.cancel_clone_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_clone_job name: name do |_result, response|
+        c.cancel_clone_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_clone_job ::Google::Cloud::VMMigration::V1::CancelCloneJobRequest.new(name: name) do |_result, response|
+        c.cancel_clone_job ::Google::Cloud::VMMigration::V1::CancelCloneJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_clone_job({ name: name }, call_options) do |_result, response|
+        c.cancel_clone_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_clone_job(::Google::Cloud::VMMigration::V1::CancelCloneJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_clone_job(::Google::Cloud::VMMigration::V1::CancelCloneJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1661,32 +1661,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_clone_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_clone_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_clone_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_clone_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_clone_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_clone_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_clone_jobs ::Google::Cloud::VMMigration::V1::ListCloneJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_clone_jobs ::Google::Cloud::VMMigration::V1::ListCloneJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_clone_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_clone_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_clone_jobs(::Google::Cloud::VMMigration::V1::ListCloneJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_clone_jobs(::Google::Cloud::VMMigration::V1::ListCloneJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1715,32 +1715,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_clone_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_clone_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_clone_job({ name: name }) do |_result, response|
+        c.get_clone_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_clone_job name: name do |_result, response|
+        c.get_clone_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_clone_job ::Google::Cloud::VMMigration::V1::GetCloneJobRequest.new(name: name) do |_result, response|
+        c.get_clone_job ::Google::Cloud::VMMigration::V1::GetCloneJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_clone_job({ name: name }, call_options) do |_result, response|
+        c.get_clone_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_clone_job(::Google::Cloud::VMMigration::V1::GetCloneJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_clone_job(::Google::Cloud::VMMigration::V1::GetCloneJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1772,32 +1772,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_cutover_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_cutover_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_cutover_job({ parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id }) do |_result, response|
+        c.create_cutover_job({ parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_cutover_job parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id do |_result, response|
+        c.create_cutover_job parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_cutover_job ::Google::Cloud::VMMigration::V1::CreateCutoverJobRequest.new(parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id) do |_result, response|
+        c.create_cutover_job ::Google::Cloud::VMMigration::V1::CreateCutoverJobRequest.new(parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_cutover_job({ parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id }, call_options) do |_result, response|
+        c.create_cutover_job({ parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_cutover_job(::Google::Cloud::VMMigration::V1::CreateCutoverJobRequest.new(parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id), call_options) do |_result, response|
+        c.create_cutover_job(::Google::Cloud::VMMigration::V1::CreateCutoverJobRequest.new(parent: parent, cutover_job_id: cutover_job_id, cutover_job: cutover_job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1826,32 +1826,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_cancel_cutover_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_cutover_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_cutover_job({ name: name }) do |_result, response|
+        c.cancel_cutover_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_cutover_job name: name do |_result, response|
+        c.cancel_cutover_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_cutover_job ::Google::Cloud::VMMigration::V1::CancelCutoverJobRequest.new(name: name) do |_result, response|
+        c.cancel_cutover_job ::Google::Cloud::VMMigration::V1::CancelCutoverJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_cutover_job({ name: name }, call_options) do |_result, response|
+        c.cancel_cutover_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_cutover_job(::Google::Cloud::VMMigration::V1::CancelCutoverJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_cutover_job(::Google::Cloud::VMMigration::V1::CancelCutoverJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1884,32 +1884,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_cutover_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cutover_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cutover_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_cutover_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cutover_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_cutover_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cutover_jobs ::Google::Cloud::VMMigration::V1::ListCutoverJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_cutover_jobs ::Google::Cloud::VMMigration::V1::ListCutoverJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cutover_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_cutover_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cutover_jobs(::Google::Cloud::VMMigration::V1::ListCutoverJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_cutover_jobs(::Google::Cloud::VMMigration::V1::ListCutoverJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1938,32 +1938,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_cutover_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cutover_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cutover_job({ name: name }) do |_result, response|
+        c.get_cutover_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cutover_job name: name do |_result, response|
+        c.get_cutover_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cutover_job ::Google::Cloud::VMMigration::V1::GetCutoverJobRequest.new(name: name) do |_result, response|
+        c.get_cutover_job ::Google::Cloud::VMMigration::V1::GetCutoverJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cutover_job({ name: name }, call_options) do |_result, response|
+        c.get_cutover_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cutover_job(::Google::Cloud::VMMigration::V1::GetCutoverJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_cutover_job(::Google::Cloud::VMMigration::V1::GetCutoverJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1996,32 +1996,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_groups_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_groups_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_groups parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_groups ::Google::Cloud::VMMigration::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_groups ::Google::Cloud::VMMigration::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_groups({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_groups(::Google::Cloud::VMMigration::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_groups(::Google::Cloud::VMMigration::V1::ListGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2050,32 +2050,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_group_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_group({ name: name }) do |_result, response|
+        c.get_group({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_group name: name do |_result, response|
+        c.get_group name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_group ::Google::Cloud::VMMigration::V1::GetGroupRequest.new(name: name) do |_result, response|
+        c.get_group ::Google::Cloud::VMMigration::V1::GetGroupRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_group({ name: name }, call_options) do |_result, response|
+        c.get_group({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_group(::Google::Cloud::VMMigration::V1::GetGroupRequest.new(name: name), call_options) do |_result, response|
+        c.get_group(::Google::Cloud::VMMigration::V1::GetGroupRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2107,32 +2107,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_group_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }) do |_result, response|
+        c.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_group parent: parent, group_id: group_id, group: group, request_id: request_id do |_result, response|
+        c.create_group parent: parent, group_id: group_id, group: group, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_group ::Google::Cloud::VMMigration::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id) do |_result, response|
+        c.create_group ::Google::Cloud::VMMigration::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }, call_options) do |_result, response|
+        c.create_group({ parent: parent, group_id: group_id, group: group, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_group(::Google::Cloud::VMMigration::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id), call_options) do |_result, response|
+        c.create_group(::Google::Cloud::VMMigration::V1::CreateGroupRequest.new(parent: parent, group_id: group_id, group: group, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2163,32 +2163,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_update_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_group_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_group({ update_mask: update_mask, group: group, request_id: request_id }) do |_result, response|
+        c.update_group({ update_mask: update_mask, group: group, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_group update_mask: update_mask, group: group, request_id: request_id do |_result, response|
+        c.update_group update_mask: update_mask, group: group, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_group ::Google::Cloud::VMMigration::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id) do |_result, response|
+        c.update_group ::Google::Cloud::VMMigration::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_group({ update_mask: update_mask, group: group, request_id: request_id }, call_options) do |_result, response|
+        c.update_group({ update_mask: update_mask, group: group, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_group(::Google::Cloud::VMMigration::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id), call_options) do |_result, response|
+        c.update_group(::Google::Cloud::VMMigration::V1::UpdateGroupRequest.new(update_mask: update_mask, group: group, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2218,32 +2218,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_group_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_group({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_group({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_group name: name, request_id: request_id do |_result, response|
+        c.delete_group name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_group ::Google::Cloud::VMMigration::V1::DeleteGroupRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_group ::Google::Cloud::VMMigration::V1::DeleteGroupRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_group({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_group({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_group(::Google::Cloud::VMMigration::V1::DeleteGroupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_group(::Google::Cloud::VMMigration::V1::DeleteGroupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2273,32 +2273,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_add_group_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_group_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_group_migration({ group: group, migrating_vm: migrating_vm }) do |_result, response|
+        c.add_group_migration({ group: group, migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_group_migration group: group, migrating_vm: migrating_vm do |_result, response|
+        c.add_group_migration group: group, migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_group_migration ::Google::Cloud::VMMigration::V1::AddGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm) do |_result, response|
+        c.add_group_migration ::Google::Cloud::VMMigration::V1::AddGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_group_migration({ group: group, migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.add_group_migration({ group: group, migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_group_migration(::Google::Cloud::VMMigration::V1::AddGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.add_group_migration(::Google::Cloud::VMMigration::V1::AddGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2328,32 +2328,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_remove_group_migration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_group_migration_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_group_migration({ group: group, migrating_vm: migrating_vm }) do |_result, response|
+        c.remove_group_migration({ group: group, migrating_vm: migrating_vm }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_group_migration group: group, migrating_vm: migrating_vm do |_result, response|
+        c.remove_group_migration group: group, migrating_vm: migrating_vm do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_group_migration ::Google::Cloud::VMMigration::V1::RemoveGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm) do |_result, response|
+        c.remove_group_migration ::Google::Cloud::VMMigration::V1::RemoveGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_group_migration({ group: group, migrating_vm: migrating_vm }, call_options) do |_result, response|
+        c.remove_group_migration({ group: group, migrating_vm: migrating_vm }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_group_migration(::Google::Cloud::VMMigration::V1::RemoveGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm), call_options) do |_result, response|
+        c.remove_group_migration(::Google::Cloud::VMMigration::V1::RemoveGroupMigrationRequest.new(group: group, migrating_vm: migrating_vm), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2386,32 +2386,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_target_projects_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_target_projects_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_target_projects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_target_projects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_target_projects parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_target_projects parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_target_projects ::Google::Cloud::VMMigration::V1::ListTargetProjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_target_projects ::Google::Cloud::VMMigration::V1::ListTargetProjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_target_projects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_target_projects({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_target_projects(::Google::Cloud::VMMigration::V1::ListTargetProjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_target_projects(::Google::Cloud::VMMigration::V1::ListTargetProjectsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2440,32 +2440,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_target_project_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_target_project_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_target_project({ name: name }) do |_result, response|
+        c.get_target_project({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_target_project name: name do |_result, response|
+        c.get_target_project name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_target_project ::Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new(name: name) do |_result, response|
+        c.get_target_project ::Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_target_project({ name: name }, call_options) do |_result, response|
+        c.get_target_project({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_target_project(::Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new(name: name), call_options) do |_result, response|
+        c.get_target_project(::Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2497,32 +2497,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_target_project_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_target_project_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_target_project({ parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id }) do |_result, response|
+        c.create_target_project({ parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_target_project parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id do |_result, response|
+        c.create_target_project parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_target_project ::Google::Cloud::VMMigration::V1::CreateTargetProjectRequest.new(parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id) do |_result, response|
+        c.create_target_project ::Google::Cloud::VMMigration::V1::CreateTargetProjectRequest.new(parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_target_project({ parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id }, call_options) do |_result, response|
+        c.create_target_project({ parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_target_project(::Google::Cloud::VMMigration::V1::CreateTargetProjectRequest.new(parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id), call_options) do |_result, response|
+        c.create_target_project(::Google::Cloud::VMMigration::V1::CreateTargetProjectRequest.new(parent: parent, target_project_id: target_project_id, target_project: target_project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2553,32 +2553,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_update_target_project_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_target_project_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_target_project({ update_mask: update_mask, target_project: target_project, request_id: request_id }) do |_result, response|
+        c.update_target_project({ update_mask: update_mask, target_project: target_project, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_target_project update_mask: update_mask, target_project: target_project, request_id: request_id do |_result, response|
+        c.update_target_project update_mask: update_mask, target_project: target_project, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_target_project ::Google::Cloud::VMMigration::V1::UpdateTargetProjectRequest.new(update_mask: update_mask, target_project: target_project, request_id: request_id) do |_result, response|
+        c.update_target_project ::Google::Cloud::VMMigration::V1::UpdateTargetProjectRequest.new(update_mask: update_mask, target_project: target_project, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_target_project({ update_mask: update_mask, target_project: target_project, request_id: request_id }, call_options) do |_result, response|
+        c.update_target_project({ update_mask: update_mask, target_project: target_project, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_target_project(::Google::Cloud::VMMigration::V1::UpdateTargetProjectRequest.new(update_mask: update_mask, target_project: target_project, request_id: request_id), call_options) do |_result, response|
+        c.update_target_project(::Google::Cloud::VMMigration::V1::UpdateTargetProjectRequest.new(update_mask: update_mask, target_project: target_project, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2608,32 +2608,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_target_project_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_target_project_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_target_project({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_target_project({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_target_project name: name, request_id: request_id do |_result, response|
+        c.delete_target_project name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_target_project ::Google::Cloud::VMMigration::V1::DeleteTargetProjectRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_target_project ::Google::Cloud::VMMigration::V1::DeleteTargetProjectRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_target_project({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_target_project({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_target_project(::Google::Cloud::VMMigration::V1::DeleteTargetProjectRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_target_project(::Google::Cloud::VMMigration::V1::DeleteTargetProjectRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2666,32 +2666,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_replication_cycles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_replication_cycles_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_replication_cycles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_replication_cycles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_replication_cycles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_replication_cycles parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_replication_cycles ::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_replication_cycles ::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_replication_cycles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_replication_cycles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_replication_cycles(::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_replication_cycles(::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2720,32 +2720,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_replication_cycle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_replication_cycle_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_replication_cycle({ name: name }) do |_result, response|
+        c.get_replication_cycle({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_replication_cycle name: name do |_result, response|
+        c.get_replication_cycle name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_replication_cycle ::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new(name: name) do |_result, response|
+        c.get_replication_cycle ::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_replication_cycle({ name: name }, call_options) do |_result, response|
+        c.get_replication_cycle({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_replication_cycle(::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new(name: name), call_options) do |_result, response|
+        c.get_replication_cycle(::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2778,32 +2778,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_image_imports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_image_imports_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_image_imports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_image_imports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_image_imports ::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_image_imports ::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_image_imports(::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_image_imports(::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2832,32 +2832,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_image_import_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_image_import_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_image_import({ name: name }) do |_result, response|
+        c.get_image_import({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_image_import name: name do |_result, response|
+        c.get_image_import name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_image_import ::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name) do |_result, response|
+        c.get_image_import ::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_image_import({ name: name }, call_options) do |_result, response|
+        c.get_image_import({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_image_import(::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name), call_options) do |_result, response|
+        c.get_image_import(::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2889,32 +2889,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_image_import_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_image_import_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }) do |_result, response|
+        c.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_image_import parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id do |_result, response|
+        c.create_image_import parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_image_import ::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id) do |_result, response|
+        c.create_image_import ::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }, call_options) do |_result, response|
+        c.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_image_import(::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id), call_options) do |_result, response|
+        c.create_image_import(::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2944,32 +2944,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_image_import_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_image_import_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_image_import({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_image_import({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_image_import name: name, request_id: request_id do |_result, response|
+        c.delete_image_import name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_image_import ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_image_import ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_image_import({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_image_import({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_image_import(::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_image_import(::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3002,32 +3002,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_image_import_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_image_import_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_image_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_image_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_image_import_jobs ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_image_import_jobs ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_image_import_jobs(::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_image_import_jobs(::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3056,32 +3056,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_image_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_image_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_image_import_job({ name: name }) do |_result, response|
+        c.get_image_import_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_image_import_job name: name do |_result, response|
+        c.get_image_import_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_image_import_job ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name) do |_result, response|
+        c.get_image_import_job ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_image_import_job({ name: name }, call_options) do |_result, response|
+        c.get_image_import_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_image_import_job(::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_image_import_job(::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3110,32 +3110,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_cancel_image_import_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_image_import_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_image_import_job({ name: name }) do |_result, response|
+        c.cancel_image_import_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_image_import_job name: name do |_result, response|
+        c.cancel_image_import_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_image_import_job ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name) do |_result, response|
+        c.cancel_image_import_job ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_image_import_job({ name: name }, call_options) do |_result, response|
+        c.cancel_image_import_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_image_import_job(::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_image_import_job(::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3167,32 +3167,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_disk_migration_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_disk_migration_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }) do |_result, response|
+        c.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_disk_migration_job parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id do |_result, response|
+        c.create_disk_migration_job parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_disk_migration_job ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id) do |_result, response|
+        c.create_disk_migration_job ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }, call_options) do |_result, response|
+        c.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_disk_migration_job(::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id), call_options) do |_result, response|
+        c.create_disk_migration_job(::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3225,32 +3225,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_disk_migration_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_disk_migration_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_disk_migration_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_disk_migration_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_disk_migration_jobs ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_disk_migration_jobs ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_disk_migration_jobs(::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_disk_migration_jobs(::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3279,32 +3279,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_disk_migration_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_disk_migration_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_disk_migration_job({ name: name }) do |_result, response|
+        c.get_disk_migration_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_disk_migration_job name: name do |_result, response|
+        c.get_disk_migration_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_disk_migration_job ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name) do |_result, response|
+        c.get_disk_migration_job ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_disk_migration_job({ name: name }, call_options) do |_result, response|
+        c.get_disk_migration_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_disk_migration_job(::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_disk_migration_job(::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3335,32 +3335,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_update_disk_migration_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_disk_migration_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }) do |_result, response|
+        c.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_disk_migration_job update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id do |_result, response|
+        c.update_disk_migration_job update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_disk_migration_job ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id) do |_result, response|
+        c.update_disk_migration_job ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }, call_options) do |_result, response|
+        c.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_disk_migration_job(::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id), call_options) do |_result, response|
+        c.update_disk_migration_job(::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3389,32 +3389,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_disk_migration_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_disk_migration_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_disk_migration_job({ name: name }) do |_result, response|
+        c.delete_disk_migration_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_disk_migration_job name: name do |_result, response|
+        c.delete_disk_migration_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_disk_migration_job ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name) do |_result, response|
+        c.delete_disk_migration_job ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_disk_migration_job({ name: name }, call_options) do |_result, response|
+        c.delete_disk_migration_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_disk_migration_job(::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+        c.delete_disk_migration_job(::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3443,32 +3443,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_run_disk_migration_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_disk_migration_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_disk_migration_job({ name: name }) do |_result, response|
+        c.run_disk_migration_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_disk_migration_job name: name do |_result, response|
+        c.run_disk_migration_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_disk_migration_job ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name) do |_result, response|
+        c.run_disk_migration_job ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_disk_migration_job({ name: name }, call_options) do |_result, response|
+        c.run_disk_migration_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_disk_migration_job(::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+        c.run_disk_migration_job(::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3497,32 +3497,32 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_cancel_disk_migration_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_disk_migration_job_client_stub do
         # Create client
-        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+        c = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_disk_migration_job({ name: name }) do |_result, response|
+        c.cancel_disk_migration_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_disk_migration_job name: name do |_result, response|
+        c.cancel_disk_migration_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_disk_migration_job ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name) do |_result, response|
+        c.cancel_disk_migration_job ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_disk_migration_job({ name: name }, call_options) do |_result, response|
+        c.cancel_disk_migration_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_disk_migration_job(::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_disk_migration_job(::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

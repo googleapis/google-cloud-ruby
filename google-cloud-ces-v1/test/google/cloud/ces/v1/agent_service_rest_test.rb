@@ -101,32 +101,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_apps_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_apps_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_apps parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_apps parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_apps ::Google::Cloud::Ces::V1::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_apps ::Google::Cloud::Ces::V1::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_apps({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_apps(::Google::Cloud::Ces::V1::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_apps(::Google::Cloud::Ces::V1::ListAppsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_app_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_app_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_app({ name: name }) do |_result, response|
+        c.get_app({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_app name: name do |_result, response|
+        c.get_app name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_app ::Google::Cloud::Ces::V1::GetAppRequest.new(name: name) do |_result, response|
+        c.get_app ::Google::Cloud::Ces::V1::GetAppRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_app({ name: name }, call_options) do |_result, response|
+        c.get_app({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_app(::Google::Cloud::Ces::V1::GetAppRequest.new(name: name), call_options) do |_result, response|
+        c.get_app(::Google::Cloud::Ces::V1::GetAppRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_app_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_app_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_app({ parent: parent, app_id: app_id, app: app }) do |_result, response|
+        c.create_app({ parent: parent, app_id: app_id, app: app }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_app parent: parent, app_id: app_id, app: app do |_result, response|
+        c.create_app parent: parent, app_id: app_id, app: app do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_app ::Google::Cloud::Ces::V1::CreateAppRequest.new(parent: parent, app_id: app_id, app: app) do |_result, response|
+        c.create_app ::Google::Cloud::Ces::V1::CreateAppRequest.new(parent: parent, app_id: app_id, app: app) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_app({ parent: parent, app_id: app_id, app: app }, call_options) do |_result, response|
+        c.create_app({ parent: parent, app_id: app_id, app: app }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_app(::Google::Cloud::Ces::V1::CreateAppRequest.new(parent: parent, app_id: app_id, app: app), call_options) do |_result, response|
+        c.create_app(::Google::Cloud::Ces::V1::CreateAppRequest.new(parent: parent, app_id: app_id, app: app), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_app_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_app_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_app({ app: app, update_mask: update_mask }) do |_result, response|
+        c.update_app({ app: app, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_app app: app, update_mask: update_mask do |_result, response|
+        c.update_app app: app, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_app ::Google::Cloud::Ces::V1::UpdateAppRequest.new(app: app, update_mask: update_mask) do |_result, response|
+        c.update_app ::Google::Cloud::Ces::V1::UpdateAppRequest.new(app: app, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_app({ app: app, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_app({ app: app, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_app(::Google::Cloud::Ces::V1::UpdateAppRequest.new(app: app, update_mask: update_mask), call_options) do |_result, response|
+        c.update_app(::Google::Cloud::Ces::V1::UpdateAppRequest.new(app: app, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_app_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_app_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_app({ name: name, etag: etag }) do |_result, response|
+        c.delete_app({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_app name: name, etag: etag do |_result, response|
+        c.delete_app name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_app ::Google::Cloud::Ces::V1::DeleteAppRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_app ::Google::Cloud::Ces::V1::DeleteAppRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_app({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_app({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_app(::Google::Cloud::Ces::V1::DeleteAppRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_app(::Google::Cloud::Ces::V1::DeleteAppRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_export_app_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, export_app_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }) do |_result, response|
+        c.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.export_app name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version do |_result, response|
+        c.export_app name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.export_app ::Google::Cloud::Ces::V1::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version) do |_result, response|
+        c.export_app ::Google::Cloud::Ces::V1::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }, call_options) do |_result, response|
+        c.export_app({ name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.export_app(::Google::Cloud::Ces::V1::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version), call_options) do |_result, response|
+        c.export_app(::Google::Cloud::Ces::V1::ExportAppRequest.new(name: name, export_format: export_format, gcs_uri: gcs_uri, app_version: app_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -437,32 +437,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_import_app_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_app_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |_result, response|
+        c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_app gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |_result, response|
+        c.import_app gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_app ::Google::Cloud::Ces::V1::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |_result, response|
+        c.import_app ::Google::Cloud::Ces::V1::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, call_options) do |_result, response|
+        c.import_app({ gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_app(::Google::Cloud::Ces::V1::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), call_options) do |_result, response|
+        c.import_app(::Google::Cloud::Ces::V1::ImportAppRequest.new(gcs_uri: gcs_uri, parent: parent, display_name: display_name, app_id: app_id, import_options: import_options, ignore_app_lock: ignore_app_lock), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -495,32 +495,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_agents_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_agents_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_agents parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_agents ::Google::Cloud::Ces::V1::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_agents ::Google::Cloud::Ces::V1::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_agents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_agents(::Google::Cloud::Ces::V1::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_agents(::Google::Cloud::Ces::V1::ListAgentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -549,32 +549,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_agent({ name: name }) do |_result, response|
+        c.get_agent({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_agent name: name do |_result, response|
+        c.get_agent name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_agent ::Google::Cloud::Ces::V1::GetAgentRequest.new(name: name) do |_result, response|
+        c.get_agent ::Google::Cloud::Ces::V1::GetAgentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_agent({ name: name }, call_options) do |_result, response|
+        c.get_agent({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_agent(::Google::Cloud::Ces::V1::GetAgentRequest.new(name: name), call_options) do |_result, response|
+        c.get_agent(::Google::Cloud::Ces::V1::GetAgentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -605,32 +605,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_agent({ parent: parent, agent_id: agent_id, agent: agent }) do |_result, response|
+        c.create_agent({ parent: parent, agent_id: agent_id, agent: agent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_agent parent: parent, agent_id: agent_id, agent: agent do |_result, response|
+        c.create_agent parent: parent, agent_id: agent_id, agent: agent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_agent ::Google::Cloud::Ces::V1::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent) do |_result, response|
+        c.create_agent ::Google::Cloud::Ces::V1::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_agent({ parent: parent, agent_id: agent_id, agent: agent }, call_options) do |_result, response|
+        c.create_agent({ parent: parent, agent_id: agent_id, agent: agent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_agent(::Google::Cloud::Ces::V1::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent), call_options) do |_result, response|
+        c.create_agent(::Google::Cloud::Ces::V1::CreateAgentRequest.new(parent: parent, agent_id: agent_id, agent: agent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -660,32 +660,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_agent({ agent: agent, update_mask: update_mask }) do |_result, response|
+        c.update_agent({ agent: agent, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_agent agent: agent, update_mask: update_mask do |_result, response|
+        c.update_agent agent: agent, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_agent ::Google::Cloud::Ces::V1::UpdateAgentRequest.new(agent: agent, update_mask: update_mask) do |_result, response|
+        c.update_agent ::Google::Cloud::Ces::V1::UpdateAgentRequest.new(agent: agent, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_agent({ agent: agent, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_agent({ agent: agent, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_agent(::Google::Cloud::Ces::V1::UpdateAgentRequest.new(agent: agent, update_mask: update_mask), call_options) do |_result, response|
+        c.update_agent(::Google::Cloud::Ces::V1::UpdateAgentRequest.new(agent: agent, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -716,32 +716,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_agent_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_agent_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_agent({ name: name, force: force, etag: etag }) do |_result, response|
+        c.delete_agent({ name: name, force: force, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_agent name: name, force: force, etag: etag do |_result, response|
+        c.delete_agent name: name, force: force, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_agent ::Google::Cloud::Ces::V1::DeleteAgentRequest.new(name: name, force: force, etag: etag) do |_result, response|
+        c.delete_agent ::Google::Cloud::Ces::V1::DeleteAgentRequest.new(name: name, force: force, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_agent({ name: name, force: force, etag: etag }, call_options) do |_result, response|
+        c.delete_agent({ name: name, force: force, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_agent(::Google::Cloud::Ces::V1::DeleteAgentRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
+        c.delete_agent(::Google::Cloud::Ces::V1::DeleteAgentRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -774,32 +774,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_examples_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_examples_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_examples parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_examples parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_examples ::Google::Cloud::Ces::V1::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_examples ::Google::Cloud::Ces::V1::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_examples({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_examples(::Google::Cloud::Ces::V1::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_examples(::Google::Cloud::Ces::V1::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -828,32 +828,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_example({ name: name }) do |_result, response|
+        c.get_example({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_example name: name do |_result, response|
+        c.get_example name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_example ::Google::Cloud::Ces::V1::GetExampleRequest.new(name: name) do |_result, response|
+        c.get_example ::Google::Cloud::Ces::V1::GetExampleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_example({ name: name }, call_options) do |_result, response|
+        c.get_example({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_example(::Google::Cloud::Ces::V1::GetExampleRequest.new(name: name), call_options) do |_result, response|
+        c.get_example(::Google::Cloud::Ces::V1::GetExampleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -884,32 +884,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_example({ parent: parent, example_id: example_id, example: example }) do |_result, response|
+        c.create_example({ parent: parent, example_id: example_id, example: example }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_example parent: parent, example_id: example_id, example: example do |_result, response|
+        c.create_example parent: parent, example_id: example_id, example: example do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_example ::Google::Cloud::Ces::V1::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example) do |_result, response|
+        c.create_example ::Google::Cloud::Ces::V1::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_example({ parent: parent, example_id: example_id, example: example }, call_options) do |_result, response|
+        c.create_example({ parent: parent, example_id: example_id, example: example }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_example(::Google::Cloud::Ces::V1::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example), call_options) do |_result, response|
+        c.create_example(::Google::Cloud::Ces::V1::CreateExampleRequest.new(parent: parent, example_id: example_id, example: example), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -939,32 +939,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_example({ example: example, update_mask: update_mask }) do |_result, response|
+        c.update_example({ example: example, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_example example: example, update_mask: update_mask do |_result, response|
+        c.update_example example: example, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_example ::Google::Cloud::Ces::V1::UpdateExampleRequest.new(example: example, update_mask: update_mask) do |_result, response|
+        c.update_example ::Google::Cloud::Ces::V1::UpdateExampleRequest.new(example: example, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_example({ example: example, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_example({ example: example, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_example(::Google::Cloud::Ces::V1::UpdateExampleRequest.new(example: example, update_mask: update_mask), call_options) do |_result, response|
+        c.update_example(::Google::Cloud::Ces::V1::UpdateExampleRequest.new(example: example, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -994,32 +994,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_example({ name: name, etag: etag }) do |_result, response|
+        c.delete_example({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_example name: name, etag: etag do |_result, response|
+        c.delete_example name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_example ::Google::Cloud::Ces::V1::DeleteExampleRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_example ::Google::Cloud::Ces::V1::DeleteExampleRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_example({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_example({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_example(::Google::Cloud::Ces::V1::DeleteExampleRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_example(::Google::Cloud::Ces::V1::DeleteExampleRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1052,32 +1052,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_tools_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tools_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_tools parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tools ::Google::Cloud::Ces::V1::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_tools ::Google::Cloud::Ces::V1::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_tools({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tools(::Google::Cloud::Ces::V1::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_tools(::Google::Cloud::Ces::V1::ListToolsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1106,32 +1106,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tool({ name: name }) do |_result, response|
+        c.get_tool({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tool name: name do |_result, response|
+        c.get_tool name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tool ::Google::Cloud::Ces::V1::GetToolRequest.new(name: name) do |_result, response|
+        c.get_tool ::Google::Cloud::Ces::V1::GetToolRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tool({ name: name }, call_options) do |_result, response|
+        c.get_tool({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tool(::Google::Cloud::Ces::V1::GetToolRequest.new(name: name), call_options) do |_result, response|
+        c.get_tool(::Google::Cloud::Ces::V1::GetToolRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1165,32 +1165,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_conversations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_conversations_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }) do |_result, response|
+        c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources do |_result, response|
+        c.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversations ::Google::Cloud::Ces::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources) do |_result, response|
+        c.list_conversations ::Google::Cloud::Ces::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }, call_options) do |_result, response|
+        c.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversations(::Google::Cloud::Ces::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources), call_options) do |_result, response|
+        c.list_conversations(::Google::Cloud::Ces::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, source: source, sources: sources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1220,32 +1220,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_conversation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_conversation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_conversation({ name: name, source: source }) do |_result, response|
+        c.get_conversation({ name: name, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_conversation name: name, source: source do |_result, response|
+        c.get_conversation name: name, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_conversation ::Google::Cloud::Ces::V1::GetConversationRequest.new(name: name, source: source) do |_result, response|
+        c.get_conversation ::Google::Cloud::Ces::V1::GetConversationRequest.new(name: name, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_conversation({ name: name, source: source }, call_options) do |_result, response|
+        c.get_conversation({ name: name, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_conversation(::Google::Cloud::Ces::V1::GetConversationRequest.new(name: name, source: source), call_options) do |_result, response|
+        c.get_conversation(::Google::Cloud::Ces::V1::GetConversationRequest.new(name: name, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1275,32 +1275,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_conversation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_conversation_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_conversation({ name: name, source: source }) do |_result, response|
+        c.delete_conversation({ name: name, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_conversation name: name, source: source do |_result, response|
+        c.delete_conversation name: name, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_conversation ::Google::Cloud::Ces::V1::DeleteConversationRequest.new(name: name, source: source) do |_result, response|
+        c.delete_conversation ::Google::Cloud::Ces::V1::DeleteConversationRequest.new(name: name, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_conversation({ name: name, source: source }, call_options) do |_result, response|
+        c.delete_conversation({ name: name, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_conversation(::Google::Cloud::Ces::V1::DeleteConversationRequest.new(name: name, source: source), call_options) do |_result, response|
+        c.delete_conversation(::Google::Cloud::Ces::V1::DeleteConversationRequest.new(name: name, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1330,32 +1330,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_batch_delete_conversations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_delete_conversations_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_delete_conversations({ parent: parent, conversations: conversations }) do |_result, response|
+        c.batch_delete_conversations({ parent: parent, conversations: conversations }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_delete_conversations parent: parent, conversations: conversations do |_result, response|
+        c.batch_delete_conversations parent: parent, conversations: conversations do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_delete_conversations ::Google::Cloud::Ces::V1::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations) do |_result, response|
+        c.batch_delete_conversations ::Google::Cloud::Ces::V1::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_delete_conversations({ parent: parent, conversations: conversations }, call_options) do |_result, response|
+        c.batch_delete_conversations({ parent: parent, conversations: conversations }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_delete_conversations(::Google::Cloud::Ces::V1::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations), call_options) do |_result, response|
+        c.batch_delete_conversations(::Google::Cloud::Ces::V1::BatchDeleteConversationsRequest.new(parent: parent, conversations: conversations), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1386,32 +1386,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tool({ parent: parent, tool_id: tool_id, tool: tool }) do |_result, response|
+        c.create_tool({ parent: parent, tool_id: tool_id, tool: tool }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tool parent: parent, tool_id: tool_id, tool: tool do |_result, response|
+        c.create_tool parent: parent, tool_id: tool_id, tool: tool do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tool ::Google::Cloud::Ces::V1::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool) do |_result, response|
+        c.create_tool ::Google::Cloud::Ces::V1::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tool({ parent: parent, tool_id: tool_id, tool: tool }, call_options) do |_result, response|
+        c.create_tool({ parent: parent, tool_id: tool_id, tool: tool }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tool(::Google::Cloud::Ces::V1::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool), call_options) do |_result, response|
+        c.create_tool(::Google::Cloud::Ces::V1::CreateToolRequest.new(parent: parent, tool_id: tool_id, tool: tool), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1441,32 +1441,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tool({ tool: tool, update_mask: update_mask }) do |_result, response|
+        c.update_tool({ tool: tool, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tool tool: tool, update_mask: update_mask do |_result, response|
+        c.update_tool tool: tool, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tool ::Google::Cloud::Ces::V1::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |_result, response|
+        c.update_tool ::Google::Cloud::Ces::V1::UpdateToolRequest.new(tool: tool, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tool({ tool: tool, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tool({ tool: tool, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tool(::Google::Cloud::Ces::V1::UpdateToolRequest.new(tool: tool, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tool(::Google::Cloud::Ces::V1::UpdateToolRequest.new(tool: tool, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1497,32 +1497,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_tool_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tool_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tool({ name: name, force: force, etag: etag }) do |_result, response|
+        c.delete_tool({ name: name, force: force, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tool name: name, force: force, etag: etag do |_result, response|
+        c.delete_tool name: name, force: force, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tool ::Google::Cloud::Ces::V1::DeleteToolRequest.new(name: name, force: force, etag: etag) do |_result, response|
+        c.delete_tool ::Google::Cloud::Ces::V1::DeleteToolRequest.new(name: name, force: force, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tool({ name: name, force: force, etag: etag }, call_options) do |_result, response|
+        c.delete_tool({ name: name, force: force, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tool(::Google::Cloud::Ces::V1::DeleteToolRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
+        c.delete_tool(::Google::Cloud::Ces::V1::DeleteToolRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1555,32 +1555,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_guardrails_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_guardrails_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_guardrails parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_guardrails parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_guardrails ::Google::Cloud::Ces::V1::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_guardrails ::Google::Cloud::Ces::V1::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_guardrails({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_guardrails(::Google::Cloud::Ces::V1::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_guardrails(::Google::Cloud::Ces::V1::ListGuardrailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1609,32 +1609,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_guardrail_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_guardrail_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_guardrail({ name: name }) do |_result, response|
+        c.get_guardrail({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_guardrail name: name do |_result, response|
+        c.get_guardrail name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_guardrail ::Google::Cloud::Ces::V1::GetGuardrailRequest.new(name: name) do |_result, response|
+        c.get_guardrail ::Google::Cloud::Ces::V1::GetGuardrailRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_guardrail({ name: name }, call_options) do |_result, response|
+        c.get_guardrail({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_guardrail(::Google::Cloud::Ces::V1::GetGuardrailRequest.new(name: name), call_options) do |_result, response|
+        c.get_guardrail(::Google::Cloud::Ces::V1::GetGuardrailRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1665,32 +1665,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_guardrail_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_guardrail_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }) do |_result, response|
+        c.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_guardrail parent: parent, guardrail_id: guardrail_id, guardrail: guardrail do |_result, response|
+        c.create_guardrail parent: parent, guardrail_id: guardrail_id, guardrail: guardrail do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_guardrail ::Google::Cloud::Ces::V1::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail) do |_result, response|
+        c.create_guardrail ::Google::Cloud::Ces::V1::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }, call_options) do |_result, response|
+        c.create_guardrail({ parent: parent, guardrail_id: guardrail_id, guardrail: guardrail }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_guardrail(::Google::Cloud::Ces::V1::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail), call_options) do |_result, response|
+        c.create_guardrail(::Google::Cloud::Ces::V1::CreateGuardrailRequest.new(parent: parent, guardrail_id: guardrail_id, guardrail: guardrail), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1720,32 +1720,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_guardrail_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_guardrail_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_guardrail({ guardrail: guardrail, update_mask: update_mask }) do |_result, response|
+        c.update_guardrail({ guardrail: guardrail, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_guardrail guardrail: guardrail, update_mask: update_mask do |_result, response|
+        c.update_guardrail guardrail: guardrail, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_guardrail ::Google::Cloud::Ces::V1::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask) do |_result, response|
+        c.update_guardrail ::Google::Cloud::Ces::V1::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_guardrail({ guardrail: guardrail, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_guardrail({ guardrail: guardrail, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_guardrail(::Google::Cloud::Ces::V1::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask), call_options) do |_result, response|
+        c.update_guardrail(::Google::Cloud::Ces::V1::UpdateGuardrailRequest.new(guardrail: guardrail, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1776,32 +1776,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_guardrail_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_guardrail_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_guardrail({ name: name, force: force, etag: etag }) do |_result, response|
+        c.delete_guardrail({ name: name, force: force, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_guardrail name: name, force: force, etag: etag do |_result, response|
+        c.delete_guardrail name: name, force: force, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_guardrail ::Google::Cloud::Ces::V1::DeleteGuardrailRequest.new(name: name, force: force, etag: etag) do |_result, response|
+        c.delete_guardrail ::Google::Cloud::Ces::V1::DeleteGuardrailRequest.new(name: name, force: force, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_guardrail({ name: name, force: force, etag: etag }, call_options) do |_result, response|
+        c.delete_guardrail({ name: name, force: force, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_guardrail(::Google::Cloud::Ces::V1::DeleteGuardrailRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
+        c.delete_guardrail(::Google::Cloud::Ces::V1::DeleteGuardrailRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1833,32 +1833,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_deployments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_deployments_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_deployments parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_deployments parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_deployments ::Google::Cloud::Ces::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_deployments ::Google::Cloud::Ces::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_deployments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_deployments(::Google::Cloud::Ces::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_deployments(::Google::Cloud::Ces::V1::ListDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1887,32 +1887,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_deployment({ name: name }) do |_result, response|
+        c.get_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_deployment name: name do |_result, response|
+        c.get_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_deployment ::Google::Cloud::Ces::V1::GetDeploymentRequest.new(name: name) do |_result, response|
+        c.get_deployment ::Google::Cloud::Ces::V1::GetDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_deployment({ name: name }, call_options) do |_result, response|
+        c.get_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_deployment(::Google::Cloud::Ces::V1::GetDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.get_deployment(::Google::Cloud::Ces::V1::GetDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1943,32 +1943,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |_result, response|
+        c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |_result, response|
+        c.create_deployment parent: parent, deployment_id: deployment_id, deployment: deployment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_deployment ::Google::Cloud::Ces::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |_result, response|
+        c.create_deployment ::Google::Cloud::Ces::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, call_options) do |_result, response|
+        c.create_deployment({ parent: parent, deployment_id: deployment_id, deployment: deployment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_deployment(::Google::Cloud::Ces::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), call_options) do |_result, response|
+        c.create_deployment(::Google::Cloud::Ces::V1::CreateDeploymentRequest.new(parent: parent, deployment_id: deployment_id, deployment: deployment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1998,32 +1998,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_deployment({ deployment: deployment, update_mask: update_mask }) do |_result, response|
+        c.update_deployment({ deployment: deployment, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_deployment deployment: deployment, update_mask: update_mask do |_result, response|
+        c.update_deployment deployment: deployment, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_deployment ::Google::Cloud::Ces::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask) do |_result, response|
+        c.update_deployment ::Google::Cloud::Ces::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_deployment({ deployment: deployment, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_deployment({ deployment: deployment, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_deployment(::Google::Cloud::Ces::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask), call_options) do |_result, response|
+        c.update_deployment(::Google::Cloud::Ces::V1::UpdateDeploymentRequest.new(deployment: deployment, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2053,32 +2053,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_deployment({ name: name, etag: etag }) do |_result, response|
+        c.delete_deployment({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_deployment name: name, etag: etag do |_result, response|
+        c.delete_deployment name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_deployment ::Google::Cloud::Ces::V1::DeleteDeploymentRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_deployment ::Google::Cloud::Ces::V1::DeleteDeploymentRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_deployment({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_deployment({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_deployment(::Google::Cloud::Ces::V1::DeleteDeploymentRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_deployment(::Google::Cloud::Ces::V1::DeleteDeploymentRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2111,32 +2111,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_toolsets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_toolsets_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_toolsets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_toolsets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_toolsets ::Google::Cloud::Ces::V1::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_toolsets ::Google::Cloud::Ces::V1::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_toolsets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_toolsets(::Google::Cloud::Ces::V1::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_toolsets(::Google::Cloud::Ces::V1::ListToolsetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2165,32 +2165,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_toolset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_toolset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_toolset({ name: name }) do |_result, response|
+        c.get_toolset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_toolset name: name do |_result, response|
+        c.get_toolset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_toolset ::Google::Cloud::Ces::V1::GetToolsetRequest.new(name: name) do |_result, response|
+        c.get_toolset ::Google::Cloud::Ces::V1::GetToolsetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_toolset({ name: name }, call_options) do |_result, response|
+        c.get_toolset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_toolset(::Google::Cloud::Ces::V1::GetToolsetRequest.new(name: name), call_options) do |_result, response|
+        c.get_toolset(::Google::Cloud::Ces::V1::GetToolsetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2221,32 +2221,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_toolset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_toolset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }) do |_result, response|
+        c.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_toolset parent: parent, toolset_id: toolset_id, toolset: toolset do |_result, response|
+        c.create_toolset parent: parent, toolset_id: toolset_id, toolset: toolset do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_toolset ::Google::Cloud::Ces::V1::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset) do |_result, response|
+        c.create_toolset ::Google::Cloud::Ces::V1::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }, call_options) do |_result, response|
+        c.create_toolset({ parent: parent, toolset_id: toolset_id, toolset: toolset }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_toolset(::Google::Cloud::Ces::V1::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset), call_options) do |_result, response|
+        c.create_toolset(::Google::Cloud::Ces::V1::CreateToolsetRequest.new(parent: parent, toolset_id: toolset_id, toolset: toolset), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2276,32 +2276,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_update_toolset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_toolset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_toolset({ toolset: toolset, update_mask: update_mask }) do |_result, response|
+        c.update_toolset({ toolset: toolset, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_toolset toolset: toolset, update_mask: update_mask do |_result, response|
+        c.update_toolset toolset: toolset, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_toolset ::Google::Cloud::Ces::V1::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask) do |_result, response|
+        c.update_toolset ::Google::Cloud::Ces::V1::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_toolset({ toolset: toolset, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_toolset({ toolset: toolset, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_toolset(::Google::Cloud::Ces::V1::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask), call_options) do |_result, response|
+        c.update_toolset(::Google::Cloud::Ces::V1::UpdateToolsetRequest.new(toolset: toolset, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2332,32 +2332,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_toolset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_toolset_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_toolset({ name: name, force: force, etag: etag }) do |_result, response|
+        c.delete_toolset({ name: name, force: force, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_toolset name: name, force: force, etag: etag do |_result, response|
+        c.delete_toolset name: name, force: force, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_toolset ::Google::Cloud::Ces::V1::DeleteToolsetRequest.new(name: name, force: force, etag: etag) do |_result, response|
+        c.delete_toolset ::Google::Cloud::Ces::V1::DeleteToolsetRequest.new(name: name, force: force, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_toolset({ name: name, force: force, etag: etag }, call_options) do |_result, response|
+        c.delete_toolset({ name: name, force: force, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_toolset(::Google::Cloud::Ces::V1::DeleteToolsetRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
+        c.delete_toolset(::Google::Cloud::Ces::V1::DeleteToolsetRequest.new(name: name, force: force, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2390,32 +2390,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_app_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_app_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_app_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_app_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_app_versions ::Google::Cloud::Ces::V1::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_app_versions ::Google::Cloud::Ces::V1::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_app_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_app_versions(::Google::Cloud::Ces::V1::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_app_versions(::Google::Cloud::Ces::V1::ListAppVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2444,32 +2444,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_app_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_app_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_app_version({ name: name }) do |_result, response|
+        c.get_app_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_app_version name: name do |_result, response|
+        c.get_app_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_app_version ::Google::Cloud::Ces::V1::GetAppVersionRequest.new(name: name) do |_result, response|
+        c.get_app_version ::Google::Cloud::Ces::V1::GetAppVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_app_version({ name: name }, call_options) do |_result, response|
+        c.get_app_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_app_version(::Google::Cloud::Ces::V1::GetAppVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_app_version(::Google::Cloud::Ces::V1::GetAppVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2500,32 +2500,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_create_app_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_app_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }) do |_result, response|
+        c.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_app_version parent: parent, app_version_id: app_version_id, app_version: app_version do |_result, response|
+        c.create_app_version parent: parent, app_version_id: app_version_id, app_version: app_version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_app_version ::Google::Cloud::Ces::V1::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version) do |_result, response|
+        c.create_app_version ::Google::Cloud::Ces::V1::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }, call_options) do |_result, response|
+        c.create_app_version({ parent: parent, app_version_id: app_version_id, app_version: app_version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_app_version(::Google::Cloud::Ces::V1::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version), call_options) do |_result, response|
+        c.create_app_version(::Google::Cloud::Ces::V1::CreateAppVersionRequest.new(parent: parent, app_version_id: app_version_id, app_version: app_version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2555,32 +2555,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_delete_app_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_app_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_app_version({ name: name, etag: etag }) do |_result, response|
+        c.delete_app_version({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_app_version name: name, etag: etag do |_result, response|
+        c.delete_app_version name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_app_version ::Google::Cloud::Ces::V1::DeleteAppVersionRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_app_version ::Google::Cloud::Ces::V1::DeleteAppVersionRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_app_version({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_app_version({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_app_version(::Google::Cloud::Ces::V1::DeleteAppVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_app_version(::Google::Cloud::Ces::V1::DeleteAppVersionRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2609,32 +2609,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_restore_app_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, restore_app_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.restore_app_version({ name: name }) do |_result, response|
+        c.restore_app_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_app_version name: name do |_result, response|
+        c.restore_app_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_app_version ::Google::Cloud::Ces::V1::RestoreAppVersionRequest.new(name: name) do |_result, response|
+        c.restore_app_version ::Google::Cloud::Ces::V1::RestoreAppVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_app_version({ name: name }, call_options) do |_result, response|
+        c.restore_app_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_app_version(::Google::Cloud::Ces::V1::RestoreAppVersionRequest.new(name: name), call_options) do |_result, response|
+        c.restore_app_version(::Google::Cloud::Ces::V1::RestoreAppVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2667,32 +2667,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_list_changelogs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_changelogs_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_changelogs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_changelogs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_changelogs ::Google::Cloud::Ces::V1::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_changelogs ::Google::Cloud::Ces::V1::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_changelogs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_changelogs(::Google::Cloud::Ces::V1::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_changelogs(::Google::Cloud::Ces::V1::ListChangelogsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2721,32 +2721,32 @@ class ::Google::Cloud::Ces::V1::AgentService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Ces::V1::AgentService::Rest::ServiceStub.stub :transcode_get_changelog_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_changelog_client_stub do
         # Create client
-        client = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Ces::V1::AgentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_changelog({ name: name }) do |_result, response|
+        c.get_changelog({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_changelog name: name do |_result, response|
+        c.get_changelog name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_changelog ::Google::Cloud::Ces::V1::GetChangelogRequest.new(name: name) do |_result, response|
+        c.get_changelog ::Google::Cloud::Ces::V1::GetChangelogRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_changelog({ name: name }, call_options) do |_result, response|
+        c.get_changelog({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_changelog(::Google::Cloud::Ces::V1::GetChangelogRequest.new(name: name), call_options) do |_result, response|
+        c.get_changelog(::Google::Cloud::Ces::V1::GetChangelogRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

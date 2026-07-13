@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the HttpRoute resource. It matches pattern
-        #     `projects/*/locations/global/httpRoutes/http_route_name>`.
+        #     `projects/*/locations/*/httpRoutes/http_route_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
         #     Output only. Server-defined URL of this resource
@@ -72,7 +72,7 @@ module Google
         #     one of the routing rules to route the requests served by the mesh.
         #
         #     Each mesh reference should match the pattern:
-        #     `projects/*/locations/global/meshes/<mesh_name>`
+        #     `projects/*/locations/*/meshes/<mesh_name>`
         #
         #     The attached Mesh should be of a type SIDECAR
         # @!attribute [rw] gateways
@@ -82,7 +82,7 @@ module Google
         #     gateway.
         #
         #     Each gateway reference should match the pattern:
-        #     `projects/*/locations/global/gateways/<gateway_name>`
+        #     `projects/*/locations/*/gateways/<gateway_name>`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Set of label tags associated with the HttpRoute resource.
@@ -683,7 +683,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the HttpRoutes should be
-        #     listed, specified in the format `projects/*/locations/global`.
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of HttpRoutes to return per call.
@@ -697,6 +697,9 @@ module Google
         #     Optional. If true, allow partial responses for multi-regional Aggregated
         #     List requests. Otherwise if one of the locations is down or unreachable,
         #     the Aggregated List request will fail.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter expression to restrict the list.
         class ListHttpRoutesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -726,7 +729,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the HttpRoute to get. Must be in the format
-        #     `projects/*/locations/global/httpRoutes/*`.
+        #     `projects/*/locations/*/httpRoutes/*`.
         class GetHttpRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -736,13 +739,16 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the HttpRoute. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] http_route_id
         #   @return [::String]
         #     Required. Short name of the HttpRoute resource to be created.
         # @!attribute [rw] http_route
         #   @return [::Google::Cloud::NetworkServices::V1::HttpRoute]
         #     Required. HttpRoute resource to be created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. Idempotent request UUID.
         class CreateHttpRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -768,7 +774,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the HttpRoute to delete. Must be in the format
-        #     `projects/*/locations/global/httpRoutes/*`.
+        #     `projects/*/locations/*/httpRoutes/*`.
         class DeleteHttpRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

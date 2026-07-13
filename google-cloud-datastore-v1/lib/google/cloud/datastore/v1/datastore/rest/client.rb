@@ -220,7 +220,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload lookup(project_id: nil, database_id: nil, read_options: nil, keys: nil, property_mask: nil)
+              # @overload lookup(project_id: nil, database_id: nil, read_options: nil, keys: nil, property_mask: nil, request_options: nil)
               #   Pass arguments to `lookup` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -243,6 +243,8 @@ module Google
               #     mask, it will be absent from [LookupResponse.found.entity.properties][].
               #
               #     The entity's key is always returned.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::LookupResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -314,7 +316,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil, property_mask: nil, explain_options: nil)
+              # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil, property_mask: nil, explain_options: nil, request_options: nil)
               #   Pass arguments to `run_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -350,6 +352,8 @@ module Google
               #   @param explain_options [::Google::Cloud::Datastore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::RunQueryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -421,7 +425,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_aggregation_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, aggregation_query: nil, gql_query: nil, explain_options: nil)
+              # @overload run_aggregation_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, aggregation_query: nil, gql_query: nil, explain_options: nil, request_options: nil)
               #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -451,6 +455,8 @@ module Google
               #   @param explain_options [::Google::Cloud::Datastore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::RunAggregationQueryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -522,7 +528,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload begin_transaction(project_id: nil, database_id: nil, transaction_options: nil)
+              # @overload begin_transaction(project_id: nil, database_id: nil, transaction_options: nil, request_options: nil)
               #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -536,6 +542,8 @@ module Google
               #     database.
               #   @param transaction_options [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
               #     Options for a new transaction.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::BeginTransactionResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -608,7 +616,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, single_use_transaction: nil, mutations: nil)
+              # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, single_use_transaction: nil, mutations: nil, request_options: nil)
               #   Pass arguments to `commit` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -649,6 +657,8 @@ module Google
               #
               #     When mode is `NON_TRANSACTIONAL`, no two mutations may affect a single
               #     entity.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::CommitResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -720,7 +730,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload rollback(project_id: nil, database_id: nil, transaction: nil)
+              # @overload rollback(project_id: nil, database_id: nil, transaction: nil, request_options: nil)
               #   Pass arguments to `rollback` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -735,6 +745,8 @@ module Google
               #   @param transaction [::String]
               #     Required. The transaction identifier, returned by a call to
               #     {::Google::Cloud::Datastore::V1::Datastore::Rest::Client#begin_transaction Datastore.BeginTransaction}.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::RollbackResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -807,7 +819,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload allocate_ids(project_id: nil, database_id: nil, keys: nil)
+              # @overload allocate_ids(project_id: nil, database_id: nil, keys: nil, request_options: nil)
               #   Pass arguments to `allocate_ids` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -822,6 +834,8 @@ module Google
               #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
               #     Required. A list of keys with incomplete key paths for which to allocate
               #     IDs. No key may be reserved/read-only.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::AllocateIdsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -894,7 +908,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload reserve_ids(project_id: nil, database_id: nil, keys: nil)
+              # @overload reserve_ids(project_id: nil, database_id: nil, keys: nil, request_options: nil)
               #   Pass arguments to `reserve_ids` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -909,6 +923,8 @@ module Google
               #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
               #     Required. A list of keys with complete key paths whose numeric IDs should
               #     not be auto-allocated.
+              #   @param request_options [::Google::Cloud::Datastore::V1::RequestOptions, ::Hash]
+              #     Optional. The options for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastore::V1::ReserveIdsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1037,6 +1053,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -1109,6 +1126,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

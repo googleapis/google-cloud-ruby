@@ -98,32 +98,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ClientTest 
     ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ServiceStub.stub :transcode_update_cmek_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_cmek_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_cmek_config({ config: config, set_default: set_default }) do |_result, response|
+        c.update_cmek_config({ config: config, set_default: set_default }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_cmek_config config: config, set_default: set_default do |_result, response|
+        c.update_cmek_config config: config, set_default: set_default do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_cmek_config ::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default) do |_result, response|
+        c.update_cmek_config ::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_cmek_config({ config: config, set_default: set_default }, call_options) do |_result, response|
+        c.update_cmek_config({ config: config, set_default: set_default }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_cmek_config(::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default), call_options) do |_result, response|
+        c.update_cmek_config(::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new(config: config, set_default: set_default), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ClientTest 
     ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ServiceStub.stub :transcode_get_cmek_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cmek_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cmek_config({ name: name }) do |_result, response|
+        c.get_cmek_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cmek_config name: name do |_result, response|
+        c.get_cmek_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cmek_config ::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name) do |_result, response|
+        c.get_cmek_config ::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cmek_config({ name: name }, call_options) do |_result, response|
+        c.get_cmek_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cmek_config(::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_cmek_config(::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -206,32 +206,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ClientTest 
     ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ServiceStub.stub :transcode_list_cmek_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cmek_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cmek_configs({ parent: parent }) do |_result, response|
+        c.list_cmek_configs({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cmek_configs parent: parent do |_result, response|
+        c.list_cmek_configs parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cmek_configs ::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent) do |_result, response|
+        c.list_cmek_configs ::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cmek_configs({ parent: parent }, call_options) do |_result, response|
+        c.list_cmek_configs({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cmek_configs(::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent), call_options) do |_result, response|
+        c.list_cmek_configs(::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -260,32 +260,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ClientTest 
     ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::ServiceStub.stub :transcode_delete_cmek_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_cmek_config_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_cmek_config({ name: name }) do |_result, response|
+        c.delete_cmek_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_cmek_config name: name do |_result, response|
+        c.delete_cmek_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_cmek_config ::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name) do |_result, response|
+        c.delete_cmek_config ::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_cmek_config({ name: name }, call_options) do |_result, response|
+        c.delete_cmek_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_cmek_config(::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_cmek_config(::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

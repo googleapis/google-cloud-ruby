@@ -99,32 +99,32 @@ class ::Google::Cloud::Dataplex::V1::CmekService::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dataplex::V1::CmekService::Rest::ServiceStub.stub :transcode_create_encryption_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_encryption_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }) do |_result, response|
+        c.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_encryption_config parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config do |_result, response|
+        c.create_encryption_config parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_encryption_config ::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config) do |_result, response|
+        c.create_encryption_config ::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }, call_options) do |_result, response|
+        c.create_encryption_config({ parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_encryption_config(::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config), call_options) do |_result, response|
+        c.create_encryption_config(::Google::Cloud::Dataplex::V1::CreateEncryptionConfigRequest.new(parent: parent, encryption_config_id: encryption_config_id, encryption_config: encryption_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Dataplex::V1::CmekService::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dataplex::V1::CmekService::Rest::ServiceStub.stub :transcode_update_encryption_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_encryption_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }) do |_result, response|
+        c.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_encryption_config encryption_config: encryption_config, update_mask: update_mask do |_result, response|
+        c.update_encryption_config encryption_config: encryption_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_encryption_config ::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask) do |_result, response|
+        c.update_encryption_config ::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_encryption_config({ encryption_config: encryption_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_encryption_config(::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_encryption_config(::Google::Cloud::Dataplex::V1::UpdateEncryptionConfigRequest.new(encryption_config: encryption_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Dataplex::V1::CmekService::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dataplex::V1::CmekService::Rest::ServiceStub.stub :transcode_delete_encryption_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_encryption_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_encryption_config({ name: name, etag: etag }) do |_result, response|
+        c.delete_encryption_config({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_encryption_config name: name, etag: etag do |_result, response|
+        c.delete_encryption_config name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_encryption_config ::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_encryption_config ::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_encryption_config({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_encryption_config({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_encryption_config(::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_encryption_config(::Google::Cloud::Dataplex::V1::DeleteEncryptionConfigRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Cloud::Dataplex::V1::CmekService::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dataplex::V1::CmekService::Rest::ServiceStub.stub :transcode_list_encryption_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_encryption_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_encryption_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_encryption_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_encryption_configs ::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_encryption_configs ::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_encryption_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_encryption_configs(::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_encryption_configs(::Google::Cloud::Dataplex::V1::ListEncryptionConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::Dataplex::V1::CmekService::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Dataplex::V1::CmekService::Rest::ServiceStub.stub :transcode_get_encryption_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_encryption_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::CmekService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_encryption_config({ name: name }) do |_result, response|
+        c.get_encryption_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_encryption_config name: name do |_result, response|
+        c.get_encryption_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_encryption_config ::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name) do |_result, response|
+        c.get_encryption_config ::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_encryption_config({ name: name }, call_options) do |_result, response|
+        c.get_encryption_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_encryption_config(::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_encryption_config(::Google::Cloud::Dataplex::V1::GetEncryptionConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

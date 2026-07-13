@@ -99,32 +99,32 @@ class ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client
     ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::ServiceStub.stub :transcode_create_runtime_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_runtime_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_runtime_project_attachment({ parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment }) do |_result, response|
+        c.create_runtime_project_attachment({ parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_runtime_project_attachment parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment do |_result, response|
+        c.create_runtime_project_attachment parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_runtime_project_attachment ::Google::Cloud::ApiHub::V1::CreateRuntimeProjectAttachmentRequest.new(parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment) do |_result, response|
+        c.create_runtime_project_attachment ::Google::Cloud::ApiHub::V1::CreateRuntimeProjectAttachmentRequest.new(parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_runtime_project_attachment({ parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment }, call_options) do |_result, response|
+        c.create_runtime_project_attachment({ parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_runtime_project_attachment(::Google::Cloud::ApiHub::V1::CreateRuntimeProjectAttachmentRequest.new(parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment), call_options) do |_result, response|
+        c.create_runtime_project_attachment(::Google::Cloud::ApiHub::V1::CreateRuntimeProjectAttachmentRequest.new(parent: parent, runtime_project_attachment_id: runtime_project_attachment_id, runtime_project_attachment: runtime_project_attachment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client
     ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::ServiceStub.stub :transcode_get_runtime_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_runtime_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_runtime_project_attachment({ name: name }) do |_result, response|
+        c.get_runtime_project_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_runtime_project_attachment name: name do |_result, response|
+        c.get_runtime_project_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_runtime_project_attachment ::Google::Cloud::ApiHub::V1::GetRuntimeProjectAttachmentRequest.new(name: name) do |_result, response|
+        c.get_runtime_project_attachment ::Google::Cloud::ApiHub::V1::GetRuntimeProjectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_runtime_project_attachment({ name: name }, call_options) do |_result, response|
+        c.get_runtime_project_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_runtime_project_attachment(::Google::Cloud::ApiHub::V1::GetRuntimeProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_runtime_project_attachment(::Google::Cloud::ApiHub::V1::GetRuntimeProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client
     ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::ServiceStub.stub :transcode_list_runtime_project_attachments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_runtime_project_attachments_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_runtime_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_runtime_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_runtime_project_attachments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_runtime_project_attachments parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_runtime_project_attachments ::Google::Cloud::ApiHub::V1::ListRuntimeProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_runtime_project_attachments ::Google::Cloud::ApiHub::V1::ListRuntimeProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_runtime_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_runtime_project_attachments({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_runtime_project_attachments(::Google::Cloud::ApiHub::V1::ListRuntimeProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_runtime_project_attachments(::Google::Cloud::ApiHub::V1::ListRuntimeProjectAttachmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client
     ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::ServiceStub.stub :transcode_delete_runtime_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_runtime_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_runtime_project_attachment({ name: name }) do |_result, response|
+        c.delete_runtime_project_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_runtime_project_attachment name: name do |_result, response|
+        c.delete_runtime_project_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_runtime_project_attachment ::Google::Cloud::ApiHub::V1::DeleteRuntimeProjectAttachmentRequest.new(name: name) do |_result, response|
+        c.delete_runtime_project_attachment ::Google::Cloud::ApiHub::V1::DeleteRuntimeProjectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_runtime_project_attachment({ name: name }, call_options) do |_result, response|
+        c.delete_runtime_project_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_runtime_project_attachment(::Google::Cloud::ApiHub::V1::DeleteRuntimeProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_runtime_project_attachment(::Google::Cloud::ApiHub::V1::DeleteRuntimeProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client
     ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::ServiceStub.stub :transcode_lookup_runtime_project_attachment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, lookup_runtime_project_attachment_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.lookup_runtime_project_attachment({ name: name }) do |_result, response|
+        c.lookup_runtime_project_attachment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_runtime_project_attachment name: name do |_result, response|
+        c.lookup_runtime_project_attachment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_runtime_project_attachment ::Google::Cloud::ApiHub::V1::LookupRuntimeProjectAttachmentRequest.new(name: name) do |_result, response|
+        c.lookup_runtime_project_attachment ::Google::Cloud::ApiHub::V1::LookupRuntimeProjectAttachmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_runtime_project_attachment({ name: name }, call_options) do |_result, response|
+        c.lookup_runtime_project_attachment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_runtime_project_attachment(::Google::Cloud::ApiHub::V1::LookupRuntimeProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
+        c.lookup_runtime_project_attachment(::Google::Cloud::ApiHub::V1::LookupRuntimeProjectAttachmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -82,36 +82,36 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_voices_client_stub do
       # Create client
-      client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
+      c = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_voices({ language_code: language_code }) do |response, operation|
+      c.list_voices({ language_code: language_code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_voices language_code: language_code do |response, operation|
+      c.list_voices language_code: language_code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_voices ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code) do |response, operation|
+      c.list_voices ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_voices({ language_code: language_code }, grpc_options) do |response, operation|
+      c.list_voices({ language_code: language_code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_voices(::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code), grpc_options) do |response, operation|
+      c.list_voices(::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -147,36 +147,36 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, synthesize_speech_client_stub do
       # Create client
-      client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
+      c = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options }) do |response, operation|
+      c.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.synthesize_speech input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options do |response, operation|
+      c.synthesize_speech input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.synthesize_speech ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options) do |response, operation|
+      c.synthesize_speech ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options }, grpc_options) do |response, operation|
+      c.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.synthesize_speech(::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options), grpc_options) do |response, operation|
+      c.synthesize_speech(::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -205,7 +205,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, streaming_synthesize_client_stub do
       # Create client
-      client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
+      c = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -213,7 +213,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeRequest.new streaming_config: streaming_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_synthesize enum_input do |response, operation|
+      c.streaming_synthesize enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeResponse, r
@@ -225,7 +225,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeRequest.new streaming_config: streaming_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_synthesize stream_input do |response, operation|
+      c.streaming_synthesize stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeResponse, r
@@ -240,7 +240,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeRequest.new streaming_config: streaming_config
       enum_input = [request_hash, request_proto].to_enum
-      client.streaming_synthesize enum_input, grpc_options do |response, operation|
+      c.streaming_synthesize enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeResponse, r
@@ -252,7 +252,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Te
       request_hash = { streaming_config: streaming_config }
       request_proto = ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeRequest.new streaming_config: streaming_config
       stream_input = Gapic::StreamInput.new
-      client.streaming_synthesize stream_input, grpc_options do |response, operation|
+      c.streaming_synthesize stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeResponse, r

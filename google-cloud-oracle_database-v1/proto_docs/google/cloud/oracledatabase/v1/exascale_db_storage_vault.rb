@@ -51,6 +51,12 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels or tags associated with the ExascaleDbStorageVault.
+        # @!attribute [rw] exadata_infrastructure
+        #   @return [::String]
+        #     Optional. The Exadata Infrastructure resource on which
+        #     ExascaleDbStorageVault
+        #     resource is created, in the following format:
+        #     projects/\\{project}/locations/\\{region}/cloudExadataInfrastuctures/\\{cloud_extradata_infrastructure}
         class ExascaleDbStorageVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -207,6 +213,10 @@ module Google
         #     the next page token can be provided to a subsequent
         #     ListExascaleDbStorageVaults call to list the next page.
         #     If empty, there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable locations when listing resources across all locations using
+        #     wildcard location '-'.
         class ListExascaleDbStorageVaultsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

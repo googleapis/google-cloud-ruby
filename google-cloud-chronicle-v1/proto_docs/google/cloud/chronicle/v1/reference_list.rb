@@ -138,6 +138,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # VerifyReferenceList request message.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The name of the parent resource, which is the SecOps instance
+        #     associated with the request. Format:
+        #     `projects/{project}/locations/{location}/instances/{instance}`
+        # @!attribute [rw] syntax_type
+        #   @return [::Google::Cloud::Chronicle::V1::ReferenceListSyntaxType]
+        #     Required. Type (format) of list lines.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Chronicle::V1::ReferenceListEntry>]
+        #     Required. The entries of the reference list.
+        #     Each line may be either an item in the list or a comment.
+        class VerifyReferenceListRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # VerifyListResponse response message.
+        # @!attribute [rw] success
+        #   @return [::Boolean]
+        #     Validity of list - true if no errors found.
+        # @!attribute [rw] errors
+        #   @return [::Array<::Google::Cloud::Chronicle::V1::ReferenceListError>]
+        #     Line-level errors causing the list to be invalid.
+        class VerifyReferenceListResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A reference list.
         # Reference lists are user-defined lists of values which users can
         # use in multiple Rules.
@@ -190,6 +220,19 @@ module Google
         #   @return [::String]
         #     Required. The value of the entry. Maximum length is 512 characters.
         class ReferenceListEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The error generated when verifying the reference list.
+        # @!attribute [rw] line_number
+        #   @return [::Integer]
+        #     1-indexed line number where the error occurs.
+        #     General list errors are indexed at -1.
+        # @!attribute [rw] error_message
+        #   @return [::String]
+        #     Message explaining why the line is invalid.
+        class ReferenceListError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

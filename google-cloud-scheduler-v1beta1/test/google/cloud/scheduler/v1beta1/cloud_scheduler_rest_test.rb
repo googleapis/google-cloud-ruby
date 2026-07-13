@@ -101,32 +101,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_list_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron }) do |_result, response|
+        c.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron do |_result, response|
+        c.list_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_jobs ::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron) do |_result, response|
+        c.list_jobs ::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron }, call_options) do |_result, response|
+        c.list_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_jobs(::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron), call_options) do |_result, response|
+        c.list_jobs(::Google::Cloud::Scheduler::V1beta1::ListJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, legacy_app_engine_cron: legacy_app_engine_cron), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_get_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_job({ name: name }) do |_result, response|
+        c.get_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_job name: name do |_result, response|
+        c.get_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_job ::Google::Cloud::Scheduler::V1beta1::GetJobRequest.new(name: name) do |_result, response|
+        c.get_job ::Google::Cloud::Scheduler::V1beta1::GetJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_job({ name: name }, call_options) do |_result, response|
+        c.get_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_job(::Google::Cloud::Scheduler::V1beta1::GetJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_job(::Google::Cloud::Scheduler::V1beta1::GetJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_create_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_job({ parent: parent, job: job }) do |_result, response|
+        c.create_job({ parent: parent, job: job }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_job parent: parent, job: job do |_result, response|
+        c.create_job parent: parent, job: job do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_job ::Google::Cloud::Scheduler::V1beta1::CreateJobRequest.new(parent: parent, job: job) do |_result, response|
+        c.create_job ::Google::Cloud::Scheduler::V1beta1::CreateJobRequest.new(parent: parent, job: job) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_job({ parent: parent, job: job }, call_options) do |_result, response|
+        c.create_job({ parent: parent, job: job }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_job(::Google::Cloud::Scheduler::V1beta1::CreateJobRequest.new(parent: parent, job: job), call_options) do |_result, response|
+        c.create_job(::Google::Cloud::Scheduler::V1beta1::CreateJobRequest.new(parent: parent, job: job), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_update_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_job({ job: job, update_mask: update_mask }) do |_result, response|
+        c.update_job({ job: job, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_job job: job, update_mask: update_mask do |_result, response|
+        c.update_job job: job, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_job ::Google::Cloud::Scheduler::V1beta1::UpdateJobRequest.new(job: job, update_mask: update_mask) do |_result, response|
+        c.update_job ::Google::Cloud::Scheduler::V1beta1::UpdateJobRequest.new(job: job, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_job({ job: job, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_job({ job: job, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_job(::Google::Cloud::Scheduler::V1beta1::UpdateJobRequest.new(job: job, update_mask: update_mask), call_options) do |_result, response|
+        c.update_job(::Google::Cloud::Scheduler::V1beta1::UpdateJobRequest.new(job: job, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_delete_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }) do |_result, response|
+        c.delete_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_job name: name, legacy_app_engine_cron: legacy_app_engine_cron do |_result, response|
+        c.delete_job name: name, legacy_app_engine_cron: legacy_app_engine_cron do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_job ::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron) do |_result, response|
+        c.delete_job ::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }, call_options) do |_result, response|
+        c.delete_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_job(::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron), call_options) do |_result, response|
+        c.delete_job(::Google::Cloud::Scheduler::V1beta1::DeleteJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_pause_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_job({ name: name }) do |_result, response|
+        c.pause_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_job name: name do |_result, response|
+        c.pause_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_job ::Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new(name: name) do |_result, response|
+        c.pause_job ::Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_job({ name: name }, call_options) do |_result, response|
+        c.pause_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_job(::Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new(name: name), call_options) do |_result, response|
+        c.pause_job(::Google::Cloud::Scheduler::V1beta1::PauseJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_resume_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_job({ name: name }) do |_result, response|
+        c.resume_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_job name: name do |_result, response|
+        c.resume_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_job ::Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new(name: name) do |_result, response|
+        c.resume_job ::Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_job({ name: name }, call_options) do |_result, response|
+        c.resume_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_job(::Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new(name: name), call_options) do |_result, response|
+        c.resume_job(::Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -483,32 +483,32 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ClientTest < Mi
     ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::ServiceStub.stub :transcode_run_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_job_client_stub do
         # Create client
-        client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
+        c = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }) do |_result, response|
+        c.run_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_job name: name, legacy_app_engine_cron: legacy_app_engine_cron do |_result, response|
+        c.run_job name: name, legacy_app_engine_cron: legacy_app_engine_cron do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_job ::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron) do |_result, response|
+        c.run_job ::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }, call_options) do |_result, response|
+        c.run_job({ name: name, legacy_app_engine_cron: legacy_app_engine_cron }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_job(::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron), call_options) do |_result, response|
+        c.run_job(::Google::Cloud::Scheduler::V1beta1::RunJobRequest.new(name: name, legacy_app_engine_cron: legacy_app_engine_cron), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

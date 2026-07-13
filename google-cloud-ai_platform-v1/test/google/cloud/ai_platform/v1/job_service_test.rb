@@ -84,36 +84,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_custom_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_custom_job({ parent: parent, custom_job: custom_job }) do |response, operation|
+      c.create_custom_job({ parent: parent, custom_job: custom_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_custom_job parent: parent, custom_job: custom_job do |response, operation|
+      c.create_custom_job parent: parent, custom_job: custom_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_custom_job ::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job) do |response, operation|
+      c.create_custom_job ::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_custom_job({ parent: parent, custom_job: custom_job }, grpc_options) do |response, operation|
+      c.create_custom_job({ parent: parent, custom_job: custom_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_custom_job(::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job), grpc_options) do |response, operation|
+      c.create_custom_job(::Google::Cloud::AIPlatform::V1::CreateCustomJobRequest.new(parent: parent, custom_job: custom_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_custom_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_custom_job({ name: name }) do |response, operation|
+      c.get_custom_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_custom_job name: name do |response, operation|
+      c.get_custom_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_custom_job ::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name) do |response, operation|
+      c.get_custom_job ::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_custom_job({ name: name }, grpc_options) do |response, operation|
+      c.get_custom_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_custom_job(::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_custom_job(::Google::Cloud::AIPlatform::V1::GetCustomJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,40 +208,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_custom_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_custom_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_custom_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_custom_jobs ::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_custom_jobs ::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_custom_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_custom_jobs(::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_custom_jobs(::Google::Cloud::AIPlatform::V1::ListCustomJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -271,40 +271,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_custom_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_custom_job({ name: name }) do |response, operation|
+      c.delete_custom_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_custom_job name: name do |response, operation|
+      c.delete_custom_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_custom_job ::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name) do |response, operation|
+      c.delete_custom_job ::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_custom_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_custom_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_custom_job(::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_custom_job(::Google::Cloud::AIPlatform::V1::DeleteCustomJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -334,36 +334,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_custom_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_custom_job({ name: name }) do |response, operation|
+      c.cancel_custom_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_custom_job name: name do |response, operation|
+      c.cancel_custom_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_custom_job ::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name) do |response, operation|
+      c.cancel_custom_job ::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_custom_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_custom_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_custom_job(::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_custom_job(::Google::Cloud::AIPlatform::V1::CancelCustomJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -394,36 +394,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_data_labeling_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }) do |response, operation|
+      c.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_labeling_job parent: parent, data_labeling_job: data_labeling_job do |response, operation|
+      c.create_data_labeling_job parent: parent, data_labeling_job: data_labeling_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_labeling_job ::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job) do |response, operation|
+      c.create_data_labeling_job ::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }, grpc_options) do |response, operation|
+      c.create_data_labeling_job({ parent: parent, data_labeling_job: data_labeling_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_labeling_job(::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job), grpc_options) do |response, operation|
+      c.create_data_labeling_job(::Google::Cloud::AIPlatform::V1::CreateDataLabelingJobRequest.new(parent: parent, data_labeling_job: data_labeling_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -452,36 +452,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_data_labeling_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_labeling_job({ name: name }) do |response, operation|
+      c.get_data_labeling_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_labeling_job name: name do |response, operation|
+      c.get_data_labeling_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_labeling_job ::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name) do |response, operation|
+      c.get_data_labeling_job ::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_labeling_job({ name: name }, grpc_options) do |response, operation|
+      c.get_data_labeling_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_labeling_job(::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_labeling_job(::Google::Cloud::AIPlatform::V1::GetDataLabelingJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -520,40 +520,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_data_labeling_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_labeling_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_data_labeling_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_labeling_jobs ::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_data_labeling_jobs ::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_data_labeling_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_labeling_jobs(::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_data_labeling_jobs(::Google::Cloud::AIPlatform::V1::ListDataLabelingJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -583,40 +583,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_data_labeling_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_labeling_job({ name: name }) do |response, operation|
+      c.delete_data_labeling_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_labeling_job name: name do |response, operation|
+      c.delete_data_labeling_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_labeling_job ::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name) do |response, operation|
+      c.delete_data_labeling_job ::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_labeling_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_labeling_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_labeling_job(::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_labeling_job(::Google::Cloud::AIPlatform::V1::DeleteDataLabelingJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -646,36 +646,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_data_labeling_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_data_labeling_job({ name: name }) do |response, operation|
+      c.cancel_data_labeling_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_data_labeling_job name: name do |response, operation|
+      c.cancel_data_labeling_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_data_labeling_job ::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name) do |response, operation|
+      c.cancel_data_labeling_job ::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_data_labeling_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_data_labeling_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_data_labeling_job(::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_data_labeling_job(::Google::Cloud::AIPlatform::V1::CancelDataLabelingJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -706,36 +706,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_hyperparameter_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }) do |response, operation|
+      c.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_hyperparameter_tuning_job parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job do |response, operation|
+      c.create_hyperparameter_tuning_job parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job) do |response, operation|
+      c.create_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }, grpc_options) do |response, operation|
+      c.create_hyperparameter_tuning_job({ parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job), grpc_options) do |response, operation|
+      c.create_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CreateHyperparameterTuningJobRequest.new(parent: parent, hyperparameter_tuning_job: hyperparameter_tuning_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -764,36 +764,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_hyperparameter_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_hyperparameter_tuning_job({ name: name }) do |response, operation|
+      c.get_hyperparameter_tuning_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_hyperparameter_tuning_job name: name do |response, operation|
+      c.get_hyperparameter_tuning_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name) do |response, operation|
+      c.get_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_hyperparameter_tuning_job({ name: name }, grpc_options) do |response, operation|
+      c.get_hyperparameter_tuning_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::GetHyperparameterTuningJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -830,40 +830,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_hyperparameter_tuning_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hyperparameter_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_hyperparameter_tuning_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hyperparameter_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_hyperparameter_tuning_jobs ::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_hyperparameter_tuning_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hyperparameter_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_hyperparameter_tuning_jobs(::Google::Cloud::AIPlatform::V1::ListHyperparameterTuningJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -893,40 +893,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_hyperparameter_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_hyperparameter_tuning_job({ name: name }) do |response, operation|
+      c.delete_hyperparameter_tuning_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_hyperparameter_tuning_job name: name do |response, operation|
+      c.delete_hyperparameter_tuning_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name) do |response, operation|
+      c.delete_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_hyperparameter_tuning_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_hyperparameter_tuning_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::DeleteHyperparameterTuningJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -956,36 +956,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_hyperparameter_tuning_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_hyperparameter_tuning_job({ name: name }) do |response, operation|
+      c.cancel_hyperparameter_tuning_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_hyperparameter_tuning_job name: name do |response, operation|
+      c.cancel_hyperparameter_tuning_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name) do |response, operation|
+      c.cancel_hyperparameter_tuning_job ::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_hyperparameter_tuning_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_hyperparameter_tuning_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_hyperparameter_tuning_job(::Google::Cloud::AIPlatform::V1::CancelHyperparameterTuningJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1016,36 +1016,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_nas_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_nas_job({ parent: parent, nas_job: nas_job }) do |response, operation|
+      c.create_nas_job({ parent: parent, nas_job: nas_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_nas_job parent: parent, nas_job: nas_job do |response, operation|
+      c.create_nas_job parent: parent, nas_job: nas_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_nas_job ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job) do |response, operation|
+      c.create_nas_job ::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_nas_job({ parent: parent, nas_job: nas_job }, grpc_options) do |response, operation|
+      c.create_nas_job({ parent: parent, nas_job: nas_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_nas_job(::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job), grpc_options) do |response, operation|
+      c.create_nas_job(::Google::Cloud::AIPlatform::V1::CreateNasJobRequest.new(parent: parent, nas_job: nas_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1074,36 +1074,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_nas_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_nas_job({ name: name }) do |response, operation|
+      c.get_nas_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_nas_job name: name do |response, operation|
+      c.get_nas_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_nas_job ::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name) do |response, operation|
+      c.get_nas_job ::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_nas_job({ name: name }, grpc_options) do |response, operation|
+      c.get_nas_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_nas_job(::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_nas_job(::Google::Cloud::AIPlatform::V1::GetNasJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1140,40 +1140,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_nas_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_nas_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_nas_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_nas_jobs ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_nas_jobs ::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_nas_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_nas_jobs(::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_nas_jobs(::Google::Cloud::AIPlatform::V1::ListNasJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1203,40 +1203,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_nas_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_nas_job({ name: name }) do |response, operation|
+      c.delete_nas_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_nas_job name: name do |response, operation|
+      c.delete_nas_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_nas_job ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name) do |response, operation|
+      c.delete_nas_job ::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_nas_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_nas_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_nas_job(::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_nas_job(::Google::Cloud::AIPlatform::V1::DeleteNasJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1266,36 +1266,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_nas_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_nas_job({ name: name }) do |response, operation|
+      c.cancel_nas_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_nas_job name: name do |response, operation|
+      c.cancel_nas_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_nas_job ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name) do |response, operation|
+      c.cancel_nas_job ::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_nas_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_nas_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_nas_job(::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_nas_job(::Google::Cloud::AIPlatform::V1::CancelNasJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1324,36 +1324,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_nas_trial_detail_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_nas_trial_detail({ name: name }) do |response, operation|
+      c.get_nas_trial_detail({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_nas_trial_detail name: name do |response, operation|
+      c.get_nas_trial_detail name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_nas_trial_detail ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name) do |response, operation|
+      c.get_nas_trial_detail ::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_nas_trial_detail({ name: name }, grpc_options) do |response, operation|
+      c.get_nas_trial_detail({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_nas_trial_detail(::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_nas_trial_detail(::Google::Cloud::AIPlatform::V1::GetNasTrialDetailRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1386,40 +1386,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_nas_trial_details_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_nas_trial_details parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_nas_trial_details parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_nas_trial_details ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_nas_trial_details ::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_nas_trial_details({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_nas_trial_details(::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_nas_trial_details(::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1451,36 +1451,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_batch_prediction_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }) do |response, operation|
+      c.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_batch_prediction_job parent: parent, batch_prediction_job: batch_prediction_job do |response, operation|
+      c.create_batch_prediction_job parent: parent, batch_prediction_job: batch_prediction_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job) do |response, operation|
+      c.create_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }, grpc_options) do |response, operation|
+      c.create_batch_prediction_job({ parent: parent, batch_prediction_job: batch_prediction_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job), grpc_options) do |response, operation|
+      c.create_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CreateBatchPredictionJobRequest.new(parent: parent, batch_prediction_job: batch_prediction_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1509,36 +1509,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_batch_prediction_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_batch_prediction_job({ name: name }) do |response, operation|
+      c.get_batch_prediction_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_batch_prediction_job name: name do |response, operation|
+      c.get_batch_prediction_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_batch_prediction_job ::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name) do |response, operation|
+      c.get_batch_prediction_job ::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_batch_prediction_job({ name: name }, grpc_options) do |response, operation|
+      c.get_batch_prediction_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_batch_prediction_job(::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_batch_prediction_job(::Google::Cloud::AIPlatform::V1::GetBatchPredictionJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1575,40 +1575,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_batch_prediction_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_batch_prediction_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_batch_prediction_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_batch_prediction_jobs ::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_batch_prediction_jobs ::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_batch_prediction_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_batch_prediction_jobs(::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_batch_prediction_jobs(::Google::Cloud::AIPlatform::V1::ListBatchPredictionJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1638,40 +1638,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_batch_prediction_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_batch_prediction_job({ name: name }) do |response, operation|
+      c.delete_batch_prediction_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_batch_prediction_job name: name do |response, operation|
+      c.delete_batch_prediction_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_batch_prediction_job ::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name) do |response, operation|
+      c.delete_batch_prediction_job ::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_batch_prediction_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_batch_prediction_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_batch_prediction_job(::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_batch_prediction_job(::Google::Cloud::AIPlatform::V1::DeleteBatchPredictionJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1701,36 +1701,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, cancel_batch_prediction_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_batch_prediction_job({ name: name }) do |response, operation|
+      c.cancel_batch_prediction_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_batch_prediction_job name: name do |response, operation|
+      c.cancel_batch_prediction_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name) do |response, operation|
+      c.cancel_batch_prediction_job ::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_batch_prediction_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_batch_prediction_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_batch_prediction_job(::Google::Cloud::AIPlatform::V1::CancelBatchPredictionJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1761,36 +1761,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_model_deployment_monitoring_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }) do |response, operation|
+      c.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_model_deployment_monitoring_job parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job do |response, operation|
+      c.create_model_deployment_monitoring_job parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job) do |response, operation|
+      c.create_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }, grpc_options) do |response, operation|
+      c.create_model_deployment_monitoring_job({ parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job), grpc_options) do |response, operation|
+      c.create_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::CreateModelDeploymentMonitoringJobRequest.new(parent: parent, model_deployment_monitoring_job: model_deployment_monitoring_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1833,40 +1833,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_model_deployment_monitoring_stats_anomalies_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |response, operation|
+      c.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_model_deployment_monitoring_stats_anomalies model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |response, operation|
+      c.search_model_deployment_monitoring_stats_anomalies model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_model_deployment_monitoring_stats_anomalies ::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |response, operation|
+      c.search_model_deployment_monitoring_stats_anomalies ::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
+      c.search_model_deployment_monitoring_stats_anomalies({ model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_model_deployment_monitoring_stats_anomalies(::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
+      c.search_model_deployment_monitoring_stats_anomalies(::Google::Cloud::AIPlatform::V1::SearchModelDeploymentMonitoringStatsAnomaliesRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, deployed_model_id: deployed_model_id, feature_display_name: feature_display_name, objectives: objectives, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1896,36 +1896,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_model_deployment_monitoring_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_model_deployment_monitoring_job({ name: name }) do |response, operation|
+      c.get_model_deployment_monitoring_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_model_deployment_monitoring_job name: name do |response, operation|
+      c.get_model_deployment_monitoring_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
+      c.get_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
+      c.get_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::GetModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1962,40 +1962,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_model_deployment_monitoring_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_model_deployment_monitoring_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_model_deployment_monitoring_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_model_deployment_monitoring_jobs ::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_model_deployment_monitoring_jobs ::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_model_deployment_monitoring_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_model_deployment_monitoring_jobs(::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_model_deployment_monitoring_jobs(::Google::Cloud::AIPlatform::V1::ListModelDeploymentMonitoringJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2027,40 +2027,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_model_deployment_monitoring_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }) do |response, operation|
+      c.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_model_deployment_monitoring_job model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask do |response, operation|
+      c.update_model_deployment_monitoring_job model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask) do |response, operation|
+      c.update_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_model_deployment_monitoring_job({ model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::UpdateModelDeploymentMonitoringJobRequest.new(model_deployment_monitoring_job: model_deployment_monitoring_job, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2090,40 +2090,40 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_model_deployment_monitoring_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_model_deployment_monitoring_job({ name: name }) do |response, operation|
+      c.delete_model_deployment_monitoring_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_model_deployment_monitoring_job name: name do |response, operation|
+      c.delete_model_deployment_monitoring_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
+      c.delete_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::DeleteModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2153,36 +2153,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, pause_model_deployment_monitoring_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.pause_model_deployment_monitoring_job({ name: name }) do |response, operation|
+      c.pause_model_deployment_monitoring_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.pause_model_deployment_monitoring_job name: name do |response, operation|
+      c.pause_model_deployment_monitoring_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.pause_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
+      c.pause_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.pause_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
+      c.pause_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.pause_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.pause_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::PauseModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2211,36 +2211,36 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, resume_model_deployment_monitoring_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::JobService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resume_model_deployment_monitoring_job({ name: name }) do |response, operation|
+      c.resume_model_deployment_monitoring_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resume_model_deployment_monitoring_job name: name do |response, operation|
+      c.resume_model_deployment_monitoring_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resume_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
+      c.resume_model_deployment_monitoring_job ::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resume_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
+      c.resume_model_deployment_monitoring_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resume_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.resume_model_deployment_monitoring_job(::Google::Cloud::AIPlatform::V1::ResumeModelDeploymentMonitoringJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

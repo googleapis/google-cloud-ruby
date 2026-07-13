@@ -98,32 +98,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ServiceStub.stub :transcode_create_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_example({ parent: parent, example: example }) do |_result, response|
+        c.create_example({ parent: parent, example: example }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_example parent: parent, example: example do |_result, response|
+        c.create_example parent: parent, example: example do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_example ::Google::Cloud::Dialogflow::CX::V3::CreateExampleRequest.new(parent: parent, example: example) do |_result, response|
+        c.create_example ::Google::Cloud::Dialogflow::CX::V3::CreateExampleRequest.new(parent: parent, example: example) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_example({ parent: parent, example: example }, call_options) do |_result, response|
+        c.create_example({ parent: parent, example: example }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_example(::Google::Cloud::Dialogflow::CX::V3::CreateExampleRequest.new(parent: parent, example: example), call_options) do |_result, response|
+        c.create_example(::Google::Cloud::Dialogflow::CX::V3::CreateExampleRequest.new(parent: parent, example: example), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ServiceStub.stub :transcode_delete_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_example({ name: name }) do |_result, response|
+        c.delete_example({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_example name: name do |_result, response|
+        c.delete_example name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_example ::Google::Cloud::Dialogflow::CX::V3::DeleteExampleRequest.new(name: name) do |_result, response|
+        c.delete_example ::Google::Cloud::Dialogflow::CX::V3::DeleteExampleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_example({ name: name }, call_options) do |_result, response|
+        c.delete_example({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_example(::Google::Cloud::Dialogflow::CX::V3::DeleteExampleRequest.new(name: name), call_options) do |_result, response|
+        c.delete_example(::Google::Cloud::Dialogflow::CX::V3::DeleteExampleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ServiceStub.stub :transcode_list_examples_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_examples_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_examples({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |_result, response|
+        c.list_examples({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_examples parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |_result, response|
+        c.list_examples parent: parent, page_size: page_size, page_token: page_token, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_examples ::Google::Cloud::Dialogflow::CX::V3::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |_result, response|
+        c.list_examples ::Google::Cloud::Dialogflow::CX::V3::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_examples({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, call_options) do |_result, response|
+        c.list_examples({ parent: parent, page_size: page_size, page_token: page_token, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_examples(::Google::Cloud::Dialogflow::CX::V3::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), call_options) do |_result, response|
+        c.list_examples(::Google::Cloud::Dialogflow::CX::V3::ListExamplesRequest.new(parent: parent, page_size: page_size, page_token: page_token, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ServiceStub.stub :transcode_get_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_example({ name: name }) do |_result, response|
+        c.get_example({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_example name: name do |_result, response|
+        c.get_example name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_example ::Google::Cloud::Dialogflow::CX::V3::GetExampleRequest.new(name: name) do |_result, response|
+        c.get_example ::Google::Cloud::Dialogflow::CX::V3::GetExampleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_example({ name: name }, call_options) do |_result, response|
+        c.get_example({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_example(::Google::Cloud::Dialogflow::CX::V3::GetExampleRequest.new(name: name), call_options) do |_result, response|
+        c.get_example(::Google::Cloud::Dialogflow::CX::V3::GetExampleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -318,32 +318,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::ServiceStub.stub :transcode_update_example_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_example_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Examples::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_example({ example: example, update_mask: update_mask }) do |_result, response|
+        c.update_example({ example: example, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_example example: example, update_mask: update_mask do |_result, response|
+        c.update_example example: example, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_example ::Google::Cloud::Dialogflow::CX::V3::UpdateExampleRequest.new(example: example, update_mask: update_mask) do |_result, response|
+        c.update_example ::Google::Cloud::Dialogflow::CX::V3::UpdateExampleRequest.new(example: example, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_example({ example: example, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_example({ example: example, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_example(::Google::Cloud::Dialogflow::CX::V3::UpdateExampleRequest.new(example: example, update_mask: update_mask), call_options) do |_result, response|
+        c.update_example(::Google::Cloud::Dialogflow::CX::V3::UpdateExampleRequest.new(example: example, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

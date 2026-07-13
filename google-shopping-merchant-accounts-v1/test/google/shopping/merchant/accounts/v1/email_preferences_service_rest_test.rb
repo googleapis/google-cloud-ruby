@@ -97,32 +97,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest:
     ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest::ServiceStub.stub :transcode_get_email_preferences_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_email_preferences_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_email_preferences({ name: name }) do |_result, response|
+        c.get_email_preferences({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_email_preferences name: name do |_result, response|
+        c.get_email_preferences name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_email_preferences ::Google::Shopping::Merchant::Accounts::V1::GetEmailPreferencesRequest.new(name: name) do |_result, response|
+        c.get_email_preferences ::Google::Shopping::Merchant::Accounts::V1::GetEmailPreferencesRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_email_preferences({ name: name }, call_options) do |_result, response|
+        c.get_email_preferences({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_email_preferences(::Google::Shopping::Merchant::Accounts::V1::GetEmailPreferencesRequest.new(name: name), call_options) do |_result, response|
+        c.get_email_preferences(::Google::Shopping::Merchant::Accounts::V1::GetEmailPreferencesRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest:
     ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest::ServiceStub.stub :transcode_update_email_preferences_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_email_preferences_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_email_preferences({ email_preferences: email_preferences, update_mask: update_mask }) do |_result, response|
+        c.update_email_preferences({ email_preferences: email_preferences, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_email_preferences email_preferences: email_preferences, update_mask: update_mask do |_result, response|
+        c.update_email_preferences email_preferences: email_preferences, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_email_preferences ::Google::Shopping::Merchant::Accounts::V1::UpdateEmailPreferencesRequest.new(email_preferences: email_preferences, update_mask: update_mask) do |_result, response|
+        c.update_email_preferences ::Google::Shopping::Merchant::Accounts::V1::UpdateEmailPreferencesRequest.new(email_preferences: email_preferences, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_email_preferences({ email_preferences: email_preferences, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_email_preferences({ email_preferences: email_preferences, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_email_preferences(::Google::Shopping::Merchant::Accounts::V1::UpdateEmailPreferencesRequest.new(email_preferences: email_preferences, update_mask: update_mask), call_options) do |_result, response|
+        c.update_email_preferences(::Google::Shopping::Merchant::Accounts::V1::UpdateEmailPreferencesRequest.new(email_preferences: email_preferences, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

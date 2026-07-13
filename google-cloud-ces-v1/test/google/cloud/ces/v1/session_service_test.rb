@@ -84,36 +84,36 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, run_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::SessionService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::SessionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.run_session({ config: config, inputs: inputs }) do |response, operation|
+      c.run_session({ config: config, inputs: inputs }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_session config: config, inputs: inputs do |response, operation|
+      c.run_session config: config, inputs: inputs do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |response, operation|
+      c.run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_session({ config: config, inputs: inputs }, grpc_options) do |response, operation|
+      c.run_session({ config: config, inputs: inputs }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), grpc_options) do |response, operation|
+      c.run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,12 +144,12 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, stream_run_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::SessionService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::SessionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stream_run_session({ config: config, inputs: inputs }) do |response, operation|
+      c.stream_run_session({ config: config, inputs: inputs }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::RunSessionResponse, r
@@ -158,7 +158,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.stream_run_session config: config, inputs: inputs do |response, operation|
+      c.stream_run_session config: config, inputs: inputs do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::RunSessionResponse, r
@@ -167,7 +167,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.stream_run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |response, operation|
+      c.stream_run_session ::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::RunSessionResponse, r
@@ -176,7 +176,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.stream_run_session({ config: config, inputs: inputs }, grpc_options) do |response, operation|
+      c.stream_run_session({ config: config, inputs: inputs }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::RunSessionResponse, r
@@ -185,7 +185,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.stream_run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), grpc_options) do |response, operation|
+      c.stream_run_session(::Google::Cloud::Ces::V1::RunSessionRequest.new(config: config, inputs: inputs), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::RunSessionResponse, r
@@ -217,7 +217,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, bidi_run_session_client_stub do
       # Create client
-      client = ::Google::Cloud::Ces::V1::SessionService::Client.new do |config|
+      c = ::Google::Cloud::Ces::V1::SessionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -225,7 +225,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::Ces::V1::BidiSessionClientMessage.new config: config
       enum_input = [request_hash, request_proto].to_enum
-      client.bidi_run_session enum_input do |response, operation|
+      c.bidi_run_session enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::BidiSessionServerMessage, r
@@ -237,7 +237,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::Ces::V1::BidiSessionClientMessage.new config: config
       stream_input = Gapic::StreamInput.new
-      client.bidi_run_session stream_input do |response, operation|
+      c.bidi_run_session stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::BidiSessionServerMessage, r
@@ -252,7 +252,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::Ces::V1::BidiSessionClientMessage.new config: config
       enum_input = [request_hash, request_proto].to_enum
-      client.bidi_run_session enum_input, grpc_options do |response, operation|
+      c.bidi_run_session enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::BidiSessionServerMessage, r
@@ -264,7 +264,7 @@ class ::Google::Cloud::Ces::V1::SessionService::ClientTest < Minitest::Test
       request_hash = { config: config }
       request_proto = ::Google::Cloud::Ces::V1::BidiSessionClientMessage.new config: config
       stream_input = Gapic::StreamInput.new
-      client.bidi_run_session stream_input, grpc_options do |response, operation|
+      c.bidi_run_session stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Ces::V1::BidiSessionServerMessage, r

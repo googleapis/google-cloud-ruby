@@ -101,32 +101,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_list_gateways_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_gateways_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_gateways parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_gateways parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_gateways ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_gateways ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_gateways({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_gateways(::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_gateways(::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_get_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_gateway({ name: name }) do |_result, response|
+        c.get_gateway({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_gateway name: name do |_result, response|
+        c.get_gateway name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_gateway ::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name) do |_result, response|
+        c.get_gateway ::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_gateway({ name: name }, call_options) do |_result, response|
+        c.get_gateway({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_gateway(::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name), call_options) do |_result, response|
+        c.get_gateway(::Google::Cloud::ApiGateway::V1::GetGatewayRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_create_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }) do |_result, response|
+        c.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_gateway parent: parent, gateway_id: gateway_id, gateway: gateway do |_result, response|
+        c.create_gateway parent: parent, gateway_id: gateway_id, gateway: gateway do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_gateway ::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway) do |_result, response|
+        c.create_gateway ::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }, call_options) do |_result, response|
+        c.create_gateway({ parent: parent, gateway_id: gateway_id, gateway: gateway }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_gateway(::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway), call_options) do |_result, response|
+        c.create_gateway(::Google::Cloud::ApiGateway::V1::CreateGatewayRequest.new(parent: parent, gateway_id: gateway_id, gateway: gateway), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_update_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_gateway({ update_mask: update_mask, gateway: gateway }) do |_result, response|
+        c.update_gateway({ update_mask: update_mask, gateway: gateway }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_gateway update_mask: update_mask, gateway: gateway do |_result, response|
+        c.update_gateway update_mask: update_mask, gateway: gateway do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_gateway ::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway) do |_result, response|
+        c.update_gateway ::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_gateway({ update_mask: update_mask, gateway: gateway }, call_options) do |_result, response|
+        c.update_gateway({ update_mask: update_mask, gateway: gateway }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_gateway(::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway), call_options) do |_result, response|
+        c.update_gateway(::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest.new(update_mask: update_mask, gateway: gateway), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_delete_gateway_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_gateway_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_gateway({ name: name }) do |_result, response|
+        c.delete_gateway({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_gateway name: name do |_result, response|
+        c.delete_gateway name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_gateway ::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name) do |_result, response|
+        c.delete_gateway ::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_gateway({ name: name }, call_options) do |_result, response|
+        c.delete_gateway({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_gateway(::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name), call_options) do |_result, response|
+        c.delete_gateway(::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_list_apis_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_apis_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_apis parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_apis parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_apis ::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_apis ::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_apis({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_apis(::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_apis(::Google::Cloud::ApiGateway::V1::ListApisRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -432,32 +432,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_get_api_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_api_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_api({ name: name }) do |_result, response|
+        c.get_api({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_api name: name do |_result, response|
+        c.get_api name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_api ::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name) do |_result, response|
+        c.get_api ::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_api({ name: name }, call_options) do |_result, response|
+        c.get_api({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_api(::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name), call_options) do |_result, response|
+        c.get_api(::Google::Cloud::ApiGateway::V1::GetApiRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_create_api_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_api_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_api({ parent: parent, api_id: api_id, api: api }) do |_result, response|
+        c.create_api({ parent: parent, api_id: api_id, api: api }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_api parent: parent, api_id: api_id, api: api do |_result, response|
+        c.create_api parent: parent, api_id: api_id, api: api do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_api ::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api) do |_result, response|
+        c.create_api ::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_api({ parent: parent, api_id: api_id, api: api }, call_options) do |_result, response|
+        c.create_api({ parent: parent, api_id: api_id, api: api }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_api(::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api), call_options) do |_result, response|
+        c.create_api(::Google::Cloud::ApiGateway::V1::CreateApiRequest.new(parent: parent, api_id: api_id, api: api), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_update_api_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_api_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_api({ update_mask: update_mask, api: api }) do |_result, response|
+        c.update_api({ update_mask: update_mask, api: api }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_api update_mask: update_mask, api: api do |_result, response|
+        c.update_api update_mask: update_mask, api: api do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_api ::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api) do |_result, response|
+        c.update_api ::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_api({ update_mask: update_mask, api: api }, call_options) do |_result, response|
+        c.update_api({ update_mask: update_mask, api: api }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_api(::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api), call_options) do |_result, response|
+        c.update_api(::Google::Cloud::ApiGateway::V1::UpdateApiRequest.new(update_mask: update_mask, api: api), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -597,32 +597,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_delete_api_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_api_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_api({ name: name }) do |_result, response|
+        c.delete_api({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_api name: name do |_result, response|
+        c.delete_api name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_api ::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name) do |_result, response|
+        c.delete_api ::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_api({ name: name }, call_options) do |_result, response|
+        c.delete_api({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_api(::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name), call_options) do |_result, response|
+        c.delete_api(::Google::Cloud::ApiGateway::V1::DeleteApiRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -655,32 +655,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_list_api_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_api_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_api_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_api_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_api_configs ::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_api_configs ::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_api_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_api_configs(::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_api_configs(::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -710,32 +710,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_get_api_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_api_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_api_config({ name: name, view: view }) do |_result, response|
+        c.get_api_config({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_api_config name: name, view: view do |_result, response|
+        c.get_api_config name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_api_config ::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view) do |_result, response|
+        c.get_api_config ::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_api_config({ name: name, view: view }, call_options) do |_result, response|
+        c.get_api_config({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_api_config(::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_api_config(::Google::Cloud::ApiGateway::V1::GetApiConfigRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -766,32 +766,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_create_api_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_api_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }) do |_result, response|
+        c.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_api_config parent: parent, api_config_id: api_config_id, api_config: api_config do |_result, response|
+        c.create_api_config parent: parent, api_config_id: api_config_id, api_config: api_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_api_config ::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config) do |_result, response|
+        c.create_api_config ::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }, call_options) do |_result, response|
+        c.create_api_config({ parent: parent, api_config_id: api_config_id, api_config: api_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_api_config(::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config), call_options) do |_result, response|
+        c.create_api_config(::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest.new(parent: parent, api_config_id: api_config_id, api_config: api_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -821,32 +821,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_update_api_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_api_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_api_config({ update_mask: update_mask, api_config: api_config }) do |_result, response|
+        c.update_api_config({ update_mask: update_mask, api_config: api_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_api_config update_mask: update_mask, api_config: api_config do |_result, response|
+        c.update_api_config update_mask: update_mask, api_config: api_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_api_config ::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config) do |_result, response|
+        c.update_api_config ::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_api_config({ update_mask: update_mask, api_config: api_config }, call_options) do |_result, response|
+        c.update_api_config({ update_mask: update_mask, api_config: api_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_api_config(::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config), call_options) do |_result, response|
+        c.update_api_config(::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest.new(update_mask: update_mask, api_config: api_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -875,32 +875,32 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ServiceStub.stub :transcode_delete_api_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_api_config_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_api_config({ name: name }) do |_result, response|
+        c.delete_api_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_api_config name: name do |_result, response|
+        c.delete_api_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_api_config ::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name) do |_result, response|
+        c.delete_api_config ::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_api_config({ name: name }, call_options) do |_result, response|
+        c.delete_api_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_api_config(::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_api_config(::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

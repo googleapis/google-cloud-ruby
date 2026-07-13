@@ -97,32 +97,32 @@ class ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::ServiceStub.stub :transcode_get_fulfillment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_fulfillment_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_fulfillment({ name: name }) do |_result, response|
+        c.get_fulfillment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_fulfillment name: name do |_result, response|
+        c.get_fulfillment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_fulfillment ::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name) do |_result, response|
+        c.get_fulfillment ::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_fulfillment({ name: name }, call_options) do |_result, response|
+        c.get_fulfillment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_fulfillment(::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_fulfillment(::Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::ServiceStub.stub :transcode_update_fulfillment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_fulfillment_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Fulfillments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }) do |_result, response|
+        c.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_fulfillment fulfillment: fulfillment, update_mask: update_mask do |_result, response|
+        c.update_fulfillment fulfillment: fulfillment, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_fulfillment ::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask) do |_result, response|
+        c.update_fulfillment ::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_fulfillment({ fulfillment: fulfillment, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_fulfillment(::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask), call_options) do |_result, response|
+        c.update_fulfillment(::Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new(fulfillment: fulfillment, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

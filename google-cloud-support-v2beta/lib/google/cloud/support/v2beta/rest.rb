@@ -20,6 +20,7 @@ require "google/cloud/support/v2beta/case_attachment_service/rest"
 require "google/cloud/support/v2beta/case_service/rest"
 require "google/cloud/support/v2beta/comment_service/rest"
 require "google/cloud/support/v2beta/feed_service/rest"
+require "google/cloud/support/v2beta/support_event_subscription_service/rest"
 require "google/cloud/support/v2beta/version"
 
 module Google

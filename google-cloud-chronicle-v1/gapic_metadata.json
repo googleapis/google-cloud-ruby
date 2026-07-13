@@ -337,6 +337,60 @@
         }
       }
     },
+    "FindingsRefinementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client",
+          "rpcs": {
+            "GetFindingsRefinement": {
+              "methods": [
+                "get_findings_refinement"
+              ]
+            },
+            "ListFindingsRefinements": {
+              "methods": [
+                "list_findings_refinements"
+              ]
+            },
+            "CreateFindingsRefinement": {
+              "methods": [
+                "create_findings_refinement"
+              ]
+            },
+            "UpdateFindingsRefinement": {
+              "methods": [
+                "update_findings_refinement"
+              ]
+            },
+            "GetFindingsRefinementDeployment": {
+              "methods": [
+                "get_findings_refinement_deployment"
+              ]
+            },
+            "UpdateFindingsRefinementDeployment": {
+              "methods": [
+                "update_findings_refinement_deployment"
+              ]
+            },
+            "ListAllFindingsRefinementDeployments": {
+              "methods": [
+                "list_all_findings_refinement_deployments"
+              ]
+            },
+            "ComputeFindingsRefinementActivity": {
+              "methods": [
+                "compute_findings_refinement_activity"
+              ]
+            },
+            "ComputeAllFindingsRefinementActivities": {
+              "methods": [
+                "compute_all_findings_refinement_activities"
+              ]
+            }
+          }
+        }
+      }
+    },
     "InstanceService": {
       "clients": {
         "grpc": {
@@ -375,6 +429,11 @@
               "methods": [
                 "update_reference_list"
               ]
+            },
+            "VerifyReferenceList": {
+              "methods": [
+                "verify_reference_list"
+              ]
             }
           }
         }
@@ -410,6 +469,11 @@
                 "delete_rule"
               ]
             },
+            "VerifyRuleText": {
+              "methods": [
+                "verify_rule_text"
+              ]
+            },
             "ListRuleRevisions": {
               "methods": [
                 "list_rule_revisions"
@@ -443,6 +507,20 @@
             "UpdateRuleDeployment": {
               "methods": [
                 "update_rule_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::RuleExecutionErrorService::Client",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "list_rule_execution_errors"
               ]
             }
           }

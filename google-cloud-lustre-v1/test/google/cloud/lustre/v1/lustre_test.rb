@@ -90,40 +90,40 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Lustre::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::Lustre::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Lustre::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Lustre::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Lustre::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Lustre::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Lustre::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Lustre::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Lustre::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
+      c.create_instance ::Google::Cloud::Lustre::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Lustre::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Lustre::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |response, operation|
+      c.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Lustre::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |response, operation|
+      c.update_instance ::Google::Cloud::Lustre::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Lustre::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::Lustre::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name, request_id: request_id do |response, operation|
+      c.delete_instance name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_instance ::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Lustre::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -422,40 +422,40 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, import_data_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_data({ gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account }) do |response, operation|
+      c.import_data({ gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_data gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account do |response, operation|
+      c.import_data gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_data ::Google::Cloud::Lustre::V1::ImportDataRequest.new(gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account) do |response, operation|
+      c.import_data ::Google::Cloud::Lustre::V1::ImportDataRequest.new(gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_data({ gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account }, grpc_options) do |response, operation|
+      c.import_data({ gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_data(::Google::Cloud::Lustre::V1::ImportDataRequest.new(gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account), grpc_options) do |response, operation|
+      c.import_data(::Google::Cloud::Lustre::V1::ImportDataRequest.new(gcs_path: gcs_path, lustre_path: lustre_path, name: name, request_id: request_id, service_account: service_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -495,40 +495,40 @@ class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_data_client_stub do
       # Create client
-      client = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
+      c = ::Google::Cloud::Lustre::V1::Lustre::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_data({ lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account }) do |response, operation|
+      c.export_data({ lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_data lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account do |response, operation|
+      c.export_data lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_data ::Google::Cloud::Lustre::V1::ExportDataRequest.new(lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account) do |response, operation|
+      c.export_data ::Google::Cloud::Lustre::V1::ExportDataRequest.new(lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_data({ lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account }, grpc_options) do |response, operation|
+      c.export_data({ lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_data(::Google::Cloud::Lustre::V1::ExportDataRequest.new(lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account), grpc_options) do |response, operation|
+      c.export_data(::Google::Cloud::Lustre::V1::ExportDataRequest.new(lustre_path: lustre_path, gcs_path: gcs_path, name: name, request_id: request_id, service_account: service_account), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

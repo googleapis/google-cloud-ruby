@@ -89,40 +89,40 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, restore_from_cloud_sql_client_stub do
       # Create client
-      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client.new do |config|
+      c = ::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }) do |response, operation|
+      c.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_from_cloud_sql cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster do |response, operation|
+      c.restore_from_cloud_sql cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_from_cloud_sql ::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster) do |response, operation|
+      c.restore_from_cloud_sql ::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }, grpc_options) do |response, operation|
+      c.restore_from_cloud_sql({ cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_from_cloud_sql(::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster), grpc_options) do |response, operation|
+      c.restore_from_cloud_sql(::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest.new(cloudsql_backup_run_source: cloudsql_backup_run_source, parent: parent, cluster_id: cluster_id, cluster: cluster), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

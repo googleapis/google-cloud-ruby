@@ -100,32 +100,32 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::Rest::ClientTest < Minite
     ::Google::Cloud::VisionAI::V1::StreamingService::Rest::ServiceStub.stub :transcode_acquire_lease_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, acquire_lease_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::StreamingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::StreamingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }) do |_result, response|
+        c.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.acquire_lease series: series, owner: owner, term: term, lease_type: lease_type do |_result, response|
+        c.acquire_lease series: series, owner: owner, term: term, lease_type: lease_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.acquire_lease ::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type) do |_result, response|
+        c.acquire_lease ::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }, call_options) do |_result, response|
+        c.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.acquire_lease(::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type), call_options) do |_result, response|
+        c.acquire_lease(::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::Rest::ClientTest < Minite
     ::Google::Cloud::VisionAI::V1::StreamingService::Rest::ServiceStub.stub :transcode_renew_lease_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, renew_lease_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::StreamingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::StreamingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.renew_lease({ id: id, series: series, owner: owner, term: term }) do |_result, response|
+        c.renew_lease({ id: id, series: series, owner: owner, term: term }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.renew_lease id: id, series: series, owner: owner, term: term do |_result, response|
+        c.renew_lease id: id, series: series, owner: owner, term: term do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.renew_lease ::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term) do |_result, response|
+        c.renew_lease ::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.renew_lease({ id: id, series: series, owner: owner, term: term }, call_options) do |_result, response|
+        c.renew_lease({ id: id, series: series, owner: owner, term: term }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.renew_lease(::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term), call_options) do |_result, response|
+        c.renew_lease(::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::Rest::ClientTest < Minite
     ::Google::Cloud::VisionAI::V1::StreamingService::Rest::ServiceStub.stub :transcode_release_lease_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, release_lease_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::StreamingService::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::StreamingService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.release_lease({ id: id, series: series, owner: owner }) do |_result, response|
+        c.release_lease({ id: id, series: series, owner: owner }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.release_lease id: id, series: series, owner: owner do |_result, response|
+        c.release_lease id: id, series: series, owner: owner do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.release_lease ::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner) do |_result, response|
+        c.release_lease ::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.release_lease({ id: id, series: series, owner: owner }, call_options) do |_result, response|
+        c.release_lease({ id: id, series: series, owner: owner }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.release_lease(::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner), call_options) do |_result, response|
+        c.release_lease(::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

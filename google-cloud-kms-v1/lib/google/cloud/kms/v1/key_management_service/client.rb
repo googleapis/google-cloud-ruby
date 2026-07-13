@@ -1322,7 +1322,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_import_job(name: nil)
+            # @overload get_import_job(name: nil, public_key_format: nil)
             #   Pass arguments to `get_import_job` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1330,6 +1330,16 @@ module Google
             #   @param name [::String]
             #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the
             #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+            #   @param public_key_format [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+            #     Optional. Specifies the [WrappingPublicKey][] format.
+            #     If not specified:
+            #       * For RSA-based import methods, the wrapping key will be returned in PEM
+            #       format
+            #       * For pure ML-KEM-based import methods, the wrapping key will be returned
+            #       in the raw bytes format specified in FIPS-203
+            #       * For X-Wing-based import methods, the wrapping key will be returned in
+            #       the raw bytes format specified in
+            #       https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::ImportJob]
@@ -4164,6 +4174,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -4247,6 +4258,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

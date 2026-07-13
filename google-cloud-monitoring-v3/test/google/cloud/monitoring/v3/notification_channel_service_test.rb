@@ -86,40 +86,40 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_notification_channel_descriptors_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notification_channel_descriptors({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_notification_channel_descriptors({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notification_channel_descriptors name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_notification_channel_descriptors name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notification_channel_descriptors ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_notification_channel_descriptors ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notification_channel_descriptors({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_notification_channel_descriptors({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notification_channel_descriptors(::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_notification_channel_descriptors(::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_notification_channel_descriptor_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notification_channel_descriptor({ name: name }) do |response, operation|
+      c.get_notification_channel_descriptor({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notification_channel_descriptor name: name do |response, operation|
+      c.get_notification_channel_descriptor name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notification_channel_descriptor ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new(name: name) do |response, operation|
+      c.get_notification_channel_descriptor ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notification_channel_descriptor({ name: name }, grpc_options) do |response, operation|
+      c.get_notification_channel_descriptor({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notification_channel_descriptor(::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_notification_channel_descriptor(::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_notification_channels_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_notification_channels({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_notification_channels({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_notification_channels name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_notification_channels name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_notification_channels ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_notification_channels ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_notification_channels({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_notification_channels({ name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_notification_channels(::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_notification_channels(::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -278,36 +278,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_notification_channel_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notification_channel({ name: name }) do |response, operation|
+      c.get_notification_channel({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notification_channel name: name do |response, operation|
+      c.get_notification_channel name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notification_channel ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new(name: name) do |response, operation|
+      c.get_notification_channel ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notification_channel({ name: name }, grpc_options) do |response, operation|
+      c.get_notification_channel({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notification_channel(::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_notification_channel(::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -338,36 +338,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_notification_channel_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_notification_channel({ name: name, notification_channel: notification_channel }) do |response, operation|
+      c.create_notification_channel({ name: name, notification_channel: notification_channel }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_notification_channel name: name, notification_channel: notification_channel do |response, operation|
+      c.create_notification_channel name: name, notification_channel: notification_channel do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_notification_channel ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new(name: name, notification_channel: notification_channel) do |response, operation|
+      c.create_notification_channel ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new(name: name, notification_channel: notification_channel) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_notification_channel({ name: name, notification_channel: notification_channel }, grpc_options) do |response, operation|
+      c.create_notification_channel({ name: name, notification_channel: notification_channel }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_notification_channel(::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new(name: name, notification_channel: notification_channel), grpc_options) do |response, operation|
+      c.create_notification_channel(::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new(name: name, notification_channel: notification_channel), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -398,36 +398,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_notification_channel_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_notification_channel({ update_mask: update_mask, notification_channel: notification_channel }) do |response, operation|
+      c.update_notification_channel({ update_mask: update_mask, notification_channel: notification_channel }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_notification_channel update_mask: update_mask, notification_channel: notification_channel do |response, operation|
+      c.update_notification_channel update_mask: update_mask, notification_channel: notification_channel do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_notification_channel ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new(update_mask: update_mask, notification_channel: notification_channel) do |response, operation|
+      c.update_notification_channel ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new(update_mask: update_mask, notification_channel: notification_channel) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_notification_channel({ update_mask: update_mask, notification_channel: notification_channel }, grpc_options) do |response, operation|
+      c.update_notification_channel({ update_mask: update_mask, notification_channel: notification_channel }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_notification_channel(::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new(update_mask: update_mask, notification_channel: notification_channel), grpc_options) do |response, operation|
+      c.update_notification_channel(::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new(update_mask: update_mask, notification_channel: notification_channel), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,36 +458,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_notification_channel_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_notification_channel({ name: name, force: force }) do |response, operation|
+      c.delete_notification_channel({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_notification_channel name: name, force: force do |response, operation|
+      c.delete_notification_channel name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_notification_channel ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new(name: name, force: force) do |response, operation|
+      c.delete_notification_channel ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_notification_channel({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_notification_channel({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_notification_channel(::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_notification_channel(::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -516,36 +516,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, send_notification_channel_verification_code_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.send_notification_channel_verification_code({ name: name }) do |response, operation|
+      c.send_notification_channel_verification_code({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.send_notification_channel_verification_code name: name do |response, operation|
+      c.send_notification_channel_verification_code name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.send_notification_channel_verification_code ::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new(name: name) do |response, operation|
+      c.send_notification_channel_verification_code ::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.send_notification_channel_verification_code({ name: name }, grpc_options) do |response, operation|
+      c.send_notification_channel_verification_code({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.send_notification_channel_verification_code(::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new(name: name), grpc_options) do |response, operation|
+      c.send_notification_channel_verification_code(::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -576,36 +576,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_notification_channel_verification_code_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_notification_channel_verification_code({ name: name, expire_time: expire_time }) do |response, operation|
+      c.get_notification_channel_verification_code({ name: name, expire_time: expire_time }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_notification_channel_verification_code name: name, expire_time: expire_time do |response, operation|
+      c.get_notification_channel_verification_code name: name, expire_time: expire_time do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_notification_channel_verification_code ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new(name: name, expire_time: expire_time) do |response, operation|
+      c.get_notification_channel_verification_code ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new(name: name, expire_time: expire_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_notification_channel_verification_code({ name: name, expire_time: expire_time }, grpc_options) do |response, operation|
+      c.get_notification_channel_verification_code({ name: name, expire_time: expire_time }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_notification_channel_verification_code(::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new(name: name, expire_time: expire_time), grpc_options) do |response, operation|
+      c.get_notification_channel_verification_code(::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new(name: name, expire_time: expire_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -636,36 +636,36 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
 
     Gapic::ServiceStub.stub :new, verify_notification_channel_client_stub do
       # Create client
-      client = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
+      c = ::Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.verify_notification_channel({ name: name, code: code }) do |response, operation|
+      c.verify_notification_channel({ name: name, code: code }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.verify_notification_channel name: name, code: code do |response, operation|
+      c.verify_notification_channel name: name, code: code do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.verify_notification_channel ::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new(name: name, code: code) do |response, operation|
+      c.verify_notification_channel ::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new(name: name, code: code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.verify_notification_channel({ name: name, code: code }, grpc_options) do |response, operation|
+      c.verify_notification_channel({ name: name, code: code }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.verify_notification_channel(::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new(name: name, code: code), grpc_options) do |response, operation|
+      c.verify_notification_channel(::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new(name: name, code: code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

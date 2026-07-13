@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::ReportService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::ReportService::Rest::ServiceStub.stub :transcode_get_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_report_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_report({ name: name }) do |_result, response|
+        c.get_report({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_report name: name do |_result, response|
+        c.get_report name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_report ::Google::Ads::AdManager::V1::GetReportRequest.new(name: name) do |_result, response|
+        c.get_report ::Google::Ads::AdManager::V1::GetReportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_report({ name: name }, call_options) do |_result, response|
+        c.get_report({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_report(::Google::Ads::AdManager::V1::GetReportRequest.new(name: name), call_options) do |_result, response|
+        c.get_report(::Google::Ads::AdManager::V1::GetReportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::ReportService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::ReportService::Rest::ServiceStub.stub :transcode_list_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_reports_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_reports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_reports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_reports ::Google::Ads::AdManager::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_reports ::Google::Ads::AdManager::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_reports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_reports(::Google::Ads::AdManager::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_reports(::Google::Ads::AdManager::V1::ListReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::ReportService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::ReportService::Rest::ServiceStub.stub :transcode_create_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_report_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_report({ parent: parent, report: report }) do |_result, response|
+        c.create_report({ parent: parent, report: report }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_report parent: parent, report: report do |_result, response|
+        c.create_report parent: parent, report: report do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_report ::Google::Ads::AdManager::V1::CreateReportRequest.new(parent: parent, report: report) do |_result, response|
+        c.create_report ::Google::Ads::AdManager::V1::CreateReportRequest.new(parent: parent, report: report) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_report({ parent: parent, report: report }, call_options) do |_result, response|
+        c.create_report({ parent: parent, report: report }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_report(::Google::Ads::AdManager::V1::CreateReportRequest.new(parent: parent, report: report), call_options) do |_result, response|
+        c.create_report(::Google::Ads::AdManager::V1::CreateReportRequest.new(parent: parent, report: report), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::ReportService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::ReportService::Rest::ServiceStub.stub :transcode_update_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_report_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_report({ report: report, update_mask: update_mask }) do |_result, response|
+        c.update_report({ report: report, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_report report: report, update_mask: update_mask do |_result, response|
+        c.update_report report: report, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_report ::Google::Ads::AdManager::V1::UpdateReportRequest.new(report: report, update_mask: update_mask) do |_result, response|
+        c.update_report ::Google::Ads::AdManager::V1::UpdateReportRequest.new(report: report, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_report({ report: report, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_report({ report: report, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_report(::Google::Ads::AdManager::V1::UpdateReportRequest.new(report: report, update_mask: update_mask), call_options) do |_result, response|
+        c.update_report(::Google::Ads::AdManager::V1::UpdateReportRequest.new(report: report, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Ads::AdManager::V1::ReportService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::ReportService::Rest::ServiceStub.stub :transcode_run_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_report_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_report({ name: name }) do |_result, response|
+        c.run_report({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_report name: name do |_result, response|
+        c.run_report name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_report ::Google::Ads::AdManager::V1::RunReportRequest.new(name: name) do |_result, response|
+        c.run_report ::Google::Ads::AdManager::V1::RunReportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_report({ name: name }, call_options) do |_result, response|
+        c.run_report({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_report(::Google::Ads::AdManager::V1::RunReportRequest.new(name: name), call_options) do |_result, response|
+        c.run_report(::Google::Ads::AdManager::V1::RunReportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Ads::AdManager::V1::ReportService::Rest::ClientTest < Minitest::
     ::Google::Ads::AdManager::V1::ReportService::Rest::ServiceStub.stub :transcode_fetch_report_result_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, fetch_report_result_rows_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::ReportService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.fetch_report_result_rows({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.fetch_report_result_rows({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.fetch_report_result_rows name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.fetch_report_result_rows name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.fetch_report_result_rows ::Google::Ads::AdManager::V1::FetchReportResultRowsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.fetch_report_result_rows ::Google::Ads::AdManager::V1::FetchReportResultRowsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.fetch_report_result_rows({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.fetch_report_result_rows({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.fetch_report_result_rows(::Google::Ads::AdManager::V1::FetchReportResultRowsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.fetch_report_result_rows(::Google::Ads::AdManager::V1::FetchReportResultRowsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

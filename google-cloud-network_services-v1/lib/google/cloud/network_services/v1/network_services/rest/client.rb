@@ -246,7 +246,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The project and location from which the EndpointPolicies should
-              #     be listed, specified in the format `projects/*/locations/global`.
+              #     be listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of EndpointPolicies to return per call.
               #   @param page_token [::String]
@@ -342,7 +342,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the EndpointPolicy to get. Must be in the format
-              #     `projects/*/locations/global/endpointPolicies/*`.
+              #     `projects/*/locations/*/endpointPolicies/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::NetworkServices::V1::EndpointPolicy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -421,7 +421,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the EndpointPolicy. Must be in the
-              #     format `projects/*/locations/global`.
+              #     format `projects/*/locations/*`.
               #   @param endpoint_policy_id [::String]
               #     Required. Short name of the EndpointPolicy resource to be created.
               #     E.g. "CustomECS".
@@ -607,7 +607,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the EndpointPolicy to delete. Must be in the format
-              #     `projects/*/locations/global/endpointPolicies/*`.
+              #     `projects/*/locations/*/endpointPolicies/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1956,7 +1956,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The project and location from which the GrpcRoutes should be
-              #     listed, specified in the format `projects/*/locations/global`.
+              #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of GrpcRoutes to return per call.
               #   @param page_token [::String]
@@ -2051,7 +2051,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the GrpcRoute to get. Must be in the format
-              #     `projects/*/locations/global/grpcRoutes/*`.
+              #     `projects/*/locations/*/grpcRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::NetworkServices::V1::GrpcRoute]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2130,7 +2130,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the GrpcRoute. Must be in the
-              #     format `projects/*/locations/global`.
+              #     format `projects/*/locations/*`.
               #   @param grpc_route_id [::String]
               #     Required. Short name of the GrpcRoute resource to be created.
               #   @param grpc_route [::Google::Cloud::NetworkServices::V1::GrpcRoute, ::Hash]
@@ -2315,7 +2315,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the GrpcRoute to delete. Must be in the format
-              #     `projects/*/locations/global/grpcRoutes/*`.
+              #     `projects/*/locations/*/grpcRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2396,14 +2396,14 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_http_routes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
+              # @overload list_http_routes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil, filter: nil)
               #   Pass arguments to `list_http_routes` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
               #     Required. The project and location from which the HttpRoutes should be
-              #     listed, specified in the format `projects/*/locations/global`.
+              #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of HttpRoutes to return per call.
               #   @param page_token [::String]
@@ -2414,6 +2414,8 @@ module Google
               #     Optional. If true, allow partial responses for multi-regional Aggregated
               #     List requests. Otherwise if one of the locations is down or unreachable,
               #     the Aggregated List request will fail.
+              #   @param filter [::String]
+              #     Optional. Filter expression to restrict the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::HttpRoute>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2498,7 +2500,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the HttpRoute to get. Must be in the format
-              #     `projects/*/locations/global/httpRoutes/*`.
+              #     `projects/*/locations/*/httpRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::NetworkServices::V1::HttpRoute]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2570,18 +2572,20 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_http_route(parent: nil, http_route_id: nil, http_route: nil)
+              # @overload create_http_route(parent: nil, http_route_id: nil, http_route: nil, request_id: nil)
               #   Pass arguments to `create_http_route` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
               #     Required. The parent resource of the HttpRoute. Must be in the
-              #     format `projects/*/locations/global`.
+              #     format `projects/*/locations/*`.
               #   @param http_route_id [::String]
               #     Required. Short name of the HttpRoute resource to be created.
               #   @param http_route [::Google::Cloud::NetworkServices::V1::HttpRoute, ::Hash]
               #     Required. HttpRoute resource to be created.
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2762,7 +2766,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the HttpRoute to delete. Must be in the format
-              #     `projects/*/locations/global/httpRoutes/*`.
+              #     `projects/*/locations/*/httpRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2850,7 +2854,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The project and location from which the TcpRoutes should be
-              #     listed, specified in the format `projects/*/locations/global`.
+              #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of TcpRoutes to return per call.
               #   @param page_token [::String]
@@ -2945,7 +2949,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the TcpRoute to get. Must be in the format
-              #     `projects/*/locations/global/tcpRoutes/*`.
+              #     `projects/*/locations/*/tcpRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::NetworkServices::V1::TcpRoute]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3024,7 +3028,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the TcpRoute. Must be in the
-              #     format `projects/*/locations/global`.
+              #     format `projects/*/locations/*`.
               #   @param tcp_route_id [::String]
               #     Required. Short name of the TcpRoute resource to be created.
               #   @param tcp_route [::Google::Cloud::NetworkServices::V1::TcpRoute, ::Hash]
@@ -3209,7 +3213,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the TcpRoute to delete. Must be in the format
-              #     `projects/*/locations/global/tcpRoutes/*`.
+              #     `projects/*/locations/*/tcpRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3297,7 +3301,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The project and location from which the TlsRoutes should be
-              #     listed, specified in the format `projects/*/locations/global`.
+              #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of TlsRoutes to return per call.
               #   @param page_token [::String]
@@ -3392,7 +3396,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the TlsRoute to get. Must be in the format
-              #     `projects/*/locations/global/tlsRoutes/*`.
+              #     `projects/*/locations/*/tlsRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::NetworkServices::V1::TlsRoute]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3471,7 +3475,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the TlsRoute. Must be in the
-              #     format `projects/*/locations/global`.
+              #     format `projects/*/locations/*`.
               #   @param tls_route_id [::String]
               #     Required. Short name of the TlsRoute resource to be created.
               #   @param tls_route [::Google::Cloud::NetworkServices::V1::TlsRoute, ::Hash]
@@ -3656,7 +3660,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the TlsRoute to delete. Must be in the format
-              #     `projects/*/locations/global/tlsRoutes/*`.
+              #     `projects/*/locations/*/tlsRoutes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4187,7 +4191,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The project and location from which the Meshes should be
-              #     listed, specified in the format `projects/*/locations/global`.
+              #     listed, specified in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of Meshes to return per call.
               #   @param page_token [::String]
@@ -4282,7 +4286,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the Mesh to get. Must be in the format
-              #     `projects/*/locations/global/meshes/*`.
+              #     `projects/*/locations/*/meshes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::NetworkServices::V1::Mesh]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4361,7 +4365,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource of the Mesh. Must be in the
-              #     format `projects/*/locations/global`.
+              #     format `projects/*/locations/*`.
               #   @param mesh_id [::String]
               #     Required. Short name of the Mesh resource to be created.
               #   @param mesh [::Google::Cloud::NetworkServices::V1::Mesh, ::Hash]
@@ -4546,7 +4550,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. A name of the Mesh to delete. Must be in the format
-              #     `projects/*/locations/global/meshes/*`.
+              #     `projects/*/locations/*/meshes/*`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -5406,6 +5410,455 @@ module Google
               end
 
               ##
+              # Lists AgentGateways in a given project and location.
+              #
+              # @overload list_agent_gateways(request, options = nil)
+              #   Pass arguments to `list_agent_gateways` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_agent_gateways(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
+              #   Pass arguments to `list_agent_gateways` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project and location from which the AgentGateways should be
+              #     listed, specified in the format `projects/*/locations/*`.
+              #   @param page_size [::Integer]
+              #     Optional. Maximum number of AgentGateways to return per call.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last `ListAgentGatewaysResponse`
+              #     Indicates that this is a continuation of a prior `ListAgentGateways`
+              #     call, and that the system should return the next page of data.
+              #   @param return_partial_success [::Boolean]
+              #     Optional. If true, allow partial responses for multi-regional Aggregated
+              #     List requests. Otherwise if one of the locations is down or unreachable,
+              #     the Aggregated List request will fail.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::AgentGateway>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::AgentGateway>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest.new
+              #
+              #   # Call the list_agent_gateways method.
+              #   result = client.list_agent_gateways request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::NetworkServices::V1::AgentGateway.
+              #     p item
+              #   end
+              #
+              def list_agent_gateways request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_agent_gateways.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_agent_gateways.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_agent_gateways.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_services_stub.list_agent_gateways request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @network_services_stub, :list_agent_gateways, "agent_gateways", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single AgentGateway.
+              #
+              # @overload get_agent_gateway(request, options = nil)
+              #   Pass arguments to `get_agent_gateway` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_agent_gateway(name: nil)
+              #   Pass arguments to `get_agent_gateway` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. A name of the AgentGateway to get. Must be in the format
+              #     `projects/*/locations/*/agentGateways/*`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::NetworkServices::V1::AgentGateway]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::NetworkServices::V1::AgentGateway]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest.new
+              #
+              #   # Call the get_agent_gateway method.
+              #   result = client.get_agent_gateway request
+              #
+              #   # The returned object is of type Google::Cloud::NetworkServices::V1::AgentGateway.
+              #   p result
+              #
+              def get_agent_gateway request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_agent_gateway.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_agent_gateway.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_agent_gateway.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_services_stub.get_agent_gateway request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new AgentGateway in a given project and location.
+              #
+              # @overload create_agent_gateway(request, options = nil)
+              #   Pass arguments to `create_agent_gateway` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_agent_gateway(parent: nil, agent_gateway_id: nil, agent_gateway: nil)
+              #   Pass arguments to `create_agent_gateway` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the AgentGateway. Must be in the
+              #     format `projects/*/locations/*`.
+              #   @param agent_gateway_id [::String]
+              #     Required. Short name of the AgentGateway resource to be created.
+              #   @param agent_gateway [::Google::Cloud::NetworkServices::V1::AgentGateway, ::Hash]
+              #     Required. AgentGateway resource to be created.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest.new
+              #
+              #   # Call the create_agent_gateway method.
+              #   result = client.create_agent_gateway request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_agent_gateway request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_agent_gateway.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_agent_gateway.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_agent_gateway.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_services_stub.create_agent_gateway request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single AgentGateway.
+              #
+              # @overload update_agent_gateway(request, options = nil)
+              #   Pass arguments to `update_agent_gateway` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_agent_gateway(update_mask: nil, agent_gateway: nil)
+              #   Pass arguments to `update_agent_gateway` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     AgentGateway resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param agent_gateway [::Google::Cloud::NetworkServices::V1::AgentGateway, ::Hash]
+              #     Required. Updated AgentGateway resource.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest.new
+              #
+              #   # Call the update_agent_gateway method.
+              #   result = client.update_agent_gateway request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_agent_gateway request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_agent_gateway.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_agent_gateway.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_agent_gateway.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_services_stub.update_agent_gateway request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single AgentGateway.
+              #
+              # @overload delete_agent_gateway(request, options = nil)
+              #   Pass arguments to `delete_agent_gateway` via a request object, either of type
+              #   {::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_agent_gateway(name: nil, etag: nil)
+              #   Pass arguments to `delete_agent_gateway` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. A name of the AgentGateway to delete. Must be in the format
+              #     `projects/*/locations/*/agentGateways/*`.
+              #   @param etag [::String]
+              #     Optional. The etag of the AgentGateway to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/network_services/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest.new
+              #
+              #   # Call the delete_agent_gateway method.
+              #   result = client.delete_agent_gateway request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_agent_gateway request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_agent_gateway.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_agent_gateway.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_agent_gateway.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_services_stub.delete_agent_gateway request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the NetworkServices REST API.
               #
               # This class represents the configuration for NetworkServices REST,
@@ -5475,6 +5928,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -5554,6 +6008,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #
@@ -5848,6 +6303,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_mesh_route_views
+                  ##
+                  # RPC-specific configuration for `list_agent_gateways`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_agent_gateways
+                  ##
+                  # RPC-specific configuration for `get_agent_gateway`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_agent_gateway
+                  ##
+                  # RPC-specific configuration for `create_agent_gateway`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_agent_gateway
+                  ##
+                  # RPC-specific configuration for `update_agent_gateway`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_agent_gateway
+                  ##
+                  # RPC-specific configuration for `delete_agent_gateway`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_agent_gateway
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -5967,6 +6447,16 @@ module Google
                     @list_gateway_route_views = ::Gapic::Config::Method.new list_gateway_route_views_config
                     list_mesh_route_views_config = parent_rpcs.list_mesh_route_views if parent_rpcs.respond_to? :list_mesh_route_views
                     @list_mesh_route_views = ::Gapic::Config::Method.new list_mesh_route_views_config
+                    list_agent_gateways_config = parent_rpcs.list_agent_gateways if parent_rpcs.respond_to? :list_agent_gateways
+                    @list_agent_gateways = ::Gapic::Config::Method.new list_agent_gateways_config
+                    get_agent_gateway_config = parent_rpcs.get_agent_gateway if parent_rpcs.respond_to? :get_agent_gateway
+                    @get_agent_gateway = ::Gapic::Config::Method.new get_agent_gateway_config
+                    create_agent_gateway_config = parent_rpcs.create_agent_gateway if parent_rpcs.respond_to? :create_agent_gateway
+                    @create_agent_gateway = ::Gapic::Config::Method.new create_agent_gateway_config
+                    update_agent_gateway_config = parent_rpcs.update_agent_gateway if parent_rpcs.respond_to? :update_agent_gateway
+                    @update_agent_gateway = ::Gapic::Config::Method.new update_agent_gateway_config
+                    delete_agent_gateway_config = parent_rpcs.delete_agent_gateway if parent_rpcs.respond_to? :delete_agent_gateway
+                    @delete_agent_gateway = ::Gapic::Config::Method.new delete_agent_gateway_config
 
                     yield self if block_given?
                   end

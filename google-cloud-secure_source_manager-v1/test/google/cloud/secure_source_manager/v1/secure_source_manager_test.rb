@@ -90,40 +90,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::SecureSourceManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::SecureSourceManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::SecureSourceManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::SecureSourceManager::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::SecureSourceManager::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::SecureSourceManager::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::SecureSourceManager::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::SecureSourceManager::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::SecureSourceManager::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
+      c.create_instance ::Google::Cloud::SecureSourceManager::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::SecureSourceManager::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::SecureSourceManager::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name, request_id: request_id, force: force }) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name, request_id: request_id, force: force do |response, operation|
+      c.delete_instance name: name, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
+      c.delete_instance ::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest.new(name: name, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -355,40 +355,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_repositories_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance }) do |response, operation|
+      c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance do |response, operation|
+      c.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_repositories ::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance) do |response, operation|
+      c.list_repositories ::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance }, grpc_options) do |response, operation|
+      c.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_repositories(::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance), grpc_options) do |response, operation|
+      c.list_repositories(::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -418,36 +418,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_repository({ name: name }) do |response, operation|
+      c.get_repository({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_repository name: name do |response, operation|
+      c.get_repository name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_repository ::Google::Cloud::SecureSourceManager::V1::GetRepositoryRequest.new(name: name) do |response, operation|
+      c.get_repository ::Google::Cloud::SecureSourceManager::V1::GetRepositoryRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_repository({ name: name }, grpc_options) do |response, operation|
+      c.get_repository({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_repository(::Google::Cloud::SecureSourceManager::V1::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_repository(::Google::Cloud::SecureSourceManager::V1::GetRepositoryRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -480,40 +480,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |response, operation|
+      c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_repository parent: parent, repository: repository, repository_id: repository_id do |response, operation|
+      c.create_repository parent: parent, repository: repository, repository_id: repository_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_repository ::Google::Cloud::SecureSourceManager::V1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |response, operation|
+      c.create_repository ::Google::Cloud::SecureSourceManager::V1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, grpc_options) do |response, operation|
+      c.create_repository({ parent: parent, repository: repository, repository_id: repository_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_repository(::Google::Cloud::SecureSourceManager::V1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), grpc_options) do |response, operation|
+      c.create_repository(::Google::Cloud::SecureSourceManager::V1::CreateRepositoryRequest.new(parent: parent, repository: repository, repository_id: repository_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -547,40 +547,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_repository({ update_mask: update_mask, repository: repository, validate_only: validate_only }) do |response, operation|
+      c.update_repository({ update_mask: update_mask, repository: repository, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_repository update_mask: update_mask, repository: repository, validate_only: validate_only do |response, operation|
+      c.update_repository update_mask: update_mask, repository: repository, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_repository ::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository, validate_only: validate_only) do |response, operation|
+      c.update_repository ::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_repository({ update_mask: update_mask, repository: repository, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_repository({ update_mask: update_mask, repository: repository, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_repository(::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_repository(::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest.new(update_mask: update_mask, repository: repository, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -612,40 +612,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_repository_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_repository({ name: name, allow_missing: allow_missing }) do |response, operation|
+      c.delete_repository({ name: name, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_repository name: name, allow_missing: allow_missing do |response, operation|
+      c.delete_repository name: name, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_repository ::Google::Cloud::SecureSourceManager::V1::DeleteRepositoryRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
+      c.delete_repository ::Google::Cloud::SecureSourceManager::V1::DeleteRepositoryRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_repository({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.delete_repository({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_repository(::Google::Cloud::SecureSourceManager::V1::DeleteRepositoryRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.delete_repository(::Google::Cloud::SecureSourceManager::V1::DeleteRepositoryRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -679,40 +679,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_hooks_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_hooks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_hooks({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_hooks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_hooks parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_hooks ::Google::Cloud::SecureSourceManager::V1::ListHooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_hooks ::Google::Cloud::SecureSourceManager::V1::ListHooksRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_hooks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_hooks({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_hooks(::Google::Cloud::SecureSourceManager::V1::ListHooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_hooks(::Google::Cloud::SecureSourceManager::V1::ListHooksRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -742,36 +742,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_hook_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_hook({ name: name }) do |response, operation|
+      c.get_hook({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_hook name: name do |response, operation|
+      c.get_hook name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_hook ::Google::Cloud::SecureSourceManager::V1::GetHookRequest.new(name: name) do |response, operation|
+      c.get_hook ::Google::Cloud::SecureSourceManager::V1::GetHookRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_hook({ name: name }, grpc_options) do |response, operation|
+      c.get_hook({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_hook(::Google::Cloud::SecureSourceManager::V1::GetHookRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_hook(::Google::Cloud::SecureSourceManager::V1::GetHookRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -804,40 +804,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_hook_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_hook({ parent: parent, hook: hook, hook_id: hook_id }) do |response, operation|
+      c.create_hook({ parent: parent, hook: hook, hook_id: hook_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_hook parent: parent, hook: hook, hook_id: hook_id do |response, operation|
+      c.create_hook parent: parent, hook: hook, hook_id: hook_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_hook ::Google::Cloud::SecureSourceManager::V1::CreateHookRequest.new(parent: parent, hook: hook, hook_id: hook_id) do |response, operation|
+      c.create_hook ::Google::Cloud::SecureSourceManager::V1::CreateHookRequest.new(parent: parent, hook: hook, hook_id: hook_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_hook({ parent: parent, hook: hook, hook_id: hook_id }, grpc_options) do |response, operation|
+      c.create_hook({ parent: parent, hook: hook, hook_id: hook_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_hook(::Google::Cloud::SecureSourceManager::V1::CreateHookRequest.new(parent: parent, hook: hook, hook_id: hook_id), grpc_options) do |response, operation|
+      c.create_hook(::Google::Cloud::SecureSourceManager::V1::CreateHookRequest.new(parent: parent, hook: hook, hook_id: hook_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -869,40 +869,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_hook_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_hook({ update_mask: update_mask, hook: hook }) do |response, operation|
+      c.update_hook({ update_mask: update_mask, hook: hook }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_hook update_mask: update_mask, hook: hook do |response, operation|
+      c.update_hook update_mask: update_mask, hook: hook do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_hook ::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest.new(update_mask: update_mask, hook: hook) do |response, operation|
+      c.update_hook ::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest.new(update_mask: update_mask, hook: hook) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_hook({ update_mask: update_mask, hook: hook }, grpc_options) do |response, operation|
+      c.update_hook({ update_mask: update_mask, hook: hook }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_hook(::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest.new(update_mask: update_mask, hook: hook), grpc_options) do |response, operation|
+      c.update_hook(::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest.new(update_mask: update_mask, hook: hook), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -932,40 +932,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_hook_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_hook({ name: name }) do |response, operation|
+      c.delete_hook({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_hook name: name do |response, operation|
+      c.delete_hook name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_hook ::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest.new(name: name) do |response, operation|
+      c.delete_hook ::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_hook({ name: name }, grpc_options) do |response, operation|
+      c.delete_hook({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_hook(::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_hook(::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -997,36 +997,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_iam_policy_repo_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy_repo({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy_repo({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy_repo resource: resource, options: options do |response, operation|
+      c.get_iam_policy_repo resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy_repo ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy_repo ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy_repo({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy_repo({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy_repo(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy_repo(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1059,36 +1059,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, set_iam_policy_repo_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy_repo({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy_repo({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy_repo resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy_repo resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy_repo ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy_repo ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy_repo({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy_repo({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy_repo(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy_repo(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1119,36 +1119,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_repo_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions_repo({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions_repo({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions_repo resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions_repo resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions_repo ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions_repo ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions_repo({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions_repo({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions_repo(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions_repo(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1181,40 +1181,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_branch_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_branch_rule({ parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id }) do |response, operation|
+      c.create_branch_rule({ parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_branch_rule parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id do |response, operation|
+      c.create_branch_rule parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_branch_rule ::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new(parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id) do |response, operation|
+      c.create_branch_rule ::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new(parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_branch_rule({ parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id }, grpc_options) do |response, operation|
+      c.create_branch_rule({ parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_branch_rule(::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new(parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id), grpc_options) do |response, operation|
+      c.create_branch_rule(::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new(parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1248,40 +1248,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_branch_rules_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_branch_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_branch_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_branch_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_branch_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_branch_rules ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_branch_rules ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_branch_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_branch_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_branch_rules(::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_branch_rules(::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1311,36 +1311,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_branch_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_branch_rule({ name: name }) do |response, operation|
+      c.get_branch_rule({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_branch_rule name: name do |response, operation|
+      c.get_branch_rule name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_branch_rule ::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new(name: name) do |response, operation|
+      c.get_branch_rule ::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_branch_rule({ name: name }, grpc_options) do |response, operation|
+      c.get_branch_rule({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_branch_rule(::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_branch_rule(::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1373,40 +1373,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_branch_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_branch_rule({ branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
+      c.update_branch_rule({ branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_branch_rule branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask do |response, operation|
+      c.update_branch_rule branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_branch_rule ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new(branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask) do |response, operation|
+      c.update_branch_rule ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new(branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_branch_rule({ branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_branch_rule({ branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_branch_rule(::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new(branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_branch_rule(::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new(branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1438,40 +1438,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_branch_rule_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_branch_rule({ name: name, allow_missing: allow_missing }) do |response, operation|
+      c.delete_branch_rule({ name: name, allow_missing: allow_missing }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_branch_rule name: name, allow_missing: allow_missing do |response, operation|
+      c.delete_branch_rule name: name, allow_missing: allow_missing do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_branch_rule ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
+      c.delete_branch_rule ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_branch_rule({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
+      c.delete_branch_rule({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_branch_rule(::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
+      c.delete_branch_rule(::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1503,40 +1503,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_pull_request_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_pull_request({ parent: parent, pull_request: pull_request }) do |response, operation|
+      c.create_pull_request({ parent: parent, pull_request: pull_request }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_pull_request parent: parent, pull_request: pull_request do |response, operation|
+      c.create_pull_request parent: parent, pull_request: pull_request do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_pull_request ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest.new(parent: parent, pull_request: pull_request) do |response, operation|
+      c.create_pull_request ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest.new(parent: parent, pull_request: pull_request) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_pull_request({ parent: parent, pull_request: pull_request }, grpc_options) do |response, operation|
+      c.create_pull_request({ parent: parent, pull_request: pull_request }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_pull_request(::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest.new(parent: parent, pull_request: pull_request), grpc_options) do |response, operation|
+      c.create_pull_request(::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest.new(parent: parent, pull_request: pull_request), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1566,36 +1566,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_pull_request_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_pull_request({ name: name }) do |response, operation|
+      c.get_pull_request({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_pull_request name: name do |response, operation|
+      c.get_pull_request name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_pull_request ::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest.new(name: name) do |response, operation|
+      c.get_pull_request ::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_pull_request({ name: name }, grpc_options) do |response, operation|
+      c.get_pull_request({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_pull_request(::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_pull_request(::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1628,40 +1628,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_pull_requests_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_pull_requests({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_pull_requests({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_pull_requests parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_pull_requests parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_pull_requests ::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_pull_requests ::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_pull_requests({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_pull_requests({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_pull_requests(::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_pull_requests(::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1693,40 +1693,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_pull_request_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_pull_request({ pull_request: pull_request, update_mask: update_mask }) do |response, operation|
+      c.update_pull_request({ pull_request: pull_request, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_pull_request pull_request: pull_request, update_mask: update_mask do |response, operation|
+      c.update_pull_request pull_request: pull_request, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_pull_request ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest.new(pull_request: pull_request, update_mask: update_mask) do |response, operation|
+      c.update_pull_request ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest.new(pull_request: pull_request, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_pull_request({ pull_request: pull_request, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_pull_request({ pull_request: pull_request, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_pull_request(::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest.new(pull_request: pull_request, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_pull_request(::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest.new(pull_request: pull_request, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1756,40 +1756,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, merge_pull_request_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.merge_pull_request({ name: name }) do |response, operation|
+      c.merge_pull_request({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.merge_pull_request name: name do |response, operation|
+      c.merge_pull_request name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.merge_pull_request ::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest.new(name: name) do |response, operation|
+      c.merge_pull_request ::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.merge_pull_request({ name: name }, grpc_options) do |response, operation|
+      c.merge_pull_request({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.merge_pull_request(::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest.new(name: name), grpc_options) do |response, operation|
+      c.merge_pull_request(::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1819,40 +1819,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, open_pull_request_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.open_pull_request({ name: name }) do |response, operation|
+      c.open_pull_request({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.open_pull_request name: name do |response, operation|
+      c.open_pull_request name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.open_pull_request ::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest.new(name: name) do |response, operation|
+      c.open_pull_request ::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.open_pull_request({ name: name }, grpc_options) do |response, operation|
+      c.open_pull_request({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.open_pull_request(::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest.new(name: name), grpc_options) do |response, operation|
+      c.open_pull_request(::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1882,40 +1882,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, close_pull_request_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.close_pull_request({ name: name }) do |response, operation|
+      c.close_pull_request({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.close_pull_request name: name do |response, operation|
+      c.close_pull_request name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.close_pull_request ::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest.new(name: name) do |response, operation|
+      c.close_pull_request ::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.close_pull_request({ name: name }, grpc_options) do |response, operation|
+      c.close_pull_request({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.close_pull_request(::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest.new(name: name), grpc_options) do |response, operation|
+      c.close_pull_request(::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1949,40 +1949,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_pull_request_file_diffs_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_pull_request_file_diffs({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_pull_request_file_diffs({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_pull_request_file_diffs name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_pull_request_file_diffs name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_pull_request_file_diffs ::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_pull_request_file_diffs ::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_pull_request_file_diffs({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_pull_request_file_diffs({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_pull_request_file_diffs(::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_pull_request_file_diffs(::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2020,40 +2020,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, fetch_tree_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_tree({ repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.fetch_tree({ repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_tree repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token do |response, operation|
+      c.fetch_tree repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_tree ::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest.new(repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token) do |response, operation|
+      c.fetch_tree ::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest.new(repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_tree({ repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.fetch_tree({ repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_tree(::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest.new(repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.fetch_tree(::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest.new(repository: repository, ref: ref, recursive: recursive, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2085,36 +2085,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, fetch_blob_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.fetch_blob({ repository: repository, sha: sha }) do |response, operation|
+      c.fetch_blob({ repository: repository, sha: sha }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.fetch_blob repository: repository, sha: sha do |response, operation|
+      c.fetch_blob repository: repository, sha: sha do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.fetch_blob ::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest.new(repository: repository, sha: sha) do |response, operation|
+      c.fetch_blob ::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest.new(repository: repository, sha: sha) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.fetch_blob({ repository: repository, sha: sha }, grpc_options) do |response, operation|
+      c.fetch_blob({ repository: repository, sha: sha }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.fetch_blob(::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest.new(repository: repository, sha: sha), grpc_options) do |response, operation|
+      c.fetch_blob(::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest.new(repository: repository, sha: sha), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2145,40 +2145,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_issue({ parent: parent, issue: issue }) do |response, operation|
+      c.create_issue({ parent: parent, issue: issue }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_issue parent: parent, issue: issue do |response, operation|
+      c.create_issue parent: parent, issue: issue do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_issue ::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest.new(parent: parent, issue: issue) do |response, operation|
+      c.create_issue ::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest.new(parent: parent, issue: issue) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_issue({ parent: parent, issue: issue }, grpc_options) do |response, operation|
+      c.create_issue({ parent: parent, issue: issue }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_issue(::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest.new(parent: parent, issue: issue), grpc_options) do |response, operation|
+      c.create_issue(::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest.new(parent: parent, issue: issue), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2208,36 +2208,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_issue({ name: name }) do |response, operation|
+      c.get_issue({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_issue name: name do |response, operation|
+      c.get_issue name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_issue ::Google::Cloud::SecureSourceManager::V1::GetIssueRequest.new(name: name) do |response, operation|
+      c.get_issue ::Google::Cloud::SecureSourceManager::V1::GetIssueRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_issue({ name: name }, grpc_options) do |response, operation|
+      c.get_issue({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_issue(::Google::Cloud::SecureSourceManager::V1::GetIssueRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_issue(::Google::Cloud::SecureSourceManager::V1::GetIssueRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2272,40 +2272,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_issues_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_issues({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_issues({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_issues parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_issues parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_issues ::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_issues ::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_issues({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_issues({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_issues(::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_issues(::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2337,40 +2337,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_issue({ issue: issue, update_mask: update_mask }) do |response, operation|
+      c.update_issue({ issue: issue, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_issue issue: issue, update_mask: update_mask do |response, operation|
+      c.update_issue issue: issue, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_issue ::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask) do |response, operation|
+      c.update_issue ::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_issue({ issue: issue, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_issue({ issue: issue, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_issue(::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_issue(::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest.new(issue: issue, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2402,40 +2402,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_issue({ name: name, etag: etag }) do |response, operation|
+      c.delete_issue({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_issue name: name, etag: etag do |response, operation|
+      c.delete_issue name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_issue ::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_issue ::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_issue({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_issue({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_issue(::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_issue(::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2467,40 +2467,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, open_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.open_issue({ name: name, etag: etag }) do |response, operation|
+      c.open_issue({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.open_issue name: name, etag: etag do |response, operation|
+      c.open_issue name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.open_issue ::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest.new(name: name, etag: etag) do |response, operation|
+      c.open_issue ::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.open_issue({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.open_issue({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.open_issue(::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.open_issue(::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2532,40 +2532,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, close_issue_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.close_issue({ name: name, etag: etag }) do |response, operation|
+      c.close_issue({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.close_issue name: name, etag: etag do |response, operation|
+      c.close_issue name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.close_issue ::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest.new(name: name, etag: etag) do |response, operation|
+      c.close_issue ::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.close_issue({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.close_issue({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.close_issue(::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.close_issue(::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2595,36 +2595,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_pull_request_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_pull_request_comment({ name: name }) do |response, operation|
+      c.get_pull_request_comment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_pull_request_comment name: name do |response, operation|
+      c.get_pull_request_comment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest.new(name: name) do |response, operation|
+      c.get_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_pull_request_comment({ name: name }, grpc_options) do |response, operation|
+      c.get_pull_request_comment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2657,40 +2657,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_pull_request_comments_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_pull_request_comments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_pull_request_comments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_pull_request_comments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_pull_request_comments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_pull_request_comments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_pull_request_comments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2722,40 +2722,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_pull_request_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_pull_request_comment({ parent: parent, pull_request_comment: pull_request_comment }) do |response, operation|
+      c.create_pull_request_comment({ parent: parent, pull_request_comment: pull_request_comment }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_pull_request_comment parent: parent, pull_request_comment: pull_request_comment do |response, operation|
+      c.create_pull_request_comment parent: parent, pull_request_comment: pull_request_comment do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest.new(parent: parent, pull_request_comment: pull_request_comment) do |response, operation|
+      c.create_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest.new(parent: parent, pull_request_comment: pull_request_comment) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_pull_request_comment({ parent: parent, pull_request_comment: pull_request_comment }, grpc_options) do |response, operation|
+      c.create_pull_request_comment({ parent: parent, pull_request_comment: pull_request_comment }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest.new(parent: parent, pull_request_comment: pull_request_comment), grpc_options) do |response, operation|
+      c.create_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest.new(parent: parent, pull_request_comment: pull_request_comment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2787,40 +2787,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_pull_request_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_pull_request_comment({ pull_request_comment: pull_request_comment, update_mask: update_mask }) do |response, operation|
+      c.update_pull_request_comment({ pull_request_comment: pull_request_comment, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_pull_request_comment pull_request_comment: pull_request_comment, update_mask: update_mask do |response, operation|
+      c.update_pull_request_comment pull_request_comment: pull_request_comment, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest.new(pull_request_comment: pull_request_comment, update_mask: update_mask) do |response, operation|
+      c.update_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest.new(pull_request_comment: pull_request_comment, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_pull_request_comment({ pull_request_comment: pull_request_comment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_pull_request_comment({ pull_request_comment: pull_request_comment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest.new(pull_request_comment: pull_request_comment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest.new(pull_request_comment: pull_request_comment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2850,40 +2850,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_pull_request_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_pull_request_comment({ name: name }) do |response, operation|
+      c.delete_pull_request_comment({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_pull_request_comment name: name do |response, operation|
+      c.delete_pull_request_comment name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest.new(name: name) do |response, operation|
+      c.delete_pull_request_comment ::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_pull_request_comment({ name: name }, grpc_options) do |response, operation|
+      c.delete_pull_request_comment({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_pull_request_comment(::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2915,40 +2915,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, batch_create_pull_request_comments_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_create_pull_request_comments({ parent: parent, requests: requests }) do |response, operation|
+      c.batch_create_pull_request_comments({ parent: parent, requests: requests }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_create_pull_request_comments parent: parent, requests: requests do |response, operation|
+      c.batch_create_pull_request_comments parent: parent, requests: requests do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_create_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest.new(parent: parent, requests: requests) do |response, operation|
+      c.batch_create_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest.new(parent: parent, requests: requests) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_create_pull_request_comments({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+      c.batch_create_pull_request_comments({ parent: parent, requests: requests }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_create_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+      c.batch_create_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2982,40 +2982,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, resolve_pull_request_comments_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.resolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }) do |response, operation|
+      c.resolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.resolve_pull_request_comments parent: parent, names: names, auto_fill: auto_fill do |response, operation|
+      c.resolve_pull_request_comments parent: parent, names: names, auto_fill: auto_fill do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.resolve_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill) do |response, operation|
+      c.resolve_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.resolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }, grpc_options) do |response, operation|
+      c.resolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.resolve_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill), grpc_options) do |response, operation|
+      c.resolve_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3049,40 +3049,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, unresolve_pull_request_comments_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.unresolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }) do |response, operation|
+      c.unresolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.unresolve_pull_request_comments parent: parent, names: names, auto_fill: auto_fill do |response, operation|
+      c.unresolve_pull_request_comments parent: parent, names: names, auto_fill: auto_fill do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.unresolve_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill) do |response, operation|
+      c.unresolve_pull_request_comments ::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.unresolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }, grpc_options) do |response, operation|
+      c.unresolve_pull_request_comments({ parent: parent, names: names, auto_fill: auto_fill }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.unresolve_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill), grpc_options) do |response, operation|
+      c.unresolve_pull_request_comments(::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest.new(parent: parent, names: names, auto_fill: auto_fill), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3114,40 +3114,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, create_issue_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_issue_comment({ parent: parent, issue_comment: issue_comment }) do |response, operation|
+      c.create_issue_comment({ parent: parent, issue_comment: issue_comment }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_issue_comment parent: parent, issue_comment: issue_comment do |response, operation|
+      c.create_issue_comment parent: parent, issue_comment: issue_comment do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_issue_comment ::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest.new(parent: parent, issue_comment: issue_comment) do |response, operation|
+      c.create_issue_comment ::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest.new(parent: parent, issue_comment: issue_comment) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_issue_comment({ parent: parent, issue_comment: issue_comment }, grpc_options) do |response, operation|
+      c.create_issue_comment({ parent: parent, issue_comment: issue_comment }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_issue_comment(::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest.new(parent: parent, issue_comment: issue_comment), grpc_options) do |response, operation|
+      c.create_issue_comment(::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest.new(parent: parent, issue_comment: issue_comment), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3177,36 +3177,36 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, get_issue_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_issue_comment({ name: name }) do |response, operation|
+      c.get_issue_comment({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_issue_comment name: name do |response, operation|
+      c.get_issue_comment name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_issue_comment ::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest.new(name: name) do |response, operation|
+      c.get_issue_comment ::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_issue_comment({ name: name }, grpc_options) do |response, operation|
+      c.get_issue_comment({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_issue_comment(::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_issue_comment(::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -3239,40 +3239,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, list_issue_comments_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_issue_comments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_issue_comments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_issue_comments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_issue_comments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_issue_comments ::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_issue_comments ::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_issue_comments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_issue_comments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_issue_comments(::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_issue_comments(::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3304,40 +3304,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, update_issue_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_issue_comment({ issue_comment: issue_comment, update_mask: update_mask }) do |response, operation|
+      c.update_issue_comment({ issue_comment: issue_comment, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_issue_comment issue_comment: issue_comment, update_mask: update_mask do |response, operation|
+      c.update_issue_comment issue_comment: issue_comment, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_issue_comment ::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest.new(issue_comment: issue_comment, update_mask: update_mask) do |response, operation|
+      c.update_issue_comment ::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest.new(issue_comment: issue_comment, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_issue_comment({ issue_comment: issue_comment, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_issue_comment({ issue_comment: issue_comment, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_issue_comment(::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest.new(issue_comment: issue_comment, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_issue_comment(::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest.new(issue_comment: issue_comment, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -3367,40 +3367,40 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
     Gapic::ServiceStub.stub :new, delete_issue_comment_client_stub do
       # Create client
-      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+      c = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_issue_comment({ name: name }) do |response, operation|
+      c.delete_issue_comment({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_issue_comment name: name do |response, operation|
+      c.delete_issue_comment name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_issue_comment ::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest.new(name: name) do |response, operation|
+      c.delete_issue_comment ::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_issue_comment({ name: name }, grpc_options) do |response, operation|
+      c.delete_issue_comment({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_issue_comment(::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_issue_comment(::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

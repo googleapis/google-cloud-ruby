@@ -103,32 +103,32 @@ class ::Google::Cloud::Talent::V4beta1::Completion::Rest::ClientTest < Minitest:
     ::Google::Cloud::Talent::V4beta1::Completion::Rest::ServiceStub.stub :transcode_complete_query_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, complete_query_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::Completion::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::Completion::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.complete_query({ parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }) do |_result, response|
+        c.complete_query({ parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.complete_query parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type do |_result, response|
+        c.complete_query parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.complete_query ::Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type) do |_result, response|
+        c.complete_query ::Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.complete_query({ parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }, call_options) do |_result, response|
+        c.complete_query({ parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.complete_query(::Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type), call_options) do |_result, response|
+        c.complete_query(::Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

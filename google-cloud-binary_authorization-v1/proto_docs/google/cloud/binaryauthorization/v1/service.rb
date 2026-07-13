@@ -21,70 +21,86 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1
-        # Request message for [BinauthzManagementService.GetPolicy][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#get_policy BinauthzManagementServiceV1.GetPolicy}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::BinaryAuthorization::V1::Policy policy} to retrieve,
-        #     in the format `projects/*/policy`.
+        #     Required. The resource name of the
+        #     {::Google::Cloud::BinaryAuthorization::V1::Policy policy} to retrieve, in the
+        #     format `projects/*/policy`.
         class GetPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BinauthzManagementService.UpdatePolicy][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#update_policy BinauthzManagementServiceV1.UpdatePolicy}.
         # @!attribute [rw] policy
         #   @return [::Google::Cloud::BinaryAuthorization::V1::Policy]
-        #     Required. A new or updated {::Google::Cloud::BinaryAuthorization::V1::Policy policy} value. The service will
-        #     overwrite the {::Google::Cloud::BinaryAuthorization::V1::Policy#name policy name} field with the resource name in
-        #     the request URL, in the format `projects/*/policy`.
+        #     Required. A new or updated
+        #     {::Google::Cloud::BinaryAuthorization::V1::Policy policy} value. The service
+        #     will overwrite the [policy
+        #     name][google.cloud.binaryauthorization.v1.Policy.name] field with the
+        #     resource name in the request URL, in the format `projects/*/policy`.
         class UpdatePolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BinauthzManagementService.CreateAttestor][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#create_attestor BinauthzManagementServiceV1.CreateAttestor}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent of this {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor}.
+        #     Required. The parent of this
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor}.
         # @!attribute [rw] attestor_id
         #   @return [::String]
         #     Required. The {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors} ID.
         # @!attribute [rw] attestor
         #   @return [::Google::Cloud::BinaryAuthorization::V1::Attestor]
-        #     Required. The initial {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} value. The service will
-        #     overwrite the {::Google::Cloud::BinaryAuthorization::V1::Attestor#name attestor name} field with the resource name,
-        #     in the format `projects/*/attestors/*`.
+        #     Required. The initial
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} value. The service
+        #     will overwrite the [attestor
+        #     name][google.cloud.binaryauthorization.v1.Attestor.name] field with the
+        #     resource name, in the format `projects/*/attestors/*`.
         class CreateAttestorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BinauthzManagementService.GetAttestor][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#get_attestor BinauthzManagementServiceV1.GetAttestor}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} to retrieve, in the format
-        #     `projects/*/attestors/*`.
+        #     Required. The name of the
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} to retrieve, in
+        #     the format `projects/*/attestors/*`.
         class GetAttestorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BinauthzManagementService.UpdateAttestor][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#update_attestor BinauthzManagementServiceV1.UpdateAttestor}.
         # @!attribute [rw] attestor
         #   @return [::Google::Cloud::BinaryAuthorization::V1::Attestor]
-        #     Required. The updated {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} value. The service will
-        #     overwrite the {::Google::Cloud::BinaryAuthorization::V1::Attestor#name attestor name} field with the resource name
-        #     in the request URL, in the format `projects/*/attestors/*`.
+        #     Required. The updated
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} value. The service
+        #     will overwrite the [attestor
+        #     name][google.cloud.binaryauthorization.v1.Attestor.name] field with the
+        #     resource name in the request URL, in the format `projects/*/attestors/*`.
         class UpdateAttestorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BinauthzManagementService.ListAttestors][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#list_attestors BinauthzManagementServiceV1.ListAttestors}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the project associated with the
-        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors}, in the format `projects/*`.
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors}, in the format
+        #     `projects/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Requested page size. The server may return fewer results than requested. If
@@ -92,32 +108,37 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return. Typically,
-        #     this is the value of {::Google::Cloud::BinaryAuthorization::V1::ListAttestorsResponse#next_page_token ListAttestorsResponse.next_page_token} returned
-        #     from the previous call to the `ListAttestors` method.
+        #     this is the value of
+        #     {::Google::Cloud::BinaryAuthorization::V1::ListAttestorsResponse#next_page_token ListAttestorsResponse.next_page_token}
+        #     returned from the previous call to the `ListAttestors` method.
         class ListAttestorsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [BinauthzManagementService.ListAttestors][].
+        # Response message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#list_attestors BinauthzManagementServiceV1.ListAttestors}.
         # @!attribute [rw] attestors
         #   @return [::Array<::Google::Cloud::BinaryAuthorization::V1::Attestor>]
         #     The list of {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors}.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results. Pass this value in the
-        #     {::Google::Cloud::BinaryAuthorization::V1::ListAttestorsRequest#page_token ListAttestorsRequest.page_token} field in the subsequent call to the
-        #     `ListAttestors` method to retrieve the next page of results.
+        #     {::Google::Cloud::BinaryAuthorization::V1::ListAttestorsRequest#page_token ListAttestorsRequest.page_token}
+        #     field in the subsequent call to the `ListAttestors` method to retrieve the
+        #     next page of results.
         class ListAttestorsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [BinauthzManagementService.DeleteAttestor][].
+        # Request message for
+        # {::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#delete_attestor BinauthzManagementServiceV1.DeleteAttestor}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors} to delete, in the format
-        #     `projects/*/attestors/*`.
+        #     Required. The name of the
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors} to delete, in the
+        #     format `projects/*/attestors/*`.
         class DeleteAttestorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -137,15 +158,16 @@ module Google
         # {::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client#validate_attestation_occurrence ValidationHelperV1.ValidateAttestationOccurrence}.
         # @!attribute [rw] attestor
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::BinaryAuthorization::V1::Attestor Attestor} of the
+        #     Required. The resource name of the
+        #     {::Google::Cloud::BinaryAuthorization::V1::Attestor Attestor} of the
         #     [occurrence][grafeas.v1.Occurrence], in the format
         #     `projects/*/attestors/*`.
         # @!attribute [rw] attestation
         #   @return [::Grafeas::V1::AttestationOccurrence]
         #     Required. An {::Grafeas::V1::AttestationOccurrence AttestationOccurrence} to
-        #     be checked that it can be verified by the Attestor. It does not have to be
-        #     an existing entity in Container Analysis. It must otherwise be a valid
-        #     AttestationOccurrence.
+        #     be checked that it can be verified by the `Attestor`. It does not have to
+        #     be an existing entity in Container Analysis. It must otherwise be a valid
+        #     `AttestationOccurrence`.
         # @!attribute [rw] occurrence_note
         #   @return [::String]
         #     Required. The resource name of the [Note][grafeas.v1.Note] to which the
@@ -171,7 +193,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The enum returned in the "result" field.
+          # The enum returned in the `result` field.
           module Result
             # Unspecified.
             RESULT_UNSPECIFIED = 0

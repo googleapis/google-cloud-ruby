@@ -98,32 +98,32 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ClientTest < Minite
     ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ServiceStub.stub :transcode_create_tenant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_tenant_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_tenant({ parent: parent, tenant: tenant }) do |_result, response|
+        c.create_tenant({ parent: parent, tenant: tenant }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_tenant parent: parent, tenant: tenant do |_result, response|
+        c.create_tenant parent: parent, tenant: tenant do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_tenant ::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant) do |_result, response|
+        c.create_tenant ::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_tenant({ parent: parent, tenant: tenant }, call_options) do |_result, response|
+        c.create_tenant({ parent: parent, tenant: tenant }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_tenant(::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant), call_options) do |_result, response|
+        c.create_tenant(::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -152,32 +152,32 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ClientTest < Minite
     ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ServiceStub.stub :transcode_get_tenant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_tenant_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_tenant({ name: name }) do |_result, response|
+        c.get_tenant({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_tenant name: name do |_result, response|
+        c.get_tenant name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_tenant ::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name) do |_result, response|
+        c.get_tenant ::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_tenant({ name: name }, call_options) do |_result, response|
+        c.get_tenant({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_tenant(::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name), call_options) do |_result, response|
+        c.get_tenant(::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,32 +207,32 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ClientTest < Minite
     ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ServiceStub.stub :transcode_update_tenant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_tenant_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_tenant({ tenant: tenant, update_mask: update_mask }) do |_result, response|
+        c.update_tenant({ tenant: tenant, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_tenant tenant: tenant, update_mask: update_mask do |_result, response|
+        c.update_tenant tenant: tenant, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_tenant ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask) do |_result, response|
+        c.update_tenant ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_tenant({ tenant: tenant, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_tenant({ tenant: tenant, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_tenant(::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), call_options) do |_result, response|
+        c.update_tenant(::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -261,32 +261,32 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ClientTest < Minite
     ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ServiceStub.stub :transcode_delete_tenant_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_tenant_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_tenant({ name: name }) do |_result, response|
+        c.delete_tenant({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_tenant name: name do |_result, response|
+        c.delete_tenant name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_tenant ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name) do |_result, response|
+        c.delete_tenant ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_tenant({ name: name }, call_options) do |_result, response|
+        c.delete_tenant({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_tenant(::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name), call_options) do |_result, response|
+        c.delete_tenant(::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ClientTest < Minite
     ::Google::Cloud::Talent::V4beta1::TenantService::Rest::ServiceStub.stub :transcode_list_tenants_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tenants_client_stub do
         # Create client
-        client = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tenants parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_tenants parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tenants ::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_tenants ::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_tenants({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tenants(::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_tenants(::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

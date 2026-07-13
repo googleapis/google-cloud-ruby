@@ -232,7 +232,7 @@ module Google
             START = 1
 
             # End of the list of sections.
-            Position::END = 2
+            const_set :END, 2
           end
         end
 

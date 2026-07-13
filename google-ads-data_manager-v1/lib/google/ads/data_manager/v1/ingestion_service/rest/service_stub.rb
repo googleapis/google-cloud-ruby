@@ -194,6 +194,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the ingest_ad_events REST call
+              #
+              # @param request_pb [::Google::Ads::DataManager::V1::IngestAdEventsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::DataManager::V1::IngestAdEventsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::DataManager::V1::IngestAdEventsResponse]
+              #   A result object deserialized from the server's reply
+              def ingest_ad_events request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_ingest_ad_events_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "ingest_ad_events",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::DataManager::V1::IngestAdEventsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the retrieve_request_status REST call
               #
               # @param request_pb [::Google::Ads::DataManager::V1::RetrieveRequestStatusRequest]
@@ -287,6 +327,26 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v1/events:ingest",
+                                                          body: "*",
+                                                          matches: []
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the ingest_ad_events REST call
+              #
+              # @param request_pb [::Google::Ads::DataManager::V1::IngestAdEventsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_ingest_ad_events_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/adEvents:ingest",
                                                           body: "*",
                                                           matches: []
                                                         )

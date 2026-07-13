@@ -90,40 +90,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::FinancialServices::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::FinancialServices::V1::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
+      c.create_instance ::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::FinancialServices::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |response, operation|
+      c.update_instance update_mask: update_mask, instance: instance, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |response, operation|
+      c.update_instance ::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_instance({ update_mask: update_mask, instance: instance, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name, request_id: request_id do |response, operation|
+      c.delete_instance name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_instance ::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -420,40 +420,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, import_registered_parties_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }) do |response, operation|
+      c.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_registered_parties name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business do |response, operation|
+      c.import_registered_parties name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_registered_parties ::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business) do |response, operation|
+      c.import_registered_parties ::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }, grpc_options) do |response, operation|
+      c.import_registered_parties({ name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_registered_parties(::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business), grpc_options) do |response, operation|
+      c.import_registered_parties(::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest.new(name: name, party_tables: party_tables, mode: mode, validate_only: validate_only, line_of_business: line_of_business), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -487,40 +487,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_registered_parties_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }) do |response, operation|
+      c.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_registered_parties name: name, dataset: dataset, line_of_business: line_of_business do |response, operation|
+      c.export_registered_parties name: name, dataset: dataset, line_of_business: line_of_business do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_registered_parties ::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business) do |response, operation|
+      c.export_registered_parties ::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }, grpc_options) do |response, operation|
+      c.export_registered_parties({ name: name, dataset: dataset, line_of_business: line_of_business }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_registered_parties(::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business), grpc_options) do |response, operation|
+      c.export_registered_parties(::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest.new(name: name, dataset: dataset, line_of_business: line_of_business), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -558,40 +558,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_datasets_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_datasets parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_datasets ::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_datasets ::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_datasets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_datasets(::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_datasets(::Google::Cloud::FinancialServices::V1::ListDatasetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -621,36 +621,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_dataset({ name: name }) do |response, operation|
+      c.get_dataset({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_dataset name: name do |response, operation|
+      c.get_dataset name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_dataset ::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name) do |response, operation|
+      c.get_dataset ::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_dataset({ name: name }, grpc_options) do |response, operation|
+      c.get_dataset({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_dataset(::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_dataset(::Google::Cloud::FinancialServices::V1::GetDatasetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -685,40 +685,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }) do |response, operation|
+      c.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dataset parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id do |response, operation|
+      c.create_dataset parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dataset ::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id) do |response, operation|
+      c.create_dataset ::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_dataset({ parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dataset(::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id), grpc_options) do |response, operation|
+      c.create_dataset(::Google::Cloud::FinancialServices::V1::CreateDatasetRequest.new(parent: parent, dataset_id: dataset_id, dataset: dataset, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -752,40 +752,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }) do |response, operation|
+      c.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_dataset update_mask: update_mask, dataset: dataset, request_id: request_id do |response, operation|
+      c.update_dataset update_mask: update_mask, dataset: dataset, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_dataset ::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id) do |response, operation|
+      c.update_dataset ::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_dataset({ update_mask: update_mask, dataset: dataset, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_dataset(::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id), grpc_options) do |response, operation|
+      c.update_dataset(::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest.new(update_mask: update_mask, dataset: dataset, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -817,40 +817,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_dataset_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_dataset({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_dataset({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_dataset name: name, request_id: request_id do |response, operation|
+      c.delete_dataset name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_dataset ::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_dataset ::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_dataset({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_dataset({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_dataset(::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_dataset(::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -888,40 +888,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_models_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_models parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_models parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_models ::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_models ::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_models({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_models(::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_models(::Google::Cloud::FinancialServices::V1::ListModelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -951,36 +951,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_model_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_model({ name: name }) do |response, operation|
+      c.get_model({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_model name: name do |response, operation|
+      c.get_model name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_model ::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name) do |response, operation|
+      c.get_model ::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_model({ name: name }, grpc_options) do |response, operation|
+      c.get_model({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_model(::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_model(::Google::Cloud::FinancialServices::V1::GetModelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1015,40 +1015,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_model_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }) do |response, operation|
+      c.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_model parent: parent, model_id: model_id, model: model, request_id: request_id do |response, operation|
+      c.create_model parent: parent, model_id: model_id, model: model, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_model ::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id) do |response, operation|
+      c.create_model ::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_model({ parent: parent, model_id: model_id, model: model, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_model(::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id), grpc_options) do |response, operation|
+      c.create_model(::Google::Cloud::FinancialServices::V1::CreateModelRequest.new(parent: parent, model_id: model_id, model: model, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1082,40 +1082,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_model_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_model({ update_mask: update_mask, model: model, request_id: request_id }) do |response, operation|
+      c.update_model({ update_mask: update_mask, model: model, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_model update_mask: update_mask, model: model, request_id: request_id do |response, operation|
+      c.update_model update_mask: update_mask, model: model, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_model ::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id) do |response, operation|
+      c.update_model ::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_model({ update_mask: update_mask, model: model, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_model({ update_mask: update_mask, model: model, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_model(::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id), grpc_options) do |response, operation|
+      c.update_model(::Google::Cloud::FinancialServices::V1::UpdateModelRequest.new(update_mask: update_mask, model: model, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1147,40 +1147,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_model_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
+      c.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_model_metadata model: model, structured_metadata_destination: structured_metadata_destination do |response, operation|
+      c.export_model_metadata model: model, structured_metadata_destination: structured_metadata_destination do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_model_metadata ::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination) do |response, operation|
+      c.export_model_metadata ::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
+      c.export_model_metadata({ model: model, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_model_metadata(::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
+      c.export_model_metadata(::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest.new(model: model, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1212,40 +1212,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_model_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_model({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_model({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_model name: name, request_id: request_id do |response, operation|
+      c.delete_model name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_model ::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_model ::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_model({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_model({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_model(::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_model(::Google::Cloud::FinancialServices::V1::DeleteModelRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1283,40 +1283,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_engine_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_engine_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_engine_configs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_engine_configs ::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_engine_configs ::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_engine_configs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_engine_configs(::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_engine_configs(::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1346,36 +1346,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_engine_config_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_engine_config({ name: name }) do |response, operation|
+      c.get_engine_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_engine_config name: name do |response, operation|
+      c.get_engine_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_engine_config ::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name) do |response, operation|
+      c.get_engine_config ::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_engine_config({ name: name }, grpc_options) do |response, operation|
+      c.get_engine_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_engine_config(::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_engine_config(::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1410,40 +1410,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_engine_config_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }) do |response, operation|
+      c.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_engine_config parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id do |response, operation|
+      c.create_engine_config parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_engine_config ::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id) do |response, operation|
+      c.create_engine_config ::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_engine_config({ parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_engine_config(::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id), grpc_options) do |response, operation|
+      c.create_engine_config(::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest.new(parent: parent, engine_config_id: engine_config_id, engine_config: engine_config, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1477,40 +1477,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_engine_config_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }) do |response, operation|
+      c.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_engine_config update_mask: update_mask, engine_config: engine_config, request_id: request_id do |response, operation|
+      c.update_engine_config update_mask: update_mask, engine_config: engine_config, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_engine_config ::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id) do |response, operation|
+      c.update_engine_config ::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_engine_config({ update_mask: update_mask, engine_config: engine_config, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_engine_config(::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id), grpc_options) do |response, operation|
+      c.update_engine_config(::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest.new(update_mask: update_mask, engine_config: engine_config, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1542,40 +1542,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_engine_config_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
+      c.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_engine_config_metadata engine_config: engine_config, structured_metadata_destination: structured_metadata_destination do |response, operation|
+      c.export_engine_config_metadata engine_config: engine_config, structured_metadata_destination: structured_metadata_destination do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_engine_config_metadata ::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination) do |response, operation|
+      c.export_engine_config_metadata ::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
+      c.export_engine_config_metadata({ engine_config: engine_config, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_engine_config_metadata(::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
+      c.export_engine_config_metadata(::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest.new(engine_config: engine_config, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1607,40 +1607,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_engine_config_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_engine_config({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_engine_config({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_engine_config name: name, request_id: request_id do |response, operation|
+      c.delete_engine_config name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_engine_config ::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_engine_config ::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_engine_config({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_engine_config({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_engine_config(::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_engine_config(::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1670,36 +1670,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_engine_version_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_engine_version({ name: name }) do |response, operation|
+      c.get_engine_version({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_engine_version name: name do |response, operation|
+      c.get_engine_version name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_engine_version ::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name) do |response, operation|
+      c.get_engine_version ::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_engine_version({ name: name }, grpc_options) do |response, operation|
+      c.get_engine_version({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_engine_version(::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_engine_version(::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1736,40 +1736,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_engine_versions_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_engine_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_engine_versions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_engine_versions ::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_engine_versions ::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_engine_versions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_engine_versions(::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_engine_versions(::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1807,40 +1807,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_prediction_results_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_prediction_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_prediction_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_prediction_results ::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_prediction_results ::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_prediction_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_prediction_results(::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_prediction_results(::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1870,36 +1870,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_prediction_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_prediction_result({ name: name }) do |response, operation|
+      c.get_prediction_result({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_prediction_result name: name do |response, operation|
+      c.get_prediction_result name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_prediction_result ::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name) do |response, operation|
+      c.get_prediction_result ::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_prediction_result({ name: name }, grpc_options) do |response, operation|
+      c.get_prediction_result({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_prediction_result(::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_prediction_result(::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1934,40 +1934,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_prediction_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }) do |response, operation|
+      c.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_prediction_result parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id do |response, operation|
+      c.create_prediction_result parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_prediction_result ::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id) do |response, operation|
+      c.create_prediction_result ::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_prediction_result({ parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_prediction_result(::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id), grpc_options) do |response, operation|
+      c.create_prediction_result(::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest.new(parent: parent, prediction_result_id: prediction_result_id, prediction_result: prediction_result, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2001,40 +2001,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_prediction_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }) do |response, operation|
+      c.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_prediction_result update_mask: update_mask, prediction_result: prediction_result, request_id: request_id do |response, operation|
+      c.update_prediction_result update_mask: update_mask, prediction_result: prediction_result, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_prediction_result ::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id) do |response, operation|
+      c.update_prediction_result ::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_prediction_result({ update_mask: update_mask, prediction_result: prediction_result, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_prediction_result(::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id), grpc_options) do |response, operation|
+      c.update_prediction_result(::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest.new(update_mask: update_mask, prediction_result: prediction_result, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2066,40 +2066,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_prediction_result_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
+      c.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_prediction_result_metadata prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination do |response, operation|
+      c.export_prediction_result_metadata prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_prediction_result_metadata ::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination) do |response, operation|
+      c.export_prediction_result_metadata ::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
+      c.export_prediction_result_metadata({ prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_prediction_result_metadata(::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
+      c.export_prediction_result_metadata(::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest.new(prediction_result: prediction_result, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2131,40 +2131,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_prediction_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_prediction_result({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_prediction_result({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_prediction_result name: name, request_id: request_id do |response, operation|
+      c.delete_prediction_result name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_prediction_result ::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_prediction_result ::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_prediction_result({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_prediction_result({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_prediction_result(::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_prediction_result(::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2202,40 +2202,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_backtest_results_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backtest_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_backtest_results parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backtest_results ::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_backtest_results ::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_backtest_results({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backtest_results(::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_backtest_results(::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2265,36 +2265,36 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_backtest_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_backtest_result({ name: name }) do |response, operation|
+      c.get_backtest_result({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_backtest_result name: name do |response, operation|
+      c.get_backtest_result name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_backtest_result ::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name) do |response, operation|
+      c.get_backtest_result ::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_backtest_result({ name: name }, grpc_options) do |response, operation|
+      c.get_backtest_result({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_backtest_result(::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_backtest_result(::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2329,40 +2329,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_backtest_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }) do |response, operation|
+      c.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_backtest_result parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id do |response, operation|
+      c.create_backtest_result parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_backtest_result ::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id) do |response, operation|
+      c.create_backtest_result ::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_backtest_result({ parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_backtest_result(::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id), grpc_options) do |response, operation|
+      c.create_backtest_result(::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest.new(parent: parent, backtest_result_id: backtest_result_id, backtest_result: backtest_result, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2396,40 +2396,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_backtest_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }) do |response, operation|
+      c.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_backtest_result update_mask: update_mask, backtest_result: backtest_result, request_id: request_id do |response, operation|
+      c.update_backtest_result update_mask: update_mask, backtest_result: backtest_result, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_backtest_result ::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id) do |response, operation|
+      c.update_backtest_result ::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_backtest_result({ update_mask: update_mask, backtest_result: backtest_result, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_backtest_result(::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id), grpc_options) do |response, operation|
+      c.update_backtest_result(::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest.new(update_mask: update_mask, backtest_result: backtest_result, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2461,40 +2461,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, export_backtest_result_metadata_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
+      c.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_backtest_result_metadata backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination do |response, operation|
+      c.export_backtest_result_metadata backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_backtest_result_metadata ::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination) do |response, operation|
+      c.export_backtest_result_metadata ::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
+      c.export_backtest_result_metadata({ backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_backtest_result_metadata(::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
+      c.export_backtest_result_metadata(::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest.new(backtest_result: backtest_result, structured_metadata_destination: structured_metadata_destination), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2526,40 +2526,40 @@ class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, delete_backtest_result_client_stub do
       # Create client
-      client = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
+      c = ::Google::Cloud::FinancialServices::V1::AML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_backtest_result({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_backtest_result({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_backtest_result name: name, request_id: request_id do |response, operation|
+      c.delete_backtest_result name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_backtest_result ::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_backtest_result ::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_backtest_result({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_backtest_result({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_backtest_result(::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_backtest_result(::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

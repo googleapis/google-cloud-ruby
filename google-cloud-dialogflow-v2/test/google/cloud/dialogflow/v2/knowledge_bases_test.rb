@@ -88,40 +88,40 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, list_knowledge_bases_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_knowledge_bases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_knowledge_bases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_knowledge_bases ::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_knowledge_bases ::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_knowledge_bases(::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_knowledge_bases(::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, get_knowledge_base_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_knowledge_base({ name: name }) do |response, operation|
+      c.get_knowledge_base({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_knowledge_base name: name do |response, operation|
+      c.get_knowledge_base name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_knowledge_base ::Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new(name: name) do |response, operation|
+      c.get_knowledge_base ::Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_knowledge_base({ name: name }, grpc_options) do |response, operation|
+      c.get_knowledge_base({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_knowledge_base(::Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_knowledge_base(::Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -211,36 +211,36 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, create_knowledge_base_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_knowledge_base({ parent: parent, knowledge_base: knowledge_base }) do |response, operation|
+      c.create_knowledge_base({ parent: parent, knowledge_base: knowledge_base }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_knowledge_base parent: parent, knowledge_base: knowledge_base do |response, operation|
+      c.create_knowledge_base parent: parent, knowledge_base: knowledge_base do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_knowledge_base ::Google::Cloud::Dialogflow::V2::CreateKnowledgeBaseRequest.new(parent: parent, knowledge_base: knowledge_base) do |response, operation|
+      c.create_knowledge_base ::Google::Cloud::Dialogflow::V2::CreateKnowledgeBaseRequest.new(parent: parent, knowledge_base: knowledge_base) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_knowledge_base({ parent: parent, knowledge_base: knowledge_base }, grpc_options) do |response, operation|
+      c.create_knowledge_base({ parent: parent, knowledge_base: knowledge_base }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_knowledge_base(::Google::Cloud::Dialogflow::V2::CreateKnowledgeBaseRequest.new(parent: parent, knowledge_base: knowledge_base), grpc_options) do |response, operation|
+      c.create_knowledge_base(::Google::Cloud::Dialogflow::V2::CreateKnowledgeBaseRequest.new(parent: parent, knowledge_base: knowledge_base), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -271,36 +271,36 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, delete_knowledge_base_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_knowledge_base({ name: name, force: force }) do |response, operation|
+      c.delete_knowledge_base({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_knowledge_base name: name, force: force do |response, operation|
+      c.delete_knowledge_base name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_knowledge_base ::Google::Cloud::Dialogflow::V2::DeleteKnowledgeBaseRequest.new(name: name, force: force) do |response, operation|
+      c.delete_knowledge_base ::Google::Cloud::Dialogflow::V2::DeleteKnowledgeBaseRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_knowledge_base({ name: name, force: force }, grpc_options) do |response, operation|
+      c.delete_knowledge_base({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_knowledge_base(::Google::Cloud::Dialogflow::V2::DeleteKnowledgeBaseRequest.new(name: name, force: force), grpc_options) do |response, operation|
+      c.delete_knowledge_base(::Google::Cloud::Dialogflow::V2::DeleteKnowledgeBaseRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, update_knowledge_base_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_knowledge_base({ knowledge_base: knowledge_base, update_mask: update_mask }) do |response, operation|
+      c.update_knowledge_base({ knowledge_base: knowledge_base, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_knowledge_base knowledge_base: knowledge_base, update_mask: update_mask do |response, operation|
+      c.update_knowledge_base knowledge_base: knowledge_base, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_knowledge_base ::Google::Cloud::Dialogflow::V2::UpdateKnowledgeBaseRequest.new(knowledge_base: knowledge_base, update_mask: update_mask) do |response, operation|
+      c.update_knowledge_base ::Google::Cloud::Dialogflow::V2::UpdateKnowledgeBaseRequest.new(knowledge_base: knowledge_base, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_knowledge_base({ knowledge_base: knowledge_base, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_knowledge_base({ knowledge_base: knowledge_base, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_knowledge_base(::Google::Cloud::Dialogflow::V2::UpdateKnowledgeBaseRequest.new(knowledge_base: knowledge_base, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_knowledge_base(::Google::Cloud::Dialogflow::V2::UpdateKnowledgeBaseRequest.new(knowledge_base: knowledge_base, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

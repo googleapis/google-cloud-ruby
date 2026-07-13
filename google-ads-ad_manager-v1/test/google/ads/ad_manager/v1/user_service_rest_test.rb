@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::UserService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_get_user_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_user_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_user({ name: name }) do |_result, response|
+        c.get_user({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_user name: name do |_result, response|
+        c.get_user name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_user ::Google::Ads::AdManager::V1::GetUserRequest.new(name: name) do |_result, response|
+        c.get_user ::Google::Ads::AdManager::V1::GetUserRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_user({ name: name }, call_options) do |_result, response|
+        c.get_user({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_user(::Google::Ads::AdManager::V1::GetUserRequest.new(name: name), call_options) do |_result, response|
+        c.get_user(::Google::Ads::AdManager::V1::GetUserRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

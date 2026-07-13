@@ -24,6 +24,7 @@ require "google/cloud/dataform/v1beta1/version"
 
 require "google/cloud/dataform/v1beta1/dataform/credentials"
 require "google/cloud/dataform/v1beta1/dataform/paths"
+require "google/cloud/dataform/v1beta1/dataform/operations"
 require "google/cloud/dataform/v1beta1/dataform/client"
 require "google/cloud/dataform/v1beta1/dataform/rest"
 

@@ -100,32 +100,32 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest:
     ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest::ServiceStub.stub :transcode_list_image_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_image_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }) do |_result, response|
+        c.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_image_versions parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases do |_result, response|
+        c.list_image_versions parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_image_versions ::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases) do |_result, response|
+        c.list_image_versions ::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }, call_options) do |_result, response|
+        c.list_image_versions({ parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_image_versions(::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases), call_options) do |_result, response|
+        c.list_image_versions(::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, include_past_releases: include_past_releases), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -94,36 +94,36 @@ class ::Google::Cloud::Talent::V4::Completion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, complete_query_client_stub do
       # Create client
-      client = ::Google::Cloud::Talent::V4::Completion::Client.new do |config|
+      c = ::Google::Cloud::Talent::V4::Completion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.complete_query({ tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }) do |response, operation|
+      c.complete_query({ tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.complete_query tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type do |response, operation|
+      c.complete_query tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.complete_query ::Google::Cloud::Talent::V4::CompleteQueryRequest.new(tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type) do |response, operation|
+      c.complete_query ::Google::Cloud::Talent::V4::CompleteQueryRequest.new(tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.complete_query({ tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }, grpc_options) do |response, operation|
+      c.complete_query({ tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.complete_query(::Google::Cloud::Talent::V4::CompleteQueryRequest.new(tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type), grpc_options) do |response, operation|
+      c.complete_query(::Google::Cloud::Talent::V4::CompleteQueryRequest.new(tenant: tenant, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

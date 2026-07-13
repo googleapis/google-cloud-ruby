@@ -553,6 +553,27 @@ module Google
             #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
             #     - `https://www.googleapis.com/auth/chat.spaces`
             rpc :FindDirectMessage, ::Google::Apps::Chat::V1::FindDirectMessageRequest, ::Google::Apps::Chat::V1::Space
+            # Returns all spaces with `spaceType == GROUP_CHAT`, whose
+            # human memberships contain exactly the calling user, and the users specified
+            # in `FindGroupChatsRequest.users`. Only members that have joined the
+            # conversation are supported. For an example, see [Find group
+            # chats](https://developers.google.com/workspace/chat/find-group-chats).
+            #
+            # If the calling user blocks, or is blocked by, some users, and no spaces
+            # with the entire specified set of users are found, this method returns
+            # spaces that don't include the blocked or blocking users.
+            #
+            # The specified set of users must contain only human (non-app) memberships.
+            # A request that contains non-human users doesn't return any spaces.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.memberships.readonly`
+            #   - `https://www.googleapis.com/auth/chat.memberships`
+            rpc :FindGroupChats, ::Google::Apps::Chat::V1::FindGroupChatsRequest, ::Google::Apps::Chat::V1::FindGroupChatsResponse
             # Creates a membership for the calling Chat app, a user, or a Google Group.
             # Creating memberships for other Chat apps isn't supported.
             # When creating a membership, if the specified member has their auto-accept
@@ -807,6 +828,77 @@ module Google
             #   - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
             #   - `https://www.googleapis.com/auth/chat.users.readstate`
             rpc :GetThreadReadState, ::Google::Apps::Chat::V1::GetThreadReadStateRequest, ::Google::Apps::Chat::V1::ThreadReadState
+            # Returns availability information for a human user in Google Chat. For
+            # example, this can be used to check if a user is online or away, or to
+            # retrieve their custom status message.
+            #
+            # This method only retrieves the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability.readonly`
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            rpc :GetAvailability, ::Google::Apps::Chat::V1::GetAvailabilityRequest, ::Google::Apps::Chat::V1::Availability
+            # Marks user as `ACTIVE` in Google Chat.
+            #
+            # Sets the user's availability state to `ACTIVE`. The `ACTIVE` state
+            # lasts until the specified expiration, at which point the user's state
+            # becomes `AWAY`. Note that if the user is actively using Chat, the `ACTIVE`
+            # state duration may extend beyond the provided expiration.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            rpc :MarkAsActive, ::Google::Apps::Chat::V1::MarkAsActiveRequest, ::Google::Apps::Chat::V1::Availability
+            # Marks user as `AWAY` in Google Chat.
+            #
+            # Sets the user's state to away and is not affected by the user's
+            # activity.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            rpc :MarkAsAway, ::Google::Apps::Chat::V1::MarkAsAwayRequest, ::Google::Apps::Chat::V1::Availability
+            # Marks user as `DO_NOT_DISTURB` in Google Chat.
+            #
+            # Sets a user's availability state to `DO_NOT_DISTURB` until a specified
+            # expiration time.
+            # When in `DO_NOT_DISTURB`, users typically won't receive notifications.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            rpc :MarkAsDoNotDisturb, ::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest, ::Google::Apps::Chat::V1::Availability
+            # Updates availability information for a human user. Only the `custom_status`
+            # field can be updated through this method.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            rpc :UpdateAvailability, ::Google::Apps::Chat::V1::UpdateAvailabilityRequest, ::Google::Apps::Chat::V1::Availability
             # Returns an event from a Google Chat space. The [event
             # payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
             # contains the most recent version of the resource that changed. For example,

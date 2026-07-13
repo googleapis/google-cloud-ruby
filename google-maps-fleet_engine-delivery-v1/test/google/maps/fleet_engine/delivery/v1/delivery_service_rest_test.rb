@@ -100,32 +100,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_create_delivery_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_delivery_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }) do |_result, response|
+        c.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_delivery_vehicle header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle do |_result, response|
+        c.create_delivery_vehicle header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle) do |_result, response|
+        c.create_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }, call_options) do |_result, response|
+        c.create_delivery_vehicle({ header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle), call_options) do |_result, response|
+        c.create_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::CreateDeliveryVehicleRequest.new(header: header, parent: parent, delivery_vehicle_id: delivery_vehicle_id, delivery_vehicle: delivery_vehicle), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_get_delivery_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_delivery_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_delivery_vehicle({ header: header, name: name }) do |_result, response|
+        c.get_delivery_vehicle({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_delivery_vehicle header: header, name: name do |_result, response|
+        c.get_delivery_vehicle header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name) do |_result, response|
+        c.get_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_delivery_vehicle({ header: header, name: name }, call_options) do |_result, response|
+        c.get_delivery_vehicle({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.get_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::GetDeliveryVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_delete_delivery_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_delivery_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_delivery_vehicle({ header: header, name: name }) do |_result, response|
+        c.delete_delivery_vehicle({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_delivery_vehicle header: header, name: name do |_result, response|
+        c.delete_delivery_vehicle header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name) do |_result, response|
+        c.delete_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_delivery_vehicle({ header: header, name: name }, call_options) do |_result, response|
+        c.delete_delivery_vehicle({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.delete_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_update_delivery_vehicle_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_delivery_vehicle_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }) do |_result, response|
+        c.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_delivery_vehicle header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask do |_result, response|
+        c.update_delivery_vehicle header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask) do |_result, response|
+        c.update_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_delivery_vehicle({ header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask), call_options) do |_result, response|
+        c.update_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::UpdateDeliveryVehicleRequest.new(header: header, delivery_vehicle: delivery_vehicle, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_batch_create_tasks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_tasks_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_tasks({ header: header, parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_tasks({ header: header, parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_tasks header: header, parent: parent, requests: requests do |_result, response|
+        c.batch_create_tasks header: header, parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_tasks ::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests) do |_result, response|
+        c.batch_create_tasks ::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_tasks({ header: header, parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_tasks({ header: header, parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_tasks(::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_tasks(::Google::Maps::FleetEngine::Delivery::V1::BatchCreateTasksRequest.new(header: header, parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_create_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_task_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_task({ header: header, parent: parent, task_id: task_id, task: task }) do |_result, response|
+        c.create_task({ header: header, parent: parent, task_id: task_id, task: task }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_task header: header, parent: parent, task_id: task_id, task: task do |_result, response|
+        c.create_task header: header, parent: parent, task_id: task_id, task: task do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_task ::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task) do |_result, response|
+        c.create_task ::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_task({ header: header, parent: parent, task_id: task_id, task: task }, call_options) do |_result, response|
+        c.create_task({ header: header, parent: parent, task_id: task_id, task: task }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_task(::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task), call_options) do |_result, response|
+        c.create_task(::Google::Maps::FleetEngine::Delivery::V1::CreateTaskRequest.new(header: header, parent: parent, task_id: task_id, task: task), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +434,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_get_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_task_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_task({ header: header, name: name }) do |_result, response|
+        c.get_task({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_task header: header, name: name do |_result, response|
+        c.get_task header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_task ::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name) do |_result, response|
+        c.get_task ::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_task({ header: header, name: name }, call_options) do |_result, response|
+        c.get_task({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_task(::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.get_task(::Google::Maps::FleetEngine::Delivery::V1::GetTaskRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -489,32 +489,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_delete_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_task_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_task({ header: header, name: name }) do |_result, response|
+        c.delete_task({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_task header: header, name: name do |_result, response|
+        c.delete_task header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_task ::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name) do |_result, response|
+        c.delete_task ::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_task({ header: header, name: name }, call_options) do |_result, response|
+        c.delete_task({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_task(::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.delete_task(::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -545,32 +545,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_update_task_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_task_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_task({ header: header, task: task, update_mask: update_mask }) do |_result, response|
+        c.update_task({ header: header, task: task, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_task header: header, task: task, update_mask: update_mask do |_result, response|
+        c.update_task header: header, task: task, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_task ::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask) do |_result, response|
+        c.update_task ::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_task({ header: header, task: task, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_task({ header: header, task: task, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_task(::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask), call_options) do |_result, response|
+        c.update_task(::Google::Maps::FleetEngine::Delivery::V1::UpdateTaskRequest.new(header: header, task: task, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -603,32 +603,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_list_tasks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_tasks_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tasks header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_tasks header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tasks ::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_tasks ::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_tasks({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tasks(::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_tasks(::Google::Maps::FleetEngine::Delivery::V1::ListTasksRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -658,32 +658,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_get_task_tracking_info_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_task_tracking_info_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_task_tracking_info({ header: header, name: name }) do |_result, response|
+        c.get_task_tracking_info({ header: header, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_task_tracking_info header: header, name: name do |_result, response|
+        c.get_task_tracking_info header: header, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_task_tracking_info ::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name) do |_result, response|
+        c.get_task_tracking_info ::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_task_tracking_info({ header: header, name: name }, call_options) do |_result, response|
+        c.get_task_tracking_info({ header: header, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_task_tracking_info(::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name), call_options) do |_result, response|
+        c.get_task_tracking_info(::Google::Maps::FleetEngine::Delivery::V1::GetTaskTrackingInfoRequest.new(header: header, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -717,32 +717,32 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ClientTe
     ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::ServiceStub.stub :transcode_list_delivery_vehicles_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_delivery_vehicles_client_stub do
         # Create client
-        client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
+        c = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }) do |_result, response|
+        c.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_delivery_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport do |_result, response|
+        c.list_delivery_vehicles header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_delivery_vehicles ::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport) do |_result, response|
+        c.list_delivery_vehicles ::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }, call_options) do |_result, response|
+        c.list_delivery_vehicles({ header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_delivery_vehicles(::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport), call_options) do |_result, response|
+        c.list_delivery_vehicles(::Google::Maps::FleetEngine::Delivery::V1::ListDeliveryVehiclesRequest.new(header: header, parent: parent, page_size: page_size, page_token: page_token, filter: filter, viewport: viewport), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

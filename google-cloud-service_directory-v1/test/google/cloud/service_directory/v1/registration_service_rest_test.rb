@@ -99,32 +99,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_create_namespace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_namespace_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_namespace({ parent: parent, namespace_id: namespace_id, namespace: namespace }) do |_result, response|
+        c.create_namespace({ parent: parent, namespace_id: namespace_id, namespace: namespace }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_namespace parent: parent, namespace_id: namespace_id, namespace: namespace do |_result, response|
+        c.create_namespace parent: parent, namespace_id: namespace_id, namespace: namespace do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_namespace ::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest.new(parent: parent, namespace_id: namespace_id, namespace: namespace) do |_result, response|
+        c.create_namespace ::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest.new(parent: parent, namespace_id: namespace_id, namespace: namespace) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_namespace({ parent: parent, namespace_id: namespace_id, namespace: namespace }, call_options) do |_result, response|
+        c.create_namespace({ parent: parent, namespace_id: namespace_id, namespace: namespace }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_namespace(::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest.new(parent: parent, namespace_id: namespace_id, namespace: namespace), call_options) do |_result, response|
+        c.create_namespace(::Google::Cloud::ServiceDirectory::V1::CreateNamespaceRequest.new(parent: parent, namespace_id: namespace_id, namespace: namespace), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_list_namespaces_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_namespaces_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_namespaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_namespaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_namespaces parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_namespaces parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_namespaces ::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_namespaces ::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_namespaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_namespaces({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_namespaces(::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_namespaces(::Google::Cloud::ServiceDirectory::V1::ListNamespacesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_get_namespace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_namespace_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_namespace({ name: name }) do |_result, response|
+        c.get_namespace({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_namespace name: name do |_result, response|
+        c.get_namespace name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_namespace ::Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new(name: name) do |_result, response|
+        c.get_namespace ::Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_namespace({ name: name }, call_options) do |_result, response|
+        c.get_namespace({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_namespace(::Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new(name: name), call_options) do |_result, response|
+        c.get_namespace(::Google::Cloud::ServiceDirectory::V1::GetNamespaceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_update_namespace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_namespace_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_namespace({ namespace: namespace, update_mask: update_mask }) do |_result, response|
+        c.update_namespace({ namespace: namespace, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_namespace namespace: namespace, update_mask: update_mask do |_result, response|
+        c.update_namespace namespace: namespace, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_namespace ::Google::Cloud::ServiceDirectory::V1::UpdateNamespaceRequest.new(namespace: namespace, update_mask: update_mask) do |_result, response|
+        c.update_namespace ::Google::Cloud::ServiceDirectory::V1::UpdateNamespaceRequest.new(namespace: namespace, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_namespace({ namespace: namespace, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_namespace({ namespace: namespace, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_namespace(::Google::Cloud::ServiceDirectory::V1::UpdateNamespaceRequest.new(namespace: namespace, update_mask: update_mask), call_options) do |_result, response|
+        c.update_namespace(::Google::Cloud::ServiceDirectory::V1::UpdateNamespaceRequest.new(namespace: namespace, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_delete_namespace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_namespace_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_namespace({ name: name }) do |_result, response|
+        c.delete_namespace({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_namespace name: name do |_result, response|
+        c.delete_namespace name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_namespace ::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new(name: name) do |_result, response|
+        c.delete_namespace ::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_namespace({ name: name }, call_options) do |_result, response|
+        c.delete_namespace({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_namespace(::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_namespace(::Google::Cloud::ServiceDirectory::V1::DeleteNamespaceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_create_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_service({ parent: parent, service_id: service_id, service: service }) do |_result, response|
+        c.create_service({ parent: parent, service_id: service_id, service: service }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_service parent: parent, service_id: service_id, service: service do |_result, response|
+        c.create_service parent: parent, service_id: service_id, service: service do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_service ::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service) do |_result, response|
+        c.create_service ::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_service({ parent: parent, service_id: service_id, service: service }, call_options) do |_result, response|
+        c.create_service({ parent: parent, service_id: service_id, service: service }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_service(::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service), call_options) do |_result, response|
+        c.create_service(::Google::Cloud::ServiceDirectory::V1::CreateServiceRequest.new(parent: parent, service_id: service_id, service: service), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -434,32 +434,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_services parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::ServiceDirectory::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_services ::Google::Cloud::ServiceDirectory::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_services({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::ServiceDirectory::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::ServiceDirectory::V1::ListServicesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_get_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_service({ name: name }) do |_result, response|
+        c.get_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_service name: name do |_result, response|
+        c.get_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_service ::Google::Cloud::ServiceDirectory::V1::GetServiceRequest.new(name: name) do |_result, response|
+        c.get_service ::Google::Cloud::ServiceDirectory::V1::GetServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_service({ name: name }, call_options) do |_result, response|
+        c.get_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_service(::Google::Cloud::ServiceDirectory::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
+        c.get_service(::Google::Cloud::ServiceDirectory::V1::GetServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_update_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_service({ service: service, update_mask: update_mask }) do |_result, response|
+        c.update_service({ service: service, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_service service: service, update_mask: update_mask do |_result, response|
+        c.update_service service: service, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_service ::Google::Cloud::ServiceDirectory::V1::UpdateServiceRequest.new(service: service, update_mask: update_mask) do |_result, response|
+        c.update_service ::Google::Cloud::ServiceDirectory::V1::UpdateServiceRequest.new(service: service, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_service({ service: service, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_service({ service: service, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_service(::Google::Cloud::ServiceDirectory::V1::UpdateServiceRequest.new(service: service, update_mask: update_mask), call_options) do |_result, response|
+        c.update_service(::Google::Cloud::ServiceDirectory::V1::UpdateServiceRequest.new(service: service, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -597,32 +597,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_delete_service_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_service_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_service({ name: name }) do |_result, response|
+        c.delete_service({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_service name: name do |_result, response|
+        c.delete_service name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_service ::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest.new(name: name) do |_result, response|
+        c.delete_service ::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_service({ name: name }, call_options) do |_result, response|
+        c.delete_service({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_service(::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_service(::Google::Cloud::ServiceDirectory::V1::DeleteServiceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -653,32 +653,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_create_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_endpoint({ parent: parent, endpoint_id: endpoint_id, endpoint: endpoint }) do |_result, response|
+        c.create_endpoint({ parent: parent, endpoint_id: endpoint_id, endpoint: endpoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_endpoint parent: parent, endpoint_id: endpoint_id, endpoint: endpoint do |_result, response|
+        c.create_endpoint parent: parent, endpoint_id: endpoint_id, endpoint: endpoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_endpoint ::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest.new(parent: parent, endpoint_id: endpoint_id, endpoint: endpoint) do |_result, response|
+        c.create_endpoint ::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest.new(parent: parent, endpoint_id: endpoint_id, endpoint: endpoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_endpoint({ parent: parent, endpoint_id: endpoint_id, endpoint: endpoint }, call_options) do |_result, response|
+        c.create_endpoint({ parent: parent, endpoint_id: endpoint_id, endpoint: endpoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_endpoint(::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest.new(parent: parent, endpoint_id: endpoint_id, endpoint: endpoint), call_options) do |_result, response|
+        c.create_endpoint(::Google::Cloud::ServiceDirectory::V1::CreateEndpointRequest.new(parent: parent, endpoint_id: endpoint_id, endpoint: endpoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -711,32 +711,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_list_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_endpoints parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_endpoints parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_endpoints ::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_endpoints ::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_endpoints(::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_endpoints(::Google::Cloud::ServiceDirectory::V1::ListEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -765,32 +765,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_get_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_endpoint({ name: name }) do |_result, response|
+        c.get_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_endpoint name: name do |_result, response|
+        c.get_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_endpoint ::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest.new(name: name) do |_result, response|
+        c.get_endpoint ::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_endpoint({ name: name }, call_options) do |_result, response|
+        c.get_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_endpoint(::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.get_endpoint(::Google::Cloud::ServiceDirectory::V1::GetEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -820,32 +820,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_update_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_endpoint({ endpoint: endpoint, update_mask: update_mask }) do |_result, response|
+        c.update_endpoint({ endpoint: endpoint, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_endpoint endpoint: endpoint, update_mask: update_mask do |_result, response|
+        c.update_endpoint endpoint: endpoint, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_endpoint ::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask) do |_result, response|
+        c.update_endpoint ::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_endpoint({ endpoint: endpoint, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_endpoint({ endpoint: endpoint, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_endpoint(::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), call_options) do |_result, response|
+        c.update_endpoint(::Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -874,32 +874,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_delete_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_endpoint({ name: name }) do |_result, response|
+        c.delete_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_endpoint name: name do |_result, response|
+        c.delete_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_endpoint ::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest.new(name: name) do |_result, response|
+        c.delete_endpoint ::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_endpoint({ name: name }, call_options) do |_result, response|
+        c.delete_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_endpoint(::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.delete_endpoint(::Google::Cloud::ServiceDirectory::V1::DeleteEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -929,32 +929,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -985,32 +985,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1040,32 +1040,32 @@ class ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ClientTe
     ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ServiceDirectory::V1::RegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

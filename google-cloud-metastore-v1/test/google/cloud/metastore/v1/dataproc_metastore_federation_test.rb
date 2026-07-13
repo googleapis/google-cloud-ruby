@@ -90,40 +90,40 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_federations_client_stub do
       # Create client
-      client = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
+      c = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_federations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_federations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_federations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_federations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_federations ::Google::Cloud::Metastore::V1::ListFederationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_federations ::Google::Cloud::Metastore::V1::ListFederationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_federations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_federations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_federations(::Google::Cloud::Metastore::V1::ListFederationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_federations(::Google::Cloud::Metastore::V1::ListFederationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_federation_client_stub do
       # Create client
-      client = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
+      c = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_federation({ name: name }) do |response, operation|
+      c.get_federation({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_federation name: name do |response, operation|
+      c.get_federation name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_federation ::Google::Cloud::Metastore::V1::GetFederationRequest.new(name: name) do |response, operation|
+      c.get_federation ::Google::Cloud::Metastore::V1::GetFederationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_federation({ name: name }, grpc_options) do |response, operation|
+      c.get_federation({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_federation(::Google::Cloud::Metastore::V1::GetFederationRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_federation(::Google::Cloud::Metastore::V1::GetFederationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_federation_client_stub do
       # Create client
-      client = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
+      c = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_federation({ parent: parent, federation_id: federation_id, federation: federation, request_id: request_id }) do |response, operation|
+      c.create_federation({ parent: parent, federation_id: federation_id, federation: federation, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_federation parent: parent, federation_id: federation_id, federation: federation, request_id: request_id do |response, operation|
+      c.create_federation parent: parent, federation_id: federation_id, federation: federation, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_federation ::Google::Cloud::Metastore::V1::CreateFederationRequest.new(parent: parent, federation_id: federation_id, federation: federation, request_id: request_id) do |response, operation|
+      c.create_federation ::Google::Cloud::Metastore::V1::CreateFederationRequest.new(parent: parent, federation_id: federation_id, federation: federation, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_federation({ parent: parent, federation_id: federation_id, federation: federation, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_federation({ parent: parent, federation_id: federation_id, federation: federation, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_federation(::Google::Cloud::Metastore::V1::CreateFederationRequest.new(parent: parent, federation_id: federation_id, federation: federation, request_id: request_id), grpc_options) do |response, operation|
+      c.create_federation(::Google::Cloud::Metastore::V1::CreateFederationRequest.new(parent: parent, federation_id: federation_id, federation: federation, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_federation_client_stub do
       # Create client
-      client = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
+      c = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_federation({ update_mask: update_mask, federation: federation, request_id: request_id }) do |response, operation|
+      c.update_federation({ update_mask: update_mask, federation: federation, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_federation update_mask: update_mask, federation: federation, request_id: request_id do |response, operation|
+      c.update_federation update_mask: update_mask, federation: federation, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_federation ::Google::Cloud::Metastore::V1::UpdateFederationRequest.new(update_mask: update_mask, federation: federation, request_id: request_id) do |response, operation|
+      c.update_federation ::Google::Cloud::Metastore::V1::UpdateFederationRequest.new(update_mask: update_mask, federation: federation, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_federation({ update_mask: update_mask, federation: federation, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_federation({ update_mask: update_mask, federation: federation, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_federation(::Google::Cloud::Metastore::V1::UpdateFederationRequest.new(update_mask: update_mask, federation: federation, request_id: request_id), grpc_options) do |response, operation|
+      c.update_federation(::Google::Cloud::Metastore::V1::UpdateFederationRequest.new(update_mask: update_mask, federation: federation, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_federation_client_stub do
       # Create client
-      client = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
+      c = ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_federation({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_federation({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_federation name: name, request_id: request_id do |response, operation|
+      c.delete_federation name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_federation ::Google::Cloud::Metastore::V1::DeleteFederationRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_federation ::Google::Cloud::Metastore::V1::DeleteFederationRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_federation({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_federation({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_federation(::Google::Cloud::Metastore::V1::DeleteFederationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_federation(::Google::Cloud::Metastore::V1::DeleteFederationRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -104,32 +104,32 @@ class ::Google::Cloud::Trace::V1::TraceService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Trace::V1::TraceService::Rest::ServiceStub.stub :transcode_list_traces_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_traces_client_stub do
         # Create client
-        client = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_traces project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by do |_result, response|
+        c.list_traces project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_traces ::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by) do |_result, response|
+        c.list_traces ::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_traces({ project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_traces(::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_traces(::Google::Cloud::Trace::V1::ListTracesRequest.new(project_id: project_id, view: view, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Cloud::Trace::V1::TraceService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Trace::V1::TraceService::Rest::ServiceStub.stub :transcode_get_trace_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_trace_client_stub do
         # Create client
-        client = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_trace({ project_id: project_id, trace_id: trace_id }) do |_result, response|
+        c.get_trace({ project_id: project_id, trace_id: trace_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_trace project_id: project_id, trace_id: trace_id do |_result, response|
+        c.get_trace project_id: project_id, trace_id: trace_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_trace ::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id) do |_result, response|
+        c.get_trace ::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_trace({ project_id: project_id, trace_id: trace_id }, call_options) do |_result, response|
+        c.get_trace({ project_id: project_id, trace_id: trace_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_trace(::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id), call_options) do |_result, response|
+        c.get_trace(::Google::Cloud::Trace::V1::GetTraceRequest.new(project_id: project_id, trace_id: trace_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Cloud::Trace::V1::TraceService::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::Trace::V1::TraceService::Rest::ServiceStub.stub :transcode_patch_traces_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, patch_traces_client_stub do
         # Create client
-        client = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.patch_traces({ project_id: project_id, traces: traces }) do |_result, response|
+        c.patch_traces({ project_id: project_id, traces: traces }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.patch_traces project_id: project_id, traces: traces do |_result, response|
+        c.patch_traces project_id: project_id, traces: traces do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.patch_traces ::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces) do |_result, response|
+        c.patch_traces ::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.patch_traces({ project_id: project_id, traces: traces }, call_options) do |_result, response|
+        c.patch_traces({ project_id: project_id, traces: traces }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.patch_traces(::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces), call_options) do |_result, response|
+        c.patch_traces(::Google::Cloud::Trace::V1::PatchTracesRequest.new(project_id: project_id, traces: traces), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

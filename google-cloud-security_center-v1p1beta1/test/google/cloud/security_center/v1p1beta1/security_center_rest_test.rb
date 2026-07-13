@@ -98,32 +98,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_create_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_source_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_source({ parent: parent, source: source }) do |_result, response|
+        c.create_source({ parent: parent, source: source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_source parent: parent, source: source do |_result, response|
+        c.create_source parent: parent, source: source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_source ::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest.new(parent: parent, source: source) do |_result, response|
+        c.create_source ::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest.new(parent: parent, source: source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_source({ parent: parent, source: source }, call_options) do |_result, response|
+        c.create_source({ parent: parent, source: source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_source(::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest.new(parent: parent, source: source), call_options) do |_result, response|
+        c.create_source(::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest.new(parent: parent, source: source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_create_finding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_finding_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_finding({ parent: parent, finding_id: finding_id, finding: finding }) do |_result, response|
+        c.create_finding({ parent: parent, finding_id: finding_id, finding: finding }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_finding parent: parent, finding_id: finding_id, finding: finding do |_result, response|
+        c.create_finding parent: parent, finding_id: finding_id, finding: finding do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_finding ::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding) do |_result, response|
+        c.create_finding ::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_finding({ parent: parent, finding_id: finding_id, finding: finding }, call_options) do |_result, response|
+        c.create_finding({ parent: parent, finding_id: finding_id, finding: finding }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_finding(::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), call_options) do |_result, response|
+        c.create_finding(::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_create_notification_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_notification_config_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }) do |_result, response|
+        c.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_notification_config parent: parent, config_id: config_id, notification_config: notification_config do |_result, response|
+        c.create_notification_config parent: parent, config_id: config_id, notification_config: notification_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config) do |_result, response|
+        c.create_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }, call_options) do |_result, response|
+        c.create_notification_config({ parent: parent, config_id: config_id, notification_config: notification_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), call_options) do |_result, response|
+        c.create_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_delete_notification_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_notification_config_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_notification_config({ name: name }) do |_result, response|
+        c.delete_notification_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_notification_config name: name do |_result, response|
+        c.delete_notification_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new(name: name) do |_result, response|
+        c.delete_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_notification_config({ name: name }, call_options) do |_result, response|
+        c.delete_notification_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_iam_policy resource: resource, options: options do |_result, response|
+        c.get_iam_policy resource: resource, options: options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -373,32 +373,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_get_notification_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_notification_config_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_notification_config({ name: name }) do |_result, response|
+        c.get_notification_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_notification_config name: name do |_result, response|
+        c.get_notification_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest.new(name: name) do |_result, response|
+        c.get_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_notification_config({ name: name }, call_options) do |_result, response|
+        c.get_notification_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -427,32 +427,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_get_organization_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_organization_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_organization_settings({ name: name }) do |_result, response|
+        c.get_organization_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_organization_settings name: name do |_result, response|
+        c.get_organization_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_organization_settings ::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest.new(name: name) do |_result, response|
+        c.get_organization_settings ::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_organization_settings({ name: name }, call_options) do |_result, response|
+        c.get_organization_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_organization_settings(::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_organization_settings(::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -481,32 +481,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_get_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_source_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_source({ name: name }) do |_result, response|
+        c.get_source({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_source name: name do |_result, response|
+        c.get_source name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_source ::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new(name: name) do |_result, response|
+        c.get_source ::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_source({ name: name }, call_options) do |_result, response|
+        c.get_source({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_source(::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new(name: name), call_options) do |_result, response|
+        c.get_source(::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -541,32 +541,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_group_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, group_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.group_assets parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size do |_result, response|
+        c.group_assets parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.group_assets ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |_result, response|
+        c.group_assets ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.group_assets({ parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.group_assets(::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.group_assets(::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -601,32 +601,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_group_findings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, group_findings_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.group_findings parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size do |_result, response|
+        c.group_findings parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.group_findings ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |_result, response|
+        c.group_findings ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.group_findings({ parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.group_findings(::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.group_findings(::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -662,32 +662,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_assets parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_assets parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_assets ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_assets ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_assets({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_assets(::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_assets(::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -723,32 +723,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_findings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_findings_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_findings parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_findings parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_findings ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_findings ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_findings({ parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_findings(::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_findings(::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -779,32 +779,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_notification_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_notification_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_notification_configs parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_notification_configs parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_notification_configs ::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_notification_configs ::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_notification_configs({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_notification_configs(::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_notification_configs(::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -835,32 +835,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_sources_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sources_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sources({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
+        c.list_sources({ parent: parent, page_token: page_token, page_size: page_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sources parent: parent, page_token: page_token, page_size: page_size do |_result, response|
+        c.list_sources parent: parent, page_token: page_token, page_size: page_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sources ::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
+        c.list_sources ::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sources({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
+        c.list_sources({ parent: parent, page_token: page_token, page_size: page_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sources(::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
+        c.list_sources(::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -889,32 +889,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_run_asset_discovery_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_asset_discovery_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_asset_discovery({ parent: parent }) do |_result, response|
+        c.run_asset_discovery({ parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_asset_discovery parent: parent do |_result, response|
+        c.run_asset_discovery parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_asset_discovery ::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest.new(parent: parent) do |_result, response|
+        c.run_asset_discovery ::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest.new(parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_asset_discovery({ parent: parent }, call_options) do |_result, response|
+        c.run_asset_discovery({ parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_asset_discovery(::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest.new(parent: parent), call_options) do |_result, response|
+        c.run_asset_discovery(::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest.new(parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -945,32 +945,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_set_finding_state_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_finding_state_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_finding_state({ name: name, state: state, start_time: start_time }) do |_result, response|
+        c.set_finding_state({ name: name, state: state, start_time: start_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_finding_state name: name, state: state, start_time: start_time do |_result, response|
+        c.set_finding_state name: name, state: state, start_time: start_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_finding_state ::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time) do |_result, response|
+        c.set_finding_state ::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_finding_state({ name: name, state: state, start_time: start_time }, call_options) do |_result, response|
+        c.set_finding_state({ name: name, state: state, start_time: start_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_finding_state(::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), call_options) do |_result, response|
+        c.set_finding_state(::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1001,32 +1001,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1056,32 +1056,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1111,32 +1111,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_update_finding_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_finding_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_finding({ finding: finding, update_mask: update_mask }) do |_result, response|
+        c.update_finding({ finding: finding, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_finding finding: finding, update_mask: update_mask do |_result, response|
+        c.update_finding finding: finding, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_finding ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask) do |_result, response|
+        c.update_finding ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_finding({ finding: finding, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_finding({ finding: finding, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_finding(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), call_options) do |_result, response|
+        c.update_finding(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1166,32 +1166,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_update_notification_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_notification_config_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_notification_config({ notification_config: notification_config, update_mask: update_mask }) do |_result, response|
+        c.update_notification_config({ notification_config: notification_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_notification_config notification_config: notification_config, update_mask: update_mask do |_result, response|
+        c.update_notification_config notification_config: notification_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask) do |_result, response|
+        c.update_notification_config ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_notification_config({ notification_config: notification_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_notification_config({ notification_config: notification_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_notification_config(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1221,32 +1221,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_update_organization_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_organization_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }) do |_result, response|
+        c.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_organization_settings organization_settings: organization_settings, update_mask: update_mask do |_result, response|
+        c.update_organization_settings organization_settings: organization_settings, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_organization_settings ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask) do |_result, response|
+        c.update_organization_settings ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_organization_settings({ organization_settings: organization_settings, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_organization_settings(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), call_options) do |_result, response|
+        c.update_organization_settings(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1276,32 +1276,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_update_source_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_source_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_source({ source: source, update_mask: update_mask }) do |_result, response|
+        c.update_source({ source: source, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_source source: source, update_mask: update_mask do |_result, response|
+        c.update_source source: source, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_source ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest.new(source: source, update_mask: update_mask) do |_result, response|
+        c.update_source ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest.new(source: source, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_source({ source: source, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_source({ source: source, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_source(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest.new(source: source, update_mask: update_mask), call_options) do |_result, response|
+        c.update_source(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest.new(source: source, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1332,32 +1332,32 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ServiceStub.stub :transcode_update_security_marks_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_security_marks_client_stub do
         # Create client
-        client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
+        c = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }) do |_result, response|
+        c.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_security_marks security_marks: security_marks, update_mask: update_mask, start_time: start_time do |_result, response|
+        c.update_security_marks security_marks: security_marks, update_mask: update_mask, start_time: start_time do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_security_marks ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time) do |_result, response|
+        c.update_security_marks ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }, call_options) do |_result, response|
+        c.update_security_marks({ security_marks: security_marks, update_mask: update_mask, start_time: start_time }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_security_marks(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), call_options) do |_result, response|
+        c.update_security_marks(::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

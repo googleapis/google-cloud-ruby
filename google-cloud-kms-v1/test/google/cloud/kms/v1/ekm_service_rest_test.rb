@@ -101,32 +101,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_list_ekm_connections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_ekm_connections_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_ekm_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_ekm_connections parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_ekm_connections ::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_ekm_connections ::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_ekm_connections({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_ekm_connections(::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_ekm_connections(::Google::Cloud::Kms::V1::ListEkmConnectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_get_ekm_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_ekm_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_ekm_connection({ name: name }) do |_result, response|
+        c.get_ekm_connection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_ekm_connection name: name do |_result, response|
+        c.get_ekm_connection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_ekm_connection ::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name) do |_result, response|
+        c.get_ekm_connection ::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_ekm_connection({ name: name }, call_options) do |_result, response|
+        c.get_ekm_connection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_ekm_connection(::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name), call_options) do |_result, response|
+        c.get_ekm_connection(::Google::Cloud::Kms::V1::GetEkmConnectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_create_ekm_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_ekm_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }) do |_result, response|
+        c.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_ekm_connection parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection do |_result, response|
+        c.create_ekm_connection parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_ekm_connection ::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection) do |_result, response|
+        c.create_ekm_connection ::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }, call_options) do |_result, response|
+        c.create_ekm_connection({ parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_ekm_connection(::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection), call_options) do |_result, response|
+        c.create_ekm_connection(::Google::Cloud::Kms::V1::CreateEkmConnectionRequest.new(parent: parent, ekm_connection_id: ekm_connection_id, ekm_connection: ekm_connection), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_update_ekm_connection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_ekm_connection_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }) do |_result, response|
+        c.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_ekm_connection ekm_connection: ekm_connection, update_mask: update_mask do |_result, response|
+        c.update_ekm_connection ekm_connection: ekm_connection, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_ekm_connection ::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask) do |_result, response|
+        c.update_ekm_connection ::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_ekm_connection({ ekm_connection: ekm_connection, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_ekm_connection(::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask), call_options) do |_result, response|
+        c.update_ekm_connection(::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest.new(ekm_connection: ekm_connection, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_get_ekm_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_ekm_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_ekm_config({ name: name }) do |_result, response|
+        c.get_ekm_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_ekm_config name: name do |_result, response|
+        c.get_ekm_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_ekm_config ::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name) do |_result, response|
+        c.get_ekm_config ::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_ekm_config({ name: name }, call_options) do |_result, response|
+        c.get_ekm_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_ekm_config(::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_ekm_config(::Google::Cloud::Kms::V1::GetEkmConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_update_ekm_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_ekm_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }) do |_result, response|
+        c.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_ekm_config ekm_config: ekm_config, update_mask: update_mask do |_result, response|
+        c.update_ekm_config ekm_config: ekm_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_ekm_config ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask) do |_result, response|
+        c.update_ekm_config ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_ekm_config({ ekm_config: ekm_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_ekm_config(::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_ekm_config(::Google::Cloud::Kms::V1::UpdateEkmConfigRequest.new(ekm_config: ekm_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -429,32 +429,32 @@ class ::Google::Cloud::Kms::V1::EkmService::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Kms::V1::EkmService::Rest::ServiceStub.stub :transcode_verify_connectivity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, verify_connectivity_client_stub do
         # Create client
-        client = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Kms::V1::EkmService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.verify_connectivity({ name: name }) do |_result, response|
+        c.verify_connectivity({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.verify_connectivity name: name do |_result, response|
+        c.verify_connectivity name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.verify_connectivity ::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name) do |_result, response|
+        c.verify_connectivity ::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.verify_connectivity({ name: name }, call_options) do |_result, response|
+        c.verify_connectivity({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.verify_connectivity(::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name), call_options) do |_result, response|
+        c.verify_connectivity(::Google::Cloud::Kms::V1::VerifyConnectivityRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

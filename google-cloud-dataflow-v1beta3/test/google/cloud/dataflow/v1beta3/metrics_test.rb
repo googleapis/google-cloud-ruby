@@ -88,36 +88,36 @@ class ::Google::Cloud::Dataflow::V1beta3::Metrics::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_job_metrics_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }) do |response, operation|
+      c.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_job_metrics project_id: project_id, job_id: job_id, start_time: start_time, location: location do |response, operation|
+      c.get_job_metrics project_id: project_id, job_id: job_id, start_time: start_time, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_job_metrics ::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location) do |response, operation|
+      c.get_job_metrics ::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }, grpc_options) do |response, operation|
+      c.get_job_metrics({ project_id: project_id, job_id: job_id, start_time: start_time, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_job_metrics(::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location), grpc_options) do |response, operation|
+      c.get_job_metrics(::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new(project_id: project_id, job_id: job_id, start_time: start_time, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -154,40 +154,40 @@ class ::Google::Cloud::Dataflow::V1beta3::Metrics::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_job_execution_details_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_job_execution_details project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token do |response, operation|
+      c.get_job_execution_details project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_job_execution_details ::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token) do |response, operation|
+      c.get_job_execution_details ::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.get_job_execution_details({ project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_job_execution_details(::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.get_job_execution_details(::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -231,40 +231,40 @@ class ::Google::Cloud::Dataflow::V1beta3::Metrics::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_stage_execution_details_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new do |config|
+      c = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |response, operation|
+      c.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_stage_execution_details project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |response, operation|
+      c.get_stage_execution_details project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_stage_execution_details ::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |response, operation|
+      c.get_stage_execution_details ::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
+      c.get_stage_execution_details({ project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_stage_execution_details(::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
+      c.get_stage_execution_details(::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest.new(project_id: project_id, job_id: job_id, location: location, stage_id: stage_id, page_size: page_size, page_token: page_token, start_time: start_time, end_time: end_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

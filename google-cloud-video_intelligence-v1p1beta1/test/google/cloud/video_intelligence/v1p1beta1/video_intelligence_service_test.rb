@@ -92,40 +92,40 @@ class ::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::C
 
     Gapic::ServiceStub.stub :new, annotate_video_client_stub do
       # Create client
-      client = ::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::Client.new do |config|
+      c = ::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }) do |response, operation|
+      c.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.annotate_video input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id do |response, operation|
+      c.annotate_video input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.annotate_video ::Google::Cloud::VideoIntelligence::V1p1beta1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id) do |response, operation|
+      c.annotate_video ::Google::Cloud::VideoIntelligence::V1p1beta1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }, grpc_options) do |response, operation|
+      c.annotate_video({ input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.annotate_video(::Google::Cloud::VideoIntelligence::V1p1beta1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id), grpc_options) do |response, operation|
+      c.annotate_video(::Google::Cloud::VideoIntelligence::V1p1beta1::AnnotateVideoRequest.new(input_uri: input_uri, input_content: input_content, features: features, video_context: video_context, output_uri: output_uri, location_id: location_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

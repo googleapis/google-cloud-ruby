@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::V2::Environments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Environments::Rest::ServiceStub.stub :transcode_list_environments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_environments_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_environments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_environments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_environments ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_environments ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_environments(::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_environments(::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Dialogflow::V2::Environments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Environments::Rest::ServiceStub.stub :transcode_get_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_environment({ name: name }) do |_result, response|
+        c.get_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_environment name: name do |_result, response|
+        c.get_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_environment ::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new(name: name) do |_result, response|
+        c.get_environment ::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_environment({ name: name }, call_options) do |_result, response|
+        c.get_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_environment(::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_environment(::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Dialogflow::V2::Environments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Environments::Rest::ServiceStub.stub :transcode_create_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_environment({ parent: parent, environment: environment, environment_id: environment_id }) do |_result, response|
+        c.create_environment({ parent: parent, environment: environment, environment_id: environment_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_environment parent: parent, environment: environment, environment_id: environment_id do |_result, response|
+        c.create_environment parent: parent, environment: environment, environment_id: environment_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_environment ::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new(parent: parent, environment: environment, environment_id: environment_id) do |_result, response|
+        c.create_environment ::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new(parent: parent, environment: environment, environment_id: environment_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_environment({ parent: parent, environment: environment, environment_id: environment_id }, call_options) do |_result, response|
+        c.create_environment({ parent: parent, environment: environment, environment_id: environment_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_environment(::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new(parent: parent, environment: environment, environment_id: environment_id), call_options) do |_result, response|
+        c.create_environment(::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new(parent: parent, environment: environment, environment_id: environment_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Dialogflow::V2::Environments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Environments::Rest::ServiceStub.stub :transcode_update_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_environment({ environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes }) do |_result, response|
+        c.update_environment({ environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_environment environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes do |_result, response|
+        c.update_environment environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_environment ::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes) do |_result, response|
+        c.update_environment ::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_environment({ environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes }, call_options) do |_result, response|
+        c.update_environment({ environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_environment(::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes), call_options) do |_result, response|
+        c.update_environment(::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::Dialogflow::V2::Environments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Environments::Rest::ServiceStub.stub :transcode_delete_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_environment({ name: name }) do |_result, response|
+        c.delete_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_environment name: name do |_result, response|
+        c.delete_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_environment ::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new(name: name) do |_result, response|
+        c.delete_environment ::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_environment({ name: name }, call_options) do |_result, response|
+        c.delete_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_environment(::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_environment(::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Dialogflow::V2::Environments::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::V2::Environments::Rest::ServiceStub.stub :transcode_get_environment_history_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_environment_history_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::V2::Environments::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_environment_history({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.get_environment_history({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_environment_history parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.get_environment_history parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_environment_history ::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.get_environment_history ::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_environment_history({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.get_environment_history({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_environment_history(::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.get_environment_history(::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

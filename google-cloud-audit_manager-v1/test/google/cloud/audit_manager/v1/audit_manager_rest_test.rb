@@ -98,32 +98,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_enroll_resource_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, enroll_resource_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.enroll_resource({ scope: scope, destinations: destinations }) do |_result, response|
+        c.enroll_resource({ scope: scope, destinations: destinations }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.enroll_resource scope: scope, destinations: destinations do |_result, response|
+        c.enroll_resource scope: scope, destinations: destinations do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.enroll_resource ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations) do |_result, response|
+        c.enroll_resource ::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.enroll_resource({ scope: scope, destinations: destinations }, call_options) do |_result, response|
+        c.enroll_resource({ scope: scope, destinations: destinations }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.enroll_resource(::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations), call_options) do |_result, response|
+        c.enroll_resource(::Google::Cloud::AuditManager::V1::EnrollResourceRequest.new(scope: scope, destinations: destinations), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -155,32 +155,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_generate_audit_scope_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_audit_scope_report_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
+        c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_audit_scope_report scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
+        c.generate_audit_scope_report scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_audit_scope_report ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
+        c.generate_audit_scope_report ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
+        c.generate_audit_scope_report({ scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_audit_scope_report(::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
+        c.generate_audit_scope_report(::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest.new(scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -213,32 +213,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_generate_audit_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_audit_report_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
+        c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
+        c.generate_audit_report gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
+        c.generate_audit_report ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
+        c.generate_audit_report({ gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
+        c.generate_audit_report(::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest.new(gcs_uri: gcs_uri, scope: scope, compliance_standard: compliance_standard, report_format: report_format, compliance_framework: compliance_framework), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_list_audit_reports_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_audit_reports_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_audit_reports parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_audit_reports parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_audit_reports ::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_audit_reports ::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_audit_reports({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_audit_reports(::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_audit_reports(::Google::Cloud::AuditManager::V1::ListAuditReportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_get_audit_report_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_audit_report_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_audit_report({ name: name }) do |_result, response|
+        c.get_audit_report({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_audit_report name: name do |_result, response|
+        c.get_audit_report name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_audit_report ::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name) do |_result, response|
+        c.get_audit_report ::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_audit_report({ name: name }, call_options) do |_result, response|
+        c.get_audit_report({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_audit_report(::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name), call_options) do |_result, response|
+        c.get_audit_report(::Google::Cloud::AuditManager::V1::GetAuditReportRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -377,32 +377,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_get_resource_enrollment_status_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_resource_enrollment_status_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_resource_enrollment_status({ name: name }) do |_result, response|
+        c.get_resource_enrollment_status({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_resource_enrollment_status name: name do |_result, response|
+        c.get_resource_enrollment_status name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_resource_enrollment_status ::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name) do |_result, response|
+        c.get_resource_enrollment_status ::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_resource_enrollment_status({ name: name }, call_options) do |_result, response|
+        c.get_resource_enrollment_status({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_resource_enrollment_status(::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name), call_options) do |_result, response|
+        c.get_resource_enrollment_status(::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_list_resource_enrollment_statuses_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_resource_enrollment_statuses_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_resource_enrollment_statuses parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_resource_enrollment_statuses parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_resource_enrollment_statuses ::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_resource_enrollment_statuses ::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_resource_enrollment_statuses({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_resource_enrollment_statuses(::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_resource_enrollment_statuses(::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -489,32 +489,32 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ClientTest < Minite
     ::Google::Cloud::AuditManager::V1::AuditManager::Rest::ServiceStub.stub :transcode_list_controls_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_controls_client_stub do
         # Create client
-        client = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::AuditManager::V1::AuditManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_controls({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_controls({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_controls parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_controls parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_controls ::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_controls ::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_controls({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_controls({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_controls(::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_controls(::Google::Cloud::AuditManager::V1::ListControlsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

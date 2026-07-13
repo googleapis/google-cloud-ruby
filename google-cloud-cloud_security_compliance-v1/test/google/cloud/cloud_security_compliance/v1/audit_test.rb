@@ -86,36 +86,36 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, generate_framework_audit_scope_report_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
+      c.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_framework_audit_scope_report scope: scope, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
+      c.generate_framework_audit_scope_report scope: scope, report_format: report_format, compliance_framework: compliance_framework do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_framework_audit_scope_report ::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
+      c.generate_framework_audit_scope_report ::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
+      c.generate_framework_audit_scope_report({ scope: scope, report_format: report_format, compliance_framework: compliance_framework }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_framework_audit_scope_report(::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
+      c.generate_framework_audit_scope_report(::Google::Cloud::CloudSecurityCompliance::V1::GenerateFrameworkAuditScopeReportRequest.new(scope: scope, report_format: report_format, compliance_framework: compliance_framework), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -148,40 +148,40 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, create_framework_audit_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }) do |response, operation|
+      c.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_framework_audit parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit do |response, operation|
+      c.create_framework_audit parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit) do |response, operation|
+      c.create_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }, grpc_options) do |response, operation|
+      c.create_framework_audit({ parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit), grpc_options) do |response, operation|
+      c.create_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::CreateFrameworkAuditRequest.new(parent: parent, framework_audit_id: framework_audit_id, framework_audit: framework_audit), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -217,40 +217,40 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, list_framework_audits_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_framework_audits parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_framework_audits parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_framework_audits ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_framework_audits ::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_framework_audits({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_framework_audits(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_framework_audits(::Google::Cloud::CloudSecurityCompliance::V1::ListFrameworkAuditsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -280,36 +280,36 @@ class ::Google::Cloud::CloudSecurityCompliance::V1::Audit::ClientTest < Minitest
 
     Gapic::ServiceStub.stub :new, get_framework_audit_client_stub do
       # Create client
-      client = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
+      c = ::Google::Cloud::CloudSecurityCompliance::V1::Audit::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_framework_audit({ name: name }) do |response, operation|
+      c.get_framework_audit({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_framework_audit name: name do |response, operation|
+      c.get_framework_audit name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name) do |response, operation|
+      c.get_framework_audit ::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_framework_audit({ name: name }, grpc_options) do |response, operation|
+      c.get_framework_audit({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_framework_audit(::Google::Cloud::CloudSecurityCompliance::V1::GetFrameworkAuditRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -96,19 +96,23 @@ client = Google::Cloud::ErrorReporting.new
 
 ### Configuration
 
-The **Project ID** and the path to the **Credentials JSON** file can be configured
+The **Project ID**, **Quota Project**, and the path to the **Credentials JSON** file can be configured
 instead of placing them in environment variables or providing them as arguments.
 
 ```ruby
 require "google/cloud/error_reporting"
 
 Google::Cloud::ErrorReporting.configure do |config|
-  config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
+  config.project_id    = "my-project-id"        # The project where errors are reported
+  config.quota_project = "my-billing-project"   # The project billed for quota/billing (optional)
+  config.credentials   = "path/to/keyfile.json"
 end
 
 client = Google::Cloud::ErrorReporting.new
 ```
+
+> [!NOTE]
+> **Project ID** (where errors are sent) and **Quota Project** (which project is billed for the API call) are distinct. By default, the library bills the project associated with the credentials. Use `config.quota_project` if you need to bill a different project.
 
 ### Cloud SDK
 

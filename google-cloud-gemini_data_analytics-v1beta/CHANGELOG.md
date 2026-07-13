@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.11.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34047](https://github.com/googleapis/google-cloud-ruby/issues/34047)) 
+
+### 0.10.0 (2026-06-08)
+
+### ⚠ BREAKING CHANGES
+
+* Changed proto3 optional flag of an existing field `value` in message `.google.cloud.geminidataanalytics.v1beta.LookerQuery` ([#34011](https://github.com/googleapis/google-cloud-ruby/issues/34011))
+
+#### Bug Fixes
+
+* Changed proto3 optional flag of an existing field `value` in message `.google.cloud.geminidataanalytics.v1beta.LookerQuery` ([#34011](https://github.com/googleapis/google-cloud-ruby/issues/34011)) 
+
 ### 0.9.1 (2026-04-03)
 
 #### Documentation

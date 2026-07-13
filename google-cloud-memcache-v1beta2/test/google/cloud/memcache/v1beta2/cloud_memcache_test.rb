@@ -90,40 +90,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_instances_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_instances parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_instances ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_instances({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_instances(::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_instance({ name: name }) do |response, operation|
+      c.get_instance({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_instance name: name do |response, operation|
+      c.get_instance name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_instance ::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name) do |response, operation|
+      c.get_instance ::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_instance({ name: name }, grpc_options) do |response, operation|
+      c.get_instance({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_instance(::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_instance(::Google::Cloud::Memcache::V1beta2::GetInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,40 +215,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, create_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_instance({ parent: parent, instance_id: instance_id, resource: resource }) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, resource: resource }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_instance parent: parent, instance_id: instance_id, resource: resource do |response, operation|
+      c.create_instance parent: parent, instance_id: instance_id, resource: resource do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_instance ::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource) do |response, operation|
+      c.create_instance ::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_instance({ parent: parent, instance_id: instance_id, resource: resource }, grpc_options) do |response, operation|
+      c.create_instance({ parent: parent, instance_id: instance_id, resource: resource }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_instance(::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource), grpc_options) do |response, operation|
+      c.create_instance(::Google::Cloud::Memcache::V1beta2::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, resource: resource), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -280,40 +280,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, update_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_instance({ update_mask: update_mask, resource: resource }) do |response, operation|
+      c.update_instance({ update_mask: update_mask, resource: resource }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance update_mask: update_mask, resource: resource do |response, operation|
+      c.update_instance update_mask: update_mask, resource: resource do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource) do |response, operation|
+      c.update_instance ::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ update_mask: update_mask, resource: resource }, grpc_options) do |response, operation|
+      c.update_instance({ update_mask: update_mask, resource: resource }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource), grpc_options) do |response, operation|
+      c.update_instance(::Google::Cloud::Memcache::V1beta2::UpdateInstanceRequest.new(update_mask: update_mask, resource: resource), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -347,40 +347,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, update_parameters_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_parameters({ name: name, update_mask: update_mask, parameters: parameters }) do |response, operation|
+      c.update_parameters({ name: name, update_mask: update_mask, parameters: parameters }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_parameters name: name, update_mask: update_mask, parameters: parameters do |response, operation|
+      c.update_parameters name: name, update_mask: update_mask, parameters: parameters do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_parameters ::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters) do |response, operation|
+      c.update_parameters ::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_parameters({ name: name, update_mask: update_mask, parameters: parameters }, grpc_options) do |response, operation|
+      c.update_parameters({ name: name, update_mask: update_mask, parameters: parameters }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_parameters(::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters), grpc_options) do |response, operation|
+      c.update_parameters(::Google::Cloud::Memcache::V1beta2::UpdateParametersRequest.new(name: name, update_mask: update_mask, parameters: parameters), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -410,40 +410,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, delete_instance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_instance({ name: name }) do |response, operation|
+      c.delete_instance({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_instance name: name do |response, operation|
+      c.delete_instance name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_instance ::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name) do |response, operation|
+      c.delete_instance ::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_instance({ name: name }, grpc_options) do |response, operation|
+      c.delete_instance({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_instance(::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_instance(::Google::Cloud::Memcache::V1beta2::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -477,40 +477,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, apply_parameters_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.apply_parameters({ name: name, node_ids: node_ids, apply_all: apply_all }) do |response, operation|
+      c.apply_parameters({ name: name, node_ids: node_ids, apply_all: apply_all }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.apply_parameters name: name, node_ids: node_ids, apply_all: apply_all do |response, operation|
+      c.apply_parameters name: name, node_ids: node_ids, apply_all: apply_all do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.apply_parameters ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all) do |response, operation|
+      c.apply_parameters ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.apply_parameters({ name: name, node_ids: node_ids, apply_all: apply_all }, grpc_options) do |response, operation|
+      c.apply_parameters({ name: name, node_ids: node_ids, apply_all: apply_all }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.apply_parameters(::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all), grpc_options) do |response, operation|
+      c.apply_parameters(::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest.new(name: name, node_ids: node_ids, apply_all: apply_all), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -544,40 +544,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, apply_software_update_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.apply_software_update({ instance: instance, node_ids: node_ids, apply_all: apply_all }) do |response, operation|
+      c.apply_software_update({ instance: instance, node_ids: node_ids, apply_all: apply_all }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.apply_software_update instance: instance, node_ids: node_ids, apply_all: apply_all do |response, operation|
+      c.apply_software_update instance: instance, node_ids: node_ids, apply_all: apply_all do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.apply_software_update ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all) do |response, operation|
+      c.apply_software_update ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.apply_software_update({ instance: instance, node_ids: node_ids, apply_all: apply_all }, grpc_options) do |response, operation|
+      c.apply_software_update({ instance: instance, node_ids: node_ids, apply_all: apply_all }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.apply_software_update(::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all), grpc_options) do |response, operation|
+      c.apply_software_update(::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -611,40 +611,40 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, reschedule_maintenance_client_stub do
       # Create client
-      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+      c = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.reschedule_maintenance({ instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
+      c.reschedule_maintenance({ instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reschedule_maintenance instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
+      c.reschedule_maintenance instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reschedule_maintenance ::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest.new(instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
+      c.reschedule_maintenance ::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest.new(instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reschedule_maintenance({ instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
+      c.reschedule_maintenance({ instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reschedule_maintenance(::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest.new(instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
+      c.reschedule_maintenance(::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest.new(instance: instance, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

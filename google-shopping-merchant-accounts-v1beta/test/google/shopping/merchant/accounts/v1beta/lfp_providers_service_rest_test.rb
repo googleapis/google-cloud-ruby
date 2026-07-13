@@ -99,32 +99,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest:
     ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest::ServiceStub.stub :transcode_find_lfp_providers_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, find_lfp_providers_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.find_lfp_providers parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.find_lfp_providers parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.find_lfp_providers ::Google::Shopping::Merchant::Accounts::V1beta::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.find_lfp_providers ::Google::Shopping::Merchant::Accounts::V1beta::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.find_lfp_providers({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.find_lfp_providers(::Google::Shopping::Merchant::Accounts::V1beta::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.find_lfp_providers(::Google::Shopping::Merchant::Accounts::V1beta::FindLfpProvidersRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest:
     ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest::ServiceStub.stub :transcode_link_lfp_provider_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, link_lfp_provider_client_stub do
         # Create client
-        client = ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.link_lfp_provider({ name: name, external_account_id: external_account_id }) do |_result, response|
+        c.link_lfp_provider({ name: name, external_account_id: external_account_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.link_lfp_provider name: name, external_account_id: external_account_id do |_result, response|
+        c.link_lfp_provider name: name, external_account_id: external_account_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.link_lfp_provider ::Google::Shopping::Merchant::Accounts::V1beta::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id) do |_result, response|
+        c.link_lfp_provider ::Google::Shopping::Merchant::Accounts::V1beta::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.link_lfp_provider({ name: name, external_account_id: external_account_id }, call_options) do |_result, response|
+        c.link_lfp_provider({ name: name, external_account_id: external_account_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.link_lfp_provider(::Google::Shopping::Merchant::Accounts::V1beta::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id), call_options) do |_result, response|
+        c.link_lfp_provider(::Google::Shopping::Merchant::Accounts::V1beta::LinkLfpProviderRequest.new(name: name, external_account_id: external_account_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

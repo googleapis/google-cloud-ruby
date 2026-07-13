@@ -99,32 +99,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_asset({ parent: parent, asset: asset, asset_id: asset_id }) do |_result, response|
+        c.create_asset({ parent: parent, asset: asset, asset_id: asset_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_asset parent: parent, asset: asset, asset_id: asset_id do |_result, response|
+        c.create_asset parent: parent, asset: asset, asset_id: asset_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_asset ::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id) do |_result, response|
+        c.create_asset ::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_asset({ parent: parent, asset: asset, asset_id: asset_id }, call_options) do |_result, response|
+        c.create_asset({ parent: parent, asset: asset, asset_id: asset_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_asset(::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id), call_options) do |_result, response|
+        c.create_asset(::Google::Cloud::VisionAI::V1::CreateAssetRequest.new(parent: parent, asset: asset, asset_id: asset_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_asset({ asset: asset, update_mask: update_mask }) do |_result, response|
+        c.update_asset({ asset: asset, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_asset asset: asset, update_mask: update_mask do |_result, response|
+        c.update_asset asset: asset, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_asset ::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask) do |_result, response|
+        c.update_asset ::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_asset({ asset: asset, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_asset({ asset: asset, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_asset(::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask), call_options) do |_result, response|
+        c.update_asset(::Google::Cloud::VisionAI::V1::UpdateAssetRequest.new(asset: asset, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_asset({ name: name }) do |_result, response|
+        c.get_asset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_asset name: name do |_result, response|
+        c.get_asset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_asset ::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name) do |_result, response|
+        c.get_asset ::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_asset({ name: name }, call_options) do |_result, response|
+        c.get_asset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_asset(::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
+        c.get_asset(::Google::Cloud::VisionAI::V1::GetAssetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_assets parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_assets ::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_assets ::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_assets({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_assets(::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_assets(::Google::Cloud::VisionAI::V1::ListAssetsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,32 +319,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_asset({ name: name }) do |_result, response|
+        c.delete_asset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_asset name: name do |_result, response|
+        c.delete_asset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_asset ::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name) do |_result, response|
+        c.delete_asset ::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_asset({ name: name }, call_options) do |_result, response|
+        c.delete_asset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_asset(::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name), call_options) do |_result, response|
+        c.delete_asset(::Google::Cloud::VisionAI::V1::DeleteAssetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -374,32 +374,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_upload_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upload_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upload_asset({ name: name, asset_source: asset_source }) do |_result, response|
+        c.upload_asset({ name: name, asset_source: asset_source }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upload_asset name: name, asset_source: asset_source do |_result, response|
+        c.upload_asset name: name, asset_source: asset_source do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upload_asset ::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source) do |_result, response|
+        c.upload_asset ::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upload_asset({ name: name, asset_source: asset_source }, call_options) do |_result, response|
+        c.upload_asset({ name: name, asset_source: asset_source }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upload_asset(::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source), call_options) do |_result, response|
+        c.upload_asset(::Google::Cloud::VisionAI::V1::UploadAssetRequest.new(name: name, asset_source: asset_source), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_generate_retrieval_url_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_retrieval_url_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_retrieval_url({ name: name }) do |_result, response|
+        c.generate_retrieval_url({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_retrieval_url name: name do |_result, response|
+        c.generate_retrieval_url name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_retrieval_url ::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name) do |_result, response|
+        c.generate_retrieval_url ::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_retrieval_url({ name: name }, call_options) do |_result, response|
+        c.generate_retrieval_url({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_retrieval_url(::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name), call_options) do |_result, response|
+        c.generate_retrieval_url(::Google::Cloud::VisionAI::V1::GenerateRetrievalUrlRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -482,32 +482,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_analyze_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_asset({ name: name }) do |_result, response|
+        c.analyze_asset({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_asset name: name do |_result, response|
+        c.analyze_asset name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_asset ::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name) do |_result, response|
+        c.analyze_asset ::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_asset({ name: name }, call_options) do |_result, response|
+        c.analyze_asset({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_asset(::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name), call_options) do |_result, response|
+        c.analyze_asset(::Google::Cloud::VisionAI::V1::AnalyzeAssetRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -537,32 +537,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_index_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, index_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.index_asset({ name: name, index: index }) do |_result, response|
+        c.index_asset({ name: name, index: index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.index_asset name: name, index: index do |_result, response|
+        c.index_asset name: name, index: index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.index_asset ::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index) do |_result, response|
+        c.index_asset ::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.index_asset({ name: name, index: index }, call_options) do |_result, response|
+        c.index_asset({ name: name, index: index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.index_asset(::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index), call_options) do |_result, response|
+        c.index_asset(::Google::Cloud::VisionAI::V1::IndexAssetRequest.new(name: name, index: index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -592,32 +592,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_remove_index_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_index_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_index_asset({ name: name, index: index }) do |_result, response|
+        c.remove_index_asset({ name: name, index: index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_index_asset name: name, index: index do |_result, response|
+        c.remove_index_asset name: name, index: index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_index_asset ::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index) do |_result, response|
+        c.remove_index_asset ::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_index_asset({ name: name, index: index }, call_options) do |_result, response|
+        c.remove_index_asset({ name: name, index: index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_index_asset(::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index), call_options) do |_result, response|
+        c.remove_index_asset(::Google::Cloud::VisionAI::V1::RemoveIndexAssetRequest.new(name: name, index: index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -649,32 +649,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_view_indexed_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, view_indexed_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.view_indexed_assets index: index, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.view_indexed_assets index: index, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.view_indexed_assets ::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.view_indexed_assets ::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.view_indexed_assets({ index: index, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.view_indexed_assets(::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.view_indexed_assets(::Google::Cloud::VisionAI::V1::ViewIndexedAssetsRequest.new(index: index, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -705,32 +705,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_index_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_index({ parent: parent, index_id: index_id, index: index }) do |_result, response|
+        c.create_index({ parent: parent, index_id: index_id, index: index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_index parent: parent, index_id: index_id, index: index do |_result, response|
+        c.create_index parent: parent, index_id: index_id, index: index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_index ::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index) do |_result, response|
+        c.create_index ::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_index({ parent: parent, index_id: index_id, index: index }, call_options) do |_result, response|
+        c.create_index({ parent: parent, index_id: index_id, index: index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_index(::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index), call_options) do |_result, response|
+        c.create_index(::Google::Cloud::VisionAI::V1::CreateIndexRequest.new(parent: parent, index_id: index_id, index: index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -760,32 +760,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_index_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_index({ index: index, update_mask: update_mask }) do |_result, response|
+        c.update_index({ index: index, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_index index: index, update_mask: update_mask do |_result, response|
+        c.update_index index: index, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_index ::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask) do |_result, response|
+        c.update_index ::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_index({ index: index, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_index({ index: index, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_index(::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask), call_options) do |_result, response|
+        c.update_index(::Google::Cloud::VisionAI::V1::UpdateIndexRequest.new(index: index, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -814,32 +814,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_index_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_index({ name: name }) do |_result, response|
+        c.get_index({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_index name: name do |_result, response|
+        c.get_index name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_index ::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name) do |_result, response|
+        c.get_index ::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_index({ name: name }, call_options) do |_result, response|
+        c.get_index({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_index(::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name), call_options) do |_result, response|
+        c.get_index(::Google::Cloud::VisionAI::V1::GetIndexRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -870,32 +870,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_indexes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_indexes_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_indexes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_indexes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_indexes ::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_indexes ::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_indexes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_indexes(::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_indexes(::Google::Cloud::VisionAI::V1::ListIndexesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -924,32 +924,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_index_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_index({ name: name }) do |_result, response|
+        c.delete_index({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_index name: name do |_result, response|
+        c.delete_index name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_index ::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name) do |_result, response|
+        c.delete_index ::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_index({ name: name }, call_options) do |_result, response|
+        c.delete_index({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_index(::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name), call_options) do |_result, response|
+        c.delete_index(::Google::Cloud::VisionAI::V1::DeleteIndexRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -979,32 +979,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_corpus({ parent: parent, corpus: corpus }) do |_result, response|
+        c.create_corpus({ parent: parent, corpus: corpus }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_corpus parent: parent, corpus: corpus do |_result, response|
+        c.create_corpus parent: parent, corpus: corpus do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_corpus ::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus) do |_result, response|
+        c.create_corpus ::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_corpus({ parent: parent, corpus: corpus }, call_options) do |_result, response|
+        c.create_corpus({ parent: parent, corpus: corpus }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_corpus(::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus), call_options) do |_result, response|
+        c.create_corpus(::Google::Cloud::VisionAI::V1::CreateCorpusRequest.new(parent: parent, corpus: corpus), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1033,32 +1033,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_corpus({ name: name }) do |_result, response|
+        c.get_corpus({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_corpus name: name do |_result, response|
+        c.get_corpus name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_corpus ::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name) do |_result, response|
+        c.get_corpus ::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_corpus({ name: name }, call_options) do |_result, response|
+        c.get_corpus({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_corpus(::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name), call_options) do |_result, response|
+        c.get_corpus(::Google::Cloud::VisionAI::V1::GetCorpusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1088,32 +1088,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_corpus({ corpus: corpus, update_mask: update_mask }) do |_result, response|
+        c.update_corpus({ corpus: corpus, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_corpus corpus: corpus, update_mask: update_mask do |_result, response|
+        c.update_corpus corpus: corpus, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_corpus ::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask) do |_result, response|
+        c.update_corpus ::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_corpus({ corpus: corpus, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_corpus({ corpus: corpus, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_corpus(::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask), call_options) do |_result, response|
+        c.update_corpus(::Google::Cloud::VisionAI::V1::UpdateCorpusRequest.new(corpus: corpus, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1145,32 +1145,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_corpora_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_corpora_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_corpora parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_corpora parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_corpora ::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_corpora ::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_corpora({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_corpora(::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_corpora(::Google::Cloud::VisionAI::V1::ListCorporaRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1199,32 +1199,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_corpus({ name: name }) do |_result, response|
+        c.delete_corpus({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_corpus name: name do |_result, response|
+        c.delete_corpus name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_corpus ::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name) do |_result, response|
+        c.delete_corpus ::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_corpus({ name: name }, call_options) do |_result, response|
+        c.delete_corpus({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_corpus(::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name), call_options) do |_result, response|
+        c.delete_corpus(::Google::Cloud::VisionAI::V1::DeleteCorpusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1253,32 +1253,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_analyze_corpus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, analyze_corpus_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.analyze_corpus({ name: name }) do |_result, response|
+        c.analyze_corpus({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.analyze_corpus name: name do |_result, response|
+        c.analyze_corpus name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.analyze_corpus ::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name) do |_result, response|
+        c.analyze_corpus ::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.analyze_corpus({ name: name }, call_options) do |_result, response|
+        c.analyze_corpus({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.analyze_corpus(::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name), call_options) do |_result, response|
+        c.analyze_corpus(::Google::Cloud::VisionAI::V1::AnalyzeCorpusRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1308,32 +1308,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_data_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_schema({ parent: parent, data_schema: data_schema }) do |_result, response|
+        c.create_data_schema({ parent: parent, data_schema: data_schema }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_schema parent: parent, data_schema: data_schema do |_result, response|
+        c.create_data_schema parent: parent, data_schema: data_schema do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_schema ::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema) do |_result, response|
+        c.create_data_schema ::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_schema({ parent: parent, data_schema: data_schema }, call_options) do |_result, response|
+        c.create_data_schema({ parent: parent, data_schema: data_schema }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_schema(::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema), call_options) do |_result, response|
+        c.create_data_schema(::Google::Cloud::VisionAI::V1::CreateDataSchemaRequest.new(parent: parent, data_schema: data_schema), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1363,32 +1363,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_data_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_schema({ data_schema: data_schema, update_mask: update_mask }) do |_result, response|
+        c.update_data_schema({ data_schema: data_schema, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_schema data_schema: data_schema, update_mask: update_mask do |_result, response|
+        c.update_data_schema data_schema: data_schema, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_schema ::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask) do |_result, response|
+        c.update_data_schema ::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_schema({ data_schema: data_schema, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_data_schema({ data_schema: data_schema, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_schema(::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask), call_options) do |_result, response|
+        c.update_data_schema(::Google::Cloud::VisionAI::V1::UpdateDataSchemaRequest.new(data_schema: data_schema, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1417,32 +1417,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_data_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_schema({ name: name }) do |_result, response|
+        c.get_data_schema({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_schema name: name do |_result, response|
+        c.get_data_schema name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_schema ::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name) do |_result, response|
+        c.get_data_schema ::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_schema({ name: name }, call_options) do |_result, response|
+        c.get_data_schema({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_schema(::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_schema(::Google::Cloud::VisionAI::V1::GetDataSchemaRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1471,32 +1471,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_data_schema_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_schema_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_schema({ name: name }) do |_result, response|
+        c.delete_data_schema({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_schema name: name do |_result, response|
+        c.delete_data_schema name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_schema ::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name) do |_result, response|
+        c.delete_data_schema ::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_schema({ name: name }, call_options) do |_result, response|
+        c.delete_data_schema({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_schema(::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name), call_options) do |_result, response|
+        c.delete_data_schema(::Google::Cloud::VisionAI::V1::DeleteDataSchemaRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1527,32 +1527,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_data_schemas_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_schemas_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_schemas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_data_schemas parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_schemas ::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_data_schemas ::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_data_schemas({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_schemas(::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_data_schemas(::Google::Cloud::VisionAI::V1::ListDataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1583,32 +1583,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_annotation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_annotation_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }) do |_result, response|
+        c.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_annotation parent: parent, annotation: annotation, annotation_id: annotation_id do |_result, response|
+        c.create_annotation parent: parent, annotation: annotation, annotation_id: annotation_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_annotation ::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id) do |_result, response|
+        c.create_annotation ::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }, call_options) do |_result, response|
+        c.create_annotation({ parent: parent, annotation: annotation, annotation_id: annotation_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_annotation(::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id), call_options) do |_result, response|
+        c.create_annotation(::Google::Cloud::VisionAI::V1::CreateAnnotationRequest.new(parent: parent, annotation: annotation, annotation_id: annotation_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1637,32 +1637,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_annotation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_annotation_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_annotation({ name: name }) do |_result, response|
+        c.get_annotation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_annotation name: name do |_result, response|
+        c.get_annotation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_annotation ::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name) do |_result, response|
+        c.get_annotation ::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_annotation({ name: name }, call_options) do |_result, response|
+        c.get_annotation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_annotation(::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name), call_options) do |_result, response|
+        c.get_annotation(::Google::Cloud::VisionAI::V1::GetAnnotationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1694,32 +1694,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_annotations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_annotations_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_annotations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_annotations parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_annotations ::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_annotations ::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_annotations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_annotations(::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_annotations(::Google::Cloud::VisionAI::V1::ListAnnotationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1749,32 +1749,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_annotation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_annotation_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_annotation({ annotation: annotation, update_mask: update_mask }) do |_result, response|
+        c.update_annotation({ annotation: annotation, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_annotation annotation: annotation, update_mask: update_mask do |_result, response|
+        c.update_annotation annotation: annotation, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_annotation ::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask) do |_result, response|
+        c.update_annotation ::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_annotation({ annotation: annotation, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_annotation({ annotation: annotation, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_annotation(::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask), call_options) do |_result, response|
+        c.update_annotation(::Google::Cloud::VisionAI::V1::UpdateAnnotationRequest.new(annotation: annotation, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1803,32 +1803,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_annotation_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_annotation_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_annotation({ name: name }) do |_result, response|
+        c.delete_annotation({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_annotation name: name do |_result, response|
+        c.delete_annotation name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_annotation ::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name) do |_result, response|
+        c.delete_annotation ::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_annotation({ name: name }, call_options) do |_result, response|
+        c.delete_annotation({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_annotation(::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name), call_options) do |_result, response|
+        c.delete_annotation(::Google::Cloud::VisionAI::V1::DeleteAnnotationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1858,32 +1858,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_clip_asset_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, clip_asset_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.clip_asset({ name: name, temporal_partition: temporal_partition }) do |_result, response|
+        c.clip_asset({ name: name, temporal_partition: temporal_partition }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.clip_asset name: name, temporal_partition: temporal_partition do |_result, response|
+        c.clip_asset name: name, temporal_partition: temporal_partition do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.clip_asset ::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition) do |_result, response|
+        c.clip_asset ::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.clip_asset({ name: name, temporal_partition: temporal_partition }, call_options) do |_result, response|
+        c.clip_asset({ name: name, temporal_partition: temporal_partition }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.clip_asset(::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition), call_options) do |_result, response|
+        c.clip_asset(::Google::Cloud::VisionAI::V1::ClipAssetRequest.new(name: name, temporal_partition: temporal_partition), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1914,32 +1914,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_generate_hls_uri_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, generate_hls_uri_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }) do |_result, response|
+        c.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_hls_uri name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled do |_result, response|
+        c.generate_hls_uri name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_hls_uri ::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled) do |_result, response|
+        c.generate_hls_uri ::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }, call_options) do |_result, response|
+        c.generate_hls_uri({ name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_hls_uri(::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled), call_options) do |_result, response|
+        c.generate_hls_uri(::Google::Cloud::VisionAI::V1::GenerateHlsUriRequest.new(name: name, temporal_partitions: temporal_partitions, live_view_enabled: live_view_enabled), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1969,32 +1969,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_import_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, import_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }) do |_result, response|
+        c.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_assets assets_gcs_uri: assets_gcs_uri, parent: parent do |_result, response|
+        c.import_assets assets_gcs_uri: assets_gcs_uri, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_assets ::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent) do |_result, response|
+        c.import_assets ::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }, call_options) do |_result, response|
+        c.import_assets({ assets_gcs_uri: assets_gcs_uri, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_assets(::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent), call_options) do |_result, response|
+        c.import_assets(::Google::Cloud::VisionAI::V1::ImportAssetsRequest.new(assets_gcs_uri: assets_gcs_uri, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2025,32 +2025,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_search_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_search_config_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }) do |_result, response|
+        c.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_search_config parent: parent, search_config: search_config, search_config_id: search_config_id do |_result, response|
+        c.create_search_config parent: parent, search_config: search_config, search_config_id: search_config_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_search_config ::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id) do |_result, response|
+        c.create_search_config ::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }, call_options) do |_result, response|
+        c.create_search_config({ parent: parent, search_config: search_config, search_config_id: search_config_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_search_config(::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id), call_options) do |_result, response|
+        c.create_search_config(::Google::Cloud::VisionAI::V1::CreateSearchConfigRequest.new(parent: parent, search_config: search_config, search_config_id: search_config_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2080,32 +2080,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_search_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_search_config_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_search_config({ search_config: search_config, update_mask: update_mask }) do |_result, response|
+        c.update_search_config({ search_config: search_config, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_search_config search_config: search_config, update_mask: update_mask do |_result, response|
+        c.update_search_config search_config: search_config, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_search_config ::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask) do |_result, response|
+        c.update_search_config ::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_search_config({ search_config: search_config, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_search_config({ search_config: search_config, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_search_config(::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask), call_options) do |_result, response|
+        c.update_search_config(::Google::Cloud::VisionAI::V1::UpdateSearchConfigRequest.new(search_config: search_config, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2134,32 +2134,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_search_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_search_config_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_search_config({ name: name }) do |_result, response|
+        c.get_search_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_search_config name: name do |_result, response|
+        c.get_search_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_search_config ::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name) do |_result, response|
+        c.get_search_config ::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_search_config({ name: name }, call_options) do |_result, response|
+        c.get_search_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_search_config(::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name), call_options) do |_result, response|
+        c.get_search_config(::Google::Cloud::VisionAI::V1::GetSearchConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2188,32 +2188,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_search_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_search_config_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_search_config({ name: name }) do |_result, response|
+        c.delete_search_config({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_search_config name: name do |_result, response|
+        c.delete_search_config name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_search_config ::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name) do |_result, response|
+        c.delete_search_config ::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_search_config({ name: name }, call_options) do |_result, response|
+        c.delete_search_config({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_search_config(::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name), call_options) do |_result, response|
+        c.delete_search_config(::Google::Cloud::VisionAI::V1::DeleteSearchConfigRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2244,32 +2244,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_search_configs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_search_configs_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_search_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_search_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_search_configs ::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_search_configs ::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_search_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_search_configs(::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_search_configs(::Google::Cloud::VisionAI::V1::ListSearchConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2300,32 +2300,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_search_hypernym_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_search_hypernym_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }) do |_result, response|
+        c.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_search_hypernym parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id do |_result, response|
+        c.create_search_hypernym parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_search_hypernym ::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id) do |_result, response|
+        c.create_search_hypernym ::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }, call_options) do |_result, response|
+        c.create_search_hypernym({ parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_search_hypernym(::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id), call_options) do |_result, response|
+        c.create_search_hypernym(::Google::Cloud::VisionAI::V1::CreateSearchHypernymRequest.new(parent: parent, search_hypernym: search_hypernym, search_hypernym_id: search_hypernym_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2355,32 +2355,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_search_hypernym_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_search_hypernym_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }) do |_result, response|
+        c.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_search_hypernym search_hypernym: search_hypernym, update_mask: update_mask do |_result, response|
+        c.update_search_hypernym search_hypernym: search_hypernym, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_search_hypernym ::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask) do |_result, response|
+        c.update_search_hypernym ::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_search_hypernym({ search_hypernym: search_hypernym, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_search_hypernym(::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask), call_options) do |_result, response|
+        c.update_search_hypernym(::Google::Cloud::VisionAI::V1::UpdateSearchHypernymRequest.new(search_hypernym: search_hypernym, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2409,32 +2409,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_search_hypernym_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_search_hypernym_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_search_hypernym({ name: name }) do |_result, response|
+        c.get_search_hypernym({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_search_hypernym name: name do |_result, response|
+        c.get_search_hypernym name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_search_hypernym ::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name) do |_result, response|
+        c.get_search_hypernym ::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_search_hypernym({ name: name }, call_options) do |_result, response|
+        c.get_search_hypernym({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_search_hypernym(::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name), call_options) do |_result, response|
+        c.get_search_hypernym(::Google::Cloud::VisionAI::V1::GetSearchHypernymRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2463,32 +2463,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_search_hypernym_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_search_hypernym_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_search_hypernym({ name: name }) do |_result, response|
+        c.delete_search_hypernym({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_search_hypernym name: name do |_result, response|
+        c.delete_search_hypernym name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_search_hypernym ::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name) do |_result, response|
+        c.delete_search_hypernym ::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_search_hypernym({ name: name }, call_options) do |_result, response|
+        c.delete_search_hypernym({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_search_hypernym(::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name), call_options) do |_result, response|
+        c.delete_search_hypernym(::Google::Cloud::VisionAI::V1::DeleteSearchHypernymRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2519,32 +2519,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_search_hypernyms_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_search_hypernyms_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_search_hypernyms parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_search_hypernyms parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_search_hypernyms ::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_search_hypernyms ::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_search_hypernyms({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_search_hypernyms(::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_search_hypernyms(::Google::Cloud::VisionAI::V1::ListSearchHypernymsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2581,32 +2581,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_search_assets_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_assets_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }) do |_result, response|
+        c.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_assets schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query do |_result, response|
+        c.search_assets schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_assets ::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query) do |_result, response|
+        c.search_assets ::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }, call_options) do |_result, response|
+        c.search_assets({ schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_assets(::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query), call_options) do |_result, response|
+        c.search_assets(::Google::Cloud::VisionAI::V1::SearchAssetsRequest.new(schema_key_sorting_strategy: schema_key_sorting_strategy, corpus: corpus, page_size: page_size, page_token: page_token, content_time_ranges: content_time_ranges, criteria: criteria, facet_selections: facet_selections, result_annotation_keys: result_annotation_keys, search_query: search_query), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2640,32 +2640,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_search_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_index_endpoint image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_index_endpoint image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_index_endpoint ::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_index_endpoint ::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_index_endpoint({ image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_index_endpoint(::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_index_endpoint(::Google::Cloud::VisionAI::V1::SearchIndexEndpointRequest.new(image_query: image_query, index_endpoint: index_endpoint, criteria: criteria, exclusion_criteria: exclusion_criteria, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2696,32 +2696,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }) do |_result, response|
+        c.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_index_endpoint parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint do |_result, response|
+        c.create_index_endpoint parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_index_endpoint ::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint) do |_result, response|
+        c.create_index_endpoint ::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }, call_options) do |_result, response|
+        c.create_index_endpoint({ parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_index_endpoint(::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint), call_options) do |_result, response|
+        c.create_index_endpoint(::Google::Cloud::VisionAI::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint_id: index_endpoint_id, index_endpoint: index_endpoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2750,32 +2750,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_index_endpoint({ name: name }) do |_result, response|
+        c.get_index_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_index_endpoint name: name do |_result, response|
+        c.get_index_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_index_endpoint ::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name) do |_result, response|
+        c.get_index_endpoint ::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_index_endpoint({ name: name }, call_options) do |_result, response|
+        c.get_index_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_index_endpoint(::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.get_index_endpoint(::Google::Cloud::VisionAI::V1::GetIndexEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2807,32 +2807,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_index_endpoints_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_index_endpoints_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_index_endpoints parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_index_endpoints parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_index_endpoints ::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_index_endpoints ::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_index_endpoints({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_index_endpoints(::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_index_endpoints(::Google::Cloud::VisionAI::V1::ListIndexEndpointsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2862,32 +2862,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |_result, response|
+        c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |_result, response|
+        c.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_index_endpoint ::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |_result, response|
+        c.update_index_endpoint ::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_index_endpoint(::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), call_options) do |_result, response|
+        c.update_index_endpoint(::Google::Cloud::VisionAI::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2916,32 +2916,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_index_endpoint_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_index_endpoint_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_index_endpoint({ name: name }) do |_result, response|
+        c.delete_index_endpoint({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_index_endpoint name: name do |_result, response|
+        c.delete_index_endpoint name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_index_endpoint ::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name) do |_result, response|
+        c.delete_index_endpoint ::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_index_endpoint({ name: name }, call_options) do |_result, response|
+        c.delete_index_endpoint({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_index_endpoint(::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name), call_options) do |_result, response|
+        c.delete_index_endpoint(::Google::Cloud::VisionAI::V1::DeleteIndexEndpointRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2971,32 +2971,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_deploy_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, deploy_index_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |_result, response|
+        c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |_result, response|
+        c.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.deploy_index ::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |_result, response|
+        c.deploy_index ::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, call_options) do |_result, response|
+        c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.deploy_index(::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), call_options) do |_result, response|
+        c.deploy_index(::Google::Cloud::VisionAI::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3025,32 +3025,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_undeploy_index_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, undeploy_index_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.undeploy_index({ index_endpoint: index_endpoint }) do |_result, response|
+        c.undeploy_index({ index_endpoint: index_endpoint }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.undeploy_index index_endpoint: index_endpoint do |_result, response|
+        c.undeploy_index index_endpoint: index_endpoint do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.undeploy_index ::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint) do |_result, response|
+        c.undeploy_index ::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.undeploy_index({ index_endpoint: index_endpoint }, call_options) do |_result, response|
+        c.undeploy_index({ index_endpoint: index_endpoint }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.undeploy_index(::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint), call_options) do |_result, response|
+        c.undeploy_index(::Google::Cloud::VisionAI::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3081,32 +3081,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_create_collection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_collection_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_collection({ parent: parent, collection: collection, collection_id: collection_id }) do |_result, response|
+        c.create_collection({ parent: parent, collection: collection, collection_id: collection_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_collection parent: parent, collection: collection, collection_id: collection_id do |_result, response|
+        c.create_collection parent: parent, collection: collection, collection_id: collection_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_collection ::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id) do |_result, response|
+        c.create_collection ::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_collection({ parent: parent, collection: collection, collection_id: collection_id }, call_options) do |_result, response|
+        c.create_collection({ parent: parent, collection: collection, collection_id: collection_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_collection(::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id), call_options) do |_result, response|
+        c.create_collection(::Google::Cloud::VisionAI::V1::CreateCollectionRequest.new(parent: parent, collection: collection, collection_id: collection_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3135,32 +3135,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_delete_collection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_collection_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_collection({ name: name }) do |_result, response|
+        c.delete_collection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_collection name: name do |_result, response|
+        c.delete_collection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_collection ::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name) do |_result, response|
+        c.delete_collection ::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_collection({ name: name }, call_options) do |_result, response|
+        c.delete_collection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_collection(::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_collection(::Google::Cloud::VisionAI::V1::DeleteCollectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3189,32 +3189,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_get_collection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_collection_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_collection({ name: name }) do |_result, response|
+        c.get_collection({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_collection name: name do |_result, response|
+        c.get_collection name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_collection ::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name) do |_result, response|
+        c.get_collection ::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_collection({ name: name }, call_options) do |_result, response|
+        c.get_collection({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_collection(::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name), call_options) do |_result, response|
+        c.get_collection(::Google::Cloud::VisionAI::V1::GetCollectionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3244,32 +3244,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_update_collection_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_collection_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_collection({ collection: collection, update_mask: update_mask }) do |_result, response|
+        c.update_collection({ collection: collection, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_collection collection: collection, update_mask: update_mask do |_result, response|
+        c.update_collection collection: collection, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_collection ::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask) do |_result, response|
+        c.update_collection ::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_collection({ collection: collection, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_collection({ collection: collection, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_collection(::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask), call_options) do |_result, response|
+        c.update_collection(::Google::Cloud::VisionAI::V1::UpdateCollectionRequest.new(collection: collection, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3300,32 +3300,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_list_collections_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_collections_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_collections parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_collections parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_collections ::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_collections ::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_collections({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_collections({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_collections(::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_collections(::Google::Cloud::VisionAI::V1::ListCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3354,32 +3354,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_add_collection_item_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_collection_item_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.add_collection_item({ item: item }) do |_result, response|
+        c.add_collection_item({ item: item }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.add_collection_item item: item do |_result, response|
+        c.add_collection_item item: item do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.add_collection_item ::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item) do |_result, response|
+        c.add_collection_item ::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.add_collection_item({ item: item }, call_options) do |_result, response|
+        c.add_collection_item({ item: item }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.add_collection_item(::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item), call_options) do |_result, response|
+        c.add_collection_item(::Google::Cloud::VisionAI::V1::AddCollectionItemRequest.new(item: item), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3408,32 +3408,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_remove_collection_item_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, remove_collection_item_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.remove_collection_item({ item: item }) do |_result, response|
+        c.remove_collection_item({ item: item }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.remove_collection_item item: item do |_result, response|
+        c.remove_collection_item item: item do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.remove_collection_item ::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item) do |_result, response|
+        c.remove_collection_item ::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.remove_collection_item({ item: item }, call_options) do |_result, response|
+        c.remove_collection_item({ item: item }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.remove_collection_item(::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item), call_options) do |_result, response|
+        c.remove_collection_item(::Google::Cloud::VisionAI::V1::RemoveCollectionItemRequest.new(item: item), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -3464,32 +3464,32 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ServiceStub.stub :transcode_view_collection_items_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, view_collection_items_client_stub do
         # Create client
-        client = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
+        c = ::Google::Cloud::VisionAI::V1::Warehouse::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.view_collection_items collection: collection, page_size: page_size, page_token: page_token do |_result, response|
+        c.view_collection_items collection: collection, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.view_collection_items ::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token) do |_result, response|
+        c.view_collection_items ::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.view_collection_items({ collection: collection, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.view_collection_items(::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.view_collection_items(::Google::Cloud::VisionAI::V1::ViewCollectionItemsRequest.new(collection: collection, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

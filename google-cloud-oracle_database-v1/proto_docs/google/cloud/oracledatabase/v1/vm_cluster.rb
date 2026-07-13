@@ -80,6 +80,11 @@ module Google
         #   @return [::Google::Cloud::OracleDatabase::V1::IdentityConnector]
         #     Output only. The identity connector details which will allow OCI to
         #     securely access the resources in the customer project.
+        # @!attribute [rw] exascale_db_storage_vault
+        #   @return [::String]
+        #     Optional. The name of ExascaleDbStorageVault associated with the VM
+        #     Cluster. Format:
+        #     projects/\\{project}/locations/\\{location}/exascaleDbStorageVaults/\\{exascale_db_storage_vault}
         class CloudVmCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -149,12 +154,12 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties::State]
         #     Output only. State of the cluster.
-        # @!attribute [r] scan_listener_port_tcp
+        # @!attribute [rw] scan_listener_port_tcp
         #   @return [::Integer]
-        #     Output only. SCAN listener port - TCP
-        # @!attribute [r] scan_listener_port_tcp_ssl
+        #     Optional. SCAN listener port - TCP
+        # @!attribute [rw] scan_listener_port_tcp_ssl
         #   @return [::Integer]
-        #     Output only. SCAN listener port - TLS
+        #     Optional. SCAN listener port - TLS
         # @!attribute [r] domain
         #   @return [::String]
         #     Output only. Parent DNS domain where SCAN DNS and hosts names are
@@ -198,6 +203,9 @@ module Google
         # @!attribute [r] compute_model
         #   @return [::Google::Cloud::OracleDatabase::V1::ComputeModel]
         #     Output only. The compute model of the VM Cluster.
+        # @!attribute [r] storage_management_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties::StorageManagementType]
+        #     Output only. The storage management type of the VM Cluster.
         class CloudVmClusterProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -251,6 +259,18 @@ module Google
 
             # Indicates that the resource is in maintenance in progress state.
             MAINTENANCE_IN_PROGRESS = 7
+          end
+
+          # The type of storage management for the Cloud VM Cluster.
+          module StorageManagementType
+            # Unspecified storage management type.
+            STORAGE_MANAGEMENT_TYPE_UNSPECIFIED = 0
+
+            # Automatic Storage Management.
+            ASM = 1
+
+            # Exascale storage management.
+            EXASCALE = 2
           end
         end
 

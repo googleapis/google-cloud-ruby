@@ -581,7 +581,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_instance(name: nil, display_name: nil, type: nil, labels: nil, tags: nil)
+              # @overload update_instance(name: nil, display_name: nil, type: nil, edition: nil, labels: nil, tags: nil)
               #   Pass arguments to `update_instance` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -595,6 +595,9 @@ module Google
               #     to avoid confusion.
               #   @param type [::Google::Cloud::Bigtable::Admin::V2::Instance::Type]
               #     The type of the instance. Defaults to `PRODUCTION`.
+              #   @param edition [::Google::Cloud::Bigtable::Admin::V2::Instance::Edition]
+              #     Optional. The edition of the instance. See
+              #     {::Google::Cloud::Bigtable::Admin::V2::Instance::Edition Edition} for details.
               #   @param labels [::Hash{::String => ::String}]
               #     Labels are a flexible and lightweight mechanism for organizing cloud
               #     resources into groups that reflect a customer's organizational needs and
@@ -3389,6 +3392,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -3472,6 +3476,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #

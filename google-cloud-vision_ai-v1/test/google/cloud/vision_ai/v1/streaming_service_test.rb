@@ -82,7 +82,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, send_packets_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -90,7 +90,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { packet: packet }
       request_proto = ::Google::Cloud::VisionAI::V1::SendPacketsRequest.new packet: packet
       enum_input = [request_hash, request_proto].to_enum
-      client.send_packets enum_input do |response, operation|
+      c.send_packets enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::SendPacketsResponse, r
@@ -102,7 +102,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { packet: packet }
       request_proto = ::Google::Cloud::VisionAI::V1::SendPacketsRequest.new packet: packet
       stream_input = Gapic::StreamInput.new
-      client.send_packets stream_input do |response, operation|
+      c.send_packets stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::SendPacketsResponse, r
@@ -117,7 +117,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { packet: packet }
       request_proto = ::Google::Cloud::VisionAI::V1::SendPacketsRequest.new packet: packet
       enum_input = [request_hash, request_proto].to_enum
-      client.send_packets enum_input, grpc_options do |response, operation|
+      c.send_packets enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::SendPacketsResponse, r
@@ -129,7 +129,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { packet: packet }
       request_proto = ::Google::Cloud::VisionAI::V1::SendPacketsRequest.new packet: packet
       stream_input = Gapic::StreamInput.new
-      client.send_packets stream_input, grpc_options do |response, operation|
+      c.send_packets stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::SendPacketsResponse, r
@@ -171,7 +171,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, receive_packets_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -179,7 +179,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceivePacketsRequest.new setup_request: setup_request
       enum_input = [request_hash, request_proto].to_enum
-      client.receive_packets enum_input do |response, operation|
+      c.receive_packets enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceivePacketsResponse, r
@@ -191,7 +191,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceivePacketsRequest.new setup_request: setup_request
       stream_input = Gapic::StreamInput.new
-      client.receive_packets stream_input do |response, operation|
+      c.receive_packets stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceivePacketsResponse, r
@@ -206,7 +206,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceivePacketsRequest.new setup_request: setup_request
       enum_input = [request_hash, request_proto].to_enum
-      client.receive_packets enum_input, grpc_options do |response, operation|
+      c.receive_packets enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceivePacketsResponse, r
@@ -218,7 +218,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceivePacketsRequest.new setup_request: setup_request
       stream_input = Gapic::StreamInput.new
-      client.receive_packets stream_input, grpc_options do |response, operation|
+      c.receive_packets stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceivePacketsResponse, r
@@ -260,7 +260,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, receive_events_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -268,7 +268,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceiveEventsRequest.new setup_request: setup_request
       enum_input = [request_hash, request_proto].to_enum
-      client.receive_events enum_input do |response, operation|
+      c.receive_events enum_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceiveEventsResponse, r
@@ -280,7 +280,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceiveEventsRequest.new setup_request: setup_request
       stream_input = Gapic::StreamInput.new
-      client.receive_events stream_input do |response, operation|
+      c.receive_events stream_input do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceiveEventsResponse, r
@@ -295,7 +295,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceiveEventsRequest.new setup_request: setup_request
       enum_input = [request_hash, request_proto].to_enum
-      client.receive_events enum_input, grpc_options do |response, operation|
+      c.receive_events enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceiveEventsResponse, r
@@ -307,7 +307,7 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
       request_hash = { setup_request: setup_request }
       request_proto = ::Google::Cloud::VisionAI::V1::ReceiveEventsRequest.new setup_request: setup_request
       stream_input = Gapic::StreamInput.new
-      client.receive_events stream_input, grpc_options do |response, operation|
+      c.receive_events stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::VisionAI::V1::ReceiveEventsResponse, r
@@ -355,36 +355,36 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, acquire_lease_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }) do |response, operation|
+      c.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.acquire_lease series: series, owner: owner, term: term, lease_type: lease_type do |response, operation|
+      c.acquire_lease series: series, owner: owner, term: term, lease_type: lease_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.acquire_lease ::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type) do |response, operation|
+      c.acquire_lease ::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }, grpc_options) do |response, operation|
+      c.acquire_lease({ series: series, owner: owner, term: term, lease_type: lease_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.acquire_lease(::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type), grpc_options) do |response, operation|
+      c.acquire_lease(::Google::Cloud::VisionAI::V1::AcquireLeaseRequest.new(series: series, owner: owner, term: term, lease_type: lease_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -419,36 +419,36 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, renew_lease_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.renew_lease({ id: id, series: series, owner: owner, term: term }) do |response, operation|
+      c.renew_lease({ id: id, series: series, owner: owner, term: term }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.renew_lease id: id, series: series, owner: owner, term: term do |response, operation|
+      c.renew_lease id: id, series: series, owner: owner, term: term do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.renew_lease ::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term) do |response, operation|
+      c.renew_lease ::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.renew_lease({ id: id, series: series, owner: owner, term: term }, grpc_options) do |response, operation|
+      c.renew_lease({ id: id, series: series, owner: owner, term: term }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.renew_lease(::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term), grpc_options) do |response, operation|
+      c.renew_lease(::Google::Cloud::VisionAI::V1::RenewLeaseRequest.new(id: id, series: series, owner: owner, term: term), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -481,36 +481,36 @@ class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, release_lease_client_stub do
       # Create client
-      client = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
+      c = ::Google::Cloud::VisionAI::V1::StreamingService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.release_lease({ id: id, series: series, owner: owner }) do |response, operation|
+      c.release_lease({ id: id, series: series, owner: owner }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.release_lease id: id, series: series, owner: owner do |response, operation|
+      c.release_lease id: id, series: series, owner: owner do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.release_lease ::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner) do |response, operation|
+      c.release_lease ::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.release_lease({ id: id, series: series, owner: owner }, grpc_options) do |response, operation|
+      c.release_lease({ id: id, series: series, owner: owner }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.release_lease(::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner), grpc_options) do |response, operation|
+      c.release_lease(::Google::Cloud::VisionAI::V1::ReleaseLeaseRequest.new(id: id, series: series, owner: owner), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

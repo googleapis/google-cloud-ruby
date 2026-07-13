@@ -90,40 +90,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_lb_traffic_extensions_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_lb_traffic_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_lb_traffic_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_lb_traffic_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_lb_traffic_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_lb_traffic_extensions ::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_lb_traffic_extensions ::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_lb_traffic_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_lb_traffic_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_lb_traffic_extensions(::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_lb_traffic_extensions(::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_lb_traffic_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_lb_traffic_extension({ name: name }) do |response, operation|
+      c.get_lb_traffic_extension({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_lb_traffic_extension name: name do |response, operation|
+      c.get_lb_traffic_extension name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::GetLbTrafficExtensionRequest.new(name: name) do |response, operation|
+      c.get_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::GetLbTrafficExtensionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_lb_traffic_extension({ name: name }, grpc_options) do |response, operation|
+      c.get_lb_traffic_extension({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::GetLbTrafficExtensionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::GetLbTrafficExtensionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_lb_traffic_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_lb_traffic_extension({ parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id }) do |response, operation|
+      c.create_lb_traffic_extension({ parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_lb_traffic_extension parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id do |response, operation|
+      c.create_lb_traffic_extension parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::CreateLbTrafficExtensionRequest.new(parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id) do |response, operation|
+      c.create_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::CreateLbTrafficExtensionRequest.new(parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_lb_traffic_extension({ parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_lb_traffic_extension({ parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::CreateLbTrafficExtensionRequest.new(parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.create_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::CreateLbTrafficExtensionRequest.new(parent: parent, lb_traffic_extension_id: lb_traffic_extension_id, lb_traffic_extension: lb_traffic_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_lb_traffic_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_lb_traffic_extension({ update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id }) do |response, operation|
+      c.update_lb_traffic_extension({ update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_lb_traffic_extension update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id do |response, operation|
+      c.update_lb_traffic_extension update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::UpdateLbTrafficExtensionRequest.new(update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id) do |response, operation|
+      c.update_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::UpdateLbTrafficExtensionRequest.new(update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_lb_traffic_extension({ update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_lb_traffic_extension({ update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::UpdateLbTrafficExtensionRequest.new(update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.update_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::UpdateLbTrafficExtensionRequest.new(update_mask: update_mask, lb_traffic_extension: lb_traffic_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_lb_traffic_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_lb_traffic_extension({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_lb_traffic_extension({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_lb_traffic_extension name: name, request_id: request_id do |response, operation|
+      c.delete_lb_traffic_extension name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::DeleteLbTrafficExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_lb_traffic_extension ::Google::Cloud::NetworkServices::V1::DeleteLbTrafficExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_lb_traffic_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_lb_traffic_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::DeleteLbTrafficExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_lb_traffic_extension(::Google::Cloud::NetworkServices::V1::DeleteLbTrafficExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -420,40 +420,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_lb_route_extensions_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_lb_route_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_lb_route_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_lb_route_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_lb_route_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_lb_route_extensions ::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_lb_route_extensions ::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_lb_route_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_lb_route_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_lb_route_extensions(::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_lb_route_extensions(::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -483,36 +483,36 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_lb_route_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_lb_route_extension({ name: name }) do |response, operation|
+      c.get_lb_route_extension({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_lb_route_extension name: name do |response, operation|
+      c.get_lb_route_extension name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_lb_route_extension ::Google::Cloud::NetworkServices::V1::GetLbRouteExtensionRequest.new(name: name) do |response, operation|
+      c.get_lb_route_extension ::Google::Cloud::NetworkServices::V1::GetLbRouteExtensionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_lb_route_extension({ name: name }, grpc_options) do |response, operation|
+      c.get_lb_route_extension({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_lb_route_extension(::Google::Cloud::NetworkServices::V1::GetLbRouteExtensionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_lb_route_extension(::Google::Cloud::NetworkServices::V1::GetLbRouteExtensionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -547,40 +547,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_lb_route_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_lb_route_extension({ parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id }) do |response, operation|
+      c.create_lb_route_extension({ parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_lb_route_extension parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id do |response, operation|
+      c.create_lb_route_extension parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_lb_route_extension ::Google::Cloud::NetworkServices::V1::CreateLbRouteExtensionRequest.new(parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id) do |response, operation|
+      c.create_lb_route_extension ::Google::Cloud::NetworkServices::V1::CreateLbRouteExtensionRequest.new(parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_lb_route_extension({ parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_lb_route_extension({ parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_lb_route_extension(::Google::Cloud::NetworkServices::V1::CreateLbRouteExtensionRequest.new(parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.create_lb_route_extension(::Google::Cloud::NetworkServices::V1::CreateLbRouteExtensionRequest.new(parent: parent, lb_route_extension_id: lb_route_extension_id, lb_route_extension: lb_route_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -614,40 +614,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_lb_route_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_lb_route_extension({ update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id }) do |response, operation|
+      c.update_lb_route_extension({ update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_lb_route_extension update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id do |response, operation|
+      c.update_lb_route_extension update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_lb_route_extension ::Google::Cloud::NetworkServices::V1::UpdateLbRouteExtensionRequest.new(update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id) do |response, operation|
+      c.update_lb_route_extension ::Google::Cloud::NetworkServices::V1::UpdateLbRouteExtensionRequest.new(update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_lb_route_extension({ update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_lb_route_extension({ update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_lb_route_extension(::Google::Cloud::NetworkServices::V1::UpdateLbRouteExtensionRequest.new(update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.update_lb_route_extension(::Google::Cloud::NetworkServices::V1::UpdateLbRouteExtensionRequest.new(update_mask: update_mask, lb_route_extension: lb_route_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -679,40 +679,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_lb_route_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_lb_route_extension({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_lb_route_extension({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_lb_route_extension name: name, request_id: request_id do |response, operation|
+      c.delete_lb_route_extension name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_lb_route_extension ::Google::Cloud::NetworkServices::V1::DeleteLbRouteExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_lb_route_extension ::Google::Cloud::NetworkServices::V1::DeleteLbRouteExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_lb_route_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_lb_route_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_lb_route_extension(::Google::Cloud::NetworkServices::V1::DeleteLbRouteExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_lb_route_extension(::Google::Cloud::NetworkServices::V1::DeleteLbRouteExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -750,40 +750,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_lb_edge_extensions_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_lb_edge_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_lb_edge_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_lb_edge_extensions ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_lb_edge_extensions ::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_lb_edge_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_lb_edge_extensions(::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_lb_edge_extensions(::Google::Cloud::NetworkServices::V1::ListLbEdgeExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -813,36 +813,36 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_lb_edge_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_lb_edge_extension({ name: name }) do |response, operation|
+      c.get_lb_edge_extension({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_lb_edge_extension name: name do |response, operation|
+      c.get_lb_edge_extension name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_lb_edge_extension ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name) do |response, operation|
+      c.get_lb_edge_extension ::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_lb_edge_extension({ name: name }, grpc_options) do |response, operation|
+      c.get_lb_edge_extension({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_lb_edge_extension(::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_lb_edge_extension(::Google::Cloud::NetworkServices::V1::GetLbEdgeExtensionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -877,40 +877,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_lb_edge_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |response, operation|
+      c.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_lb_edge_extension parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id do |response, operation|
+      c.create_lb_edge_extension parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_lb_edge_extension ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id) do |response, operation|
+      c.create_lb_edge_extension ::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_lb_edge_extension({ parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_lb_edge_extension(::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.create_lb_edge_extension(::Google::Cloud::NetworkServices::V1::CreateLbEdgeExtensionRequest.new(parent: parent, lb_edge_extension_id: lb_edge_extension_id, lb_edge_extension: lb_edge_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -944,40 +944,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_lb_edge_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |response, operation|
+      c.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_lb_edge_extension update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id do |response, operation|
+      c.update_lb_edge_extension update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_lb_edge_extension ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id) do |response, operation|
+      c.update_lb_edge_extension ::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_lb_edge_extension({ update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_lb_edge_extension(::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.update_lb_edge_extension(::Google::Cloud::NetworkServices::V1::UpdateLbEdgeExtensionRequest.new(update_mask: update_mask, lb_edge_extension: lb_edge_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1009,40 +1009,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_lb_edge_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_lb_edge_extension({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_lb_edge_extension({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_lb_edge_extension name: name, request_id: request_id do |response, operation|
+      c.delete_lb_edge_extension name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_lb_edge_extension ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_lb_edge_extension ::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_lb_edge_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_lb_edge_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_lb_edge_extension(::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_lb_edge_extension(::Google::Cloud::NetworkServices::V1::DeleteLbEdgeExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1080,40 +1080,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_authz_extensions_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_authz_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_authz_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_authz_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_authz_extensions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_authz_extensions ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_authz_extensions ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_authz_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_authz_extensions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_authz_extensions(::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_authz_extensions(::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1143,36 +1143,36 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_authz_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_authz_extension({ name: name }) do |response, operation|
+      c.get_authz_extension({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_authz_extension name: name do |response, operation|
+      c.get_authz_extension name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_authz_extension ::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest.new(name: name) do |response, operation|
+      c.get_authz_extension ::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_authz_extension({ name: name }, grpc_options) do |response, operation|
+      c.get_authz_extension({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_authz_extension(::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_authz_extension(::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1207,40 +1207,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_authz_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_authz_extension({ parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id }) do |response, operation|
+      c.create_authz_extension({ parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_authz_extension parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id do |response, operation|
+      c.create_authz_extension parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_authz_extension ::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest.new(parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id) do |response, operation|
+      c.create_authz_extension ::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest.new(parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_authz_extension({ parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_authz_extension({ parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_authz_extension(::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest.new(parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.create_authz_extension(::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest.new(parent: parent, authz_extension_id: authz_extension_id, authz_extension: authz_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1274,40 +1274,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_authz_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_authz_extension({ update_mask: update_mask, authz_extension: authz_extension, request_id: request_id }) do |response, operation|
+      c.update_authz_extension({ update_mask: update_mask, authz_extension: authz_extension, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_authz_extension update_mask: update_mask, authz_extension: authz_extension, request_id: request_id do |response, operation|
+      c.update_authz_extension update_mask: update_mask, authz_extension: authz_extension, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_authz_extension ::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest.new(update_mask: update_mask, authz_extension: authz_extension, request_id: request_id) do |response, operation|
+      c.update_authz_extension ::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest.new(update_mask: update_mask, authz_extension: authz_extension, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_authz_extension({ update_mask: update_mask, authz_extension: authz_extension, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_authz_extension({ update_mask: update_mask, authz_extension: authz_extension, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_authz_extension(::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest.new(update_mask: update_mask, authz_extension: authz_extension, request_id: request_id), grpc_options) do |response, operation|
+      c.update_authz_extension(::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest.new(update_mask: update_mask, authz_extension: authz_extension, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1339,40 +1339,40 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_authz_extension_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
+      c = ::Google::Cloud::NetworkServices::V1::DepService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_authz_extension({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_authz_extension({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_authz_extension name: name, request_id: request_id do |response, operation|
+      c.delete_authz_extension name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_authz_extension ::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_authz_extension ::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_authz_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_authz_extension({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_authz_extension(::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_authz_extension(::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -88,40 +88,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_data_taxonomy_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_taxonomy({ parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only }) do |response, operation|
+      c.create_data_taxonomy({ parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_taxonomy parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only do |response, operation|
+      c.create_data_taxonomy parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_taxonomy ::Google::Cloud::Dataplex::V1::CreateDataTaxonomyRequest.new(parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only) do |response, operation|
+      c.create_data_taxonomy ::Google::Cloud::Dataplex::V1::CreateDataTaxonomyRequest.new(parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_taxonomy({ parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_data_taxonomy({ parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_taxonomy(::Google::Cloud::Dataplex::V1::CreateDataTaxonomyRequest.new(parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_data_taxonomy(::Google::Cloud::Dataplex::V1::CreateDataTaxonomyRequest.new(parent: parent, data_taxonomy_id: data_taxonomy_id, data_taxonomy: data_taxonomy, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -155,40 +155,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_data_taxonomy_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_taxonomy({ update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only }) do |response, operation|
+      c.update_data_taxonomy({ update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_taxonomy update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only do |response, operation|
+      c.update_data_taxonomy update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_taxonomy ::Google::Cloud::Dataplex::V1::UpdateDataTaxonomyRequest.new(update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only) do |response, operation|
+      c.update_data_taxonomy ::Google::Cloud::Dataplex::V1::UpdateDataTaxonomyRequest.new(update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_taxonomy({ update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_data_taxonomy({ update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_taxonomy(::Google::Cloud::Dataplex::V1::UpdateDataTaxonomyRequest.new(update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_data_taxonomy(::Google::Cloud::Dataplex::V1::UpdateDataTaxonomyRequest.new(update_mask: update_mask, data_taxonomy: data_taxonomy, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -220,40 +220,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_data_taxonomy_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_taxonomy({ name: name, etag: etag }) do |response, operation|
+      c.delete_data_taxonomy({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_taxonomy name: name, etag: etag do |response, operation|
+      c.delete_data_taxonomy name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_taxonomy ::Google::Cloud::Dataplex::V1::DeleteDataTaxonomyRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_data_taxonomy ::Google::Cloud::Dataplex::V1::DeleteDataTaxonomyRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_taxonomy({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_data_taxonomy({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_taxonomy(::Google::Cloud::Dataplex::V1::DeleteDataTaxonomyRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_data_taxonomy(::Google::Cloud::Dataplex::V1::DeleteDataTaxonomyRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -291,40 +291,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_data_taxonomies_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_taxonomies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_data_taxonomies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_taxonomies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_data_taxonomies parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_taxonomies ::Google::Cloud::Dataplex::V1::ListDataTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_data_taxonomies ::Google::Cloud::Dataplex::V1::ListDataTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_taxonomies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_data_taxonomies({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_taxonomies(::Google::Cloud::Dataplex::V1::ListDataTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_data_taxonomies(::Google::Cloud::Dataplex::V1::ListDataTaxonomiesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -354,36 +354,36 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_data_taxonomy_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_taxonomy({ name: name }) do |response, operation|
+      c.get_data_taxonomy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_taxonomy name: name do |response, operation|
+      c.get_data_taxonomy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_taxonomy ::Google::Cloud::Dataplex::V1::GetDataTaxonomyRequest.new(name: name) do |response, operation|
+      c.get_data_taxonomy ::Google::Cloud::Dataplex::V1::GetDataTaxonomyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_taxonomy({ name: name }, grpc_options) do |response, operation|
+      c.get_data_taxonomy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_taxonomy(::Google::Cloud::Dataplex::V1::GetDataTaxonomyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_taxonomy(::Google::Cloud::Dataplex::V1::GetDataTaxonomyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -418,40 +418,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_data_attribute_binding_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_attribute_binding({ parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only }) do |response, operation|
+      c.create_data_attribute_binding({ parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_attribute_binding parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only do |response, operation|
+      c.create_data_attribute_binding parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_attribute_binding ::Google::Cloud::Dataplex::V1::CreateDataAttributeBindingRequest.new(parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only) do |response, operation|
+      c.create_data_attribute_binding ::Google::Cloud::Dataplex::V1::CreateDataAttributeBindingRequest.new(parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_attribute_binding({ parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_data_attribute_binding({ parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_attribute_binding(::Google::Cloud::Dataplex::V1::CreateDataAttributeBindingRequest.new(parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_data_attribute_binding(::Google::Cloud::Dataplex::V1::CreateDataAttributeBindingRequest.new(parent: parent, data_attribute_binding_id: data_attribute_binding_id, data_attribute_binding: data_attribute_binding, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -485,40 +485,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_data_attribute_binding_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_attribute_binding({ update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only }) do |response, operation|
+      c.update_data_attribute_binding({ update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_attribute_binding update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only do |response, operation|
+      c.update_data_attribute_binding update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_attribute_binding ::Google::Cloud::Dataplex::V1::UpdateDataAttributeBindingRequest.new(update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only) do |response, operation|
+      c.update_data_attribute_binding ::Google::Cloud::Dataplex::V1::UpdateDataAttributeBindingRequest.new(update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_attribute_binding({ update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_data_attribute_binding({ update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_attribute_binding(::Google::Cloud::Dataplex::V1::UpdateDataAttributeBindingRequest.new(update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_data_attribute_binding(::Google::Cloud::Dataplex::V1::UpdateDataAttributeBindingRequest.new(update_mask: update_mask, data_attribute_binding: data_attribute_binding, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -550,40 +550,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_data_attribute_binding_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_attribute_binding({ name: name, etag: etag }) do |response, operation|
+      c.delete_data_attribute_binding({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_attribute_binding name: name, etag: etag do |response, operation|
+      c.delete_data_attribute_binding name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_attribute_binding ::Google::Cloud::Dataplex::V1::DeleteDataAttributeBindingRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_data_attribute_binding ::Google::Cloud::Dataplex::V1::DeleteDataAttributeBindingRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_attribute_binding({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_data_attribute_binding({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_attribute_binding(::Google::Cloud::Dataplex::V1::DeleteDataAttributeBindingRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_data_attribute_binding(::Google::Cloud::Dataplex::V1::DeleteDataAttributeBindingRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -621,40 +621,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_data_attribute_bindings_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_attribute_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_data_attribute_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_attribute_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_data_attribute_bindings parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_attribute_bindings ::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_data_attribute_bindings ::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_attribute_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_data_attribute_bindings({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_attribute_bindings(::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_data_attribute_bindings(::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -684,36 +684,36 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_data_attribute_binding_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_attribute_binding({ name: name }) do |response, operation|
+      c.get_data_attribute_binding({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_attribute_binding name: name do |response, operation|
+      c.get_data_attribute_binding name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_attribute_binding ::Google::Cloud::Dataplex::V1::GetDataAttributeBindingRequest.new(name: name) do |response, operation|
+      c.get_data_attribute_binding ::Google::Cloud::Dataplex::V1::GetDataAttributeBindingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_attribute_binding({ name: name }, grpc_options) do |response, operation|
+      c.get_data_attribute_binding({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_attribute_binding(::Google::Cloud::Dataplex::V1::GetDataAttributeBindingRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_attribute_binding(::Google::Cloud::Dataplex::V1::GetDataAttributeBindingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -748,40 +748,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_data_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_attribute({ parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only }) do |response, operation|
+      c.create_data_attribute({ parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_attribute parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only do |response, operation|
+      c.create_data_attribute parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_attribute ::Google::Cloud::Dataplex::V1::CreateDataAttributeRequest.new(parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only) do |response, operation|
+      c.create_data_attribute ::Google::Cloud::Dataplex::V1::CreateDataAttributeRequest.new(parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_attribute({ parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_data_attribute({ parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_attribute(::Google::Cloud::Dataplex::V1::CreateDataAttributeRequest.new(parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_data_attribute(::Google::Cloud::Dataplex::V1::CreateDataAttributeRequest.new(parent: parent, data_attribute_id: data_attribute_id, data_attribute: data_attribute, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -815,40 +815,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_data_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_attribute({ update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only }) do |response, operation|
+      c.update_data_attribute({ update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_attribute update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only do |response, operation|
+      c.update_data_attribute update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_attribute ::Google::Cloud::Dataplex::V1::UpdateDataAttributeRequest.new(update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only) do |response, operation|
+      c.update_data_attribute ::Google::Cloud::Dataplex::V1::UpdateDataAttributeRequest.new(update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_attribute({ update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.update_data_attribute({ update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_attribute(::Google::Cloud::Dataplex::V1::UpdateDataAttributeRequest.new(update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only), grpc_options) do |response, operation|
+      c.update_data_attribute(::Google::Cloud::Dataplex::V1::UpdateDataAttributeRequest.new(update_mask: update_mask, data_attribute: data_attribute, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -880,40 +880,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_data_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_attribute({ name: name, etag: etag }) do |response, operation|
+      c.delete_data_attribute({ name: name, etag: etag }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_attribute name: name, etag: etag do |response, operation|
+      c.delete_data_attribute name: name, etag: etag do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_attribute ::Google::Cloud::Dataplex::V1::DeleteDataAttributeRequest.new(name: name, etag: etag) do |response, operation|
+      c.delete_data_attribute ::Google::Cloud::Dataplex::V1::DeleteDataAttributeRequest.new(name: name, etag: etag) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_attribute({ name: name, etag: etag }, grpc_options) do |response, operation|
+      c.delete_data_attribute({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_attribute(::Google::Cloud::Dataplex::V1::DeleteDataAttributeRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+      c.delete_data_attribute(::Google::Cloud::Dataplex::V1::DeleteDataAttributeRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -951,40 +951,40 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_data_attributes_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_attributes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_data_attributes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_attributes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_data_attributes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_attributes ::Google::Cloud::Dataplex::V1::ListDataAttributesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_data_attributes ::Google::Cloud::Dataplex::V1::ListDataAttributesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_attributes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_data_attributes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_attributes(::Google::Cloud::Dataplex::V1::ListDataAttributesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_data_attributes(::Google::Cloud::Dataplex::V1::ListDataAttributesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1014,36 +1014,36 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_data_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
+      c = ::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_attribute({ name: name }) do |response, operation|
+      c.get_data_attribute({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_attribute name: name do |response, operation|
+      c.get_data_attribute name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_attribute ::Google::Cloud::Dataplex::V1::GetDataAttributeRequest.new(name: name) do |response, operation|
+      c.get_data_attribute ::Google::Cloud::Dataplex::V1::GetDataAttributeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_attribute({ name: name }, grpc_options) do |response, operation|
+      c.get_data_attribute({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_attribute(::Google::Cloud::Dataplex::V1::GetDataAttributeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_attribute(::Google::Cloud::Dataplex::V1::GetDataAttributeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

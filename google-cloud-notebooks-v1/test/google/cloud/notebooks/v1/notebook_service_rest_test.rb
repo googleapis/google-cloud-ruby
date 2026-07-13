@@ -99,32 +99,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_list_instances_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_instances_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_instances parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_instances parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_instances ::Google::Cloud::Notebooks::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_instances ::Google::Cloud::Notebooks::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_instances({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_instances(::Google::Cloud::Notebooks::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_instances(::Google::Cloud::Notebooks::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_get_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance({ name: name }) do |_result, response|
+        c.get_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance name: name do |_result, response|
+        c.get_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance ::Google::Cloud::Notebooks::V1::GetInstanceRequest.new(name: name) do |_result, response|
+        c.get_instance ::Google::Cloud::Notebooks::V1::GetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance({ name: name }, call_options) do |_result, response|
+        c.get_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance(::Google::Cloud::Notebooks::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance(::Google::Cloud::Notebooks::V1::GetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_create_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
+        c.create_instance parent: parent, instance_id: instance_id, instance: instance do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_instance ::Google::Cloud::Notebooks::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
+        c.create_instance ::Google::Cloud::Notebooks::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
+        c.create_instance({ parent: parent, instance_id: instance_id, instance: instance }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_instance(::Google::Cloud::Notebooks::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
+        c.create_instance(::Google::Cloud::Notebooks::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_register_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, register_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.register_instance({ parent: parent, instance_id: instance_id }) do |_result, response|
+        c.register_instance({ parent: parent, instance_id: instance_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.register_instance parent: parent, instance_id: instance_id do |_result, response|
+        c.register_instance parent: parent, instance_id: instance_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.register_instance ::Google::Cloud::Notebooks::V1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id) do |_result, response|
+        c.register_instance ::Google::Cloud::Notebooks::V1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.register_instance({ parent: parent, instance_id: instance_id }, call_options) do |_result, response|
+        c.register_instance({ parent: parent, instance_id: instance_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.register_instance(::Google::Cloud::Notebooks::V1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id), call_options) do |_result, response|
+        c.register_instance(::Google::Cloud::Notebooks::V1::RegisterInstanceRequest.new(parent: parent, instance_id: instance_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_set_instance_accelerator_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_instance_accelerator_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_instance_accelerator({ name: name, type: type, core_count: core_count }) do |_result, response|
+        c.set_instance_accelerator({ name: name, type: type, core_count: core_count }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_instance_accelerator name: name, type: type, core_count: core_count do |_result, response|
+        c.set_instance_accelerator name: name, type: type, core_count: core_count do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_instance_accelerator ::Google::Cloud::Notebooks::V1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count) do |_result, response|
+        c.set_instance_accelerator ::Google::Cloud::Notebooks::V1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_instance_accelerator({ name: name, type: type, core_count: core_count }, call_options) do |_result, response|
+        c.set_instance_accelerator({ name: name, type: type, core_count: core_count }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_instance_accelerator(::Google::Cloud::Notebooks::V1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count), call_options) do |_result, response|
+        c.set_instance_accelerator(::Google::Cloud::Notebooks::V1::SetInstanceAcceleratorRequest.new(name: name, type: type, core_count: core_count), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_set_instance_machine_type_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_instance_machine_type_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_instance_machine_type({ name: name, machine_type: machine_type }) do |_result, response|
+        c.set_instance_machine_type({ name: name, machine_type: machine_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_instance_machine_type name: name, machine_type: machine_type do |_result, response|
+        c.set_instance_machine_type name: name, machine_type: machine_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_instance_machine_type ::Google::Cloud::Notebooks::V1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type) do |_result, response|
+        c.set_instance_machine_type ::Google::Cloud::Notebooks::V1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_instance_machine_type({ name: name, machine_type: machine_type }, call_options) do |_result, response|
+        c.set_instance_machine_type({ name: name, machine_type: machine_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_instance_machine_type(::Google::Cloud::Notebooks::V1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type), call_options) do |_result, response|
+        c.set_instance_machine_type(::Google::Cloud::Notebooks::V1::SetInstanceMachineTypeRequest.new(name: name, machine_type: machine_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -430,32 +430,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_update_instance_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance_config({ name: name, config: config }) do |_result, response|
+        c.update_instance_config({ name: name, config: config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance_config name: name, config: config do |_result, response|
+        c.update_instance_config name: name, config: config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance_config ::Google::Cloud::Notebooks::V1::UpdateInstanceConfigRequest.new(name: name, config: config) do |_result, response|
+        c.update_instance_config ::Google::Cloud::Notebooks::V1::UpdateInstanceConfigRequest.new(name: name, config: config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance_config({ name: name, config: config }, call_options) do |_result, response|
+        c.update_instance_config({ name: name, config: config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance_config(::Google::Cloud::Notebooks::V1::UpdateInstanceConfigRequest.new(name: name, config: config), call_options) do |_result, response|
+        c.update_instance_config(::Google::Cloud::Notebooks::V1::UpdateInstanceConfigRequest.new(name: name, config: config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,32 +485,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_update_shielded_instance_config_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_shielded_instance_config_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_shielded_instance_config({ name: name, shielded_instance_config: shielded_instance_config }) do |_result, response|
+        c.update_shielded_instance_config({ name: name, shielded_instance_config: shielded_instance_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_shielded_instance_config name: name, shielded_instance_config: shielded_instance_config do |_result, response|
+        c.update_shielded_instance_config name: name, shielded_instance_config: shielded_instance_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_shielded_instance_config ::Google::Cloud::Notebooks::V1::UpdateShieldedInstanceConfigRequest.new(name: name, shielded_instance_config: shielded_instance_config) do |_result, response|
+        c.update_shielded_instance_config ::Google::Cloud::Notebooks::V1::UpdateShieldedInstanceConfigRequest.new(name: name, shielded_instance_config: shielded_instance_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_shielded_instance_config({ name: name, shielded_instance_config: shielded_instance_config }, call_options) do |_result, response|
+        c.update_shielded_instance_config({ name: name, shielded_instance_config: shielded_instance_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_shielded_instance_config(::Google::Cloud::Notebooks::V1::UpdateShieldedInstanceConfigRequest.new(name: name, shielded_instance_config: shielded_instance_config), call_options) do |_result, response|
+        c.update_shielded_instance_config(::Google::Cloud::Notebooks::V1::UpdateShieldedInstanceConfigRequest.new(name: name, shielded_instance_config: shielded_instance_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -540,32 +540,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_set_instance_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_instance_labels_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.set_instance_labels({ name: name, labels: labels }) do |_result, response|
+        c.set_instance_labels({ name: name, labels: labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.set_instance_labels name: name, labels: labels do |_result, response|
+        c.set_instance_labels name: name, labels: labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.set_instance_labels ::Google::Cloud::Notebooks::V1::SetInstanceLabelsRequest.new(name: name, labels: labels) do |_result, response|
+        c.set_instance_labels ::Google::Cloud::Notebooks::V1::SetInstanceLabelsRequest.new(name: name, labels: labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.set_instance_labels({ name: name, labels: labels }, call_options) do |_result, response|
+        c.set_instance_labels({ name: name, labels: labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.set_instance_labels(::Google::Cloud::Notebooks::V1::SetInstanceLabelsRequest.new(name: name, labels: labels), call_options) do |_result, response|
+        c.set_instance_labels(::Google::Cloud::Notebooks::V1::SetInstanceLabelsRequest.new(name: name, labels: labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -595,32 +595,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_update_instance_metadata_items_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_instance_metadata_items_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_instance_metadata_items({ name: name, items: items }) do |_result, response|
+        c.update_instance_metadata_items({ name: name, items: items }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_instance_metadata_items name: name, items: items do |_result, response|
+        c.update_instance_metadata_items name: name, items: items do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_instance_metadata_items ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new(name: name, items: items) do |_result, response|
+        c.update_instance_metadata_items ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new(name: name, items: items) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_instance_metadata_items({ name: name, items: items }, call_options) do |_result, response|
+        c.update_instance_metadata_items({ name: name, items: items }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_instance_metadata_items(::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new(name: name, items: items), call_options) do |_result, response|
+        c.update_instance_metadata_items(::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new(name: name, items: items), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -649,32 +649,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_delete_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_instance({ name: name }) do |_result, response|
+        c.delete_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_instance name: name do |_result, response|
+        c.delete_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_instance ::Google::Cloud::Notebooks::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
+        c.delete_instance ::Google::Cloud::Notebooks::V1::DeleteInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_instance({ name: name }, call_options) do |_result, response|
+        c.delete_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_instance(::Google::Cloud::Notebooks::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.delete_instance(::Google::Cloud::Notebooks::V1::DeleteInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -703,32 +703,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_start_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_instance({ name: name }) do |_result, response|
+        c.start_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_instance name: name do |_result, response|
+        c.start_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_instance ::Google::Cloud::Notebooks::V1::StartInstanceRequest.new(name: name) do |_result, response|
+        c.start_instance ::Google::Cloud::Notebooks::V1::StartInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_instance({ name: name }, call_options) do |_result, response|
+        c.start_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_instance(::Google::Cloud::Notebooks::V1::StartInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.start_instance(::Google::Cloud::Notebooks::V1::StartInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -757,32 +757,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_stop_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_instance({ name: name }) do |_result, response|
+        c.stop_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_instance name: name do |_result, response|
+        c.stop_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_instance ::Google::Cloud::Notebooks::V1::StopInstanceRequest.new(name: name) do |_result, response|
+        c.stop_instance ::Google::Cloud::Notebooks::V1::StopInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_instance({ name: name }, call_options) do |_result, response|
+        c.stop_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_instance(::Google::Cloud::Notebooks::V1::StopInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.stop_instance(::Google::Cloud::Notebooks::V1::StopInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -811,32 +811,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_reset_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reset_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reset_instance({ name: name }) do |_result, response|
+        c.reset_instance({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reset_instance name: name do |_result, response|
+        c.reset_instance name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reset_instance ::Google::Cloud::Notebooks::V1::ResetInstanceRequest.new(name: name) do |_result, response|
+        c.reset_instance ::Google::Cloud::Notebooks::V1::ResetInstanceRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reset_instance({ name: name }, call_options) do |_result, response|
+        c.reset_instance({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reset_instance(::Google::Cloud::Notebooks::V1::ResetInstanceRequest.new(name: name), call_options) do |_result, response|
+        c.reset_instance(::Google::Cloud::Notebooks::V1::ResetInstanceRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -867,32 +867,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_report_instance_info_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_instance_info_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }) do |_result, response|
+        c.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report_instance_info name: name, vm_id: vm_id, metadata: metadata do |_result, response|
+        c.report_instance_info name: name, vm_id: vm_id, metadata: metadata do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report_instance_info ::Google::Cloud::Notebooks::V1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata) do |_result, response|
+        c.report_instance_info ::Google::Cloud::Notebooks::V1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }, call_options) do |_result, response|
+        c.report_instance_info({ name: name, vm_id: vm_id, metadata: metadata }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report_instance_info(::Google::Cloud::Notebooks::V1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata), call_options) do |_result, response|
+        c.report_instance_info(::Google::Cloud::Notebooks::V1::ReportInstanceInfoRequest.new(name: name, vm_id: vm_id, metadata: metadata), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -922,32 +922,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_is_instance_upgradeable_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, is_instance_upgradeable_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.is_instance_upgradeable({ notebook_instance: notebook_instance, type: type }) do |_result, response|
+        c.is_instance_upgradeable({ notebook_instance: notebook_instance, type: type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.is_instance_upgradeable notebook_instance: notebook_instance, type: type do |_result, response|
+        c.is_instance_upgradeable notebook_instance: notebook_instance, type: type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.is_instance_upgradeable ::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance, type: type) do |_result, response|
+        c.is_instance_upgradeable ::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance, type: type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.is_instance_upgradeable({ notebook_instance: notebook_instance, type: type }, call_options) do |_result, response|
+        c.is_instance_upgradeable({ notebook_instance: notebook_instance, type: type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.is_instance_upgradeable(::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance, type: type), call_options) do |_result, response|
+        c.is_instance_upgradeable(::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance, type: type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -976,32 +976,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_get_instance_health_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_instance_health_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_instance_health({ name: name }) do |_result, response|
+        c.get_instance_health({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_instance_health name: name do |_result, response|
+        c.get_instance_health name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_instance_health ::Google::Cloud::Notebooks::V1::GetInstanceHealthRequest.new(name: name) do |_result, response|
+        c.get_instance_health ::Google::Cloud::Notebooks::V1::GetInstanceHealthRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_instance_health({ name: name }, call_options) do |_result, response|
+        c.get_instance_health({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_instance_health(::Google::Cloud::Notebooks::V1::GetInstanceHealthRequest.new(name: name), call_options) do |_result, response|
+        c.get_instance_health(::Google::Cloud::Notebooks::V1::GetInstanceHealthRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1031,32 +1031,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_upgrade_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upgrade_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upgrade_instance({ name: name, type: type }) do |_result, response|
+        c.upgrade_instance({ name: name, type: type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upgrade_instance name: name, type: type do |_result, response|
+        c.upgrade_instance name: name, type: type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upgrade_instance ::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name, type: type) do |_result, response|
+        c.upgrade_instance ::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name, type: type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upgrade_instance({ name: name, type: type }, call_options) do |_result, response|
+        c.upgrade_instance({ name: name, type: type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upgrade_instance(::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name, type: type), call_options) do |_result, response|
+        c.upgrade_instance(::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name, type: type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1086,32 +1086,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_rollback_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, rollback_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.rollback_instance({ name: name, target_snapshot: target_snapshot }) do |_result, response|
+        c.rollback_instance({ name: name, target_snapshot: target_snapshot }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.rollback_instance name: name, target_snapshot: target_snapshot do |_result, response|
+        c.rollback_instance name: name, target_snapshot: target_snapshot do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.rollback_instance ::Google::Cloud::Notebooks::V1::RollbackInstanceRequest.new(name: name, target_snapshot: target_snapshot) do |_result, response|
+        c.rollback_instance ::Google::Cloud::Notebooks::V1::RollbackInstanceRequest.new(name: name, target_snapshot: target_snapshot) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.rollback_instance({ name: name, target_snapshot: target_snapshot }, call_options) do |_result, response|
+        c.rollback_instance({ name: name, target_snapshot: target_snapshot }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.rollback_instance(::Google::Cloud::Notebooks::V1::RollbackInstanceRequest.new(name: name, target_snapshot: target_snapshot), call_options) do |_result, response|
+        c.rollback_instance(::Google::Cloud::Notebooks::V1::RollbackInstanceRequest.new(name: name, target_snapshot: target_snapshot), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1141,32 +1141,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_diagnose_instance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, diagnose_instance_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.diagnose_instance({ name: name, diagnostic_config: diagnostic_config }) do |_result, response|
+        c.diagnose_instance({ name: name, diagnostic_config: diagnostic_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_instance name: name, diagnostic_config: diagnostic_config do |_result, response|
+        c.diagnose_instance name: name, diagnostic_config: diagnostic_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_instance ::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest.new(name: name, diagnostic_config: diagnostic_config) do |_result, response|
+        c.diagnose_instance ::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest.new(name: name, diagnostic_config: diagnostic_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_instance({ name: name, diagnostic_config: diagnostic_config }, call_options) do |_result, response|
+        c.diagnose_instance({ name: name, diagnostic_config: diagnostic_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_instance(::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest.new(name: name, diagnostic_config: diagnostic_config), call_options) do |_result, response|
+        c.diagnose_instance(::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest.new(name: name, diagnostic_config: diagnostic_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1197,32 +1197,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_upgrade_instance_internal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upgrade_instance_internal_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upgrade_instance_internal({ name: name, vm_id: vm_id, type: type }) do |_result, response|
+        c.upgrade_instance_internal({ name: name, vm_id: vm_id, type: type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upgrade_instance_internal name: name, vm_id: vm_id, type: type do |_result, response|
+        c.upgrade_instance_internal name: name, vm_id: vm_id, type: type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upgrade_instance_internal ::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id, type: type) do |_result, response|
+        c.upgrade_instance_internal ::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id, type: type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upgrade_instance_internal({ name: name, vm_id: vm_id, type: type }, call_options) do |_result, response|
+        c.upgrade_instance_internal({ name: name, vm_id: vm_id, type: type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upgrade_instance_internal(::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id, type: type), call_options) do |_result, response|
+        c.upgrade_instance_internal(::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id, type: type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1253,32 +1253,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_list_environments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_environments_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_environments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_environments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_environments ::Google::Cloud::Notebooks::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_environments ::Google::Cloud::Notebooks::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_environments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_environments(::Google::Cloud::Notebooks::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_environments(::Google::Cloud::Notebooks::V1::ListEnvironmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1307,32 +1307,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_get_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_environment({ name: name }) do |_result, response|
+        c.get_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_environment name: name do |_result, response|
+        c.get_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_environment ::Google::Cloud::Notebooks::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
+        c.get_environment ::Google::Cloud::Notebooks::V1::GetEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_environment({ name: name }, call_options) do |_result, response|
+        c.get_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_environment(::Google::Cloud::Notebooks::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.get_environment(::Google::Cloud::Notebooks::V1::GetEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1363,32 +1363,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_create_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_environment({ parent: parent, environment_id: environment_id, environment: environment }) do |_result, response|
+        c.create_environment({ parent: parent, environment_id: environment_id, environment: environment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_environment parent: parent, environment_id: environment_id, environment: environment do |_result, response|
+        c.create_environment parent: parent, environment_id: environment_id, environment: environment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_environment ::Google::Cloud::Notebooks::V1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment) do |_result, response|
+        c.create_environment ::Google::Cloud::Notebooks::V1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_environment({ parent: parent, environment_id: environment_id, environment: environment }, call_options) do |_result, response|
+        c.create_environment({ parent: parent, environment_id: environment_id, environment: environment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_environment(::Google::Cloud::Notebooks::V1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment), call_options) do |_result, response|
+        c.create_environment(::Google::Cloud::Notebooks::V1::CreateEnvironmentRequest.new(parent: parent, environment_id: environment_id, environment: environment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1417,32 +1417,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_delete_environment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_environment_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_environment({ name: name }) do |_result, response|
+        c.delete_environment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_environment name: name do |_result, response|
+        c.delete_environment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_environment ::Google::Cloud::Notebooks::V1::DeleteEnvironmentRequest.new(name: name) do |_result, response|
+        c.delete_environment ::Google::Cloud::Notebooks::V1::DeleteEnvironmentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_environment({ name: name }, call_options) do |_result, response|
+        c.delete_environment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_environment(::Google::Cloud::Notebooks::V1::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_environment(::Google::Cloud::Notebooks::V1::DeleteEnvironmentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1475,32 +1475,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_list_schedules_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_schedules_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_schedules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_schedules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_schedules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_schedules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_schedules ::Google::Cloud::Notebooks::V1::ListSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_schedules ::Google::Cloud::Notebooks::V1::ListSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_schedules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_schedules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_schedules(::Google::Cloud::Notebooks::V1::ListSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_schedules(::Google::Cloud::Notebooks::V1::ListSchedulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1529,32 +1529,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_get_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_schedule({ name: name }) do |_result, response|
+        c.get_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_schedule name: name do |_result, response|
+        c.get_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_schedule ::Google::Cloud::Notebooks::V1::GetScheduleRequest.new(name: name) do |_result, response|
+        c.get_schedule ::Google::Cloud::Notebooks::V1::GetScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_schedule({ name: name }, call_options) do |_result, response|
+        c.get_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_schedule(::Google::Cloud::Notebooks::V1::GetScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.get_schedule(::Google::Cloud::Notebooks::V1::GetScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1583,32 +1583,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_delete_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_schedule({ name: name }) do |_result, response|
+        c.delete_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_schedule name: name do |_result, response|
+        c.delete_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_schedule ::Google::Cloud::Notebooks::V1::DeleteScheduleRequest.new(name: name) do |_result, response|
+        c.delete_schedule ::Google::Cloud::Notebooks::V1::DeleteScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_schedule({ name: name }, call_options) do |_result, response|
+        c.delete_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_schedule(::Google::Cloud::Notebooks::V1::DeleteScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.delete_schedule(::Google::Cloud::Notebooks::V1::DeleteScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1639,32 +1639,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_create_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_schedule({ parent: parent, schedule_id: schedule_id, schedule: schedule }) do |_result, response|
+        c.create_schedule({ parent: parent, schedule_id: schedule_id, schedule: schedule }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_schedule parent: parent, schedule_id: schedule_id, schedule: schedule do |_result, response|
+        c.create_schedule parent: parent, schedule_id: schedule_id, schedule: schedule do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_schedule ::Google::Cloud::Notebooks::V1::CreateScheduleRequest.new(parent: parent, schedule_id: schedule_id, schedule: schedule) do |_result, response|
+        c.create_schedule ::Google::Cloud::Notebooks::V1::CreateScheduleRequest.new(parent: parent, schedule_id: schedule_id, schedule: schedule) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_schedule({ parent: parent, schedule_id: schedule_id, schedule: schedule }, call_options) do |_result, response|
+        c.create_schedule({ parent: parent, schedule_id: schedule_id, schedule: schedule }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_schedule(::Google::Cloud::Notebooks::V1::CreateScheduleRequest.new(parent: parent, schedule_id: schedule_id, schedule: schedule), call_options) do |_result, response|
+        c.create_schedule(::Google::Cloud::Notebooks::V1::CreateScheduleRequest.new(parent: parent, schedule_id: schedule_id, schedule: schedule), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1693,32 +1693,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_trigger_schedule_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, trigger_schedule_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.trigger_schedule({ name: name }) do |_result, response|
+        c.trigger_schedule({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.trigger_schedule name: name do |_result, response|
+        c.trigger_schedule name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.trigger_schedule ::Google::Cloud::Notebooks::V1::TriggerScheduleRequest.new(name: name) do |_result, response|
+        c.trigger_schedule ::Google::Cloud::Notebooks::V1::TriggerScheduleRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.trigger_schedule({ name: name }, call_options) do |_result, response|
+        c.trigger_schedule({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.trigger_schedule(::Google::Cloud::Notebooks::V1::TriggerScheduleRequest.new(name: name), call_options) do |_result, response|
+        c.trigger_schedule(::Google::Cloud::Notebooks::V1::TriggerScheduleRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1751,32 +1751,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_list_executions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_executions_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_executions ::Google::Cloud::Notebooks::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_executions ::Google::Cloud::Notebooks::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_executions(::Google::Cloud::Notebooks::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_executions(::Google::Cloud::Notebooks::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1805,32 +1805,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_get_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_execution({ name: name }) do |_result, response|
+        c.get_execution({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_execution name: name do |_result, response|
+        c.get_execution name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_execution ::Google::Cloud::Notebooks::V1::GetExecutionRequest.new(name: name) do |_result, response|
+        c.get_execution ::Google::Cloud::Notebooks::V1::GetExecutionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_execution({ name: name }, call_options) do |_result, response|
+        c.get_execution({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_execution(::Google::Cloud::Notebooks::V1::GetExecutionRequest.new(name: name), call_options) do |_result, response|
+        c.get_execution(::Google::Cloud::Notebooks::V1::GetExecutionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1859,32 +1859,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_delete_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_execution({ name: name }) do |_result, response|
+        c.delete_execution({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_execution name: name do |_result, response|
+        c.delete_execution name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_execution ::Google::Cloud::Notebooks::V1::DeleteExecutionRequest.new(name: name) do |_result, response|
+        c.delete_execution ::Google::Cloud::Notebooks::V1::DeleteExecutionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_execution({ name: name }, call_options) do |_result, response|
+        c.delete_execution({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_execution(::Google::Cloud::Notebooks::V1::DeleteExecutionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_execution(::Google::Cloud::Notebooks::V1::DeleteExecutionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1915,32 +1915,32 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ServiceStub.stub :transcode_create_execution_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_execution_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::NotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_execution({ parent: parent, execution_id: execution_id, execution: execution }) do |_result, response|
+        c.create_execution({ parent: parent, execution_id: execution_id, execution: execution }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_execution parent: parent, execution_id: execution_id, execution: execution do |_result, response|
+        c.create_execution parent: parent, execution_id: execution_id, execution: execution do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_execution ::Google::Cloud::Notebooks::V1::CreateExecutionRequest.new(parent: parent, execution_id: execution_id, execution: execution) do |_result, response|
+        c.create_execution ::Google::Cloud::Notebooks::V1::CreateExecutionRequest.new(parent: parent, execution_id: execution_id, execution: execution) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_execution({ parent: parent, execution_id: execution_id, execution: execution }, call_options) do |_result, response|
+        c.create_execution({ parent: parent, execution_id: execution_id, execution: execution }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_execution(::Google::Cloud::Notebooks::V1::CreateExecutionRequest.new(parent: parent, execution_id: execution_id, execution: execution), call_options) do |_result, response|
+        c.create_execution(::Google::Cloud::Notebooks::V1::CreateExecutionRequest.new(parent: parent, execution_id: execution_id, execution: execution), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

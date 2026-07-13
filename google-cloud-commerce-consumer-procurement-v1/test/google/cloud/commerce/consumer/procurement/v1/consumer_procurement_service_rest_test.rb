@@ -100,32 +100,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::ServiceStub.stub :transcode_place_order_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, place_order_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }) do |_result, response|
+        c.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.place_order parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id do |_result, response|
+        c.place_order parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.place_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id) do |_result, response|
+        c.place_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }, call_options) do |_result, response|
+        c.place_order({ parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.place_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id), call_options) do |_result, response|
+        c.place_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new(parent: parent, display_name: display_name, line_item_info: line_item_info, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::ServiceStub.stub :transcode_get_order_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_order_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_order({ name: name }) do |_result, response|
+        c.get_order({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_order name: name do |_result, response|
+        c.get_order name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name) do |_result, response|
+        c.get_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_order({ name: name }, call_options) do |_result, response|
+        c.get_order({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name), call_options) do |_result, response|
+        c.get_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::GetOrderRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::ServiceStub.stub :transcode_list_orders_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_orders_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_orders parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_orders ::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_orders ::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_orders({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_orders(::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_orders(::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -268,32 +268,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::ServiceStub.stub :transcode_modify_order_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, modify_order_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }) do |_result, response|
+        c.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.modify_order name: name, modifications: modifications, display_name: display_name, etag: etag do |_result, response|
+        c.modify_order name: name, modifications: modifications, display_name: display_name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.modify_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag) do |_result, response|
+        c.modify_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }, call_options) do |_result, response|
+        c.modify_order({ name: name, modifications: modifications, display_name: display_name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.modify_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag), call_options) do |_result, response|
+        c.modify_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new(name: name, modifications: modifications, display_name: display_name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -324,32 +324,32 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::ServiceStub.stub :transcode_cancel_order_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_order_client_stub do
         # Create client
-        client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }) do |_result, response|
+        c.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_order name: name, etag: etag, cancellation_policy: cancellation_policy do |_result, response|
+        c.cancel_order name: name, etag: etag, cancellation_policy: cancellation_policy do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy) do |_result, response|
+        c.cancel_order ::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }, call_options) do |_result, response|
+        c.cancel_order({ name: name, etag: etag, cancellation_policy: cancellation_policy }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy), call_options) do |_result, response|
+        c.cancel_order(::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new(name: name, etag: etag, cancellation_policy: cancellation_policy), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -82,36 +82,36 @@ class ::Google::Cloud::Chronicle::V1::BigQueryExportService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_big_query_export({ name: name }) do |response, operation|
+      c.get_big_query_export({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_big_query_export name: name do |response, operation|
+      c.get_big_query_export name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_big_query_export ::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name) do |response, operation|
+      c.get_big_query_export ::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_big_query_export({ name: name }, grpc_options) do |response, operation|
+      c.get_big_query_export({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_big_query_export(::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_big_query_export(::Google::Cloud::Chronicle::V1::GetBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::Chronicle::V1::BigQueryExportService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |response, operation|
+      c.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |response, operation|
+      c.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_big_query_export ::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |response, operation|
+      c.update_big_query_export ::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_big_query_export(::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_big_query_export(::Google::Cloud::Chronicle::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Cloud::Chronicle::V1::BigQueryExportService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, provision_big_query_export_client_stub do
       # Create client
-      client = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
+      c = ::Google::Cloud::Chronicle::V1::BigQueryExportService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.provision_big_query_export({ parent: parent }) do |response, operation|
+      c.provision_big_query_export({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.provision_big_query_export parent: parent do |response, operation|
+      c.provision_big_query_export parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.provision_big_query_export ::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent) do |response, operation|
+      c.provision_big_query_export ::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.provision_big_query_export({ parent: parent }, grpc_options) do |response, operation|
+      c.provision_big_query_export({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.provision_big_query_export(::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.provision_big_query_export(::Google::Cloud::Chronicle::V1::ProvisionBigQueryExportRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -51,6 +51,8 @@ module Google
             rpc :GetDataScanJob, ::Google::Cloud::Dataplex::V1::GetDataScanJobRequest, ::Google::Cloud::Dataplex::V1::DataScanJob
             # Lists DataScanJobs under the given DataScan.
             rpc :ListDataScanJobs, ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest, ::Google::Cloud::Dataplex::V1::ListDataScanJobsResponse
+            # Cancels a running/pending DataScan job.
+            rpc :CancelDataScanJob, ::Google::Cloud::Dataplex::V1::CancelDataScanJobRequest, ::Google::Cloud::Dataplex::V1::CancelDataScanJobResponse
             # Generates recommended data quality rules based on the results of a data
             # profiling scan.
             #

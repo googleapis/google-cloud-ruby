@@ -103,32 +103,32 @@ class ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Rest::ClientT
     ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Rest::ServiceStub.stub :transcode_recommend_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, recommend_client_stub do
         # Create client
-        client = ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::DiscoveryEngine::V1::RecommendationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }) do |_result, response|
+        c.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.recommend serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels do |_result, response|
+        c.recommend serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.recommend ::Google::Cloud::DiscoveryEngine::V1::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels) do |_result, response|
+        c.recommend ::Google::Cloud::DiscoveryEngine::V1::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }, call_options) do |_result, response|
+        c.recommend({ serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.recommend(::Google::Cloud::DiscoveryEngine::V1::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels), call_options) do |_result, response|
+        c.recommend(::Google::Cloud::DiscoveryEngine::V1::RecommendRequest.new(serving_config: serving_config, user_event: user_event, page_size: page_size, filter: filter, validate_only: validate_only, params: params, user_labels: user_labels), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

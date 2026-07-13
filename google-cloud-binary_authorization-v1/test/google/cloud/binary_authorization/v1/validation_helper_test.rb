@@ -88,36 +88,36 @@ class ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::ClientTest < M
 
     Gapic::ServiceStub.stub :new, validate_attestation_occurrence_client_stub do
       # Create client
-      client = ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client.new do |config|
+      c = ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.validate_attestation_occurrence({ attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri }) do |response, operation|
+      c.validate_attestation_occurrence({ attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.validate_attestation_occurrence attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri do |response, operation|
+      c.validate_attestation_occurrence attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.validate_attestation_occurrence ::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest.new(attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri) do |response, operation|
+      c.validate_attestation_occurrence ::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest.new(attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.validate_attestation_occurrence({ attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri }, grpc_options) do |response, operation|
+      c.validate_attestation_occurrence({ attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.validate_attestation_occurrence(::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest.new(attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri), grpc_options) do |response, operation|
+      c.validate_attestation_occurrence(::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest.new(attestor: attestor, attestation: attestation, occurrence_note: occurrence_note, occurrence_resource_uri: occurrence_resource_uri), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

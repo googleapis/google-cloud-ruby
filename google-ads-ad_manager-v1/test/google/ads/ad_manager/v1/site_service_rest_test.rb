@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_get_site_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_site_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_site({ name: name }) do |_result, response|
+        c.get_site({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_site name: name do |_result, response|
+        c.get_site name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_site ::Google::Ads::AdManager::V1::GetSiteRequest.new(name: name) do |_result, response|
+        c.get_site ::Google::Ads::AdManager::V1::GetSiteRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_site({ name: name }, call_options) do |_result, response|
+        c.get_site({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_site(::Google::Ads::AdManager::V1::GetSiteRequest.new(name: name), call_options) do |_result, response|
+        c.get_site(::Google::Ads::AdManager::V1::GetSiteRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_list_sites_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_sites_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_sites parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_sites parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_sites ::Google::Ads::AdManager::V1::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_sites ::Google::Ads::AdManager::V1::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_sites({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_sites(::Google::Ads::AdManager::V1::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_sites(::Google::Ads::AdManager::V1::ListSitesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_create_site_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_site_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_site({ parent: parent, site: site }) do |_result, response|
+        c.create_site({ parent: parent, site: site }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_site parent: parent, site: site do |_result, response|
+        c.create_site parent: parent, site: site do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_site ::Google::Ads::AdManager::V1::CreateSiteRequest.new(parent: parent, site: site) do |_result, response|
+        c.create_site ::Google::Ads::AdManager::V1::CreateSiteRequest.new(parent: parent, site: site) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_site({ parent: parent, site: site }, call_options) do |_result, response|
+        c.create_site({ parent: parent, site: site }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_site(::Google::Ads::AdManager::V1::CreateSiteRequest.new(parent: parent, site: site), call_options) do |_result, response|
+        c.create_site(::Google::Ads::AdManager::V1::CreateSiteRequest.new(parent: parent, site: site), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_batch_create_sites_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_create_sites_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_create_sites({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_create_sites({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_create_sites parent: parent, requests: requests do |_result, response|
+        c.batch_create_sites parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_create_sites ::Google::Ads::AdManager::V1::BatchCreateSitesRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_create_sites ::Google::Ads::AdManager::V1::BatchCreateSitesRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_create_sites({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_create_sites({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_create_sites(::Google::Ads::AdManager::V1::BatchCreateSitesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_create_sites(::Google::Ads::AdManager::V1::BatchCreateSitesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_update_site_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_site_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_site({ site: site, update_mask: update_mask }) do |_result, response|
+        c.update_site({ site: site, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_site site: site, update_mask: update_mask do |_result, response|
+        c.update_site site: site, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_site ::Google::Ads::AdManager::V1::UpdateSiteRequest.new(site: site, update_mask: update_mask) do |_result, response|
+        c.update_site ::Google::Ads::AdManager::V1::UpdateSiteRequest.new(site: site, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_site({ site: site, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_site({ site: site, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_site(::Google::Ads::AdManager::V1::UpdateSiteRequest.new(site: site, update_mask: update_mask), call_options) do |_result, response|
+        c.update_site(::Google::Ads::AdManager::V1::UpdateSiteRequest.new(site: site, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_batch_update_sites_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_update_sites_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_update_sites({ parent: parent, requests: requests }) do |_result, response|
+        c.batch_update_sites({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_update_sites parent: parent, requests: requests do |_result, response|
+        c.batch_update_sites parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_update_sites ::Google::Ads::AdManager::V1::BatchUpdateSitesRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.batch_update_sites ::Google::Ads::AdManager::V1::BatchUpdateSitesRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_update_sites({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.batch_update_sites({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_update_sites(::Google::Ads::AdManager::V1::BatchUpdateSitesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.batch_update_sites(::Google::Ads::AdManager::V1::BatchUpdateSitesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_batch_deactivate_sites_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_deactivate_sites_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_deactivate_sites({ parent: parent, names: names }) do |_result, response|
+        c.batch_deactivate_sites({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_deactivate_sites parent: parent, names: names do |_result, response|
+        c.batch_deactivate_sites parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_deactivate_sites ::Google::Ads::AdManager::V1::BatchDeactivateSitesRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_deactivate_sites ::Google::Ads::AdManager::V1::BatchDeactivateSitesRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_deactivate_sites({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_deactivate_sites({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_deactivate_sites(::Google::Ads::AdManager::V1::BatchDeactivateSitesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_deactivate_sites(::Google::Ads::AdManager::V1::BatchDeactivateSitesRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -486,32 +486,32 @@ class ::Google::Ads::AdManager::V1::SiteService::Rest::ClientTest < Minitest::Te
     ::Google::Ads::AdManager::V1::SiteService::Rest::ServiceStub.stub :transcode_batch_submit_sites_for_approval_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_submit_sites_for_approval_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::SiteService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_submit_sites_for_approval({ parent: parent, names: names }) do |_result, response|
+        c.batch_submit_sites_for_approval({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_submit_sites_for_approval parent: parent, names: names do |_result, response|
+        c.batch_submit_sites_for_approval parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_submit_sites_for_approval ::Google::Ads::AdManager::V1::BatchSubmitSitesForApprovalRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_submit_sites_for_approval ::Google::Ads::AdManager::V1::BatchSubmitSitesForApprovalRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_submit_sites_for_approval({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_submit_sites_for_approval({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_submit_sites_for_approval(::Google::Ads::AdManager::V1::BatchSubmitSitesForApprovalRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_submit_sites_for_approval(::Google::Ads::AdManager::V1::BatchSubmitSitesForApprovalRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

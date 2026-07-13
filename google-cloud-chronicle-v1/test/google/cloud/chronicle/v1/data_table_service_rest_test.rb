@@ -99,32 +99,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_create_data_table_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_table_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_table({ parent: parent, data_table: data_table, data_table_id: data_table_id }) do |_result, response|
+        c.create_data_table({ parent: parent, data_table: data_table, data_table_id: data_table_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_table parent: parent, data_table: data_table, data_table_id: data_table_id do |_result, response|
+        c.create_data_table parent: parent, data_table: data_table, data_table_id: data_table_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_table ::Google::Cloud::Chronicle::V1::CreateDataTableRequest.new(parent: parent, data_table: data_table, data_table_id: data_table_id) do |_result, response|
+        c.create_data_table ::Google::Cloud::Chronicle::V1::CreateDataTableRequest.new(parent: parent, data_table: data_table, data_table_id: data_table_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_table({ parent: parent, data_table: data_table, data_table_id: data_table_id }, call_options) do |_result, response|
+        c.create_data_table({ parent: parent, data_table: data_table, data_table_id: data_table_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_table(::Google::Cloud::Chronicle::V1::CreateDataTableRequest.new(parent: parent, data_table: data_table, data_table_id: data_table_id), call_options) do |_result, response|
+        c.create_data_table(::Google::Cloud::Chronicle::V1::CreateDataTableRequest.new(parent: parent, data_table: data_table, data_table_id: data_table_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_list_data_tables_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_tables_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_tables({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
+        c.list_data_tables({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_tables parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
+        c.list_data_tables parent: parent, page_size: page_size, page_token: page_token, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_tables ::Google::Cloud::Chronicle::V1::ListDataTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
+        c.list_data_tables ::Google::Cloud::Chronicle::V1::ListDataTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_tables({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
+        c.list_data_tables({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_tables(::Google::Cloud::Chronicle::V1::ListDataTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
+        c.list_data_tables(::Google::Cloud::Chronicle::V1::ListDataTablesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_get_data_table_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_table_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_table({ name: name }) do |_result, response|
+        c.get_data_table({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_table name: name do |_result, response|
+        c.get_data_table name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_table ::Google::Cloud::Chronicle::V1::GetDataTableRequest.new(name: name) do |_result, response|
+        c.get_data_table ::Google::Cloud::Chronicle::V1::GetDataTableRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_table({ name: name }, call_options) do |_result, response|
+        c.get_data_table({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_table(::Google::Cloud::Chronicle::V1::GetDataTableRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_table(::Google::Cloud::Chronicle::V1::GetDataTableRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,32 +265,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_update_data_table_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_table_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_table({ data_table: data_table, update_mask: update_mask }) do |_result, response|
+        c.update_data_table({ data_table: data_table, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_table data_table: data_table, update_mask: update_mask do |_result, response|
+        c.update_data_table data_table: data_table, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_table ::Google::Cloud::Chronicle::V1::UpdateDataTableRequest.new(data_table: data_table, update_mask: update_mask) do |_result, response|
+        c.update_data_table ::Google::Cloud::Chronicle::V1::UpdateDataTableRequest.new(data_table: data_table, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_table({ data_table: data_table, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_data_table({ data_table: data_table, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_table(::Google::Cloud::Chronicle::V1::UpdateDataTableRequest.new(data_table: data_table, update_mask: update_mask), call_options) do |_result, response|
+        c.update_data_table(::Google::Cloud::Chronicle::V1::UpdateDataTableRequest.new(data_table: data_table, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -320,32 +320,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_delete_data_table_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_table_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_table({ name: name, force: force }) do |_result, response|
+        c.delete_data_table({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_table name: name, force: force do |_result, response|
+        c.delete_data_table name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_table ::Google::Cloud::Chronicle::V1::DeleteDataTableRequest.new(name: name, force: force) do |_result, response|
+        c.delete_data_table ::Google::Cloud::Chronicle::V1::DeleteDataTableRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_table({ name: name, force: force }, call_options) do |_result, response|
+        c.delete_data_table({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_table(::Google::Cloud::Chronicle::V1::DeleteDataTableRequest.new(name: name, force: force), call_options) do |_result, response|
+        c.delete_data_table(::Google::Cloud::Chronicle::V1::DeleteDataTableRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -375,32 +375,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_create_data_table_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_data_table_row_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_data_table_row({ parent: parent, data_table_row: data_table_row }) do |_result, response|
+        c.create_data_table_row({ parent: parent, data_table_row: data_table_row }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_table_row parent: parent, data_table_row: data_table_row do |_result, response|
+        c.create_data_table_row parent: parent, data_table_row: data_table_row do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_table_row ::Google::Cloud::Chronicle::V1::CreateDataTableRowRequest.new(parent: parent, data_table_row: data_table_row) do |_result, response|
+        c.create_data_table_row ::Google::Cloud::Chronicle::V1::CreateDataTableRowRequest.new(parent: parent, data_table_row: data_table_row) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_table_row({ parent: parent, data_table_row: data_table_row }, call_options) do |_result, response|
+        c.create_data_table_row({ parent: parent, data_table_row: data_table_row }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_table_row(::Google::Cloud::Chronicle::V1::CreateDataTableRowRequest.new(parent: parent, data_table_row: data_table_row), call_options) do |_result, response|
+        c.create_data_table_row(::Google::Cloud::Chronicle::V1::CreateDataTableRowRequest.new(parent: parent, data_table_row: data_table_row), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -430,32 +430,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_update_data_table_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_data_table_row_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_data_table_row({ data_table_row: data_table_row, update_mask: update_mask }) do |_result, response|
+        c.update_data_table_row({ data_table_row: data_table_row, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_data_table_row data_table_row: data_table_row, update_mask: update_mask do |_result, response|
+        c.update_data_table_row data_table_row: data_table_row, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_data_table_row ::Google::Cloud::Chronicle::V1::UpdateDataTableRowRequest.new(data_table_row: data_table_row, update_mask: update_mask) do |_result, response|
+        c.update_data_table_row ::Google::Cloud::Chronicle::V1::UpdateDataTableRowRequest.new(data_table_row: data_table_row, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_data_table_row({ data_table_row: data_table_row, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_data_table_row({ data_table_row: data_table_row, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_data_table_row(::Google::Cloud::Chronicle::V1::UpdateDataTableRowRequest.new(data_table_row: data_table_row, update_mask: update_mask), call_options) do |_result, response|
+        c.update_data_table_row(::Google::Cloud::Chronicle::V1::UpdateDataTableRowRequest.new(data_table_row: data_table_row, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_list_data_table_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_data_table_rows_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_data_table_rows({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        c.list_data_table_rows({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_table_rows parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        c.list_data_table_rows parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_table_rows ::Google::Cloud::Chronicle::V1::ListDataTableRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        c.list_data_table_rows ::Google::Cloud::Chronicle::V1::ListDataTableRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_table_rows({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        c.list_data_table_rows({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_table_rows(::Google::Cloud::Chronicle::V1::ListDataTableRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        c.list_data_table_rows(::Google::Cloud::Chronicle::V1::ListDataTableRowsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,32 +542,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_get_data_table_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_table_row_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_table_row({ name: name }) do |_result, response|
+        c.get_data_table_row({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_table_row name: name do |_result, response|
+        c.get_data_table_row name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_table_row ::Google::Cloud::Chronicle::V1::GetDataTableRowRequest.new(name: name) do |_result, response|
+        c.get_data_table_row ::Google::Cloud::Chronicle::V1::GetDataTableRowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_table_row({ name: name }, call_options) do |_result, response|
+        c.get_data_table_row({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_table_row(::Google::Cloud::Chronicle::V1::GetDataTableRowRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_table_row(::Google::Cloud::Chronicle::V1::GetDataTableRowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -596,32 +596,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_delete_data_table_row_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_data_table_row_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_data_table_row({ name: name }) do |_result, response|
+        c.delete_data_table_row({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_data_table_row name: name do |_result, response|
+        c.delete_data_table_row name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_data_table_row ::Google::Cloud::Chronicle::V1::DeleteDataTableRowRequest.new(name: name) do |_result, response|
+        c.delete_data_table_row ::Google::Cloud::Chronicle::V1::DeleteDataTableRowRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_data_table_row({ name: name }, call_options) do |_result, response|
+        c.delete_data_table_row({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_data_table_row(::Google::Cloud::Chronicle::V1::DeleteDataTableRowRequest.new(name: name), call_options) do |_result, response|
+        c.delete_data_table_row(::Google::Cloud::Chronicle::V1::DeleteDataTableRowRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -651,32 +651,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_bulk_create_data_table_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, bulk_create_data_table_rows_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.bulk_create_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
+        c.bulk_create_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.bulk_create_data_table_rows parent: parent, requests: requests do |_result, response|
+        c.bulk_create_data_table_rows parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.bulk_create_data_table_rows ::Google::Cloud::Chronicle::V1::BulkCreateDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.bulk_create_data_table_rows ::Google::Cloud::Chronicle::V1::BulkCreateDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.bulk_create_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.bulk_create_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.bulk_create_data_table_rows(::Google::Cloud::Chronicle::V1::BulkCreateDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.bulk_create_data_table_rows(::Google::Cloud::Chronicle::V1::BulkCreateDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -706,32 +706,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_bulk_get_data_table_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, bulk_get_data_table_rows_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.bulk_get_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
+        c.bulk_get_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.bulk_get_data_table_rows parent: parent, requests: requests do |_result, response|
+        c.bulk_get_data_table_rows parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.bulk_get_data_table_rows ::Google::Cloud::Chronicle::V1::BulkGetDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.bulk_get_data_table_rows ::Google::Cloud::Chronicle::V1::BulkGetDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.bulk_get_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.bulk_get_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.bulk_get_data_table_rows(::Google::Cloud::Chronicle::V1::BulkGetDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.bulk_get_data_table_rows(::Google::Cloud::Chronicle::V1::BulkGetDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,32 +761,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_bulk_replace_data_table_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, bulk_replace_data_table_rows_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.bulk_replace_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
+        c.bulk_replace_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.bulk_replace_data_table_rows parent: parent, requests: requests do |_result, response|
+        c.bulk_replace_data_table_rows parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.bulk_replace_data_table_rows ::Google::Cloud::Chronicle::V1::BulkReplaceDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.bulk_replace_data_table_rows ::Google::Cloud::Chronicle::V1::BulkReplaceDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.bulk_replace_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.bulk_replace_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.bulk_replace_data_table_rows(::Google::Cloud::Chronicle::V1::BulkReplaceDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.bulk_replace_data_table_rows(::Google::Cloud::Chronicle::V1::BulkReplaceDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -816,32 +816,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_bulk_update_data_table_rows_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, bulk_update_data_table_rows_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.bulk_update_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
+        c.bulk_update_data_table_rows({ parent: parent, requests: requests }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.bulk_update_data_table_rows parent: parent, requests: requests do |_result, response|
+        c.bulk_update_data_table_rows parent: parent, requests: requests do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.bulk_update_data_table_rows ::Google::Cloud::Chronicle::V1::BulkUpdateDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
+        c.bulk_update_data_table_rows ::Google::Cloud::Chronicle::V1::BulkUpdateDataTableRowsRequest.new(parent: parent, requests: requests) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.bulk_update_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
+        c.bulk_update_data_table_rows({ parent: parent, requests: requests }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.bulk_update_data_table_rows(::Google::Cloud::Chronicle::V1::BulkUpdateDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+        c.bulk_update_data_table_rows(::Google::Cloud::Chronicle::V1::BulkUpdateDataTableRowsRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -870,32 +870,32 @@ class ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ClientTest < Minit
     ::Google::Cloud::Chronicle::V1::DataTableService::Rest::ServiceStub.stub :transcode_get_data_table_operation_errors_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_data_table_operation_errors_client_stub do
         # Create client
-        client = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Chronicle::V1::DataTableService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_data_table_operation_errors({ name: name }) do |_result, response|
+        c.get_data_table_operation_errors({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_data_table_operation_errors name: name do |_result, response|
+        c.get_data_table_operation_errors name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_data_table_operation_errors ::Google::Cloud::Chronicle::V1::GetDataTableOperationErrorsRequest.new(name: name) do |_result, response|
+        c.get_data_table_operation_errors ::Google::Cloud::Chronicle::V1::GetDataTableOperationErrorsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_data_table_operation_errors({ name: name }, call_options) do |_result, response|
+        c.get_data_table_operation_errors({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_data_table_operation_errors(::Google::Cloud::Chronicle::V1::GetDataTableOperationErrorsRequest.new(name: name), call_options) do |_result, response|
+        c.get_data_table_operation_errors(::Google::Cloud::Chronicle::V1::GetDataTableOperationErrorsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

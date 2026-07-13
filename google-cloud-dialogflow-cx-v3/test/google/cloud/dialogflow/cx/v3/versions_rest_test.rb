@@ -99,32 +99,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_list_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_versions ::Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_versions ::Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_versions(::Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_versions(::Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_get_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_version({ name: name }) do |_result, response|
+        c.get_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_version name: name do |_result, response|
+        c.get_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_version ::Google::Cloud::Dialogflow::CX::V3::GetVersionRequest.new(name: name) do |_result, response|
+        c.get_version ::Google::Cloud::Dialogflow::CX::V3::GetVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_version({ name: name }, call_options) do |_result, response|
+        c.get_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_version(::Google::Cloud::Dialogflow::CX::V3::GetVersionRequest.new(name: name), call_options) do |_result, response|
+        c.get_version(::Google::Cloud::Dialogflow::CX::V3::GetVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -208,32 +208,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_create_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_version({ parent: parent, version: version }) do |_result, response|
+        c.create_version({ parent: parent, version: version }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_version parent: parent, version: version do |_result, response|
+        c.create_version parent: parent, version: version do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_version ::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest.new(parent: parent, version: version) do |_result, response|
+        c.create_version ::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest.new(parent: parent, version: version) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_version({ parent: parent, version: version }, call_options) do |_result, response|
+        c.create_version({ parent: parent, version: version }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_version(::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest.new(parent: parent, version: version), call_options) do |_result, response|
+        c.create_version(::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest.new(parent: parent, version: version), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -263,32 +263,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_update_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_version({ version: version, update_mask: update_mask }) do |_result, response|
+        c.update_version({ version: version, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_version version: version, update_mask: update_mask do |_result, response|
+        c.update_version version: version, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_version ::Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest.new(version: version, update_mask: update_mask) do |_result, response|
+        c.update_version ::Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest.new(version: version, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_version({ version: version, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_version({ version: version, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_version(::Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest.new(version: version, update_mask: update_mask), call_options) do |_result, response|
+        c.update_version(::Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest.new(version: version, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,32 +317,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_delete_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_version({ name: name }) do |_result, response|
+        c.delete_version({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_version name: name do |_result, response|
+        c.delete_version name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_version ::Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest.new(name: name) do |_result, response|
+        c.delete_version ::Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_version({ name: name }, call_options) do |_result, response|
+        c.delete_version({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_version(::Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest.new(name: name), call_options) do |_result, response|
+        c.delete_version(::Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -372,32 +372,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_load_version_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, load_version_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.load_version({ name: name, allow_override_agent_resources: allow_override_agent_resources }) do |_result, response|
+        c.load_version({ name: name, allow_override_agent_resources: allow_override_agent_resources }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.load_version name: name, allow_override_agent_resources: allow_override_agent_resources do |_result, response|
+        c.load_version name: name, allow_override_agent_resources: allow_override_agent_resources do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.load_version ::Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest.new(name: name, allow_override_agent_resources: allow_override_agent_resources) do |_result, response|
+        c.load_version ::Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest.new(name: name, allow_override_agent_resources: allow_override_agent_resources) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.load_version({ name: name, allow_override_agent_resources: allow_override_agent_resources }, call_options) do |_result, response|
+        c.load_version({ name: name, allow_override_agent_resources: allow_override_agent_resources }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.load_version(::Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest.new(name: name, allow_override_agent_resources: allow_override_agent_resources), call_options) do |_result, response|
+        c.load_version(::Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest.new(name: name, allow_override_agent_resources: allow_override_agent_resources), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -428,32 +428,32 @@ class ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ClientTest < Minitest
     ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::ServiceStub.stub :transcode_compare_versions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, compare_versions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dialogflow::CX::V3::Versions::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.compare_versions({ base_version: base_version, target_version: target_version, language_code: language_code }) do |_result, response|
+        c.compare_versions({ base_version: base_version, target_version: target_version, language_code: language_code }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.compare_versions base_version: base_version, target_version: target_version, language_code: language_code do |_result, response|
+        c.compare_versions base_version: base_version, target_version: target_version, language_code: language_code do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.compare_versions ::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new(base_version: base_version, target_version: target_version, language_code: language_code) do |_result, response|
+        c.compare_versions ::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new(base_version: base_version, target_version: target_version, language_code: language_code) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.compare_versions({ base_version: base_version, target_version: target_version, language_code: language_code }, call_options) do |_result, response|
+        c.compare_versions({ base_version: base_version, target_version: target_version, language_code: language_code }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.compare_versions(::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new(base_version: base_version, target_version: target_version, language_code: language_code), call_options) do |_result, response|
+        c.compare_versions(::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new(base_version: base_version, target_version: target_version, language_code: language_code), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

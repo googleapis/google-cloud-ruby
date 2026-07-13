@@ -100,32 +100,32 @@ class ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::ClientTest 
     ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::ServiceStub.stub :transcode_run_pipeline_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, run_pipeline_client_stub do
         # Create client
-        client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::Client.new do |config|
+        c = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }) do |_result, response|
+        c.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_pipeline parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic do |_result, response|
+        c.run_pipeline parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_pipeline ::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic) do |_result, response|
+        c.run_pipeline ::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }, call_options) do |_result, response|
+        c.run_pipeline({ parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_pipeline(::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic), call_options) do |_result, response|
+        c.run_pipeline(::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new(parent: parent, pipeline: pipeline, labels: labels, pub_sub_topic: pub_sub_topic), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

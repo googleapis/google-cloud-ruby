@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_services-v1",
-    "version": "2.9.0",
+    "version": "2.10.1",
     "language": "RUBY",
     "apis": [
       {
@@ -3127,6 +3127,206 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListAgentGateways_sync",
+      "title": "Snippet for the list_agent_gateways call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_agent_gateways.",
+      "file": "network_services/list_agent_gateways.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_agent_gateways",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_agent_gateways",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListAgentGatewaysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListAgentGatewaysResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListAgentGateways",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListAgentGateways",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetAgentGateway_sync",
+      "title": "Snippet for the get_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_agent_gateway.",
+      "file": "network_services/get_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::AgentGateway",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_CreateAgentGateway_sync",
+      "title": "Snippet for the create_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_agent_gateway.",
+      "file": "network_services/create_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "CreateAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.CreateAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_UpdateAgentGateway_sync",
+      "title": "Snippet for the update_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_agent_gateway.",
+      "file": "network_services/update_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "UpdateAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.UpdateAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_DeleteAgentGateway_sync",
+      "title": "Snippet for the delete_agent_gateway call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_agent_gateway.",
+      "file": "network_services/delete_agent_gateway.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_agent_gateway",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_agent_gateway",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteAgentGatewayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "DeleteAgentGateway",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.DeleteAgentGateway",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

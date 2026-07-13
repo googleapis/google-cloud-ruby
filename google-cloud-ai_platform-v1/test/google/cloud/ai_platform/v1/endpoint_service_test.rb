@@ -86,40 +86,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }) do |response, operation|
+      c.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_endpoint parent: parent, endpoint: endpoint, endpoint_id: endpoint_id do |response, operation|
+      c.create_endpoint parent: parent, endpoint: endpoint, endpoint_id: endpoint_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_endpoint ::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id) do |response, operation|
+      c.create_endpoint ::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }, grpc_options) do |response, operation|
+      c.create_endpoint({ parent: parent, endpoint: endpoint, endpoint_id: endpoint_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_endpoint(::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id), grpc_options) do |response, operation|
+      c.create_endpoint(::Google::Cloud::AIPlatform::V1::CreateEndpointRequest.new(parent: parent, endpoint: endpoint, endpoint_id: endpoint_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -149,36 +149,36 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_endpoint({ name: name }) do |response, operation|
+      c.get_endpoint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_endpoint name: name do |response, operation|
+      c.get_endpoint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_endpoint ::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name) do |response, operation|
+      c.get_endpoint ::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_endpoint({ name: name }, grpc_options) do |response, operation|
+      c.get_endpoint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_endpoint(::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_endpoint(::Google::Cloud::AIPlatform::V1::GetEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_endpoints_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
+      c.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
+      c.list_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_endpoints ::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
+      c.list_endpoints ::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_endpoints(::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
+      c.list_endpoints(::Google::Cloud::AIPlatform::V1::ListEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -282,36 +282,36 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_endpoint({ endpoint: endpoint, update_mask: update_mask }) do |response, operation|
+      c.update_endpoint({ endpoint: endpoint, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_endpoint endpoint: endpoint, update_mask: update_mask do |response, operation|
+      c.update_endpoint endpoint: endpoint, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_endpoint ::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask) do |response, operation|
+      c.update_endpoint ::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_endpoint({ endpoint: endpoint, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_endpoint({ endpoint: endpoint, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_endpoint(::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_endpoint(::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest.new(endpoint: endpoint, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,40 +340,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, update_endpoint_long_running_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_endpoint_long_running({ endpoint: endpoint }) do |response, operation|
+      c.update_endpoint_long_running({ endpoint: endpoint }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_endpoint_long_running endpoint: endpoint do |response, operation|
+      c.update_endpoint_long_running endpoint: endpoint do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_endpoint_long_running ::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint) do |response, operation|
+      c.update_endpoint_long_running ::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_endpoint_long_running({ endpoint: endpoint }, grpc_options) do |response, operation|
+      c.update_endpoint_long_running({ endpoint: endpoint }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_endpoint_long_running(::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint), grpc_options) do |response, operation|
+      c.update_endpoint_long_running(::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest.new(endpoint: endpoint), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -403,40 +403,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_endpoint({ name: name }) do |response, operation|
+      c.delete_endpoint({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_endpoint name: name do |response, operation|
+      c.delete_endpoint name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_endpoint ::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name) do |response, operation|
+      c.delete_endpoint ::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_endpoint({ name: name }, grpc_options) do |response, operation|
+      c.delete_endpoint({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_endpoint(::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_endpoint(::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -470,40 +470,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, deploy_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }) do |response, operation|
+      c.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_model endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split do |response, operation|
+      c.deploy_model endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_model ::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split) do |response, operation|
+      c.deploy_model ::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }, grpc_options) do |response, operation|
+      c.deploy_model({ endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_model(::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split), grpc_options) do |response, operation|
+      c.deploy_model(::Google::Cloud::AIPlatform::V1::DeployModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, traffic_split: traffic_split), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -537,40 +537,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, undeploy_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }) do |response, operation|
+      c.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_model endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split do |response, operation|
+      c.undeploy_model endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_model ::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split) do |response, operation|
+      c.undeploy_model ::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }, grpc_options) do |response, operation|
+      c.undeploy_model({ endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_model(::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split), grpc_options) do |response, operation|
+      c.undeploy_model(::Google::Cloud::AIPlatform::V1::UndeployModelRequest.new(endpoint: endpoint, deployed_model_id: deployed_model_id, traffic_split: traffic_split), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -604,40 +604,40 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, mutate_deployed_model_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::EndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }) do |response, operation|
+      c.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mutate_deployed_model endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask do |response, operation|
+      c.mutate_deployed_model endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mutate_deployed_model ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask) do |response, operation|
+      c.mutate_deployed_model ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.mutate_deployed_model({ endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mutate_deployed_model(::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask), grpc_options) do |response, operation|
+      c.mutate_deployed_model(::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest.new(endpoint: endpoint, deployed_model: deployed_model, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

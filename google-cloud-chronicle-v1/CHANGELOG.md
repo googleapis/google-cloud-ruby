@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.9.0 (2026-07-07)
+
+#### Features
+
+* GA FindingsRefinementService Client libraries ([#34709](https://github.com/googleapis/google-cloud-ruby/issues/34709)) 
+
+### 0.8.0 (2026-06-18)
+
+#### Features
+
+* GA RuleExecutionErrorService Client libraries ([#34624](https://github.com/googleapis/google-cloud-ruby/issues/34624)) 
+
+### 0.7.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34042](https://github.com/googleapis/google-cloud-ruby/issues/34042)) 
+
 ### 0.6.0 (2026-05-06)
 
 #### Features

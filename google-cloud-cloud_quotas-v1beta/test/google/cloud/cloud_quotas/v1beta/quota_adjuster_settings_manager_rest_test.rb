@@ -99,32 +99,32 @@ class ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::
     ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::ServiceStub.stub :transcode_update_quota_adjuster_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_quota_adjuster_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
+        c.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_quota_adjuster_settings quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only do |_result, response|
+        c.update_quota_adjuster_settings quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only) do |_result, response|
+        c.update_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_quota_adjuster_settings({ quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
+        c.update_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::UpdateQuotaAdjusterSettingsRequest.new(quota_adjuster_settings: quota_adjuster_settings, update_mask: update_mask, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::
     ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::ServiceStub.stub :transcode_get_quota_adjuster_settings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_quota_adjuster_settings_client_stub do
         # Create client
-        client = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::Client.new do |config|
+        c = ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_quota_adjuster_settings({ name: name }) do |_result, response|
+        c.get_quota_adjuster_settings({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_quota_adjuster_settings name: name do |_result, response|
+        c.get_quota_adjuster_settings name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name) do |_result, response|
+        c.get_quota_adjuster_settings ::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_quota_adjuster_settings({ name: name }, call_options) do |_result, response|
+        c.get_quota_adjuster_settings({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name), call_options) do |_result, response|
+        c.get_quota_adjuster_settings(::Google::Cloud::CloudQuotas::V1beta::GetQuotaAdjusterSettingsRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

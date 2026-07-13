@@ -1,5 +1,17 @@
 # Release History
 
+### 0.20.0 (2026-07-09)
+
+#### Features
+
+* add support for new signature algorithm in PkixPublicKey SignatureAlgorithm ([#34712](https://github.com/googleapis/google-cloud-ruby/issues/34712)) 
+
+### 0.19.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34041](https://github.com/googleapis/google-cloud-ruby/issues/34041)) 
+
 ### 0.18.0 (2026-03-19)
 
 #### Features

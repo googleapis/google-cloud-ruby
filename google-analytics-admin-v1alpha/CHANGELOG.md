@@ -1,5 +1,17 @@
 # Release History
 
+### 0.43.0 (2026-06-22)
+
+#### Features
+
+* add a can_edit field to the PropertySummary resource to indicate if a user has permission to edit the property ([#34640](https://github.com/googleapis/google-cloud-ruby/issues/34640)) 
+
+### 0.42.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34037](https://github.com/googleapis/google-cloud-ruby/issues/34037)) 
+
 ### 0.41.0 (2026-04-15)
 
 #### Features

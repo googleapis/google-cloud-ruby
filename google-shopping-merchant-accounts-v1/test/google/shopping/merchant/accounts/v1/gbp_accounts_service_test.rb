@@ -86,40 +86,40 @@ class ::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::ClientTest
 
     Gapic::ServiceStub.stub :new, list_gbp_accounts_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_gbp_accounts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_gbp_accounts({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_gbp_accounts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_gbp_accounts parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_gbp_accounts ::Google::Shopping::Merchant::Accounts::V1::ListGbpAccountsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_gbp_accounts ::Google::Shopping::Merchant::Accounts::V1::ListGbpAccountsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_gbp_accounts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_gbp_accounts({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_gbp_accounts(::Google::Shopping::Merchant::Accounts::V1::ListGbpAccountsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_gbp_accounts(::Google::Shopping::Merchant::Accounts::V1::ListGbpAccountsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::ClientTest
 
     Gapic::ServiceStub.stub :new, link_gbp_account_client_stub do
       # Create client
-      client = ::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client.new do |config|
+      c = ::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.link_gbp_account({ parent: parent, gbp_email: gbp_email }) do |response, operation|
+      c.link_gbp_account({ parent: parent, gbp_email: gbp_email }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.link_gbp_account parent: parent, gbp_email: gbp_email do |response, operation|
+      c.link_gbp_account parent: parent, gbp_email: gbp_email do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.link_gbp_account ::Google::Shopping::Merchant::Accounts::V1::LinkGbpAccountRequest.new(parent: parent, gbp_email: gbp_email) do |response, operation|
+      c.link_gbp_account ::Google::Shopping::Merchant::Accounts::V1::LinkGbpAccountRequest.new(parent: parent, gbp_email: gbp_email) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.link_gbp_account({ parent: parent, gbp_email: gbp_email }, grpc_options) do |response, operation|
+      c.link_gbp_account({ parent: parent, gbp_email: gbp_email }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.link_gbp_account(::Google::Shopping::Merchant::Accounts::V1::LinkGbpAccountRequest.new(parent: parent, gbp_email: gbp_email), grpc_options) do |response, operation|
+      c.link_gbp_account(::Google::Shopping::Merchant::Accounts::V1::LinkGbpAccountRequest.new(parent: parent, gbp_email: gbp_email), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

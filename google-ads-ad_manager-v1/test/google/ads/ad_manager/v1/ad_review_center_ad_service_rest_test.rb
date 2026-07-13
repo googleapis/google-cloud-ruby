@@ -104,32 +104,32 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
     ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ServiceStub.stub :transcode_search_ad_review_center_ads_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_ad_review_center_ads_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }) do |_result, response|
+        c.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_ad_review_center_ads status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id do |_result, response|
+        c.search_ad_review_center_ads status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_ad_review_center_ads ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id) do |_result, response|
+        c.search_ad_review_center_ads ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }, call_options) do |_result, response|
+        c.search_ad_review_center_ads({ status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_ad_review_center_ads(::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id), call_options) do |_result, response|
+        c.search_ad_review_center_ads(::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest.new(status: status, parent: parent, page_size: page_size, page_token: page_token, ad_review_center_ad_id: ad_review_center_ad_id, date_time_range: date_time_range, search_text: search_text, buyer_account_id: buyer_account_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -159,32 +159,32 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
     ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ServiceStub.stub :transcode_batch_allow_ad_review_center_ads_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_allow_ad_review_center_ads_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_allow_ad_review_center_ads({ parent: parent, names: names }) do |_result, response|
+        c.batch_allow_ad_review_center_ads({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_allow_ad_review_center_ads parent: parent, names: names do |_result, response|
+        c.batch_allow_ad_review_center_ads parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_allow_ad_review_center_ads ::Google::Ads::AdManager::V1::BatchAllowAdReviewCenterAdsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_allow_ad_review_center_ads ::Google::Ads::AdManager::V1::BatchAllowAdReviewCenterAdsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_allow_ad_review_center_ads({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_allow_ad_review_center_ads({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_allow_ad_review_center_ads(::Google::Ads::AdManager::V1::BatchAllowAdReviewCenterAdsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_allow_ad_review_center_ads(::Google::Ads::AdManager::V1::BatchAllowAdReviewCenterAdsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -214,32 +214,32 @@ class ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ClientTest < 
     ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::ServiceStub.stub :transcode_batch_block_ad_review_center_ads_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_block_ad_review_center_ads_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::AdReviewCenterAdService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_block_ad_review_center_ads({ parent: parent, names: names }) do |_result, response|
+        c.batch_block_ad_review_center_ads({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_block_ad_review_center_ads parent: parent, names: names do |_result, response|
+        c.batch_block_ad_review_center_ads parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_block_ad_review_center_ads ::Google::Ads::AdManager::V1::BatchBlockAdReviewCenterAdsRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_block_ad_review_center_ads ::Google::Ads::AdManager::V1::BatchBlockAdReviewCenterAdsRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_block_ad_review_center_ads({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_block_ad_review_center_ads({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_block_ad_review_center_ads(::Google::Ads::AdManager::V1::BatchBlockAdReviewCenterAdsRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_block_ad_review_center_ads(::Google::Ads::AdManager::V1::BatchBlockAdReviewCenterAdsRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

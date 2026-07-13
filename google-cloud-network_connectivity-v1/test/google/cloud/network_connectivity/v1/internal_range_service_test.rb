@@ -90,40 +90,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::ClientTest
 
     Gapic::ServiceStub.stub :new, list_internal_ranges_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_internal_ranges({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      c.list_internal_ranges({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_internal_ranges parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      c.list_internal_ranges parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_internal_ranges ::Google::Cloud::NetworkConnectivity::V1::ListInternalRangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      c.list_internal_ranges ::Google::Cloud::NetworkConnectivity::V1::ListInternalRangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_internal_ranges({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      c.list_internal_ranges({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_internal_ranges(::Google::Cloud::NetworkConnectivity::V1::ListInternalRangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      c.list_internal_ranges(::Google::Cloud::NetworkConnectivity::V1::ListInternalRangesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::ClientTest
 
     Gapic::ServiceStub.stub :new, get_internal_range_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_internal_range({ name: name }) do |response, operation|
+      c.get_internal_range({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_internal_range name: name do |response, operation|
+      c.get_internal_range name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_internal_range ::Google::Cloud::NetworkConnectivity::V1::GetInternalRangeRequest.new(name: name) do |response, operation|
+      c.get_internal_range ::Google::Cloud::NetworkConnectivity::V1::GetInternalRangeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_internal_range({ name: name }, grpc_options) do |response, operation|
+      c.get_internal_range({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_internal_range(::Google::Cloud::NetworkConnectivity::V1::GetInternalRangeRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_internal_range(::Google::Cloud::NetworkConnectivity::V1::GetInternalRangeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -217,40 +217,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::ClientTest
 
     Gapic::ServiceStub.stub :new, create_internal_range_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_internal_range({ parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id }) do |response, operation|
+      c.create_internal_range({ parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_internal_range parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id do |response, operation|
+      c.create_internal_range parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_internal_range ::Google::Cloud::NetworkConnectivity::V1::CreateInternalRangeRequest.new(parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id) do |response, operation|
+      c.create_internal_range ::Google::Cloud::NetworkConnectivity::V1::CreateInternalRangeRequest.new(parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_internal_range({ parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id }, grpc_options) do |response, operation|
+      c.create_internal_range({ parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_internal_range(::Google::Cloud::NetworkConnectivity::V1::CreateInternalRangeRequest.new(parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id), grpc_options) do |response, operation|
+      c.create_internal_range(::Google::Cloud::NetworkConnectivity::V1::CreateInternalRangeRequest.new(parent: parent, internal_range_id: internal_range_id, internal_range: internal_range, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -284,40 +284,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::ClientTest
 
     Gapic::ServiceStub.stub :new, update_internal_range_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_internal_range({ update_mask: update_mask, internal_range: internal_range, request_id: request_id }) do |response, operation|
+      c.update_internal_range({ update_mask: update_mask, internal_range: internal_range, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_internal_range update_mask: update_mask, internal_range: internal_range, request_id: request_id do |response, operation|
+      c.update_internal_range update_mask: update_mask, internal_range: internal_range, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_internal_range ::Google::Cloud::NetworkConnectivity::V1::UpdateInternalRangeRequest.new(update_mask: update_mask, internal_range: internal_range, request_id: request_id) do |response, operation|
+      c.update_internal_range ::Google::Cloud::NetworkConnectivity::V1::UpdateInternalRangeRequest.new(update_mask: update_mask, internal_range: internal_range, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_internal_range({ update_mask: update_mask, internal_range: internal_range, request_id: request_id }, grpc_options) do |response, operation|
+      c.update_internal_range({ update_mask: update_mask, internal_range: internal_range, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_internal_range(::Google::Cloud::NetworkConnectivity::V1::UpdateInternalRangeRequest.new(update_mask: update_mask, internal_range: internal_range, request_id: request_id), grpc_options) do |response, operation|
+      c.update_internal_range(::Google::Cloud::NetworkConnectivity::V1::UpdateInternalRangeRequest.new(update_mask: update_mask, internal_range: internal_range, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::ClientTest
 
     Gapic::ServiceStub.stub :new, delete_internal_range_client_stub do
       # Create client
-      client = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
+      c = ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_internal_range({ name: name, request_id: request_id }) do |response, operation|
+      c.delete_internal_range({ name: name, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_internal_range name: name, request_id: request_id do |response, operation|
+      c.delete_internal_range name: name, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_internal_range ::Google::Cloud::NetworkConnectivity::V1::DeleteInternalRangeRequest.new(name: name, request_id: request_id) do |response, operation|
+      c.delete_internal_range ::Google::Cloud::NetworkConnectivity::V1::DeleteInternalRangeRequest.new(name: name, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_internal_range({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      c.delete_internal_range({ name: name, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_internal_range(::Google::Cloud::NetworkConnectivity::V1::DeleteInternalRangeRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      c.delete_internal_range(::Google::Cloud::NetworkConnectivity::V1::DeleteInternalRangeRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -101,32 +101,32 @@ class ::Google::Shopping::Css::V1::AccountsService::Rest::ClientTest < Minitest:
     ::Google::Shopping::Css::V1::AccountsService::Rest::ServiceStub.stub :transcode_list_child_accounts_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_child_accounts_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_child_accounts parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_child_accounts parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_child_accounts ::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_child_accounts ::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_child_accounts({ parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_child_accounts(::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_child_accounts(::Google::Shopping::Css::V1::ListChildAccountsRequest.new(parent: parent, label_id: label_id, full_name: full_name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Shopping::Css::V1::AccountsService::Rest::ClientTest < Minitest:
     ::Google::Shopping::Css::V1::AccountsService::Rest::ServiceStub.stub :transcode_get_account_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_account_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_account({ name: name, parent: parent }) do |_result, response|
+        c.get_account({ name: name, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_account name: name, parent: parent do |_result, response|
+        c.get_account name: name, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_account ::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent) do |_result, response|
+        c.get_account ::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_account({ name: name, parent: parent }, call_options) do |_result, response|
+        c.get_account({ name: name, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_account(::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent), call_options) do |_result, response|
+        c.get_account(::Google::Shopping::Css::V1::GetAccountRequest.new(name: name, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Shopping::Css::V1::AccountsService::Rest::ClientTest < Minitest:
     ::Google::Shopping::Css::V1::AccountsService::Rest::ServiceStub.stub :transcode_update_labels_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_labels_client_stub do
         # Create client
-        client = ::Google::Shopping::Css::V1::AccountsService::Rest::Client.new do |config|
+        c = ::Google::Shopping::Css::V1::AccountsService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_labels({ name: name, label_ids: label_ids, parent: parent }) do |_result, response|
+        c.update_labels({ name: name, label_ids: label_ids, parent: parent }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_labels name: name, label_ids: label_ids, parent: parent do |_result, response|
+        c.update_labels name: name, label_ids: label_ids, parent: parent do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_labels ::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent) do |_result, response|
+        c.update_labels ::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_labels({ name: name, label_ids: label_ids, parent: parent }, call_options) do |_result, response|
+        c.update_labels({ name: name, label_ids: label_ids, parent: parent }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_labels(::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent), call_options) do |_result, response|
+        c.update_labels(::Google::Shopping::Css::V1::UpdateAccountLabelsRequest.new(name: name, label_ids: label_ids, parent: parent), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

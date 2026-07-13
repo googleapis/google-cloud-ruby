@@ -99,32 +99,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_create_entity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_entity_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_entity({ parent: parent, entity: entity, validate_only: validate_only }) do |_result, response|
+        c.create_entity({ parent: parent, entity: entity, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_entity parent: parent, entity: entity, validate_only: validate_only do |_result, response|
+        c.create_entity parent: parent, entity: entity, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_entity ::Google::Cloud::Dataplex::V1::CreateEntityRequest.new(parent: parent, entity: entity, validate_only: validate_only) do |_result, response|
+        c.create_entity ::Google::Cloud::Dataplex::V1::CreateEntityRequest.new(parent: parent, entity: entity, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_entity({ parent: parent, entity: entity, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_entity({ parent: parent, entity: entity, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_entity(::Google::Cloud::Dataplex::V1::CreateEntityRequest.new(parent: parent, entity: entity, validate_only: validate_only), call_options) do |_result, response|
+        c.create_entity(::Google::Cloud::Dataplex::V1::CreateEntityRequest.new(parent: parent, entity: entity, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_update_entity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_entity_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_entity({ entity: entity, validate_only: validate_only }) do |_result, response|
+        c.update_entity({ entity: entity, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_entity entity: entity, validate_only: validate_only do |_result, response|
+        c.update_entity entity: entity, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_entity ::Google::Cloud::Dataplex::V1::UpdateEntityRequest.new(entity: entity, validate_only: validate_only) do |_result, response|
+        c.update_entity ::Google::Cloud::Dataplex::V1::UpdateEntityRequest.new(entity: entity, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_entity({ entity: entity, validate_only: validate_only }, call_options) do |_result, response|
+        c.update_entity({ entity: entity, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_entity(::Google::Cloud::Dataplex::V1::UpdateEntityRequest.new(entity: entity, validate_only: validate_only), call_options) do |_result, response|
+        c.update_entity(::Google::Cloud::Dataplex::V1::UpdateEntityRequest.new(entity: entity, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -209,32 +209,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_delete_entity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_entity_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_entity({ name: name, etag: etag }) do |_result, response|
+        c.delete_entity({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_entity name: name, etag: etag do |_result, response|
+        c.delete_entity name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_entity ::Google::Cloud::Dataplex::V1::DeleteEntityRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_entity ::Google::Cloud::Dataplex::V1::DeleteEntityRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_entity({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_entity({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_entity(::Google::Cloud::Dataplex::V1::DeleteEntityRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_entity(::Google::Cloud::Dataplex::V1::DeleteEntityRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,32 +264,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_get_entity_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_entity_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_entity({ name: name, view: view }) do |_result, response|
+        c.get_entity({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_entity name: name, view: view do |_result, response|
+        c.get_entity name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_entity ::Google::Cloud::Dataplex::V1::GetEntityRequest.new(name: name, view: view) do |_result, response|
+        c.get_entity ::Google::Cloud::Dataplex::V1::GetEntityRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_entity({ name: name, view: view }, call_options) do |_result, response|
+        c.get_entity({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_entity(::Google::Cloud::Dataplex::V1::GetEntityRequest.new(name: name, view: view), call_options) do |_result, response|
+        c.get_entity(::Google::Cloud::Dataplex::V1::GetEntityRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -322,32 +322,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_list_entities_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_entities_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_entities({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_entities({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_entities parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_entities parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_entities ::Google::Cloud::Dataplex::V1::ListEntitiesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_entities ::Google::Cloud::Dataplex::V1::ListEntitiesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_entities({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_entities({ parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_entities(::Google::Cloud::Dataplex::V1::ListEntitiesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_entities(::Google::Cloud::Dataplex::V1::ListEntitiesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -378,32 +378,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_create_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_partition({ parent: parent, partition: partition, validate_only: validate_only }) do |_result, response|
+        c.create_partition({ parent: parent, partition: partition, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_partition parent: parent, partition: partition, validate_only: validate_only do |_result, response|
+        c.create_partition parent: parent, partition: partition, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_partition ::Google::Cloud::Dataplex::V1::CreatePartitionRequest.new(parent: parent, partition: partition, validate_only: validate_only) do |_result, response|
+        c.create_partition ::Google::Cloud::Dataplex::V1::CreatePartitionRequest.new(parent: parent, partition: partition, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_partition({ parent: parent, partition: partition, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_partition({ parent: parent, partition: partition, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_partition(::Google::Cloud::Dataplex::V1::CreatePartitionRequest.new(parent: parent, partition: partition, validate_only: validate_only), call_options) do |_result, response|
+        c.create_partition(::Google::Cloud::Dataplex::V1::CreatePartitionRequest.new(parent: parent, partition: partition, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -433,32 +433,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_delete_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_partition({ name: name, etag: etag }) do |_result, response|
+        c.delete_partition({ name: name, etag: etag }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_partition name: name, etag: etag do |_result, response|
+        c.delete_partition name: name, etag: etag do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_partition ::Google::Cloud::Dataplex::V1::DeletePartitionRequest.new(name: name, etag: etag) do |_result, response|
+        c.delete_partition ::Google::Cloud::Dataplex::V1::DeletePartitionRequest.new(name: name, etag: etag) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_partition({ name: name, etag: etag }, call_options) do |_result, response|
+        c.delete_partition({ name: name, etag: etag }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_partition(::Google::Cloud::Dataplex::V1::DeletePartitionRequest.new(name: name, etag: etag), call_options) do |_result, response|
+        c.delete_partition(::Google::Cloud::Dataplex::V1::DeletePartitionRequest.new(name: name, etag: etag), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -487,32 +487,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_get_partition_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_partition_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_partition({ name: name }) do |_result, response|
+        c.get_partition({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_partition name: name do |_result, response|
+        c.get_partition name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_partition ::Google::Cloud::Dataplex::V1::GetPartitionRequest.new(name: name) do |_result, response|
+        c.get_partition ::Google::Cloud::Dataplex::V1::GetPartitionRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_partition({ name: name }, call_options) do |_result, response|
+        c.get_partition({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_partition(::Google::Cloud::Dataplex::V1::GetPartitionRequest.new(name: name), call_options) do |_result, response|
+        c.get_partition(::Google::Cloud::Dataplex::V1::GetPartitionRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -544,32 +544,32 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ClientTest < Minites
     ::Google::Cloud::Dataplex::V1::MetadataService::Rest::ServiceStub.stub :transcode_list_partitions_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_partitions_client_stub do
         # Create client
-        client = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Dataplex::V1::MetadataService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_partitions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_partitions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_partitions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_partitions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_partitions ::Google::Cloud::Dataplex::V1::ListPartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_partitions ::Google::Cloud::Dataplex::V1::ListPartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_partitions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_partitions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_partitions(::Google::Cloud::Dataplex::V1::ListPartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_partitions(::Google::Cloud::Dataplex::V1::ListPartitionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

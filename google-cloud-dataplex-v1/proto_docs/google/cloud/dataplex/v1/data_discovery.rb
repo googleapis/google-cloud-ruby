@@ -114,6 +114,9 @@ module Google
           # @!attribute [rw] json_options
           #   @return [::Google::Cloud::Dataplex::V1::DataDiscoverySpec::StorageConfig::JsonOptions]
           #     Optional. Configuration for JSON data.
+          # @!attribute [rw] unstructured_data_options
+          #   @return [::Google::Cloud::Dataplex::V1::DataDiscoverySpec::StorageConfig::UnstructuredDataOptions]
+          #     Optional. Specifies configuration for unstructured data discovery.
           class StorageConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,6 +157,16 @@ module Google
             #     If true, all columns are registered as their primitive types
             #     (strings, number, or boolean).
             class JsonOptions
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Describes options for unstructured data discovery.
+            # @!attribute [rw] semantic_inference_enabled
+            #   @return [::Boolean]
+            #     Optional. Specifies whether deeper semantic inference over the objects'
+            #     contents using GenAI is enabled.
+            class UnstructuredDataOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

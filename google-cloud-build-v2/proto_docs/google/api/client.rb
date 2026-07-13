@@ -31,6 +31,8 @@ module Google
     # @!attribute [rw] selective_gapic_generation
     #   @return [::Google::Api::SelectiveGapicGeneration]
     #     Configuration for which RPCs should be generated in the GAPIC client.
+    #
+    #     Note: This field should not be used in most cases.
     class CommonLanguageSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -141,9 +143,10 @@ module Google
     #
     #     Example of a YAML configuration::
     #
-    #      publishing:
-    #        java_settings:
-    #          library_package: com.google.cloud.pubsub.v1
+    #         publishing:
+    #           library_settings:
+    #             java_settings:
+    #               library_package: com.google.cloud.pubsub.v1
     # @!attribute [rw] service_class_names
     #   @return [::Google::Protobuf::Map{::String => ::String}]
     #     Configure the Java class name to use instead of the service's for its
@@ -155,11 +158,11 @@ module Google
     #
     #     Example of a YAML configuration::
     #
-    #      publishing:
-    #        java_settings:
-    #          service_class_names:
-    #            - google.pubsub.v1.Publisher: TopicAdmin
-    #            - google.pubsub.v1.Subscriber: SubscriptionAdmin
+    #         publishing:
+    #           java_settings:
+    #             service_class_names:
+    #               - google.pubsub.v1.Publisher: TopicAdmin
+    #               - google.pubsub.v1.Subscriber: SubscriptionAdmin
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
@@ -190,6 +193,20 @@ module Google
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
+    # @!attribute [rw] library_package
+    #   @return [::String]
+    #     The package name to use in Php. Clobbers the php_namespace option
+    #     set in the protobuf. This should be used **only** by APIs
+    #     who have already set the language_settings.php.package_name" field
+    #     in gapic.yaml. API teams should use the protobuf php_namespace option
+    #     where possible.
+    #
+    #     Example of a YAML configuration::
+    #
+    #         publishing:
+    #           library_settings:
+    #             php_settings:
+    #               library_package: Google\Cloud\PubSub\V1
     class PhpSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -318,10 +335,12 @@ module Google
     #     service names and values are the name to be used for the service client
     #     and call options.
     #
-    #     publishing:
-    #       go_settings:
-    #         renamed_services:
-    #           Publisher: TopicAdmin
+    #     Example:
+    #
+    #         publishing:
+    #           go_settings:
+    #             renamed_services:
+    #               Publisher: TopicAdmin
     class GoSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -344,10 +363,10 @@ module Google
     #
     #     Example:
     #
-    #        publishing:
-    #          method_settings:
-    #          - selector: google.storage.control.v2.StorageControl.CreateFolder
-    #            # method settings for CreateFolder...
+    #         publishing:
+    #           method_settings:
+    #           - selector: google.storage.control.v2.StorageControl.CreateFolder
+    #             # method settings for CreateFolder...
     # @!attribute [rw] long_running
     #   @return [::Google::Api::MethodSettings::LongRunning]
     #     Describes settings to use for long-running operations when generating
@@ -356,14 +375,14 @@ module Google
     #
     #     Example of a YAML configuration::
     #
-    #        publishing:
-    #          method_settings:
-    #          - selector: google.cloud.speech.v2.Speech.BatchRecognize
-    #            long_running:
-    #              initial_poll_delay: 60s # 1 minute
-    #              poll_delay_multiplier: 1.5
-    #              max_poll_delay: 360s # 6 minutes
-    #              total_poll_timeout: 54000s # 90 minutes
+    #         publishing:
+    #           method_settings:
+    #           - selector: google.cloud.speech.v2.Speech.BatchRecognize
+    #             long_running:
+    #               initial_poll_delay: 60s # 1 minute
+    #               poll_delay_multiplier: 1.5
+    #               max_poll_delay: 360s # 6 minutes
+    #               total_poll_timeout: 54000s # 90 minutes
     # @!attribute [rw] auto_populated_fields
     #   @return [::Array<::String>]
     #     List of top-level fields of the request message, that should be
@@ -372,11 +391,24 @@ module Google
     #
     #     Example of a YAML configuration:
     #
-    #        publishing:
-    #          method_settings:
-    #          - selector: google.example.v1.ExampleService.CreateExample
-    #            auto_populated_fields:
-    #            - request_id
+    #         publishing:
+    #           method_settings:
+    #           - selector: google.example.v1.ExampleService.CreateExample
+    #             auto_populated_fields:
+    #             - request_id
+    # @!attribute [rw] batching
+    #   @return [::Google::Api::BatchingConfigProto]
+    #     Batching configuration for an API method in client libraries.
+    #
+    #     Example of a YAML configuration:
+    #
+    #         publishing:
+    #           method_settings:
+    #           - selector: google.example.v1.ExampleService.BatchCreateExample
+    #             batching:
+    #               element_count_threshold: 1000
+    #               request_byte_threshold: 100000000
+    #               delay_threshold_millis: 10
     class MethodSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -411,6 +443,8 @@ module Google
 
     # This message is used to configure the generation of a subset of the RPCs in
     # a service for client libraries.
+    #
+    # Note: This feature should not be used in most cases.
     # @!attribute [rw] methods
     #   @return [::Array<::String>]
     #     An allowlist of the fully qualified names of RPCs that should be included
@@ -424,6 +458,77 @@ module Google
     #     implementations to decide. Some examples may be: added annotations,
     #     obfuscated identifiers, or other language idiomatic patterns.
     class SelectiveGapicGeneration
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # `BatchingConfigProto` defines the batching configuration for an API method.
+    # @!attribute [rw] thresholds
+    #   @return [::Google::Api::BatchingSettingsProto]
+    #     The thresholds which trigger a batched request to be sent.
+    # @!attribute [rw] batch_descriptor
+    #   @return [::Google::Api::BatchingDescriptorProto]
+    #     The request and response fields used in batching.
+    class BatchingConfigProto
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # `BatchingSettingsProto` specifies a set of batching thresholds, each of
+    # which acts as a trigger to send a batch of messages as a request. At least
+    # one threshold must be positive nonzero.
+    # @!attribute [rw] element_count_threshold
+    #   @return [::Integer]
+    #     The number of elements of a field collected into a batch which, if
+    #     exceeded, causes the batch to be sent.
+    # @!attribute [rw] request_byte_threshold
+    #   @return [::Integer]
+    #     The aggregated size of the batched field which, if exceeded, causes the
+    #     batch to be sent. This size is computed by aggregating the sizes of the
+    #     request field to be batched, not of the entire request message.
+    # @!attribute [rw] delay_threshold
+    #   @return [::Google::Protobuf::Duration]
+    #     The duration after which a batch should be sent, starting from the addition
+    #     of the first message to that batch.
+    # @!attribute [rw] element_count_limit
+    #   @return [::Integer]
+    #     The maximum number of elements collected in a batch that could be accepted
+    #     by server.
+    # @!attribute [rw] request_byte_limit
+    #   @return [::Integer]
+    #     The maximum size of the request that could be accepted by server.
+    # @!attribute [rw] flow_control_element_limit
+    #   @return [::Integer]
+    #     The maximum number of elements allowed by flow control.
+    # @!attribute [rw] flow_control_byte_limit
+    #   @return [::Integer]
+    #     The maximum size of data allowed by flow control.
+    # @!attribute [rw] flow_control_limit_exceeded_behavior
+    #   @return [::Google::Api::FlowControlLimitExceededBehaviorProto]
+    #     The behavior to take when the flow control limit is exceeded.
+    class BatchingSettingsProto
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # `BatchingDescriptorProto` specifies the fields of the request message to be
+    # used for batching, and, optionally, the fields of the response message to be
+    # used for demultiplexing.
+    # @!attribute [rw] batched_field
+    #   @return [::String]
+    #     The repeated field in the request message to be aggregated by batching.
+    # @!attribute [rw] discriminator_fields
+    #   @return [::Array<::String>]
+    #     A list of the fields in the request message. Two requests will be batched
+    #     together only if the values of every field specified in
+    #     `request_discriminator_fields` is equal between the two requests.
+    # @!attribute [rw] subresponse_field
+    #   @return [::String]
+    #     Optional. When present, indicates the field in the response message to be
+    #     used to demultiplex the response into multiple response messages, in
+    #     correspondence with the multiple request messages originally batched
+    #     together.
+    class BatchingDescriptorProto
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
@@ -468,6 +573,21 @@ module Google
 
       # Publish the library to package managers like nuget.org and npmjs.com.
       PACKAGE_MANAGER = 20
+    end
+
+    # The behavior to take when the flow control limit is exceeded.
+    module FlowControlLimitExceededBehaviorProto
+      # Default behavior, system-defined.
+      UNSET_BEHAVIOR = 0
+
+      # Stop operation, raise error.
+      THROW_EXCEPTION = 1
+
+      # Pause operation until limit clears.
+      BLOCK = 2
+
+      # Continue operation, disregard limit.
+      IGNORE = 3
     end
   end
 end

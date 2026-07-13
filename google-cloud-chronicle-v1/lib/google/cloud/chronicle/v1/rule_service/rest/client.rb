@@ -88,6 +88,11 @@ module Google
 
                   default_config.rpcs.delete_rule.timeout = 60.0
 
+                  default_config.rpcs.verify_rule_text.timeout = 60.0
+                  default_config.rpcs.verify_rule_text.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.list_rule_revisions.timeout = 600.0
                   default_config.rpcs.list_rule_revisions.retry_policy = {
                     initial_delay: 1.0, max_delay: 600.0, multiplier: 1.3, retry_codes: [14]
@@ -670,6 +675,88 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @rule_service_stub.delete_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Verifies the given rule text.
+              #
+              # @overload verify_rule_text(request, options = nil)
+              #   Pass arguments to `verify_rule_text` via a request object, either of type
+              #   {::Google::Cloud::Chronicle::V1::VerifyRuleTextRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Chronicle::V1::VerifyRuleTextRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload verify_rule_text(instance: nil, rule_text: nil)
+              #   Pass arguments to `verify_rule_text` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. The name of the parent resource, which is the SecOps instance
+              #     associated with the request. Format:
+              #     `projects/{project}/locations/{location}/instances/{instance}`
+              #   @param rule_text [::String]
+              #     Required. The rule text to verify as a UTF-8 string.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Chronicle::V1::VerifyRuleTextResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Chronicle::V1::VerifyRuleTextResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/chronicle/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Chronicle::V1::RuleService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Chronicle::V1::VerifyRuleTextRequest.new
+              #
+              #   # Call the verify_rule_text method.
+              #   result = client.verify_rule_text request
+              #
+              #   # The returned object is of type Google::Cloud::Chronicle::V1::VerifyRuleTextResponse.
+              #   p result
+              #
+              def verify_rule_text request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Chronicle::V1::VerifyRuleTextRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.verify_rule_text.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Chronicle::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.verify_rule_text.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.verify_rule_text.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @rule_service_stub.verify_rule_text request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1387,6 +1474,7 @@ module Google
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
               #   @return [::Hash]
@@ -1459,6 +1547,7 @@ module Google
                 #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
                 #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
                 #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
                 #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
                 #         trigger a retry.
                 #
@@ -1488,6 +1577,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_rule
+                  ##
+                  # RPC-specific configuration for `verify_rule_text`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :verify_rule_text
                   ##
                   # RPC-specific configuration for `list_rule_revisions`
                   # @return [::Gapic::Config::Method]
@@ -1536,6 +1630,8 @@ module Google
                     @update_rule = ::Gapic::Config::Method.new update_rule_config
                     delete_rule_config = parent_rpcs.delete_rule if parent_rpcs.respond_to? :delete_rule
                     @delete_rule = ::Gapic::Config::Method.new delete_rule_config
+                    verify_rule_text_config = parent_rpcs.verify_rule_text if parent_rpcs.respond_to? :verify_rule_text
+                    @verify_rule_text = ::Gapic::Config::Method.new verify_rule_text_config
                     list_rule_revisions_config = parent_rpcs.list_rule_revisions if parent_rpcs.respond_to? :list_rule_revisions
                     @list_rule_revisions = ::Gapic::Config::Method.new list_rule_revisions_config
                     create_retrohunt_config = parent_rpcs.create_retrohunt if parent_rpcs.respond_to? :create_retrohunt

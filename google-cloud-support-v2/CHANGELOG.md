@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.10.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34680](https://github.com/googleapis/google-cloud-ruby/issues/34680)) 
+
+### 1.9.0 (2026-06-11)
+
+#### Features
+
+* update gapic-common dependency to 1.3 and document retry jitter ([#34056](https://github.com/googleapis/google-cloud-ruby/issues/34056)) 
+
 ### 1.8.0 (2026-05-18)
 
 #### Features

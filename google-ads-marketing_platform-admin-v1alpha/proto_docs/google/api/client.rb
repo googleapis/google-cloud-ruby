@@ -31,6 +31,8 @@ module Google
     # @!attribute [rw] selective_gapic_generation
     #   @return [::Google::Api::SelectiveGapicGeneration]
     #     Configuration for which RPCs should be generated in the GAPIC client.
+    #
+    #     Note: This field should not be used in most cases.
     class CommonLanguageSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -441,6 +443,8 @@ module Google
 
     # This message is used to configure the generation of a subset of the RPCs in
     # a service for client libraries.
+    #
+    # Note: This feature should not be used in most cases.
     # @!attribute [rw] methods
     #   @return [::Array<::String>]
     #     An allowlist of the fully qualified names of RPCs that should be included

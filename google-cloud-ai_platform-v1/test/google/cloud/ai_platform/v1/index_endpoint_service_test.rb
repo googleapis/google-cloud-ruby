@@ -84,40 +84,40 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, create_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }) do |response, operation|
+      c.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_index_endpoint parent: parent, index_endpoint: index_endpoint do |response, operation|
+      c.create_index_endpoint parent: parent, index_endpoint: index_endpoint do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_index_endpoint ::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint) do |response, operation|
+      c.create_index_endpoint ::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }, grpc_options) do |response, operation|
+      c.create_index_endpoint({ parent: parent, index_endpoint: index_endpoint }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_index_endpoint(::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint), grpc_options) do |response, operation|
+      c.create_index_endpoint(::Google::Cloud::AIPlatform::V1::CreateIndexEndpointRequest.new(parent: parent, index_endpoint: index_endpoint), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -147,36 +147,36 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, get_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_index_endpoint({ name: name }) do |response, operation|
+      c.get_index_endpoint({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_index_endpoint name: name do |response, operation|
+      c.get_index_endpoint name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_index_endpoint ::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name) do |response, operation|
+      c.get_index_endpoint ::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_index_endpoint({ name: name }, grpc_options) do |response, operation|
+      c.get_index_endpoint({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_index_endpoint(::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_index_endpoint(::Google::Cloud::AIPlatform::V1::GetIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, list_index_endpoints_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_index_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_index_endpoints parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_index_endpoints ::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_index_endpoints ::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_index_endpoints({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_index_endpoints(::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_index_endpoints(::Google::Cloud::AIPlatform::V1::ListIndexEndpointsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -278,36 +278,36 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, update_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |response, operation|
+      c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |response, operation|
+      c.update_index_endpoint index_endpoint: index_endpoint, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_index_endpoint ::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |response, operation|
+      c.update_index_endpoint ::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_index_endpoint({ index_endpoint: index_endpoint, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_index_endpoint(::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_index_endpoint(::Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new(index_endpoint: index_endpoint, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -336,40 +336,40 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, delete_index_endpoint_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_index_endpoint({ name: name }) do |response, operation|
+      c.delete_index_endpoint({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_index_endpoint name: name do |response, operation|
+      c.delete_index_endpoint name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_index_endpoint ::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name) do |response, operation|
+      c.delete_index_endpoint ::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_index_endpoint({ name: name }, grpc_options) do |response, operation|
+      c.delete_index_endpoint({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_index_endpoint(::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_index_endpoint(::Google::Cloud::AIPlatform::V1::DeleteIndexEndpointRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -401,40 +401,40 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, deploy_index_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |response, operation|
+      c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |response, operation|
+      c.deploy_index index_endpoint: index_endpoint, deployed_index: deployed_index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.deploy_index ::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |response, operation|
+      c.deploy_index ::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, grpc_options) do |response, operation|
+      c.deploy_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.deploy_index(::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), grpc_options) do |response, operation|
+      c.deploy_index(::Google::Cloud::AIPlatform::V1::DeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -466,40 +466,40 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, undeploy_index_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }) do |response, operation|
+      c.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.undeploy_index index_endpoint: index_endpoint, deployed_index_id: deployed_index_id do |response, operation|
+      c.undeploy_index index_endpoint: index_endpoint, deployed_index_id: deployed_index_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.undeploy_index ::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id) do |response, operation|
+      c.undeploy_index ::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }, grpc_options) do |response, operation|
+      c.undeploy_index({ index_endpoint: index_endpoint, deployed_index_id: deployed_index_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.undeploy_index(::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id), grpc_options) do |response, operation|
+      c.undeploy_index(::Google::Cloud::AIPlatform::V1::UndeployIndexRequest.new(index_endpoint: index_endpoint, deployed_index_id: deployed_index_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -531,40 +531,40 @@ class ::Google::Cloud::AIPlatform::V1::IndexEndpointService::ClientTest < Minite
 
     Gapic::ServiceStub.stub :new, mutate_deployed_index_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |response, operation|
+      c.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mutate_deployed_index index_endpoint: index_endpoint, deployed_index: deployed_index do |response, operation|
+      c.mutate_deployed_index index_endpoint: index_endpoint, deployed_index: deployed_index do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mutate_deployed_index ::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |response, operation|
+      c.mutate_deployed_index ::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, grpc_options) do |response, operation|
+      c.mutate_deployed_index({ index_endpoint: index_endpoint, deployed_index: deployed_index }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mutate_deployed_index(::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), grpc_options) do |response, operation|
+      c.mutate_deployed_index(::Google::Cloud::AIPlatform::V1::MutateDeployedIndexRequest.new(index_endpoint: index_endpoint, deployed_index: deployed_index), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

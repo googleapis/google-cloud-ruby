@@ -90,40 +90,40 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_events_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
+      c = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |response, operation|
+      c.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_events parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |response, operation|
+      c.list_events parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_events ::Google::Cloud::ServiceHealth::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |response, operation|
+      c.list_events ::Google::Cloud::ServiceHealth::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, grpc_options) do |response, operation|
+      c.list_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_events(::Google::Cloud::ServiceHealth::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), grpc_options) do |response, operation|
+      c.list_events(::Google::Cloud::ServiceHealth::V1::ListEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -153,36 +153,36 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_event_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
+      c = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_event({ name: name }) do |response, operation|
+      c.get_event({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_event name: name do |response, operation|
+      c.get_event name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_event ::Google::Cloud::ServiceHealth::V1::GetEventRequest.new(name: name) do |response, operation|
+      c.get_event ::Google::Cloud::ServiceHealth::V1::GetEventRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_event({ name: name }, grpc_options) do |response, operation|
+      c.get_event({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_event(::Google::Cloud::ServiceHealth::V1::GetEventRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_event(::Google::Cloud::ServiceHealth::V1::GetEventRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -219,40 +219,40 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_organization_events_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
+      c = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_organization_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |response, operation|
+      c.list_organization_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_organization_events parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |response, operation|
+      c.list_organization_events parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_organization_events ::Google::Cloud::ServiceHealth::V1::ListOrganizationEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |response, operation|
+      c.list_organization_events ::Google::Cloud::ServiceHealth::V1::ListOrganizationEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_organization_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, grpc_options) do |response, operation|
+      c.list_organization_events({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_organization_events(::Google::Cloud::ServiceHealth::V1::ListOrganizationEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), grpc_options) do |response, operation|
+      c.list_organization_events(::Google::Cloud::ServiceHealth::V1::ListOrganizationEventsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -282,36 +282,36 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_organization_event_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
+      c = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_organization_event({ name: name }) do |response, operation|
+      c.get_organization_event({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_organization_event name: name do |response, operation|
+      c.get_organization_event name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_organization_event ::Google::Cloud::ServiceHealth::V1::GetOrganizationEventRequest.new(name: name) do |response, operation|
+      c.get_organization_event ::Google::Cloud::ServiceHealth::V1::GetOrganizationEventRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_organization_event({ name: name }, grpc_options) do |response, operation|
+      c.get_organization_event({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_organization_event(::Google::Cloud::ServiceHealth::V1::GetOrganizationEventRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_organization_event(::Google::Cloud::ServiceHealth::V1::GetOrganizationEventRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,40 +346,40 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_organization_impacts_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
+      c = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_organization_impacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      c.list_organization_impacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_organization_impacts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      c.list_organization_impacts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_organization_impacts ::Google::Cloud::ServiceHealth::V1::ListOrganizationImpactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      c.list_organization_impacts ::Google::Cloud::ServiceHealth::V1::ListOrganizationImpactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_organization_impacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      c.list_organization_impacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_organization_impacts(::Google::Cloud::ServiceHealth::V1::ListOrganizationImpactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      c.list_organization_impacts(::Google::Cloud::ServiceHealth::V1::ListOrganizationImpactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -409,36 +409,36 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, get_organization_impact_client_stub do
       # Create client
-      client = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
+      c = ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_organization_impact({ name: name }) do |response, operation|
+      c.get_organization_impact({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_organization_impact name: name do |response, operation|
+      c.get_organization_impact name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_organization_impact ::Google::Cloud::ServiceHealth::V1::GetOrganizationImpactRequest.new(name: name) do |response, operation|
+      c.get_organization_impact ::Google::Cloud::ServiceHealth::V1::GetOrganizationImpactRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_organization_impact({ name: name }, grpc_options) do |response, operation|
+      c.get_organization_impact({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_organization_impact(::Google::Cloud::ServiceHealth::V1::GetOrganizationImpactRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_organization_impact(::Google::Cloud::ServiceHealth::V1::GetOrganizationImpactRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

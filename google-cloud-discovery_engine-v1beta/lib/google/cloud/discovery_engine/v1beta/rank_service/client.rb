@@ -228,7 +228,7 @@ module Google
             #   @param model [::String]
             #     The identifier of the model to use. It is one of:
             #
-            #     * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
+            #     * `semantic-ranker-512@latest`: Semantic ranking model with maximum input
             #     token size 512.
             #
             #     It is set to `semantic-ranker-512@latest` by default if unspecified.
@@ -238,7 +238,7 @@ module Google
             #   @param query [::String]
             #     The query to use.
             #   @param records [::Array<::Google::Cloud::DiscoveryEngine::V1beta::RankingRecord, ::Hash>]
-            #     Required. A list of records to rank. At most 200 records to rank.
+            #     Required. A list of records to rank.
             #   @param ignore_record_details_in_response [::Boolean]
             #     If true, the response will contain only record ID and score. By default, it
             #     is false, the response will contain record details.
@@ -421,6 +421,7 @@ module Google
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
             #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
             #   @return [::Hash]
@@ -504,6 +505,7 @@ module Google
               #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
               #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
               #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:jitter` (*type:* `Numeric`) - The jitter in seconds. Default: 1.0.
               #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #         trigger a retry.
               #

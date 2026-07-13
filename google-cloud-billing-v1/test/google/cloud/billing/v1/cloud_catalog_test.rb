@@ -84,40 +84,40 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_services_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_services({ page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_services({ page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_services page_size: page_size, page_token: page_token do |response, operation|
+      c.list_services page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_services({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_services({ page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_services(::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_services(::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -157,40 +157,40 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_skus_client_stub do
       # Create client
-      client = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
+      c = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_skus parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_skus parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_skus(::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_skus(::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

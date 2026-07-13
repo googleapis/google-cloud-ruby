@@ -82,36 +82,36 @@ class ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, get_encryption_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_encryption_spec({ name: name }) do |response, operation|
+      c.get_encryption_spec({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_encryption_spec name: name do |response, operation|
+      c.get_encryption_spec name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_encryption_spec ::Google::Cloud::Dialogflow::V2::GetEncryptionSpecRequest.new(name: name) do |response, operation|
+      c.get_encryption_spec ::Google::Cloud::Dialogflow::V2::GetEncryptionSpecRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_encryption_spec({ name: name }, grpc_options) do |response, operation|
+      c.get_encryption_spec({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_encryption_spec(::Google::Cloud::Dialogflow::V2::GetEncryptionSpecRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_encryption_spec(::Google::Cloud::Dialogflow::V2::GetEncryptionSpecRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -140,40 +140,40 @@ class ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::ClientTest < Minit
 
     Gapic::ServiceStub.stub :new, initialize_encryption_spec_client_stub do
       # Create client
-      client = ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client.new do |config|
+      c = ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.initialize_encryption_spec({ encryption_spec: encryption_spec }) do |response, operation|
+      c.initialize_encryption_spec({ encryption_spec: encryption_spec }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.initialize_encryption_spec encryption_spec: encryption_spec do |response, operation|
+      c.initialize_encryption_spec encryption_spec: encryption_spec do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.initialize_encryption_spec ::Google::Cloud::Dialogflow::V2::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec) do |response, operation|
+      c.initialize_encryption_spec ::Google::Cloud::Dialogflow::V2::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.initialize_encryption_spec({ encryption_spec: encryption_spec }, grpc_options) do |response, operation|
+      c.initialize_encryption_spec({ encryption_spec: encryption_spec }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.initialize_encryption_spec(::Google::Cloud::Dialogflow::V2::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec), grpc_options) do |response, operation|
+      c.initialize_encryption_spec(::Google::Cloud::Dialogflow::V2::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

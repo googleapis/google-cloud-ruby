@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/dataform/v1"
 
-client = ::Google::Cloud::Dataform::V1::Dataform::Client.new
-request = ::Google::Cloud::Dataform::V1::ListRepositoriesRequest.new # (request fields as keyword arguments...)
-response = client.list_repositories request
+client = ::Google::Longrunning::Operations::Client.new
+request = ::Google::Longrunning::ListOperationsRequest.new # (request fields as keyword arguments...)
+response = client.list_operations request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataform-v1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/dataform/v1"
 require "logger"
 
-client = ::Google::Cloud::Dataform::V1::Dataform::Client.new do |config|
+client = ::Google::Longrunning::Operations::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
@@ -86,7 +86,7 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 3.0+.
+This library is supported on Ruby 3.2+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

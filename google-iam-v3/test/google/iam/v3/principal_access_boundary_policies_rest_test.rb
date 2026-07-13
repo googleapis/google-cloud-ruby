@@ -100,32 +100,32 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ClientTest < Min
     ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ServiceStub.stub :transcode_create_principal_access_boundary_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_principal_access_boundary_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }) do |_result, response|
+        c.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_principal_access_boundary_policy parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only do |_result, response|
+        c.create_principal_access_boundary_policy parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_principal_access_boundary_policy ::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only) do |_result, response|
+        c.create_principal_access_boundary_policy ::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }, call_options) do |_result, response|
+        c.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_principal_access_boundary_policy(::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only), call_options) do |_result, response|
+        c.create_principal_access_boundary_policy(::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -154,32 +154,32 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ClientTest < Min
     ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ServiceStub.stub :transcode_get_principal_access_boundary_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_principal_access_boundary_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_principal_access_boundary_policy({ name: name }) do |_result, response|
+        c.get_principal_access_boundary_policy({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_principal_access_boundary_policy name: name do |_result, response|
+        c.get_principal_access_boundary_policy name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_principal_access_boundary_policy ::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name) do |_result, response|
+        c.get_principal_access_boundary_policy ::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_principal_access_boundary_policy({ name: name }, call_options) do |_result, response|
+        c.get_principal_access_boundary_policy({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_principal_access_boundary_policy(::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name), call_options) do |_result, response|
+        c.get_principal_access_boundary_policy(::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ClientTest < Min
     ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ServiceStub.stub :transcode_update_principal_access_boundary_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_principal_access_boundary_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
+        c.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_principal_access_boundary_policy principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask do |_result, response|
+        c.update_principal_access_boundary_policy principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_principal_access_boundary_policy ::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask) do |_result, response|
+        c.update_principal_access_boundary_policy ::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_principal_access_boundary_policy(::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
+        c.update_principal_access_boundary_policy(::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -267,32 +267,32 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ClientTest < Min
     ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ServiceStub.stub :transcode_delete_principal_access_boundary_policy_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_principal_access_boundary_policy_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }) do |_result, response|
+        c.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_principal_access_boundary_policy name: name, etag: etag, validate_only: validate_only, force: force do |_result, response|
+        c.delete_principal_access_boundary_policy name: name, etag: etag, validate_only: validate_only, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_principal_access_boundary_policy ::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force) do |_result, response|
+        c.delete_principal_access_boundary_policy ::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }, call_options) do |_result, response|
+        c.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_principal_access_boundary_policy(::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force), call_options) do |_result, response|
+        c.delete_principal_access_boundary_policy(::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,32 +323,32 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ClientTest < Min
     ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ServiceStub.stub :transcode_list_principal_access_boundary_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_principal_access_boundary_policies_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_principal_access_boundary_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_principal_access_boundary_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_principal_access_boundary_policies ::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_principal_access_boundary_policies ::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_principal_access_boundary_policies(::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_principal_access_boundary_policies(::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,32 +379,32 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ClientTest < Min
     ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::ServiceStub.stub :transcode_search_principal_access_boundary_policy_bindings_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, search_principal_access_boundary_policy_bindings_client_stub do
         # Create client
-        client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
+        c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_principal_access_boundary_policy_bindings name: name, page_size: page_size, page_token: page_token do |_result, response|
+        c.search_principal_access_boundary_policy_bindings name: name, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_principal_access_boundary_policy_bindings ::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
+        c.search_principal_access_boundary_policy_bindings ::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_principal_access_boundary_policy_bindings(::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.search_principal_access_boundary_policy_bindings(::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

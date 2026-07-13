@@ -104,32 +104,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_execute_patch_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, execute_patch_job_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }) do |_result, response|
+        c.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_patch_job parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout do |_result, response|
+        c.execute_patch_job parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout) do |_result, response|
+        c.execute_patch_job ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }, call_options) do |_result, response|
+        c.execute_patch_job({ parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_patch_job(::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), call_options) do |_result, response|
+        c.execute_patch_job(::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new(parent: parent, description: description, instance_filter: instance_filter, patch_config: patch_config, duration: duration, dry_run: dry_run, display_name: display_name, rollout: rollout), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -158,32 +158,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_get_patch_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_patch_job_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_patch_job({ name: name }) do |_result, response|
+        c.get_patch_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_patch_job name: name do |_result, response|
+        c.get_patch_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_patch_job ::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name) do |_result, response|
+        c.get_patch_job ::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_patch_job({ name: name }, call_options) do |_result, response|
+        c.get_patch_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_patch_job(::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_patch_job(::Google::Cloud::OsConfig::V1::GetPatchJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -212,32 +212,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_cancel_patch_job_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, cancel_patch_job_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.cancel_patch_job({ name: name }) do |_result, response|
+        c.cancel_patch_job({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.cancel_patch_job name: name do |_result, response|
+        c.cancel_patch_job name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.cancel_patch_job ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name) do |_result, response|
+        c.cancel_patch_job ::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.cancel_patch_job({ name: name }, call_options) do |_result, response|
+        c.cancel_patch_job({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.cancel_patch_job(::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name), call_options) do |_result, response|
+        c.cancel_patch_job(::Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -269,32 +269,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_list_patch_jobs_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_patch_jobs_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_patch_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_patch_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_patch_jobs ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_patch_jobs ::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_patch_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_patch_jobs(::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_patch_jobs(::Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -326,32 +326,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_list_patch_job_instance_details_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_patch_job_instance_details_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+        c.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_patch_job_instance_details parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+        c.list_patch_job_instance_details parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_patch_job_instance_details ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+        c.list_patch_job_instance_details ::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+        c.list_patch_job_instance_details({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_patch_job_instance_details(::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+        c.list_patch_job_instance_details(::Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -382,32 +382,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_create_patch_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_patch_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }) do |_result, response|
+        c.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_patch_deployment parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment do |_result, response|
+        c.create_patch_deployment parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_patch_deployment ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment) do |_result, response|
+        c.create_patch_deployment ::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }, call_options) do |_result, response|
+        c.create_patch_deployment({ parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_patch_deployment(::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment), call_options) do |_result, response|
+        c.create_patch_deployment(::Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new(parent: parent, patch_deployment_id: patch_deployment_id, patch_deployment: patch_deployment), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -436,32 +436,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_get_patch_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_patch_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_patch_deployment({ name: name }) do |_result, response|
+        c.get_patch_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_patch_deployment name: name do |_result, response|
+        c.get_patch_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_patch_deployment ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name) do |_result, response|
+        c.get_patch_deployment ::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_patch_deployment({ name: name }, call_options) do |_result, response|
+        c.get_patch_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_patch_deployment(::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.get_patch_deployment(::Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -492,32 +492,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_list_patch_deployments_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_patch_deployments_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_patch_deployments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_patch_deployments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_patch_deployments ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_patch_deployments ::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_patch_deployments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_patch_deployments(::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_patch_deployments(::Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -546,32 +546,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_delete_patch_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_patch_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_patch_deployment({ name: name }) do |_result, response|
+        c.delete_patch_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_patch_deployment name: name do |_result, response|
+        c.delete_patch_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_patch_deployment ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name) do |_result, response|
+        c.delete_patch_deployment ::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_patch_deployment({ name: name }, call_options) do |_result, response|
+        c.delete_patch_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_patch_deployment(::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.delete_patch_deployment(::Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -601,32 +601,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_update_patch_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_patch_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }) do |_result, response|
+        c.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_patch_deployment patch_deployment: patch_deployment, update_mask: update_mask do |_result, response|
+        c.update_patch_deployment patch_deployment: patch_deployment, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_patch_deployment ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask) do |_result, response|
+        c.update_patch_deployment ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }, call_options) do |_result, response|
+        c.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_patch_deployment(::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask), call_options) do |_result, response|
+        c.update_patch_deployment(::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -655,32 +655,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_pause_patch_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, pause_patch_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.pause_patch_deployment({ name: name }) do |_result, response|
+        c.pause_patch_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.pause_patch_deployment name: name do |_result, response|
+        c.pause_patch_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.pause_patch_deployment ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name) do |_result, response|
+        c.pause_patch_deployment ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.pause_patch_deployment({ name: name }, call_options) do |_result, response|
+        c.pause_patch_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.pause_patch_deployment(::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.pause_patch_deployment(::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -709,32 +709,32 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ServiceStub.stub :transcode_resume_patch_deployment_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, resume_patch_deployment_client_stub do
         # Create client
-        client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
+        c = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.resume_patch_deployment({ name: name }) do |_result, response|
+        c.resume_patch_deployment({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.resume_patch_deployment name: name do |_result, response|
+        c.resume_patch_deployment name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.resume_patch_deployment ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name) do |_result, response|
+        c.resume_patch_deployment ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.resume_patch_deployment({ name: name }, call_options) do |_result, response|
+        c.resume_patch_deployment({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.resume_patch_deployment(::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name), call_options) do |_result, response|
+        c.resume_patch_deployment(::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

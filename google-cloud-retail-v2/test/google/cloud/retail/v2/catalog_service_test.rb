@@ -86,40 +86,40 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_catalogs_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_catalogs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_catalogs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_catalogs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_catalogs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_catalogs ::Google::Cloud::Retail::V2::ListCatalogsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_catalogs ::Google::Cloud::Retail::V2::ListCatalogsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_catalogs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_catalogs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_catalogs(::Google::Cloud::Retail::V2::ListCatalogsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_catalogs(::Google::Cloud::Retail::V2::ListCatalogsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_catalog_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_catalog({ catalog: catalog, update_mask: update_mask }) do |response, operation|
+      c.update_catalog({ catalog: catalog, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_catalog catalog: catalog, update_mask: update_mask do |response, operation|
+      c.update_catalog catalog: catalog, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_catalog ::Google::Cloud::Retail::V2::UpdateCatalogRequest.new(catalog: catalog, update_mask: update_mask) do |response, operation|
+      c.update_catalog ::Google::Cloud::Retail::V2::UpdateCatalogRequest.new(catalog: catalog, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_catalog({ catalog: catalog, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_catalog({ catalog: catalog, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_catalog(::Google::Cloud::Retail::V2::UpdateCatalogRequest.new(catalog: catalog, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_catalog(::Google::Cloud::Retail::V2::UpdateCatalogRequest.new(catalog: catalog, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,36 +215,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, set_default_branch_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note, force: force }) do |response, operation|
+      c.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_default_branch catalog: catalog, branch_id: branch_id, note: note, force: force do |response, operation|
+      c.set_default_branch catalog: catalog, branch_id: branch_id, note: note, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_default_branch ::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note, force: force) do |response, operation|
+      c.set_default_branch ::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note, force: force }, grpc_options) do |response, operation|
+      c.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_default_branch(::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note, force: force), grpc_options) do |response, operation|
+      c.set_default_branch(::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -273,36 +273,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_default_branch_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_default_branch({ catalog: catalog }) do |response, operation|
+      c.get_default_branch({ catalog: catalog }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_default_branch catalog: catalog do |response, operation|
+      c.get_default_branch catalog: catalog do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_default_branch ::Google::Cloud::Retail::V2::GetDefaultBranchRequest.new(catalog: catalog) do |response, operation|
+      c.get_default_branch ::Google::Cloud::Retail::V2::GetDefaultBranchRequest.new(catalog: catalog) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_default_branch({ catalog: catalog }, grpc_options) do |response, operation|
+      c.get_default_branch({ catalog: catalog }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_default_branch(::Google::Cloud::Retail::V2::GetDefaultBranchRequest.new(catalog: catalog), grpc_options) do |response, operation|
+      c.get_default_branch(::Google::Cloud::Retail::V2::GetDefaultBranchRequest.new(catalog: catalog), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -331,36 +331,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_completion_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_completion_config({ name: name }) do |response, operation|
+      c.get_completion_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_completion_config name: name do |response, operation|
+      c.get_completion_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_completion_config ::Google::Cloud::Retail::V2::GetCompletionConfigRequest.new(name: name) do |response, operation|
+      c.get_completion_config ::Google::Cloud::Retail::V2::GetCompletionConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_completion_config({ name: name }, grpc_options) do |response, operation|
+      c.get_completion_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_completion_config(::Google::Cloud::Retail::V2::GetCompletionConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_completion_config(::Google::Cloud::Retail::V2::GetCompletionConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -391,36 +391,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_completion_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_completion_config({ completion_config: completion_config, update_mask: update_mask }) do |response, operation|
+      c.update_completion_config({ completion_config: completion_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_completion_config completion_config: completion_config, update_mask: update_mask do |response, operation|
+      c.update_completion_config completion_config: completion_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_completion_config ::Google::Cloud::Retail::V2::UpdateCompletionConfigRequest.new(completion_config: completion_config, update_mask: update_mask) do |response, operation|
+      c.update_completion_config ::Google::Cloud::Retail::V2::UpdateCompletionConfigRequest.new(completion_config: completion_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_completion_config({ completion_config: completion_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_completion_config({ completion_config: completion_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_completion_config(::Google::Cloud::Retail::V2::UpdateCompletionConfigRequest.new(completion_config: completion_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_completion_config(::Google::Cloud::Retail::V2::UpdateCompletionConfigRequest.new(completion_config: completion_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -449,36 +449,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, get_attributes_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_attributes_config({ name: name }) do |response, operation|
+      c.get_attributes_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_attributes_config name: name do |response, operation|
+      c.get_attributes_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_attributes_config ::Google::Cloud::Retail::V2::GetAttributesConfigRequest.new(name: name) do |response, operation|
+      c.get_attributes_config ::Google::Cloud::Retail::V2::GetAttributesConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_attributes_config({ name: name }, grpc_options) do |response, operation|
+      c.get_attributes_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_attributes_config(::Google::Cloud::Retail::V2::GetAttributesConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_attributes_config(::Google::Cloud::Retail::V2::GetAttributesConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -509,36 +509,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, update_attributes_config_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_attributes_config({ attributes_config: attributes_config, update_mask: update_mask }) do |response, operation|
+      c.update_attributes_config({ attributes_config: attributes_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_attributes_config attributes_config: attributes_config, update_mask: update_mask do |response, operation|
+      c.update_attributes_config attributes_config: attributes_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_attributes_config ::Google::Cloud::Retail::V2::UpdateAttributesConfigRequest.new(attributes_config: attributes_config, update_mask: update_mask) do |response, operation|
+      c.update_attributes_config ::Google::Cloud::Retail::V2::UpdateAttributesConfigRequest.new(attributes_config: attributes_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_attributes_config({ attributes_config: attributes_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_attributes_config({ attributes_config: attributes_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_attributes_config(::Google::Cloud::Retail::V2::UpdateAttributesConfigRequest.new(attributes_config: attributes_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_attributes_config(::Google::Cloud::Retail::V2::UpdateAttributesConfigRequest.new(attributes_config: attributes_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -569,36 +569,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, add_catalog_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.add_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute }) do |response, operation|
+      c.add_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.add_catalog_attribute attributes_config: attributes_config, catalog_attribute: catalog_attribute do |response, operation|
+      c.add_catalog_attribute attributes_config: attributes_config, catalog_attribute: catalog_attribute do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.add_catalog_attribute ::Google::Cloud::Retail::V2::AddCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute) do |response, operation|
+      c.add_catalog_attribute ::Google::Cloud::Retail::V2::AddCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.add_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute }, grpc_options) do |response, operation|
+      c.add_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.add_catalog_attribute(::Google::Cloud::Retail::V2::AddCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute), grpc_options) do |response, operation|
+      c.add_catalog_attribute(::Google::Cloud::Retail::V2::AddCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -629,36 +629,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, remove_catalog_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.remove_catalog_attribute({ attributes_config: attributes_config, key: key }) do |response, operation|
+      c.remove_catalog_attribute({ attributes_config: attributes_config, key: key }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.remove_catalog_attribute attributes_config: attributes_config, key: key do |response, operation|
+      c.remove_catalog_attribute attributes_config: attributes_config, key: key do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.remove_catalog_attribute ::Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new(attributes_config: attributes_config, key: key) do |response, operation|
+      c.remove_catalog_attribute ::Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new(attributes_config: attributes_config, key: key) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.remove_catalog_attribute({ attributes_config: attributes_config, key: key }, grpc_options) do |response, operation|
+      c.remove_catalog_attribute({ attributes_config: attributes_config, key: key }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.remove_catalog_attribute(::Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new(attributes_config: attributes_config, key: key), grpc_options) do |response, operation|
+      c.remove_catalog_attribute(::Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest.new(attributes_config: attributes_config, key: key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -691,36 +691,36 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, replace_catalog_attribute_client_stub do
       # Create client
-      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+      c = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.replace_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask }) do |response, operation|
+      c.replace_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.replace_catalog_attribute attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask do |response, operation|
+      c.replace_catalog_attribute attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.replace_catalog_attribute ::Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask) do |response, operation|
+      c.replace_catalog_attribute ::Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.replace_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.replace_catalog_attribute({ attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.replace_catalog_attribute(::Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask), grpc_options) do |response, operation|
+      c.replace_catalog_attribute(::Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new(attributes_config: attributes_config, catalog_attribute: catalog_attribute, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

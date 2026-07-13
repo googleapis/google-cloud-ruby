@@ -131,9 +131,63 @@ module Google
         # @!attribute [rw] partner_account
         #   @return [::Google::Ads::DataManager::V1::ProductAccount]
         #     Required. The partner account granted access by the owning account.
+        # @!attribute [rw] feature_set
+        #   @return [::Google::Ads::DataManager::V1::FeatureSet]
+        #     Optional. Immutable. The set of features supported for the partner link.
+        #     If not specified, the system behavior defaults to
+        #     {::Google::Ads::DataManager::V1::FeatureSet::FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT}.
+        # @!attribute [rw] partner_customer_account
+        #   @return [::Google::Ads::DataManager::V1::PartnerCustomerAccount]
+        #     Optional. The customer account in the partner system.
+        #     This is required for partner links with the
+        #     {::Google::Ads::DataManager::V1::FeatureSet::FEATURE_SET_AD_EVENT_MANAGEMENT FEATURE_SET_AD_EVENT_MANAGEMENT}
+        #     feature set.
+        # @!attribute [rw] partner_link_metadata
+        #   @return [::Google::Ads::DataManager::V1::PartnerLinkMetadata]
+        #     Optional. Metadata associated with the partner link.
+        #     This is optional and only accepted for partner links with the
+        #     {::Google::Ads::DataManager::V1::FeatureSet::FEATURE_SET_AD_EVENT_MANAGEMENT FEATURE_SET_AD_EVENT_MANAGEMENT}.
         class PartnerLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a customer account in the partner's system.
+        # @!attribute [rw] account_id
+        #   @return [::String]
+        #     Required. The identifier of the customer account in the partner's ID space.
+        # @!attribute [rw] account_name
+        #   @return [::String]
+        #     Optional. The name of the account.
+        # @!attribute [rw] account_type
+        #   @return [::String]
+        #     Optional. The type of the account. Can be used to distinguish between
+        #     advertiser accounts and business level accounts, for example.
+        class PartnerCustomerAccount
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents metadata associated with a partner link.
+        # @!attribute [rw] implicit_accounts
+        #   @return [::Array<::Google::Ads::DataManager::V1::PartnerCustomerAccount>]
+        #     Optional. The list of implicit accounts.
+        class PartnerLinkMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The set of supported features for a partner link.
+        module FeatureSet
+          # Unspecified feature set. If unspecified, the system behavior defaults to
+          # {::Google::Ads::DataManager::V1::FeatureSet::FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT}.
+          FEATURE_SET_UNSPECIFIED = 0
+
+          # Indicates a link used for audience and event management.
+          FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT = 1
+
+          # Indicates a link used for ad event management.
+          FEATURE_SET_AD_EVENT_MANAGEMENT = 2
         end
       end
     end

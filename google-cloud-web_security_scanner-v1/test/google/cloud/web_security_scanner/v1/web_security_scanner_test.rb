@@ -84,36 +84,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, create_scan_config_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_scan_config({ parent: parent, scan_config: scan_config }) do |response, operation|
+      c.create_scan_config({ parent: parent, scan_config: scan_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_scan_config parent: parent, scan_config: scan_config do |response, operation|
+      c.create_scan_config parent: parent, scan_config: scan_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_scan_config ::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config) do |response, operation|
+      c.create_scan_config ::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_scan_config({ parent: parent, scan_config: scan_config }, grpc_options) do |response, operation|
+      c.create_scan_config({ parent: parent, scan_config: scan_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_scan_config(::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config), grpc_options) do |response, operation|
+      c.create_scan_config(::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new(parent: parent, scan_config: scan_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, delete_scan_config_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_scan_config({ name: name }) do |response, operation|
+      c.delete_scan_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_scan_config name: name do |response, operation|
+      c.delete_scan_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_scan_config ::Google::Cloud::WebSecurityScanner::V1::DeleteScanConfigRequest.new(name: name) do |response, operation|
+      c.delete_scan_config ::Google::Cloud::WebSecurityScanner::V1::DeleteScanConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_scan_config({ name: name }, grpc_options) do |response, operation|
+      c.delete_scan_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_scan_config(::Google::Cloud::WebSecurityScanner::V1::DeleteScanConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_scan_config(::Google::Cloud::WebSecurityScanner::V1::DeleteScanConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -200,36 +200,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_scan_config_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_scan_config({ name: name }) do |response, operation|
+      c.get_scan_config({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_scan_config name: name do |response, operation|
+      c.get_scan_config name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_scan_config ::Google::Cloud::WebSecurityScanner::V1::GetScanConfigRequest.new(name: name) do |response, operation|
+      c.get_scan_config ::Google::Cloud::WebSecurityScanner::V1::GetScanConfigRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_scan_config({ name: name }, grpc_options) do |response, operation|
+      c.get_scan_config({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_scan_config(::Google::Cloud::WebSecurityScanner::V1::GetScanConfigRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_scan_config(::Google::Cloud::WebSecurityScanner::V1::GetScanConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -262,40 +262,40 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_scan_configs_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_scan_configs parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_scan_configs parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_scan_configs ::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_scan_configs ::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_scan_configs({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_scan_configs(::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_scan_configs(::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -327,36 +327,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, update_scan_config_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_scan_config({ scan_config: scan_config, update_mask: update_mask }) do |response, operation|
+      c.update_scan_config({ scan_config: scan_config, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_scan_config scan_config: scan_config, update_mask: update_mask do |response, operation|
+      c.update_scan_config scan_config: scan_config, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_scan_config ::Google::Cloud::WebSecurityScanner::V1::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask) do |response, operation|
+      c.update_scan_config ::Google::Cloud::WebSecurityScanner::V1::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_scan_config({ scan_config: scan_config, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_scan_config({ scan_config: scan_config, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_scan_config(::Google::Cloud::WebSecurityScanner::V1::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_scan_config(::Google::Cloud::WebSecurityScanner::V1::UpdateScanConfigRequest.new(scan_config: scan_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -385,36 +385,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, start_scan_run_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.start_scan_run({ name: name }) do |response, operation|
+      c.start_scan_run({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.start_scan_run name: name do |response, operation|
+      c.start_scan_run name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.start_scan_run ::Google::Cloud::WebSecurityScanner::V1::StartScanRunRequest.new(name: name) do |response, operation|
+      c.start_scan_run ::Google::Cloud::WebSecurityScanner::V1::StartScanRunRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.start_scan_run({ name: name }, grpc_options) do |response, operation|
+      c.start_scan_run({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.start_scan_run(::Google::Cloud::WebSecurityScanner::V1::StartScanRunRequest.new(name: name), grpc_options) do |response, operation|
+      c.start_scan_run(::Google::Cloud::WebSecurityScanner::V1::StartScanRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -443,36 +443,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_scan_run_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_scan_run({ name: name }) do |response, operation|
+      c.get_scan_run({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_scan_run name: name do |response, operation|
+      c.get_scan_run name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_scan_run ::Google::Cloud::WebSecurityScanner::V1::GetScanRunRequest.new(name: name) do |response, operation|
+      c.get_scan_run ::Google::Cloud::WebSecurityScanner::V1::GetScanRunRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_scan_run({ name: name }, grpc_options) do |response, operation|
+      c.get_scan_run({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_scan_run(::Google::Cloud::WebSecurityScanner::V1::GetScanRunRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_scan_run(::Google::Cloud::WebSecurityScanner::V1::GetScanRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -505,40 +505,40 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_scan_runs_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_scan_runs parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_scan_runs parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_scan_runs ::Google::Cloud::WebSecurityScanner::V1::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_scan_runs ::Google::Cloud::WebSecurityScanner::V1::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_scan_runs({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_scan_runs(::Google::Cloud::WebSecurityScanner::V1::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_scan_runs(::Google::Cloud::WebSecurityScanner::V1::ListScanRunsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -568,36 +568,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, stop_scan_run_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.stop_scan_run({ name: name }) do |response, operation|
+      c.stop_scan_run({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.stop_scan_run name: name do |response, operation|
+      c.stop_scan_run name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.stop_scan_run ::Google::Cloud::WebSecurityScanner::V1::StopScanRunRequest.new(name: name) do |response, operation|
+      c.stop_scan_run ::Google::Cloud::WebSecurityScanner::V1::StopScanRunRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.stop_scan_run({ name: name }, grpc_options) do |response, operation|
+      c.stop_scan_run({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.stop_scan_run(::Google::Cloud::WebSecurityScanner::V1::StopScanRunRequest.new(name: name), grpc_options) do |response, operation|
+      c.stop_scan_run(::Google::Cloud::WebSecurityScanner::V1::StopScanRunRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -630,40 +630,40 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_crawled_urls_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_crawled_urls parent: parent, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_crawled_urls parent: parent, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_crawled_urls ::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_crawled_urls ::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_crawled_urls({ parent: parent, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_crawled_urls(::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_crawled_urls(::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -693,36 +693,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, get_finding_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_finding({ name: name }) do |response, operation|
+      c.get_finding({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_finding name: name do |response, operation|
+      c.get_finding name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_finding ::Google::Cloud::WebSecurityScanner::V1::GetFindingRequest.new(name: name) do |response, operation|
+      c.get_finding ::Google::Cloud::WebSecurityScanner::V1::GetFindingRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_finding({ name: name }, grpc_options) do |response, operation|
+      c.get_finding({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_finding(::Google::Cloud::WebSecurityScanner::V1::GetFindingRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_finding(::Google::Cloud::WebSecurityScanner::V1::GetFindingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -757,40 +757,40 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_findings_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }) do |response, operation|
+      c.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_findings parent: parent, filter: filter, page_token: page_token, page_size: page_size do |response, operation|
+      c.list_findings parent: parent, filter: filter, page_token: page_token, page_size: page_size do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_findings ::Google::Cloud::WebSecurityScanner::V1::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size) do |response, operation|
+      c.list_findings ::Google::Cloud::WebSecurityScanner::V1::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
+      c.list_findings({ parent: parent, filter: filter, page_token: page_token, page_size: page_size }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_findings(::Google::Cloud::WebSecurityScanner::V1::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
+      c.list_findings(::Google::Cloud::WebSecurityScanner::V1::ListFindingsRequest.new(parent: parent, filter: filter, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -820,36 +820,36 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
 
     Gapic::ServiceStub.stub :new, list_finding_type_stats_client_stub do
       # Create client
-      client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
+      c = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_finding_type_stats({ parent: parent }) do |response, operation|
+      c.list_finding_type_stats({ parent: parent }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_finding_type_stats parent: parent do |response, operation|
+      c.list_finding_type_stats parent: parent do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_finding_type_stats ::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest.new(parent: parent) do |response, operation|
+      c.list_finding_type_stats ::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest.new(parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_finding_type_stats({ parent: parent }, grpc_options) do |response, operation|
+      c.list_finding_type_stats({ parent: parent }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_finding_type_stats(::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest.new(parent: parent), grpc_options) do |response, operation|
+      c.list_finding_type_stats(::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

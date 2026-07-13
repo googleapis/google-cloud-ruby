@@ -86,36 +86,36 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, compute_threat_list_diff_client_stub do
       # Create client
-      client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+      c = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }) do |response, operation|
+      c.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.compute_threat_list_diff threat_type: threat_type, version_token: version_token, constraints: constraints do |response, operation|
+      c.compute_threat_list_diff threat_type: threat_type, version_token: version_token, constraints: constraints do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.compute_threat_list_diff ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints) do |response, operation|
+      c.compute_threat_list_diff ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }, grpc_options) do |response, operation|
+      c.compute_threat_list_diff({ threat_type: threat_type, version_token: version_token, constraints: constraints }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.compute_threat_list_diff(::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), grpc_options) do |response, operation|
+      c.compute_threat_list_diff(::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -146,36 +146,36 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_uris_client_stub do
       # Create client
-      client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+      c = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_uris({ uri: uri, threat_types: threat_types }) do |response, operation|
+      c.search_uris({ uri: uri, threat_types: threat_types }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_uris uri: uri, threat_types: threat_types do |response, operation|
+      c.search_uris uri: uri, threat_types: threat_types do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_uris ::Google::Cloud::WebRisk::V1::SearchUrisRequest.new(uri: uri, threat_types: threat_types) do |response, operation|
+      c.search_uris ::Google::Cloud::WebRisk::V1::SearchUrisRequest.new(uri: uri, threat_types: threat_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_uris({ uri: uri, threat_types: threat_types }, grpc_options) do |response, operation|
+      c.search_uris({ uri: uri, threat_types: threat_types }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_uris(::Google::Cloud::WebRisk::V1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), grpc_options) do |response, operation|
+      c.search_uris(::Google::Cloud::WebRisk::V1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -206,36 +206,36 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, search_hashes_client_stub do
       # Create client
-      client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+      c = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }) do |response, operation|
+      c.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_hashes hash_prefix: hash_prefix, threat_types: threat_types do |response, operation|
+      c.search_hashes hash_prefix: hash_prefix, threat_types: threat_types do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_hashes ::Google::Cloud::WebRisk::V1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types) do |response, operation|
+      c.search_hashes ::Google::Cloud::WebRisk::V1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }, grpc_options) do |response, operation|
+      c.search_hashes({ hash_prefix: hash_prefix, threat_types: threat_types }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_hashes(::Google::Cloud::WebRisk::V1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), grpc_options) do |response, operation|
+      c.search_hashes(::Google::Cloud::WebRisk::V1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -266,36 +266,36 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, create_submission_client_stub do
       # Create client
-      client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+      c = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_submission({ parent: parent, submission: submission }) do |response, operation|
+      c.create_submission({ parent: parent, submission: submission }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_submission parent: parent, submission: submission do |response, operation|
+      c.create_submission parent: parent, submission: submission do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_submission ::Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new(parent: parent, submission: submission) do |response, operation|
+      c.create_submission ::Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new(parent: parent, submission: submission) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_submission({ parent: parent, submission: submission }, grpc_options) do |response, operation|
+      c.create_submission({ parent: parent, submission: submission }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_submission(::Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new(parent: parent, submission: submission), grpc_options) do |response, operation|
+      c.create_submission(::Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new(parent: parent, submission: submission), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -330,40 +330,40 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, submit_uri_client_stub do
       # Create client
-      client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+      c = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.submit_uri({ parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery }) do |response, operation|
+      c.submit_uri({ parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.submit_uri parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery do |response, operation|
+      c.submit_uri parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.submit_uri ::Google::Cloud::WebRisk::V1::SubmitUriRequest.new(parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery) do |response, operation|
+      c.submit_uri ::Google::Cloud::WebRisk::V1::SubmitUriRequest.new(parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.submit_uri({ parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery }, grpc_options) do |response, operation|
+      c.submit_uri({ parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.submit_uri(::Google::Cloud::WebRisk::V1::SubmitUriRequest.new(parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery), grpc_options) do |response, operation|
+      c.submit_uri(::Google::Cloud::WebRisk::V1::SubmitUriRequest.new(parent: parent, submission: submission, threat_info: threat_info, threat_discovery: threat_discovery), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -84,36 +84,36 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_training_pipeline_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_training_pipeline({ parent: parent, training_pipeline: training_pipeline }) do |response, operation|
+      c.create_training_pipeline({ parent: parent, training_pipeline: training_pipeline }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_training_pipeline parent: parent, training_pipeline: training_pipeline do |response, operation|
+      c.create_training_pipeline parent: parent, training_pipeline: training_pipeline do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_training_pipeline ::Google::Cloud::AIPlatform::V1::CreateTrainingPipelineRequest.new(parent: parent, training_pipeline: training_pipeline) do |response, operation|
+      c.create_training_pipeline ::Google::Cloud::AIPlatform::V1::CreateTrainingPipelineRequest.new(parent: parent, training_pipeline: training_pipeline) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_training_pipeline({ parent: parent, training_pipeline: training_pipeline }, grpc_options) do |response, operation|
+      c.create_training_pipeline({ parent: parent, training_pipeline: training_pipeline }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_training_pipeline(::Google::Cloud::AIPlatform::V1::CreateTrainingPipelineRequest.new(parent: parent, training_pipeline: training_pipeline), grpc_options) do |response, operation|
+      c.create_training_pipeline(::Google::Cloud::AIPlatform::V1::CreateTrainingPipelineRequest.new(parent: parent, training_pipeline: training_pipeline), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,36 +142,36 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_training_pipeline_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_training_pipeline({ name: name }) do |response, operation|
+      c.get_training_pipeline({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_training_pipeline name: name do |response, operation|
+      c.get_training_pipeline name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_training_pipeline ::Google::Cloud::AIPlatform::V1::GetTrainingPipelineRequest.new(name: name) do |response, operation|
+      c.get_training_pipeline ::Google::Cloud::AIPlatform::V1::GetTrainingPipelineRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_training_pipeline({ name: name }, grpc_options) do |response, operation|
+      c.get_training_pipeline({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_training_pipeline(::Google::Cloud::AIPlatform::V1::GetTrainingPipelineRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_training_pipeline(::Google::Cloud::AIPlatform::V1::GetTrainingPipelineRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -208,40 +208,40 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_training_pipelines_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_training_pipelines({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
+      c.list_training_pipelines({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_training_pipelines parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
+      c.list_training_pipelines parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_training_pipelines ::Google::Cloud::AIPlatform::V1::ListTrainingPipelinesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
+      c.list_training_pipelines ::Google::Cloud::AIPlatform::V1::ListTrainingPipelinesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_training_pipelines({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_training_pipelines({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_training_pipelines(::Google::Cloud::AIPlatform::V1::ListTrainingPipelinesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_training_pipelines(::Google::Cloud::AIPlatform::V1::ListTrainingPipelinesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -271,40 +271,40 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_training_pipeline_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_training_pipeline({ name: name }) do |response, operation|
+      c.delete_training_pipeline({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_training_pipeline name: name do |response, operation|
+      c.delete_training_pipeline name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_training_pipeline ::Google::Cloud::AIPlatform::V1::DeleteTrainingPipelineRequest.new(name: name) do |response, operation|
+      c.delete_training_pipeline ::Google::Cloud::AIPlatform::V1::DeleteTrainingPipelineRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_training_pipeline({ name: name }, grpc_options) do |response, operation|
+      c.delete_training_pipeline({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_training_pipeline(::Google::Cloud::AIPlatform::V1::DeleteTrainingPipelineRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_training_pipeline(::Google::Cloud::AIPlatform::V1::DeleteTrainingPipelineRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -334,36 +334,36 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, cancel_training_pipeline_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_training_pipeline({ name: name }) do |response, operation|
+      c.cancel_training_pipeline({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_training_pipeline name: name do |response, operation|
+      c.cancel_training_pipeline name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_training_pipeline ::Google::Cloud::AIPlatform::V1::CancelTrainingPipelineRequest.new(name: name) do |response, operation|
+      c.cancel_training_pipeline ::Google::Cloud::AIPlatform::V1::CancelTrainingPipelineRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_training_pipeline({ name: name }, grpc_options) do |response, operation|
+      c.cancel_training_pipeline({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_training_pipeline(::Google::Cloud::AIPlatform::V1::CancelTrainingPipelineRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_training_pipeline(::Google::Cloud::AIPlatform::V1::CancelTrainingPipelineRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -396,36 +396,36 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, create_pipeline_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_pipeline_job({ parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id }) do |response, operation|
+      c.create_pipeline_job({ parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_pipeline_job parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id do |response, operation|
+      c.create_pipeline_job parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_pipeline_job ::Google::Cloud::AIPlatform::V1::CreatePipelineJobRequest.new(parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id) do |response, operation|
+      c.create_pipeline_job ::Google::Cloud::AIPlatform::V1::CreatePipelineJobRequest.new(parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_pipeline_job({ parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id }, grpc_options) do |response, operation|
+      c.create_pipeline_job({ parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_pipeline_job(::Google::Cloud::AIPlatform::V1::CreatePipelineJobRequest.new(parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id), grpc_options) do |response, operation|
+      c.create_pipeline_job(::Google::Cloud::AIPlatform::V1::CreatePipelineJobRequest.new(parent: parent, pipeline_job: pipeline_job, pipeline_job_id: pipeline_job_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -454,36 +454,36 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, get_pipeline_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_pipeline_job({ name: name }) do |response, operation|
+      c.get_pipeline_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_pipeline_job name: name do |response, operation|
+      c.get_pipeline_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_pipeline_job ::Google::Cloud::AIPlatform::V1::GetPipelineJobRequest.new(name: name) do |response, operation|
+      c.get_pipeline_job ::Google::Cloud::AIPlatform::V1::GetPipelineJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_pipeline_job({ name: name }, grpc_options) do |response, operation|
+      c.get_pipeline_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_pipeline_job(::Google::Cloud::AIPlatform::V1::GetPipelineJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_pipeline_job(::Google::Cloud::AIPlatform::V1::GetPipelineJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -522,40 +522,40 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, list_pipeline_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
+      c.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_pipeline_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
+      c.list_pipeline_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_pipeline_jobs ::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
+      c.list_pipeline_jobs ::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
+      c.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_pipeline_jobs(::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
+      c.list_pipeline_jobs(::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -585,40 +585,40 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, delete_pipeline_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_pipeline_job({ name: name }) do |response, operation|
+      c.delete_pipeline_job({ name: name }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_pipeline_job name: name do |response, operation|
+      c.delete_pipeline_job name: name do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_pipeline_job ::Google::Cloud::AIPlatform::V1::DeletePipelineJobRequest.new(name: name) do |response, operation|
+      c.delete_pipeline_job ::Google::Cloud::AIPlatform::V1::DeletePipelineJobRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_pipeline_job({ name: name }, grpc_options) do |response, operation|
+      c.delete_pipeline_job({ name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_pipeline_job(::Google::Cloud::AIPlatform::V1::DeletePipelineJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_pipeline_job(::Google::Cloud::AIPlatform::V1::DeletePipelineJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -650,40 +650,40 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, batch_delete_pipeline_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_delete_pipeline_jobs({ parent: parent, names: names }) do |response, operation|
+      c.batch_delete_pipeline_jobs({ parent: parent, names: names }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_delete_pipeline_jobs parent: parent, names: names do |response, operation|
+      c.batch_delete_pipeline_jobs parent: parent, names: names do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_delete_pipeline_jobs ::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest.new(parent: parent, names: names) do |response, operation|
+      c.batch_delete_pipeline_jobs ::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest.new(parent: parent, names: names) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_delete_pipeline_jobs({ parent: parent, names: names }, grpc_options) do |response, operation|
+      c.batch_delete_pipeline_jobs({ parent: parent, names: names }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_delete_pipeline_jobs(::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+      c.batch_delete_pipeline_jobs(::Google::Cloud::AIPlatform::V1::BatchDeletePipelineJobsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -713,36 +713,36 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, cancel_pipeline_job_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.cancel_pipeline_job({ name: name }) do |response, operation|
+      c.cancel_pipeline_job({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.cancel_pipeline_job name: name do |response, operation|
+      c.cancel_pipeline_job name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.cancel_pipeline_job ::Google::Cloud::AIPlatform::V1::CancelPipelineJobRequest.new(name: name) do |response, operation|
+      c.cancel_pipeline_job ::Google::Cloud::AIPlatform::V1::CancelPipelineJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.cancel_pipeline_job({ name: name }, grpc_options) do |response, operation|
+      c.cancel_pipeline_job({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.cancel_pipeline_job(::Google::Cloud::AIPlatform::V1::CancelPipelineJobRequest.new(name: name), grpc_options) do |response, operation|
+      c.cancel_pipeline_job(::Google::Cloud::AIPlatform::V1::CancelPipelineJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -773,40 +773,40 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
 
     Gapic::ServiceStub.stub :new, batch_cancel_pipeline_jobs_client_stub do
       # Create client
-      client = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
+      c = ::Google::Cloud::AIPlatform::V1::PipelineService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.batch_cancel_pipeline_jobs({ parent: parent, names: names }) do |response, operation|
+      c.batch_cancel_pipeline_jobs({ parent: parent, names: names }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_cancel_pipeline_jobs parent: parent, names: names do |response, operation|
+      c.batch_cancel_pipeline_jobs parent: parent, names: names do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_cancel_pipeline_jobs ::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest.new(parent: parent, names: names) do |response, operation|
+      c.batch_cancel_pipeline_jobs ::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest.new(parent: parent, names: names) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_cancel_pipeline_jobs({ parent: parent, names: names }, grpc_options) do |response, operation|
+      c.batch_cancel_pipeline_jobs({ parent: parent, names: names }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_cancel_pipeline_jobs(::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
+      c.batch_cancel_pipeline_jobs(::Google::Cloud::AIPlatform::V1::BatchCancelPipelineJobsRequest.new(parent: parent, names: names), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -98,32 +98,32 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Billing::V1::CloudCatalog::Rest::ServiceStub.stub :transcode_list_services_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_services_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::V1::CloudCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::V1::CloudCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_services({ page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_services({ page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_services page_size: page_size, page_token: page_token do |_result, response|
+        c.list_services page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_services({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_services({ page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_services(::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_services(::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -157,32 +157,32 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::Rest::ClientTest < Minitest::T
     ::Google::Cloud::Billing::V1::CloudCatalog::Rest::ServiceStub.stub :transcode_list_skus_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_skus_client_stub do
         # Create client
-        client = ::Google::Cloud::Billing::V1::CloudCatalog::Rest::Client.new do |config|
+        c = ::Google::Cloud::Billing::V1::CloudCatalog::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_skus parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_skus parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_skus({ parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_skus(::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_skus(::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

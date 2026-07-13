@@ -97,32 +97,32 @@ class ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ClientTest < Mi
     ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ServiceStub.stub :transcode_get_cms_metadata_key_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_cms_metadata_key_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_cms_metadata_key({ name: name }) do |_result, response|
+        c.get_cms_metadata_key({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cms_metadata_key name: name do |_result, response|
+        c.get_cms_metadata_key name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cms_metadata_key ::Google::Ads::AdManager::V1::GetCmsMetadataKeyRequest.new(name: name) do |_result, response|
+        c.get_cms_metadata_key ::Google::Ads::AdManager::V1::GetCmsMetadataKeyRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cms_metadata_key({ name: name }, call_options) do |_result, response|
+        c.get_cms_metadata_key({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cms_metadata_key(::Google::Ads::AdManager::V1::GetCmsMetadataKeyRequest.new(name: name), call_options) do |_result, response|
+        c.get_cms_metadata_key(::Google::Ads::AdManager::V1::GetCmsMetadataKeyRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -156,32 +156,32 @@ class ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ClientTest < Mi
     ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ServiceStub.stub :transcode_list_cms_metadata_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_cms_metadata_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_cms_metadata_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+        c.list_cms_metadata_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_cms_metadata_keys parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+        c.list_cms_metadata_keys parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_cms_metadata_keys ::Google::Ads::AdManager::V1::ListCmsMetadataKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+        c.list_cms_metadata_keys ::Google::Ads::AdManager::V1::ListCmsMetadataKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_cms_metadata_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+        c.list_cms_metadata_keys({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_cms_metadata_keys(::Google::Ads::AdManager::V1::ListCmsMetadataKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+        c.list_cms_metadata_keys(::Google::Ads::AdManager::V1::ListCmsMetadataKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ClientTest < Mi
     ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ServiceStub.stub :transcode_batch_activate_cms_metadata_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_activate_cms_metadata_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_activate_cms_metadata_keys({ parent: parent, names: names }) do |_result, response|
+        c.batch_activate_cms_metadata_keys({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_activate_cms_metadata_keys parent: parent, names: names do |_result, response|
+        c.batch_activate_cms_metadata_keys parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_activate_cms_metadata_keys ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_activate_cms_metadata_keys ::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_activate_cms_metadata_keys({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_activate_cms_metadata_keys({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_activate_cms_metadata_keys(::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_activate_cms_metadata_keys(::Google::Ads::AdManager::V1::BatchActivateCmsMetadataKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ClientTest < Mi
     ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::ServiceStub.stub :transcode_batch_deactivate_cms_metadata_keys_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, batch_deactivate_cms_metadata_keys_client_stub do
         # Create client
-        client = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
+        c = ::Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.batch_deactivate_cms_metadata_keys({ parent: parent, names: names }) do |_result, response|
+        c.batch_deactivate_cms_metadata_keys({ parent: parent, names: names }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_deactivate_cms_metadata_keys parent: parent, names: names do |_result, response|
+        c.batch_deactivate_cms_metadata_keys parent: parent, names: names do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_deactivate_cms_metadata_keys ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest.new(parent: parent, names: names) do |_result, response|
+        c.batch_deactivate_cms_metadata_keys ::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest.new(parent: parent, names: names) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_deactivate_cms_metadata_keys({ parent: parent, names: names }, call_options) do |_result, response|
+        c.batch_deactivate_cms_metadata_keys({ parent: parent, names: names }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_deactivate_cms_metadata_keys(::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
+        c.batch_deactivate_cms_metadata_keys(::Google::Ads::AdManager::V1::BatchDeactivateCmsMetadataKeysRequest.new(parent: parent, names: names), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

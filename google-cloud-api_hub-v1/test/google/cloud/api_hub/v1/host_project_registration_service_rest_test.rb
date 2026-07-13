@@ -99,32 +99,32 @@ class ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::ClientT
     ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::ServiceStub.stub :transcode_create_host_project_registration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_host_project_registration_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_host_project_registration({ parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration }) do |_result, response|
+        c.create_host_project_registration({ parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_host_project_registration parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration do |_result, response|
+        c.create_host_project_registration parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_host_project_registration ::Google::Cloud::ApiHub::V1::CreateHostProjectRegistrationRequest.new(parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration) do |_result, response|
+        c.create_host_project_registration ::Google::Cloud::ApiHub::V1::CreateHostProjectRegistrationRequest.new(parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_host_project_registration({ parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration }, call_options) do |_result, response|
+        c.create_host_project_registration({ parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_host_project_registration(::Google::Cloud::ApiHub::V1::CreateHostProjectRegistrationRequest.new(parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration), call_options) do |_result, response|
+        c.create_host_project_registration(::Google::Cloud::ApiHub::V1::CreateHostProjectRegistrationRequest.new(parent: parent, host_project_registration_id: host_project_registration_id, host_project_registration: host_project_registration), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::ClientT
     ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::ServiceStub.stub :transcode_get_host_project_registration_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_host_project_registration_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_host_project_registration({ name: name }) do |_result, response|
+        c.get_host_project_registration({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_host_project_registration name: name do |_result, response|
+        c.get_host_project_registration name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_host_project_registration ::Google::Cloud::ApiHub::V1::GetHostProjectRegistrationRequest.new(name: name) do |_result, response|
+        c.get_host_project_registration ::Google::Cloud::ApiHub::V1::GetHostProjectRegistrationRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_host_project_registration({ name: name }, call_options) do |_result, response|
+        c.get_host_project_registration({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_host_project_registration(::Google::Cloud::ApiHub::V1::GetHostProjectRegistrationRequest.new(name: name), call_options) do |_result, response|
+        c.get_host_project_registration(::Google::Cloud::ApiHub::V1::GetHostProjectRegistrationRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -211,32 +211,32 @@ class ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::ClientT
     ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::ServiceStub.stub :transcode_list_host_project_registrations_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_host_project_registrations_client_stub do
         # Create client
-        client = ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_host_project_registrations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+        c.list_host_project_registrations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_host_project_registrations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+        c.list_host_project_registrations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_host_project_registrations ::Google::Cloud::ApiHub::V1::ListHostProjectRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+        c.list_host_project_registrations ::Google::Cloud::ApiHub::V1::ListHostProjectRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_host_project_registrations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+        c.list_host_project_registrations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_host_project_registrations(::Google::Cloud::ApiHub::V1::ListHostProjectRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+        c.list_host_project_registrations(::Google::Cloud::ApiHub::V1::ListHostProjectRegistrationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

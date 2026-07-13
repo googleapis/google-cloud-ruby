@@ -99,32 +99,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_list_runtimes_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_runtimes_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list_runtimes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.list_runtimes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_runtimes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        c.list_runtimes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_runtimes ::Google::Cloud::Notebooks::V1::ListRuntimesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        c.list_runtimes ::Google::Cloud::Notebooks::V1::ListRuntimesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_runtimes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.list_runtimes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_runtimes(::Google::Cloud::Notebooks::V1::ListRuntimesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.list_runtimes(::Google::Cloud::Notebooks::V1::ListRuntimesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -153,32 +153,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_get_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_runtime({ name: name }) do |_result, response|
+        c.get_runtime({ name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_runtime name: name do |_result, response|
+        c.get_runtime name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_runtime ::Google::Cloud::Notebooks::V1::GetRuntimeRequest.new(name: name) do |_result, response|
+        c.get_runtime ::Google::Cloud::Notebooks::V1::GetRuntimeRequest.new(name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_runtime({ name: name }, call_options) do |_result, response|
+        c.get_runtime({ name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_runtime(::Google::Cloud::Notebooks::V1::GetRuntimeRequest.new(name: name), call_options) do |_result, response|
+        c.get_runtime(::Google::Cloud::Notebooks::V1::GetRuntimeRequest.new(name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -210,32 +210,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_create_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, create_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.create_runtime({ parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id }) do |_result, response|
+        c.create_runtime({ parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_runtime parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id do |_result, response|
+        c.create_runtime parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_runtime ::Google::Cloud::Notebooks::V1::CreateRuntimeRequest.new(parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id) do |_result, response|
+        c.create_runtime ::Google::Cloud::Notebooks::V1::CreateRuntimeRequest.new(parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_runtime({ parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id }, call_options) do |_result, response|
+        c.create_runtime({ parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_runtime(::Google::Cloud::Notebooks::V1::CreateRuntimeRequest.new(parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id), call_options) do |_result, response|
+        c.create_runtime(::Google::Cloud::Notebooks::V1::CreateRuntimeRequest.new(parent: parent, runtime_id: runtime_id, runtime: runtime, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -266,32 +266,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_update_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_runtime({ runtime: runtime, update_mask: update_mask, request_id: request_id }) do |_result, response|
+        c.update_runtime({ runtime: runtime, update_mask: update_mask, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_runtime runtime: runtime, update_mask: update_mask, request_id: request_id do |_result, response|
+        c.update_runtime runtime: runtime, update_mask: update_mask, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_runtime ::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest.new(runtime: runtime, update_mask: update_mask, request_id: request_id) do |_result, response|
+        c.update_runtime ::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest.new(runtime: runtime, update_mask: update_mask, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_runtime({ runtime: runtime, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
+        c.update_runtime({ runtime: runtime, update_mask: update_mask, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_runtime(::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest.new(runtime: runtime, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
+        c.update_runtime(::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest.new(runtime: runtime, update_mask: update_mask, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -321,32 +321,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_delete_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, delete_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.delete_runtime({ name: name, request_id: request_id }) do |_result, response|
+        c.delete_runtime({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_runtime name: name, request_id: request_id do |_result, response|
+        c.delete_runtime name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_runtime ::Google::Cloud::Notebooks::V1::DeleteRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.delete_runtime ::Google::Cloud::Notebooks::V1::DeleteRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.delete_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_runtime(::Google::Cloud::Notebooks::V1::DeleteRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.delete_runtime(::Google::Cloud::Notebooks::V1::DeleteRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -376,32 +376,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_start_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, start_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.start_runtime({ name: name, request_id: request_id }) do |_result, response|
+        c.start_runtime({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.start_runtime name: name, request_id: request_id do |_result, response|
+        c.start_runtime name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.start_runtime ::Google::Cloud::Notebooks::V1::StartRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.start_runtime ::Google::Cloud::Notebooks::V1::StartRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.start_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.start_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.start_runtime(::Google::Cloud::Notebooks::V1::StartRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.start_runtime(::Google::Cloud::Notebooks::V1::StartRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -431,32 +431,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_stop_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, stop_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.stop_runtime({ name: name, request_id: request_id }) do |_result, response|
+        c.stop_runtime({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.stop_runtime name: name, request_id: request_id do |_result, response|
+        c.stop_runtime name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.stop_runtime ::Google::Cloud::Notebooks::V1::StopRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.stop_runtime ::Google::Cloud::Notebooks::V1::StopRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.stop_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.stop_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.stop_runtime(::Google::Cloud::Notebooks::V1::StopRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.stop_runtime(::Google::Cloud::Notebooks::V1::StopRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -488,32 +488,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_switch_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, switch_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.switch_runtime({ name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id }) do |_result, response|
+        c.switch_runtime({ name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.switch_runtime name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id do |_result, response|
+        c.switch_runtime name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.switch_runtime ::Google::Cloud::Notebooks::V1::SwitchRuntimeRequest.new(name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id) do |_result, response|
+        c.switch_runtime ::Google::Cloud::Notebooks::V1::SwitchRuntimeRequest.new(name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.switch_runtime({ name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id }, call_options) do |_result, response|
+        c.switch_runtime({ name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.switch_runtime(::Google::Cloud::Notebooks::V1::SwitchRuntimeRequest.new(name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id), call_options) do |_result, response|
+        c.switch_runtime(::Google::Cloud::Notebooks::V1::SwitchRuntimeRequest.new(name: name, machine_type: machine_type, accelerator_config: accelerator_config, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -543,32 +543,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_reset_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, reset_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.reset_runtime({ name: name, request_id: request_id }) do |_result, response|
+        c.reset_runtime({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.reset_runtime name: name, request_id: request_id do |_result, response|
+        c.reset_runtime name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.reset_runtime ::Google::Cloud::Notebooks::V1::ResetRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.reset_runtime ::Google::Cloud::Notebooks::V1::ResetRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.reset_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.reset_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.reset_runtime(::Google::Cloud::Notebooks::V1::ResetRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.reset_runtime(::Google::Cloud::Notebooks::V1::ResetRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -598,32 +598,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_upgrade_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, upgrade_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.upgrade_runtime({ name: name, request_id: request_id }) do |_result, response|
+        c.upgrade_runtime({ name: name, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.upgrade_runtime name: name, request_id: request_id do |_result, response|
+        c.upgrade_runtime name: name, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.upgrade_runtime ::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
+        c.upgrade_runtime ::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest.new(name: name, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.upgrade_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
+        c.upgrade_runtime({ name: name, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.upgrade_runtime(::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        c.upgrade_runtime(::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -654,32 +654,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_report_runtime_event_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, report_runtime_event_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.report_runtime_event({ name: name, vm_id: vm_id, event: event }) do |_result, response|
+        c.report_runtime_event({ name: name, vm_id: vm_id, event: event }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.report_runtime_event name: name, vm_id: vm_id, event: event do |_result, response|
+        c.report_runtime_event name: name, vm_id: vm_id, event: event do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.report_runtime_event ::Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest.new(name: name, vm_id: vm_id, event: event) do |_result, response|
+        c.report_runtime_event ::Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest.new(name: name, vm_id: vm_id, event: event) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.report_runtime_event({ name: name, vm_id: vm_id, event: event }, call_options) do |_result, response|
+        c.report_runtime_event({ name: name, vm_id: vm_id, event: event }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.report_runtime_event(::Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest.new(name: name, vm_id: vm_id, event: event), call_options) do |_result, response|
+        c.report_runtime_event(::Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest.new(name: name, vm_id: vm_id, event: event), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -709,32 +709,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_refresh_runtime_token_internal_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, refresh_runtime_token_internal_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.refresh_runtime_token_internal({ name: name, vm_id: vm_id }) do |_result, response|
+        c.refresh_runtime_token_internal({ name: name, vm_id: vm_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.refresh_runtime_token_internal name: name, vm_id: vm_id do |_result, response|
+        c.refresh_runtime_token_internal name: name, vm_id: vm_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.refresh_runtime_token_internal ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new(name: name, vm_id: vm_id) do |_result, response|
+        c.refresh_runtime_token_internal ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new(name: name, vm_id: vm_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.refresh_runtime_token_internal({ name: name, vm_id: vm_id }, call_options) do |_result, response|
+        c.refresh_runtime_token_internal({ name: name, vm_id: vm_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.refresh_runtime_token_internal(::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new(name: name, vm_id: vm_id), call_options) do |_result, response|
+        c.refresh_runtime_token_internal(::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new(name: name, vm_id: vm_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -764,32 +764,32 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ClientTest <
     ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::ServiceStub.stub :transcode_diagnose_runtime_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, diagnose_runtime_client_stub do
         # Create client
-        client = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
+        c = ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.diagnose_runtime({ name: name, diagnostic_config: diagnostic_config }) do |_result, response|
+        c.diagnose_runtime({ name: name, diagnostic_config: diagnostic_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.diagnose_runtime name: name, diagnostic_config: diagnostic_config do |_result, response|
+        c.diagnose_runtime name: name, diagnostic_config: diagnostic_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.diagnose_runtime ::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest.new(name: name, diagnostic_config: diagnostic_config) do |_result, response|
+        c.diagnose_runtime ::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest.new(name: name, diagnostic_config: diagnostic_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.diagnose_runtime({ name: name, diagnostic_config: diagnostic_config }, call_options) do |_result, response|
+        c.diagnose_runtime({ name: name, diagnostic_config: diagnostic_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.diagnose_runtime(::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest.new(name: name, diagnostic_config: diagnostic_config), call_options) do |_result, response|
+        c.diagnose_runtime(::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest.new(name: name, diagnostic_config: diagnostic_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

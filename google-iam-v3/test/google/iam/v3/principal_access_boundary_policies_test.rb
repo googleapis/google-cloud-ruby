@@ -88,40 +88,40 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, create_principal_access_boundary_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
+      c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }) do |response, operation|
+      c.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_principal_access_boundary_policy parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only do |response, operation|
+      c.create_principal_access_boundary_policy parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_principal_access_boundary_policy ::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only) do |response, operation|
+      c.create_principal_access_boundary_policy ::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }, grpc_options) do |response, operation|
+      c.create_principal_access_boundary_policy({ parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_principal_access_boundary_policy(::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only), grpc_options) do |response, operation|
+      c.create_principal_access_boundary_policy(::Google::Iam::V3::CreatePrincipalAccessBoundaryPolicyRequest.new(parent: parent, principal_access_boundary_policy_id: principal_access_boundary_policy_id, principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -151,36 +151,36 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, get_principal_access_boundary_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
+      c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_principal_access_boundary_policy({ name: name }) do |response, operation|
+      c.get_principal_access_boundary_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_principal_access_boundary_policy name: name do |response, operation|
+      c.get_principal_access_boundary_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_principal_access_boundary_policy ::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name) do |response, operation|
+      c.get_principal_access_boundary_policy ::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_principal_access_boundary_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_principal_access_boundary_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_principal_access_boundary_policy(::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_principal_access_boundary_policy(::Google::Iam::V3::GetPrincipalAccessBoundaryPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -213,40 +213,40 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, update_principal_access_boundary_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
+      c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
+      c.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_principal_access_boundary_policy principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask do |response, operation|
+      c.update_principal_access_boundary_policy principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_principal_access_boundary_policy ::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask) do |response, operation|
+      c.update_principal_access_boundary_policy ::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_principal_access_boundary_policy({ principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_principal_access_boundary_policy(::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_principal_access_boundary_policy(::Google::Iam::V3::UpdatePrincipalAccessBoundaryPolicyRequest.new(principal_access_boundary_policy: principal_access_boundary_policy, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -282,40 +282,40 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, delete_principal_access_boundary_policy_client_stub do
       # Create client
-      client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
+      c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }) do |response, operation|
+      c.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_principal_access_boundary_policy name: name, etag: etag, validate_only: validate_only, force: force do |response, operation|
+      c.delete_principal_access_boundary_policy name: name, etag: etag, validate_only: validate_only, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_principal_access_boundary_policy ::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force) do |response, operation|
+      c.delete_principal_access_boundary_policy ::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }, grpc_options) do |response, operation|
+      c.delete_principal_access_boundary_policy({ name: name, etag: etag, validate_only: validate_only, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_principal_access_boundary_policy(::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force), grpc_options) do |response, operation|
+      c.delete_principal_access_boundary_policy(::Google::Iam::V3::DeletePrincipalAccessBoundaryPolicyRequest.new(name: name, etag: etag, validate_only: validate_only, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -349,40 +349,40 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, list_principal_access_boundary_policies_client_stub do
       # Create client
-      client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
+      c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_principal_access_boundary_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_principal_access_boundary_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_principal_access_boundary_policies ::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_principal_access_boundary_policies ::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_principal_access_boundary_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_principal_access_boundary_policies(::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_principal_access_boundary_policies(::Google::Iam::V3::ListPrincipalAccessBoundaryPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -416,40 +416,40 @@ class ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::ClientTest < Minitest:
 
     Gapic::ServiceStub.stub :new, search_principal_access_boundary_policy_bindings_client_stub do
       # Create client
-      client = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
+      c = ::Google::Iam::V3::PrincipalAccessBoundaryPolicies::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_principal_access_boundary_policy_bindings name: name, page_size: page_size, page_token: page_token do |response, operation|
+      c.search_principal_access_boundary_policy_bindings name: name, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_principal_access_boundary_policy_bindings ::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
+      c.search_principal_access_boundary_policy_bindings ::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.search_principal_access_boundary_policy_bindings({ name: name, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_principal_access_boundary_policy_bindings(::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.search_principal_access_boundary_policy_bindings(::Google::Iam::V3::SearchPrincipalAccessBoundaryPolicyBindingsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

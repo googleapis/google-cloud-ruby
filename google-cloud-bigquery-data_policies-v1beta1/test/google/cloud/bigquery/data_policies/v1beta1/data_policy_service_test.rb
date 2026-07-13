@@ -84,36 +84,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, create_data_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.create_data_policy({ parent: parent, data_policy: data_policy }) do |response, operation|
+      c.create_data_policy({ parent: parent, data_policy: data_policy }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_policy parent: parent, data_policy: data_policy do |response, operation|
+      c.create_data_policy parent: parent, data_policy: data_policy do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::CreateDataPolicyRequest.new(parent: parent, data_policy: data_policy) do |response, operation|
+      c.create_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::CreateDataPolicyRequest.new(parent: parent, data_policy: data_policy) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_policy({ parent: parent, data_policy: data_policy }, grpc_options) do |response, operation|
+      c.create_data_policy({ parent: parent, data_policy: data_policy }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::CreateDataPolicyRequest.new(parent: parent, data_policy: data_policy), grpc_options) do |response, operation|
+      c.create_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::CreateDataPolicyRequest.new(parent: parent, data_policy: data_policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -144,36 +144,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, update_data_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.update_data_policy({ data_policy: data_policy, update_mask: update_mask }) do |response, operation|
+      c.update_data_policy({ data_policy: data_policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_data_policy data_policy: data_policy, update_mask: update_mask do |response, operation|
+      c.update_data_policy data_policy: data_policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::UpdateDataPolicyRequest.new(data_policy: data_policy, update_mask: update_mask) do |response, operation|
+      c.update_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::UpdateDataPolicyRequest.new(data_policy: data_policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_data_policy({ data_policy: data_policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.update_data_policy({ data_policy: data_policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::UpdateDataPolicyRequest.new(data_policy: data_policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.update_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::UpdateDataPolicyRequest.new(data_policy: data_policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -202,36 +202,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, delete_data_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.delete_data_policy({ name: name }) do |response, operation|
+      c.delete_data_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_data_policy name: name do |response, operation|
+      c.delete_data_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DeleteDataPolicyRequest.new(name: name) do |response, operation|
+      c.delete_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DeleteDataPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_data_policy({ name: name }, grpc_options) do |response, operation|
+      c.delete_data_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::DeleteDataPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.delete_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::DeleteDataPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -260,36 +260,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, get_data_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_data_policy({ name: name }) do |response, operation|
+      c.get_data_policy({ name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_data_policy name: name do |response, operation|
+      c.get_data_policy name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::GetDataPolicyRequest.new(name: name) do |response, operation|
+      c.get_data_policy ::Google::Cloud::Bigquery::DataPolicies::V1beta1::GetDataPolicyRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_data_policy({ name: name }, grpc_options) do |response, operation|
+      c.get_data_policy({ name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::GetDataPolicyRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_data_policy(::Google::Cloud::Bigquery::DataPolicies::V1beta1::GetDataPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -322,40 +322,40 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, list_data_policies_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.list_data_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      c.list_data_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_data_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      c.list_data_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_data_policies ::Google::Cloud::Bigquery::DataPolicies::V1beta1::ListDataPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      c.list_data_policies ::Google::Cloud::Bigquery::DataPolicies::V1beta1::ListDataPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_data_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      c.list_data_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_data_policies(::Google::Cloud::Bigquery::DataPolicies::V1beta1::ListDataPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      c.list_data_policies(::Google::Cloud::Bigquery::DataPolicies::V1beta1::ListDataPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -387,36 +387,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource, options: options do |response, operation|
+      c.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
+      c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
+      c.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
+      c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -449,36 +449,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
+      c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
+      c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
+      c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
+      c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -509,36 +509,36 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
 
     Gapic::ServiceStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
+      c = ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
       # Use hash object
-      client.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
+      c.test_iam_permissions resource: resource, permissions: permissions do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
+      c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
+      c.test_iam_permissions({ resource: resource, permissions: permissions }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
+      c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

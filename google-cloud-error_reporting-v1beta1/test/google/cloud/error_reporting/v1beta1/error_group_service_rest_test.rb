@@ -97,32 +97,32 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::ClientT
     ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::ServiceStub.stub :transcode_get_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_group_client_stub do
         # Create client
-        client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get_group({ group_name: group_name }) do |_result, response|
+        c.get_group({ group_name: group_name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_group group_name: group_name do |_result, response|
+        c.get_group group_name: group_name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_group ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name) do |_result, response|
+        c.get_group ::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_group({ group_name: group_name }, call_options) do |_result, response|
+        c.get_group({ group_name: group_name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_group(::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name), call_options) do |_result, response|
+        c.get_group(::Google::Cloud::ErrorReporting::V1beta1::GetGroupRequest.new(group_name: group_name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -151,32 +151,32 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::ClientT
     ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::ServiceStub.stub :transcode_update_group_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, update_group_client_stub do
         # Create client
-        client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new do |config|
+        c = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.update_group({ group: group }) do |_result, response|
+        c.update_group({ group: group }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_group group: group do |_result, response|
+        c.update_group group: group do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_group ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group) do |_result, response|
+        c.update_group ::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_group({ group: group }, call_options) do |_result, response|
+        c.update_group({ group: group }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_group(::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group), call_options) do |_result, response|
+        c.update_group(::Google::Cloud::ErrorReporting::V1beta1::UpdateGroupRequest.new(group: group), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
