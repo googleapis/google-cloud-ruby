@@ -33,18 +33,7 @@
       "enabled": false
     },
     {
-      "description": "Phase 1: Strictly disable direct Gemfile dependency upgrades (do not modify Gemfile version constraints)",
-      "matchFileNames": [
-        "google-cloud-core/**",
-        "google-cloud-storage/**",
-        "google-cloud-pubsub/**",
-        "google-cloud-bigquery/**",
-        "google-cloud-errors/**",
-        "google-cloud-resource_manager/**",
-        "google-cloud-bigtable/**",
-        "google-cloud-logging/**",
-        "google-cloud-monitoring/**"
-      ],
+      "description": "Strictly disable all direct Gemfile rubygems dependency checks so purely lockFileMaintenance runs across Phase 1",
       "matchDatasources": ["rubygems"],
       "enabled": false
     }
