@@ -10,13 +10,13 @@
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
   // Increase compatibility with other projects
-  "rangeStrategy": "update-lockfile",
+  "rangeStrategy": "in-range-only",
   // Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems
   "lockFileMaintenance": {
     "enabled": true,
     "groupName": "core handwritten gems lockfiles (renovate e2e verification)",
     "branchName": "renovate-authentic-e2e/lockfiles-only-check",
-    "rangeStrategy": "update-lockfile",
+    "rangeStrategy": "in-range-only",
     "automerge": false,
     // Schedule commented out temporarily to allow instant on-demand verification runs at any hour of the day.
     // "schedule": ["before 5am"],
