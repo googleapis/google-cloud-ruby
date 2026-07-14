@@ -14,13 +14,10 @@
   // Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems
   "lockFileMaintenance": {
     "enabled": true,
-    "groupName": "core handwritten gems lockfiles",
+    "groupName": "core handwritten gems lockfiles (json5 check)",
     "automerge": false,
-    // Note: We keep this daily ("before 5am every day") while actively validating the Phase 1 rollout.
-    // Once validated, we can remove this line so lockFileMaintenance inherits the top-level "schedule:monthly" (or switch to weekly).
-    "schedule": [
-      "before 5am"
-    ],
+    // Schedule commented out temporarily to allow instant on-demand verification runs at any hour of the day.
+    // "schedule": ["before 5am"],
     "commitMessageAction": "maintain Gemfile.lock files"
   },
   "packageRules": [
