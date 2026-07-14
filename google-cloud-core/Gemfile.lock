@@ -1,7 +1,7 @@
 PATH
   remote: ../google-cloud-errors
   specs:
-    google-cloud-errors (1.6.0)
+    google-cloud-errors (1.7.0)
 
 PATH
   remote: .
@@ -20,7 +20,6 @@ GEM
     autotest-suffix (1.1.0)
     base64 (0.3.0)
     builder (3.3.0)
-    docile (1.4.1)
     drb (2.2.3)
     faraday (2.14.3)
       faraday-net_http (>= 2.0, < 3.5)
@@ -48,10 +47,11 @@ GEM
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
-    minitest (5.27.0)
-    minitest-autotest (1.2.0)
-      minitest-server (~> 1.0)
-      path_expander (~> 2.0)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
+    minitest-autotest (1.2.2)
+      minitest (~> 6.0)
     minitest-focus (1.4.1)
       minitest (> 5.0)
     minitest-reporters (1.5.0)
@@ -61,9 +61,6 @@ GEM
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
-    minitest-server (1.0.10)
-      drb (~> 2.0)
-      minitest (~> 5.16)
     net-http (0.9.1)
       uri (>= 0.11.1)
     os (1.1.4)
@@ -72,7 +69,6 @@ GEM
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
-    path_expander (2.0.1)
     prism (1.9.0)
     pstore (0.2.1)
     public_suffix (7.0.5)
@@ -100,12 +96,7 @@ GEM
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
       jwt (>= 1.5, < 4.0)
-    simplecov (0.22.0)
-      docile (~> 1.1)
-      simplecov-html (~> 0.11)
-      simplecov_json_formatter (~> 0.1)
-    simplecov-html (0.13.2)
-    simplecov_json_formatter (0.1.4)
+    simplecov (1.0.1)
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
@@ -125,7 +116,7 @@ DEPENDENCIES
   google-cloud-errors!
   google-style (~> 1.30.1)
   googleauth (~> 1.0)
-  minitest (~> 5.14)
+  minitest (~> 6.0)
   minitest-autotest (~> 1.0)
   minitest-focus (~> 1.1)
   minitest-reporters (~> 1.5.0)
@@ -133,25 +124,24 @@ DEPENDENCIES
   ostruct (~> 0.6.3)
   rake
   redcarpet (~> 3.0)
-  simplecov (~> 0.9)
+  simplecov (~> 1.0)
   yard (~> 0.9)
   yard-doctest (~> 0.1.13)
 
 CHECKSUMS
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
-  ansi (1.6.0)
+  ansi (1.6.0) sha256=ac9ea0c0ea8d32fb4e271348e609963ac78882f34b73836c2a02b3622e666658
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   autotest-suffix (1.1.0) sha256=9bb29331b7b66a9659b01ef10839bd61fc1a6e95477c8ea710bd01e10c380977
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
-  builder (3.3.0)
-  bundler (4.0.14) sha256=d09a0a965cf772266a7e49e83610be7c2f4e49e61134c42a56804bb383cc24b8
-  docile (1.4.1) sha256=96159be799bfa73cdb721b840e9802126e4e03dfc26863db73647204c727f21e
+  builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
+  bundler (4.0.16) sha256=d6ca5dd440c24f9abce9844cf44cc8e18c6a553de65a47efb4544137af92c47d
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   faraday (2.14.3) sha256=1882247e6766615c8220b4392bf1d27f6ebb63d8e28267587cef1fb0bf37f278
   faraday-net_http (3.4.4) sha256=0e78af151747ed1b00f33e25973b4bc220d7f16c00c39676817c8b12331eb588
   google-cloud-core (1.9.0)
   google-cloud-env (2.3.1) sha256=0faac01eb27be78c2591d64433663b1a114f8f7af55a4f819755426cac9178e7
-  google-cloud-errors (1.6.0)
+  google-cloud-errors (1.7.0)
   google-logging-utils (0.2.0) sha256=675462b4ea5affa825a3442694ca2d75d0069455a1d0956127207498fca3df7b
   google-style (1.30.1) sha256=ae9260c1f86856d8179a17fb270ccc2137ec0c0baa2a728ab5c8e7d76ce4032a
   googleauth (1.17.1) sha256=0f7e6fc70e204cee1b2d71f1e1de2d3b349d432404197fe68ebf7fa23d0821b9
@@ -160,18 +150,16 @@ CHECKSUMS
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
-  minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
-  minitest-autotest (1.2.0) sha256=60d031cba705215450662b0060f03f96507682b346a19c27f6756751ad92d2b4
+  minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
+  minitest-autotest (1.2.2) sha256=ce9844aae6a47f24ce5decb81a02555098185d71d389396112f59d591164583f
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
-  minitest-reporters (1.5.0)
+  minitest-reporters (1.5.0) sha256=a693acddc67987cde96d33ad6766b8d3e8522bb4c8a20628352950c30d42f0a3
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
-  minitest-server (1.0.10) sha256=275439bf3ffc433fcbe161733248f1d9749ebf122892cf010bf864aaa95cef75
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
   os (1.1.4) sha256=57816d6a334e7bd6aed048f4b0308226c5fb027433b67d90a9ab435f35108d3f
   ostruct (0.6.3) sha256=95a2ed4a4bd1d190784e666b47b2d3f078e4a9efda2fccf18f84ddc6538ed912
   parallel (2.1.0) sha256=b35258865c2e31134c5ecb708beaaf6772adf9d5efae28e93e99260877b09356
   parser (3.3.11.1) sha256=d17ace7aabe3e72c3cc94043714be27cc6f852f104d81aa284c2281aecc65d54
-  path_expander (2.0.1) sha256=2de201164bff4719cc4d0b3767286e9977cc832a59c4d70abab571ec86cb41e4
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
   pstore (0.2.1) sha256=03904d0f2c66579e96d1e6704cdabc0c88df7ea8ed8782d9f3569f6f6c702c1a
   public_suffix (7.0.5) sha256=1a8bb08f1bbea19228d3bed6e5ed908d1cb4f7c2726d18bd9cadf60bc676f623
@@ -184,9 +172,7 @@ CHECKSUMS
   rubocop-ast (1.49.1) sha256=4412f3ee70f6fe4546cc489548e0f6fcf76cafcfa80fa03af67098ffed755035
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   signet (0.22.0) sha256=b76d495ccb07ad35dbc89f3e920665a9d8ed717141955034005d7843dcfe4780
-  simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
-  simplecov-html (0.13.2) sha256=bd0b8e54e7c2d7685927e8d6286466359b6f16b18cb0df47b508e8d73c777246
-  simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
+  simplecov (1.0.1) sha256=419d93c40484159d20b40e26e9a83cdd4c3afa2f3fd443bb8946c301cd658d75
   unicode-display_width (3.2.0) sha256=0cdd96b5681a5949cdbc2c55e7b420facae74c4aaf9a9815eee1087cb1853c42
   unicode-emoji (4.2.0) sha256=519e69150f75652e40bf736106cfbc8f0f73aa3fb6a65afe62fefa7f80b0f80f
   uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
@@ -194,4 +180,4 @@ CHECKSUMS
   yard-doctest (0.1.17) sha256=7cb35a75d99f58fc42ee72d3542a36e227237b621a40aebc391c95988b72847f
 
 BUNDLED WITH
-  4.0.14
+  4.0.16
