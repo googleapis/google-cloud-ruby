@@ -46,7 +46,6 @@
         "google-cloud-monitoring/**"
       ],
       "matchDatasources": ["rubygems"],
-      "matchDepTypes": ["dependencies", "development"],
       "enabled": false
     }
   ]
