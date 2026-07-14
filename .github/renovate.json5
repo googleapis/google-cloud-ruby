@@ -11,12 +11,15 @@
   "semanticCommitScope": "deps",
   // Increase compatibility with other projects
   "rangeStrategy": "in-range-only",
+  // Follow Renovate discussion #29097 approach: disable lockfile updates globally, enable only inside lockFileMaintenance
+  "updateLockFiles": false,
   // Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems
   "lockFileMaintenance": {
     "enabled": true,
     "groupName": "core handwritten gems lockfiles (renovate e2e verification)",
     "branchName": "renovate-authentic-e2e/lockfiles-only-check",
     "rangeStrategy": "in-range-only",
+    "updateLockFiles": true,
     "automerge": false,
     // Schedule commented out temporarily to allow instant on-demand verification runs at any hour of the day.
     // "schedule": ["before 5am"],
