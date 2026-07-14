@@ -11,7 +11,7 @@
   "semanticCommitScope": "deps",
   // Increase compatibility with other projects
   "rangeStrategy": "update-lockfile",
-  // Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems
+  // Phase 1: Minimal lockfile maintenance across Core & Handwritten gems without proactive version bumps
   "lockFileMaintenance": {
     "enabled": true,
     "groupName": "core handwritten gems lockfiles",
@@ -45,11 +45,13 @@
       ],
       "enabled": false
     },
-    // Strictly disable all direct Gemfile rubygems dependency checks across Phase 1
-    // When the team is ready for Phase 2 (allowing Gemfile version bumps), simply delete this rule.
+    // Disable proactive rubygems version checking across Phase 1 while allowing lockFileMaintenance to run with minimal necessary constraint updates
+    // When the team is ready for Phase 2 (allowing proactive Gemfile version bumps), simply delete this rule.
     {
-      "description": "Strictly disable all direct Gemfile rubygems dependency checks so purely lockFileMaintenance runs across Phase 1",
-      "matchDatasources": ["rubygems"],
+      "description": "Disable proactive rubygems version checking across Phase 1 so lockFileMaintenance runs with minimal necessary constraint updates",
+      "matchDatasources": [
+        "rubygems"
+      ],
       "enabled": false
     }
   ]
