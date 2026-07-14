@@ -16,9 +16,7 @@
     "enabled": true,
     "groupName": "core handwritten gems lockfiles",
     "automerge": false,
-    "schedule": [
-      "before 5am"
-    ],
+    // Inherits "schedule:monthly" from extends preset
     "commitMessageAction": "maintain Gemfile.lock files"
   },
   "packageRules": [
