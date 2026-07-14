@@ -8,7 +8,13 @@
   "semanticCommitScope": "deps",
   "rangeStrategy": "widen",
   "lockFileMaintenance": {
-    "enabled": false
+    "enabled": true,
+    "groupName": "core handwritten gems lockfiles",
+    "automerge": false,
+    "schedule": [
+      "before 5am every day"
+    ],
+    "commitMessageAction": "maintain Gemfile.lock files"
   },
   "packageRules": [
     {
@@ -41,29 +47,6 @@
       ],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "enabled": false
-    },
-    {
-      "description": "Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems",
-      "matchFileNames": [
-        "google-cloud-core/**",
-        "google-cloud-storage/**",
-        "google-cloud-pubsub/**",
-        "google-cloud-bigquery/**",
-        "google-cloud-errors/**",
-        "google-cloud-resource_manager/**",
-        "google-cloud-bigtable/**",
-        "google-cloud-logging/**",
-        "google-cloud-monitoring/**"
-      ],
-      "lockFileMaintenance": {
-        "enabled": true,
-        "groupName": "core handwritten gems lockfiles",
-        "automerge": false,
-        "schedule": [
-          "before 5am every day"
-        ],
-        "commitMessageAction": "maintain Gemfile.lock files"
-      }
     }
   ]
 }
