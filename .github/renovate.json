@@ -45,7 +45,8 @@
         "google-cloud-logging/**",
         "google-cloud-monitoring/**"
       ],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchDatasources": ["rubygems"],
+      "matchDepTypes": ["dependencies", "development"],
       "enabled": false
     }
   ]
