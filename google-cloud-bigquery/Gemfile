@@ -38,3 +38,5 @@ gem "redcarpet", "~> 3.6"
 gem "simplecov", "~> 0.22"
 gem "yard", "~> 0.9"
 gem "yard-doctest", "~> 0.1.13"
+
+gem "google-protobuf", "= 4.36.0.rc.1"
