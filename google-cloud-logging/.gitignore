@@ -7,3 +7,6 @@ jsondoc/*
 
 # Ignore YARD stuffs
 .yardoc
+
+# Allow tracking Gemfile.lock for Renovate daily pilot expansion
+!Gemfile.lock

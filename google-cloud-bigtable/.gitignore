@@ -18,3 +18,6 @@ tmp/*
 .byebug_history
 .DS_Store
 rubocop_yard_examples/*
+
+# Allow tracking Gemfile.lock for Renovate daily pilot expansion
+!Gemfile.lock
