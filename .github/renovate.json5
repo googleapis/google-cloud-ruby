@@ -1,22 +1,37 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    // Use pre-determined best practices, including monorepo groupings & GitHub Action digest pinning
+    "config:best-practices",
+    // Create version bump PRs globally on a monthly basis (first day of the month)
+    "schedule:monthly"
   ],
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
+  // Increase compatibility with other projects
   "rangeStrategy": "widen",
+  // Phase 1: Strictly Gemfile.lock maintenance (bundle lock --update) across Core & Handwritten gems
   "lockFileMaintenance": {
     "enabled": true,
     "groupName": "core handwritten gems lockfiles",
     "automerge": false,
+    // Note: We keep this daily ("before 5am every day") while actively validating the Phase 1 rollout.
+    // Once validated, we can remove this line so lockFileMaintenance inherits the top-level "schedule:monthly" (or switch to weekly).
     "schedule": [
-      "before 5am every day"
+      "before 5am"
     ],
     "commitMessageAction": "maintain Gemfile.lock files"
   },
   "packageRules": [
+    // Group all patch updates across all dependencies into a single PR
+    {
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "groupName": "all patch updates"
+    },
+    // Disable Renovate processing for non-Phase 1 gems during our phased rollout
     {
       "description": "Disable Renovate processing for non-Phase 1 gems during phased rollout",
       "matchFileNames": [
@@ -32,6 +47,8 @@
       ],
       "enabled": false
     },
+    // Strictly disable all direct Gemfile rubygems dependency checks across Phase 1
+    // When the team is ready for Phase 2 (allowing Gemfile version bumps), simply delete this rule.
     {
       "description": "Strictly disable all direct Gemfile rubygems dependency checks so purely lockFileMaintenance runs across Phase 1",
       "matchDatasources": ["rubygems"],
