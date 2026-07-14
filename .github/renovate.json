@@ -55,10 +55,9 @@
         "google-cloud-logging/**",
         "google-cloud-monitoring/**"
       ],
-      "matchUpdateTypes": ["lockFileMaintenance"],
-      "groupName": "core handwritten gems lockfiles",
       "lockFileMaintenance": {
         "enabled": true,
+        "groupName": "core handwritten gems lockfiles",
         "automerge": false,
         "schedule": [
           "before 5am every day"
