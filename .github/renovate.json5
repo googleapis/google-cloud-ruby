@@ -15,9 +15,8 @@
   "lockFileMaintenance": {
     "enabled": true,
     "groupName": "core handwritten gems lockfiles",
-    "automerge": false,
+    "automerge": false
     // Inherits "schedule:monthly" from extends preset
-    "commitMessageAction": "maintain Gemfile.lock files"
   },
   "packageRules": [
     // Group all patch updates across all dependencies into a single PR
