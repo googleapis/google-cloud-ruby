@@ -96,3 +96,4 @@
 * Initial generation of google-cloud-gemini_data_analytics-v1beta ([#30905](https://github.com/googleapis/google-cloud-ruby/issues/30905)) 
 
 ## Release History
+

@@ -19,3 +19,4 @@
 * Initial generation of google-cloud-ces ([#33847](https://github.com/googleapis/google-cloud-ruby/issues/33847)) 
 
 ## Release History
+

@@ -66,3 +66,4 @@
 * Initial generation of google-cloud-financial_services-v1 ([#29530](https://github.com/googleapis/google-cloud-ruby/issues/29530)) 
 
 ## Release History
+
