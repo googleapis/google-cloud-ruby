@@ -137,6 +137,17 @@ module Google
         #     Tags are used to organize and group resources.
         #
         #     Tags can be used to control policy evaluation for the resource.
+        # @!attribute [rw] secret_type
+        #   @return [::Google::Cloud::SecretManager::V1::Secret::SecretType]
+        #     Optional. Immutable. This defines the type of the secret.
+        #     Enforces certain structural requirements on the
+        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
+        #     For secret of type UNSPECIFIED, the SecretVersions can be of any type.
+        # @!attribute [r] policy_member
+        #   @return [::Google::Iam::V1::ResourcePolicyMember]
+        #     Output only. Defines the policy member for the secret.
+        #     This will be used to check if the caller has the permission to perform
+        #     certain operations on the typed secret.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -175,6 +186,30 @@ module Google
           class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # This defines the various values of the type of secret can be.
+          module SecretType
+            # Applicable to all secrets which do not have any restriction on the
+            # SecretVersions.
+            SECRET_TYPE_UNSPECIFIED = 0
+
+            # Applicable to secrets which are used for the managed rotation feature
+            # for Cloud SQL Single User.
+            CLOUD_SQL_DB_CREDENTIALS = 1
+
+            # Applicable to secrets where the payload contains an access key.
+            ACCESS_KEY = 2
+
+            # Applicable to secrets where the payload contains a certificate.
+            CERTIFICATE = 3
+
+            # Applicable to secrets where the payload contains database credentials.
+            OTHER_DB_CREDENTIALS = 4
+
+            # Applicable to secrets whose type doesn't belong to any of the above
+            # defined types.
+            OTHER = 50
           end
         end
 
@@ -487,9 +522,44 @@ module Google
         #     {::Google::Cloud::SecretManager::V1::Rotation#next_rotation_time next_rotation_time}
         #     will be advanced by this period when the service automatically sends
         #     rotation notifications.
+        # @!attribute [r] managed_rotation_status
+        #   @return [::Google::Cloud::SecretManager::V1::Rotation::ManagedRotationStatus]
+        #     Output only. The current status of the managed rotation.
+        #     This field is only applicable to Typed Secrets.
+        #     This field is set by the service and cannot be set by the user.
         class Rotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the status of a managed rotation.
+          #
+          # This is applicable only to Typed Secrets. It indicates whether the
+          # rotation is active and any errors that may have occurred during the
+          # asynchronous managed rotation.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::SecretManager::V1::Rotation::ManagedRotationStatus::State]
+          #     Output only. Indicates whether the Managed Rotation is active or not.
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. Displays customer-facing issues that occurred during an
+          #     asynchronous managed rotation. For example, if there are some permission
+          #     errors.
+          class ManagedRotationStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # This defines the various states in which the managed rotation can be.
+            module State
+              # Not specified. This value is unused and invalid.
+              STATE_UNSPECIFIED = 0
+
+              # Indicates that the Managed rotation is ACTIVE.
+              ACTIVE = 1
+
+              # Indicates that the Managed rotation is INACTIVE.
+              INACTIVE = 2
+            end
+          end
         end
 
         # A secret payload resource in the Secret Manager API. This contains the
