@@ -1,7 +1,7 @@
 PATH
   remote: ../google-cloud-errors
   specs:
-    google-cloud-errors (1.6.0)
+    google-cloud-errors (1.7.0)
 
 PATH
   remote: .
@@ -32,8 +32,8 @@ GEM
       base64 (~> 0.2)
       faraday (>= 1.0, < 3.a)
     google-logging-utils (0.2.0)
-    google-style (1.30.1)
-      rubocop (~> 1.63)
+    google-style (1.32.0)
+      rubocop (~> 1.76)
     googleauth (1.17.1)
       faraday (>= 1.0, < 3.a)
       google-cloud-env (~> 2.2)
@@ -42,10 +42,10 @@ GEM
       os (>= 0.9, < 2.0)
       pstore (~> 0.1)
       signet (>= 0.16, < 2.a)
-    json (2.20.0)
+    json (2.21.1)
     jwt (3.2.0)
       base64
-    language_server-protocol (3.17.0.5)
+    language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     logger (1.7.0)
     minitest (5.27.0)
@@ -54,10 +54,10 @@ GEM
       path_expander (~> 2.0)
     minitest-focus (1.4.1)
       minitest (> 5.0)
-    minitest-reporters (1.5.0)
+    minitest-reporters (1.8.0)
       ansi
       builder
-      minitest (>= 5.0)
+      minitest (>= 5.0, < 7)
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
@@ -81,7 +81,7 @@ GEM
     rake (13.4.2)
     redcarpet (3.6.1)
     regexp_parser (2.12.0)
-    rubocop (1.88.0)
+    rubocop (1.88.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -92,7 +92,7 @@ GEM
       rubocop-ast (>= 1.49.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.49.1)
+    rubocop-ast (1.50.0)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
     ruby-progressbar (1.13.0)
@@ -110,7 +110,7 @@ GEM
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
     uri (1.1.1)
-    yard (0.9.44)
+    yard (0.9.45)
     yard-doctest (0.1.17)
       minitest
       yard
@@ -123,12 +123,12 @@ DEPENDENCIES
   autotest-suffix (~> 1.1)
   google-cloud-core!
   google-cloud-errors!
-  google-style (~> 1.30.1)
+  google-style (~> 1.32.0)
   googleauth (~> 1.0)
   minitest (~> 5.14)
   minitest-autotest (~> 1.0)
   minitest-focus (~> 1.1)
-  minitest-reporters (~> 1.5.0)
+  minitest-reporters (~> 1.8.0)
   minitest-rg (~> 5.2)
   ostruct (~> 0.6.3)
   rake
@@ -139,11 +139,11 @@ DEPENDENCIES
 
 CHECKSUMS
   addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
-  ansi (1.6.0)
+  ansi (1.6.0) sha256=ac9ea0c0ea8d32fb4e271348e609963ac78882f34b73836c2a02b3622e666658
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   autotest-suffix (1.1.0) sha256=9bb29331b7b66a9659b01ef10839bd61fc1a6e95477c8ea710bd01e10c380977
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
-  builder (3.3.0)
+  builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   bundler (4.0.14) sha256=d09a0a965cf772266a7e49e83610be7c2f4e49e61134c42a56804bb383cc24b8
   docile (1.4.1) sha256=96159be799bfa73cdb721b840e9802126e4e03dfc26863db73647204c727f21e
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
@@ -151,19 +151,19 @@ CHECKSUMS
   faraday-net_http (3.4.4) sha256=0e78af151747ed1b00f33e25973b4bc220d7f16c00c39676817c8b12331eb588
   google-cloud-core (1.9.0)
   google-cloud-env (2.3.1) sha256=0faac01eb27be78c2591d64433663b1a114f8f7af55a4f819755426cac9178e7
-  google-cloud-errors (1.6.0)
+  google-cloud-errors (1.7.0)
   google-logging-utils (0.2.0) sha256=675462b4ea5affa825a3442694ca2d75d0069455a1d0956127207498fca3df7b
-  google-style (1.30.1) sha256=ae9260c1f86856d8179a17fb270ccc2137ec0c0baa2a728ab5c8e7d76ce4032a
+  google-style (1.32.0) sha256=3b13068979e5b8caa067ecce9bf818b6cf0e5eb706ead41c5b905f237d9bfb01
   googleauth (1.17.1) sha256=0f7e6fc70e204cee1b2d71f1e1de2d3b349d432404197fe68ebf7fa23d0821b9
-  json (2.20.0) sha256=9362bc6e55a952b056abf9167cf053358181c904cb70cd6eee0808ea830fc32b
+  json (2.21.1) sha256=13a43df75d95641443f5702dff350f237164a9d811ff0f2c2800d4d980220583
   jwt (3.2.0) sha256=5419b1fe37b1da0982bd07051f573a8b8789ab724c2aa7e785e4784a3ed217d7
-  language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
+  language_server-protocol (3.17.0.6) sha256=5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
   minitest-autotest (1.2.0) sha256=60d031cba705215450662b0060f03f96507682b346a19c27f6756751ad92d2b4
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
-  minitest-reporters (1.5.0)
+  minitest-reporters (1.8.0) sha256=8ce5280fb73ad3178ae525454df169b6f28c1b38b1d088ea91815d3a370ba384
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
   minitest-server (1.0.10) sha256=275439bf3ffc433fcbe161733248f1d9749ebf122892cf010bf864aaa95cef75
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
@@ -180,8 +180,8 @@ CHECKSUMS
   rake (13.4.2) sha256=cb825b2bd5f1f8e91ca37bddb4b9aaf345551b4731da62949be002fa89283701
   redcarpet (3.6.1) sha256=d444910e6aa55480c6bcdc0cdb057626e8a32c054c29e793fa642ba2f155f445
   regexp_parser (2.12.0) sha256=35a916a1d63190ab5c9009457136ae5f3c0c7512d60291d0d1378ba18ce08ebb
-  rubocop (1.88.0) sha256=e420ddf1662d0ef34bc8a2910ac4b396a7ddda0b51a708264405241734b08e0b
-  rubocop-ast (1.49.1) sha256=4412f3ee70f6fe4546cc489548e0f6fcf76cafcfa80fa03af67098ffed755035
+  rubocop (1.88.2) sha256=8def251c90cd955feb4daa3edc0ab56893250c4ce90ef81e6c80c03f9a939bbf
+  rubocop-ast (1.50.0) sha256=b9ca88300da0803ee222ad20cdb30494c0a784eed06fdc35d254b06d662788db
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   signet (0.22.0) sha256=b76d495ccb07ad35dbc89f3e920665a9d8ed717141955034005d7843dcfe4780
   simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
@@ -190,7 +190,7 @@ CHECKSUMS
   unicode-display_width (3.2.0) sha256=0cdd96b5681a5949cdbc2c55e7b420facae74c4aaf9a9815eee1087cb1853c42
   unicode-emoji (4.2.0) sha256=519e69150f75652e40bf736106cfbc8f0f73aa3fb6a65afe62fefa7f80b0f80f
   uri (1.1.1) sha256=379fa58d27ffb1387eaada68c749d1426738bd0f654d812fcc07e7568f5c57c6
-  yard (0.9.44) sha256=eb087e9b631ccd887b049f303d489963945452d5e2a7eb49a5a74a7cf6887f28
+  yard (0.9.45) sha256=52e211493f7cb8a3ebf7e104a25a1e73937a3103092545d34cb88fafebb3dc51
   yard-doctest (0.1.17) sha256=7cb35a75d99f58fc42ee72d3542a36e227237b621a40aebc391c95988b72847f
 
 BUNDLED WITH
