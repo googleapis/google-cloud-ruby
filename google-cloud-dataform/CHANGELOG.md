@@ -74,3 +74,4 @@
 * Initial generation of google-cloud-dataform ([#19355](https://github.com/googleapis/google-cloud-ruby/issues/19355)) 
 
 ## Release History
+

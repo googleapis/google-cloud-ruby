@@ -25,3 +25,4 @@
 * Initial generation of google-cloud-lustre ([#30076](https://github.com/googleapis/google-cloud-ruby/issues/30076)) 
 
 ## Release History
+
