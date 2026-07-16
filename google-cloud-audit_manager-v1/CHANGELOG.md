@@ -13,4 +13,3 @@
 * Initial generation of google-cloud-audit_manager-v1 ([#33838](https://github.com/googleapis/google-cloud-ruby/issues/33838)) 
 
 ## Release History
-

@@ -19,4 +19,3 @@
 * Initial generation of google-cloud-gke_recommender ([#31520](https://github.com/googleapis/google-cloud-ruby/issues/31520)) 
 
 ## Release History
-

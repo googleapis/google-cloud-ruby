@@ -38,4 +38,3 @@
 * Initial generation of google-cloud-storage_batch_operations ([#29488](https://github.com/googleapis/google-cloud-ruby/issues/29488)) 
 
 ## Release History
-

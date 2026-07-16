@@ -31,4 +31,3 @@
 * Initial generation of google-cloud-hypercompute_cluster-v1beta ([#32126](https://github.com/googleapis/google-cloud-ruby/issues/32126)) 
 
 ## Release History
-

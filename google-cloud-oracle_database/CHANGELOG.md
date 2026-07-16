@@ -38,4 +38,3 @@
 * Initial generation of google-cloud-oracle_database ([#27398](https://github.com/googleapis/google-cloud-ruby/issues/27398)) 
 
 ## Release History
-
