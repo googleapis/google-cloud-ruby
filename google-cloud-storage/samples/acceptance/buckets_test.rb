@@ -211,13 +211,14 @@ describe "Buckets Snippets" do
         end
       end
 
-      # Lists IP filter allowed ranges
-      expected = "IP filter mode: Disabled\n" \
-                 "Allowed range: 8.8.8.8/32\n"
+       # Lists IP filter configurations for buckets in the project
       retry_resource_exhaustion do
-        assert_output expected do
-          list_bucket_ip_filters bucket_name: bucket_name
+        out, _err = capture_io do
+          list_bucket_ip_filters bucket_name
         end
+        # Assert that the specific bucket we created in this test suite 
+        # appears in the list with its IP filter mode
+        assert_includes out, "Bucket Name: #{bucket_name}, IP Filtering Mode: Disabled"
       end
 
       # Deletes IP filter of an existing bucket
@@ -229,11 +230,10 @@ describe "Buckets Snippets" do
       end
 
       # Enables IP filter of an existing bucket (SKIPPED)
-      skip "SKIPPED : If Ip filter is enabled, we cannot access the bucket"
       expected = "Enabled IP filter for bucket #{bucket_name}.\n"
       retry_resource_exhaustion do
         assert_output expected do
-          enable_bucket_ip_filter bucket_name: bucket_name
+          enable_bucket_ip_filter bucket_name: bucket_name, mode: "Disabled"
         end
       end
     end

@@ -13,25 +13,21 @@
 # limitations under the License.
 
 # [START storage_list_bucket_ip_filters]
-def list_bucket_ip_filters bucket_name:
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
+def list_bucket_ip_filters bucket_name
+  # The ID of your GCP project
+  # project_id = "your-project-id"
 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
-
-  ip_filter = bucket.ip_filter
-  if ip_filter
-    puts "IP filter mode: #{ip_filter.mode}"
-    if ip_filter.public_network_source
-      ip_filter.public_network_source.allowed_ip_cidr_ranges.each do |range|
-        puts "Allowed range: #{range}"
-      end
-    end
-  else
-    puts "No IP filter configured on bucket #{bucket_name}."
+  
+  puts "Buckets:"
+  # Use projection: "full" to ensure IP filter metadata is returned
+  storage.buckets(projection: "full").all do |bucket|
+    ip_filter = bucket.ip_filter
+    mode = ip_filter ? ip_filter.mode : "Not Configured"
+    
+    puts "Bucket Name: #{bucket.name}, IP Filtering Mode: #{mode}"
   end
 end
 # [END storage_list_bucket_ip_filters]

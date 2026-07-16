@@ -20,16 +20,16 @@ def get_bucket_ip_filter bucket_name:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket bucket_name
+  bucket = storage.bucket bucket_name, projection: "full"
   ip_filter = bucket.ip_filter
 
   if ip_filter
-    puts "Bucket #{bucket_name} has IP filter mode: #{ip_filter.mode}."
+    puts "Bucket #{bucket.name} has IP filter mode: #{ip_filter.mode}."
     if ip_filter.public_network_source
       puts "Allowed public network CIDR ranges: #{ip_filter.public_network_source.allowed_ip_cidr_ranges.join(', ')}."
     end
   else
-    puts "Bucket #{bucket_name} does not have an IP filter configuration."
+    puts "Bucket #{bucket.name} does not have an IP filter configuration."
   end
 end
 # [END storage_get_bucket_ip_filter]

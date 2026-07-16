@@ -214,11 +214,11 @@ module Google
         #     puts unreachable_bucket_name
         #   end
         #  
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, return_partial_success: nil, projection: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
+            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success, projection: projection
           Bucket::List.from_gapi \
-            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success
+            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted, return_partial_success: return_partial_success, projection: projection
           
         end
         alias find_buckets buckets
@@ -298,7 +298,8 @@ module Google
                    soft_deleted: nil,
                    if_metageneration_match: nil,
                    if_metageneration_not_match: nil,
-                   user_project: nil
+                   user_project: nil,
+                   projection: nil
           if skip_lookup
             return Bucket.new_lazy bucket_name, service,
                                    user_project: user_project
@@ -308,7 +309,8 @@ module Google
                                     if_metageneration_not_match: if_metageneration_not_match,
                                     user_project: user_project,
                                     soft_deleted: soft_deleted,
-                                    generation: generation
+                                    generation: generation,
+                                    projection: projection
 
           Bucket.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
@@ -490,7 +492,8 @@ module Google
                           autoclass_enabled: false,
                           enable_object_retention: nil,
                           hierarchical_namespace: nil,
-                          ip_filter: nil
+                          ip_filter: nil,
+                          projection: nil
 
           params = {
             name: bucket_name,
@@ -520,7 +523,8 @@ module Google
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
                         user_project: user_project,
-                        enable_object_retention: enable_object_retention
+                        enable_object_retention: enable_object_retention,
+                        projection: projection
           Bucket.from_gapi gapi, service, user_project: user_project
         end
         # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity

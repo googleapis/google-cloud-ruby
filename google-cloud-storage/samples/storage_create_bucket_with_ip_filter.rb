@@ -33,7 +33,7 @@ def create_bucket_with_ip_filter bucket_name:
     b.ip_filter = ip_filter
     b.uniform_bucket_level_access = true
   end
-  puts "Created bucket #{bucket_name} with IP filter."
+  puts "Created bucket #{bucket.name} with IP filter."
 end
 # [END storage_create_bucket_with_ip_filter]
 

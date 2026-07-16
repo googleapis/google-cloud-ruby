@@ -3403,9 +3403,9 @@ module Google
         ##
         # Reloads the bucket with current data from the Storage service.
         #
-        def reload!
+        def reload! projection: nil
           ensure_service!
-          @gapi = service.get_bucket name, user_project: user_project
+          @gapi = service.get_bucket name, user_project: user_project, projection: projection
           # If NotFound then lazy will never be unset
           @lazy = nil
           self

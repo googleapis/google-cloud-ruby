@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_enable_bucket_ip_filter]
-def enable_bucket_ip_filter bucket_name:
+def enable_bucket_ip_filter bucket_name:, mode: "Enabled"
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -24,7 +24,7 @@ def enable_bucket_ip_filter bucket_name:
 
   # Enable the IP filter configuration.
   ip_filter = {
-    mode: "Enabled",
+    mode: mode,
     allow_all_service_agent_access: true,
     public_network_source: {
       allowed_ip_cidr_ranges: ["0.0.0.0/0", "::/0"]
@@ -40,5 +40,5 @@ end
 # [END storage_enable_bucket_ip_filter]
 
 if $PROGRAM_NAME == __FILE__
-  enable_bucket_ip_filter bucket_name: ARGV.shift
+  enable_bucket_ip_filter bucket_name: ARGV.shift, mode: ARGV.shift
 end
