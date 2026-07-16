@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.7.0 (2026-06-11)
 
 #### Features
@@ -66,4 +72,3 @@
 * Initial generation of google-cloud-financial_services-v1 ([#29530](https://github.com/googleapis/google-cloud-ruby/issues/29530)) 
 
 ## Release History
-
