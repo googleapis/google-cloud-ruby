@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.6.0 (2026-06-11)
 
 #### Features
@@ -47,4 +53,3 @@
 * Initial generation of google-cloud-license_manager-v1 ([#30883](https://github.com/googleapis/google-cloud-ruby/issues/30883)) 
 
 ## Release History
-
