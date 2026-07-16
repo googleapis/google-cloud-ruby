@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.10.0 (2026-06-11)
 
 #### Features
@@ -83,4 +89,3 @@
 * Initial generation of google-cloud-api_hub-v1 ([#26952](https://github.com/googleapis/google-cloud-ruby/issues/26952)) 
 
 ## Release History
-
