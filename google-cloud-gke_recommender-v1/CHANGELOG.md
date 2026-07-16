@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.4.0 (2026-06-11)
 
 #### Features
@@ -37,4 +43,3 @@
 * Initial generation of google-cloud-gke_recommender-v1 ([#31519](https://github.com/googleapis/google-cloud-ruby/issues/31519)) 
 
 ## Release History
-
