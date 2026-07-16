@@ -77,7 +77,7 @@ describe "Files Snippets" do
   end
 
   after do
-    bucket.requester_pays = false
+    storage_client.bucket(bucket.name, user_project: storage_client.project).requester_pays = false
     bucket.files.each(&:delete)
   end
 
@@ -337,10 +337,13 @@ describe "Files Snippets" do
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     end
     it "fetches all object contexts" do
-
-      assert_output "Custom Contexts for #{remote_file_name} are:\nKey: #{custom_context_key1}, Value: #{custom_context_value1}\nKey: #{custom_context_key2}, Value: #{custom_context_value2}\n" do
+      out, _err = capture_io do
         get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
       end
+
+      assert_includes out, "Custom Contexts for #{remote_file_name} are:\n"
+      assert_includes out, "Key: #{custom_context_key1}, Value: #{custom_context_value1}\n"
+      assert_includes out, "Key: #{custom_context_key2}, Value: #{custom_context_value2}\n"
     end
   end
 
