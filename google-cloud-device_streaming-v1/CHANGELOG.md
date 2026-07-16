@@ -31,3 +31,4 @@
 * Initial generation of google-cloud-device_streaming-v1 ([#30408](https://github.com/googleapis/google-cloud-ruby/issues/30408)) 
 
 ## Release History
+

@@ -13,3 +13,4 @@
 * Initial generation of google-cloud-app_optimize ([#33849](https://github.com/googleapis/google-cloud-ruby/issues/33849)) 
 
 ## Release History
+

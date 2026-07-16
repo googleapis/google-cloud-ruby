@@ -44,3 +44,4 @@
 * Initial generation of google-cloud-config_delivery-v1 ([#30761](https://github.com/googleapis/google-cloud-ruby/issues/30761)) 
 
 ## Release History
+

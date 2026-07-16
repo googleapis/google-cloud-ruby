@@ -51,3 +51,4 @@
 * Initial generation of google-cloud-api_hub ([#26953](https://github.com/googleapis/google-cloud-ruby/issues/26953)) 
 
 ## Release History
+
