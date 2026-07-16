@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 (2026-07-16)
+
+#### Features
+
+* add support for Managed Rotation ([#34754](https://github.com/googleapis/google-cloud-ruby/issues/34754)) 
+
 ### 1.8.0 (2026-06-11)
 
 #### Features
