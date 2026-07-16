@@ -34,4 +34,3 @@
 * Initial generation of google-cloud-location_finder-v1 ([#31780](https://github.com/googleapis/google-cloud-ruby/issues/31780)) 
 
 ## Release History
-

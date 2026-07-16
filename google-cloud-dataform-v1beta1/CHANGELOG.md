@@ -168,4 +168,3 @@
 * Initial generation of google-cloud-dataform-v1beta1 ([#19345](https://github.com/googleapis/google-cloud-ruby/issues/19345)) 
 
 ## Release History
-

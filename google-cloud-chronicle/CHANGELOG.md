@@ -56,4 +56,3 @@
 * Initial generation of google-cloud-chronicle ([#30412](https://github.com/googleapis/google-cloud-ruby/issues/30412)) 
 
 ## Release History
-

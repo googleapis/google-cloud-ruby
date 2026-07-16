@@ -47,4 +47,3 @@
 * Initial generation of google-cloud-license_manager-v1 ([#30883](https://github.com/googleapis/google-cloud-ruby/issues/30883)) 
 
 ## Release History
-
