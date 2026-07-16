@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.4.0 (2026-06-11)
 
 #### Features
@@ -38,4 +44,3 @@
 * Initial generation of google-cloud-storage_batch_operations ([#29488](https://github.com/googleapis/google-cloud-ruby/issues/29488)) 
 
 ## Release History
-
