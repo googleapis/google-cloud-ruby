@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.9.0 (2026-07-07)
 
 #### Features
@@ -63,4 +69,3 @@
 * Initial generation of google-cloud-chronicle-v1 ([#30407](https://github.com/googleapis/google-cloud-ruby/issues/30407)) 
 
 ## Release History
-
