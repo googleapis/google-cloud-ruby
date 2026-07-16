@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.5.0 (2026-06-30)
 
 #### Features
@@ -43,4 +49,3 @@
 * Initial generation of google-cloud-dataform-v1 ([#30396](https://github.com/googleapis/google-cloud-ruby/issues/30396)) 
 
 ## Release History
-
