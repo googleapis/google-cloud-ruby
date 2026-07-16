@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2026-07-16)
+
+#### Features
+
+* Release GA version 1.0.0 ([#34791](https://github.com/googleapis/google-cloud-ruby/issues/34791)) 
+
 ### 0.3.0 (2026-07-10)
 
 #### Features
@@ -25,4 +31,3 @@
 * Initial generation of google-cloud-ces-v1 ([#33841](https://github.com/googleapis/google-cloud-ruby/issues/33841)) 
 
 ## Release History
-
