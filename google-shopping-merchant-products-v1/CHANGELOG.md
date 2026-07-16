@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2026-07-16)
+
+#### Features
+
+* add various new attributes to Product including vehicles, properties, and Q&A ([#34757](https://github.com/googleapis/google-cloud-ruby/issues/34757)) 
+
 ### 0.8.0 (2026-06-11)
 
 #### Features
