@@ -8,7 +8,7 @@ PATH
 PATH
   remote: ../google-cloud-errors
   specs:
-    google-cloud-errors (1.6.0)
+    google-cloud-errors (1.7.0)
 
 PATH
   remote: ../google-cloud-pubsub-v1
@@ -157,10 +157,10 @@ GEM
       path_expander (~> 2.0)
     minitest-focus (1.4.1)
       minitest (> 5.0)
-    minitest-reporters (1.7.1)
+    minitest-reporters (1.8.0)
       ansi
       builder
-      minitest (>= 5.0)
+      minitest (>= 5.0, < 7)
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
@@ -246,7 +246,7 @@ DEPENDENCIES
   minitest (~> 5.25)
   minitest-autotest (~> 1.1)
   minitest-focus (~> 1.4)
-  minitest-reporters (~> 1.7.0)
+  minitest-reporters (~> 1.8.0)
   minitest-rg (~> 5.3)
   ostruct (~> 0.6.3)
   pry (~> 0.15.2)
@@ -277,7 +277,7 @@ CHECKSUMS
   gapic-common (1.3.0) sha256=4e5d9be1effb7366e2cda13c0f44922285d5613ac8de8b9b18c2c835fe4faa91
   google-cloud-core (1.9.0)
   google-cloud-env (2.3.1) sha256=0faac01eb27be78c2591d64433663b1a114f8f7af55a4f819755426cac9178e7
-  google-cloud-errors (1.6.0)
+  google-cloud-errors (1.7.0)
   google-cloud-pubsub (3.3.0)
   google-cloud-pubsub-v1 (1.16.0)
   google-iam-v1 (1.7.0) sha256=9e3ea9dcc59cbd5f8d2f62b00da41ec57a2e427b33c0e798207fa06c8fbb8b87
@@ -314,7 +314,7 @@ CHECKSUMS
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
   minitest-autotest (1.2.0) sha256=60d031cba705215450662b0060f03f96507682b346a19c27f6756751ad92d2b4
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
-  minitest-reporters (1.7.1) sha256=5060413a0c95b8c32fe73e0606f3631c173a884d7900e50013e15094eb50562c
+  minitest-reporters (1.8.0)
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
   minitest-server (1.0.10) sha256=275439bf3ffc433fcbe161733248f1d9749ebf122892cf010bf864aaa95cef75
   multi_json (1.21.1) sha256=e6126a31808e3b4d19f483c775ceac34df190dffa62adfb63a165ee14ba68080

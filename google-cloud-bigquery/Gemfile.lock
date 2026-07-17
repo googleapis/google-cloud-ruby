@@ -15,12 +15,12 @@ PATH
 PATH
   remote: ../google-cloud-errors
   specs:
-    google-cloud-errors (1.6.0)
+    google-cloud-errors (1.7.0)
 
 PATH
   remote: ../google-cloud-storage
   specs:
-    google-cloud-storage (1.61.0)
+    google-cloud-storage (1.62.0)
       addressable (~> 2.8)
       digest-crc (~> 0.4)
       google-apis-core (>= 0.18, < 2)
@@ -207,10 +207,10 @@ GEM
     minitest-focus (1.4.1)
       minitest (> 5.0)
     minitest-mock (5.27.0)
-    minitest-reporters (1.5.0)
+    minitest-reporters (1.8.0)
       ansi
       builder
-      minitest (>= 5.0)
+      minitest (>= 5.0, < 7)
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
@@ -313,7 +313,7 @@ DEPENDENCIES
   minitest-autotest (~> 1.0)
   minitest-focus (~> 1.4)
   minitest-mock (~> 5.27)
-  minitest-reporters (~> 1.5.0)
+  minitest-reporters (~> 1.8.0)
   minitest-rg (~> 5.3)
   ostruct (~> 0.5.5)
   rake
@@ -353,8 +353,8 @@ CHECKSUMS
   google-cloud-data_catalog (2.3.0)
   google-cloud-data_catalog-v1 (2.8.0) sha256=12006f9bcb66dcfa39d146fefed2987cdd4b5b5ea8790780e5ef0e655a7c380a
   google-cloud-env (2.3.1) sha256=0faac01eb27be78c2591d64433663b1a114f8f7af55a4f819755426cac9178e7
-  google-cloud-errors (1.6.0)
-  google-cloud-storage (1.61.0)
+  google-cloud-errors (1.7.0)
+  google-cloud-storage (1.62.0)
   google-iam-v1 (1.7.0) sha256=9e3ea9dcc59cbd5f8d2f62b00da41ec57a2e427b33c0e798207fa06c8fbb8b87
   google-logging-utils (0.2.0) sha256=675462b4ea5affa825a3442694ca2d75d0069455a1d0956127207498fca3df7b
   google-protobuf (4.35.1) sha256=a3a6471331d918f58dfa4d014a8f6286f0af2cf4840216bde52fcf2ea3fe3726
@@ -392,7 +392,7 @@ CHECKSUMS
   minitest-autotest (1.2.2) sha256=ce9844aae6a47f24ce5decb81a02555098185d71d389396112f59d591164583f
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
   minitest-mock (5.27.0) sha256=7040ed7185417a966920987eaa6eaf1be4ea1fc5b25bb03ff4703f98564a55b0
-  minitest-reporters (1.5.0) sha256=a693acddc67987cde96d33ad6766b8d3e8522bb4c8a20628352950c30d42f0a3
+  minitest-reporters (1.8.0)
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
   multi_json (1.21.1) sha256=e6126a31808e3b4d19f483c775ceac34df190dffa62adfb63a165ee14ba68080
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
