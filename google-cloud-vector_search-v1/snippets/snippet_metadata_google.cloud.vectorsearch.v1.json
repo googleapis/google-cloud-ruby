@@ -1,0 +1,935 @@
+{
+  "client_library": {
+    "name": "google-cloud-vector_search-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.vectorsearch.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectSearchService_SearchDataObjects_sync",
+      "title": "Snippet for the search_data_objects call in the DataObjectSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#search_data_objects.",
+      "file": "data_object_search_service/search_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#search_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::SearchDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::SearchDataObjectsResponse",
+        "client": {
+          "short_name": "DataObjectSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client"
+        },
+        "method": {
+          "short_name": "SearchDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService.SearchDataObjects",
+          "service": {
+            "short_name": "DataObjectSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectSearchService_QueryDataObjects_sync",
+      "title": "Snippet for the query_data_objects call in the DataObjectSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#query_data_objects.",
+      "file": "data_object_search_service/query_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#query_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::QueryDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::QueryDataObjectsResponse",
+        "client": {
+          "short_name": "DataObjectSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client"
+        },
+        "method": {
+          "short_name": "QueryDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService.QueryDataObjects",
+          "service": {
+            "short_name": "DataObjectSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectSearchService_AggregateDataObjects_sync",
+      "title": "Snippet for the aggregate_data_objects call in the DataObjectSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#aggregate_data_objects.",
+      "file": "data_object_search_service/aggregate_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "aggregate_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#aggregate_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::AggregateDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::AggregateDataObjectsResponse",
+        "client": {
+          "short_name": "DataObjectSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client"
+        },
+        "method": {
+          "short_name": "AggregateDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService.AggregateDataObjects",
+          "service": {
+            "short_name": "DataObjectSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectSearchService_BatchSearchDataObjects_sync",
+      "title": "Snippet for the batch_search_data_objects call in the DataObjectSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#batch_search_data_objects.",
+      "file": "data_object_search_service/batch_search_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_search_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client#batch_search_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::BatchSearchDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::BatchSearchDataObjectsResponse",
+        "client": {
+          "short_name": "DataObjectSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectSearchService::Client"
+        },
+        "method": {
+          "short_name": "BatchSearchDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService.BatchSearchDataObjects",
+          "service": {
+            "short_name": "DataObjectSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_CreateDataObject_sync",
+      "title": "Snippet for the create_data_object call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#create_data_object.",
+      "file": "data_object_service/create_data_object.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_object",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#create_data_object",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::CreateDataObjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::DataObject",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataObject",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.CreateDataObject",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_BatchCreateDataObjects_sync",
+      "title": "Snippet for the batch_create_data_objects call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#batch_create_data_objects.",
+      "file": "data_object_service/batch_create_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#batch_create_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::BatchCreateDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::BatchCreateDataObjectsResponse",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.BatchCreateDataObjects",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_GetDataObject_sync",
+      "title": "Snippet for the get_data_object call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#get_data_object.",
+      "file": "data_object_service/get_data_object.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_object",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#get_data_object",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::GetDataObjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::DataObject",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "GetDataObject",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.GetDataObject",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_UpdateDataObject_sync",
+      "title": "Snippet for the update_data_object call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#update_data_object.",
+      "file": "data_object_service/update_data_object.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_object",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#update_data_object",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::UpdateDataObjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::DataObject",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataObject",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.UpdateDataObject",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_BatchUpdateDataObjects_sync",
+      "title": "Snippet for the batch_update_data_objects call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#batch_update_data_objects.",
+      "file": "data_object_service/batch_update_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#batch_update_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::BatchUpdateDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::BatchUpdateDataObjectsResponse",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.BatchUpdateDataObjects",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_DeleteDataObject_sync",
+      "title": "Snippet for the delete_data_object call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#delete_data_object.",
+      "file": "data_object_service/delete_data_object.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_object",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#delete_data_object",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::DeleteDataObjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataObject",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.DeleteDataObject",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_DataObjectService_BatchDeleteDataObjects_sync",
+      "title": "Snippet for the batch_delete_data_objects call in the DataObjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::DataObjectService::Client#batch_delete_data_objects.",
+      "file": "data_object_service/batch_delete_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client#batch_delete_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::BatchDeleteDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DataObjectService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::DataObjectService::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.DataObjectService.BatchDeleteDataObjects",
+          "service": {
+            "short_name": "DataObjectService",
+            "full_name": "google.cloud.vectorsearch.v1.DataObjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_ListCollections_sync",
+      "title": "Snippet for the list_collections call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#list_collections.",
+      "file": "vector_search_service/list_collections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_collections",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#list_collections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::ListCollectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::ListCollectionsResponse",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "ListCollections",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.ListCollections",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_GetCollection_sync",
+      "title": "Snippet for the get_collection call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#get_collection.",
+      "file": "vector_search_service/get_collection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_collection",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#get_collection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::GetCollectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::Collection",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "GetCollection",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.GetCollection",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_CreateCollection_sync",
+      "title": "Snippet for the create_collection call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#create_collection.",
+      "file": "vector_search_service/create_collection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_collection",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#create_collection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::CreateCollectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "CreateCollection",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.CreateCollection",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_UpdateCollection_sync",
+      "title": "Snippet for the update_collection call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#update_collection.",
+      "file": "vector_search_service/update_collection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_collection",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#update_collection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::UpdateCollectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCollection",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.UpdateCollection",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_DeleteCollection_sync",
+      "title": "Snippet for the delete_collection call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#delete_collection.",
+      "file": "vector_search_service/delete_collection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_collection",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#delete_collection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::DeleteCollectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCollection",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.DeleteCollection",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_ListIndexes_sync",
+      "title": "Snippet for the list_indexes call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#list_indexes.",
+      "file": "vector_search_service/list_indexes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_indexes",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#list_indexes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::ListIndexesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::ListIndexesResponse",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "ListIndexes",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.ListIndexes",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_GetIndex_sync",
+      "title": "Snippet for the get_index call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#get_index.",
+      "file": "vector_search_service/get_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_index",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#get_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::GetIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VectorSearch::V1::Index",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "GetIndex",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.GetIndex",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_CreateIndex_sync",
+      "title": "Snippet for the create_index call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#create_index.",
+      "file": "vector_search_service/create_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_index",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#create_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::CreateIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "CreateIndex",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.CreateIndex",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_UpdateIndex_sync",
+      "title": "Snippet for the update_index call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#update_index.",
+      "file": "vector_search_service/update_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_index",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#update_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::UpdateIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "UpdateIndex",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.UpdateIndex",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_DeleteIndex_sync",
+      "title": "Snippet for the delete_index call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#delete_index.",
+      "file": "vector_search_service/delete_index.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_index",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#delete_index",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::DeleteIndexRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "DeleteIndex",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.DeleteIndex",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_ImportDataObjects_sync",
+      "title": "Snippet for the import_data_objects call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#import_data_objects.",
+      "file": "vector_search_service/import_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#import_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::ImportDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "ImportDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.ImportDataObjects",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vectorsearch_v1_generated_VectorSearchService_ExportDataObjects_sync",
+      "title": "Snippet for the export_data_objects call in the VectorSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VectorSearch::V1::VectorSearchService::Client#export_data_objects.",
+      "file": "vector_search_service/export_data_objects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_data_objects",
+        "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client#export_data_objects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VectorSearch::V1::ExportDataObjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VectorSearchService::Client",
+          "full_name": "::Google::Cloud::VectorSearch::V1::VectorSearchService::Client"
+        },
+        "method": {
+          "short_name": "ExportDataObjects",
+          "full_name": "google.cloud.vectorsearch.v1.VectorSearchService.ExportDataObjects",
+          "service": {
+            "short_name": "VectorSearchService",
+            "full_name": "google.cloud.vectorsearch.v1.VectorSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
