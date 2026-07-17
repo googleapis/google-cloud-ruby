@@ -182,7 +182,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve an Order object.
+              # Retrieves an `Order` object.
               #
               # @overload get_order(request, options = nil)
               #   Pass arguments to `get_order` via a request object, either of type
@@ -261,7 +261,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Order` objects.
+              # Lists `Order` objects.
               #
               # Fields used for literal matching in filter string:
               # * `order_id`

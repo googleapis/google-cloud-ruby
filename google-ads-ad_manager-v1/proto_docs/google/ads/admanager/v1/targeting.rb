@@ -47,6 +47,9 @@ module Google
         # @!attribute [rw] data_segment_targeting
         #   @return [::Google::Ads::AdManager::V1::DataSegmentTargeting]
         #     Optional. Used to target data segments.
+        # @!attribute [rw] request_format_targeting
+        #   @return [::Google::Ads::AdManager::V1::RequestFormatTargeting]
+        #     Optional. Used to target inventory formats.
         # @!attribute [rw] content_targeting
         #   @return [::Google::Ads::AdManager::V1::ContentTargeting]
         #     Optional. Used to target content.
@@ -436,6 +439,56 @@ module Google
         #   @return [::Boolean]
         #     Output only. Whether any data segments are currently targeted.
         class DataSegmentTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request Format Targeting
+        #
+        # This message specifies inclusion or exclusion of various request formats for
+        # targeting. Each optional boolean field controls the targeting of a specific
+        # request format:
+        #
+        # - If set to `true`, the corresponding format is **included** in targeting.
+        # - If set to `false`, the corresponding format is **excluded** from targeting.
+        # - If unset, the format is neither explicitly included nor excluded.
+        # @!attribute [rw] app_open_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls app open format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] rewarded_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls rewarded format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] rewarded_interstitial_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls rewarded interstitial format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] interstitial_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls interstitial format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] anchor_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls anchor format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] banner_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls banner format targeting. Set to `true` to include,
+        #     `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] instream_video_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls instream video format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] instream_audio_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls instream audio format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        # @!attribute [rw] native_advanced_enabled
+        #   @return [::Boolean]
+        #     Optional. Controls native advanced format targeting. Set to `true` to
+        #     include, `false` to exclude, or leave unset for neither.
+        class RequestFormatTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

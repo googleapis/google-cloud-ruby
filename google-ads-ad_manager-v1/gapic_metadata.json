@@ -63,6 +63,99 @@
         }
       }
     },
+    "AdRuleService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::AdRuleService::Client",
+          "rpcs": {
+            "GetAdRule": {
+              "methods": [
+                "get_ad_rule"
+              ]
+            },
+            "ListAdRules": {
+              "methods": [
+                "list_ad_rules"
+              ]
+            },
+            "CreateAdRule": {
+              "methods": [
+                "create_ad_rule"
+              ]
+            },
+            "BatchCreateAdRules": {
+              "methods": [
+                "batch_create_ad_rules"
+              ]
+            },
+            "UpdateAdRule": {
+              "methods": [
+                "update_ad_rule"
+              ]
+            },
+            "BatchUpdateAdRules": {
+              "methods": [
+                "batch_update_ad_rules"
+              ]
+            },
+            "BatchActivateAdRules": {
+              "methods": [
+                "batch_activate_ad_rules"
+              ]
+            },
+            "BatchDeactivateAdRules": {
+              "methods": [
+                "batch_deactivate_ad_rules"
+              ]
+            },
+            "BatchDeleteAdRules": {
+              "methods": [
+                "batch_delete_ad_rules"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AdSpotService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::AdSpotService::Client",
+          "rpcs": {
+            "GetAdSpot": {
+              "methods": [
+                "get_ad_spot"
+              ]
+            },
+            "ListAdSpots": {
+              "methods": [
+                "list_ad_spots"
+              ]
+            },
+            "CreateAdSpot": {
+              "methods": [
+                "create_ad_spot"
+              ]
+            },
+            "BatchCreateAdSpots": {
+              "methods": [
+                "batch_create_ad_spots"
+              ]
+            },
+            "UpdateAdSpot": {
+              "methods": [
+                "update_ad_spot"
+              ]
+            },
+            "BatchUpdateAdSpots": {
+              "methods": [
+                "batch_update_ad_spots"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AdUnitService": {
       "clients": {
         "grpc": {
@@ -241,6 +334,55 @@
             "ListBrowsers": {
               "methods": [
                 "list_browsers"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CdnConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CdnConfigService::Client",
+          "rpcs": {
+            "GetCdnConfig": {
+              "methods": [
+                "get_cdn_config"
+              ]
+            },
+            "ListCdnConfigs": {
+              "methods": [
+                "list_cdn_configs"
+              ]
+            },
+            "CreateCdnConfig": {
+              "methods": [
+                "create_cdn_config"
+              ]
+            },
+            "BatchCreateCdnConfigs": {
+              "methods": [
+                "batch_create_cdn_configs"
+              ]
+            },
+            "UpdateCdnConfig": {
+              "methods": [
+                "update_cdn_config"
+              ]
+            },
+            "BatchUpdateCdnConfigs": {
+              "methods": [
+                "batch_update_cdn_configs"
+              ]
+            },
+            "BatchActivateCdnConfigs": {
+              "methods": [
+                "batch_activate_cdn_configs"
+              ]
+            },
+            "BatchArchiveCdnConfigs": {
+              "methods": [
+                "batch_archive_cdn_configs"
               ]
             }
           }
@@ -551,6 +693,36 @@
               "methods": [
                 "list_custom_targeting_values"
               ]
+            },
+            "CreateCustomTargetingValue": {
+              "methods": [
+                "create_custom_targeting_value"
+              ]
+            },
+            "BatchCreateCustomTargetingValues": {
+              "methods": [
+                "batch_create_custom_targeting_values"
+              ]
+            },
+            "UpdateCustomTargetingValue": {
+              "methods": [
+                "update_custom_targeting_value"
+              ]
+            },
+            "BatchUpdateCustomTargetingValues": {
+              "methods": [
+                "batch_update_custom_targeting_values"
+              ]
+            },
+            "BatchActivateCustomTargetingValues": {
+              "methods": [
+                "batch_activate_custom_targeting_values"
+              ]
+            },
+            "BatchDeactivateCustomTargetingValues": {
+              "methods": [
+                "batch_deactivate_custom_targeting_values"
+              ]
             }
           }
         }
@@ -752,6 +924,70 @@
             "ListLinkedDevices": {
               "methods": [
                 "list_linked_devices"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LiveStreamService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::LiveStreamService::Client",
+          "rpcs": {
+            "GetLiveStream": {
+              "methods": [
+                "get_live_stream"
+              ]
+            },
+            "ListLiveStreams": {
+              "methods": [
+                "list_live_streams"
+              ]
+            },
+            "CreateLiveStream": {
+              "methods": [
+                "create_live_stream"
+              ]
+            },
+            "BatchCreateLiveStreams": {
+              "methods": [
+                "batch_create_live_streams"
+              ]
+            },
+            "UpdateLiveStream": {
+              "methods": [
+                "update_live_stream"
+              ]
+            },
+            "BatchUpdateLiveStreams": {
+              "methods": [
+                "batch_update_live_streams"
+              ]
+            },
+            "BatchActivateLiveStreams": {
+              "methods": [
+                "batch_activate_live_streams"
+              ]
+            },
+            "BatchPauseLiveStreams": {
+              "methods": [
+                "batch_pause_live_streams"
+              ]
+            },
+            "BatchArchiveLiveStreams": {
+              "methods": [
+                "batch_archive_live_streams"
+              ]
+            },
+            "BatchPauseAdsLiveStreams": {
+              "methods": [
+                "batch_pause_ads_live_streams"
+              ]
+            },
+            "BatchRefreshMasterPlaylists": {
+              "methods": [
+                "batch_refresh_master_playlists"
               ]
             }
           }
@@ -1162,6 +1398,64 @@
         }
       }
     },
+    "SuggestedAdUnitService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Client",
+          "rpcs": {
+            "GetSuggestedAdUnit": {
+              "methods": [
+                "get_suggested_ad_unit"
+              ]
+            },
+            "ListSuggestedAdUnits": {
+              "methods": [
+                "list_suggested_ad_units"
+              ]
+            },
+            "BatchApproveSuggestedAdUnits": {
+              "methods": [
+                "batch_approve_suggested_ad_units"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetingPresetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::TargetingPresetService::Client",
+          "rpcs": {
+            "GetTargetingPreset": {
+              "methods": [
+                "get_targeting_preset"
+              ]
+            },
+            "ListTargetingPresets": {
+              "methods": [
+                "list_targeting_presets"
+              ]
+            },
+            "CreateTargetingPreset": {
+              "methods": [
+                "create_targeting_preset"
+              ]
+            },
+            "BatchCreateTargetingPresets": {
+              "methods": [
+                "batch_create_targeting_presets"
+              ]
+            },
+            "BatchDeactivateTargetingPresets": {
+              "methods": [
+                "batch_deactivate_targeting_presets"
+              ]
+            }
+          }
+        }
+      }
+    },
     "TaxonomyCategoryService": {
       "clients": {
         "grpc": {
@@ -1224,6 +1518,25 @@
             "BatchDeactivateTeams": {
               "methods": [
                 "batch_deactivate_teams"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ThirdPartyCompanyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ThirdPartyCompanyService::Client",
+          "rpcs": {
+            "GetThirdPartyCompany": {
+              "methods": [
+                "get_third_party_company"
+              ]
+            },
+            "ListThirdPartyCompanies": {
+              "methods": [
+                "list_third_party_companies"
               ]
             }
           }

@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.MobileDeviceService'
 
-            # API to retrieve a `MobileDevice` object.
+            # Retrieves a `MobileDevice` object.
             rpc :GetMobileDevice, ::Google::Ads::AdManager::V1::GetMobileDeviceRequest, ::Google::Ads::AdManager::V1::MobileDevice
-            # API to retrieve a list of `MobileDevice` objects.
+            # Lists `MobileDevice` objects.
             rpc :ListMobileDevices, ::Google::Ads::AdManager::V1::ListMobileDevicesRequest, ::Google::Ads::AdManager::V1::ListMobileDevicesResponse
           end
 

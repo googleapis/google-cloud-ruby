@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `ContentLabel` object.
+              # Retrieves a `ContentLabel` object.
               #
               # @overload get_content_label(request, options = nil)
               #   Pass arguments to `get_content_label` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `ContentLabel` objects.
+              # Lists `ContentLabel` objects.
               #
               # @overload list_content_labels(request, options = nil)
               #   Pass arguments to `list_content_labels` via a request object, either of type

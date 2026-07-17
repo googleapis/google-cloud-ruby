@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.OrderService'
 
-            # API to retrieve an Order object.
+            # Retrieves an `Order` object.
             rpc :GetOrder, ::Google::Ads::AdManager::V1::GetOrderRequest, ::Google::Ads::AdManager::V1::Order
-            # API to retrieve a list of `Order` objects.
+            # Lists `Order` objects.
             #
             # Fields used for literal matching in filter string:
             # * `order_id`

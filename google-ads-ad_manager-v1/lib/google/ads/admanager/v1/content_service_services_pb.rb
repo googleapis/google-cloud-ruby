@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ContentService'
 
-            # API to retrieve a `Content` object.
+            # Retrieves a `Content` object.
             rpc :GetContent, ::Google::Ads::AdManager::V1::GetContentRequest, ::Google::Ads::AdManager::V1::Content
-            # API to retrieve a list of `Content` objects.
+            # Lists `Content` objects.
             rpc :ListContent, ::Google::Ads::AdManager::V1::ListContentRequest, ::Google::Ads::AdManager::V1::ListContentResponse
           end
 

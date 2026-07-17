@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `OperatingSystem` object.
+              # Retrieves a `OperatingSystem` object.
               #
               # @overload get_operating_system(request, options = nil)
               #   Pass arguments to `get_operating_system` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `OperatingSystem` objects.
+              # Lists `OperatingSystem` objects.
               #
               # @overload list_operating_systems(request, options = nil)
               #   Pass arguments to `list_operating_systems` via a request object, either of type
