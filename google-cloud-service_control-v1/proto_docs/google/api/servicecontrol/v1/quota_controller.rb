@@ -27,7 +27,8 @@ module Google
         #     Name of the service as specified in the service configuration. For example,
         #     `"pubsub.googleapis.com"`.
         #
-        #     See [google.api.Service][google.api.Service] for the definition of a service name.
+        #     See [google.api.Service][google.api.Service] for the definition of a
+        #     service name.
         # @!attribute [rw] allocate_operation
         #   @return [::Google::Cloud::ServiceControl::V1::QuotaOperation]
         #     Operation that describes the quota allocation.
@@ -44,9 +45,9 @@ module Google
         # Represents information regarding a quota operation.
         # @!attribute [rw] operation_id
         #   @return [::String]
-        #     Identity of the operation. This is expected to be unique within the scope
-        #     of the service that generated the operation, and guarantees idempotency in
-        #     case of retries.
+        #     Identity of the operation. For Allocation Quota, this is expected to be
+        #     unique within the scope of the service that generated the operation, and
+        #     guarantees idempotency in case of retries.
         #
         #     In order to ensure best performance and latency in the Quota backends,
         #     operation_ids are optimally associated with time, so that related
@@ -179,7 +180,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents error information for {::Google::Cloud::ServiceControl::V1::QuotaOperation QuotaOperation}.
+        # Represents error information for
+        # {::Google::Cloud::ServiceControl::V1::QuotaOperation QuotaOperation}.
         # @!attribute [rw] code
         #   @return [::Google::Cloud::ServiceControl::V1::QuotaError::Code]
         #     Error code.
@@ -209,7 +211,8 @@ module Google
             UNSPECIFIED = 0
 
             # Quota allocation failed.
-            # Same as [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
+            # Same as
+            # [google.rpc.Code.RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED].
             RESOURCE_EXHAUSTED = 8
 
             # Consumer cannot access the service because the service requires active
