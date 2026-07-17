@@ -43,6 +43,7 @@ module Google
         #     consumer, but not for service-initiated operations that are
         #     not related to a specific consumer.
         #
+        #
         #     - This can be in one of the following formats:
         #         - project:PROJECT_ID,
         #         - project`_`number:PROJECT_NUMBER,
@@ -96,6 +97,12 @@ module Google
         # @!attribute [rw] importance
         #   @return [::Google::Cloud::ServiceControl::V1::Operation::Importance]
         #     DO NOT USE. This is an experimental field.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Private Preview. This feature is only available for approved services.
+        #
+        #     User defined labels for the resource that this operation is associated
+        #     with.
         # @!attribute [rw] extensions
         #   @return [::Array<::Google::Protobuf::Any>]
         #     Unimplemented.
@@ -108,6 +115,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
