@@ -690,6 +690,326 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_ListTokenAuthUsers_sync",
+      "title": "Snippet for the list_token_auth_users call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#list_token_auth_users.",
+      "file": "memorystore/list_token_auth_users.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_token_auth_users",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#list_token_auth_users",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::ListTokenAuthUsersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::ListTokenAuthUsersResponse",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "ListTokenAuthUsers",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.ListTokenAuthUsers",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_GetTokenAuthUser_sync",
+      "title": "Snippet for the get_token_auth_user call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#get_token_auth_user.",
+      "file": "memorystore/get_token_auth_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_token_auth_user",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#get_token_auth_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::GetTokenAuthUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::TokenAuthUser",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "GetTokenAuthUser",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.GetTokenAuthUser",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_ListAuthTokens_sync",
+      "title": "Snippet for the list_auth_tokens call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#list_auth_tokens.",
+      "file": "memorystore/list_auth_tokens.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_auth_tokens",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#list_auth_tokens",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::ListAuthTokensRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::ListAuthTokensResponse",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "ListAuthTokens",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.ListAuthTokens",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_GetAuthToken_sync",
+      "title": "Snippet for the get_auth_token call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#get_auth_token.",
+      "file": "memorystore/get_auth_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_auth_token",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#get_auth_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::GetAuthTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::AuthToken",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "GetAuthToken",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.GetAuthToken",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_AddTokenAuthUser_sync",
+      "title": "Snippet for the add_token_auth_user call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#add_token_auth_user.",
+      "file": "memorystore/add_token_auth_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_token_auth_user",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#add_token_auth_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::AddTokenAuthUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "AddTokenAuthUser",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.AddTokenAuthUser",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_DeleteTokenAuthUser_sync",
+      "title": "Snippet for the delete_token_auth_user call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#delete_token_auth_user.",
+      "file": "memorystore/delete_token_auth_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_token_auth_user",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#delete_token_auth_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::DeleteTokenAuthUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "DeleteTokenAuthUser",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.DeleteTokenAuthUser",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_AddAuthToken_sync",
+      "title": "Snippet for the add_auth_token call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#add_auth_token.",
+      "file": "memorystore/add_auth_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_auth_token",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#add_auth_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::AddAuthTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "AddAuthToken",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.AddAuthToken",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_DeleteAuthToken_sync",
+      "title": "Snippet for the delete_auth_token call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Client#delete_auth_token.",
+      "file": "memorystore/delete_auth_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_auth_token",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client#delete_auth_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::DeleteAuthTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Client"
+        },
+        "method": {
+          "short_name": "DeleteAuthToken",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.DeleteAuthToken",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

@@ -323,6 +323,9 @@ module Google
 
             # IAM basic authorization.
             IAM_AUTH = 2
+
+            # Token based authorization.
+            TOKEN_AUTH = 3
           end
 
           # Possible in-transit encryption modes of the instance.
@@ -776,6 +779,71 @@ module Google
             # A instance that allows only reads and replicates data from a primary
             # instance.
             SECONDARY = 3
+          end
+        end
+
+        # Token based auth user for the instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Token based auth user name.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::TokenAuthUser::State]
+        #     Output only. The state of the token based auth user.
+        class TokenAuthUser
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the different states of a token based auth user.
+          # New values may be added in the future.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # The auth user is active.
+            ACTIVE = 1
+
+            # The auth user is being created.
+            CREATING = 2
+
+            # The auth user is being updated.
+            UPDATING = 3
+
+            # The auth user is being deleted.
+            DELETING = 4
+          end
+        end
+
+        # Auth token for the instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Name of the auth token.
+        # @!attribute [r] token
+        #   @return [::String]
+        #     Output only. The auth token.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create time of the auth token.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::AuthToken::State]
+        #     Output only. The state of the auth token.
+        class AuthToken
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the different states of an auth token.
+          # New values may be added in the future.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # The auth token is active.
+            ACTIVE = 1
+
+            # The auth token is being created.
+            CREATING = 2
+
+            # The auth token is being deleted.
+            DELETING = 3
           end
         end
 
@@ -1402,6 +1470,187 @@ module Google
         #     Format:
         #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/certificateAuthority
         class GetCertificateAuthorityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `ListTokenAuthUsers`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent to list token auth users from.
+        #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return. The maximum value is 1000;
+        #     values above 1000 will be coerced to 1000. If not specified, a default
+        #     value of 1000 will be used by the service. Regardless of the page_size
+        #     value, the response may include a partial list and a caller should only
+        #     rely on response's `next_page_token` to determine if there are more token
+        #     auth users left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     `ListTokenAuthUsers` request, if any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Expression for filtering results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results by a defined order.
+        class ListTokenAuthUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `ListTokenAuthUsers`.
+        # @!attribute [rw] token_auth_users
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::TokenAuthUser>]
+        #     A list of token auth users in the project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Token auth users that could not be reached.
+        class ListTokenAuthUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `GetTokenAuthUser`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of token auth user for a basic auth enabled instance.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+        class GetTokenAuthUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `ListAuthTokens`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent to list auth tokens from.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return. The maximum value is 1000;
+        #     values above 1000 will be coerced to 1000.
+        #
+        #     If not specified, a default value of 1000 will be used by the service.
+        #     Regardless of the page_size value, the response may include a partial list
+        #     and a caller should only rely on response's
+        #     `next_page_token`
+        #     to determine if there are more auth tokens left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     `ListAuthTokens` request, if any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Expression for filtering results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results by a defined order.
+        class ListAuthTokensRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `ListAuthTokens`.
+        # @!attribute [rw] auth_tokens
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AuthToken>]
+        #     A list of auth tokens in the project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Auth tokens that could not be reached.
+        class ListAuthTokensResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `GetAuthToken`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of token auth user for a token auth enabled instance.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+        class GetAuthTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `AddTokenAuthUser`.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The instance resource that this token auth user will be added
+        #     for. Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] token_auth_user
+        #   @return [::String]
+        #     Required. The name of the token auth user to add.
+        class AddTokenAuthUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `DeleteTokenAuthUser`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the token auth user to delete.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any auth tokens from this user will also be
+        #     deleted. Otherwise, the request will only work if the user has no auth
+        #     tokens.
+        class DeleteTokenAuthUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `AddAuthToken`.
+        # @!attribute [rw] token_auth_user
+        #   @return [::String]
+        #     Required. The name of the token auth user resource that this token will be
+        #     added for.
+        # @!attribute [rw] auth_token
+        #   @return [::Google::Cloud::Memorystore::V1::AuthToken]
+        #     Required. The auth token to add.
+        class AddAuthTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `DeleteAuthToken`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the token auth user resource that this token will be
+        #     deleted from. Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{name}
+        class DeleteAuthTokenRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
