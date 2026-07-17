@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.9.0 (2026-07-16)
+
+#### Features
+
+* add agent, agent_sessions, and agent_anomaly fields to Finding ([#34758](https://github.com/googleapis/google-cloud-ruby/issues/34758)) 
+
 ### 1.8.0 (2026-06-11)
 
 #### Features

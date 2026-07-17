@@ -1787,6 +1787,14 @@
       "component": "google-cloud-translate-v3",
       "version_file": "lib/google/cloud/translate/v3/version.rb"
     },
+    "google-cloud-vector_search": {
+      "component": "google-cloud-vector_search",
+      "version_file": "lib/google/cloud/vector_search/version.rb"
+    },
+    "google-cloud-vector_search-v1": {
+      "component": "google-cloud-vector_search-v1",
+      "version_file": "lib/google/cloud/vector_search/v1/version.rb"
+    },
     "google-cloud-video-live_stream": {
       "component": "google-cloud-video-live_stream",
       "version_file": "lib/google/cloud/video/live_stream/version.rb"

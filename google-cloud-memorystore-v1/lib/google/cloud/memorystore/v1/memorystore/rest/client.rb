@@ -1817,6 +1817,743 @@ module Google
               end
 
               ##
+              # Lists all the token auth users for a token based auth enabled instance.
+              #
+              # @overload list_token_auth_users(request, options = nil)
+              #   Pass arguments to `list_token_auth_users` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::ListTokenAuthUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::ListTokenAuthUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_token_auth_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_token_auth_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent to list token auth users from.
+              #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return. The maximum value is 1000;
+              #     values above 1000 will be coerced to 1000. If not specified, a default
+              #     value of 1000 will be used by the service. Regardless of the page_size
+              #     value, the response may include a partial list and a caller should only
+              #     rely on response's `next_page_token` to determine if there are more token
+              #     auth users left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListTokenAuthUsers` request, if any.
+              #   @param filter [::String]
+              #     Optional. Expression for filtering results.
+              #   @param order_by [::String]
+              #     Optional. Sort results by a defined order.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::TokenAuthUser>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::TokenAuthUser>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::ListTokenAuthUsersRequest.new
+              #
+              #   # Call the list_token_auth_users method.
+              #   result = client.list_token_auth_users request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1::TokenAuthUser.
+              #     p item
+              #   end
+              #
+              def list_token_auth_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::ListTokenAuthUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_token_auth_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_token_auth_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_token_auth_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_token_auth_users request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_token_auth_users, "token_auth_users", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a specific token auth user for a token based auth enabled instance.
+              #
+              # @overload get_token_auth_user(request, options = nil)
+              #   Pass arguments to `get_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::GetTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::GetTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_token_auth_user(name: nil)
+              #   Pass arguments to `get_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of token auth user for a basic auth enabled instance.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1::TokenAuthUser]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1::TokenAuthUser]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::GetTokenAuthUserRequest.new
+              #
+              #   # Call the get_token_auth_user method.
+              #   result = client.get_token_auth_user request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1::TokenAuthUser.
+              #   p result
+              #
+              def get_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::GetTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_token_auth_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_token_auth_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all the auth tokens for a specific token auth user.
+              #
+              # @overload list_auth_tokens(request, options = nil)
+              #   Pass arguments to `list_auth_tokens` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::ListAuthTokensRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::ListAuthTokensRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_auth_tokens(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_auth_tokens` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent to list auth tokens from.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return. The maximum value is 1000;
+              #     values above 1000 will be coerced to 1000.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     `next_page_token`
+              #     to determine if there are more auth tokens left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListAuthTokens` request, if any.
+              #   @param filter [::String]
+              #     Optional. Expression for filtering results.
+              #   @param order_by [::String]
+              #     Optional. Sort results by a defined order.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::AuthToken>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::AuthToken>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::ListAuthTokensRequest.new
+              #
+              #   # Call the list_auth_tokens method.
+              #   result = client.list_auth_tokens request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1::AuthToken.
+              #     p item
+              #   end
+              #
+              def list_auth_tokens request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::ListAuthTokensRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_auth_tokens.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_auth_tokens.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_auth_tokens.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_auth_tokens request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_auth_tokens, "auth_tokens", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a token based auth enabled instance's auth token for a given user.
+              #
+              # @overload get_auth_token(request, options = nil)
+              #   Pass arguments to `get_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::GetAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::GetAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_auth_token(name: nil)
+              #   Pass arguments to `get_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of token auth user for a token auth enabled instance.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1::AuthToken]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1::AuthToken]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::GetAuthTokenRequest.new
+              #
+              #   # Call the get_auth_token method.
+              #   result = client.get_auth_token request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1::AuthToken.
+              #   p result
+              #
+              def get_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::GetAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_auth_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_auth_token request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds a token auth user for a token based auth enabled instance.
+              #
+              # @overload add_token_auth_user(request, options = nil)
+              #   Pass arguments to `add_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::AddTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::AddTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_token_auth_user(instance: nil, token_auth_user: nil)
+              #   Pass arguments to `add_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. The instance resource that this token auth user will be added
+              #     for. Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param token_auth_user [::String]
+              #     Required. The name of the token auth user to add.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::AddTokenAuthUserRequest.new
+              #
+              #   # Call the add_token_auth_user method.
+              #   result = client.add_token_auth_user request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def add_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::AddTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_token_auth_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.add_token_auth_user request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a token auth user for a token based auth enabled instance.
+              #
+              # @overload delete_token_auth_user(request, options = nil)
+              #   Pass arguments to `delete_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::DeleteTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::DeleteTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_token_auth_user(name: nil, request_id: nil, force: nil)
+              #   Pass arguments to `delete_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the token auth user to delete.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any auth tokens from this user will also be
+              #     deleted. Otherwise, the request will only work if the user has no auth
+              #     tokens.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::DeleteTokenAuthUserRequest.new
+              #
+              #   # Call the delete_token_auth_user method.
+              #   result = client.delete_token_auth_user request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::DeleteTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_token_auth_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.delete_token_auth_user request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds a token for a user of a token based auth enabled instance.
+              #
+              # @overload add_auth_token(request, options = nil)
+              #   Pass arguments to `add_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::AddAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::AddAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_auth_token(token_auth_user: nil, auth_token: nil)
+              #   Pass arguments to `add_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param token_auth_user [::String]
+              #     Required. The name of the token auth user resource that this token will be
+              #     added for.
+              #   @param auth_token [::Google::Cloud::Memorystore::V1::AuthToken, ::Hash]
+              #     Required. The auth token to add.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::AddAuthTokenRequest.new
+              #
+              #   # Call the add_auth_token method.
+              #   result = client.add_auth_token request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def add_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::AddAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_auth_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.add_auth_token request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a token for a user of a token based auth enabled instance.
+              #
+              # @overload delete_auth_token(request, options = nil)
+              #   Pass arguments to `delete_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::DeleteAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::DeleteAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_auth_token(name: nil)
+              #   Pass arguments to `delete_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the token auth user resource that this token will be
+              #     deleted from. Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{name}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::DeleteAuthTokenRequest.new
+              #
+              #   # Call the delete_auth_token method.
+              #   result = client.delete_auth_token request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::DeleteAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_auth_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.delete_auth_token request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Memorystore REST API.
               #
               # This class represents the configuration for Memorystore REST,
@@ -2056,6 +2793,46 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :finish_migration
+                  ##
+                  # RPC-specific configuration for `list_token_auth_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_token_auth_users
+                  ##
+                  # RPC-specific configuration for `get_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_token_auth_user
+                  ##
+                  # RPC-specific configuration for `list_auth_tokens`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_auth_tokens
+                  ##
+                  # RPC-specific configuration for `get_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_auth_token
+                  ##
+                  # RPC-specific configuration for `add_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_token_auth_user
+                  ##
+                  # RPC-specific configuration for `delete_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_token_auth_user
+                  ##
+                  # RPC-specific configuration for `add_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_auth_token
+                  ##
+                  # RPC-specific configuration for `delete_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_auth_token
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2093,6 +2870,22 @@ module Google
                     @start_migration = ::Gapic::Config::Method.new start_migration_config
                     finish_migration_config = parent_rpcs.finish_migration if parent_rpcs.respond_to? :finish_migration
                     @finish_migration = ::Gapic::Config::Method.new finish_migration_config
+                    list_token_auth_users_config = parent_rpcs.list_token_auth_users if parent_rpcs.respond_to? :list_token_auth_users
+                    @list_token_auth_users = ::Gapic::Config::Method.new list_token_auth_users_config
+                    get_token_auth_user_config = parent_rpcs.get_token_auth_user if parent_rpcs.respond_to? :get_token_auth_user
+                    @get_token_auth_user = ::Gapic::Config::Method.new get_token_auth_user_config
+                    list_auth_tokens_config = parent_rpcs.list_auth_tokens if parent_rpcs.respond_to? :list_auth_tokens
+                    @list_auth_tokens = ::Gapic::Config::Method.new list_auth_tokens_config
+                    get_auth_token_config = parent_rpcs.get_auth_token if parent_rpcs.respond_to? :get_auth_token
+                    @get_auth_token = ::Gapic::Config::Method.new get_auth_token_config
+                    add_token_auth_user_config = parent_rpcs.add_token_auth_user if parent_rpcs.respond_to? :add_token_auth_user
+                    @add_token_auth_user = ::Gapic::Config::Method.new add_token_auth_user_config
+                    delete_token_auth_user_config = parent_rpcs.delete_token_auth_user if parent_rpcs.respond_to? :delete_token_auth_user
+                    @delete_token_auth_user = ::Gapic::Config::Method.new delete_token_auth_user_config
+                    add_auth_token_config = parent_rpcs.add_auth_token if parent_rpcs.respond_to? :add_auth_token
+                    @add_auth_token = ::Gapic::Config::Method.new add_auth_token_config
+                    delete_auth_token_config = parent_rpcs.delete_auth_token if parent_rpcs.respond_to? :delete_auth_token
+                    @delete_auth_token = ::Gapic::Config::Method.new delete_auth_token_config
 
                     yield self if block_given?
                   end
