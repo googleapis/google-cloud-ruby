@@ -219,7 +219,7 @@
   "google-cloud-certificate_manager+FILLER": "0.0.0",
   "google-cloud-certificate_manager-v1": "1.5.0",
   "google-cloud-certificate_manager-v1+FILLER": "0.0.0",
-  "google-cloud-ces": "0.2.0",
+  "google-cloud-ces": "1.0.0",
   "google-cloud-ces+FILLER": "0.0.0",
   "google-cloud-ces-v1": "0.3.0",
   "google-cloud-ces-v1+FILLER": "0.0.0",
