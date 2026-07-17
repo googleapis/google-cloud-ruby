@@ -426,6 +426,12 @@ module Google
           # @!attribute [r] encryption_info
           #   @return [::Google::Cloud::Redis::Cluster::V1::EncryptionInfo]
           #     Output only. Encryption information of the data at rest of the cluster.
+          # @!attribute [rw] async_cluster_endpoints_deletion_enabled
+          #   @return [::Boolean]
+          #     Optional. If true, cluster endpoints that are created and registered by
+          #     customers can be deleted asynchronously. That is, such a cluster endpoint
+          #     can be de-registered before the forwarding rules in the cluster endpoint
+          #     are deleted.
           # @!attribute [rw] server_ca_mode
           #   @return [::Google::Cloud::Redis::Cluster::V1::ServerCaMode]
           #     Optional. Server CA mode for the cluster.
