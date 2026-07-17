@@ -78,6 +78,63 @@ class ::Google::Cloud::Compute::V1::Rollouts::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_advance
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    current_wave_number = 42
+    project = "hello world"
+    request_id = "hello world"
+    rollout = "hello world"
+
+    advance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Rollouts::Rest::ServiceStub.stub :transcode_advance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, advance_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Rollouts::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.advance({ current_wave_number: current_wave_number, project: project, request_id: request_id, rollout: rollout }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.advance current_wave_number: current_wave_number, project: project, request_id: request_id, rollout: rollout do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.advance ::Google::Cloud::Compute::V1::AdvanceRolloutRequest.new(current_wave_number: current_wave_number, project: project, request_id: request_id, rollout: rollout) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.advance({ current_wave_number: current_wave_number, project: project, request_id: request_id, rollout: rollout }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.advance(::Google::Cloud::Compute::V1::AdvanceRolloutRequest.new(current_wave_number: current_wave_number, project: project, request_id: request_id, rollout: rollout), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, advance_client_stub.call_count
+      end
+    end
+  end
+
   def test_cancel
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -301,6 +358,120 @@ class ::Google::Cloud::Compute::V1::Rollouts::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, list_client_stub.call_count
+      end
+    end
+  end
+
+  def test_pause
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    etag = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    rollout = "hello world"
+
+    pause_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Rollouts::Rest::ServiceStub.stub :transcode_pause_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, pause_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Rollouts::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.pause({ etag: etag, project: project, request_id: request_id, rollout: rollout }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.pause etag: etag, project: project, request_id: request_id, rollout: rollout do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.pause ::Google::Cloud::Compute::V1::PauseRolloutRequest.new(etag: etag, project: project, request_id: request_id, rollout: rollout) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.pause({ etag: etag, project: project, request_id: request_id, rollout: rollout }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.pause(::Google::Cloud::Compute::V1::PauseRolloutRequest.new(etag: etag, project: project, request_id: request_id, rollout: rollout), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, pause_client_stub.call_count
+      end
+    end
+  end
+
+  def test_resume
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    etag = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    rollout = "hello world"
+
+    resume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Rollouts::Rest::ServiceStub.stub :transcode_resume_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, resume_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Rollouts::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.resume({ etag: etag, project: project, request_id: request_id, rollout: rollout }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.resume etag: etag, project: project, request_id: request_id, rollout: rollout do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.resume ::Google::Cloud::Compute::V1::ResumeRolloutRequest.new(etag: etag, project: project, request_id: request_id, rollout: rollout) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.resume({ etag: etag, project: project, request_id: request_id, rollout: rollout }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.resume(::Google::Cloud::Compute::V1::ResumeRolloutRequest.new(etag: etag, project: project, request_id: request_id, rollout: rollout), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, resume_client_stub.call_count
       end
     end
   end
