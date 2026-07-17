@@ -9,6 +9,7 @@
 # explicitly taken by someone else.
 *                                    @googleapis/cloud-sdk-ruby-team @yoshi-approver
 
+/librarian.yaml                      @googleapis/cloud-sdk-librarian-team
 /google-cloud-bigquery*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/bigquery-team
 /google-cloud-bigtable*/.            @googleapis/cloud-sdk-ruby-team @yoshi-approver @googleapis/bigtable-team
 /google-cloud-datastore*/.           @googleapis/cloud-sdk-ruby-team @yoshi-approver
