@@ -35,6 +35,7 @@
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "snippets/Gemfile",
+    "snippets/developer_knowledge/answer_query.rb",
     "snippets/developer_knowledge/batch_get_documents.rb",
     "snippets/developer_knowledge/get_document.rb",
     "snippets/developer_knowledge/search_document_chunks.rb",

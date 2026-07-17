@@ -65,6 +65,8 @@ module Google
             rpc :GetDocument, ::Google::Developers::DeveloperKnowledge::V1::GetDocumentRequest, ::Google::Developers::DeveloperKnowledge::V1::Document
             # Retrieves multiple documents, each with its full Markdown content.
             rpc :BatchGetDocuments, ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsRequest, ::Google::Developers::DeveloperKnowledge::V1::BatchGetDocumentsResponse
+            # Answers a query using grounded generation.
+            rpc :AnswerQuery, ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest, ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse
           end
 
           Stub = Service.rpc_stub_class
