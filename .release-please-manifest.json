@@ -887,7 +887,7 @@
   "google-cloud-translate-v3+FILLER": "0.0.0",
   "google-cloud-vector_search": "0.0.1",
   "google-cloud-vector_search+FILLER": "0.0.0",
-  "google-cloud-vector_search-v1": "0.0.1",
+  "google-cloud-vector_search-v1": "0.1.0",
   "google-cloud-vector_search-v1+FILLER": "0.0.0",
   "google-cloud-video-live_stream": "2.2.0",
   "google-cloud-video-live_stream+FILLER": "0.0.0",
