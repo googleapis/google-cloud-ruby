@@ -53,6 +53,9 @@ module Google
         #     Output only. Specifies the
         #     {::Google::Developers::DeveloperKnowledge::V1::DocumentView DocumentView} of the
         #     document.
+        # @!attribute [r] content_length_bytes
+        #   @return [::Integer]
+        #     Output only. The length of the `content` field in bytes.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -71,8 +74,7 @@ module Google
         #
         #     If unspecified, at most 5 results will be returned.
         #
-        #     The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-        #     error.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Contains a page token, received from a previous
@@ -88,6 +90,8 @@ module Google
         #
         #     Supported fields for filtering:
         #
+        #     * `content_length_bytes` (INTEGER): The length of the `Document.content`
+        #       field in bytes.
         #     * `data_source` (STRING): The source of the document, e.g.
         #       `docs.cloud.google.com`. See
         #       https://developers.google.com/knowledge/reference/corpus-reference for
@@ -97,6 +101,8 @@ module Google
         #       markdown content or metadata.
         #     * `uri` (STRING): The document URI, e.g.
         #       `https://docs.cloud.google.com/bigquery/docs/tables`.
+        #
+        #     INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
         #
         #     STRING fields support `=` (equals) and `!=` (not equals) operators for
         #     **exact match** on the whole string. Partial match, prefix match, and
@@ -111,12 +117,14 @@ module Google
         #
         #     Examples:
         #
+        #     * Filter by `Document.content_length_bytes`:
+        #       `content_length_bytes < 50000`
         #     * `data_source = "docs.cloud.google.com" OR data_source =
-        #     "firebase.google.com"`
+        #       "firebase.google.com"`
         #     * `data_source != "firebase.google.com"`
         #     * `update_time < "2024-01-01T00:00:00Z"`
         #     * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-        #     "developer.chrome.com" OR data_source = "web.dev")`
+        #       "developer.chrome.com" OR data_source = "web.dev")`
         #     * `uri = "https://docs.cloud.google.com/release-notes"`
         #
         #     The `filter` string must not exceed 500 characters; values longer than 500
@@ -199,6 +207,92 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#answer_query DeveloperKnowledge.AnswerQuery}.
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Required. The query to answer.
+        class AnswerQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#answer_query DeveloperKnowledge.AnswerQuery}.
+        # @!attribute [rw] answer
+        #   @return [::Google::Developers::DeveloperKnowledge::V1::Answer]
+        #     The answer to the query.
+        class AnswerQueryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An answer to a query.
+        # @!attribute [rw] answer_text
+        #   @return [::String]
+        #     Contains the text of the answer.
+        # @!attribute [r] citations
+        #   @return [::Array<::Google::Developers::DeveloperKnowledge::V1::Answer::AnswerCitation>]
+        #     Output only. Contains citations for the answer.
+        # @!attribute [r] references
+        #   @return [::Array<::Google::Developers::DeveloperKnowledge::V1::Answer::AnswerReference>]
+        #     Output only. Contains references for the answer.
+        class Answer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Citation info for a segment.
+          # @!attribute [r] start_index
+          #   @return [::Integer]
+          #     Output only. Indicates the start of the segment, measured in bytes (UTF-8
+          #     unicode), inclusive. If there are multi-byte characters, such as
+          #     non-ASCII characters, the index measurement is longer than the string
+          #     length.
+          # @!attribute [r] end_index
+          #   @return [::Integer]
+          #     Output only. Indicates the end of the segment, measured in bytes (UTF-8
+          #     unicode), exclusive. If there are multi-byte characters, such as
+          #     non-ASCII characters, the index measurement is longer than the string
+          #     length.
+          # @!attribute [r] sources
+          #   @return [::Array<::Google::Developers::DeveloperKnowledge::V1::Answer::CitationSource>]
+          #     Output only. Contains citation sources for the attributed segment.
+          class AnswerCitation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Citation source.
+          # @!attribute [r] reference_index
+          #   @return [::Integer]
+          #     Output only. Contains the index of the
+          #     {::Google::Developers::DeveloperKnowledge::V1::Answer::AnswerReference Answer.AnswerReference}
+          #     in the `references` repeated field.
+          class CitationSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a reference to a source.
+          # @!attribute [r] document_reference
+          #   @return [::Google::Developers::DeveloperKnowledge::V1::Answer::DocumentReference]
+          #     Output only. The reference document.
+          class AnswerReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a reference to a document.
+          # @!attribute [r] document_chunk
+          #   @return [::Google::Developers::DeveloperKnowledge::V1::DocumentChunk]
+          #     Output only. Contains the document chunk. The `document_chunk.id` field
+          #     is not set and will be empty.
+          class DocumentReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # A DocumentChunk represents a piece of content from a
         # {::Google::Developers::DeveloperKnowledge::V1::Document Document} in the DeveloperKnowledge
         # corpus. To fetch the entire document content, pass the `parent` to
@@ -248,6 +342,7 @@ module Google
           DOCUMENT_VIEW_UNSPECIFIED = 0
 
           # Includes only the basic metadata fields:
+          #
           # - `name`
           # - `uri`
           # - `data_source`
@@ -255,6 +350,7 @@ module Google
           # - `description`
           # - `update_time`
           # - `view`
+          # - `content_length_bytes`
           #
           # This is the default of view for
           # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#search_document_chunks DeveloperKnowledge.SearchDocumentChunks}.
