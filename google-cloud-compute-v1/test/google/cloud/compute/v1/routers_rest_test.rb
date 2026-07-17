@@ -196,6 +196,64 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_delete_named_set
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    named_set = "hello world"
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+    router = "hello world"
+
+    delete_named_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Routers::Rest::ServiceStub.stub :transcode_delete_named_set_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_named_set_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_named_set({ named_set: named_set, project: project, region: region, request_id: request_id, router: router }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_named_set named_set: named_set, project: project, region: region, request_id: request_id, router: router do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_named_set ::Google::Cloud::Compute::V1::DeleteNamedSetRouterRequest.new(named_set: named_set, project: project, region: region, request_id: request_id, router: router) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_named_set({ named_set: named_set, project: project, region: region, request_id: request_id, router: router }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_named_set(::Google::Cloud::Compute::V1::DeleteNamedSetRouterRequest.new(named_set: named_set, project: project, region: region, request_id: request_id, router: router), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_named_set_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_route_policy
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -306,6 +364,63 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, get_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_named_set
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::RoutersGetNamedSetResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    named_set = "hello world"
+    project = "hello world"
+    region = "hello world"
+    router = "hello world"
+
+    get_named_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Routers::Rest::ServiceStub.stub :transcode_get_named_set_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_named_set_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_named_set({ named_set: named_set, project: project, region: region, router: router }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_named_set named_set: named_set, project: project, region: region, router: router do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_named_set ::Google::Cloud::Compute::V1::GetNamedSetRouterRequest.new(named_set: named_set, project: project, region: region, router: router) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_named_set({ named_set: named_set, project: project, region: region, router: router }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_named_set(::Google::Cloud::Compute::V1::GetNamedSetRouterRequest.new(named_set: named_set, project: project, region: region, router: router), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_named_set_client_stub.call_count
       end
     end
   end
@@ -725,6 +840,67 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_named_sets
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::RoutersListNamedSets.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    filter = "hello world"
+    max_results = 42
+    order_by = "hello world"
+    page_token = "hello world"
+    project = "hello world"
+    region = "hello world"
+    return_partial_success = true
+    router = "hello world"
+
+    list_named_sets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Routers::Rest::ServiceStub.stub :transcode_list_named_sets_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_named_sets_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_named_sets({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_named_sets filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_named_sets ::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_named_sets({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_named_sets(::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_named_sets_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_route_policies
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::RoutersListRoutePolicies.new
@@ -840,6 +1016,64 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, patch_client_stub.call_count
+      end
+    end
+  end
+
+  def test_patch_named_set
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    named_set_resource = {}
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+    router = "hello world"
+
+    patch_named_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Routers::Rest::ServiceStub.stub :transcode_patch_named_set_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, patch_named_set_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.patch_named_set({ named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.patch_named_set named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.patch_named_set ::Google::Cloud::Compute::V1::PatchNamedSetRouterRequest.new(named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.patch_named_set({ named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.patch_named_set(::Google::Cloud::Compute::V1::PatchNamedSetRouterRequest.new(named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, patch_named_set_client_stub.call_count
       end
     end
   end
@@ -1013,6 +1247,64 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, update_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_named_set
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    named_set_resource = {}
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+    router = "hello world"
+
+    update_named_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Routers::Rest::ServiceStub.stub :transcode_update_named_set_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_named_set_client_stub do
+        # Create client
+        c = ::Google::Cloud::Compute::V1::Routers::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_named_set({ named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_named_set named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_named_set ::Google::Cloud::Compute::V1::UpdateNamedSetRouterRequest.new(named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_named_set({ named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_named_set(::Google::Cloud::Compute::V1::UpdateNamedSetRouterRequest.new(named_set_resource: named_set_resource, project: project, region: region, request_id: request_id, router: router), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_named_set_client_stub.call_count
       end
     end
   end

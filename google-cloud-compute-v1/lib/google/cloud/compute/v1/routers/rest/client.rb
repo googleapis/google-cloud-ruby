@@ -78,10 +78,17 @@ module Google
 
                   default_config.rpcs.delete.timeout = 600.0
 
+                  default_config.rpcs.delete_named_set.timeout = 600.0
+
                   default_config.rpcs.delete_route_policy.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
                   default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_named_set.timeout = 600.0
+                  default_config.rpcs.get_named_set.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
@@ -117,6 +124,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.list_named_sets.timeout = 600.0
+                  default_config.rpcs.list_named_sets.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.list_route_policies.timeout = 600.0
                   default_config.rpcs.list_route_policies.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
@@ -124,11 +136,15 @@ module Google
 
                   default_config.rpcs.patch.timeout = 600.0
 
+                  default_config.rpcs.patch_named_set.timeout = 600.0
+
                   default_config.rpcs.patch_route_policy.timeout = 600.0
 
                   default_config.rpcs.preview.timeout = 600.0
 
                   default_config.rpcs.update.timeout = 600.0
+
+                  default_config.rpcs.update_named_set.timeout = 600.0
 
                   default_config.rpcs.update_route_policy.timeout = 600.0
 
@@ -539,6 +555,114 @@ module Google
               end
 
               ##
+              # Deletes Named Set
+              #
+              # @overload delete_named_set(request, options = nil)
+              #   Pass arguments to `delete_named_set` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::DeleteNamedSetRouterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::DeleteNamedSetRouterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_named_set(named_set: nil, project: nil, region: nil, request_id: nil, router: nil)
+              #   Pass arguments to `delete_named_set` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param named_set [::String]
+              #     The Named Set name for this request. Name must conform to RFC1035
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param router [::String]
+              #     Name of the Router resource where Named Set is defined.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Routers::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteNamedSetRouterRequest.new
+              #
+              #   # Call the delete_named_set method.
+              #   result = client.delete_named_set request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def delete_named_set request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNamedSetRouterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_named_set.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_named_set.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_named_set.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @routers_stub.delete_named_set request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes Route Policy
               #
               # @overload delete_route_policy(request, options = nil)
@@ -722,6 +846,91 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @routers_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns specified Named Set
+              #
+              # @overload get_named_set(request, options = nil)
+              #   Pass arguments to `get_named_set` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetNamedSetRouterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetNamedSetRouterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_named_set(named_set: nil, project: nil, region: nil, router: nil)
+              #   Pass arguments to `get_named_set` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param named_set [::String]
+              #     The Named Set name for this request. Name must conform to RFC1035
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              #   @param router [::String]
+              #     Name of the Router resource to query for the named set. The name should
+              #     conform to RFC1035.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::RoutersGetNamedSetResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::RoutersGetNamedSetResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Routers::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetNamedSetRouterRequest.new
+              #
+              #   # Call the get_named_set method.
+              #   result = client.get_named_set request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::RoutersGetNamedSetResponse.
+              #   p result
+              #
+              def get_named_set request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetNamedSetRouterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_named_set.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_named_set.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_named_set.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @routers_stub.get_named_set request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1625,6 +1834,180 @@ module Google
               end
 
               ##
+              # Retrieves a list of router named set subresources available to the
+              # specified project.
+              #
+              # @overload list_named_sets(request, options = nil)
+              #   Pass arguments to `list_named_sets` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_named_sets(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil, router: nil)
+              #   Pass arguments to `list_named_sets` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param filter [::String]
+              #     A filter expression that filters resources listed in the response. Most
+              #     Compute resources support two types of filter expressions:
+              #     expressions that support regular expressions and expressions that follow
+              #     API improvement proposal AIP-160.
+              #     These two types of filter expressions cannot be mixed in one request.
+              #
+              #     If you want to use AIP-160, your expression must specify the field name, an
+              #     operator, and the value that you want to use for filtering. The value
+              #     must be a string, a number, or a boolean. The operator
+              #     must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+              #
+              #     For example, if you are filtering Compute Engine instances, you can
+              #     exclude instances named `example-instance` by specifying
+              #     `name != example-instance`.
+              #
+              #     The `:*` comparison can be used to test whether a key has been defined.
+              #     For example, to find all objects with `owner` label use:
+              #     ```
+              #     labels.owner:*
+              #     ```
+              #
+              #     You can also filter nested fields. For example, you could specify
+              #     `scheduling.automaticRestart = false` to include instances only
+              #     if they are not scheduled for automatic restarts. You can use filtering
+              #     on nested fields to filter based onresource labels.
+              #
+              #     To filter on multiple expressions, provide each separate expression within
+              #     parentheses. For example:
+              #     ```
+              #     (scheduling.automaticRestart = true)
+              #     (cpuPlatform = "Intel Skylake")
+              #     ```
+              #     By default, each expression is an `AND` expression. However, you
+              #     can include `AND` and `OR` expressions explicitly.
+              #     For example:
+              #     ```
+              #     (cpuPlatform = "Intel Skylake") OR
+              #     (cpuPlatform = "Intel Broadwell") AND
+              #     (scheduling.automaticRestart = true)
+              #     ```
+              #
+              #     If you want to use a regular expression, use the `eq` (equal) or `ne`
+              #     (not equal) operator against a single un-parenthesized expression with or
+              #     without quotes or against multiple parenthesized expressions. Examples:
+              #
+              #     `fieldname eq unquoted literal`
+              #     `fieldname eq 'single quoted literal'`
+              #     `fieldname eq "double quoted literal"`
+              #     `(fieldname1 eq literal) (fieldname2 ne "literal")`
+              #
+              #     The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+              #     The literal value must match the entire field.
+              #
+              #     For example, to filter for instances that do not end with name "instance",
+              #     you would use `name ne .*instance`.
+              #
+              #     You cannot combine constraints on multiple fields using regular
+              #     expressions.
+              #   @param max_results [::Integer]
+              #     The maximum number of results per page that should be returned.
+              #     If the number of available results is larger than `maxResults`,
+              #     Compute Engine returns a `nextPageToken` that can be used to get
+              #     the next page of results in subsequent list requests. Acceptable values are
+              #     `0` to `500`, inclusive. (Default: `500`)
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, results
+              #     are returned in alphanumerical order based on the resource name.
+              #
+              #     You can also sort results in descending order based on the creation
+              #     timestamp using `orderBy="creationTimestamp desc"`. This sorts
+              #     results based on the `creationTimestamp` field in
+              #     reverse chronological order (newest result first). Use this to sort
+              #     resources like operations so that the newest operation is returned first.
+              #
+              #     Currently, only sorting by `name` or
+              #     `creationTimestamp desc` is supported.
+              #   @param page_token [::String]
+              #     Specifies a page token to use. Set `pageToken` to the
+              #     `nextPageToken` returned by a previous list request to get
+              #     the next page of results.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              #   @param return_partial_success [::Boolean]
+              #     Opt-in for partial success behavior which provides partial results in case
+              #     of failure. The default value is false.
+              #
+              #     For example, when partial success behavior is enabled, aggregatedList for a
+              #     single zone scope either returns all resources in the zone or no resources,
+              #     with an error code.
+              #   @param router [::String]
+              #     Name or id of the resource for this request.
+              #     Name should conform to RFC1035.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NamedSet>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::NamedSet>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Routers::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest.new
+              #
+              #   # Call the list_named_sets method.
+              #   result = client.list_named_sets request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::RoutersListNamedSets.
+              #   p result
+              #
+              def list_named_sets request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListNamedSetsRoutersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_named_sets.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_named_sets.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_named_sets.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @routers_stub.list_named_sets request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @routers_stub, :list_named_sets, "result", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Retrieves a list of router route policy subresources available to the
               # specified project.
               #
@@ -1893,6 +2276,114 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @routers_stub.patch request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Patches Named Set
+              #
+              # @overload patch_named_set(request, options = nil)
+              #   Pass arguments to `patch_named_set` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchNamedSetRouterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PatchNamedSetRouterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload patch_named_set(named_set_resource: nil, project: nil, region: nil, request_id: nil, router: nil)
+              #   Pass arguments to `patch_named_set` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param named_set_resource [::Google::Cloud::Compute::V1::NamedSet, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param router [::String]
+              #     Name of the Router resource where Named Set is defined.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Routers::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchNamedSetRouterRequest.new
+              #
+              #   # Call the patch_named_set method.
+              #   result = client.patch_named_set request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def patch_named_set request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchNamedSetRouterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.patch_named_set.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.patch_named_set.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.patch_named_set.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @routers_stub.patch_named_set request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -2214,6 +2705,114 @@ module Google
               end
 
               ##
+              # Updates or creates new Named Set
+              #
+              # @overload update_named_set(request, options = nil)
+              #   Pass arguments to `update_named_set` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::UpdateNamedSetRouterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::UpdateNamedSetRouterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_named_set(named_set_resource: nil, project: nil, region: nil, request_id: nil, router: nil)
+              #   Pass arguments to `update_named_set` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param named_set_resource [::Google::Cloud::Compute::V1::NamedSet, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param router [::String]
+              #     Name of the Router resource where Named Set is defined.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Routers::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::UpdateNamedSetRouterRequest.new
+              #
+              #   # Call the update_named_set method.
+              #   result = client.update_named_set request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def update_named_set request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::UpdateNamedSetRouterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_named_set.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_named_set.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_named_set.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @routers_stub.update_named_set request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates or creates new Route Policy
               #
               # @overload update_route_policy(request, options = nil)
@@ -2480,6 +3079,11 @@ module Google
                   #
                   attr_reader :delete
                   ##
+                  # RPC-specific configuration for `delete_named_set`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_named_set
+                  ##
                   # RPC-specific configuration for `delete_route_policy`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2489,6 +3093,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get
+                  ##
+                  # RPC-specific configuration for `get_named_set`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_named_set
                   ##
                   # RPC-specific configuration for `get_nat_ip_info`
                   # @return [::Gapic::Config::Method]
@@ -2525,6 +3134,11 @@ module Google
                   #
                   attr_reader :list_bgp_routes
                   ##
+                  # RPC-specific configuration for `list_named_sets`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_named_sets
+                  ##
                   # RPC-specific configuration for `list_route_policies`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2534,6 +3148,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :patch
+                  ##
+                  # RPC-specific configuration for `patch_named_set`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :patch_named_set
                   ##
                   # RPC-specific configuration for `patch_route_policy`
                   # @return [::Gapic::Config::Method]
@@ -2550,6 +3169,11 @@ module Google
                   #
                   attr_reader :update
                   ##
+                  # RPC-specific configuration for `update_named_set`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_named_set
+                  ##
                   # RPC-specific configuration for `update_route_policy`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2561,10 +3185,14 @@ module Google
                     @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
+                    delete_named_set_config = parent_rpcs.delete_named_set if parent_rpcs.respond_to? :delete_named_set
+                    @delete_named_set = ::Gapic::Config::Method.new delete_named_set_config
                     delete_route_policy_config = parent_rpcs.delete_route_policy if parent_rpcs.respond_to? :delete_route_policy
                     @delete_route_policy = ::Gapic::Config::Method.new delete_route_policy_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
+                    get_named_set_config = parent_rpcs.get_named_set if parent_rpcs.respond_to? :get_named_set
+                    @get_named_set = ::Gapic::Config::Method.new get_named_set_config
                     get_nat_ip_info_config = parent_rpcs.get_nat_ip_info if parent_rpcs.respond_to? :get_nat_ip_info
                     @get_nat_ip_info = ::Gapic::Config::Method.new get_nat_ip_info_config
                     get_nat_mapping_info_config = parent_rpcs.get_nat_mapping_info if parent_rpcs.respond_to? :get_nat_mapping_info
@@ -2579,16 +3207,22 @@ module Google
                     @list = ::Gapic::Config::Method.new list_config
                     list_bgp_routes_config = parent_rpcs.list_bgp_routes if parent_rpcs.respond_to? :list_bgp_routes
                     @list_bgp_routes = ::Gapic::Config::Method.new list_bgp_routes_config
+                    list_named_sets_config = parent_rpcs.list_named_sets if parent_rpcs.respond_to? :list_named_sets
+                    @list_named_sets = ::Gapic::Config::Method.new list_named_sets_config
                     list_route_policies_config = parent_rpcs.list_route_policies if parent_rpcs.respond_to? :list_route_policies
                     @list_route_policies = ::Gapic::Config::Method.new list_route_policies_config
                     patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
                     @patch = ::Gapic::Config::Method.new patch_config
+                    patch_named_set_config = parent_rpcs.patch_named_set if parent_rpcs.respond_to? :patch_named_set
+                    @patch_named_set = ::Gapic::Config::Method.new patch_named_set_config
                     patch_route_policy_config = parent_rpcs.patch_route_policy if parent_rpcs.respond_to? :patch_route_policy
                     @patch_route_policy = ::Gapic::Config::Method.new patch_route_policy_config
                     preview_config = parent_rpcs.preview if parent_rpcs.respond_to? :preview
                     @preview = ::Gapic::Config::Method.new preview_config
                     update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
                     @update = ::Gapic::Config::Method.new update_config
+                    update_named_set_config = parent_rpcs.update_named_set if parent_rpcs.respond_to? :update_named_set
+                    @update_named_set = ::Gapic::Config::Method.new update_named_set_config
                     update_route_policy_config = parent_rpcs.update_route_policy if parent_rpcs.respond_to? :update_route_policy
                     @update_route_policy = ::Gapic::Config::Method.new update_route_policy_config
 

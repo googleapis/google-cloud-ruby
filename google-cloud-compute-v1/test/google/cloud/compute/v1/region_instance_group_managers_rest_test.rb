@@ -260,6 +260,7 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
 
     # Create request parameters for a unary method.
     instance_group_manager = "hello world"
+    no_graceful_shutdown = true
     project = "hello world"
     region = "hello world"
     request_id = "hello world"
@@ -278,27 +279,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id }) do |_result, response|
+        c.delete({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id do |_result, response|
+        c.delete instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete({ instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
+        c.delete({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete(::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, request_id: request_id), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -317,6 +318,7 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
 
     # Create request parameters for a unary method.
     instance_group_manager = "hello world"
+    no_graceful_shutdown = true
     project = "hello world"
     region = "hello world"
     region_instance_group_managers_delete_instances_request_resource = {}
@@ -336,27 +338,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.delete_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }) do |_result, response|
+        c.delete_instances({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id do |_result, response|
+        c.delete_instances instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete_instances ::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id) do |_result, response|
+        c.delete_instances ::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
+        c.delete_instances({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete_instances(::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id), call_options) do |_result, response|
+        c.delete_instances(::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_delete_instances_request_resource: region_instance_group_managers_delete_instances_request_resource, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -904,6 +906,7 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
 
     # Create request parameters for a unary method.
     instance_group_manager = "hello world"
+    no_graceful_shutdown = true
     project = "hello world"
     region = "hello world"
     region_instance_group_managers_recreate_request_resource = {}
@@ -923,27 +926,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.recreate_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }) do |_result, response|
+        c.recreate_instances({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.recreate_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id do |_result, response|
+        c.recreate_instances instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.recreate_instances ::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id) do |_result, response|
+        c.recreate_instances ::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.recreate_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }, call_options) do |_result, response|
+        c.recreate_instances({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.recreate_instances(::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id), call_options) do |_result, response|
+        c.recreate_instances(::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_recreate_request_resource: region_instance_group_managers_recreate_request_resource, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1252,6 +1255,7 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
 
     # Create request parameters for a unary method.
     instance_group_manager = "hello world"
+    no_graceful_shutdown = true
     project = "hello world"
     region = "hello world"
     region_instance_group_managers_stop_instances_request_resource = {}
@@ -1271,27 +1275,27 @@ class ::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::ClientTes
         end
 
         # Use hash object
-        c.stop_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id }) do |_result, response|
+        c.stop_instances({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.stop_instances instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id do |_result, response|
+        c.stop_instances instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.stop_instances ::Google::Cloud::Compute::V1::StopInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id) do |_result, response|
+        c.stop_instances ::Google::Cloud::Compute::V1::StopInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.stop_instances({ instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
+        c.stop_instances({ instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.stop_instances(::Google::Cloud::Compute::V1::StopInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id), call_options) do |_result, response|
+        c.stop_instances(::Google::Cloud::Compute::V1::StopInstancesRegionInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, no_graceful_shutdown: no_graceful_shutdown, project: project, region: region, region_instance_group_managers_stop_instances_request_resource: region_instance_group_managers_stop_instances_request_resource, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
