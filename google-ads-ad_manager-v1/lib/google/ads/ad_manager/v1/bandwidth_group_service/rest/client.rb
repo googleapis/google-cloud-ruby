@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `BandwidthGroup` object.
+              # Retrieves a `BandwidthGroup` object.
               #
               # @overload get_bandwidth_group(request, options = nil)
               #   Pass arguments to `get_bandwidth_group` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `BandwidthGroup` objects.
+              # Lists `BandwidthGroup` objects.
               #
               # @overload list_bandwidth_groups(request, options = nil)
               #   Pass arguments to `list_bandwidth_groups` via a request object, either of type

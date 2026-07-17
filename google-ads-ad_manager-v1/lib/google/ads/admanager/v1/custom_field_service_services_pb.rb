@@ -33,17 +33,17 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.CustomFieldService'
 
-            # API to retrieve a `CustomField` object.
+            # Retrieves a `CustomField` object.
             rpc :GetCustomField, ::Google::Ads::AdManager::V1::GetCustomFieldRequest, ::Google::Ads::AdManager::V1::CustomField
-            # API to retrieve a list of `CustomField` objects.
+            # Lists `CustomField` objects.
             rpc :ListCustomFields, ::Google::Ads::AdManager::V1::ListCustomFieldsRequest, ::Google::Ads::AdManager::V1::ListCustomFieldsResponse
-            # API to create a `CustomField` object.
+            # Creates a `CustomField` object.
             rpc :CreateCustomField, ::Google::Ads::AdManager::V1::CreateCustomFieldRequest, ::Google::Ads::AdManager::V1::CustomField
-            # API to batch create `CustomField` objects.
+            # Creates `CustomField` objects.
             rpc :BatchCreateCustomFields, ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchCreateCustomFieldsResponse
-            # API to update a `CustomField` object.
+            # Updates a `CustomField` object.
             rpc :UpdateCustomField, ::Google::Ads::AdManager::V1::UpdateCustomFieldRequest, ::Google::Ads::AdManager::V1::CustomField
-            # API to batch update `CustomField` objects.
+            # Batch updates `CustomField` objects.
             rpc :BatchUpdateCustomFields, ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchUpdateCustomFieldsResponse
             # Activates a list of `CustomField` objects.
             rpc :BatchActivateCustomFields, ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsRequest, ::Google::Ads::AdManager::V1::BatchActivateCustomFieldsResponse

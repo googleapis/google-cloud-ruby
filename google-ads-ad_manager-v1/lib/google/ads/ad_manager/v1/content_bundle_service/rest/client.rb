@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `ContentBundle` object.
+              # Retrieves a `ContentBundle` object.
               #
               # @overload get_content_bundle(request, options = nil)
               #   Pass arguments to `get_content_bundle` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `ContentBundle` objects.
+              # Lists `ContentBundle` objects.
               #
               # @overload list_content_bundles(request, options = nil)
               #   Pass arguments to `list_content_bundles` via a request object, either of type
@@ -296,6 +296,8 @@ module Google
               #     <ul style="list-style-type:none">
               #       <li><code>displayName</code></li>
               #       <li><code>name</code></li>
+              #       <li><code>status</code></li>
+              #       <li><code>updateTime</code></li>
               #     </ul>
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.

@@ -73,6 +73,9 @@ module Google
         # @!attribute [rw] buyer_data
         #   @return [::Google::Ads::AdManager::V1::PrivateAuctionDeal::BuyerData]
         #     Optional. The buyer data required by the Marketplace API.
+        # @!attribute [rw] deal_priority
+        #   @return [::Google::Ads::AdManager::V1::NonGuaranteedDealPriority]
+        #     Optional. The priority of the deal across all non-guaranteed deals.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The instant at which the `PrivateAuctionDeal` was created.

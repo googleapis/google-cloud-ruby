@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `ProgrammaticBuyer` object.
+              # Retrieves a `ProgrammaticBuyer` object.
               #
               # @overload get_programmatic_buyer(request, options = nil)
               #   Pass arguments to `get_programmatic_buyer` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `ProgrammaticBuyer` objects.
+              # Lists `ProgrammaticBuyer` objects.
               #
               # @overload list_programmatic_buyers(request, options = nil)
               #   Pass arguments to `list_programmatic_buyers` via a request object, either of type

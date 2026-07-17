@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.BandwidthGroupService'
 
-            # API to retrieve a `BandwidthGroup` object.
+            # Retrieves a `BandwidthGroup` object.
             rpc :GetBandwidthGroup, ::Google::Ads::AdManager::V1::GetBandwidthGroupRequest, ::Google::Ads::AdManager::V1::BandwidthGroup
-            # API to retrieve a list of `BandwidthGroup` objects.
+            # Lists `BandwidthGroup` objects.
             rpc :ListBandwidthGroups, ::Google::Ads::AdManager::V1::ListBandwidthGroupsRequest, ::Google::Ads::AdManager::V1::ListBandwidthGroupsResponse
           end
 

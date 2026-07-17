@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `PrivateAuctionDeal` object.
+              # Retrieves a `PrivateAuctionDeal` object.
               #
               # @overload get_private_auction_deal(request, options = nil)
               #   Pass arguments to `get_private_auction_deal` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `PrivateAuctionDeal` objects.
+              # Lists `PrivateAuctionDeal` objects.
               #
               # @overload list_private_auction_deals(request, options = nil)
               #   Pass arguments to `list_private_auction_deals` via a request object, either of type
@@ -382,7 +382,7 @@ module Google
               end
 
               ##
-              # API to create a `PrivateAuctionDeal` object.
+              # Creates a `PrivateAuctionDeal` object.
               #
               # @overload create_private_auction_deal(request, options = nil)
               #   Pass arguments to `create_private_auction_deal` via a request object, either of type
@@ -463,7 +463,7 @@ module Google
               end
 
               ##
-              # API to update a `PrivateAuctionDeal` object.
+              # Updates a `PrivateAuctionDeal` object.
               #
               # @overload update_private_auction_deal(request, options = nil)
               #   Pass arguments to `update_private_auction_deal` via a request object, either of type

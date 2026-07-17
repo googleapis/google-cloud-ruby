@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `LineItem` object.
+              # Retrieves a `LineItem` object.
               #
               # @overload get_line_item(request, options = nil)
               #   Pass arguments to `get_line_item` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `LineItem` objects.
+              # Lists `LineItem` objects.
               #
               # @overload list_line_items(request, options = nil)
               #   Pass arguments to `list_line_items` via a request object, either of type
