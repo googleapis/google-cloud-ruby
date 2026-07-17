@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-07-17)
+
+#### Features
+
+* Release GA version 1.0.0 
+
 ### 0.6.0 (2026-06-11)
 
 #### Features
