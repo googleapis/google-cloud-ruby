@@ -73,6 +73,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(service.service.request_options.add_idempotency_token_header).must_equal true
   end
 
+  
   it "supports setting a universe domain argument" do
     service = Google::Cloud::Storage::Service.new "my-project", default_credentials, universe_domain: "mydomain1.com"
     _(service.universe_domain).must_equal "mydomain1.com"
