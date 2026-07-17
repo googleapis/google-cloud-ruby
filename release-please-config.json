@@ -607,6 +607,10 @@
       "component": "google-cloud-data_catalog-lineage",
       "version_file": "lib/google/cloud/data_catalog/lineage/version.rb"
     },
+    "google-cloud-data_catalog-lineage-config_management-v1": {
+      "component": "google-cloud-data_catalog-lineage-config_management-v1",
+      "version_file": "lib/google/cloud/data_catalog/lineage/config_management/v1/version.rb"
+    },
     "google-cloud-data_catalog-lineage-v1": {
       "component": "google-cloud-data_catalog-lineage-v1",
       "version_file": "lib/google/cloud/data_catalog/lineage/v1/version.rb"
