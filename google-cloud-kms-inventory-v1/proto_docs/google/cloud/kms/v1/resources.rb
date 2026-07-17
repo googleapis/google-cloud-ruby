@@ -213,6 +213,10 @@ module Google
             # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey]
             # and [Decapsulate][google.cloud.kms.v1.KeyManagementService.Decapsulate].
             KEY_ENCAPSULATION = 10
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # for AES key
+            AES_WRAPPING = 11
           end
         end
 
@@ -397,6 +401,24 @@ module Google
         #     Output only. Whether or not this key version is eligible for reimport, by
         #     being specified as a target in
         #     [ImportCryptoKeyVersionRequest.crypto_key_version][google.cloud.kms.v1.ImportCryptoKeyVersionRequest.crypto_key_version].
+        # @!attribute [rw] trusted_wrapping_enabled
+        #   @return [::Boolean]
+        #     Immutable. Field indicating that the key may be wrapped by a trusted key.
+        #     This field can be set for all key purposes except
+        #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT},
+        #     and is only valid for keys with protection level
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+        #     This field can only be set at creation or import time via
+        #     [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion],
+        #     or
+        #     [ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].
+        # @!attribute [r] hsm_trusted
+        #   @return [::Boolean]
+        #     Output only. Field indicating that the key wrapping key is trusted.
+        #     This field is only valid for key purpose
+        #     [AES_256_WRAPPING][CryptoKey.CryptoKeyPurpose.AES_256_WRAPPING], and
+        #     protection level
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
         class CryptoKeyVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -608,6 +630,10 @@ module Google
             # security level 5. Randomized version supporting externally-computed
             # message representatives.
             PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
+
+            # AES key wrap with zero padding algorithm (RFC 5649). Can only be used
+            # by keys with purpose AES_WRAPPING.
+            AES_256_KWP = 73
           end
 
           # The state of a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion},
