@@ -214,7 +214,7 @@ describe "Buckets Snippets" do
        # Lists IP filter configurations for buckets in the project
       retry_resource_exhaustion do
         out, _err = capture_io do
-          list_bucket_ip_filters bucket_name
+          list_bucket_ip_filters
         end
         # Assert that the specific bucket we created in this test suite 
         # appears in the list with its IP filter mode
@@ -229,7 +229,9 @@ describe "Buckets Snippets" do
         end
       end
 
-      # Enables IP filter of an existing bucket (SKIPPED)
+      # Enables IP filter of an existing bucket
+      # We are intentionally setting the mode to "Disabled" to test the update functionality
+      # In real use-case, user would be setting it to "Enabled"
       expected = "Enabled IP filter for bucket #{bucket_name}.\n"
       retry_resource_exhaustion do
         assert_output expected do

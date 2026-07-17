@@ -159,8 +159,12 @@ module Google
         #
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         # @param [Boolean] return_partial_success
-        # If true, the response will contain a list of unreachable buckets.
-        # If false, ListBuckets will throw an error if there are any unreachable buckets.
+        #   If true, the response will contain a list of unreachable buckets.
+        #   If false, ListBuckets will throw an error if there are any unreachable buckets.
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
         #
         # @return [Array<Google::Cloud::Storage::Bucket>] (See
         #   {Google::Cloud::Storage::Bucket::List})
@@ -249,6 +253,10 @@ module Google
         #   on whether the bucket's current metageneration matches the given value.
         # @param [Boolean] soft_deleted If true, returns the soft-deleted bucket.
         #   This parameter is required if generation is specified.
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instance and its files.
@@ -425,19 +433,23 @@ module Google
         #   See also {Bucket#requester_pays=} and {Bucket#requester_pays}.
         # @param [Boolean] enable_object_retention
         #   When set to true, object retention is enabled for this bucket.
+        # @param [String] projection Set of properties to return. Accepted values
+        #   are `noAcl` and `full`. The default value is `noAcl`. If set to `full`,
+        #   the bucket will include additional metadata, such as ACL policies and
+        #   IP filter settings.
         #
         # @param [Hash] ip_filter The bucket's IP filter configuration.
         #   Acceptable values are:
-        #   - {Google::Apis::StorageV1::Bucket::IpFilter} object
-        #   - Hash that can be converted to a {Google::Apis::StorageV1::Bucket::IpFilter} object
-        #     - :mode - [String] The mode of the IP filter. Acceptable values are: "Disabled", "Enabled"
-        #     - :public_network_source - [Hash] The public network source configuration:
-        #       - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for public access.
-        #     - :vpc_network_sources - [Array<Hash>] The VPC network sources configuration:
-        #       - :network - [String] The VPC network resource path, e.g. "projects/PROJECT_ID/global/networks/NETWORK_NAME".
-        #       - :allowed_ip_cidr_ranges - [Array<String>] Array of IP CIDR ranges allowed for VPC access.
-        #     - :allow_cross_org_vpcs - [Boolean] Whether to allow cross-org VPC access.
-        #     - :allow_all_service_agent_access - [Boolean] Whether to allow all service agent access.
+        #   * A {Google::Apis::StorageV1::Bucket::IpFilter} object.
+        #   * A Hash that can be converted to a {Google::Apis::StorageV1::Bucket::IpFilter} object:
+        #     * `:mode` (String) - The mode of the IP filter. Acceptable values are: "Disabled", "Enabled"
+        #     * `:public_network_source` (Hash) - The public network source configuration:
+        #       * `:allowed_ip_cidr_ranges` (Array<String>) - Array of IP CIDR ranges allowed for public access.
+        #     * `:vpc_network_sources` (Array<Hash>) - The VPC network sources configuration:
+        #       * `:network` (String) - The VPC network resource path, e.g. "projects/PROJECT_ID/global/networks/NETWORK_NAME".
+        #       * `:allowed_ip_cidr_ranges` (Array<String>) - Array of IP CIDR ranges allowed for VPC access.
+        #     * `:allow_cross_org_vpcs` (Boolean) - Whether to allow cross-org VPC access.
+        #     * `:allow_all_service_agent_access` (Boolean) - Whether to allow all service agent access.
         # @yield [bucket] a block for configuring the bucket before it is
         #   created
         # @yieldparam [Bucket] bucket the bucket object to be configured

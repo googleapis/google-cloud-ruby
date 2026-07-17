@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_list_bucket_ip_filters]
-def list_bucket_ip_filters bucket_name
+def list_bucket_ip_filters
   # The ID of your GCP project
   # project_id = "your-project-id"
 
@@ -33,5 +33,5 @@ end
 # [END storage_list_bucket_ip_filters]
 
 if $PROGRAM_NAME == __FILE__
-  list_bucket_ip_filters bucket_name: ARGV.shift
+  list_bucket_ip_filters
 end
