@@ -27,9 +27,9 @@ module Google
         # {::Google::Cloud::Tasks::V2beta3::Queue#type PULL} type. It currently exists for
         # backwards compatibility with the App Engine Task Queue SDK. This message type
         # maybe returned with methods
-        # [list][google.cloud.tasks.v2beta3.CloudTask.ListTasks] and
-        # [get][google.cloud.tasks.v2beta3.CloudTask.ListTasks], when the response view
-        # is [FULL][google.cloud.tasks.v2beta3.Task.View.Full].
+        # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_tasks list} and
+        # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#list_tasks get}, when the response
+        # view is {::Google::Cloud::Tasks::V2beta3::Task::View::FULL FULL}.
         # @!attribute [rw] payload
         #   @return [::String]
         #     A data payload consumed by the worker to execute the task.
@@ -95,9 +95,10 @@ module Google
         #     Port override.
         #
         #     When specified, replaces the port part of the task URI. For instance,
-        #     for a URI http://www.google.com/foo and port=123, the overridden URI
-        #     becomes http://www.google.com:123/foo. Note that the port value must be a
-        #     positive integer. Setting the port to 0 (Zero) clears the URI port.
+        #     for a URI "https://www.example.com/example" and port=123, the overridden
+        #     URI becomes "https://www.example.com:123/example". Note that the port value
+        #     must be a positive integer. Setting the port to 0 (Zero) clears the URI
+        #     port.
         # @!attribute [rw] path_override
         #   @return [::Google::Cloud::Tasks::V2beta3::PathOverride]
         #     URI path.
@@ -125,12 +126,12 @@ module Google
             # Scheme unspecified. Defaults to HTTPS.
             SCHEME_UNSPECIFIED = 0
 
-            # Convert the scheme to HTTP, e.g., https://www.google.ca will change to
-            # http://www.google.ca.
+            # Convert the scheme to HTTP, e.g., "https://www.example.com" will change
+            # to "http://www.example.com".
             HTTP = 1
 
-            # Convert the scheme to HTTPS, e.g., http://www.google.ca will change to
-            # https://www.google.ca.
+            # Convert the scheme to HTTPS, e.g., "http://www.example.com" will change
+            # to "https://www.example.com".
             HTTPS = 2
           end
 
@@ -152,8 +153,8 @@ module Google
 
         # HTTP target.
         #
-        # When specified as a [Queue][target_type], all the tasks with [HttpRequest]
-        # will be overridden according to the target.
+        # When specified as a {::Google::Cloud::Tasks::V2beta3::Queue Queue}, all the tasks
+        # with [HttpRequest] will be overridden according to the target.
         # @!attribute [rw] uri_override
         #   @return [::Google::Cloud::Tasks::V2beta3::UriOverride]
         #     URI override.
@@ -164,9 +165,11 @@ module Google
         #     The HTTP method to use for the request.
         #
         #     When specified, it overrides
-        #     {::Google::Cloud::Tasks::V2beta3::HttpTarget#http_method HttpRequest} for the
-        #     task. Note that if the value is set to [HttpMethod][GET] the
-        #     [HttpRequest][body] of the task will be ignored at execution time.
+        #     {::Google::Cloud::Tasks::V2beta3::HttpRequest#http_method HttpRequest.http_method}
+        #     for the task. Note that if the value is set to
+        #     {::Google::Cloud::Tasks::V2beta3::HttpMethod::GET HttpMethod.GET} the
+        #     {::Google::Cloud::Tasks::V2beta3::HttpRequest#body HttpRequest.body} of the task
+        #     will be ignored at execution time.
         # @!attribute [rw] header_overrides
         #   @return [::Array<::Google::Cloud::Tasks::V2beta3::HttpTarget::HeaderOverride>]
         #     HTTP target headers.
@@ -200,27 +203,35 @@ module Google
         #
         #     The size of the headers must be less than 80KB.
         #     Queue-level headers to override headers of all the tasks in the queue.
+        #
+        #     Do not put business sensitive or personally identifying data in the HTTP
+        #     Header Override Configuration or other similar fields in accordance with
+        #     Section 12 (Resource Fields) of the
+        #     [Service Specific Terms](https://cloud.google.com/terms/service-terms).
         # @!attribute [rw] oauth_token
         #   @return [::Google::Cloud::Tasks::V2beta3::OAuthToken]
         #     If specified, an
         #     [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
-        #     will be generated and attached as the `Authorization` header in the HTTP
+        #     is generated and attached as the `Authorization` header in the HTTP
         #     request.
         #
-        #     This type of authorization should generally only be used when calling
-        #     Google APIs hosted on *.googleapis.com.
+        #     This type of authorization should generally be used only when calling
+        #     Google APIs hosted on *.googleapis.com. Note that both the service
+        #     account email and the scope MUST be specified when using the queue-level
+        #     authorization override.
         #
         #     Note: The following fields are mutually exclusive: `oauth_token`, `oidc_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oidc_token
         #   @return [::Google::Cloud::Tasks::V2beta3::OidcToken]
         #     If specified, an
         #     [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
-        #     token will be generated and attached as an `Authorization` header in the
+        #     token is generated and attached as an `Authorization` header in the
         #     HTTP request.
         #
         #     This type of authorization can be used for many scenarios, including
         #     calling Cloud Run, or endpoints where you intend to validate the token
-        #     yourself.
+        #     yourself. Note that both the service account email and the audience MUST
+        #     be specified when using the queue-level authorization override.
         #
         #     Note: The following fields are mutually exclusive: `oidc_token`, `oauth_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class HttpTarget
@@ -242,7 +253,12 @@ module Google
           # Wraps the Header object.
           # @!attribute [rw] header
           #   @return [::Google::Cloud::Tasks::V2beta3::HttpTarget::Header]
-          #     header embodying a key and a value.
+          #     Header embodying a key and a value.
+          #
+          #     Do not put business sensitive or personally identifying data in the HTTP
+          #     Header Override Configuration or other similar fields in accordance with
+          #     Section 12 (Resource Fields) of the
+          #     [Service Specific Terms](https://cloud.google.com/terms/service-terms).
           class HeaderOverride
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -309,7 +325,7 @@ module Google
         #
         #     * Any header that is prefixed with "X-CloudTasks-" will be treated
         #     as service header. Service headers define properties of the task and are
-        #     predefined in CloudTask.
+        #     predefined in Cloud Tasks.
         #     * Host: This will be computed by Cloud Tasks and derived from
         #       {::Google::Cloud::Tasks::V2beta3::HttpRequest#url HttpRequest.url}.
         #     * Content-Length: This will be computed by Cloud Tasks.

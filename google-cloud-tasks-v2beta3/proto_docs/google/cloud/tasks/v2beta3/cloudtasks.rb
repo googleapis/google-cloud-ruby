@@ -319,11 +319,10 @@ module Google
         #     a task's ID is identical to that of an existing task or a task
         #     that was deleted or executed recently then the call will fail
         #     with [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS].
-        #     If the task's queue was created using Cloud Tasks, then another task with
-        #     the same name can't be created for ~1 hour after the original task was
-        #     deleted or executed. If the task's queue was created using queue.yaml or
-        #     queue.xml, then another task with the same name can't be created
-        #     for ~9 days after the original task was deleted or executed.
+        #     The IDs of deleted tasks are not immediately available for reuse.  It can
+        #     take up to 24 hours (or 9 days if the task's queue was created using a
+        #     queue.yaml or queue.xml) for the task ID to be released and made available
+        #     again.
         #
         #     Because there is an extra lookup cost to identify duplicate task
         #     names, these {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_task CreateTask}
@@ -354,6 +353,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for [BatchCreateTasks].
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The queue name. For example:
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+        #
+        #     The queue must already exist.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Cloud::Tasks::V2beta3::CreateTaskRequest>]
+        #     Required. The list of requests to create tasks.
+        #     The queue specified in parent field of each CreateTaskRequest will be
+        #     the same. This validation happens on the client side as well as in the
+        #     handler.
+        #     BatchCreateTasksRequest.parent will also be the same value as the
+        #     individual CreateTaskRequest.parent .
+        #     The maximum number of requests is 100.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. This field will be used to identify the long running operation,
+        #     avoiding duplication when user retries. If not provided, then a UUID will
+        #     be generated at server side.
+        class BatchCreateTasksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for deleting a task using
         # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#delete_task DeleteTask}.
         # @!attribute [rw] name
@@ -363,6 +388,90 @@ module Google
         class DeleteTaskRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for deleting a batch of tasks using
+        # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#batch_delete_tasks BatchDeleteTasks}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The queue name. For example:
+        #     Format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the tasks to delete.
+        #     A maximum of 1000 tasks can be deleted in a batch.
+        #     For example:
+        #     Format:
+        #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. This field will be used to identify the long running operation,
+        #     avoiding duplication when user retries. If not provided, then a UUID will
+        #     be generated at server side.
+        class BatchDeleteTasksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for the long-running operation returned by
+        # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#batch_delete_tasks BatchDeleteTasks}.
+        # This message is used to hold metadata information about the
+        # batch delete tasks operation; that is, it is put in
+        # {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the batch delete started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the batch delete finished.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksMetadata::State]
+        #     Output only. The state of the batch delete operation.
+        # @!attribute [r] failed_requests
+        #   @return [::Google::Protobuf::Map{::Integer => ::Google::Rpc::Status}]
+        #     Output only. A map of failed requests, where the key is the index of the
+        #     request in BatchDeleteTasksRequest.names and the value is the error status.
+        class BatchDeleteTasksMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Google::Rpc::Status]
+          class FailedRequestsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of the batch delete operation.
+          # This enum is not frozen and new values may be added in the future.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # The batch delete is running.
+            RUNNING = 1
+
+            # The batch delete has finished and all tasks were successfully deleted.
+            SUCCEEDED = 2
+
+            # The batch delete has finished with partial success.
+            # The tasks that failed to be deleted are reported in
+            # {::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksMetadata#failed_requests failed_requests}.
+            # When all requests in the batch fail,
+            # {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+            # will be set with `code` = `google.rpc.Code.ABORTED` and `message` = "None
+            # of the requests succeeded, refer to
+            # BatchDeleteTasksMetadata.failed_requests for individual error details".
+            PARTIALLY_SUCCEEDED = 3
+
+            # The batch delete has failed.
+            # This means the overall batch delete operation failed to complete.
+            # This can happen due to an internal error preventing the operation from
+            # finishing.
+            FAILED = 4
+          end
         end
 
         # Request message for forcing a task to run now using
@@ -387,6 +496,94 @@ module Google
         #     IAM](https://cloud.google.com/iam/) permission on the
         #     {::Google::Cloud::Tasks::V2beta3::Task Task} resource.
         class RunTaskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for [BatchCreateTasks].
+        # @!attribute [rw] tasks
+        #   @return [::Array<::Google::Cloud::Tasks::V2beta3::Task>]
+        #     The tasks that were successfully created.
+        class BatchCreateTasksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata message for [BatchCreateTasks].
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the batch create started.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the batch create finished.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Tasks::V2beta3::BatchCreateTasksMetadata::State]
+        #     Output only. The state of the batch create operation.
+        # @!attribute [rw] failed_requests
+        #   @return [::Google::Protobuf::Map{::Integer => ::Google::Rpc::Status}]
+        #     A map of failed requests, where the key is the index of the request in
+        #     BatchCreateTasksRequest.requests and the value is the error status.
+        class BatchCreateTasksMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Google::Rpc::Status]
+          class FailedRequestsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of the batch create operation.
+          module State
+            # The default value. This value is used if the state is omitted.
+            STATE_UNSPECIFIED = 0
+
+            # The batch create is running.
+            RUNNING = 1
+
+            # The batch create has finished.
+            # All tasks in the request were successfully created.
+            SUCCEEDED = 2
+
+            # The batch create has finished with partial success.
+            # The tasks that failed to be created are reported in
+            # {::Google::Cloud::Tasks::V2beta3::BatchCreateTasksMetadata#failed_requests failed_requests}.
+            PARTIALLY_SUCCEEDED = 5
+
+            # The batch create has failed.
+            # This means the overall batch create operation failed to complete.
+            # This can happen due to an internal error preventing the operation from
+            # finishing.
+            FAILED = 3
+
+            # The batch create was cancelled.
+            CANCELLED = 4
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#update_cmek_config UpdateCmekConfig}.
+        # @!attribute [rw] cmek_config
+        #   @return [::Google::Cloud::Tasks::V2beta3::CmekConfig]
+        #     Required. The config to update.  Its name attribute distinguishes it.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     List of fields to be updated in this request.
+        class UpdateCmekConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_cmek_config GetCmekConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The config resource name. For example:
+        #     projects/PROJECT_ID/locations/LOCATION_ID/cmekConfig`
+        class GetCmekConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
