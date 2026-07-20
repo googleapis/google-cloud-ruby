@@ -43,7 +43,17 @@
         "!google-analytics-data-v1beta/**",
         "!google-apps-chat-v1/**",
         "!google-area120-tables-v1alpha1/**",
-        "!google-cloud-bigquery-data_exchange-v1beta1/**"
+        "!google-cloud-bigquery-data_exchange-v1beta1/**",
+        "!google-ads-ad_manager/**",
+        "!google-ads-data_manager-v1/**",
+        "!google-ads-data_manager/**",
+        "!google-ads-marketing_platform-admin-v1alpha/**",
+        "!google-ads-marketing_platform-admin/**",
+        "!google-analytics-admin-v1alpha/**",
+        "!google-analytics-admin/**",
+        "!google-analytics-data/**",
+        "!google-apps-chat/**",
+        "!google-apps-events-subscriptions-v1/**"
       ],
       "enabled": false
     },
