@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2026-07-20)
+
+#### Features
+
+* export custom_attributes field in LocalInventory and RegionalInventory ([#34848](https://github.com/googleapis/google-cloud-ruby/issues/34848)) 
+
 ### 0.5.0 (2026-06-11)
 
 #### Features
