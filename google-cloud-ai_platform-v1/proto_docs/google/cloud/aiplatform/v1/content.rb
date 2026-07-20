@@ -934,7 +934,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Chunk from Google Maps.
+          # A `Maps` chunk is a piece of evidence that comes from Google Maps,
+          # containing information about places or routes. This is used to provide
+          # the user with rich, location-based information.
           # @!attribute [rw] uri
           #   @return [::String]
           #     URI reference of the chunk.
@@ -953,6 +955,9 @@ module Google
           #     Sources used to generate the place answer.
           #     This includes review snippets and photos that were used to generate the
           #     answer, as well as uris to flag content.
+          # @!attribute [r] route
+          #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::Maps::Route]
+          #     Output only. Route information.
           class Maps
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -978,6 +983,22 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Route information from Google Maps.
+            # @!attribute [rw] distance_meters
+            #   @return [::Integer]
+            #     The total distance of the route, in meters.
+            # @!attribute [rw] duration
+            #   @return [::Google::Protobuf::Duration]
+            #     The total duration of the route.
+            # @!attribute [rw] encoded_polyline
+            #   @return [::String]
+            #     An encoded polyline of the route. See
+            #     https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+            class Route
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end
