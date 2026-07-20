@@ -20,3 +20,6 @@ pkg/*
 
 # Ignore synth output
 __pycache__
+
+# Allow tracking Gemfile.lock for Phase 2 rollout
+!Gemfile.lock
