@@ -37,6 +37,8 @@ module Google
             rpc :ListRemoteTransportProfiles, ::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesRequest, ::Google::Cloud::NetworkConnectivity::V1beta::ListRemoteTransportProfilesResponse
             # Gets details of a single RemoteTransportProfile.
             rpc :GetRemoteTransportProfile, ::Google::Cloud::NetworkConnectivity::V1beta::GetRemoteTransportProfileRequest, ::Google::Cloud::NetworkConnectivity::V1beta::RemoteTransportProfile
+            # Gets details of a single RemoteTransportProfile given an activation key.
+            rpc :ParseFromActivationKey, ::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest, ::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyResponse
             # Lists Transports in a given project and location.
             rpc :ListTransports, ::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsRequest, ::Google::Cloud::NetworkConnectivity::V1beta::ListTransportsResponse
             # Gets details of a single Transport.
