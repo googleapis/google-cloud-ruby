@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.23.0 (2026-07-20)
+
+#### Features
+
+* Add support for trusted key wrapping and HSM key trust upgrades ([#34850](https://github.com/googleapis/google-cloud-ruby/issues/34850)) 
+
 ### 0.22.0 (2026-06-30)
 
 #### Features
