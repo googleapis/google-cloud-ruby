@@ -1,5 +1,11 @@
 # Changelog
 
+### 4.2.0 (2026-07-20)
+
+#### Features
+
+* Added AdSpotService ([#34853](https://github.com/googleapis/google-cloud-ruby/issues/34853)) 
+
 ### 4.1.0 (2026-06-11)
 
 #### Features
