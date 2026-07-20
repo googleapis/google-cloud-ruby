@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.1 (2026-07-20)
+
+#### Documentation
+
+* update documentation comment for access_restriction in BackupVault proto ([#34957](https://github.com/googleapis/google-cloud-ruby/issues/34957)) 
+
 ### 1.11.0 (2026-06-11)
 
 #### Features
