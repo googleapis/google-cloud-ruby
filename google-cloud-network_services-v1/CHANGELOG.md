@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.11.0 (2026-07-21)
+
+#### Features
+
+* A new field `resource_uris` is added to message `.google.cloud.networkservices.v1.AgentGateway` ([#34979](https://github.com/googleapis/google-cloud-ruby/issues/34979)) 
+
 ### 2.10.1 (2026-06-18)
 
 #### Documentation
