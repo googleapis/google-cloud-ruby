@@ -26,9 +26,11 @@
       ],
       "groupName": "all patch updates"
     },
-    // Disable Renovate processing for non-enrolled gems during our phased rollout
+    // Disable Renovate processing for non-enrolled gems during phased rollout.
+    // Note: As gapic-generator-ruby scaffolds !Gemfile.lock across all generated client libraries,
+    // gems with tracked Gemfile.lock files are automatically maintained via lockFileMaintenance.
     {
-      "description": "Disable Renovate processing for non-enrolled (non-Phase 1 and non-Phase 2 sample) gems during phased rollout",
+      "description": "Disable Renovate processing for non-enrolled gems during phased rollout",
       "matchFileNames": [
         "!google-cloud-core/**",
         "!google-cloud-storage/**",
