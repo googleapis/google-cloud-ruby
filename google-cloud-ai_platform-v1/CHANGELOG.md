@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.47.0 (2026-07-21)
+
+#### Features
+
+* add Route to GroundingChunk.Maps in Vertex AI v1 ([#34981](https://github.com/googleapis/google-cloud-ruby/issues/34981)) 
+#### Documentation
+
+* expand GroundingChunk.Maps documentation to describe route support 
+
 ### 1.46.0 (2026-07-13)
 
 #### Features
