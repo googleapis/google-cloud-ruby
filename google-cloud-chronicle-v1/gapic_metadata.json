@@ -337,6 +337,60 @@
         }
       }
     },
+    "FindingsRefinementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Chronicle::V1::FindingsRefinementService::Client",
+          "rpcs": {
+            "GetFindingsRefinement": {
+              "methods": [
+                "get_findings_refinement"
+              ]
+            },
+            "ListFindingsRefinements": {
+              "methods": [
+                "list_findings_refinements"
+              ]
+            },
+            "CreateFindingsRefinement": {
+              "methods": [
+                "create_findings_refinement"
+              ]
+            },
+            "UpdateFindingsRefinement": {
+              "methods": [
+                "update_findings_refinement"
+              ]
+            },
+            "GetFindingsRefinementDeployment": {
+              "methods": [
+                "get_findings_refinement_deployment"
+              ]
+            },
+            "UpdateFindingsRefinementDeployment": {
+              "methods": [
+                "update_findings_refinement_deployment"
+              ]
+            },
+            "ListAllFindingsRefinementDeployments": {
+              "methods": [
+                "list_all_findings_refinement_deployments"
+              ]
+            },
+            "ComputeFindingsRefinementActivity": {
+              "methods": [
+                "compute_findings_refinement_activity"
+              ]
+            },
+            "ComputeAllFindingsRefinementActivities": {
+              "methods": [
+                "compute_all_findings_refinement_activities"
+              ]
+            }
+          }
+        }
+      }
+    },
     "InstanceService": {
       "clients": {
         "grpc": {

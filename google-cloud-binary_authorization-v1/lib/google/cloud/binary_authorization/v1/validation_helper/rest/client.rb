@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/binaryauthorization/v1/service_pb"
 require "google/cloud/binary_authorization/v1/validation_helper/rest/service_stub"
+require "google/iam/v1/rest"
 
 module Google
   module Cloud
@@ -161,7 +162,23 @@ module Google
                   entry.set "defaultTimeout", @config.timeout if @config.timeout
                   entry.set "quotaProject", @quota_project_id if @quota_project_id
                 end
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @validation_helper_stub.endpoint
+                  config.universe_domain = @validation_helper_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                  config.logger = @validation_helper_stub.logger if config.respond_to? :logger=
+                end
               end
+
+              ##
+              # Get the associated client for mix-in of the IAMPolicy.
+              #
+              # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
+              #
+              attr_reader :iam_policy_client
 
               ##
               # The logger used for request/response debug logging.
@@ -175,8 +192,8 @@ module Google
               # Service calls
 
               ##
-              # Returns whether the given Attestation for the given image URI
-              # was signed by the given Attestor
+              # Returns whether the given `Attestation` for the given image URI
+              # was signed by the given `Attestor`
               #
               # @overload validate_attestation_occurrence(request, options = nil)
               #   Pass arguments to `validate_attestation_occurrence` via a request object, either of type
@@ -194,14 +211,15 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param attestor [::String]
-              #     Required. The resource name of the {::Google::Cloud::BinaryAuthorization::V1::Attestor Attestor} of the
+              #     Required. The resource name of the
+              #     {::Google::Cloud::BinaryAuthorization::V1::Attestor Attestor} of the
               #     [occurrence][grafeas.v1.Occurrence], in the format
               #     `projects/*/attestors/*`.
               #   @param attestation [::Grafeas::V1::AttestationOccurrence, ::Hash]
               #     Required. An {::Grafeas::V1::AttestationOccurrence AttestationOccurrence} to
-              #     be checked that it can be verified by the Attestor. It does not have to be
-              #     an existing entity in Container Analysis. It must otherwise be a valid
-              #     AttestationOccurrence.
+              #     be checked that it can be verified by the `Attestor`. It does not have to
+              #     be an existing entity in Container Analysis. It must otherwise be a valid
+              #     `AttestationOccurrence`.
               #   @param occurrence_note [::String]
               #     Required. The resource name of the [Note][grafeas.v1.Note] to which the
               #     containing [Occurrence][grafeas.v1.Occurrence] is associated.
@@ -374,6 +392,13 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
                 config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private

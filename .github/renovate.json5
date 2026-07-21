@@ -1,0 +1,63 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    // Use pre-determined best practices, including monorepo groupings & GitHub Action digest pinning
+    "config:best-practices",
+    // Create version bump PRs globally on a monthly basis (first day of the month)
+    "schedule:monthly"
+  ],
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  // Increase compatibility with other projects
+  "rangeStrategy": "update-lockfile",
+  // Phase 1 & Phase 2 sample: lockfile maintenance without proactive version bumps
+  "lockFileMaintenance": {
+    "enabled": true,
+    "groupName": "enrolled gems lockfiles",
+    "automerge": false
+    // Inherits "schedule:monthly" from extends preset
+  },
+  "packageRules": [
+    // Group all patch updates across all dependencies into a single PR
+    {
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "groupName": "all patch updates"
+    },
+    // Disable Renovate processing for non-enrolled gems during our phased rollout
+    {
+      "description": "Disable Renovate processing for non-enrolled (non-Phase 1 and non-Phase 2 sample) gems during phased rollout",
+      "matchFileNames": [
+        "!google-cloud-core/**",
+        "!google-cloud-storage/**",
+        "!google-cloud-pubsub/**",
+        "!google-cloud-bigquery/**",
+        "!google-cloud-errors/**",
+        "!google-cloud-resource_manager/**",
+        "!google-cloud-bigtable/**",
+        "!google-cloud-logging/**",
+        "!google-cloud-monitoring/**",
+        "!google-ads-ad_manager-v1/**",
+        "!google-analytics-data-v1beta/**",
+        "!google-apps-chat-v1/**",
+        "!google-area120-tables-v1alpha1/**",
+        "!google-cloud-bigquery-data_exchange-v1beta1/**"
+      ],
+      "enabled": false
+    },
+    // Disable proactive rubygems version bumps across Phase 1 while keeping lockFileMaintenance enabled.
+    // Note: Even though proactive package updates (`rubygems`) are disabled here, when `lockFileMaintenance`
+    // runs (`bundle lock --update` via Renovate's bundler manager), it can still trigger `Gemfile` constraint updates
+    // to synchronize out-of-date bounds (e.g., internal monorepo gems or dev utilities) with the refreshed `Gemfile.lock`.
+    // When the team is ready for Phase 2 (allowing proactive Gemfile version bumps), simply delete this rule.
+    {
+      "description": "Disable proactive rubygems version bumps across Phase 1; note that lockFileMaintenance (`bundle lock --update`) can still trigger Gemfile constraint updates when refreshing lockfiles",
+      "matchDatasources": [
+        "rubygems"
+      ],
+      "enabled": false
+    }
+  ]
+}

@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.9.0 (2026-07-07)
+
+#### Features
+
+* GA FindingsRefinementService Client libraries ([#34709](https://github.com/googleapis/google-cloud-ruby/issues/34709)) 
+
 ### 0.8.0 (2026-06-18)
 
 #### Features

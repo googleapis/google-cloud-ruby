@@ -1,5 +1,24 @@
 # Changelog
 
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.16.0 (2026-06-24)
+
+#### Features
+
+* Add Developer Connect integration for Git repository authentication 
+* Add directory metadata views to retrieve file sizes and modification timestamps 
+* Add effective default branch field and granular access token error status for repositories 
+* Add long-running operations for asynchronous repository deletion 
+* Add support for recursive folder and team folder deletions ([#34643](https://github.com/googleapis/google-cloud-ruby/issues/34643)) 
+#### Documentation
+
+* Clarify field usage guidelines and default values in API reference documentation 
+
 ### 0.15.0 (2026-06-11)
 
 #### Features

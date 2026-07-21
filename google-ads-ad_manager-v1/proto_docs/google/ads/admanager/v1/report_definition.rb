@@ -627,7 +627,7 @@ module Google
             #
             #
             #
-            # Corresponds to "Advertiser domain" in the Ad Manager UI.
+            # Corresponds to "Landing page domain" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`
             #
@@ -2639,7 +2639,8 @@ module Google
             # Corresponds to "Creative or creative set value" in the Ad Manager UI
             # (when showing API fields).
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `ENUM`
             CREATIVE_OR_CREATIVE_SET = 682
@@ -2651,7 +2652,8 @@ module Google
             #
             # Corresponds to "Creative or creative set" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REAL_TIME_VIDEO`
             #
             # Data format: `STRING`
             CREATIVE_OR_CREATIVE_SET_NAME = 683
@@ -3055,6 +3057,17 @@ module Google
             #
             # Data format: `STRING`
             DEAL_NAME = 437
+
+            # The declared domain of the advertiser.
+            #
+            #
+            #
+            # Corresponds to "Declared advertiser domain" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            DECLARED_ADVERTISER_DOMAIN = 796
 
             # The ID of the secure signals that were sent to the bidder who won the
             #  impression.
@@ -3811,7 +3824,8 @@ module Google
             #
             # Corresponds to "Key-values ID" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `IDENTIFIER`
             KEY_VALUES_ID = 214
@@ -3822,7 +3836,8 @@ module Google
             #
             # Corresponds to "Key-values" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `HISTORICAL`
+            # Compatible with the following report types: `HISTORICAL`,
+            # `FUTURE_SELL_THROUGH`
             #
             # Data format: `STRING`
             KEY_VALUES_NAME = 215
@@ -3833,7 +3848,7 @@ module Google
             #
             # Corresponds to "Key-values" in the Ad Manager UI.
             #
-            # Compatible with the following report types: `FUTURE_SELL_THROUGH`
+            # Compatible with the following report types:
             #
             # Data format: `STRING_LIST`
             KEY_VALUES_SET = 713
@@ -6534,7 +6549,7 @@ module Google
             # Data format: `STRING`
             VIDEO_FALLBACK_POSITION = 530
 
-            # The duration of the ad break in seconds for a live stream event.
+            # The expected duration of the ad break in seconds for a live stream event.
             #
             #
             #

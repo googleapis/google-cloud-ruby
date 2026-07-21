@@ -27,6 +27,7 @@ gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.4"
 gem "minitest-mock", "~> 5.27"
 gem "minitest-rg", "~> 5.3"
+gem "minitest-reporters", "~> 1.5.0", require: false
 gem "ostruct", "~> 0.5.5"
 gem "rake"
 gem "redcarpet", "~> 3.6"

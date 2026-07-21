@@ -267,6 +267,11 @@
                 "get_remote_transport_profile"
               ]
             },
+            "ParseFromActivationKey": {
+              "methods": [
+                "parse_from_activation_key"
+              ]
+            },
             "ListTransports": {
               "methods": [
                 "list_transports"

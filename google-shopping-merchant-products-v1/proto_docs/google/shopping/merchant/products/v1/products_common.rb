@@ -328,6 +328,11 @@ module Google
           #   @return [::Google::Shopping::Merchant::Products::V1::PickupSla]
           #     Item store pickup timeline. For more information, see
           #     [Pickup SLA](https://support.google.com/merchants/answer/14635400).
+          # @!attribute [rw] pickup_cost
+          #   @return [::Google::Shopping::Merchant::Products::V1::PickupCost]
+          #     Optional. The [pickup
+          #     cost](https://support.google.com/merchants/answer/16988704) for an item
+          #     when a customer buys it online and picks it up at a store.
           # @!attribute [rw] link_template
           #   @return [::String]
           #     [Link template](https://support.google.com/merchants/answer/13871172) for
@@ -439,6 +444,210 @@ module Google
           #     more visuals for your product beyond your image attributes. See the [Help
           #     Center article](https://support.google.com/merchants/answer/15216925) for
           #     more information.
+          # @!attribute [rw] minimum_order_values
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductMinimumOrderValue>]
+          #     The [minimum value](https://support.google.com/merchants/answer/16989009)
+          #     in the cart before a customer can initiate checkout. Supports multiple
+          #     minimum order values. Different minimum order values can be specified per
+          #     country, service and surface. Maximum entries: 100.
+          # @!attribute [rw] vin
+          #   @return [::String]
+          #     The [Vehicle Identification Number
+          #     (VIN)](https://support.google.com/google-ads/answer/14154510) of the
+          #     vehicle.
+          # @!attribute [rw] model
+          #   @return [::String]
+          #     The [Model](https://support.google.com/google-ads/answer/14154511) of the
+          #     vehicle, such as `LX`, `EX`, and others.
+          # @!attribute [rw] trim
+          #   @return [::String]
+          #     The [Trim](https://support.google.com/google-ads/answer/14154176) of the
+          #     vehicle model, such as `S`, `SV`, `SL` and others.
+          # @!attribute [rw] body_style
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::VehicleBodyStyle]
+          #     The [body style](https://support.google.com/google-ads/answer/14157085) of
+          #     the vehicle.
+          # @!attribute [rw] year
+          #   @return [::Integer]
+          #     The [Year](https://support.google.com/google-ads/answer/14152816) of the
+          #     vehicle model.
+          # @!attribute [rw] mileage
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Mileage]
+          #     The number of miles/kms on the vehicle. See the
+          #     [Mileage](https://support.google.com/google-ads/answer/14156166) for more
+          #     information.
+          # @!attribute [rw] electric_range
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Mileage]
+          #     The [electric range](https://support.google.com/google-ads/answer/15162232)
+          #     of the vehicle in miles/kms.
+          # @!attribute [rw] fuel_consumption
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::FuelConsumption]
+          #     The [fuel
+          #     consumption](https://support.google.com/google-ads/answer/14543580) of the
+          #     vehicle.
+          # @!attribute [rw] fuel_consumption_discharged_battery
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::FuelConsumption]
+          #     The fuel consumption of the vehicle when the hybrid battery is discharged.
+          #     See the [Help Center
+          #     article](https://support.google.com/google-ads/answer/15162033) for more
+          #     information.
+          # @!attribute [rw] energy_consumption
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::EnergyConsumption]
+          #     The [energy
+          #     consumption](https://support.google.com/google-ads/answer/14546149) of the
+          #     vehicle.
+          # @!attribute [rw] co2_emissions
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Co2Emissions]
+          #     The [co2 emission](https://support.google.com/google-ads/answer/14546146)
+          #     of the vehicle.
+          # @!attribute [rw] date_first_registered
+          #   @return [::String]
+          #     The date the vehicle was first registered. Format: `YYYY-MM`. See the
+          #     [Date first
+          #     registered](https://support.google.com/google-ads/answer/14546138) for more
+          #     information.
+          # @!attribute [rw] engine
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::EngineType]
+          #     The [engine](https://support.google.com/google-ads/answer/14156068) type of
+          #     the vehicle.
+          # @!attribute [rw] emissions_standard
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::EmissionsStandard]
+          #     The [emission
+          #     standard](https://support.google.com/google-ads/answer/14869021) of the
+          #     vehicle.
+          # @!attribute [rw] certified_pre_owned
+          #   @return [::Boolean]
+          #     Whether the vehicle is OEM [certified
+          #     pre-owned](https://support.google.com/google-ads/answer/14156475).
+          # @!attribute [rw] vehicle_msrp
+          #   @return [::Google::Shopping::Type::Price]
+          #     The MSRP (Manufacturer Suggested Retail Price) for the vehicle in its
+          #     current configuration. See the [Vehicle
+          #     MSRP](https://support.google.com/google-ads/answer/14154171) for more
+          #     information.
+          # @!attribute [rw] vehicle_all_in_price
+          #   @return [::Google::Shopping::Type::Price]
+          #     The all-in advertised price for a vehicle, which includes costs for the
+          #     following – any accessories attached to the vehicle, environmental levies,
+          #     extra warranty, fuel, freight, pre-delivery inspection (PDI), dealer fees
+          #     for handling licensing, provincial regulatory fees, miscellaneous dealer
+          #     charges for security etching and nitrogen tire fill, and
+          #     factory-to-customer or dealer-to-customer discounts or incentives. See the
+          #     [Vehicle all-in
+          #     price](https://support.google.com/google-ads/answer/14156981) for more
+          #     information.
+          # @!attribute [rw] vehicle_price_type
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::VehiclePriceType]
+          #     The [price type](https://support.google.com/google-ads/answer/14592783) of
+          #     the vehicle.
+          # @!attribute [rw] vehicle_mandatory_inspection_included
+          #   @return [::Boolean]
+          #     Whether the vehicle is sold with mandatory inspection and maintenance
+          #     performed before delivery. See the [Vehicle mandatory inspection
+          #     included](https://support.google.com/google-ads/answer/15956630) for more
+          #     information.`
+          # @!attribute [rw] vehicle_expenses
+          #   @return [::Google::Shopping::Type::Price]
+          #     The miscellaneous expenses like insurance and registration fees of the
+          #     vehicle. See the [Vehicle
+          #     expenses](https://support.google.com/google-ads/answer/15957154) for more
+          #     information.
+          # @!attribute [rw] warranty
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Warranty]
+          #     The [warranty](https://support.google.com/google-ads/answer/15957626) of
+          #     the vehicle.
+          # @!attribute [rw] display_address
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::DisplayAddress]
+          #     The display address of the property.
+          # @!attribute [rw] latitude
+          #   @return [::Float]
+          #     The latitude of the property. The value must be between -90 (inclusive) and
+          #     90 (inclusive), up to 6 decimal places.
+          # @!attribute [rw] longitude
+          #   @return [::Float]
+          #     The longitude of the property. The value must be between -180 (inclusive)
+          #     and 180 (inclusive), up to 6 decimal places.
+          # @!attribute [rw] neighborhood
+          #   @return [::String]
+          #     The neighborhood (locality) of the property, such as `Wallingford`,
+          #     `Greenwood`, etc.
+          # @!attribute [rw] unit_area
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::UnitArea]
+          #     The unit area of the property, such as `1000 sqft`.
+          # @!attribute [rw] number_of_units
+          #   @return [::Integer]
+          #     The number of units available for a specific floor plan of the property.
+          #     The value must be greater than 0.
+          # @!attribute [rw] property_name
+          #   @return [::String]
+          #     The name of the property.
+          # @!attribute [rw] number_of_bedrooms
+          #   @return [::Float]
+          #     The number of bedrooms in the property. The value must be greater than or
+          #     equal to 0 and a multiple of 1.0.
+          # @!attribute [rw] number_of_bathrooms
+          #   @return [::Float]
+          #     The number of bathrooms in the property. The value must be greater than 0
+          #     and a multiple of 0.5.
+          # @!attribute [rw] property_type
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::PropertyType]
+          #     The type of property.
+          # @!attribute [rw] amenity_feature
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::AmenityFeature>]
+          #     The amenity features for the property.
+          # @!attribute [rw] utilities_included
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::UtilitiesIncluded>]
+          #     The utilities included for the property.
+          # @!attribute [rw] pet_policy
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::PetPolicy]
+          #     The pet policy for the property.
+          # @!attribute [rw] specialty_housing_type
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::SpecialtyHousingType]
+          #     The specialty housing type for the property.
+          # @!attribute [rw] product_fee
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::ProductFee>]
+          #     The product fee for the property.
+          # @!attribute [rw] short_title
+          #   @return [::String]
+          #     The short title of the item.
+          # @!attribute [rw] questions_and_answers
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::QuestionAndAnswer>]
+          #     Optional. Contains user-, merchant-, and manufacturer-authored [questions
+          #     and answers](https://support.google.com/merchants/answer/17085211) about
+          #     the product. Max 30 question and answer pairs. Max 10000 characters total.
+          #     Each question can have max 1000 characters. Each answer can have max 1000
+          #     characters.
+          # @!attribute [rw] popularity_rank
+          #   @return [::Float]
+          #     Optional. Indicates the
+          #     [popularity](https://support.google.com/merchants/answer/17085297) of the
+          #     product in a merchant's inventory. Using a scale of 0.0 (lowest) to 100.0
+          #     (highest).
+          # @!attribute [rw] item_group_title
+          #   @return [::String]
+          #     Optional. Represents the [title of the product
+          #     group](https://support.google.com/merchants/answer/17085146) to which
+          #     this variant product belongs. This can be used along with the [item group
+          #     id](https://support.google.com/merchants/answer/6324507) attribute.
+          #     It lets you perform better grouping of variant products, and helps
+          #     identifying common product characteristics more efficiently.
+          # @!attribute [rw] document_links
+          #   @return [::Array<::String>]
+          #     Optional. Contains a list of PDF [document
+          #     URLs](https://support.google.com/merchants/answer/17084656) for the
+          #     product. Examples are training manuals, user guides, assembly instructions,
+          #     package inserts, etc. Must start with "http://" or "https://"), ASCII
+          #     characters only, and RFC 3986 compliant.
+          # @!attribute [rw] variant_options
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::VariantOption>]
+          #     Optional. Contains the [list of all variant-identifying
+          #     options](https://support.google.com/merchants/answer/17085214) of this
+          #     product.
+          # @!attribute [rw] related_products
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::RelatedProduct>]
+          #     Optional. Specifies how other [products are
+          #     related](https://support.google.com/merchants/answer/17085213) to this
+          #     product.
           class ProductAttributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -579,6 +788,293 @@ module Google
             class CarrierShipping
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The mileage of the vehicle.
+            # @!attribute [rw] value
+            #   @return [::Integer]
+            #     The distance value.
+            # @!attribute [rw] unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Mileage::Unit]
+            #     The unit of the mileage.
+            class Mileage
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The unit of the mileage.
+              module Unit
+                # Unspecified unit.
+                UNIT_UNSPECIFIED = 0
+
+                # Miles.
+                MILES = 1
+
+                # Kilometers.
+                KM = 2
+              end
+            end
+
+            # The fuel consumption of the vehicle.
+            # @!attribute [rw] value
+            #   @return [::Float]
+            #     The fuel consumption value.
+            # @!attribute [rw] unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::FuelConsumption::Unit]
+            #     The unit of the fuel consumption.
+            class FuelConsumption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The unit of the fuel consumption.
+              module Unit
+                # Unspecified unit.
+                UNIT_UNSPECIFIED = 0
+
+                # Liter per 100 kilometers.
+                LPER100KM = 1
+
+                # Kilograms per 100 kilometers.
+                KGPER100KM = 2
+              end
+            end
+
+            # The energy consumption of the vehicle.
+            # @!attribute [rw] value
+            #   @return [::Float]
+            #     The energy consumption value.
+            # @!attribute [rw] unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::EnergyConsumption::Unit]
+            #     The unit of the energy consumption.
+            class EnergyConsumption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The unit of the energy consumption.
+              module Unit
+                # Unspecified unit.
+                UNIT_UNSPECIFIED = 0
+
+                # Kilowatt hours per 100 kilometers.
+                KWHPER100KM = 1
+              end
+            end
+
+            # The co2 emission of the vehicle.
+            # @!attribute [rw] value
+            #   @return [::Integer]
+            #     The co2 emission value.
+            # @!attribute [rw] unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Co2Emissions::Unit]
+            #     The unit of the co2 emission.
+            class Co2Emissions
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The unit of the co2 emission.
+              module Unit
+                # Unspecified unit.
+                UNIT_UNSPECIFIED = 0
+
+                # Grams per kilometer.
+                GPERKM = 1
+              end
+            end
+
+            # The warranty of the vehicle.
+            # @!attribute [rw] duration
+            #   @return [::Integer]
+            #     The warranty duration in months.
+            # @!attribute [rw] mileage
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::Mileage]
+            #     The warranty mileage.
+            class Warranty
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The product fee attribute containing type and amount.
+            # @!attribute [rw] type
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::ProductFee::FeeType]
+            #     The type of product fee.
+            # @!attribute [rw] amount
+            #   @return [::Google::Shopping::Type::Price]
+            #     The amount of product fee.
+            class ProductFee
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The type of product fee.
+              module FeeType
+                # Unspecified fee type.
+                FEE_TYPE_UNSPECIFIED = 0
+
+                # Admin fee.
+                ADMIN_FEE = 1
+
+                # Application fee.
+                APPLICATION_FEE = 2
+
+                # Security deposit.
+                SECURITY_DEPOSIT = 3
+              end
+            end
+
+            # The display address of the property.
+            # @!attribute [rw] street_number
+            #   @return [::String]
+            #     The street number.
+            # @!attribute [rw] street_name
+            #   @return [::String]
+            #     The street name.
+            # @!attribute [rw] city
+            #   @return [::String]
+            #     The city such as Seattle, New York, etc.
+            # @!attribute [rw] region
+            #   @return [::String]
+            #     The region(state), such as WA, OH, etc.
+            # @!attribute [rw] postal_code
+            #   @return [::String]
+            #     The postal code, such as 94043.
+            class DisplayAddress
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The unit area of the property.
+            # @!attribute [rw] value
+            #   @return [::Float]
+            #     The area value.
+            # @!attribute [rw] unit
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::UnitArea::Unit]
+            #     The unit of area.
+            class UnitArea
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The unit of area.
+              module Unit
+                # Unspecified unit.
+                UNIT_UNSPECIFIED = 0
+
+                # Square meters.
+                SQM = 1
+
+                # Square feet.
+                SQFT = 2
+              end
+            end
+
+            # The pet policy of the property.
+            # @!attribute [rw] pets_allowed
+            #   @return [::Boolean]
+            #     Whether pets are allowed.
+            # @!attribute [rw] pet_types
+            #   @return [::Array<::Google::Shopping::Merchant::Products::V1::ProductAttributes::PetPolicy::PetType>]
+            #     The pet types allowed.
+            class PetPolicy
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The pet types.
+              module PetType
+                # Unspecified pet type.
+                PET_TYPE_UNSPECIFIED = 0
+
+                # Cats.
+                CATS = 1
+
+                # Large dogs.
+                LARGE_DOGS = 2
+
+                # Small dogs.
+                SMALL_DOGS = 3
+              end
+            end
+
+            # The question and answer for the product.
+            # @!attribute [rw] question
+            #   @return [::String]
+            #     Required. The question text.
+            # @!attribute [rw] answer
+            #   @return [::String]
+            #     Required. The answer text.
+            class QuestionAndAnswer
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Additional product variants for the product.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The name of the variant. For example, "Color", "Memory",
+            #     "Size", "Length"
+            # @!attribute [rw] value
+            #   @return [::String]
+            #     Required. The value of the variant. For example, "Red", "128GB", "XL",
+            #     "100cm"
+            class VariantOption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies how other products are related to this product.
+            # @!attribute [rw] relationship_type
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::RelatedProduct::RelationshipType]
+            #     Required. The type of the relationship between this product and the
+            #     related product.
+            # @!attribute [rw] id_type
+            #   @return [::Google::Shopping::Merchant::Products::V1::ProductAttributes::RelatedProduct::IdType]
+            #     Required. The type of the identifier of the related product.
+            #     For example, [GTIN](https://support.google.com/merchants/answer/6219078)
+            #     or [product ID](https://support.google.com/merchants/answer/6324405).
+            # @!attribute [rw] id
+            #   @return [::String]
+            #     Required. The identifier of the related product.
+            class RelatedProduct
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The various types of the relationships between this product and the
+              # related product.
+              module RelationshipType
+                # The relationship type is unspecified.
+                RELATIONSHIP_TYPE_UNSPECIFIED = 0
+
+                # Part of a set of products that are often purchased together.
+                PART_OF_SET = 1
+
+                # Part that is necessary for the product to function, for example a
+                # battery for a battery-operated lamp.
+                REQUIRED_PART = 2
+
+                # A product that this product is often purchased together with, for
+                # example a phone case with a phone.
+                OFTEN_BOUGHT_WITH = 3
+
+                # Product that this product can be substituted for. For example a printer
+                # comparable in function to another printer.
+                SUBSTITUTE = 4
+
+                # An identical product sold under a different brand, for example a
+                # cheaper house brand.
+                DIFFERENT_BRAND = 5
+
+                # An accessory to this product, for example a side table that matches the
+                # style of a couch.
+                ACCESSORY = 6
+              end
+
+              # The type of the identifier of the related product.
+              module IdType
+                # The identifier type is unspecified.
+                ID_TYPE_UNSPECIFIED = 0
+
+                # The identifier is a GTIN.
+                GTIN = 1
+
+                # The identifier is a product ID in the feed.
+                ID = 2
+              end
             end
 
             # Possible carrier where price is coming from.
@@ -769,6 +1265,389 @@ module Google
               # USPS Ground Advantage Commercial shipping service.
               USPS_GROUND_ADVANTAGE_COMMERCIAL = 61
             end
+
+            # The vehicle body style. See the [Body
+            # style](https://support.google.com/google-ads/answer/14157085) for more
+            # information.
+            module VehicleBodyStyle
+              # Unspecified vehicle body style.
+              VEHICLE_BODY_STYLE_UNSPECIFIED = 0
+
+              # ATV Sport.
+              ATV_SPORT = 1
+
+              # ATV Touring.
+              ATV_TOURING = 2
+
+              # ATV Utility.
+              ATV_UTILITY = 3
+
+              # ATV Youth.
+              ATV_YOUTH = 4
+
+              # City car.
+              CITY_CAR = 5
+
+              # Class A motorhome.
+              CLASS_A_MOTORHOME = 6
+
+              # Class B motorhome.
+              CLASS_B_MOTORHOME = 7
+
+              # Class C motorhome.
+              CLASS_C_MOTORHOME = 8
+
+              # Compact SUV.
+              COMPACT_SUV = 9
+
+              # Convertible.
+              CONVERTIBLE = 10
+
+              # Coupe.
+              COUPE = 11
+
+              # Crossover.
+              CROSSOVER = 12
+
+              # Fifth wheel.
+              FIFTH_WHEEL = 13
+
+              # Full size van.
+              FULL_SIZE_VAN = 14
+
+              # Hatchback.
+              HATCHBACK = 15
+
+              # Limousine.
+              LIMOUSINE = 16
+
+              # Minivan.
+              MINIVAN = 17
+
+              # Notchback.
+              NOTCHBACK = 18
+
+              # Pop up camper.
+              POP_UP_CAMPER = 19
+
+              # Sedan.
+              SEDAN = 20
+
+              # Side by side.
+              SIDE_BY_SIDE = 21
+
+              # Station wagon.
+              STATION_WAGON = 22
+
+              # SUV.
+              SUV = 23
+
+              # Travel trailer.
+              TRAVEL_TRAILER = 24
+
+              # Truck.
+              TRUCK = 25
+
+              # Truck camper.
+              TRUCK_CAMPER = 26
+
+              # Ute.
+              UTE = 27
+
+              # UTV Recreational utility.
+              UTV_RECREATIONAL_UTILITY = 28
+
+              # UTV Sport.
+              UTV_SPORT = 29
+
+              # UTV Utility.
+              UTV_UTILITY = 30
+
+              # UTV Youth.
+              UTV_YOUTH = 31
+            end
+
+            # The engine type of the vehicle.
+            module EngineType
+              # Unspecified engine type.
+              ENGINE_TYPE_UNSPECIFIED = 0
+
+              # Gasoline.
+              GASOLINE = 1
+
+              # Diesel.
+              DIESEL = 2
+
+              # Electric.
+              ELECTRIC = 3
+
+              # Hybrid.
+              HYBRID = 4
+
+              # Plug-in hybrid.
+              PLUG_IN_HYBRID = 5
+
+              # Natural gas.
+              NATURAL_GAS = 6
+
+              # LPG.
+              LPG = 7
+
+              # Methane.
+              METHANE = 8
+
+              # Other.
+              OTHER = 9
+            end
+
+            # The emission standard of the vehicle.
+            module EmissionsStandard
+              # Unspecified emission standard.
+              EMISSIONS_STANDARD_UNSPECIFIED = 0
+
+              # Zero emissions.
+              ZERO_EMISSIONS = 1
+
+              # Euro 1.
+              EURO1 = 2
+
+              # Euro 2.
+              EURO2 = 3
+
+              # Euro 3.
+              EURO3 = 4
+
+              # Euro 4.
+              EURO4 = 5
+
+              # Euro 5.
+              EURO5 = 6
+
+              # Euro 5b.
+              EURO5B = 7
+
+              # Euro 6.
+              EURO6 = 8
+
+              # Euro 6c.
+              EURO6C = 9
+
+              # Euro 6d.
+              EURO6D = 10
+
+              # Euro 6d-TEMP.
+              EURO6D_TEMP = 11
+
+              # Euro 6e.
+              EURO6E = 12
+            end
+
+            # The vehicle price type.
+            module VehiclePriceType
+              # Unspecified vehicle price type.
+              VEHICLE_PRICE_TYPE_UNSPECIFIED = 0
+
+              # All in price.
+              ALL_IN_PRICE = 1
+
+              # Drive away price.
+              DRIVE_AWAY_PRICE = 2
+
+              # Estimated drive away price.
+              ESTIMATED_DRIVE_AWAY_PRICE = 3
+
+              # Excluding government charges price.
+              EXCLUDING_GOVERNMENT_CHARGES_PRICE = 4
+
+              # Vehicle base price.
+              VEHICLE_BASE_PRICE = 5
+            end
+
+            # The property type.
+            module PropertyType
+              # Unspecified property type.
+              PROPERTY_TYPE_UNSPECIFIED = 0
+
+              # Apartment.
+              APARTMENT = 1
+
+              # Condo.
+              CONDO = 2
+
+              # Loft.
+              LOFT = 3
+
+              # Multi-family home.
+              MULTI_FAMILY_HOME = 4
+
+              # Penthouse.
+              PENTHOUSE = 5
+
+              # Room.
+              ROOM = 6
+
+              # Single-family home.
+              SINGLE_FAMILY_HOME = 7
+
+              # Studio.
+              STUDIO = 8
+
+              # Townhouse.
+              TOWNHOUSE = 9
+            end
+
+            # The amenity features for the property.
+            module AmenityFeature
+              # Unspecified amenity feature.
+              AMENITY_FEATURE_UNSPECIFIED = 0
+
+              # Balcony.
+              BALCONY = 1
+
+              # Basement.
+              BASEMENT = 2
+
+              # Basketball court.
+              BASKETBALL_COURT = 3
+
+              # Bike storage.
+              BIKE_STORAGE = 4
+
+              # Central air conditioning.
+              CENTRAL_AC = 5
+
+              # Dishwasher.
+              DISHWASHER = 6
+
+              # Dog park.
+              DOG_PARK = 7
+
+              # Elevator.
+              ELEVATOR = 8
+
+              # EV charging.
+              EV_CHARGING = 9
+
+              # Fenced lot.
+              FENCED_LOT = 10
+
+              # Fireplace.
+              FIREPLACE = 11
+
+              # Fitness center.
+              FITNESS_CENTER = 12
+
+              # Forced air heating.
+              FORCED_AIR_HEATING = 13
+
+              # Fully furnished.
+              FULLY_FURNISHED = 14
+
+              # Garage.
+              GARAGE = 15
+
+              # Gated community.
+              GATED_COMMUNITY = 16
+
+              # Hardwood floors.
+              HARDWOOD_FLOORS = 17
+
+              # High speed internet.
+              HIGH_SPEED_INTERNET = 18
+
+              # Intercom.
+              INTERCOM = 19
+
+              # In-unit washer and dryer.
+              IN_UNIT_WASHER_DRYER = 20
+
+              # Kitchen.
+              KITCHEN = 21
+
+              # Large closets.
+              LARGE_CLOSETS = 22
+
+              # Multisport court.
+              MULTISPORT_COURT = 23
+
+              # Onsite laundry.
+              ONSITE_LAUNDRY = 24
+
+              # Outdoor lounge.
+              OUTDOOR_LOUNGE = 25
+
+              # Parking.
+              PARKING = 26
+
+              # Patio.
+              PATIO = 27
+
+              # Pickleball court.
+              PICKLEBALL_COURT = 28
+
+              # Pool.
+              POOL = 29
+
+              # Refrigerator.
+              REFRIGERATOR = 30
+
+              # Soccer field.
+              SOCCER_FIELD = 31
+
+              # Tennis court.
+              TENNIS_COURT = 32
+
+              # Walk-in closets.
+              WALK_IN_CLOSETS = 33
+
+              # Wheelchair accessibility.
+              WHEELCHAIR_ACCESS = 34
+            end
+
+            # The utilities included for the property.
+            module UtilitiesIncluded
+              # Unspecified utilities included.
+              UTILITIES_INCLUDED_UNSPECIFIED = 0
+
+              # Electricity.
+              ELECTRICITY = 1
+
+              # Gas.
+              GAS = 2
+
+              # Internet.
+              INTERNET = 3
+
+              # Trash.
+              TRASH = 4
+
+              # Water.
+              WATER = 5
+            end
+
+            # The specialty housing type for the property.
+            module SpecialtyHousingType
+              # Unspecified specialty housing type.
+              SPECIALTY_HOUSING_TYPE_UNSPECIFIED = 0
+
+              # Corporate housing.
+              CORPORATE = 1
+
+              # Low income housing.
+              LOW_INCOME = 2
+
+              # Military housing.
+              MILITARY = 3
+
+              # Senior housing.
+              SENIOR = 4
+
+              # Short term housing.
+              SHORT_TERM = 5
+
+              # Student housing.
+              STUDENT = 6
+            end
           end
 
           # The ShippingWeight of the product.
@@ -856,6 +1735,9 @@ module Google
           # @!attribute [rw] annual_percentage_rate
           #   @return [::Float]
           #     Optional. Annual percentage rate for `credit_type` finance
+          # @!attribute [rw] total_amount
+          #   @return [::Google::Shopping::Type::Price]
+          #     Optional. Total amount the buyer has to pay, including interest.
           class ProductInstallment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1010,6 +1892,26 @@ module Google
           #     `handling_cutoff_time` is set. If `handling_cutoff_time` is set but this
           #     field is not set, the shipping destination timezone will be used. If both
           #     fields are not set, the handling cutoff time will default to 8AM PST.
+          # @!attribute [rw] loyalty_program_label
+          #   @return [::String]
+          #     Optional. The label of the [loyalty
+          #     program](https://support.google.com/merchants/answer/6324484).
+          #     Must match one of the program labels set in
+          #     {::Google::Shopping::Merchant::Products::V1::LoyaltyProgram loyalty_programs}.
+          #     When set (in combination with
+          #     [loyalty_tier_label](https://support.google.com/merchants/answer/6324484)),
+          #     this shipping option is only applicable to loyalty program members of the
+          #     specified tier.
+          # @!attribute [rw] loyalty_tier_label
+          #   @return [::String]
+          #     Optional. The label of the [loyalty
+          #     tier](https://support.google.com/merchants/answer/6324484) within the
+          #     loyalty program. Must match one of the tiers set in the
+          #     {::Google::Shopping::Merchant::Products::V1::LoyaltyProgram loyalty_programs}.
+          #     When set (in combination with
+          #     [loyalty_program_label](https://support.google.com/merchants/answer/6324484)),
+          #     this shipping option is only applicable to loyalty program members of the
+          #     specified tier.
           class Shipping
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1333,6 +2235,18 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The pickup cost of the item.
+          # @!attribute [rw] flat_rate
+          #   @return [::Google::Shopping::Type::Price]
+          #     Required. The flat rate pickup cost of the item.
+          # @!attribute [rw] free_threshold
+          #   @return [::Google::Shopping::Type::Price]
+          #     Optional. The price threshold above which pickup is free of charge.
+          class PickupCost
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Configuration for offer or offer-country level shipping handling cutoff time.
           # @!attribute [rw] country
           #   @return [::String]
@@ -1360,6 +2274,45 @@ module Google
           class HandlingCutoffTime
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The minimum order value in the cart before the checkout is permitted.
+          # @!attribute [rw] country
+          #   @return [::String]
+          #     Required. The [CLDR territory
+          #     code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml)
+          #     of the country to which an item will ship.
+          # @!attribute [rw] service
+          #   @return [::String]
+          #     A free-form description of the service class or delivery speed.
+          #     This should match the service value set for the Shipping attribute.
+          #     See {::Google::Shopping::Merchant::Products::V1::Shipping#service service}.
+          # @!attribute [rw] surface
+          #   @return [::Google::Shopping::Merchant::Products::V1::ProductMinimumOrderValue::Surface]
+          #     The surface to which the minimum order value applies.
+          #     Defaults to `ONLINE_LOCAL` if not configured.
+          # @!attribute [rw] price
+          #   @return [::Google::Shopping::Type::Price]
+          #     Required. The minimum cart or basket value before the checkout is
+          #     permitted.
+          class ProductMinimumOrderValue
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The surface values to which the minimum order value applies.
+            module Surface
+              # Surface is unspecified.
+              SURFACE_UNSPECIFIED = 0
+
+              # Surface value to indicate online purchases.
+              ONLINE = 1
+
+              # Surface value to indicate local purchases.
+              LOCAL = 2
+
+              # Surface value to indicate online and local purchases.
+              ONLINE_LOCAL = 3
+            end
           end
 
           # The subscription period of the product.

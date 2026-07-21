@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `CreativeTemplate` object.
+              # Retrieves a `CreativeTemplate` object.
               #
               # @overload get_creative_template(request, options = nil)
               #   Pass arguments to `get_creative_template` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `CreativeTemplate` objects.
+              # Lists `CreativeTemplate` objects.
               #
               # @overload list_creative_templates(request, options = nil)
               #   Pass arguments to `list_creative_templates` via a request object, either of type

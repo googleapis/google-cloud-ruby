@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
 ### 0.10.0 (2026-06-11)
 
 #### Features

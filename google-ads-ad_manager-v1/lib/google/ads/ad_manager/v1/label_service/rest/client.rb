@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Label` object.
+              # Retrieves a `Label` object.
               #
               # @overload get_label(request, options = nil)
               #   Pass arguments to `get_label` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Label` objects.
+              # Lists `Label` objects.
               #
               # @overload list_labels(request, options = nil)
               #   Pass arguments to `list_labels` via a request object, either of type
@@ -371,7 +371,7 @@ module Google
               end
 
               ##
-              # API to create a `Label` object.
+              # Creates a `Label` object.
               #
               # @overload create_label(request, options = nil)
               #   Pass arguments to `create_label` via a request object, either of type
@@ -452,7 +452,7 @@ module Google
               end
 
               ##
-              # API to batch create `Label` objects.
+              # Creates `Label` objects.
               #
               # @overload batch_create_labels(request, options = nil)
               #   Pass arguments to `batch_create_labels` via a request object, either of type
@@ -536,7 +536,7 @@ module Google
               end
 
               ##
-              # API to update a `Label` object.
+              # Updates a `Label` object.
               #
               # @overload update_label(request, options = nil)
               #   Pass arguments to `update_label` via a request object, either of type
@@ -618,7 +618,7 @@ module Google
               end
 
               ##
-              # API to batch update `Label` objects.
+              # Batch updates `Label` objects.
               #
               # @overload batch_update_labels(request, options = nil)
               #   Pass arguments to `batch_update_labels` via a request object, either of type
@@ -702,7 +702,7 @@ module Google
               end
 
               ##
-              # API to activate `Label` objects.
+              # Activates `Label` objects.
               #
               # @overload batch_activate_labels(request, options = nil)
               #   Pass arguments to `batch_activate_labels` via a request object, either of type
@@ -783,7 +783,7 @@ module Google
               end
 
               ##
-              # API to deactivate `Label` objects.
+              # Deactivates `Label` objects.
               #
               # @overload batch_deactivate_labels(request, options = nil)
               #   Pass arguments to `batch_deactivate_labels` via a request object, either of type

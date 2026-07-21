@@ -33,21 +33,21 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.LabelService'
 
-            # API to retrieve a `Label` object.
+            # Retrieves a `Label` object.
             rpc :GetLabel, ::Google::Ads::AdManager::V1::GetLabelRequest, ::Google::Ads::AdManager::V1::Label
-            # API to retrieve a list of `Label` objects.
+            # Lists `Label` objects.
             rpc :ListLabels, ::Google::Ads::AdManager::V1::ListLabelsRequest, ::Google::Ads::AdManager::V1::ListLabelsResponse
-            # API to create a `Label` object.
+            # Creates a `Label` object.
             rpc :CreateLabel, ::Google::Ads::AdManager::V1::CreateLabelRequest, ::Google::Ads::AdManager::V1::Label
-            # API to batch create `Label` objects.
+            # Creates `Label` objects.
             rpc :BatchCreateLabels, ::Google::Ads::AdManager::V1::BatchCreateLabelsRequest, ::Google::Ads::AdManager::V1::BatchCreateLabelsResponse
-            # API to update a `Label` object.
+            # Updates a `Label` object.
             rpc :UpdateLabel, ::Google::Ads::AdManager::V1::UpdateLabelRequest, ::Google::Ads::AdManager::V1::Label
-            # API to batch update `Label` objects.
+            # Batch updates `Label` objects.
             rpc :BatchUpdateLabels, ::Google::Ads::AdManager::V1::BatchUpdateLabelsRequest, ::Google::Ads::AdManager::V1::BatchUpdateLabelsResponse
-            # API to activate `Label` objects.
+            # Activates `Label` objects.
             rpc :BatchActivateLabels, ::Google::Ads::AdManager::V1::BatchActivateLabelsRequest, ::Google::Ads::AdManager::V1::BatchActivateLabelsResponse
-            # API to deactivate `Label` objects.
+            # Deactivates `Label` objects.
             rpc :BatchDeactivateLabels, ::Google::Ads::AdManager::V1::BatchDeactivateLabelsRequest, ::Google::Ads::AdManager::V1::BatchDeactivateLabelsResponse
           end
 

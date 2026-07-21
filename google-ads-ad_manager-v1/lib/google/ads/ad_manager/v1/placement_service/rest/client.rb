@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Placement` object.
+              # Retrieves a `Placement` object.
               #
               # @overload get_placement(request, options = nil)
               #   Pass arguments to `get_placement` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Placement` objects.
+              # Lists `Placement` objects.
               #
               # @overload list_placements(request, options = nil)
               #   Pass arguments to `list_placements` via a request object, either of type
@@ -373,7 +373,7 @@ module Google
               end
 
               ##
-              # API to create an `Placement` object.
+              # Creates an `Placement` object.
               #
               # @overload create_placement(request, options = nil)
               #   Pass arguments to `create_placement` via a request object, either of type
@@ -454,7 +454,7 @@ module Google
               end
 
               ##
-              # API to update an `Placement` object.
+              # Updates an `Placement` object.
               #
               # @overload update_placement(request, options = nil)
               #   Pass arguments to `update_placement` via a request object, either of type
@@ -538,7 +538,7 @@ module Google
               end
 
               ##
-              # API to batch create `Placement` objects.
+              # Creates `Placement` objects.
               #
               # @overload batch_create_placements(request, options = nil)
               #   Pass arguments to `batch_create_placements` via a request object, either of type
@@ -622,7 +622,7 @@ module Google
               end
 
               ##
-              # API to batch update `Placement` objects.
+              # Batch updates `Placement` objects.
               #
               # @overload batch_update_placements(request, options = nil)
               #   Pass arguments to `batch_update_placements` via a request object, either of type

@@ -1254,7 +1254,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_import_job(name: nil)
+              # @overload get_import_job(name: nil, public_key_format: nil)
               #   Pass arguments to `get_import_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1262,6 +1262,16 @@ module Google
               #   @param name [::String]
               #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the
               #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+              #   @param public_key_format [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+              #     Optional. Specifies the [WrappingPublicKey][] format.
+              #     If not specified:
+              #       * For RSA-based import methods, the wrapping key will be returned in PEM
+              #       format
+              #       * For pure ML-KEM-based import methods, the wrapping key will be returned
+              #       in the raw bytes format specified in FIPS-203
+              #       * For X-Wing-based import methods, the wrapping key will be returned in
+              #       the raw bytes format specified in
+              #       https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Kms::V1::ImportJob]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1506,7 +1516,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_crypto_key(parent: nil, crypto_key_id: nil, crypto_key: nil, skip_initial_version_creation: nil)
+              # @overload create_crypto_key(parent: nil, crypto_key_id: nil, crypto_key: nil, skip_initial_version_creation: nil, trusted_wrapping_enabled: nil)
               #   Pass arguments to `create_crypto_key` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1529,6 +1539,16 @@ module Google
               #     or
               #     {::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client#import_crypto_key_version ImportCryptoKeyVersion}
               #     before you can use this {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+              #   @param trusted_wrapping_enabled [::Boolean]
+              #     Optional. Whether trusted wrapping will be enabled on the first
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} created for this
+              #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. This field is only supported
+              #     for keys with
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level CryptoKeyVersionTemplate.protection_level}
+              #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+              #     This field is supported for all
+              #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurposes} except
+              #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Kms::V1::CryptoKey]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1886,7 +1906,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_crypto_key_version(parent: nil, crypto_key_version: nil, algorithm: nil, import_job: nil, wrapped_key: nil, rsa_aes_wrapped_key: nil)
+              # @overload import_crypto_key_version(parent: nil, crypto_key_version: nil, algorithm: nil, import_job: nil, wrapped_key: nil, rsa_aes_wrapped_key: nil, trusted_wrapping_enabled: nil)
               #   Pass arguments to `import_crypto_key_version` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1975,6 +1995,14 @@ module Google
               #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#wrapped_key wrapped_key}.
               #     Prefer to use that field in new work. Either that field or this field
               #     (but not both) must be specified.
+              #   @param trusted_wrapping_enabled [::Boolean]
+              #     Optional. Whether trusted wrapping will be enabled on the imported
+              #     [CryptoKeyVersion]. This field is only supported for keys with
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level CryptoKeyVersionTemplate.protection_level}
+              #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM_SINGLE_TENANT HSM_SINGLE_TENANT}.
+              #     This field is supported for all
+              #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose CryptoKeyPurposes} besides
+              #     {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Kms::V1::CryptoKeyVersion]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2027,6 +2055,228 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @key_management_service_stub.import_crypto_key_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Import wrapped key material into a
+              # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with a trusted
+              # key.
+              #
+              # All requests must specify a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. If
+              # a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} is additionally
+              # specified in the request, key material will be reimported into that
+              # version. Otherwise, a new version will be created, and will be assigned the
+              # next sequential id within the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+              #
+              # The {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} will have
+              # trusted_wrapping_enabled set to true.
+              #
+              # @overload import_trusted_key_wrapped_crypto_key_version(request, options = nil)
+              #   Pass arguments to `import_trusted_key_wrapped_crypto_key_version` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload import_trusted_key_wrapped_crypto_key_version(parent: nil, importing_key: nil, crypto_key_version: nil, wrapped_key: nil, algorithm: nil)
+              #   Pass arguments to `import_trusted_key_wrapped_crypto_key_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the
+              #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to be imported into.
+              #   @param importing_key [::String]
+              #     Required. Required - the CKV of the trusted key used to import.
+              #     This can be the name of a CryptoKeyVersion or a CryptoKey.
+              #   @param crypto_key_version [::String]
+              #     Optional. The optional {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of
+              #     an existing {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to
+              #     target for an import operation. If this field is not present, a new
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} containing the
+              #     supplied key material is created.
+              #
+              #     If this field is present, the supplied key material is imported into
+              #     the existing {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. To
+              #     import into an existing
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, the
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must be a child of
+              #     {::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest#parent ImportTrustedKeyWrappedCryptoKeyVersionRequest.parent},
+              #     have been previously created via
+              #     {::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client#import_trusted_key_wrapped_crypto_key_version ImportTrustedKeyWrappedCryptoKeyVersion},
+              #     and be in
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}
+              #     or
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}
+              #     state. The key material and algorithm must match the previous
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} exactly if the
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} has ever contained
+              #     key material
+              #   @param wrapped_key [::String]
+              #     Required. The target key pre-wrapped on premises.
+              #   @param algorithm [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
+              #     Required. Required - The
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm}
+              #     of the key being imported. This does not need to match the
+              #     {::Google::Cloud::Kms::V1::CryptoKey#version_template version_template} of the
+              #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} this version imports into.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new
+              #
+              #   # Call the import_trusted_key_wrapped_crypto_key_version method.
+              #   result = client.import_trusted_key_wrapped_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+              #   p result
+              #
+              def import_trusted_key_wrapped_crypto_key_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.import_trusted_key_wrapped_crypto_key_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.import_trusted_key_wrapped_crypto_key_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.import_trusted_key_wrapped_crypto_key_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.import_trusted_key_wrapped_crypto_key_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Exports a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with a
+              # trusted key.
+              #
+              # The {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must have
+              # trusted_wrapping_enabled set to true. The
+              # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} of the
+              # [wrapping_key] must have the
+              # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::AES_WRAPPING AES_WRAPPING}
+              # purpose. The [wrapping_key] must have the
+              # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm::AES_256_KWP AES_256_KWP}
+              # algorithm.
+              #
+              # @overload export_trusted_key_wrapped_crypto_key_version(request, options = nil)
+              #   Pass arguments to `export_trusted_key_wrapped_crypto_key_version` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload export_trusted_key_wrapped_crypto_key_version(name: nil, wrapping_key: nil)
+              #   Pass arguments to `export_trusted_key_wrapped_crypto_key_version` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to export. The
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must have
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#trusted_wrapping_enabled trusted_wrapping_enabled}
+              #     set to true.
+              #   @param wrapping_key [::String]
+              #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as a
+              #     wrapping key. The {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+              #     must have {::Google::Cloud::Kms::V1::CryptoKeyVersion#hsm_trusted hsm_trusted}
+              #     set to true.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new
+              #
+              #   # Call the export_trusted_key_wrapped_crypto_key_version method.
+              #   result = client.export_trusted_key_wrapped_crypto_key_version request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse.
+              #   p result
+              #
+              def export_trusted_key_wrapped_crypto_key_version request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.export_trusted_key_wrapped_crypto_key_version.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.export_trusted_key_wrapped_crypto_key_version.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.export_trusted_key_wrapped_crypto_key_version.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.export_trusted_key_wrapped_crypto_key_version request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -4073,6 +4323,16 @@ module Google
                   #
                   attr_reader :import_crypto_key_version
                   ##
+                  # RPC-specific configuration for `import_trusted_key_wrapped_crypto_key_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :import_trusted_key_wrapped_crypto_key_version
+                  ##
+                  # RPC-specific configuration for `export_trusted_key_wrapped_crypto_key_version`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_trusted_key_wrapped_crypto_key_version
+                  ##
                   # RPC-specific configuration for `create_import_job`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4189,6 +4449,10 @@ module Google
                     @delete_crypto_key_version = ::Gapic::Config::Method.new delete_crypto_key_version_config
                     import_crypto_key_version_config = parent_rpcs.import_crypto_key_version if parent_rpcs.respond_to? :import_crypto_key_version
                     @import_crypto_key_version = ::Gapic::Config::Method.new import_crypto_key_version_config
+                    import_trusted_key_wrapped_crypto_key_version_config = parent_rpcs.import_trusted_key_wrapped_crypto_key_version if parent_rpcs.respond_to? :import_trusted_key_wrapped_crypto_key_version
+                    @import_trusted_key_wrapped_crypto_key_version = ::Gapic::Config::Method.new import_trusted_key_wrapped_crypto_key_version_config
+                    export_trusted_key_wrapped_crypto_key_version_config = parent_rpcs.export_trusted_key_wrapped_crypto_key_version if parent_rpcs.respond_to? :export_trusted_key_wrapped_crypto_key_version
+                    @export_trusted_key_wrapped_crypto_key_version = ::Gapic::Config::Method.new export_trusted_key_wrapped_crypto_key_version_config
                     create_import_job_config = parent_rpcs.create_import_job if parent_rpcs.respond_to? :create_import_job
                     @create_import_job = ::Gapic::Config::Method.new create_import_job_config
                     update_crypto_key_config = parent_rpcs.update_crypto_key if parent_rpcs.respond_to? :update_crypto_key

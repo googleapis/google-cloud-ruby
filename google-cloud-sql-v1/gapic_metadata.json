@@ -310,6 +310,11 @@
                 "get_connect_settings"
               ]
             },
+            "ResolveConnectSettings": {
+              "methods": [
+                "resolve_connect_settings"
+              ]
+            },
             "GenerateEphemeralCert": {
               "methods": [
                 "generate_ephemeral_cert"

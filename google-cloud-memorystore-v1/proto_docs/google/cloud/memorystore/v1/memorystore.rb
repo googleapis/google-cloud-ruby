@@ -115,7 +115,7 @@ module Google
         #     Optional. Endpoints for the instance.
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1::Instance::Mode]
-        #     Optional. The mode config for the instance.
+        #     Optional. Immutable. The mode config for the instance.
         # @!attribute [rw] simulate_maintenance_event
         #   @return [::Boolean]
         #     Optional. Input only. Simulate a maintenance event.
@@ -187,6 +187,9 @@ module Google
         # @!attribute [rw] rotate_server_certificate
         #   @return [::Boolean]
         #     Optional. Input only. Rotate the server certificates.
+        # @!attribute [r] migration_config
+        #   @return [::Google::Cloud::Memorystore::V1::MigrationConfig]
+        #     Output only. Migration config for the instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,6 +308,9 @@ module Google
 
             # Instance is being deleted.
             DELETING = 4
+
+            # Instance is being migrated.
+            MIGRATING = 6
           end
 
           # Possible authorization modes of the instance.
@@ -317,6 +323,9 @@ module Google
 
             # IAM basic authorization.
             IAM_AUTH = 2
+
+            # Token based authorization.
+            TOKEN_AUTH = 3
           end
 
           # Possible in-transit encryption modes of the instance.
@@ -362,7 +371,7 @@ module Google
             # Standard large.
             STANDARD_LARGE = 8
 
-            # High memory 2x large.
+            # High memory 2xlarge.
             HIGHMEM_2XLARGE = 9
 
             # Custom pico.
@@ -406,6 +415,107 @@ module Google
 
             # Deprecated: Use CUSTOMER_MANAGED_CAS_CA instead.
             SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA = 3
+          end
+        end
+
+        # Request for `StartMigration`.
+        # @!attribute [rw] self_managed_source
+        #   @return [::Google::Cloud::Memorystore::V1::SelfManagedSource]
+        #     Required. Configuration for migrating from a self-managed Valkey/Redis
+        #     instance
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the instance to start migration on.
+        #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        class StartMigrationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for `FinishMigration`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the instance to finalize migration on.
+        #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. By default, the `FinishMigration` operation ensures the target
+        #     replication offset to catch up to the source offset as of the time of the
+        #     call. Set this field to `true` to bypass this offset verification check.
+        class FinishMigrationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of the self-managed source instance.
+        # @!attribute [rw] ip_address
+        #   @return [::String]
+        #     Required. The IP address of the source instance.
+        #     This IP address should be a stable IP address that can be accessed by the
+        #     Memorystore instance throughout the migration process.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Required. The port of the source instance.
+        #     This port should be a stable port that can be accessed by the Memorystore
+        #     instance throughout the migration process.
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     Required. The resource name of the Private Service Connect Network
+        #     Attachment used to establish connectivity to the source instance. This
+        #     network attachment has the following requirements:
+        #     1. It must be in the same project as the Memorystore instance.
+        #     2. It must be in the same region as the Memorystore instance.
+        #     3. The subnet attached to the network attachment must be in the same VPC
+        #     network as the source instance nodes.
+        #
+        #     Format:
+        #     projects/\\{project}/regions/\\{region}/networkAttachments/\\{network_attachment}
+        class SelfManagedSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the migration of an instance.
+        # @!attribute [r] self_managed_source
+        #   @return [::Google::Cloud::Memorystore::V1::SelfManagedSource]
+        #     Output only. Configuration for migrating from a self-managed Valkey/Redis
+        #     instance
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::MigrationConfig::State]
+        #     Output only. Migration state of the instance.
+        # @!attribute [r] force_finish_migration
+        #   @return [::Boolean]
+        #     Output only. Represents a boolean flag to force migration finalization
+        #     without offset catch up validation between source and target before
+        #     stopping replication.
+        class MigrationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Migration state of the instance.
+          # New values may be added in the future.
+          module State
+            # Instance has no migration related activity. This is the initial state.
+            STATE_UNSPECIFIED = 0
+
+            # Instance is not currently migrating. The instance underwent a migration
+            # attempt that failed, and the subsequent rollback was successful. The
+            # instance is now ready for a new migration attempt if desired.
+            ROLLED_BACK = 1
+
+            # Indicates a previous migration attempt failed. The high-level instance
+            # state will be `MIGRATING`. The instance is not ready for a new migration
+            # attempt. Rollback is in progress to restore the instance to its original
+            # state. The instance will remain in this state until rollback is
+            # successful.
+            ROLLING_BACK = 5
+
+            # Instance is in the process of migration. Instance has established
+            # successful replication and is ready for cutover.
+            REPLICATION_ESTABLISHED = 6
+
+            # Instance is successfully migrated.
+            MIGRATED = 4
           end
         end
 
@@ -672,6 +782,71 @@ module Google
           end
         end
 
+        # Token based auth user for the instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Token based auth user name.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::TokenAuthUser::State]
+        #     Output only. The state of the token based auth user.
+        class TokenAuthUser
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the different states of a token based auth user.
+          # New values may be added in the future.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # The auth user is active.
+            ACTIVE = 1
+
+            # The auth user is being created.
+            CREATING = 2
+
+            # The auth user is being updated.
+            UPDATING = 3
+
+            # The auth user is being deleted.
+            DELETING = 4
+          end
+        end
+
+        # Auth token for the instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Name of the auth token.
+        # @!attribute [r] token
+        #   @return [::String]
+        #     Output only. The auth token.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create time of the auth token.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::AuthToken::State]
+        #     Output only. The state of the auth token.
+        class AuthToken
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents the different states of an auth token.
+          # New values may be added in the future.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # The auth token is active.
+            ACTIVE = 1
+
+            # The auth token is being created.
+            CREATING = 2
+
+            # The auth token is being deleted.
+            DELETING = 3
+          end
+        end
+
         # Maintenance policy per instance.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -753,7 +928,7 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. The network where the PSC endpoints are created, in the form of
-        #     projects/\\{project_id}/global/networks/\\{network_id}.
+        #     projects/\\{project_id}/global/networks/\\{network_name}.
         # @!attribute [r] service_attachment
         #   @return [::String]
         #     Output only. The service attachment which is the target of the PSC
@@ -797,7 +972,7 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. The consumer network where the IP address resides, in the form of
-        #     projects/\\{project_id}/global/networks/\\{network_id}.
+        #     projects/\\{project_id}/global/networks/\\{network_name}.
         # @!attribute [rw] service_attachment
         #   @return [::String]
         #     Required. The service attachment which is the target of the PSC connection,
@@ -828,7 +1003,7 @@ module Google
         #   @return [::String]
         #     Output only. The network where the IP address of the discovery endpoint
         #     will be reserved, in the form of
-        #     projects/\\{network_project}/global/networks/\\{network_id}.
+        #     projects/\\{network_project}/global/networks/\\{network_name}.
         class DiscoveryEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1012,7 +1187,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for [ListInstances][].
+        # Response message for `ListInstances`.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Memorystore::V1::Instance>]
         #     If the \\{location} requested was "-" the response contains a list of
@@ -1133,7 +1308,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [ListBackupCollections]
+        # Request for `ListBackupCollections`.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the backupCollection location using the
@@ -1147,18 +1322,18 @@ module Google
         #     If not specified, a default value of 1000 will be used by the service.
         #     Regardless of the page_size value, the response may include a partial list
         #     and a caller should only rely on response's
-        #     {::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse#next_page_token `next_page_token`}
+        #     `next_page_token`
         #     to determine if there are more clusters left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The `next_page_token` value returned from a previous
-        #     [ListBackupCollections] request, if any.
+        #     `ListBackupCollections` request, if any.
         class ListBackupCollectionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for [ListBackupCollections].
+        # Response for `ListBackupCollections`.
         # @!attribute [rw] backup_collections
         #   @return [::Array<::Google::Cloud::Memorystore::V1::BackupCollection>]
         #     A list of backupCollections in the project.
@@ -1183,7 +1358,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [GetBackupCollection].
+        # Request for `GetBackupCollection`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance backupCollection resource name using the form:
@@ -1194,7 +1369,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [ListBackups].
+        # Request for `ListBackups`.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the backupCollection using the form:
@@ -1206,18 +1381,18 @@ module Google
         #     If not specified, a default value of 1000 will be used by the service.
         #     Regardless of the page_size value, the response may include a partial list
         #     and a caller should only rely on response's
-        #     {::Google::Cloud::Memorystore::V1::ListBackupsResponse#next_page_token `next_page_token`}
+        #     `next_page_token`
         #     to determine if there are more clusters left to be queried.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The `next_page_token` value returned from a previous
-        #     [ListBackupCollections] request, if any.
+        #     `ListBackupCollections` request, if any.
         class ListBackupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for [ListBackups].
+        # Response for `ListBackups`.
         # @!attribute [rw] backups
         #   @return [::Array<::Google::Cloud::Memorystore::V1::Backup>]
         #     A list of backups in the project.
@@ -1233,7 +1408,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [GetBackup].
+        # Request for `GetBackup`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance backup resource name using the form:
@@ -1243,7 +1418,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [DeleteBackup].
+        # Request for `DeleteBackup`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance backup resource name using the form:
@@ -1256,7 +1431,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [ExportBackup].
+        # Request for `ExportBackup`.
         # @!attribute [rw] gcs_bucket
         #   @return [::String]
         #     Google Cloud Storage bucket, like "my-bucket".
@@ -1269,7 +1444,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [BackupInstance].
+        # Request for `BackupInstance`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Instance resource name using the form:
@@ -1288,13 +1463,194 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [GetCertificateAuthority][].
+        # Request message for `GetCertificateAuthority`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the certificate authority.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/certificateAuthority
         class GetCertificateAuthorityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `ListTokenAuthUsers`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent to list token auth users from.
+        #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return. The maximum value is 1000;
+        #     values above 1000 will be coerced to 1000. If not specified, a default
+        #     value of 1000 will be used by the service. Regardless of the page_size
+        #     value, the response may include a partial list and a caller should only
+        #     rely on response's `next_page_token` to determine if there are more token
+        #     auth users left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     `ListTokenAuthUsers` request, if any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Expression for filtering results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results by a defined order.
+        class ListTokenAuthUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `ListTokenAuthUsers`.
+        # @!attribute [rw] token_auth_users
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::TokenAuthUser>]
+        #     A list of token auth users in the project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Token auth users that could not be reached.
+        class ListTokenAuthUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `GetTokenAuthUser`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of token auth user for a basic auth enabled instance.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+        class GetTokenAuthUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `ListAuthTokens`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent to list auth tokens from.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return. The maximum value is 1000;
+        #     values above 1000 will be coerced to 1000.
+        #
+        #     If not specified, a default value of 1000 will be used by the service.
+        #     Regardless of the page_size value, the response may include a partial list
+        #     and a caller should only rely on response's
+        #     `next_page_token`
+        #     to determine if there are more auth tokens left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     `ListAuthTokens` request, if any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Expression for filtering results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results by a defined order.
+        class ListAuthTokensRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `ListAuthTokens`.
+        # @!attribute [rw] auth_tokens
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::AuthToken>]
+        #     A list of auth tokens in the project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Auth tokens that could not be reached.
+        class ListAuthTokensResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `GetAuthToken`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of token auth user for a token auth enabled instance.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+        class GetAuthTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `AddTokenAuthUser`.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The instance resource that this token auth user will be added
+        #     for. Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [rw] token_auth_user
+        #   @return [::String]
+        #     Required. The name of the token auth user to add.
+        class AddTokenAuthUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `DeleteTokenAuthUser`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the token auth user to delete.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any auth tokens from this user will also be
+        #     deleted. Otherwise, the request will only work if the user has no auth
+        #     tokens.
+        class DeleteTokenAuthUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `AddAuthToken`.
+        # @!attribute [rw] token_auth_user
+        #   @return [::String]
+        #     Required. The name of the token auth user resource that this token will be
+        #     added for.
+        # @!attribute [rw] auth_token
+        #   @return [::Google::Cloud::Memorystore::V1::AuthToken]
+        #     Required. The auth token to add.
+        class AddAuthTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `DeleteAuthToken`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the token auth user resource that this token will be
+        #     deleted from. Format:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{name}
+        class DeleteAuthTokenRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1364,8 +1720,7 @@ module Google
           end
         end
 
-        # Request for
-        # {::Google::Cloud::Memorystore::V1::Memorystore::Client#get_shared_regional_certificate_authority GetSharedRegionalCertificateAuthority}.
+        # Request for `GetSharedRegionalCertificateAuthority`.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Regional certificate authority resource name using the form:

@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/datacatalog/lineage/configmanagement/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-data_catalog-lineage-config_management/$1

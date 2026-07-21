@@ -885,6 +885,1675 @@ module Google
               end
 
               ##
+              # Reschedules upcoming maintenance event.
+              #
+              # @overload reschedule_maintenance(request, options = nil)
+              #   Pass arguments to `reschedule_maintenance` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::RescheduleMaintenanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::RescheduleMaintenanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload reschedule_maintenance(name: nil, reschedule_type: nil, schedule_time: nil)
+              #   Pass arguments to `reschedule_maintenance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the instance to reschedule maintenance for:
+              #     `projects/{project}/locations/{location_id}/instances/{instance}`
+              #   @param reschedule_type [::Google::Cloud::Memorystore::V1beta::RescheduleMaintenanceRequest::RescheduleType]
+              #     Required. If reschedule type is SPECIFIC_TIME, schedule_time must be set.
+              #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
+              #     Optional. Timestamp when the maintenance shall be rescheduled to if
+              #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format.
+              #     Example: `2012-11-15T16:19:00.094Z`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::RescheduleMaintenanceRequest.new
+              #
+              #   # Call the reschedule_maintenance method.
+              #   result = client.reschedule_maintenance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def reschedule_maintenance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::RescheduleMaintenanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.reschedule_maintenance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.reschedule_maintenance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.reschedule_maintenance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.reschedule_maintenance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all backup collections owned by a consumer project in either the
+              # specified location (region) or all locations.
+              #
+              # If `location_id` is specified as `-` (wildcard), then all regions
+              # available to the project are queried, and the results are aggregated.
+              #
+              # @overload list_backup_collections(request, options = nil)
+              #   Pass arguments to `list_backup_collections` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::ListBackupCollectionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::ListBackupCollectionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_backup_collections(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_backup_collections` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the backupCollection location using the
+              #     form:
+              #         `projects/{project_id}/locations/{location_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     `next_page_token`
+              #     to determine if there are more clusters left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListBackupCollections` request, if any.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::BackupCollection>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::BackupCollection>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::ListBackupCollectionsRequest.new
+              #
+              #   # Call the list_backup_collections method.
+              #   result = client.list_backup_collections request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1beta::BackupCollection.
+              #     p item
+              #   end
+              #
+              def list_backup_collections request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::ListBackupCollectionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_backup_collections.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_backup_collections.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_backup_collections.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_backup_collections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_backup_collections, "backup_collections", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get a backup collection.
+              #
+              # @overload get_backup_collection(request, options = nil)
+              #   Pass arguments to `get_backup_collection` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::GetBackupCollectionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::GetBackupCollectionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_backup_collection(name: nil)
+              #   Pass arguments to `get_backup_collection` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Instance backupCollection resource name using the form:
+              #         `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1beta::BackupCollection]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1beta::BackupCollection]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::GetBackupCollectionRequest.new
+              #
+              #   # Call the get_backup_collection method.
+              #   result = client.get_backup_collection request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1beta::BackupCollection.
+              #   p result
+              #
+              def get_backup_collection request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::GetBackupCollectionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_backup_collection.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_backup_collection.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_backup_collection.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_backup_collection request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all backups owned by a backup collection.
+              #
+              # @overload list_backups(request, options = nil)
+              #   Pass arguments to `list_backups` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::ListBackupsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::ListBackupsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_backups(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_backups` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the backupCollection using the form:
+              #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     `next_page_token`
+              #     to determine if there are more clusters left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListBackupCollections` request, if any.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::Backup>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::Backup>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::ListBackupsRequest.new
+              #
+              #   # Call the list_backups method.
+              #   result = client.list_backups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1beta::Backup.
+              #     p item
+              #   end
+              #
+              def list_backups request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::ListBackupsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_backups.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_backups.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_backups.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_backups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_backups, "backups", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the details of a specific backup.
+              #
+              # @overload get_backup(request, options = nil)
+              #   Pass arguments to `get_backup` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::GetBackupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::GetBackupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_backup(name: nil)
+              #   Pass arguments to `get_backup` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Instance backup resource name using the form:
+              #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1beta::Backup]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1beta::Backup]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::GetBackupRequest.new
+              #
+              #   # Call the get_backup method.
+              #   result = client.get_backup request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1beta::Backup.
+              #   p result
+              #
+              def get_backup request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::GetBackupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_backup.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_backup.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_backup.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_backup request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a specific backup.
+              #
+              # @overload delete_backup(request, options = nil)
+              #   Pass arguments to `delete_backup` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::DeleteBackupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::DeleteBackupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_backup(name: nil, request_id: nil)
+              #   Pass arguments to `delete_backup` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Instance backup resource name using the form:
+              #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::DeleteBackupRequest.new
+              #
+              #   # Call the delete_backup method.
+              #   result = client.delete_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_backup request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::DeleteBackupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_backup.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_backup.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_backup.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.delete_backup request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Exports a specific backup to a customer target Cloud Storage URI.
+              #
+              # @overload export_backup(request, options = nil)
+              #   Pass arguments to `export_backup` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::ExportBackupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::ExportBackupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload export_backup(gcs_bucket: nil, name: nil)
+              #   Pass arguments to `export_backup` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param gcs_bucket [::String]
+              #     Google Cloud Storage bucket, like "my-bucket".
+              #   @param name [::String]
+              #     Required. Instance backup resource name using the form:
+              #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::ExportBackupRequest.new
+              #
+              #   # Call the export_backup method.
+              #   result = client.export_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def export_backup request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::ExportBackupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.export_backup.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.export_backup.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.export_backup.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.export_backup request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Backup Instance.
+              # If this is the first time a backup is being created, a backup collection
+              # will be created at the backend, and this backup belongs to this collection.
+              # Both collection and backup will have a resource name. Backup will be
+              # executed for each shard. A replica (primary if nonHA) will be selected to
+              # perform the execution. Backup call will be rejected if there is an ongoing
+              # backup or update operation. Be aware that during preview, if the instance's
+              # internal software version is too old, critical update will be performed
+              # before actual backup. Once the internal software version is updated to the
+              # minimum version required by the backup feature, subsequent backups will not
+              # require critical update. After preview, there will be no critical update
+              # needed for backup.
+              #
+              # @overload backup_instance(request, options = nil)
+              #   Pass arguments to `backup_instance` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::BackupInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::BackupInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload backup_instance(name: nil, ttl: nil, backup_id: nil)
+              #   Pass arguments to `backup_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Instance resource name using the form:
+              #      `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+              #     where `location_id` refers to a Google Cloud region.
+              #   @param ttl [::Google::Protobuf::Duration, ::Hash]
+              #     Optional. TTL for the backup to expire. Value range is 1 day to 100 years.
+              #     If not specified, the default value is 100 years.
+              #   @param backup_id [::String]
+              #     Optional. The id of the backup to be created. If not specified, the
+              #     default value ([YYYYMMDDHHMMSS]_[Shortened Instance UID] is used.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::BackupInstanceRequest.new
+              #
+              #   # Call the backup_instance method.
+              #   result = client.backup_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def backup_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::BackupInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.backup_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.backup_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.backup_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.backup_instance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Initiates the migration of a source instance to the target Memorystore
+              # instance.
+              #
+              # After the successful completion of this operation, the target instance
+              # will:
+              # 1. Set up replication with the source instance and replicate any writes to
+              # the source instance.
+              # 2. Only allow reads.
+              #
+              # @overload start_migration(request, options = nil)
+              #   Pass arguments to `start_migration` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::StartMigrationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::StartMigrationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload start_migration(self_managed_source: nil, name: nil)
+              #   Pass arguments to `start_migration` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param self_managed_source [::Google::Cloud::Memorystore::V1beta::SelfManagedSource, ::Hash]
+              #     Required. Configuration for migrating from a self-managed Valkey/Redis
+              #     instance
+              #   @param name [::String]
+              #     Required. The resource name of the instance to start migration on.
+              #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::StartMigrationRequest.new
+              #
+              #   # Call the start_migration method.
+              #   result = client.start_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def start_migration request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::StartMigrationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.start_migration.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.start_migration.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start_migration.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.start_migration request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Finalizes the migration process.
+              #
+              # After the successful completion of this operation, the target instance
+              # will:
+              # 1. Stop replicating from the source instance.
+              # 2. Allow both reads and writes.
+              #
+              # @overload finish_migration(request, options = nil)
+              #   Pass arguments to `finish_migration` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::FinishMigrationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::FinishMigrationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload finish_migration(name: nil, force: nil)
+              #   Pass arguments to `finish_migration` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the instance to finalize migration on.
+              #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param force [::Boolean]
+              #     Optional. By default, the `FinishMigration` operation ensures the target
+              #     replication offset to catch up to the source offset as of the time of the
+              #     call. Set this field to `true` to bypass this offset verification check.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::FinishMigrationRequest.new
+              #
+              #   # Call the finish_migration method.
+              #   result = client.finish_migration request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def finish_migration request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::FinishMigrationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.finish_migration.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.finish_migration.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.finish_migration.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.finish_migration request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all the token auth users for a token based auth enabled instance.
+              #
+              # @overload list_token_auth_users(request, options = nil)
+              #   Pass arguments to `list_token_auth_users` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::ListTokenAuthUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::ListTokenAuthUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_token_auth_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_token_auth_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent to list token auth users from.
+              #     Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return. The maximum value is 1000;
+              #     values above 1000 will be coerced to 1000. If not specified, a default
+              #     value of 1000 will be used by the service. Regardless of the page_size
+              #     value, the response may include a partial list and a caller should only
+              #     rely on response's `next_page_token` to determine if there are more token
+              #     auth users left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListTokenAuthUsers` request, if any.
+              #   @param filter [::String]
+              #     Optional. Expression for filtering results.
+              #   @param order_by [::String]
+              #     Optional. Sort results by a defined order.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::TokenAuthUser>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::TokenAuthUser>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::ListTokenAuthUsersRequest.new
+              #
+              #   # Call the list_token_auth_users method.
+              #   result = client.list_token_auth_users request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1beta::TokenAuthUser.
+              #     p item
+              #   end
+              #
+              def list_token_auth_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::ListTokenAuthUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_token_auth_users.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_token_auth_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_token_auth_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_token_auth_users request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_token_auth_users, "token_auth_users", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a specific token auth user for a token based auth enabled instance.
+              #
+              # @overload get_token_auth_user(request, options = nil)
+              #   Pass arguments to `get_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::GetTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::GetTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_token_auth_user(name: nil)
+              #   Pass arguments to `get_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of token auth user for a basic auth enabled instance.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1beta::TokenAuthUser]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1beta::TokenAuthUser]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::GetTokenAuthUserRequest.new
+              #
+              #   # Call the get_token_auth_user method.
+              #   result = client.get_token_auth_user request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1beta::TokenAuthUser.
+              #   p result
+              #
+              def get_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::GetTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_token_auth_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_token_auth_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all the auth tokens for a specific token auth user.
+              #
+              # @overload list_auth_tokens(request, options = nil)
+              #   Pass arguments to `list_auth_tokens` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::ListAuthTokensRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::ListAuthTokensRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_auth_tokens(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_auth_tokens` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent to list auth tokens from.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return. The maximum value is 1000;
+              #     values above 1000 will be coerced to 1000.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     `next_page_token`
+              #     to determine if there are more auth tokens left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListAuthTokens` request, if any.
+              #   @param filter [::String]
+              #     Optional. Expression for filtering results.
+              #   @param order_by [::String]
+              #     Optional. Sort results by a defined order.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::AuthToken>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1beta::AuthToken>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::ListAuthTokensRequest.new
+              #
+              #   # Call the list_auth_tokens method.
+              #   result = client.list_auth_tokens request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1beta::AuthToken.
+              #     p item
+              #   end
+              #
+              def list_auth_tokens request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::ListAuthTokensRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_auth_tokens.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_auth_tokens.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_auth_tokens.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_auth_tokens request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_auth_tokens, "auth_tokens", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a token based auth enabled instance's auth token for a given user.
+              #
+              # @overload get_auth_token(request, options = nil)
+              #   Pass arguments to `get_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::GetAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::GetAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_auth_token(name: nil)
+              #   Pass arguments to `get_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of token auth user for a token auth enabled instance.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{auth_token}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1beta::AuthToken]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1beta::AuthToken]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::GetAuthTokenRequest.new
+              #
+              #   # Call the get_auth_token method.
+              #   result = client.get_auth_token request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1beta::AuthToken.
+              #   p result
+              #
+              def get_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::GetAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_auth_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_auth_token request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds a token auth user for a token based auth enabled instance.
+              #
+              # @overload add_token_auth_user(request, options = nil)
+              #   Pass arguments to `add_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::AddTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::AddTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_token_auth_user(instance: nil, token_auth_user: nil)
+              #   Pass arguments to `add_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Required. The instance resource that this token auth user will be added
+              #     for. Format: projects/\\{project}/locations/\\{location}/instances/\\{instance}
+              #   @param token_auth_user [::String]
+              #     Required. The name of the token auth user to add.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::AddTokenAuthUserRequest.new
+              #
+              #   # Call the add_token_auth_user method.
+              #   result = client.add_token_auth_user request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def add_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::AddTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_token_auth_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.add_token_auth_user request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a token auth user for a token based auth enabled instance.
+              #
+              # @overload delete_token_auth_user(request, options = nil)
+              #   Pass arguments to `delete_token_auth_user` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::DeleteTokenAuthUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::DeleteTokenAuthUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_token_auth_user(name: nil, request_id: nil, force: nil)
+              #   Pass arguments to `delete_token_auth_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the token auth user to delete.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any auth tokens from this user will also be
+              #     deleted. Otherwise, the request will only work if the user has no auth
+              #     tokens.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::DeleteTokenAuthUserRequest.new
+              #
+              #   # Call the delete_token_auth_user method.
+              #   result = client.delete_token_auth_user request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_token_auth_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::DeleteTokenAuthUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_token_auth_user.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_token_auth_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_token_auth_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.delete_token_auth_user request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds a token for a user of a token based auth enabled instance.
+              #
+              # @overload add_auth_token(request, options = nil)
+              #   Pass arguments to `add_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::AddAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::AddAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_auth_token(token_auth_user: nil, auth_token: nil)
+              #   Pass arguments to `add_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param token_auth_user [::String]
+              #     Required. The name of the token auth user resource that this token will be
+              #     added for.
+              #   @param auth_token [::Google::Cloud::Memorystore::V1beta::AuthToken, ::Hash]
+              #     Required. The auth token to add.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::AddAuthTokenRequest.new
+              #
+              #   # Call the add_auth_token method.
+              #   result = client.add_auth_token request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def add_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::AddAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_auth_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.add_auth_token request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a token for a user of a token based auth enabled instance.
+              #
+              # @overload delete_auth_token(request, options = nil)
+              #   Pass arguments to `delete_auth_token` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1beta::DeleteAuthTokenRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1beta::DeleteAuthTokenRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_auth_token(name: nil)
+              #   Pass arguments to `delete_auth_token` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the token auth user resource that this token will be
+              #     deleted from. Format:
+              #     projects/\\{project}/locations/\\{location}/instances/\\{instance}/tokenAuthUsers/\\{token_auth_user}/authTokens/\\{name}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1beta::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1beta::DeleteAuthTokenRequest.new
+              #
+              #   # Call the delete_auth_token method.
+              #   result = client.delete_auth_token request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_auth_token request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1beta::DeleteAuthTokenRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_auth_token.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_auth_token.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_auth_token.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.delete_auth_token request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Memorystore REST API.
               #
               # This class represents the configuration for Memorystore REST,
@@ -1074,6 +2743,96 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_shared_regional_certificate_authority
+                  ##
+                  # RPC-specific configuration for `reschedule_maintenance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :reschedule_maintenance
+                  ##
+                  # RPC-specific configuration for `list_backup_collections`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_backup_collections
+                  ##
+                  # RPC-specific configuration for `get_backup_collection`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_backup_collection
+                  ##
+                  # RPC-specific configuration for `list_backups`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_backups
+                  ##
+                  # RPC-specific configuration for `get_backup`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_backup
+                  ##
+                  # RPC-specific configuration for `delete_backup`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_backup
+                  ##
+                  # RPC-specific configuration for `export_backup`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_backup
+                  ##
+                  # RPC-specific configuration for `backup_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :backup_instance
+                  ##
+                  # RPC-specific configuration for `start_migration`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :start_migration
+                  ##
+                  # RPC-specific configuration for `finish_migration`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :finish_migration
+                  ##
+                  # RPC-specific configuration for `list_token_auth_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_token_auth_users
+                  ##
+                  # RPC-specific configuration for `get_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_token_auth_user
+                  ##
+                  # RPC-specific configuration for `list_auth_tokens`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_auth_tokens
+                  ##
+                  # RPC-specific configuration for `get_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_auth_token
+                  ##
+                  # RPC-specific configuration for `add_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_token_auth_user
+                  ##
+                  # RPC-specific configuration for `delete_token_auth_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_token_auth_user
+                  ##
+                  # RPC-specific configuration for `add_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_auth_token
+                  ##
+                  # RPC-specific configuration for `delete_auth_token`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_auth_token
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1091,6 +2850,42 @@ module Google
                     @get_certificate_authority = ::Gapic::Config::Method.new get_certificate_authority_config
                     get_shared_regional_certificate_authority_config = parent_rpcs.get_shared_regional_certificate_authority if parent_rpcs.respond_to? :get_shared_regional_certificate_authority
                     @get_shared_regional_certificate_authority = ::Gapic::Config::Method.new get_shared_regional_certificate_authority_config
+                    reschedule_maintenance_config = parent_rpcs.reschedule_maintenance if parent_rpcs.respond_to? :reschedule_maintenance
+                    @reschedule_maintenance = ::Gapic::Config::Method.new reschedule_maintenance_config
+                    list_backup_collections_config = parent_rpcs.list_backup_collections if parent_rpcs.respond_to? :list_backup_collections
+                    @list_backup_collections = ::Gapic::Config::Method.new list_backup_collections_config
+                    get_backup_collection_config = parent_rpcs.get_backup_collection if parent_rpcs.respond_to? :get_backup_collection
+                    @get_backup_collection = ::Gapic::Config::Method.new get_backup_collection_config
+                    list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
+                    @list_backups = ::Gapic::Config::Method.new list_backups_config
+                    get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
+                    @get_backup = ::Gapic::Config::Method.new get_backup_config
+                    delete_backup_config = parent_rpcs.delete_backup if parent_rpcs.respond_to? :delete_backup
+                    @delete_backup = ::Gapic::Config::Method.new delete_backup_config
+                    export_backup_config = parent_rpcs.export_backup if parent_rpcs.respond_to? :export_backup
+                    @export_backup = ::Gapic::Config::Method.new export_backup_config
+                    backup_instance_config = parent_rpcs.backup_instance if parent_rpcs.respond_to? :backup_instance
+                    @backup_instance = ::Gapic::Config::Method.new backup_instance_config
+                    start_migration_config = parent_rpcs.start_migration if parent_rpcs.respond_to? :start_migration
+                    @start_migration = ::Gapic::Config::Method.new start_migration_config
+                    finish_migration_config = parent_rpcs.finish_migration if parent_rpcs.respond_to? :finish_migration
+                    @finish_migration = ::Gapic::Config::Method.new finish_migration_config
+                    list_token_auth_users_config = parent_rpcs.list_token_auth_users if parent_rpcs.respond_to? :list_token_auth_users
+                    @list_token_auth_users = ::Gapic::Config::Method.new list_token_auth_users_config
+                    get_token_auth_user_config = parent_rpcs.get_token_auth_user if parent_rpcs.respond_to? :get_token_auth_user
+                    @get_token_auth_user = ::Gapic::Config::Method.new get_token_auth_user_config
+                    list_auth_tokens_config = parent_rpcs.list_auth_tokens if parent_rpcs.respond_to? :list_auth_tokens
+                    @list_auth_tokens = ::Gapic::Config::Method.new list_auth_tokens_config
+                    get_auth_token_config = parent_rpcs.get_auth_token if parent_rpcs.respond_to? :get_auth_token
+                    @get_auth_token = ::Gapic::Config::Method.new get_auth_token_config
+                    add_token_auth_user_config = parent_rpcs.add_token_auth_user if parent_rpcs.respond_to? :add_token_auth_user
+                    @add_token_auth_user = ::Gapic::Config::Method.new add_token_auth_user_config
+                    delete_token_auth_user_config = parent_rpcs.delete_token_auth_user if parent_rpcs.respond_to? :delete_token_auth_user
+                    @delete_token_auth_user = ::Gapic::Config::Method.new delete_token_auth_user_config
+                    add_auth_token_config = parent_rpcs.add_auth_token if parent_rpcs.respond_to? :add_auth_token
+                    @add_auth_token = ::Gapic::Config::Method.new add_auth_token_config
+                    delete_auth_token_config = parent_rpcs.delete_auth_token if parent_rpcs.respond_to? :delete_auth_token
+                    @delete_auth_token = ::Gapic::Config::Method.new delete_auth_token_config
 
                     yield self if block_given?
                   end

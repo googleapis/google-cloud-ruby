@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `DeviceManufacturer` object.
+              # Retrieves a `DeviceManufacturer` object.
               #
               # @overload get_device_manufacturer(request, options = nil)
               #   Pass arguments to `get_device_manufacturer` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `DeviceManufacturer` objects.
+              # Lists `DeviceManufacturer` objects.
               #
               # @overload list_device_manufacturers(request, options = nil)
               #   Pass arguments to `list_device_manufacturers` via a request object, either of type

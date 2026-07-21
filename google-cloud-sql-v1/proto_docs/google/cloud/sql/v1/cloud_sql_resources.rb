@@ -117,8 +117,12 @@ module Google
         #     (MySQL only) Whether binary log is enabled. If backup configuration is
         #     disabled, binarylog must be disabled as well.
         # @!attribute [rw] replication_log_archiving_enabled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::BoolValue]
-        #     Reserved for future use.
+        #     Optional. Deprecated: replication_log_archiving_enabled is deprecated and
+        #     will be removed from a future version of the API. Use
+        #     {::Google::Cloud::Sql::V1::BackupConfiguration#point_in_time_recovery_enabled point_in_time_recovery_enabled}
+        #     instead.
         # @!attribute [rw] location
         #   @return [::String]
         #     Location of the backup
@@ -961,20 +965,24 @@ module Google
         #     format: projects/PROJECT/regions/REGION/networkAttachments/ID
         # @!attribute [rw] psc_auto_dns_enabled
         #   @return [::Boolean]
-        #     Optional. Indicates whether PSC DNS automation is enabled for this
-        #     instance. When enabled, Cloud SQL provisions a universal DNS record across
-        #     all networks configured with Private Service Connect (PSC)
-        #     auto-connections. This will default to true for new instances when Private
-        #     Service Connect is enabled.
+        #     Optional. Indicates whether Private Service Connect DNS automation is
+        #     enabled for this instance. When enabled, Cloud SQL provisions a universal
+        #     DNS record across all networks configured with Private Service Connect
+        #     auto-connections. This will default to true for new instances when
+        #     Private Service Connect is enabled.
         # @!attribute [rw] psc_write_endpoint_dns_enabled
         #   @return [::Boolean]
-        #     Optional. Indicates whether PSC write endpoint DNS automation is enabled
-        #     for this instance. When enabled, Cloud SQL provisions a universal global
-        #     DNS record across all networks configured with Private Service Connect
-        #     (PSC) auto-connections that always points to the cluster primary instance.
-        #     This feature is only supported for Enterprise Plus edition.
-        #     This will default to true for new Enterprise Plus instances when
+        #     Optional. Indicates whether Private Service Connect write endpoint DNS
+        #     automation is enabled for this instance. When enabled, Cloud SQL provisions
+        #     a universal global DNS record across all networks configured with Private
+        #     Service Connect auto-connections that points to the cluster primary
+        #     instance. This feature is only supported for Enterprise Plus edition. This
+        #     will default to true for new Enterprise Plus instances when
         #     `psc_auto_dns_enabled` is enabled.
+        # @!attribute [rw] psc_auto_connection_policy_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether to set up the PSC service connection policy
+        #     automatically.
         class PscConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1007,6 +1015,23 @@ module Google
         # @!attribute [rw] consumer_network_status
         #   @return [::String]
         #     The connection policy status of the consumer network.
+        # @!attribute [r] service_connection_policy
+        #   @return [::String]
+        #     Output only. The service connection policy created automatically for the
+        #     consumer network when `psc_auto_connection_policy_enabled` is true. It is
+        #     in the format of:
+        #     `projects/{project}/regions/{region}/serviceConnectionPolicies/{policy_id}`
+        #     The `policy_id` is in format of `$NETWORK-$RANDOM`.
+        # @!attribute [r] service_connection_policy_creation_result
+        #   @return [::String]
+        #     Output only. The status of service connection policy creation.
+        # @!attribute [r] instance_auto_dns_status
+        #   @return [::Google::Cloud::Sql::V1::AutoDnsStatus]
+        #     Output only. The status of automated DNS provisioning.
+        # @!attribute [r] write_endpoint_auto_dns_status
+        #   @return [::Google::Cloud::Sql::V1::AutoDnsStatus]
+        #     Output only. The status of automated DNS provisioning for the write
+        #     endpoint.
         class PscAutoConnectionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1480,6 +1505,11 @@ module Google
 
             # Pre-checks the major version upgrade operation.
             PRE_CHECK_MAJOR_VERSION_UPGRADE = 54
+
+            # This operation type represents individual steps in a multi-step setup
+            # migration workflow: including configuration, replication,
+            # switchover/back, and data reseeding, as defined by operation's intent.
+            SETUP_MIGRATION = 55
           end
 
           # The status of an operation.
@@ -1711,7 +1741,7 @@ module Google
         #     SQL Server specific audit configuration.
         # @!attribute [rw] edition
         #   @return [::Google::Cloud::Sql::V1::Settings::Edition]
-        #     Optional. The edition of the instance.
+        #     Optional. The edition type of the Cloud SQL instance.
         # @!attribute [rw] connector_enforcement
         #   @return [::Google::Cloud::Sql::V1::Settings::ConnectorEnforcement]
         #     Specifies if connections must use Cloud SQL connectors.
@@ -1823,7 +1853,7 @@ module Google
             ON_DEMAND = 3
           end
 
-          # The edition of the instance.
+          # The list of Cloud SQL editions available to users.
           module Edition
             # The instance did not specify the edition.
             EDITION_UNSPECIFIED = 0
@@ -1833,6 +1863,9 @@ module Google
 
             # The instance is an Enterprise Plus edition.
             ENTERPRISE_PLUS = 3
+
+            # This instance is a Cloud SQL developer edition instance.
+            DEVELOPER = 5
           end
 
           # The options for enforcing Cloud SQL connectors in the instance.
@@ -1888,9 +1921,70 @@ module Google
         #   @return [::Integer]
         #     Optional. Specifies the amount of time in seconds that a transaction needs
         #     to have been open before the watcher starts recording it.
+        # @!attribute [rw] cpu_utilization_threshold_percent
+        #   @return [::Integer]
+        #     Optional. Specifies the minimum percentage of CPU utilization to trigger
+        #     the performance capture. Valid integers range from `10` to `99`. Enter `0`
+        #     to disable the check.
+        # @!attribute [rw] memory_usage_threshold_percent
+        #   @return [::Integer]
+        #     Optional. Specifies the minimum percentage of memory usage to trigger the
+        #     performance capture.
+        #     Valid integers range from `10` to `99`. Enter `0` to disable the check.
+        # @!attribute [rw] transaction_lock_wait_threshold_count
+        #   @return [::Integer]
+        #     Optional. Specifies the minimum allowed number of transactions in lock wait
+        #     state to trigger the performance capture. Valid integers range from `10` to
+        #     `10000`. Enter `0` to disable the check.
+        # @!attribute [rw] semaphore_wait_threshold_count
+        #   @return [::Integer]
+        #     Optional. Specifies the minimum allowed number of semaphore waits to
+        #     trigger the performance capture. Valid integers range from `10` to `10000`.
+        #     Enter `0` to disable the check.
+        # @!attribute [rw] history_list_length_threshold_count
+        #   @return [::Integer]
+        #     Optional. Specifies the minimum number of undo log entries in the history
+        #     list length to trigger the performance capture. Valid integers range from
+        #     `10000` to `10000000`. Enter `0` to disable the check.
+        # @!attribute [rw] transaction_kill_threshold_seconds
+        #   @return [::Integer]
+        #     Optional. Specifies the amount of time in seconds that a transaction needs
+        #     to have been open before the watcher starts terminating it. Valid integers
+        #     range from `60` to `604800` (7 days). Enter `0` to disable. If enabled
+        #     (i.e., > 0), this value must be greater than or equal to
+        #     `transaction_duration_threshold`. Configurations where
+        #     `0 < transaction_kill_threshold_seconds < transaction_duration_threshold`
+        #     will be rejected.
+        # @!attribute [rw] transaction_kill_excluded_user_hosts
+        #   @return [::Array<::String>]
+        #     Optional. Specifies a customer-defined list of users to exclude from
+        #     transaction termination. Entries can be in the format 'user@host' or just
+        #     'user'. A standalone 'user' implies 'user@%', excluding the user from any
+        #     host. Wildcard '%' is allowed in the host part of the 'user@host' format.
+        #     Example: `["app_user", "db_admin@10.1.2.3", "report_user@%"]`
+        # @!attribute [rw] transaction_kill_type
+        #   @return [::Google::Cloud::Sql::V1::PerformanceCaptureConfig::TransactionKillType]
+        #     Optional. Determines which transactions are allowed to be terminated when
+        #     they exceed `transaction_kill_threshold_seconds`. This allows protecting
+        #     write-heavy transactions from auto-termination if desired. Defaults to
+        #     `READ_ONLY_TRANSACTIONS` if unspecified.
         class PerformanceCaptureConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines the categories of long-running transactions eligible for automatic
+          # termination by the Performance Capture.
+          module TransactionKillType
+            # Unspecified.
+            TRANSACTION_KILL_TYPE_UNSPECIFIED = 0
+
+            # Only read-only transactions are eligible for termination.
+            READ_ONLY_TRANSACTIONS = 1
+
+            # All transactions are eligible for termination, including those with write
+            # operations (such as INSERT, UPDATE, DELETE, or DDL).
+            ALL_TRANSACTIONS = 2
+          end
         end
 
         # Connection pool flags for Cloud SQL instances managed connection pool
@@ -2405,6 +2499,9 @@ module Google
           # The database version is PostgreSQL 19.
           POSTGRES_19 = 684
 
+          # The database version is PostgreSQL 20.
+          POSTGRES_20 = 781
+
           # The database version is SQL Server 2019 Standard.
           SQLSERVER_2019_STANDARD = 26
 
@@ -2515,6 +2612,21 @@ module Google
           # timing indicates that the maintenance update is scheduled 35 to 42 days
           # after the notification is sent out.
           3
+        end
+
+        # The status of automated DNS provisioning.
+        module AutoDnsStatus
+          # Unspecified status. This means status is missing from dependency service.
+          AUTO_DNS_STATUS_UNSPECIFIED = 0
+
+          # DNS provisioning is OK.
+          AUTO_DNS_OK = 1
+
+          # DNS provisioning failed.
+          AUTO_DNS_FAILED = 2
+
+          # DNS provisioning status is not recognized by Cloud SQL.
+          AUTO_DNS_UNKNOWN = 3
         end
       end
     end

@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/binaryauthorization/v1/service_pb"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -170,7 +171,22 @@ module Google
                 entry.set "defaultTimeout", @config.timeout if @config.timeout
                 entry.set "quotaProject", @quota_project_id if @quota_project_id
               end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @system_policy_stub.endpoint
+                config.universe_domain = @system_policy_stub.universe_domain
+                config.logger = @system_policy_stub.logger if config.respond_to? :logger=
+              end
             end
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             ##
             # The logger used for request/response debug logging.

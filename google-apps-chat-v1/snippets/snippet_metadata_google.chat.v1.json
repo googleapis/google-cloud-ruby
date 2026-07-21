@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-apps-chat-v1",
-    "version": "0.24.0",
+    "version": "0.26.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1275,6 +1275,206 @@
         "method": {
           "short_name": "GetThreadReadState",
           "full_name": "google.chat.v1.ChatService.GetThreadReadState",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_GetAvailability_sync",
+      "title": "Snippet for the get_availability call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#get_availability.",
+      "file": "chat_service/get_availability.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_availability",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#get_availability",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::GetAvailabilityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Availability",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "GetAvailability",
+          "full_name": "google.chat.v1.ChatService.GetAvailability",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_MarkAsActive_sync",
+      "title": "Snippet for the mark_as_active call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#mark_as_active.",
+      "file": "chat_service/mark_as_active.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_as_active",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#mark_as_active",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::MarkAsActiveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Availability",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "MarkAsActive",
+          "full_name": "google.chat.v1.ChatService.MarkAsActive",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_MarkAsAway_sync",
+      "title": "Snippet for the mark_as_away call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#mark_as_away.",
+      "file": "chat_service/mark_as_away.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_as_away",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#mark_as_away",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::MarkAsAwayRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Availability",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "MarkAsAway",
+          "full_name": "google.chat.v1.ChatService.MarkAsAway",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_MarkAsDoNotDisturb_sync",
+      "title": "Snippet for the mark_as_do_not_disturb call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#mark_as_do_not_disturb.",
+      "file": "chat_service/mark_as_do_not_disturb.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "mark_as_do_not_disturb",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#mark_as_do_not_disturb",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Availability",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "MarkAsDoNotDisturb",
+          "full_name": "google.chat.v1.ChatService.MarkAsDoNotDisturb",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_UpdateAvailability_sync",
+      "title": "Snippet for the update_availability call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#update_availability.",
+      "file": "chat_service/update_availability.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_availability",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#update_availability",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::UpdateAvailabilityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::Availability",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAvailability",
+          "full_name": "google.chat.v1.ChatService.UpdateAvailability",
           "service": {
             "short_name": "ChatService",
             "full_name": "google.chat.v1.ChatService"

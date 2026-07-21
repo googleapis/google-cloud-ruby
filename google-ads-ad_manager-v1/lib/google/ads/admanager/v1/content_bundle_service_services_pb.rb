@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ContentBundleService'
 
-            # API to retrieve a `ContentBundle` object.
+            # Retrieves a `ContentBundle` object.
             rpc :GetContentBundle, ::Google::Ads::AdManager::V1::GetContentBundleRequest, ::Google::Ads::AdManager::V1::ContentBundle
-            # API to retrieve a list of `ContentBundle` objects.
+            # Lists `ContentBundle` objects.
             rpc :ListContentBundles, ::Google::Ads::AdManager::V1::ListContentBundlesRequest, ::Google::Ads::AdManager::V1::ListContentBundlesResponse
           end
 

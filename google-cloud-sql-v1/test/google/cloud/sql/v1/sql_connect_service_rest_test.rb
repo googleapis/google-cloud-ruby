@@ -134,6 +134,61 @@ class ::Google::Cloud::Sql::V1::SqlConnectService::Rest::ClientTest < Minitest::
     end
   end
 
+  def test_resolve_connect_settings
+    # Create test objects.
+    client_result = ::Google::Cloud::Sql::V1::ConnectSettings.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    dns_name = "hello world"
+    location = "hello world"
+
+    resolve_connect_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Sql::V1::SqlConnectService::Rest::ServiceStub.stub :transcode_resolve_connect_settings_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, resolve_connect_settings_client_stub do
+        # Create client
+        c = ::Google::Cloud::Sql::V1::SqlConnectService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.resolve_connect_settings({ dns_name: dns_name, location: location }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.resolve_connect_settings dns_name: dns_name, location: location do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.resolve_connect_settings ::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest.new(dns_name: dns_name, location: location) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.resolve_connect_settings({ dns_name: dns_name, location: location }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.resolve_connect_settings(::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest.new(dns_name: dns_name, location: location), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, resolve_connect_settings_client_stub.call_count
+      end
+    end
+  end
+
   def test_generate_ephemeral_cert
     # Create test objects.
     client_result = ::Google::Cloud::Sql::V1::GenerateEphemeralCertResponse.new

@@ -259,6 +259,12 @@ module Google
           #
           #     Setting the target audience requires [user
           #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+          # @!attribute [rw] access_permission_settings
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSettings]
+          #     Optional. Access permission settings for the space.
+          #
+          #     To set the target audience when creating a space, specify the
+          #     `accessSettings.audience` field in your request.
           class AccessSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -283,6 +289,36 @@ module Google
               # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
               DISCOVERABLE = 2
             end
+          end
+
+          # Access permission settings for a space.
+          # @!attribute [rw] discover_space_setting
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSetting]
+          #     Optional. Access permission setting for discovering the space.
+          # @!attribute [rw] join_space_setting
+          #   @return [::Google::Apps::Chat::V1::Space::AccessPermissionSetting]
+          #     Optional. Access permission setting for joining the space.
+          class AccessPermissionSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An access permission setting.
+          # @!attribute [rw] principals
+          #   @return [::Array<::Google::Apps::Chat::V1::Space::Principal>]
+          #     Optional. Unordered list. Allowed principals for this permission.
+          class AccessPermissionSetting
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A principal representing an entity granted access.
+          # @!attribute [rw] audience
+          #   @return [::Google::Apps::Chat::V1::Audience]
+          #     An audience.
+          class Principal
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # [Permission settings](https://support.google.com/chat/answer/13340792)
@@ -658,6 +694,24 @@ module Google
         #     To learn more, see [Make a space discoverable to specific
         #     users](https://developers.google.com/workspace/chat/space-target-audience).
         #     `access_settings.audience` is not supported with `useAdminAccess`.
+        #
+        #     `access_settings.access_permission_settings`: Updates the [access
+        #     permission
+        #     settings](https://support.google.com/chat/answer/11971020) of who can
+        #     discover and join the space where `spaceType` field is `SPACE`. Principals
+        #     allowed to join the space must also be allowed to discover it. To update
+        #     access permission settings for a space, the authenticating user must be a
+        #     space manager or assistant manager and omit all other field masks in the
+        #     request. You can't update this field if the space is in [import
+        #     mode](https://developers.google.com/workspace/chat/import-data-overview).
+        #     To learn more, see [Make a space discoverable to specific
+        #     users](https://developers.google.com/workspace/chat/space-target-audience).
+        #     `access_settings.access_permission_settings` is not supported with
+        #     `useAdminAccess`.
+        #     The supported field masks include:
+        #
+        #     - `access_settings.access_permission_settings.discoverSpaceSetting`
+        #     - `access_settings.access_permission_settings.joinSpaceSetting`
         #
         #     `permission_settings`: Supports changing the
         #     [permission settings](https://support.google.com/chat/answer/13340792)

@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.CreativeTemplateService'
 
-            # API to retrieve a `CreativeTemplate` object.
+            # Retrieves a `CreativeTemplate` object.
             rpc :GetCreativeTemplate, ::Google::Ads::AdManager::V1::GetCreativeTemplateRequest, ::Google::Ads::AdManager::V1::CreativeTemplate
-            # API to retrieve a list of `CreativeTemplate` objects.
+            # Lists `CreativeTemplate` objects.
             rpc :ListCreativeTemplates, ::Google::Ads::AdManager::V1::ListCreativeTemplatesRequest, ::Google::Ads::AdManager::V1::ListCreativeTemplatesResponse
           end
 

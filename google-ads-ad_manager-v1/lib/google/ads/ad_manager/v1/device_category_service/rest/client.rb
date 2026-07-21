@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `DeviceCategory` object.
+              # Retrieves a `DeviceCategory` object.
               #
               # @overload get_device_category(request, options = nil)
               #   Pass arguments to `get_device_category` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `DeviceCategory` objects.
+              # Lists `DeviceCategory` objects.
               #
               # @overload list_device_categories(request, options = nil)
               #   Pass arguments to `list_device_categories` via a request object, either of type

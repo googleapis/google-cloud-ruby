@@ -21,7 +21,7 @@ module Google
   module Cloud
     module HypercomputeCluster
       module V1beta
-        VERSION = "0.4.0"
+        VERSION = "1.0.0"
       end
     end
   end

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `MobileDevice` object.
+              # Retrieves a `MobileDevice` object.
               #
               # @overload get_mobile_device(request, options = nil)
               #   Pass arguments to `get_mobile_device` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `MobileDevice` objects.
+              # Lists `MobileDevice` objects.
               #
               # @overload list_mobile_devices(request, options = nil)
               #   Pass arguments to `list_mobile_devices` via a request object, either of type

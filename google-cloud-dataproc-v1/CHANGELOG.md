@@ -1,5 +1,11 @@
 # Release History
 
+### 1.17.0 (2026-07-07)
+
+#### Features
+
+* Add `DiskConfig` to instance selection to support disk config overrides for flexible VMs ([#34704](https://github.com/googleapis/google-cloud-ruby/issues/34704)) 
+
 ### 1.16.0 (2026-06-22)
 
 #### Features

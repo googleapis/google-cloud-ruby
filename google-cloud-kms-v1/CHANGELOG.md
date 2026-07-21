@@ -1,5 +1,11 @@
 # Release History
 
+### 1.14.0 (2026-06-30)
+
+#### Features
+
+* add support for post-quantum (PQ) import methods ([#34676](https://github.com/googleapis/google-cloud-ruby/issues/34676)) 
+
 ### 1.13.0 (2026-06-11)
 
 #### Features

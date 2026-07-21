@@ -93,9 +93,31 @@ module Google
         #     for the hub. If true, Private Service Connect endpoints in VPC spokes
         #     attached to the hub are made accessible to other VPC spokes attached to the
         #     hub. The default value is false.
+        # @!attribute [rw] export_psc_config
+        #   @return [::Google::Cloud::NetworkConnectivity::V1beta::Hub::ExportPscConfig]
+        #     Optional. Config for more granular control of Private Service Connect
+        #     transitivity.
         class Hub
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for more granular control of Private Service Connect
+          # connection propagation.
+          # This allows enabling or disabling connection propagation for specific types
+          # of Private Service Connect endpoints.
+          # @!attribute [rw] published_services_and_regional_google_apis
+          #   @return [::Boolean]
+          #     Optional. Controls whether Private Service Connect endpoints for regional
+          #     ILBs and regional Google APIs should be propagated. Default value is true
+          #     if export_psc is true. Otherwise, the default value is false.
+          # @!attribute [rw] global_google_apis
+          #   @return [::Boolean]
+          #     Optional. Controls whether Private Service Connect endpoints for global
+          #     Google APIs should be propagated. The default value is false.
+          class ExportPscConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -1290,6 +1312,18 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. Hub routes fully encompassed by include import ranges are
         #     included during import from hub.
+        # @!attribute [rw] exclude_import_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Hub routes overlapped/encompassed by exclude import ranges are
+        #     excluded during import from hub.
+        # @!attribute [rw] include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Dynamic routes fully encompassed by include export ranges are
+        #     included during export to hub.
+        # @!attribute [rw] exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Dynamic routes overlapped/encompassed by exclude export ranges
+        #     are excluded during export to hub.
         class LinkedVpnTunnels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1314,6 +1348,18 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. Hub routes fully encompassed by include import ranges are
         #     included during import from hub.
+        # @!attribute [rw] exclude_import_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Hub routes overlapped/encompassed by exclude import ranges are
+        #     excluded during import from hub.
+        # @!attribute [rw] include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Dynamic routes fully encompassed by include export ranges are
+        #     included during export to hub.
+        # @!attribute [rw] exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Dynamic routes overlapped/encompassed by exclude export ranges
+        #     are excluded during export to hub.
         class LinkedInterconnectAttachments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1339,6 +1385,18 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. Hub routes fully encompassed by include import ranges are
         #     included during import from hub.
+        # @!attribute [rw] exclude_import_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Hub routes overlapped/encompassed by exclude import ranges are
+        #     excluded during import from hub.
+        # @!attribute [rw] include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Dynamic routes fully encompassed by include export ranges are
+        #     included during export to hub.
+        # @!attribute [rw] exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. Dynamic routes overlapped/encompassed by exclude export ranges
+        #     are excluded during export to hub.
         class LinkedRouterApplianceInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1910,6 +1968,10 @@ module Google
           # derived from Border Gateway Protocol (BGP) advertisements received from an
           # NCC hybrid spoke.
           DYNAMIC_ROUTE = 3
+
+          # The route leads to a destination within the Private Service Connect
+          # Global Google API range of the VPC network.
+          PSC_GLOBAL_GAPI = 4
         end
 
         # The State enum represents the lifecycle stage of a Network Connectivity
@@ -2017,6 +2079,9 @@ module Google
 
           # Gateway spokes are supported in this location.
           GATEWAY_SPOKES = 3
+
+          # Supports transports in this location.
+          TRANSPORTS = 4
         end
       end
     end

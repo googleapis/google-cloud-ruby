@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-sql-v1",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "language": "RUBY",
     "apis": [
       {
@@ -2115,6 +2115,46 @@
         "method": {
           "short_name": "GetConnectSettings",
           "full_name": "google.cloud.sql.v1.SqlConnectService.GetConnectSettings",
+          "service": {
+            "short_name": "SqlConnectService",
+            "full_name": "google.cloud.sql.v1.SqlConnectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlConnectService_ResolveConnectSettings_sync",
+      "title": "Snippet for the resolve_connect_settings call in the SqlConnectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlConnectService::Client#resolve_connect_settings.",
+      "file": "sql_connect_service/resolve_connect_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resolve_connect_settings",
+        "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client#resolve_connect_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::ConnectSettings",
+        "client": {
+          "short_name": "SqlConnectService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client"
+        },
+        "method": {
+          "short_name": "ResolveConnectSettings",
+          "full_name": "google.cloud.sql.v1.SqlConnectService.ResolveConnectSettings",
           "service": {
             "short_name": "SqlConnectService",
             "full_name": "google.cloud.sql.v1.SqlConnectService"

@@ -934,7 +934,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Chunk from Google Maps.
+          # A `Maps` chunk is a piece of evidence that comes from Google Maps,
+          # containing information about places or routes. This is used to provide
+          # the user with rich, location-based information.
           # @!attribute [rw] uri
           #   @return [::String]
           #     URI reference of the chunk.
@@ -953,6 +955,9 @@ module Google
           #     Sources used to generate the place answer.
           #     This includes review snippets and photos that were used to generate the
           #     answer, as well as uris to flag content.
+          # @!attribute [r] route
+          #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::Maps::Route]
+          #     Output only. Route information.
           class Maps
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -978,6 +983,22 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Route information from Google Maps.
+            # @!attribute [rw] distance_meters
+            #   @return [::Integer]
+            #     The total distance of the route, in meters.
+            # @!attribute [rw] duration
+            #   @return [::Google::Protobuf::Duration]
+            #     The total duration of the route.
+            # @!attribute [rw] encoded_polyline
+            #   @return [::String]
+            #     An encoded polyline of the route. See
+            #     https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+            class Route
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end
@@ -1009,6 +1030,11 @@ module Google
         # @!attribute [rw] search_entry_point
         #   @return [::Google::Cloud::AIPlatform::V1::SearchEntryPoint]
         #     Optional. Google search entry for the following-up web searches.
+        # @!attribute [rw] retrieval_queries
+        #   @return [::Array<::String>]
+        #     Optional. The queries that were executed by the retrieval tools.
+        #     This field is populated only when the grounding source is a retrieval tool,
+        #     such as Vertex AI Search.
         # @!attribute [rw] grounding_chunks
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingChunk>]
         #     List of supporting references retrieved from specified grounding source.

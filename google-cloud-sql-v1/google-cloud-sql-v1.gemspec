@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "API for Cloud SQL database instance management. Note that google-cloud-sql-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-sql instead. See the readme for more details."
-  gem.summary       = "API for Cloud SQL database instance management."
+  gem.description   = "Cloud SQL Admin API. Note that google-cloud-sql-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-sql instead. See the readme for more details."
+  gem.summary       = "Cloud SQL Admin API."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

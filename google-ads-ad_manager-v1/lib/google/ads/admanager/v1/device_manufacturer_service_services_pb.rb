@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.DeviceManufacturerService'
 
-            # API to retrieve a `DeviceManufacturer` object.
+            # Retrieves a `DeviceManufacturer` object.
             rpc :GetDeviceManufacturer, ::Google::Ads::AdManager::V1::GetDeviceManufacturerRequest, ::Google::Ads::AdManager::V1::DeviceManufacturer
-            # API to retrieve a list of `DeviceManufacturer` objects.
+            # Lists `DeviceManufacturer` objects.
             rpc :ListDeviceManufacturers, ::Google::Ads::AdManager::V1::ListDeviceManufacturersRequest, ::Google::Ads::AdManager::V1::ListDeviceManufacturersResponse
           end
 

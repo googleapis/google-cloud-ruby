@@ -84,6 +84,56 @@
               "methods": [
                 "backup_instance"
               ]
+            },
+            "StartMigration": {
+              "methods": [
+                "start_migration"
+              ]
+            },
+            "FinishMigration": {
+              "methods": [
+                "finish_migration"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "list_token_auth_users"
+              ]
+            },
+            "GetTokenAuthUser": {
+              "methods": [
+                "get_token_auth_user"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "list_auth_tokens"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "get_auth_token"
+              ]
+            },
+            "AddTokenAuthUser": {
+              "methods": [
+                "add_token_auth_user"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "delete_token_auth_user"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "add_auth_token"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "delete_auth_token"
+              ]
             }
           }
         }

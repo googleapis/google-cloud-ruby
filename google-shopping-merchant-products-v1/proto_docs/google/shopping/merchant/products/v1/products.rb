@@ -121,6 +121,14 @@ module Google
           # @!attribute [r] automated_discounts
           #   @return [::Google::Shopping::Merchant::Products::V1::AutomatedDiscounts]
           #     Output only. The automated discounts information for the product.
+          # @!attribute [r] archived
+          #   @return [::Boolean]
+          #     Output only. Determines whether the product is
+          #     [archived](https://support.google.com/merchants/answer/11909930).
+          #
+          #     To archive or restore your product, visit Merchant Center products page.
+          #     Learn also more about [offer
+          #     visibility](https://support.google.com/merchants/answer/12488713).
           class Product
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

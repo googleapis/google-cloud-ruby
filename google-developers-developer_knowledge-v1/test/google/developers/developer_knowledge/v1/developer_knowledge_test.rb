@@ -252,6 +252,64 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::ClientTe
     end
   end
 
+  def test_answer_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    query = "hello world"
+
+    answer_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :answer_query, name
+      assert_kind_of ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest, request
+      assert_equal "hello world", request["query"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, answer_query_client_stub do
+      # Create client
+      c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.answer_query({ query: query }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.answer_query query: query do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.answer_query ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.answer_query({ query: query }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.answer_query(::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, answer_query_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

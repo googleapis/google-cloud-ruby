@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.26.0 (2026-07-13)
+
+#### Features
+
+* Add access permission settings to Space resource for configuring space discovery and join permissions ([#34741](https://github.com/googleapis/google-cloud-ruby/issues/34741)) 
+
+### 0.25.0 (2026-07-09)
+
+#### Features
+
+* Add Availability Api's ([#34718](https://github.com/googleapis/google-cloud-ruby/issues/34718)) 
+
 ### 0.24.0 (2026-06-18)
 
 #### Features

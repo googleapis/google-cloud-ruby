@@ -246,8 +246,7 @@ module Google
             #
             #     If unspecified, at most 5 results will be returned.
             #
-            #     The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-            #     error.
+            #     The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     Optional. Contains a page token, received from a previous
             #     `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -278,6 +277,10 @@ module Google
             #     TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
             #     Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
             #
+            #     Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+            #     the right-hand side of filtering expressions must be string literals
+            #     enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+            #
             #     You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
             #     operators. `OR` has higher precedence than `AND`. Use parentheses for
             #     explicit precedence grouping.
@@ -285,11 +288,11 @@ module Google
             #     Examples:
             #
             #     * `data_source = "docs.cloud.google.com" OR data_source =
-            #     "firebase.google.com"`
+            #       "firebase.google.com"`
             #     * `data_source != "firebase.google.com"`
             #     * `update_time < "2024-01-01T00:00:00Z"`
             #     * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-            #     "developer.chrome.com" OR data_source = "web.dev")`
+            #       "developer.chrome.com" OR data_source = "web.dev")`
             #     * `uri = "https://docs.cloud.google.com/release-notes"`
             #
             #     The `filter` string must not exceed 500 characters; values longer than 500
@@ -539,6 +542,83 @@ module Google
             end
 
             ##
+            # Answers a query using grounded generation.
+            #
+            # @overload answer_query(request, options = nil)
+            #   Pass arguments to `answer_query` via a request object, either of type
+            #   {::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload answer_query(query: nil)
+            #   Pass arguments to `answer_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param query [::String]
+            #     Required. The query to answer.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/developers/developer_knowledge/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new
+            #
+            #   # Call the answer_query method.
+            #   result = client.answer_query request
+            #
+            #   # The returned object is of type Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse.
+            #   p result
+            #
+            def answer_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.answer_query.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Developers::DeveloperKnowledge::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.answer_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.answer_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_knowledge_stub.call_rpc :answer_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DeveloperKnowledge API.
             #
             # This class represents the configuration for DeveloperKnowledge,
@@ -738,6 +818,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_get_documents
+                ##
+                # RPC-specific configuration for `answer_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :answer_query
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -747,6 +832,8 @@ module Google
                   @get_document = ::Gapic::Config::Method.new get_document_config
                   batch_get_documents_config = parent_rpcs.batch_get_documents if parent_rpcs.respond_to? :batch_get_documents
                   @batch_get_documents = ::Gapic::Config::Method.new batch_get_documents_config
+                  answer_query_config = parent_rpcs.answer_query if parent_rpcs.respond_to? :answer_query
+                  @answer_query = ::Gapic::Config::Method.new answer_query_config
 
                   yield self if block_given?
                 end
