@@ -56,7 +56,6 @@ describe Google::Cloud::Storage::Bucket, :ip_filter, :mock_storage do
     _(bucket.ip_filter).wont_be_nil
     _(bucket.ip_filter.mode).must_equal "Disabled"
     _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_equal ["0.0.0.0/0", "::/0"]
-
     mock.verify
   end
 
