@@ -919,6 +919,73 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::ClientTest < Minitest::Test
     end
   end
 
+  def test_batch_create_tasks
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+    request_id = "hello world"
+
+    batch_create_tasks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_create_tasks, name
+      assert_kind_of ::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::Tasks::V2beta3::CreateTaskRequest, request["requests"].first
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_create_tasks_client_stub do
+      # Create client
+      c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.batch_create_tasks({ parent: parent, requests: requests, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.batch_create_tasks parent: parent, requests: requests, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.batch_create_tasks ::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest.new(parent: parent, requests: requests, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.batch_create_tasks({ parent: parent, requests: requests, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.batch_create_tasks(::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest.new(parent: parent, requests: requests, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_create_tasks_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_task
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new
@@ -974,6 +1041,73 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_task_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_delete_tasks
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    request_id = "hello world"
+
+    batch_delete_tasks_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_delete_tasks, name
+      assert_kind_of ::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal ["hello world"], request["names"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_delete_tasks_client_stub do
+      # Create client
+      c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.batch_delete_tasks({ parent: parent, names: names, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.batch_delete_tasks parent: parent, names: names, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.batch_delete_tasks ::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest.new(parent: parent, names: names, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.batch_delete_tasks({ parent: parent, names: names, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.batch_delete_tasks(::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest.new(parent: parent, names: names, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_delete_tasks_client_stub.call_rpc_count
     end
   end
 
@@ -1037,6 +1171,124 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::ClientTest < Minitest::Test
     end
   end
 
+  def test_update_cmek_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Tasks::V2beta3::CmekConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    cmek_config = {}
+    update_mask = {}
+
+    update_cmek_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_cmek_config, name
+      assert_kind_of ::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Tasks::V2beta3::CmekConfig), request["cmek_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_cmek_config_client_stub do
+      # Create client
+      c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_cmek_config({ cmek_config: cmek_config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_cmek_config cmek_config: cmek_config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_cmek_config ::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest.new(cmek_config: cmek_config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_cmek_config({ cmek_config: cmek_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_cmek_config(::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest.new(cmek_config: cmek_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_cmek_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_cmek_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Tasks::V2beta3::CmekConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_cmek_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_cmek_config, name
+      assert_kind_of ::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_cmek_config_client_stub do
+      # Create client
+      c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_cmek_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_cmek_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_cmek_config ::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_cmek_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_cmek_config(::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_cmek_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -1074,5 +1326,19 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::ClientTest < Minitest::Test
       assert_kind_of ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client, client
       assert_equal creds, client.configure.credentials
     end
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Tasks::V2beta3::CloudTasks::Operations, client.operations_client
   end
 end

@@ -25,6 +25,44 @@ module Google
           # Path helper methods for the CloudTasks API.
           module Paths
             ##
+            # Create a fully-qualified CmekConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/cmekConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def cmek_config_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/cmekConfig"
+            end
+
+            ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

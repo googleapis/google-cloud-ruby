@@ -24,6 +24,7 @@ require "google/cloud/tasks/v2beta3/version"
 
 require "google/cloud/tasks/v2beta3/cloud_tasks/credentials"
 require "google/cloud/tasks/v2beta3/cloud_tasks/paths"
+require "google/cloud/tasks/v2beta3/cloud_tasks/operations"
 require "google/cloud/tasks/v2beta3/cloud_tasks/client"
 require "google/cloud/tasks/v2beta3/cloud_tasks/rest"
 
