@@ -41,6 +41,18 @@ class ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::ClientPath
     end
   end
 
+  def test_hub_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.hub_path project: "value0", hub: "value1"
+      assert_equal "projects/value0/locations/global/hubs/value1", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

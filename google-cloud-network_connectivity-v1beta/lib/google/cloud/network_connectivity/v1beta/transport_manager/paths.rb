@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the TransportManager API.
           module Paths
             ##
+            # Create a fully-qualified Hub resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/global/hubs/{hub}`
+            #
+            # @param project [String]
+            # @param hub [String]
+            #
+            # @return [::String]
+            def hub_path project:, hub:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/global/hubs/#{hub}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
