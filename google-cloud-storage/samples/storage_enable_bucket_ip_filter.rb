@@ -34,7 +34,6 @@ def enable_bucket_ip_filter bucket_name:, mode: "Enabled"
   bucket.update do |b|
     b.ip_filter = ip_filter
   end
-
   puts "Enabled IP filter for bucket #{bucket_name}."
 end
 # [END storage_enable_bucket_ip_filter]
