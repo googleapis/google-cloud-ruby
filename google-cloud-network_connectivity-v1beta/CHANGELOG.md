@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2026-07-21)
+
+#### Features
+
+* add ParseFromActivationKey RPC, ProviderType enum, and PSC routing fields (`psc_routing_enabled`, `hub`, `auto_accept`) to v1beta Transport and TransportManagerService ([#34980](https://github.com/googleapis/google-cloud-ruby/issues/34980)) 
+
 ### 0.2.0 (2026-06-11)
 
 #### Features
