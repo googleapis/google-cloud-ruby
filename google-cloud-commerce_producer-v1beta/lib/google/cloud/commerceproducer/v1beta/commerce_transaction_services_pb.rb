@@ -41,6 +41,10 @@ module Google
             rpc :ListPrivateOffers, ::Google::Cloud::CommerceProducer::V1beta::ListPrivateOffersRequest, ::Google::Cloud::CommerceProducer::V1beta::ListPrivateOffersResponse
             # Gets details of a single PrivateOffer.
             rpc :GetPrivateOffer, ::Google::Cloud::CommerceProducer::V1beta::GetPrivateOfferRequest, ::Google::Cloud::CommerceProducer::V1beta::PrivateOffer
+            # Resolves the existing offer that must be amended when creating a new
+            # PrivateOffer. Use this method to determine the correct amendment target
+            # before creating or publishing an offer.
+            rpc :ResolveAmendmentTarget, ::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest, ::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetResponse
             # Creates a new PrivateOffer in a given project and location.
             rpc :CreatePrivateOffer, ::Google::Cloud::CommerceProducer::V1beta::CreatePrivateOfferRequest, ::Google::Cloud::CommerceProducer::V1beta::PrivateOffer
             # Updates the target PrivateOffer.
