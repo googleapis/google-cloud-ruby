@@ -73,12 +73,14 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     operation = "hello world"
     project = "hello world"
+    location = "hello world"
 
     get_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get, name
       assert_kind_of ::Google::Cloud::Sql::V1::SqlOperationsGetRequest, request
       assert_equal "hello world", request["operation"]
       assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -89,31 +91,31 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      c.get({ operation: operation, project: project }) do |response, operation|
+      c.get({ operation: operation, project: project, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.get operation: operation, project: project do |response, operation|
+      c.get operation: operation, project: project, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.get ::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project) do |response, operation|
+      c.get ::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.get({ operation: operation, project: project }, grpc_options) do |response, operation|
+      c.get({ operation: operation, project: project, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.get(::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project), grpc_options) do |response, operation|
+      c.get(::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -135,6 +137,7 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
     max_results = 42
     page_token = "hello world"
     project = "hello world"
+    location = "hello world"
 
     list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list, name
@@ -143,6 +146,7 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
       assert_equal 42, request["max_results"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -153,31 +157,31 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project }) do |response, operation|
+      c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list instance: instance, max_results: max_results, page_token: page_token, project: project do |response, operation|
+      c.list instance: instance, max_results: max_results, page_token: page_token, project: project, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list ::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project) do |response, operation|
+      c.list ::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project }, grpc_options) do |response, operation|
+      c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list(::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project), grpc_options) do |response, operation|
+      c.list(::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -197,12 +201,14 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     operation = "hello world"
     project = "hello world"
+    location = "hello world"
 
     cancel_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :cancel, name
       assert_kind_of ::Google::Cloud::Sql::V1::SqlOperationsCancelRequest, request
       assert_equal "hello world", request["operation"]
       assert_equal "hello world", request["project"]
+      assert_equal "hello world", request["location"]
       refute_nil options
     end
 
@@ -213,31 +219,31 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      c.cancel({ operation: operation, project: project }) do |response, operation|
+      c.cancel({ operation: operation, project: project, location: location }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.cancel operation: operation, project: project do |response, operation|
+      c.cancel operation: operation, project: project, location: location do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.cancel ::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project) do |response, operation|
+      c.cancel ::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project, location: location) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.cancel({ operation: operation, project: project }, grpc_options) do |response, operation|
+      c.cancel({ operation: operation, project: project, location: location }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.cancel(::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project), grpc_options) do |response, operation|
+      c.cancel(::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project, location: location), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

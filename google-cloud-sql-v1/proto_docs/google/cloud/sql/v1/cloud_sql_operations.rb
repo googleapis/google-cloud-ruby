@@ -28,6 +28,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlOperationsGetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -47,6 +50,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlOperationsListRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,6 +81,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID of the project that contains the instance.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Optional. Region of the Cloud SQL instance.
         class SqlOperationsCancelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -101,6 +101,16 @@ module Google
         #     Optional. Specifies whether to revoke existing roles that are not present
         #     in the `database_roles` field. If `false` or unset, the database roles
         #     specified in `database_roles` are added to the user's existing roles.
+        # @!attribute [rw] server_roles
+        #   @return [::Array<::String>]
+        #     Optional. The server roles to grant to the SQL Server login. Existing
+        #     server roles will not be revoked if revoke_existing_roles is false.
+        #     body.server_roles will be ignored for update request.
+        # @!attribute [rw] revoke_existing_server_roles
+        #   @return [::Boolean]
+        #     Optional. Specifies whether to revoke existing roles that are not present
+        #     in the `server_roles` field. If `false` or unset, the server roles
+        #     specified in `server_roles` are added to the user's existing server roles.
         # @!attribute [rw] body
         #   @return [::Google::Cloud::Sql::V1::User]
         class SqlUsersUpdateRequest
@@ -196,6 +206,9 @@ module Google
         # @!attribute [rw] database_roles
         #   @return [::Array<::String>]
         #     Optional. Role memberships of the user
+        # @!attribute [rw] server_roles
+        #   @return [::Array<::String>]
+        #     Optional. The server roles for the SQL Server login.
         class User
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
