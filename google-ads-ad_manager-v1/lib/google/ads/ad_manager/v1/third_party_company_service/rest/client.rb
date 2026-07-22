@@ -178,7 +178,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `ThirdPartyCompany` object.
+              # Retrieves a `ThirdPartyCompany` object.
               #
               # @overload get_third_party_company(request, options = nil)
               #   Pass arguments to `get_third_party_company` via a request object, either of type
@@ -258,7 +258,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `ThirdPartyCompany` objects.
+              # Lists `ThirdPartyCompany` objects.
               #
               # @overload list_third_party_companies(request, options = nil)
               #   Pass arguments to `list_third_party_companies` via a request object, either of type

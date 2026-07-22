@@ -44,6 +44,10 @@ module Google
             rpc :CreateTargetingPreset, ::Google::Ads::AdManager::V1::CreateTargetingPresetRequest, ::Google::Ads::AdManager::V1::TargetingPreset
             # Creates `TargetingPreset` objects.
             rpc :BatchCreateTargetingPresets, ::Google::Ads::AdManager::V1::BatchCreateTargetingPresetsRequest, ::Google::Ads::AdManager::V1::BatchCreateTargetingPresetsResponse
+            # Updates a `TargetingPreset` object.
+            rpc :UpdateTargetingPreset, ::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest, ::Google::Ads::AdManager::V1::TargetingPreset
+            # Batch updates `TargetingPreset` objects.
+            rpc :BatchUpdateTargetingPresets, ::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest, ::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse
             # Batch deactivates `TargetingPreset` objects.
             rpc :BatchDeactivateTargetingPresets, ::Google::Ads::AdManager::V1::BatchDeactivateTargetingPresetsRequest, ::Google::Ads::AdManager::V1::BatchDeactivateTargetingPresetsResponse
           end

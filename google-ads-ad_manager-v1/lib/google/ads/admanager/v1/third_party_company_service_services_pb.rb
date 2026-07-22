@@ -34,9 +34,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ThirdPartyCompanyService'
 
-            # API to retrieve a `ThirdPartyCompany` object.
+            # Retrieves a `ThirdPartyCompany` object.
             rpc :GetThirdPartyCompany, ::Google::Ads::AdManager::V1::GetThirdPartyCompanyRequest, ::Google::Ads::AdManager::V1::ThirdPartyCompany
-            # API to retrieve a list of `ThirdPartyCompany` objects.
+            # Lists `ThirdPartyCompany` objects.
             rpc :ListThirdPartyCompanies, ::Google::Ads::AdManager::V1::ListThirdPartyCompaniesRequest, ::Google::Ads::AdManager::V1::ListThirdPartyCompaniesResponse
           end
 

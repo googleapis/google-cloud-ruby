@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.RoleService'
 
-            # API to retrieve a `Role` object.
+            # Retrieves a `Role` object.
             rpc :GetRole, ::Google::Ads::AdManager::V1::GetRoleRequest, ::Google::Ads::AdManager::V1::Role
-            # API to retrieve a list of `Role` objects.
+            # Lists `Role` objects.
             rpc :ListRoles, ::Google::Ads::AdManager::V1::ListRolesRequest, ::Google::Ads::AdManager::V1::ListRolesResponse
           end
 

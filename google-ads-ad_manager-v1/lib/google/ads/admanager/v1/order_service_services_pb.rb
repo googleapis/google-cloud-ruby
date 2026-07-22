@@ -42,6 +42,43 @@ module Google
             # * `display_name`
             # * `external_order_id`
             rpc :ListOrders, ::Google::Ads::AdManager::V1::ListOrdersRequest, ::Google::Ads::AdManager::V1::ListOrdersResponse
+            # Creates `Order` objects.
+            rpc :BatchCreateOrders, ::Google::Ads::AdManager::V1::BatchCreateOrdersRequest, ::Google::Ads::AdManager::V1::BatchCreateOrdersResponse
+            # Batch updates `Order` objects.
+            rpc :BatchUpdateOrders, ::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest, ::Google::Ads::AdManager::V1::BatchUpdateOrdersResponse
+            # Approves a list of `Order` objects.
+            rpc :BatchApproveOrders, ::Google::Ads::AdManager::V1::BatchApproveOrdersRequest, ::Google::Ads::AdManager::V1::BatchApproveOrdersResponse
+            # Approves and overbooks a list of `Order` objects.
+            rpc :BatchApproveAndOverbookOrders, ::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest, ::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersResponse
+            # Submits a list of `Order` objects for approval.
+            rpc :BatchSubmitOrdersForApproval, ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest, ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalResponse
+            # Submits and overbooks a list of `Order` objects for approval.
+            rpc :BatchSubmitOrdersForApprovalAndOverbook, ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest, ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookResponse
+            # Submits a list of `Order` objects for approval without changing reservation
+            # status.
+            rpc :BatchSubmitOrdersForApprovalWithoutReservationChanges, ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest, ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesResponse
+            # Pauses a list of `Order` objects.
+            rpc :BatchPauseOrders, ::Google::Ads::AdManager::V1::BatchPauseOrdersRequest, ::Google::Ads::AdManager::V1::BatchPauseOrdersResponse
+            # Resumes a list of `Order` objects.
+            rpc :BatchResumeOrders, ::Google::Ads::AdManager::V1::BatchResumeOrdersRequest, ::Google::Ads::AdManager::V1::BatchResumeOrdersResponse
+            # Resumes and overbooks a list of `Order` objects.
+            rpc :BatchResumeAndOverbookOrders, ::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest, ::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersResponse
+            # Approves a list of `Order` objects without changing reservation status.
+            rpc :BatchApproveOrdersWithoutReservation, ::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest, ::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationResponse
+            # Archives a list of `Order` objects.
+            rpc :BatchArchiveOrders, ::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest, ::Google::Ads::AdManager::V1::BatchArchiveOrdersResponse
+            # Unarchives a list of `Order` objects.
+            rpc :BatchUnarchiveOrders, ::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest, ::Google::Ads::AdManager::V1::BatchUnarchiveOrdersResponse
+            # Deletes a list of `Order` objects.
+            rpc :BatchDeleteOrders, ::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest, ::Google::Ads::AdManager::V1::BatchDeleteOrdersResponse
+            # Disapproves a list of `Order` objects.
+            rpc :BatchDisapproveOrders, ::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest, ::Google::Ads::AdManager::V1::BatchDisapproveOrdersResponse
+            # Disapproves a list of `Order` objects without changing reservation status.
+            rpc :BatchDisapproveOrdersWithoutReservationChanges, ::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest, ::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesResponse
+            # Retracts a list of `Order` objects.
+            rpc :BatchRetractOrders, ::Google::Ads::AdManager::V1::BatchRetractOrdersRequest, ::Google::Ads::AdManager::V1::BatchRetractOrdersResponse
+            # Retracts a list of `Order` objects without changing reservation status.
+            rpc :BatchRetractOrdersWithoutReservationChanges, ::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest, ::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesResponse
           end
 
           Stub = Service.rpc_stub_class

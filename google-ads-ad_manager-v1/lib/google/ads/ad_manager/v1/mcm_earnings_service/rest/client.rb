@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a list of `McmEarnings` objects.
+              # Lists `McmEarnings` objects.
               #
               # @overload fetch_mcm_earnings(request, options = nil)
               #   Pass arguments to `fetch_mcm_earnings` via a request object, either of type

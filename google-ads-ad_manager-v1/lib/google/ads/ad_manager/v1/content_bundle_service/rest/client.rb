@@ -370,6 +370,171 @@ module Google
               end
 
               ##
+              # Activate a list of `ContentBundle` objects.
+              #
+              # @overload batch_activate_content_bundles(request, options = nil)
+              #   Pass arguments to `batch_activate_content_bundles` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_activate_content_bundles(parent: nil, names: nil)
+              #   Pass arguments to `batch_activate_content_bundles` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `ContentBundles` will be activated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `ContentBundle`s to activate.
+              #     Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest.new
+              #
+              #   # Call the batch_activate_content_bundles method.
+              #   result = client.batch_activate_content_bundles request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse.
+              #   p result
+              #
+              def batch_activate_content_bundles request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_activate_content_bundles.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_activate_content_bundles.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_activate_content_bundles.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @content_bundle_service_stub.batch_activate_content_bundles request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deactivates a list of `ContentBundle` objects.
+              #
+              # @overload batch_deactivate_content_bundles(request, options = nil)
+              #   Pass arguments to `batch_deactivate_content_bundles` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_deactivate_content_bundles(parent: nil, names: nil)
+              #   Pass arguments to `batch_deactivate_content_bundles` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `ContentBundles` will be
+              #     deactivated.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the `ContentBundle`s to deactivate.
+              #     Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::ContentBundleService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest.new
+              #
+              #   # Call the batch_deactivate_content_bundles method.
+              #   result = client.batch_deactivate_content_bundles request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse.
+              #   p result
+              #
+              def batch_deactivate_content_bundles request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_deactivate_content_bundles.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_deactivate_content_bundles.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_deactivate_content_bundles.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @content_bundle_service_stub.batch_deactivate_content_bundles request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ContentBundleService REST API.
               #
               # This class represents the configuration for ContentBundleService REST,
@@ -527,6 +692,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_content_bundles
+                  ##
+                  # RPC-specific configuration for `batch_activate_content_bundles`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_activate_content_bundles
+                  ##
+                  # RPC-specific configuration for `batch_deactivate_content_bundles`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_deactivate_content_bundles
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -534,6 +709,10 @@ module Google
                     @get_content_bundle = ::Gapic::Config::Method.new get_content_bundle_config
                     list_content_bundles_config = parent_rpcs.list_content_bundles if parent_rpcs.respond_to? :list_content_bundles
                     @list_content_bundles = ::Gapic::Config::Method.new list_content_bundles_config
+                    batch_activate_content_bundles_config = parent_rpcs.batch_activate_content_bundles if parent_rpcs.respond_to? :batch_activate_content_bundles
+                    @batch_activate_content_bundles = ::Gapic::Config::Method.new batch_activate_content_bundles_config
+                    batch_deactivate_content_bundles_config = parent_rpcs.batch_deactivate_content_bundles if parent_rpcs.respond_to? :batch_deactivate_content_bundles
+                    @batch_deactivate_content_bundles = ::Gapic::Config::Method.new batch_deactivate_content_bundles_config
 
                     yield self if block_given?
                   end

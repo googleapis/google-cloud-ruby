@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n-google/ads/admanager/v1/line_item_enums.proto\x12\x17google.ads.admanager.v1\"\x82\x02\n\x10LineItemTypeEnum\"\xed\x01\n\x0cLineItemType\x12\x1e\n\x1aLINE_ITEM_TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bSPONSORSHIP\x10\x0c\x12\x0c\n\x08STANDARD\x10\r\x12\x0b\n\x07NETWORK\x10\t\x12\x08\n\x04\x42ULK\x10\x04\x12\x12\n\x0ePRICE_PRIORITY\x10\x0b\x12\t\n\x05HOUSE\x10\x07\x12\x12\n\x0e\x43LICK_TRACKING\x10\x06\x12\x0b\n\x07\x41\x44SENSE\x10\x02\x12\x0f\n\x0b\x41\x44_EXCHANGE\x10\x03\x12\n\n\x06\x42UMPER\x10\x05\x12\x12\n\x0ePREFERRED_DEAL\x10\n\x12\x16\n\x12\x41UDIENCE_EXTENSION\x10\x0e\x42\xc6\x01\n\x1b\x63om.google.ads.admanager.v1B\x12LineItemEnumsProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n-google/ads/admanager/v1/line_item_enums.proto\x12\x17google.ads.admanager.v1\"\xa8\x01\n\x14LineItemCostTypeEnum\"\x8f\x01\n\x10LineItemCostType\x12#\n\x1fLINE_ITEM_COST_TYPE_UNSPECIFIED\x10\x00\x12\x0b\n\x03\x43PA\x10\x01\x1a\x02\x08\x01\x12\x07\n\x03\x43PC\x10\x02\x12\x07\n\x03\x43PD\x10\x03\x12\x07\n\x03\x43PM\x10\x04\x12\x08\n\x04VCPM\x10\x05\x12\x11\n\rCPM_IN_TARGET\x10\x06\x12\x07\n\x03\x43PF\x10\x07\x12\x08\n\x04\x43PCV\x10\x08\"\x82\x02\n\x10LineItemTypeEnum\"\xed\x01\n\x0cLineItemType\x12\x1e\n\x1aLINE_ITEM_TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bSPONSORSHIP\x10\x0c\x12\x0c\n\x08STANDARD\x10\r\x12\x0b\n\x07NETWORK\x10\t\x12\x08\n\x04\x42ULK\x10\x04\x12\x12\n\x0ePRICE_PRIORITY\x10\x0b\x12\t\n\x05HOUSE\x10\x07\x12\x12\n\x0e\x43LICK_TRACKING\x10\x06\x12\x0b\n\x07\x41\x44SENSE\x10\x02\x12\x0f\n\x0b\x41\x44_EXCHANGE\x10\x03\x12\n\n\x06\x42UMPER\x10\x05\x12\x12\n\x0ePREFERRED_DEAL\x10\n\x12\x16\n\x12\x41UDIENCE_EXTENSION\x10\x0e\"\x88\x01\n\x1dLineItemReservationStatusEnum\"g\n\x19LineItemReservationStatus\x12,\n(LINE_ITEM_RESERVATION_STATUS_UNSPECIFIED\x10\x00\x12\x0c\n\x08RESERVED\x10\x01\x12\x0e\n\nUNRESERVED\x10\x02\"\x9c\x02\n\x1aLineItemComputedStatusEnum\"\xfd\x01\n\x16LineItemComputedStatus\x12)\n%LINE_ITEM_COMPUTED_STATUS_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x43\x41NCELED\x10\x01\x12\r\n\tCOMPLETED\x10\x02\x12\x0e\n\nDELIVERING\x10\x03\x12\x15\n\x11\x44\x45LIVERY_EXTENDED\x10\x04\x12\x0f\n\x0b\x44ISAPPROVED\x10\x05\x12\t\n\x05\x44RAFT\x10\x06\x12\x0c\n\x08INACTIVE\x10\x07\x12\n\n\x06PAUSED\x10\x08\x12\x1d\n\x19PAUSED_INVENTORY_RELEASED\x10\t\x12\x14\n\x10PENDING_APPROVAL\x10\n\x12\t\n\x05READY\x10\x0b\x42\xc6\x01\n\x1b\x63om.google.ads.admanager.v1B\x12LineItemEnumsProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
@@ -14,8 +14,14 @@ module Google
   module Ads
     module AdManager
       module V1
+        LineItemCostTypeEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemCostTypeEnum").msgclass
+        LineItemCostTypeEnum::LineItemCostType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemCostTypeEnum.LineItemCostType").enummodule
         LineItemTypeEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemTypeEnum").msgclass
         LineItemTypeEnum::LineItemType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemTypeEnum.LineItemType").enummodule
+        LineItemReservationStatusEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemReservationStatusEnum").msgclass
+        LineItemReservationStatusEnum::LineItemReservationStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemReservationStatusEnum.LineItemReservationStatus").enummodule
+        LineItemComputedStatusEnum = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemComputedStatusEnum").msgclass
+        LineItemComputedStatusEnum::LineItemComputedStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.ads.admanager.v1.LineItemComputedStatusEnum.LineItemComputedStatus").enummodule
       end
     end
   end

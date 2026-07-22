@@ -227,8 +227,7 @@ module Google
 
         # Mobile Carrier Targeting.
         #
-        # Can be used to target/exclude a variety of mobile carriers, such as AT&T,
-        # Verizon, or T-Mobile.
+        # Used to target or exclude mobile carriers.
         # @!attribute [rw] targeted_mobile_carriers
         #   @return [::Array<::String>]
         #     Optional. A list of mobile carrier resource names that should be

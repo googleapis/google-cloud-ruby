@@ -234,6 +234,86 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_targeting_preset REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::TargetingPreset]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::TargetingPreset]
+              #   A result object deserialized from the server's reply
+              def update_targeting_preset request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_targeting_preset_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_targeting_preset",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::TargetingPreset.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the batch_update_targeting_presets REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse]
+              #   A result object deserialized from the server's reply
+              def batch_update_targeting_presets request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_batch_update_targeting_presets_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_update_targeting_presets",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the batch_deactivate_targeting_presets REST call
               #
               # @param request_pb [::Google::Ads::AdManager::V1::BatchDeactivateTargetingPresetsRequest]
@@ -351,6 +431,50 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v1/{parent}/targetingPresets:batchCreate",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_targeting_preset REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_targeting_preset_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{targeting_preset.name}",
+                                                          body: "targeting_preset",
+                                                          matches: [
+                                                            ["targeting_preset.name", %r{^networks/[^/]+/targetingPresets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the batch_update_targeting_presets REST call
+              #
+              # @param request_pb [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_batch_update_targeting_presets_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/targetingPresets:batchUpdate",
                                                           body: "*",
                                                           matches: [
                                                             ["parent", %r{^networks/[^/]+/?$}, false]

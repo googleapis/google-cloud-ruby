@@ -537,6 +537,173 @@ module Google
               end
 
               ##
+              # Updates a `TargetingPreset` object.
+              #
+              # @overload update_targeting_preset(request, options = nil)
+              #   Pass arguments to `update_targeting_preset` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_targeting_preset(targeting_preset: nil, update_mask: nil)
+              #   Pass arguments to `update_targeting_preset` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param targeting_preset [::Google::Ads::AdManager::V1::TargetingPreset, ::Hash]
+              #     Required. The `TargetingPreset` to update.
+              #
+              #     The `TargetingPreset`'s `name` is used to identify the `TargetingPreset` to
+              #     update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::TargetingPreset]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::TargetingPreset]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateTargetingPresetRequest.new
+              #
+              #   # Call the update_targeting_preset method.
+              #   result = client.update_targeting_preset request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::TargetingPreset.
+              #   p result
+              #
+              def update_targeting_preset request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_targeting_preset.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_targeting_preset.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_targeting_preset.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @targeting_preset_service_stub.update_targeting_preset request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `TargetingPreset` objects.
+              #
+              # @overload batch_update_targeting_presets(request, options = nil)
+              #   Pass arguments to `batch_update_targeting_presets` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_targeting_presets(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_targeting_presets` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `TargetingPresets` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateTargetingPresetRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest, ::Hash>]
+              #     Required. The `TargetingPreset` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest.new
+              #
+              #   # Call the batch_update_targeting_presets method.
+              #   result = client.batch_update_targeting_presets request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse.
+              #   p result
+              #
+              def batch_update_targeting_presets request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_targeting_presets.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_targeting_presets.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_targeting_presets.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @targeting_preset_service_stub.batch_update_targeting_presets request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Batch deactivates `TargetingPreset` objects.
               #
               # @overload batch_deactivate_targeting_presets(request, options = nil)
@@ -785,6 +952,16 @@ module Google
                   #
                   attr_reader :batch_create_targeting_presets
                   ##
+                  # RPC-specific configuration for `update_targeting_preset`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_targeting_preset
+                  ##
+                  # RPC-specific configuration for `batch_update_targeting_presets`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_targeting_presets
+                  ##
                   # RPC-specific configuration for `batch_deactivate_targeting_presets`
                   # @return [::Gapic::Config::Method]
                   #
@@ -800,6 +977,10 @@ module Google
                     @create_targeting_preset = ::Gapic::Config::Method.new create_targeting_preset_config
                     batch_create_targeting_presets_config = parent_rpcs.batch_create_targeting_presets if parent_rpcs.respond_to? :batch_create_targeting_presets
                     @batch_create_targeting_presets = ::Gapic::Config::Method.new batch_create_targeting_presets_config
+                    update_targeting_preset_config = parent_rpcs.update_targeting_preset if parent_rpcs.respond_to? :update_targeting_preset
+                    @update_targeting_preset = ::Gapic::Config::Method.new update_targeting_preset_config
+                    batch_update_targeting_presets_config = parent_rpcs.batch_update_targeting_presets if parent_rpcs.respond_to? :batch_update_targeting_presets
+                    @batch_update_targeting_presets = ::Gapic::Config::Method.new batch_update_targeting_presets_config
                     batch_deactivate_targeting_presets_config = parent_rpcs.batch_deactivate_targeting_presets if parent_rpcs.respond_to? :batch_deactivate_targeting_presets
                     @batch_deactivate_targeting_presets = ::Gapic::Config::Method.new batch_deactivate_targeting_presets_config
 
