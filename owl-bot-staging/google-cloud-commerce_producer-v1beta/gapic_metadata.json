@@ -1,0 +1,123 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.commerceproducer.v1beta",
+  "libraryPackage": "::Google::Cloud::CommerceProducer::V1beta",
+  "services": {
+    "CommerceTransaction": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client",
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "ListPrivateOffers": {
+              "methods": [
+                "list_private_offers"
+              ]
+            },
+            "GetPrivateOffer": {
+              "methods": [
+                "get_private_offer"
+              ]
+            },
+            "ResolveAmendmentTarget": {
+              "methods": [
+                "resolve_amendment_target"
+              ]
+            },
+            "CreatePrivateOffer": {
+              "methods": [
+                "create_private_offer"
+              ]
+            },
+            "UpdatePrivateOffer": {
+              "methods": [
+                "update_private_offer"
+              ]
+            },
+            "PublishPrivateOffer": {
+              "methods": [
+                "publish_private_offer"
+              ]
+            },
+            "CancelPrivateOffer": {
+              "methods": [
+                "cancel_private_offer"
+              ]
+            },
+            "DeletePrivateOffer": {
+              "methods": [
+                "delete_private_offer"
+              ]
+            },
+            "ListPrivateOfferDocuments": {
+              "methods": [
+                "list_private_offer_documents"
+              ]
+            },
+            "GetPrivateOfferDocument": {
+              "methods": [
+                "get_private_offer_document"
+              ]
+            },
+            "CreatePrivateOfferDocument": {
+              "methods": [
+                "create_private_offer_document"
+              ]
+            },
+            "UpdatePrivateOfferDocument": {
+              "methods": [
+                "update_private_offer_document"
+              ]
+            },
+            "DeletePrivateOfferDocument": {
+              "methods": [
+                "delete_private_offer_document"
+              ]
+            },
+            "ListStandardOffers": {
+              "methods": [
+                "list_standard_offers"
+              ]
+            },
+            "GetStandardOffer": {
+              "methods": [
+                "get_standard_offer"
+              ]
+            },
+            "GetSku": {
+              "methods": [
+                "get_sku"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "list_skus"
+              ]
+            },
+            "GetSkuGroup": {
+              "methods": [
+                "get_sku_group"
+              ]
+            },
+            "ListSkuGroups": {
+              "methods": [
+                "list_sku_groups"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

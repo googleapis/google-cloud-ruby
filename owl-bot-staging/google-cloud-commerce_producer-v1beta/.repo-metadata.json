@@ -1,0 +1,17 @@
+{
+    "api_id": "commerceproducer.googleapis.com",
+    "api_shortname": "commerceproducer",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-commerce_producer-v1beta/latest",
+    "distribution_name": "google-cloud-commerce_producer-v1beta",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "commerceproducer",
+    "name_pretty": "Cloud Commerce Producer V1BETA API",
+    "product_documentation": "https://docs.cloud.google.com/marketplace/docs/partners/commerce-producer-api/reference",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Using this API, partners can: * Manage private offers extended to specific customer billing accounts. * Attach documents to private offers, such as custom EULAs or Statements of Work. * Publish private offers to make them available to customers. # Data Model The following resources are exposed by this API: * **Service**: Represents a service offered by a partner on Google Cloud Marketplace. * **StandardOffer**: Represents a standard offer for a product, which can be used as a base for private offers. * **PrivateOffer**: Represents a customized offer extended to a specific customer billing account. * **PrivateOfferDocument**: Represents a document attached to a private offer. * **SkuGroup**: Represents a group of SKUs (Stock Keeping Units) used for pricing or commitment. * **Sku**: Represents a SKU (Stock Keeping Unit) used for pricing or commitment. Note that google-cloud-commerce_producer-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-commerce_producer instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://docs.cloud.google.com/marketplace/docs/partners/commerce-producer-api/reference",
+    "library_type": "GAPIC_AUTO"
+}
