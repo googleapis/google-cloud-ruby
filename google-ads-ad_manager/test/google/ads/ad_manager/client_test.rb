@@ -220,6 +220,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_creative_set_service_rest
+    skip unless Google::Ads::AdManager.creative_set_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.creative_set_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::CreativeSetService::Rest::Client, client
+    end
+  end
+
   def test_creative_template_service_rest
     skip unless Google::Ads::AdManager.creative_template_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -507,6 +517,16 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Ads::AdManager::V1::SiteService::Rest::Client, client
+    end
+  end
+
+  def test_slate_service_rest
+    skip unless Google::Ads::AdManager.slate_service_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Ads::AdManager.slate_service do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Ads::AdManager::V1::SlateService::Rest::Client, client
     end
   end
 
