@@ -22,6 +22,25 @@ module Google
     module AdManager
       module V1
         # Wrapper message for
+        # {::Google::Ads::AdManager::V1::SlateStatusEnum::SlateStatus SlateStatus}
+        class SlateStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes the status of a Slate object.
+          module SlateStatus
+            # Default value. This value is unused.
+            SLATE_STATUS_UNSPECIFIED = 0
+
+            # Indicates the Slate has been created and is eligible for streaming.
+            ACTIVE = 1
+
+            # Indicates the Slate has been archived.
+            ARCHIVED = 2
+          end
+        end
+
+        # Wrapper message for
         # {::Google::Ads::AdManager::V1::LiveStreamEventStatusEnum::LiveStreamEventStatus LiveStreamEventStatus}
         class LiveStreamEventStatusEnum
           include ::Google::Protobuf::MessageExts

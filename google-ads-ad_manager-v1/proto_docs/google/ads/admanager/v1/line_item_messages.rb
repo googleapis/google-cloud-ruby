@@ -34,36 +34,329 @@ module Google
         #     Format: `networks/{network_code}/orders/{order}`
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. The name of the line item. This attribute is required and has a
-        #     maximum length of 255 characters.
+        #     Required. The name of the line item. This attribute has a maximum length of
+        #     255 characters.
+        # @!attribute [rw] external_line_item_id
+        #   @return [::String]
+        #     Optional. An identifier for the LineItem that is meaningful to the
+        #     publisher. This attribute has a maximum length of 255 characters.
+        # @!attribute [r] order_display_name
+        #   @return [::String]
+        #     Output only. The name of the Order.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Required. The date and time on which the LineItem is enabled to begin
         #     serving. This attribute is required and must be in the future.
+        # @!attribute [rw] target_end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The target end time of the line item. This attribute is required
+        #     unless
+        #     {::Google::Ads::AdManager::V1::LineItem#end_time_unlimited end_time_unlimited}
+        #     is set to true. If specified, it must be after the
+        #     {::Google::Ads::AdManager::V1::LineItem#start_time start_time}. This does not
+        #     include auto extension days.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the LineItem will stop serving. This
-        #     attribute is read-only and includes auto extension days.
+        #     attribute includes auto extension days.
+        # @!attribute [rw] auto_extension_days
+        #   @return [::Integer]
+        #     Optional. The number of days to allow a line item to deliver past its
+        #     {::Google::Ads::AdManager::V1::LineItem#target_end_time target_end_time}. A
+        #     maximum of 7 days is allowed. This is feature is only available for Ad
+        #     Manager 360 accounts.
+        # @!attribute [rw] end_time_unlimited
+        #   @return [::Boolean]
+        #     Optional. Non-empty default. Specifies whether or not the LineItem has an
+        #     end time. This attribute defaults to false. It can be be set to true for
+        #     only line items of type SPONSORSHIP, NETWORK, PRICE_PRIORITY and HOUSE.
+        # @!attribute [rw] creative_rotation_type
+        #   @return [::Google::Ads::AdManager::V1::CreativeRotationTypeEnum::CreativeRotationType]
+        #     Required. The strategy used for displaying multiple Creative objects that
+        #     are associated with the LineItem.
+        # @!attribute [rw] delivery_rate_type
+        #   @return [::Google::Ads::AdManager::V1::LineItemDeliveryRateTypeEnum::LineItemDeliveryRateType]
+        #     Optional. Non-empty default. The strategy for delivering ads over the
+        #     course of the line item's duration. This attribute defaults to EVENLY or
+        #     FRONTLOADED depending on the network's configuration.
+        # @!attribute [rw] delivery_forecast_source
+        #   @return [::Google::Ads::AdManager::V1::LineItemDeliveryForecastSourceEnum::LineItemDeliveryForecastSource]
+        #     Optional. Non-empty default. Strategy for choosing forecasted traffic
+        #     shapes to pace line items. This field defaults to HISTORICAL.
+        # @!attribute [rw] custom_pacing_curve
+        #   @return [::Google::Ads::AdManager::V1::CustomPacingCurve]
+        #     Optional. The curve that is used to pace the line item's delivery. This
+        #     field is required if and only if the delivery forecast source is
+        #     CUSTOM_PACING_CURVE.
+        # @!attribute [rw] roadblocking_type
+        #   @return [::Google::Ads::AdManager::V1::RoadblockingTypeEnum::RoadblockingType]
+        #     Optional. Non-empty default. The strategy for serving roadblocked
+        #     creatives, that is, instances where multiple creatives must be served
+        #     together on a single web page. This attribute defaults to ONE_OR_MORE.
+        # @!attribute [rw] skippable_ad_type
+        #   @return [::Google::Ads::AdManager::V1::SkippableAdTypeEnum::SkippableAdType]
+        #     Optional. Non-empty default. The nature of the line item's creatives'
+        #     skippability. This attribute is only applicable for video line items, and
+        #     defaults to NOT_SKIPPABLE.
+        # @!attribute [rw] frequency_caps
+        #   @return [::Array<::Google::Ads::AdManager::V1::FrequencyCap>]
+        #     Optional. The set of frequency capping units for this LineItem.
         # @!attribute [rw] line_item_type
         #   @return [::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType]
-        #     Required. Indicates the line item type of a LineItem. This attribute is
-        #     required. The line item type determines the default priority of the line
-        #     item. More information can be found at
-        #     https://support.google.com/admanager/answer/177279.
+        #     Required. Indicates the line item type of a LineItem. The line item type
+        #     determines the default priority of the line item. More information can be
+        #     found at https://support.google.com/admanager/answer/177279.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     Optional. Non-empty default. The priority for the line item. Valid values
+        #     range from 1 to 16. This field defaults to the default priority of the
+        #     LineItemType. The following list shows the default, minimum, and maximum
+        #     priority values are for each line item type:
+        #       - LineItemType: default priority (minimum priority, maximum priority)
+        #       - SPONSORSHIP: 4 (2, 5)
+        #       - STANDARD: 8 (6, 10)
+        #       - NETWORK: 12 (11, 14)
+        #       - BULK: 12 (11, 14)
+        #       - PRICE_PRIORITY: 12 (11, 14)
+        #       - HOUSE: 16 (15, 16)
+        #       - CLICK_TRACKING: 16 (1, 16)
+        #       - AD_EXCHANGE: 12 (1, 16)
+        #       - ADSENSE: 12 (1, 16)
+        #       - BUMPER: 16 (15, 16)
+        #       - ADMOB: 21 (1, 16)
+        #       - PREFERRED_DEAL: 12 (12, 12)
+        #     This field can only be edited by certain networks, otherwise a
+        #     PermissionError will occur.
         # @!attribute [rw] rate
         #   @return [::Google::Type::Money]
         #     Required. The amount of money to spend per impression or click.
+        # @!attribute [rw] value_cpm
+        #   @return [::Google::Type::Money]
+        #     Optional. Non-empty default. An amount to help the adserver rank inventory.
+        #     {::Google::Ads::AdManager::V1::LineItem#value_cpm value_cpm} artificially raises
+        #     the value of inventory over the
+        #     {::Google::Ads::AdManager::V1::LineItem#rate rate} but avoids raising the actual
+        #     {::Google::Ads::AdManager::V1::LineItem#rate rate}. This attribute defaults to a
+        #     Money object in the local currency with units and nanos set to 0.
+        # @!attribute [rw] cost_type
+        #   @return [::Google::Ads::AdManager::V1::LineItemCostTypeEnum::LineItemCostType]
+        #     Required. The method used for billing this LineItem.
+        # @!attribute [rw] discount
+        #   @return [::Google::Ads::AdManager::V1::LineItemDiscount]
+        #     Optional. Discount information for the line item.
+        # @!attribute [rw] contracted_units_bought
+        #   @return [::Integer]
+        #     Optional. This attribute is only applicable for certain line item types and
+        #     acts as an "FYI" or note, which does not impact adserving or other backend
+        #     systems. For SPONSORSHIP line items, this represents the minimum quantity,
+        #     which is a lifetime impression volume goal for reporting purposes only. For
+        #     STANDARD line items, this represent the contracted quantity, which is the
+        #     number of units specified in the contract the advertiser has bought for
+        #     this LineItem. This field is just a "FYI" for traffickers to manually
+        #     intervene with the LineItem when needed. This attribute is only available
+        #     for STANDARD line items if you have this feature enabled on your network.
+        # @!attribute [rw] creative_placeholders
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreativePlaceholder>]
+        #     Required. Details about the creatives that are expected to serve through
+        #     this LineItem.
+        # @!attribute [rw] environment_type
+        #   @return [::Google::Ads::AdManager::V1::EnvironmentTypeEnum::EnvironmentType]
+        #     Optional. Non-empty default. The environment that the LineItem is
+        #     targeting. The default value is BROWSER. If this value is VIDEO_PLAYER,
+        #     then this line item can only target AdUnits that have AdUnitSizes whose
+        #     environmentType is also VIDEO_PLAYER.
+        # @!attribute [rw] companion_delivery_option
+        #   @return [::Google::Ads::AdManager::V1::CompanionDeliveryOptionEnum::CompanionDeliveryOption]
+        #     Optional. The delivery option for companions. Setting this field is only
+        #     meaningful if the following conditions are met:
+        #       - The "Guaranteed roadblocks" feature is enabled on your network.
+        #       - One of the following is true (both cannot be true, these are mutually
+        #       exclusive).
+        #         - The environmentType is VIDEO_PLAYER.
+        #         - The roadblockingType is CREATIVE_SET.
+        #     This field defaults to OPTIONAL if the conditions are met.
+        #     In all other cases it defaults to UNKNOWN and is not meaningful.
+        # @!attribute [rw] allow_overbook
+        #   @return [::Boolean]
+        #     Input only. The flag indicates whether overbooking should be allowed when
+        #     creating or updating reservations of line item types SPONSORSHIP and
+        #     STANDARD. When true, operations on this line item will never
+        #     trigger a ForecastError, which corresponds to an overbook warning in the
+        #     UI. The default value is false.  Note: this field won't persist on the
+        #     line item itself, and the value will only affect the current request.
+        # @!attribute [rw] skip_inventory_check
+        #   @return [::Boolean]
+        #     Input only. The flag indicates whether the inventory check should be
+        #     skipped when creating or updating a line item. The default value is false.
+        #     Note: this field won't persist on the line item itself, and the value will
+        #     only affect the current request.
+        # @!attribute [rw] skip_cross_selling_rule_warning_checks
+        #   @return [::Boolean]
+        #     Input only. True to skip checks for warnings from rules applied to line
+        #     items targeting inventory shared by a distributor partner for cross selling
+        #     when performing an action on this line item. The default is false. Note:
+        #     this field won't persist on the line item itself, and the value will only
+        #     affect the current request.
+        # @!attribute [rw] reserve_on_creation
+        #   @return [::Boolean]
+        #     Input only. The flag indicates whether inventory should be reserved when
+        #     creating a line item of types SPONSORSHIP and STANDARD in an unapproved
+        #     Order. The default value is false.
+        # @!attribute [r] stats
+        #   @return [::Google::Ads::AdManager::V1::LineItemStats]
+        #     Output only. Contains trafficking statistics for the line item. This will
+        #     be empty in case there are no statistics for a line item yet.
+        # @!attribute [r] delivery_indicator
+        #   @return [::Google::Ads::AdManager::V1::DeliveryIndicator]
+        #     Output only. Indicates how well the line item has been performing. This
+        #     will be empty if the delivery indicator information is not available due to
+        #     one of the following reasons:
+        #       - The line item is not delivering.
+        #       - The line item has an unlimited goal or cap.
+        #       - The line item has a percentage based goal or cap.
         # @!attribute [r] budget
         #   @return [::Google::Type::Money]
         #     Output only. The amount of money allocated to the LineItem. This attribute
         #     is readonly and is populated by Google. The currency code is readonly.
+        # @!attribute [r] status
+        #   @return [::Google::Ads::AdManager::V1::LineItemComputedStatusEnum::LineItemComputedStatus]
+        #     Output only. The status of the LineItem.
+        # @!attribute [r] reservation_status
+        #   @return [::Google::Ads::AdManager::V1::LineItemReservationStatusEnum::LineItemReservationStatus]
+        #     Output only. Describes whether or not inventory has been reserved for the
+        #     LineItem.
+        # @!attribute [r] archived
+        #   @return [::Boolean]
+        #     Output only. The archival status of the LineItem.
+        # @!attribute [rw] web_property_code
+        #   @return [::String]
+        #     Optional. The web property code used for dynamic allocation line items.
+        #     This web property is only required with line item types AD_EXCHANGE and
+        #     ADSENSE.
+        # @!attribute [rw] applied_labels
+        #   @return [::Array<::Google::Ads::AdManager::V1::AppliedLabel>]
+        #     Optional. The set of labels applied directly to this line item.
+        # @!attribute [r] effective_applied_labels
+        #   @return [::Array<::Google::Ads::AdManager::V1::AppliedLabel>]
+        #     Output only. Contains the set of labels inherited from the order that
+        #     contains this line item and the advertiser that owns the order. If a label
+        #     has been negated, only the negated label is returned.
+        # @!attribute [rw] same_advertiser_exception_enabled
+        #   @return [::Boolean]
+        #     Optional. If a line item has a series of competitive exclusions on it, it
+        #     could be blocked from serving with line items from the same advertiser.
+        #     Setting this to true will allow line items from the same advertiser to
+        #     serve regardless of the other competitive exclusion labels being applied.
+        # @!attribute [r] update_source
+        #   @return [::String]
+        #     Output only. The application that last modified this line item.
+        # @!attribute [rw] notes
+        #   @return [::String]
+        #     Optional. Provides any additional notes that may annotate the LineItem.
+        #     This attribute has a maximum length of 65,535 characters.
+        # @!attribute [rw] competitive_constraint_scope
+        #   @return [::Google::Ads::AdManager::V1::ExclusionScopeEnum::ExclusionScope]
+        #     Optional. Non-empty default. The CompetitiveConstraintScope for the
+        #     competitive exclusion labels assigned to this line item. This field
+        #     defaults to POD.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time this line item was last modified.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time this line item was created.
         # @!attribute [rw] custom_field_values
         #   @return [::Array<::Google::Ads::AdManager::V1::CustomFieldValue>]
         #     Optional. The values of the custom fields associated with this line item.
+        # @!attribute [r] missing_creatives
+        #   @return [::Boolean]
+        #     Output only. Indicates if a LineItem is missing any Creative creatives for
+        #     the creativePlaceholders specified.  Creative Creatives can be considered
+        #     missing for several reasons including:
+        #      - Not enough Creative creatives of a certain size have been uploaded, as
+        #        determined by
+        #        {::Google::Ads::AdManager::V1::CreativePlaceholder#expected_creative_count expected_creative_count}.
+        #        For example a LineItem specifies 750x350, 400x200 but only a 750x350 was
+        #        uploaded. Or LineItem specifies 750x350 with an expected count of 2, but
+        #        only one was uploaded.
+        #      - The [Creative.applied_labels][] of an associated Creative don't match
+        #        the
+        #        {::Google::Ads::AdManager::V1::CreativePlaceholder#applied_labels CreativePlaceholder.applied_labels}
+        #        of the LineItem. For example LineItem specifies 750x350 with a Foo
+        #        AppliedLabel but a 750x350 creative without a AppliedLabel was uploaded.
+        # @!attribute [rw] third_party_measurement_settings
+        #   @return [::Google::Ads::AdManager::V1::ThirdPartyMeasurementSettings]
+        #     Optional. Third party auto-pixeling settings for cross-sell Partners.
+        # @!attribute [rw] youtube_kids_restricted
+        #   @return [::Boolean]
+        #     Optional. Designates this line item as intended for YT Kids app. If true,
+        #     all creatives associated with this line item must be reviewed and approved.
+        #     See the help center article for more information:
+        #     https://support.google.com/yt-partner-sales/answer/10015534.
+        # @!attribute [rw] max_video_creative_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The max duration of a video creative associated with this
+        #     LineItem. This attribute is only meaningful for video line items. This
+        #     attribute is required for video line items and must be greater than 0.
         # @!attribute [rw] goal
         #   @return [::Google::Ads::AdManager::V1::Goal]
         #     Optional. The primary goal that this LineItem is associated with, which is
         #     used in its pacing and budgeting.
+        # @!attribute [rw] secondary_goals
+        #   @return [::Array<::Google::Ads::AdManager::V1::Goal>]
+        #     Optional. The secondary goals that this LineItem is associated with. This
+        #     is required and meaningful only if the
+        #     {::Google::Ads::AdManager::V1::LineItem#line_item_type line_item_type} is
+        #     SPONSORSHIP and {::Google::Ads::AdManager::V1::LineItem#cost_type cost_type} is
+        #     CPM.
+        # @!attribute [rw] grp_settings
+        #   @return [::Google::Ads::AdManager::V1::GrpSettings]
+        #     Optional. Contains the information for a line item which has a target GRP
+        #     demographic.
+        # @!attribute [rw] deal_info
+        #   @return [::Google::Ads::AdManager::V1::LineItemDealInfo]
+        #     Optional. The deal information associated with this line item, if it is
+        #     programmatic.
+        # @!attribute [rw] viewability_provider_companies
+        #   @return [::Array<::String>]
+        #     Optional. Optional IDs of the Company that provide ad verification for this
+        #     line item.
+        # @!attribute [rw] child_content_eligibility
+        #   @return [::Google::Ads::AdManager::V1::ChildContentEligibilityEnum::ChildContentEligibility]
+        #     Optional. Non-empty default. Child content eligibility designation for this
+        #     line item. This field defaults to DISALLOWED.
+        # @!attribute [rw] custom_vast_extension
+        #   @return [::String]
+        #     Optional. Custom XML to be rendered in a custom VAST response at serving
+        #     time.
+        # @!attribute [rw] sponsorship_exclusivity_enabled
+        #   @return [::Boolean]
+        #     Optional. Whether the line item is enabled for sponsorship exclusivity.  If
+        #     true, only exclusive sponsorships can be served on inventory targeted by
+        #     this LineItem. This control should only be available for 100% video
+        #     sponsorships.
+        # @!attribute [rw] repeated_creative_serving_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether repeated creative serving is enabled for this
+        #     line item.
+        # @!attribute [rw] targeting
+        #   @return [::Google::Ads::AdManager::V1::Targeting]
+        #     Required. Contains the targeting criteria for the ad campaign.
+        # @!attribute [rw] creative_targetings
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreativeTargeting>]
+        #     Optional. A list of CreativeTargeting objects that can be used to specify
+        #     creative level targeting for this line item. Creative level targeting is
+        #     specified in a
+        #     {::Google::Ads::AdManager::V1::CreativePlaceholder#creative_targeting_display_name CreativePlaceholder.creative_targeting_display_name}
+        #     field by referencing the [CreativeTargeting.display_name][] field. It also
+        #     needs to be re-specified in the
+        #     [LineItemCreativeAssociation.targeting_display_name][] field when
+        #     associating a line item with a creative that fits into that placeholder.
+        # @!attribute [rw] allowed_formats
+        #   @return [::Array<::Google::Ads::AdManager::V1::LineItemAllowedFormatEnum::LineItemAllowedFormat>]
+        #     Optional. The set of allowed formats for this line item.
+        #     If empty, all formats are allowed. This property only applies
+        #     to programmatic video line items.
         class LineItem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -33,7 +33,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.McmEarningsService'
 
-            # API to retrieve a list of `McmEarnings` objects.
+            # Lists `McmEarnings` objects.
             rpc :FetchMcmEarnings, ::Google::Ads::AdManager::V1::FetchMcmEarningsRequest, ::Google::Ads::AdManager::V1::FetchMcmEarningsResponse
           end
 

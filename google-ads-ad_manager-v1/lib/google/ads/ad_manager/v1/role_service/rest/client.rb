@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Role` object.
+              # Retrieves a `Role` object.
               #
               # @overload get_role(request, options = nil)
               #   Pass arguments to `get_role` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Role` objects.
+              # Lists `Role` objects.
               #
               # @overload list_roles(request, options = nil)
               #   Pass arguments to `list_roles` via a request object, either of type

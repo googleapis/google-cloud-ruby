@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.NetworkService'
 
-            # API to retrieve a Network object.
+            # Retrieves a `Network` object.
             rpc :GetNetwork, ::Google::Ads::AdManager::V1::GetNetworkRequest, ::Google::Ads::AdManager::V1::Network
-            # API to retrieve all the networks the current user has access to.
+            # Retrieves all the networks the current user has access to.
             rpc :ListNetworks, ::Google::Ads::AdManager::V1::ListNetworksRequest, ::Google::Ads::AdManager::V1::ListNetworksResponse
           end
 

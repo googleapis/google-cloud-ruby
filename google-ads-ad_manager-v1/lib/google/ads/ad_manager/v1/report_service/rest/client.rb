@@ -191,7 +191,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Report` object.
+              # Retrieves a `Report` object.
               #
               # @overload get_report(request, options = nil)
               #   Pass arguments to `get_report` via a request object, either of type
@@ -270,7 +270,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Report` objects.
+              # Lists `Report` objects.
               #
               # @overload list_reports(request, options = nil)
               #   Pass arguments to `list_reports` via a request object, either of type
@@ -376,7 +376,7 @@ module Google
               end
 
               ##
-              # API to create a `Report` object.
+              # Creates a `Report` object.
               #
               # @overload create_report(request, options = nil)
               #   Pass arguments to `create_report` via a request object, either of type
@@ -457,7 +457,7 @@ module Google
               end
 
               ##
-              # API to update a `Report` object.
+              # Updates a `Report` object.
               #
               # @overload update_report(request, options = nil)
               #   Pass arguments to `update_report` via a request object, either of type

@@ -37,6 +37,10 @@ module Google
             rpc :GetContentBundle, ::Google::Ads::AdManager::V1::GetContentBundleRequest, ::Google::Ads::AdManager::V1::ContentBundle
             # Lists `ContentBundle` objects.
             rpc :ListContentBundles, ::Google::Ads::AdManager::V1::ListContentBundlesRequest, ::Google::Ads::AdManager::V1::ListContentBundlesResponse
+            # Activate a list of `ContentBundle` objects.
+            rpc :BatchActivateContentBundles, ::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest, ::Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse
+            # Deactivates a list of `ContentBundle` objects.
+            rpc :BatchDeactivateContentBundles, ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest, ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse
           end
 
           Stub = Service.rpc_stub_class

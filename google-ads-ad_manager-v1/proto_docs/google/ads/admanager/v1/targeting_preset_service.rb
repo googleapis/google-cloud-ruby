@@ -139,6 +139,46 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request object for `UpdateTargetingPreset` method.
+        # @!attribute [rw] targeting_preset
+        #   @return [::Google::Ads::AdManager::V1::TargetingPreset]
+        #     Required. The `TargetingPreset` to update.
+        #
+        #     The `TargetingPreset`'s `name` is used to identify the `TargetingPreset` to
+        #     update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateTargetingPresetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateTargetingPresets` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `TargetingPresets` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateTargetingPresetRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest>]
+        #     Required. The `TargetingPreset` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateTargetingPresetsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateTargetingPresets` method.
+        # @!attribute [rw] targeting_presets
+        #   @return [::Array<::Google::Ads::AdManager::V1::TargetingPreset>]
+        #     The `TargetingPreset` objects updated.
+        class BatchUpdateTargetingPresetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request object for `DeactivateTargetingPreset` method.
         # @!attribute [rw] name
         #   @return [::String]

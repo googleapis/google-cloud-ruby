@@ -3101,7 +3101,7 @@ module Google
             # API fields).
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `REVENUE_VERIFICATION`, `AD_SPEED`
+            # `REVENUE_VERIFICATION`, `AD_SPEED`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `ENUM`
             DEMAND_CHANNEL = 9
@@ -3113,7 +3113,7 @@ module Google
             # Corresponds to "Demand channel" in the Ad Manager UI.
             #
             # Compatible with the following report types: `HISTORICAL`, `REACH`,
-            # `REVENUE_VERIFICATION`, `AD_SPEED`
+            # `REVENUE_VERIFICATION`, `AD_SPEED`, `ON_PLATFORM_MULTICALL`
             #
             # Data format: `STRING`
             DEMAND_CHANNEL_NAME = 10
@@ -3926,7 +3926,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemComputedStatus][google.ads.admanager.v1.LineItemComputedStatusEnum.LineItemComputedStatus]
+            # {::Google::Ads::AdManager::V1::LineItemComputedStatusEnum::LineItemComputedStatus LineItemComputedStatus}
             LINE_ITEM_COMPUTED_STATUS = 250
 
             # The localized name of the computed status of the LineItem.
@@ -3977,7 +3977,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemCostType][google.ads.admanager.v1.LineItemCostTypeEnum.LineItemCostType]
+            # {::Google::Ads::AdManager::V1::LineItemCostTypeEnum::LineItemCostType LineItemCostType}
             LINE_ITEM_COST_TYPE = 212
 
             # Localized line item cost type name.
@@ -4015,7 +4015,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [CreativeRotationType][google.ads.admanager.v1.CreativeRotationTypeEnum.CreativeRotationType]
+            # {::Google::Ads::AdManager::V1::CreativeRotationTypeEnum::CreativeRotationType CreativeRotationType}
             LINE_ITEM_CREATIVE_ROTATION_TYPE = 189
 
             # The localized name of the creative rotation type of the LineItem.
@@ -4077,7 +4077,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemDeliveryRateType][google.ads.admanager.v1.LineItemDeliveryRateTypeEnum.LineItemDeliveryRateType]
+            # {::Google::Ads::AdManager::V1::LineItemDeliveryRateTypeEnum::LineItemDeliveryRateType LineItemDeliveryRateType}
             LINE_ITEM_DELIVERY_RATE_TYPE = 191
 
             # The localized name of the delivery rate type of the LineItem.
@@ -4456,7 +4456,7 @@ module Google
             # Data format: `ENUM`
             #
             # Values:
-            # [LineItemReservationStatus][google.ads.admanager.v1.LineItemReservationStatusEnum.LineItemReservationStatus]
+            # {::Google::Ads::AdManager::V1::LineItemReservationStatusEnum::LineItemReservationStatus LineItemReservationStatus}
             LINE_ITEM_RESERVATION_STATUS = 304
 
             # Localized string describing the state of inventory reservation for the

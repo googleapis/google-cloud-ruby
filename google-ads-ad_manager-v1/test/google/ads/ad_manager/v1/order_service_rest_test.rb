@@ -191,6 +191,1000 @@ class ::Google::Ads::AdManager::V1::OrderService::Rest::ClientTest < Minitest::T
     end
   end
 
+  def test_batch_create_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_create_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_orders({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_orders parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_orders ::Google::Ads::AdManager::V1::BatchCreateOrdersRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_orders({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_orders(::Google::Ads::AdManager::V1::BatchCreateOrdersRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_update_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_orders({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_orders parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_orders ::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_orders({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_orders(::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_approve_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchApproveOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    skip_inventory_check = true
+
+    batch_approve_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_approve_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_approve_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_approve_orders({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_approve_orders parent: parent, names: names, skip_inventory_check: skip_inventory_check do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_approve_orders ::Google::Ads::AdManager::V1::BatchApproveOrdersRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_approve_orders({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_approve_orders(::Google::Ads::AdManager::V1::BatchApproveOrdersRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_approve_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_approve_and_overbook_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    skip_inventory_check = true
+
+    batch_approve_and_overbook_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_approve_and_overbook_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_approve_and_overbook_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_approve_and_overbook_orders({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_approve_and_overbook_orders parent: parent, names: names, skip_inventory_check: skip_inventory_check do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_approve_and_overbook_orders ::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_approve_and_overbook_orders({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_approve_and_overbook_orders(::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_approve_and_overbook_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_submit_orders_for_approval
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    skip_inventory_check = true
+
+    batch_submit_orders_for_approval_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_submit_orders_for_approval_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_submit_orders_for_approval_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_submit_orders_for_approval({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_submit_orders_for_approval parent: parent, names: names, skip_inventory_check: skip_inventory_check do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_submit_orders_for_approval ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_submit_orders_for_approval({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_submit_orders_for_approval(::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_submit_orders_for_approval_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_submit_orders_for_approval_and_overbook
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_submit_orders_for_approval_and_overbook_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_submit_orders_for_approval_and_overbook_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_submit_orders_for_approval_and_overbook_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_submit_orders_for_approval_and_overbook({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_submit_orders_for_approval_and_overbook parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_submit_orders_for_approval_and_overbook ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_submit_orders_for_approval_and_overbook({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_submit_orders_for_approval_and_overbook(::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_submit_orders_for_approval_and_overbook_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_submit_orders_for_approval_without_reservation_changes
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_submit_orders_for_approval_without_reservation_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_submit_orders_for_approval_without_reservation_changes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_submit_orders_for_approval_without_reservation_changes_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_submit_orders_for_approval_without_reservation_changes({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_submit_orders_for_approval_without_reservation_changes parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_submit_orders_for_approval_without_reservation_changes ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_submit_orders_for_approval_without_reservation_changes({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_submit_orders_for_approval_without_reservation_changes(::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_submit_orders_for_approval_without_reservation_changes_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_pause_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchPauseOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_pause_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_pause_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_pause_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_pause_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_pause_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_pause_orders ::Google::Ads::AdManager::V1::BatchPauseOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_pause_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_pause_orders(::Google::Ads::AdManager::V1::BatchPauseOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_pause_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_resume_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchResumeOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    skip_inventory_check = true
+
+    batch_resume_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_resume_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_resume_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_resume_orders({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_resume_orders parent: parent, names: names, skip_inventory_check: skip_inventory_check do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_resume_orders ::Google::Ads::AdManager::V1::BatchResumeOrdersRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_resume_orders({ parent: parent, names: names, skip_inventory_check: skip_inventory_check }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_resume_orders(::Google::Ads::AdManager::V1::BatchResumeOrdersRequest.new(parent: parent, names: names, skip_inventory_check: skip_inventory_check), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_resume_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_resume_and_overbook_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_resume_and_overbook_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_resume_and_overbook_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_resume_and_overbook_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_resume_and_overbook_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_resume_and_overbook_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_resume_and_overbook_orders ::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_resume_and_overbook_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_resume_and_overbook_orders(::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_resume_and_overbook_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_approve_orders_without_reservation
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_approve_orders_without_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_approve_orders_without_reservation_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_approve_orders_without_reservation_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_approve_orders_without_reservation({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_approve_orders_without_reservation parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_approve_orders_without_reservation ::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_approve_orders_without_reservation({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_approve_orders_without_reservation(::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_approve_orders_without_reservation_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_archive_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchArchiveOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_archive_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_archive_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_archive_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_archive_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_archive_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_archive_orders ::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_archive_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_archive_orders(::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_archive_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_unarchive_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUnarchiveOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_unarchive_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_unarchive_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_unarchive_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_unarchive_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_unarchive_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_unarchive_orders ::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_unarchive_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_unarchive_orders(::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_unarchive_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_delete_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeleteOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_delete_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_delete_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_delete_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_delete_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_delete_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_delete_orders ::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_delete_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_delete_orders(::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_delete_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_disapprove_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDisapproveOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_disapprove_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_disapprove_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_disapprove_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_disapprove_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_disapprove_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_disapprove_orders ::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_disapprove_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_disapprove_orders(::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_disapprove_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_disapprove_orders_without_reservation_changes
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_disapprove_orders_without_reservation_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_disapprove_orders_without_reservation_changes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_disapprove_orders_without_reservation_changes_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_disapprove_orders_without_reservation_changes({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_disapprove_orders_without_reservation_changes parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_disapprove_orders_without_reservation_changes ::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_disapprove_orders_without_reservation_changes({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_disapprove_orders_without_reservation_changes(::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_disapprove_orders_without_reservation_changes_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_retract_orders
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchRetractOrdersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_retract_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_retract_orders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_retract_orders_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_retract_orders({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_retract_orders parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_retract_orders ::Google::Ads::AdManager::V1::BatchRetractOrdersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_retract_orders({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_retract_orders(::Google::Ads::AdManager::V1::BatchRetractOrdersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_retract_orders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_retract_orders_without_reservation_changes
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_retract_orders_without_reservation_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::OrderService::Rest::ServiceStub.stub :transcode_batch_retract_orders_without_reservation_changes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_retract_orders_without_reservation_changes_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::OrderService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_retract_orders_without_reservation_changes({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_retract_orders_without_reservation_changes parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_retract_orders_without_reservation_changes ::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_retract_orders_without_reservation_changes({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_retract_orders_without_reservation_changes(::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_retract_orders_without_reservation_changes_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

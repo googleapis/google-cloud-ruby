@@ -519,6 +519,16 @@
               "methods": [
                 "list_content_bundles"
               ]
+            },
+            "BatchActivateContentBundles": {
+              "methods": [
+                "batch_activate_content_bundles"
+              ]
+            },
+            "BatchDeactivateContentBundles": {
+              "methods": [
+                "batch_deactivate_content_bundles"
+              ]
             }
           }
         }
@@ -556,6 +566,35 @@
             "ListContent": {
               "methods": [
                 "list_content"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CreativeSetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CreativeSetService::Client",
+          "rpcs": {
+            "GetCreativeSet": {
+              "methods": [
+                "get_creative_set"
+              ]
+            },
+            "ListCreativeSets": {
+              "methods": [
+                "list_creative_sets"
+              ]
+            },
+            "CreateCreativeSet": {
+              "methods": [
+                "create_creative_set"
+              ]
+            },
+            "UpdateCreativeSet": {
+              "methods": [
+                "update_creative_set"
               ]
             }
           }
@@ -1136,6 +1175,96 @@
               "methods": [
                 "list_orders"
               ]
+            },
+            "BatchCreateOrders": {
+              "methods": [
+                "batch_create_orders"
+              ]
+            },
+            "BatchUpdateOrders": {
+              "methods": [
+                "batch_update_orders"
+              ]
+            },
+            "BatchApproveOrders": {
+              "methods": [
+                "batch_approve_orders"
+              ]
+            },
+            "BatchApproveAndOverbookOrders": {
+              "methods": [
+                "batch_approve_and_overbook_orders"
+              ]
+            },
+            "BatchSubmitOrdersForApproval": {
+              "methods": [
+                "batch_submit_orders_for_approval"
+              ]
+            },
+            "BatchSubmitOrdersForApprovalAndOverbook": {
+              "methods": [
+                "batch_submit_orders_for_approval_and_overbook"
+              ]
+            },
+            "BatchSubmitOrdersForApprovalWithoutReservationChanges": {
+              "methods": [
+                "batch_submit_orders_for_approval_without_reservation_changes"
+              ]
+            },
+            "BatchPauseOrders": {
+              "methods": [
+                "batch_pause_orders"
+              ]
+            },
+            "BatchResumeOrders": {
+              "methods": [
+                "batch_resume_orders"
+              ]
+            },
+            "BatchResumeAndOverbookOrders": {
+              "methods": [
+                "batch_resume_and_overbook_orders"
+              ]
+            },
+            "BatchApproveOrdersWithoutReservation": {
+              "methods": [
+                "batch_approve_orders_without_reservation"
+              ]
+            },
+            "BatchArchiveOrders": {
+              "methods": [
+                "batch_archive_orders"
+              ]
+            },
+            "BatchUnarchiveOrders": {
+              "methods": [
+                "batch_unarchive_orders"
+              ]
+            },
+            "BatchDeleteOrders": {
+              "methods": [
+                "batch_delete_orders"
+              ]
+            },
+            "BatchDisapproveOrders": {
+              "methods": [
+                "batch_disapprove_orders"
+              ]
+            },
+            "BatchDisapproveOrdersWithoutReservationChanges": {
+              "methods": [
+                "batch_disapprove_orders_without_reservation_changes"
+              ]
+            },
+            "BatchRetractOrders": {
+              "methods": [
+                "batch_retract_orders"
+              ]
+            },
+            "BatchRetractOrdersWithoutReservationChanges": {
+              "methods": [
+                "batch_retract_orders_without_reservation_changes"
+              ]
             }
           }
         }
@@ -1398,6 +1527,55 @@
         }
       }
     },
+    "SlateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::SlateService::Client",
+          "rpcs": {
+            "GetSlate": {
+              "methods": [
+                "get_slate"
+              ]
+            },
+            "ListSlates": {
+              "methods": [
+                "list_slates"
+              ]
+            },
+            "CreateSlate": {
+              "methods": [
+                "create_slate"
+              ]
+            },
+            "BatchCreateSlates": {
+              "methods": [
+                "batch_create_slates"
+              ]
+            },
+            "UpdateSlate": {
+              "methods": [
+                "update_slate"
+              ]
+            },
+            "BatchUpdateSlates": {
+              "methods": [
+                "batch_update_slates"
+              ]
+            },
+            "BatchArchiveSlates": {
+              "methods": [
+                "batch_archive_slates"
+              ]
+            },
+            "BatchUnarchiveSlates": {
+              "methods": [
+                "batch_unarchive_slates"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SuggestedAdUnitService": {
       "clients": {
         "grpc": {
@@ -1445,6 +1623,16 @@
             "BatchCreateTargetingPresets": {
               "methods": [
                 "batch_create_targeting_presets"
+              ]
+            },
+            "UpdateTargetingPreset": {
+              "methods": [
+                "update_targeting_preset"
+              ]
+            },
+            "BatchUpdateTargetingPresets": {
+              "methods": [
+                "batch_update_targeting_presets"
               ]
             },
             "BatchDeactivateTargetingPresets": {

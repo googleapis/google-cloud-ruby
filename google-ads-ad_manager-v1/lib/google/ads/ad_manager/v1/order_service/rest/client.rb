@@ -312,6 +312,7 @@ module Google
               #       <li><code>displayName</code></li>
               #       <li><code>endTime</code></li>
               #       <li><code>externalOrderId</code></li>
+              #       <li><code>impressionsDelivered</code></li>
               #       <li><code>name</code></li>
               #       <li><code>orderId</code></li>
               #       <li><code>poNumber</code></li>
@@ -321,6 +322,8 @@ module Google
               #       <li><code>secondaryTraffickers</code></li>
               #       <li><code>startTime</code></li>
               #       <li><code>status</code></li>
+              #       <li><code>totalClicksDelivered</code></li>
+              #       <li><code>totalViewableImpressionsDelivered</code></li>
               #       <li><code>trafficker</code></li>
               #       <li><code>updateTime</code></li>
               #     </ul>
@@ -389,6 +392,1498 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @order_service_stub, :list_orders, "orders", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates `Order` objects.
+              #
+              # @overload batch_create_orders(request, options = nil)
+              #   Pass arguments to `batch_create_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_orders(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Orders` will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateOrderRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateOrderRequest, ::Hash>]
+              #     Required. The `Order` objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateOrdersRequest.new
+              #
+              #   # Call the batch_create_orders method.
+              #   result = client.batch_create_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateOrdersResponse.
+              #   p result
+              #
+              def batch_create_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_create_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates `Order` objects.
+              #
+              # @overload batch_update_orders(request, options = nil)
+              #   Pass arguments to `batch_update_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_orders(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where `Orders` will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateOrderRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateOrderRequest, ::Hash>]
+              #     Required. The `Order` objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateOrdersRequest.new
+              #
+              #   # Call the batch_update_orders method.
+              #   result = client.batch_update_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateOrdersResponse.
+              #   p result
+              #
+              def batch_update_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_update_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Approves a list of `Order` objects.
+              #
+              # @overload batch_approve_orders(request, options = nil)
+              #   Pass arguments to `batch_approve_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchApproveOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchApproveOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_approve_orders(parent: nil, names: nil, skip_inventory_check: nil)
+              #   Pass arguments to `batch_approve_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to approve.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              #   @param skip_inventory_check [::Boolean]
+              #     Optional. Indicates whether the inventory check should be skipped when
+              #     performing this action.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchApproveOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchApproveOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchApproveOrdersRequest.new
+              #
+              #   # Call the batch_approve_orders method.
+              #   result = client.batch_approve_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchApproveOrdersResponse.
+              #   p result
+              #
+              def batch_approve_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchApproveOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_approve_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_approve_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_approve_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_approve_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Approves and overbooks a list of `Order` objects.
+              #
+              # @overload batch_approve_and_overbook_orders(request, options = nil)
+              #   Pass arguments to `batch_approve_and_overbook_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_approve_and_overbook_orders(parent: nil, names: nil, skip_inventory_check: nil)
+              #   Pass arguments to `batch_approve_and_overbook_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to approve and overbook.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              #   @param skip_inventory_check [::Boolean]
+              #     Optional. Indicates whether the inventory check should be skipped when
+              #     performing this action.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest.new
+              #
+              #   # Call the batch_approve_and_overbook_orders method.
+              #   result = client.batch_approve_and_overbook_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersResponse.
+              #   p result
+              #
+              def batch_approve_and_overbook_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_approve_and_overbook_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_approve_and_overbook_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_approve_and_overbook_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_approve_and_overbook_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Submits a list of `Order` objects for approval.
+              #
+              # @overload batch_submit_orders_for_approval(request, options = nil)
+              #   Pass arguments to `batch_submit_orders_for_approval` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_submit_orders_for_approval(parent: nil, names: nil, skip_inventory_check: nil)
+              #   Pass arguments to `batch_submit_orders_for_approval` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to submit for approval.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              #   @param skip_inventory_check [::Boolean]
+              #     Optional. Indicates whether the inventory check should be skipped when
+              #     performing this action.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest.new
+              #
+              #   # Call the batch_submit_orders_for_approval method.
+              #   result = client.batch_submit_orders_for_approval request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalResponse.
+              #   p result
+              #
+              def batch_submit_orders_for_approval request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_submit_orders_for_approval.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_submit_orders_for_approval.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_submit_orders_for_approval.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_submit_orders_for_approval request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Submits and overbooks a list of `Order` objects for approval.
+              #
+              # @overload batch_submit_orders_for_approval_and_overbook(request, options = nil)
+              #   Pass arguments to `batch_submit_orders_for_approval_and_overbook` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_submit_orders_for_approval_and_overbook(parent: nil, names: nil)
+              #   Pass arguments to `batch_submit_orders_for_approval_and_overbook` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to submit for approval and
+              #     overbook. Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest.new
+              #
+              #   # Call the batch_submit_orders_for_approval_and_overbook method.
+              #   result = client.batch_submit_orders_for_approval_and_overbook request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookResponse.
+              #   p result
+              #
+              def batch_submit_orders_for_approval_and_overbook request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_submit_orders_for_approval_and_overbook.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_submit_orders_for_approval_and_overbook.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_submit_orders_for_approval_and_overbook.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_submit_orders_for_approval_and_overbook request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Submits a list of `Order` objects for approval without changing reservation
+              # status.
+              #
+              # @overload batch_submit_orders_for_approval_without_reservation_changes(request, options = nil)
+              #   Pass arguments to `batch_submit_orders_for_approval_without_reservation_changes` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_submit_orders_for_approval_without_reservation_changes(parent: nil, names: nil)
+              #   Pass arguments to `batch_submit_orders_for_approval_without_reservation_changes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to submit for approval.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest.new
+              #
+              #   # Call the batch_submit_orders_for_approval_without_reservation_changes method.
+              #   result = client.batch_submit_orders_for_approval_without_reservation_changes request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesResponse.
+              #   p result
+              #
+              def batch_submit_orders_for_approval_without_reservation_changes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_submit_orders_for_approval_without_reservation_changes.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_submit_orders_for_approval_without_reservation_changes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_submit_orders_for_approval_without_reservation_changes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_submit_orders_for_approval_without_reservation_changes request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Pauses a list of `Order` objects.
+              #
+              # @overload batch_pause_orders(request, options = nil)
+              #   Pass arguments to `batch_pause_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchPauseOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchPauseOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_pause_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_pause_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to pause.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchPauseOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchPauseOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchPauseOrdersRequest.new
+              #
+              #   # Call the batch_pause_orders method.
+              #   result = client.batch_pause_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchPauseOrdersResponse.
+              #   p result
+              #
+              def batch_pause_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchPauseOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_pause_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_pause_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_pause_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_pause_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Resumes a list of `Order` objects.
+              #
+              # @overload batch_resume_orders(request, options = nil)
+              #   Pass arguments to `batch_resume_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchResumeOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchResumeOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_resume_orders(parent: nil, names: nil, skip_inventory_check: nil)
+              #   Pass arguments to `batch_resume_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to resume.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              #   @param skip_inventory_check [::Boolean]
+              #     Optional. Indicates whether the inventory check should be skipped when
+              #     performing this action.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchResumeOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchResumeOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchResumeOrdersRequest.new
+              #
+              #   # Call the batch_resume_orders method.
+              #   result = client.batch_resume_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchResumeOrdersResponse.
+              #   p result
+              #
+              def batch_resume_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchResumeOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_resume_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_resume_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_resume_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_resume_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Resumes and overbooks a list of `Order` objects.
+              #
+              # @overload batch_resume_and_overbook_orders(request, options = nil)
+              #   Pass arguments to `batch_resume_and_overbook_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_resume_and_overbook_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_resume_and_overbook_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to resume and overbook.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest.new
+              #
+              #   # Call the batch_resume_and_overbook_orders method.
+              #   result = client.batch_resume_and_overbook_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersResponse.
+              #   p result
+              #
+              def batch_resume_and_overbook_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_resume_and_overbook_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_resume_and_overbook_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_resume_and_overbook_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_resume_and_overbook_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Approves a list of `Order` objects without changing reservation status.
+              #
+              # @overload batch_approve_orders_without_reservation(request, options = nil)
+              #   Pass arguments to `batch_approve_orders_without_reservation` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_approve_orders_without_reservation(parent: nil, names: nil)
+              #   Pass arguments to `batch_approve_orders_without_reservation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to approve.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest.new
+              #
+              #   # Call the batch_approve_orders_without_reservation method.
+              #   result = client.batch_approve_orders_without_reservation request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationResponse.
+              #   p result
+              #
+              def batch_approve_orders_without_reservation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_approve_orders_without_reservation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_approve_orders_without_reservation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_approve_orders_without_reservation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_approve_orders_without_reservation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Archives a list of `Order` objects.
+              #
+              # @overload batch_archive_orders(request, options = nil)
+              #   Pass arguments to `batch_archive_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_archive_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_archive_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to archive.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchArchiveOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchArchiveOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchArchiveOrdersRequest.new
+              #
+              #   # Call the batch_archive_orders method.
+              #   result = client.batch_archive_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchArchiveOrdersResponse.
+              #   p result
+              #
+              def batch_archive_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_archive_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_archive_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_archive_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_archive_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Unarchives a list of `Order` objects.
+              #
+              # @overload batch_unarchive_orders(request, options = nil)
+              #   Pass arguments to `batch_unarchive_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_unarchive_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_unarchive_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to extract.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUnarchiveOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUnarchiveOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest.new
+              #
+              #   # Call the batch_unarchive_orders method.
+              #   result = client.batch_unarchive_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUnarchiveOrdersResponse.
+              #   p result
+              #
+              def batch_unarchive_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_unarchive_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_unarchive_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_unarchive_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_unarchive_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a list of `Order` objects.
+              #
+              # @overload batch_delete_orders(request, options = nil)
+              #   Pass arguments to `batch_delete_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_delete_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_delete_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to delete.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDeleteOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDeleteOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDeleteOrdersRequest.new
+              #
+              #   # Call the batch_delete_orders method.
+              #   result = client.batch_delete_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDeleteOrdersResponse.
+              #   p result
+              #
+              def batch_delete_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_delete_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_delete_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_delete_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Disapproves a list of `Order` objects.
+              #
+              # @overload batch_disapprove_orders(request, options = nil)
+              #   Pass arguments to `batch_disapprove_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_disapprove_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_disapprove_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to disapprove.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDisapproveOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDisapproveOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest.new
+              #
+              #   # Call the batch_disapprove_orders method.
+              #   result = client.batch_disapprove_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDisapproveOrdersResponse.
+              #   p result
+              #
+              def batch_disapprove_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_disapprove_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_disapprove_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_disapprove_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_disapprove_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Disapproves a list of `Order` objects without changing reservation status.
+              #
+              # @overload batch_disapprove_orders_without_reservation_changes(request, options = nil)
+              #   Pass arguments to `batch_disapprove_orders_without_reservation_changes` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_disapprove_orders_without_reservation_changes(parent: nil, names: nil)
+              #   Pass arguments to `batch_disapprove_orders_without_reservation_changes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to disapprove without
+              #     reservation changes. Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest.new
+              #
+              #   # Call the batch_disapprove_orders_without_reservation_changes method.
+              #   result = client.batch_disapprove_orders_without_reservation_changes request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesResponse.
+              #   p result
+              #
+              def batch_disapprove_orders_without_reservation_changes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_disapprove_orders_without_reservation_changes.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_disapprove_orders_without_reservation_changes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_disapprove_orders_without_reservation_changes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_disapprove_orders_without_reservation_changes request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retracts a list of `Order` objects.
+              #
+              # @overload batch_retract_orders(request, options = nil)
+              #   Pass arguments to `batch_retract_orders` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchRetractOrdersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchRetractOrdersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_retract_orders(parent: nil, names: nil)
+              #   Pass arguments to `batch_retract_orders` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to retract.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchRetractOrdersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchRetractOrdersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchRetractOrdersRequest.new
+              #
+              #   # Call the batch_retract_orders method.
+              #   result = client.batch_retract_orders request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchRetractOrdersResponse.
+              #   p result
+              #
+              def batch_retract_orders request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchRetractOrdersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_retract_orders.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_retract_orders.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_retract_orders.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_retract_orders request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retracts a list of `Order` objects without changing reservation status.
+              #
+              # @overload batch_retract_orders_without_reservation_changes(request, options = nil)
+              #   Pass arguments to `batch_retract_orders_without_reservation_changes` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_retract_orders_without_reservation_changes(parent: nil, names: nil)
+              #   Pass arguments to `batch_retract_orders_without_reservation_changes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of Orders.
+              #     Format: `networks/{network_code}`
+              #   @param names [::Array<::String>]
+              #     Required. The resource names of the orders to retract.
+              #     Format: `networks/{network_code}/orders/{order_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::OrderService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest.new
+              #
+              #   # Call the batch_retract_orders_without_reservation_changes method.
+              #   result = client.batch_retract_orders_without_reservation_changes request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesResponse.
+              #   p result
+              #
+              def batch_retract_orders_without_reservation_changes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_retract_orders_without_reservation_changes.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_retract_orders_without_reservation_changes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_retract_orders_without_reservation_changes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @order_service_stub.batch_retract_orders_without_reservation_changes request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -552,6 +2047,96 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_orders
+                  ##
+                  # RPC-specific configuration for `batch_create_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_orders
+                  ##
+                  # RPC-specific configuration for `batch_update_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_orders
+                  ##
+                  # RPC-specific configuration for `batch_approve_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_approve_orders
+                  ##
+                  # RPC-specific configuration for `batch_approve_and_overbook_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_approve_and_overbook_orders
+                  ##
+                  # RPC-specific configuration for `batch_submit_orders_for_approval`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_submit_orders_for_approval
+                  ##
+                  # RPC-specific configuration for `batch_submit_orders_for_approval_and_overbook`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_submit_orders_for_approval_and_overbook
+                  ##
+                  # RPC-specific configuration for `batch_submit_orders_for_approval_without_reservation_changes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_submit_orders_for_approval_without_reservation_changes
+                  ##
+                  # RPC-specific configuration for `batch_pause_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_pause_orders
+                  ##
+                  # RPC-specific configuration for `batch_resume_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_resume_orders
+                  ##
+                  # RPC-specific configuration for `batch_resume_and_overbook_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_resume_and_overbook_orders
+                  ##
+                  # RPC-specific configuration for `batch_approve_orders_without_reservation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_approve_orders_without_reservation
+                  ##
+                  # RPC-specific configuration for `batch_archive_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_archive_orders
+                  ##
+                  # RPC-specific configuration for `batch_unarchive_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_unarchive_orders
+                  ##
+                  # RPC-specific configuration for `batch_delete_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_orders
+                  ##
+                  # RPC-specific configuration for `batch_disapprove_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_disapprove_orders
+                  ##
+                  # RPC-specific configuration for `batch_disapprove_orders_without_reservation_changes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_disapprove_orders_without_reservation_changes
+                  ##
+                  # RPC-specific configuration for `batch_retract_orders`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_retract_orders
+                  ##
+                  # RPC-specific configuration for `batch_retract_orders_without_reservation_changes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_retract_orders_without_reservation_changes
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -559,6 +2144,42 @@ module Google
                     @get_order = ::Gapic::Config::Method.new get_order_config
                     list_orders_config = parent_rpcs.list_orders if parent_rpcs.respond_to? :list_orders
                     @list_orders = ::Gapic::Config::Method.new list_orders_config
+                    batch_create_orders_config = parent_rpcs.batch_create_orders if parent_rpcs.respond_to? :batch_create_orders
+                    @batch_create_orders = ::Gapic::Config::Method.new batch_create_orders_config
+                    batch_update_orders_config = parent_rpcs.batch_update_orders if parent_rpcs.respond_to? :batch_update_orders
+                    @batch_update_orders = ::Gapic::Config::Method.new batch_update_orders_config
+                    batch_approve_orders_config = parent_rpcs.batch_approve_orders if parent_rpcs.respond_to? :batch_approve_orders
+                    @batch_approve_orders = ::Gapic::Config::Method.new batch_approve_orders_config
+                    batch_approve_and_overbook_orders_config = parent_rpcs.batch_approve_and_overbook_orders if parent_rpcs.respond_to? :batch_approve_and_overbook_orders
+                    @batch_approve_and_overbook_orders = ::Gapic::Config::Method.new batch_approve_and_overbook_orders_config
+                    batch_submit_orders_for_approval_config = parent_rpcs.batch_submit_orders_for_approval if parent_rpcs.respond_to? :batch_submit_orders_for_approval
+                    @batch_submit_orders_for_approval = ::Gapic::Config::Method.new batch_submit_orders_for_approval_config
+                    batch_submit_orders_for_approval_and_overbook_config = parent_rpcs.batch_submit_orders_for_approval_and_overbook if parent_rpcs.respond_to? :batch_submit_orders_for_approval_and_overbook
+                    @batch_submit_orders_for_approval_and_overbook = ::Gapic::Config::Method.new batch_submit_orders_for_approval_and_overbook_config
+                    batch_submit_orders_for_approval_without_reservation_changes_config = parent_rpcs.batch_submit_orders_for_approval_without_reservation_changes if parent_rpcs.respond_to? :batch_submit_orders_for_approval_without_reservation_changes
+                    @batch_submit_orders_for_approval_without_reservation_changes = ::Gapic::Config::Method.new batch_submit_orders_for_approval_without_reservation_changes_config
+                    batch_pause_orders_config = parent_rpcs.batch_pause_orders if parent_rpcs.respond_to? :batch_pause_orders
+                    @batch_pause_orders = ::Gapic::Config::Method.new batch_pause_orders_config
+                    batch_resume_orders_config = parent_rpcs.batch_resume_orders if parent_rpcs.respond_to? :batch_resume_orders
+                    @batch_resume_orders = ::Gapic::Config::Method.new batch_resume_orders_config
+                    batch_resume_and_overbook_orders_config = parent_rpcs.batch_resume_and_overbook_orders if parent_rpcs.respond_to? :batch_resume_and_overbook_orders
+                    @batch_resume_and_overbook_orders = ::Gapic::Config::Method.new batch_resume_and_overbook_orders_config
+                    batch_approve_orders_without_reservation_config = parent_rpcs.batch_approve_orders_without_reservation if parent_rpcs.respond_to? :batch_approve_orders_without_reservation
+                    @batch_approve_orders_without_reservation = ::Gapic::Config::Method.new batch_approve_orders_without_reservation_config
+                    batch_archive_orders_config = parent_rpcs.batch_archive_orders if parent_rpcs.respond_to? :batch_archive_orders
+                    @batch_archive_orders = ::Gapic::Config::Method.new batch_archive_orders_config
+                    batch_unarchive_orders_config = parent_rpcs.batch_unarchive_orders if parent_rpcs.respond_to? :batch_unarchive_orders
+                    @batch_unarchive_orders = ::Gapic::Config::Method.new batch_unarchive_orders_config
+                    batch_delete_orders_config = parent_rpcs.batch_delete_orders if parent_rpcs.respond_to? :batch_delete_orders
+                    @batch_delete_orders = ::Gapic::Config::Method.new batch_delete_orders_config
+                    batch_disapprove_orders_config = parent_rpcs.batch_disapprove_orders if parent_rpcs.respond_to? :batch_disapprove_orders
+                    @batch_disapprove_orders = ::Gapic::Config::Method.new batch_disapprove_orders_config
+                    batch_disapprove_orders_without_reservation_changes_config = parent_rpcs.batch_disapprove_orders_without_reservation_changes if parent_rpcs.respond_to? :batch_disapprove_orders_without_reservation_changes
+                    @batch_disapprove_orders_without_reservation_changes = ::Gapic::Config::Method.new batch_disapprove_orders_without_reservation_changes_config
+                    batch_retract_orders_config = parent_rpcs.batch_retract_orders if parent_rpcs.respond_to? :batch_retract_orders
+                    @batch_retract_orders = ::Gapic::Config::Method.new batch_retract_orders_config
+                    batch_retract_orders_without_reservation_changes_config = parent_rpcs.batch_retract_orders_without_reservation_changes if parent_rpcs.respond_to? :batch_retract_orders_without_reservation_changes
+                    @batch_retract_orders_without_reservation_changes = ::Gapic::Config::Method.new batch_retract_orders_without_reservation_changes_config
 
                     yield self if block_given?
                   end
