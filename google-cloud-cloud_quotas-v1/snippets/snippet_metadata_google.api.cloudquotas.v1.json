@@ -250,6 +250,86 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "cloudquotas_v1_generated_QuotaAdjusterSettingsManager_UpdateQuotaAdjusterSettings_sync",
+      "title": "Snippet for the update_quota_adjuster_settings call in the QuotaAdjusterSettingsManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client#update_quota_adjuster_settings.",
+      "file": "quota_adjuster_settings_manager/update_quota_adjuster_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_quota_adjuster_settings",
+        "full_name": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client#update_quota_adjuster_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudQuotas::V1::UpdateQuotaAdjusterSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettings",
+        "client": {
+          "short_name": "QuotaAdjusterSettingsManager::Client",
+          "full_name": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateQuotaAdjusterSettings",
+          "full_name": "google.api.cloudquotas.v1.QuotaAdjusterSettingsManager.UpdateQuotaAdjusterSettings",
+          "service": {
+            "short_name": "QuotaAdjusterSettingsManager",
+            "full_name": "google.api.cloudquotas.v1.QuotaAdjusterSettingsManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudquotas_v1_generated_QuotaAdjusterSettingsManager_GetQuotaAdjusterSettings_sync",
+      "title": "Snippet for the get_quota_adjuster_settings call in the QuotaAdjusterSettingsManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client#get_quota_adjuster_settings.",
+      "file": "quota_adjuster_settings_manager/get_quota_adjuster_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_quota_adjuster_settings",
+        "full_name": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client#get_quota_adjuster_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudQuotas::V1::GetQuotaAdjusterSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettings",
+        "client": {
+          "short_name": "QuotaAdjusterSettingsManager::Client",
+          "full_name": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client"
+        },
+        "method": {
+          "short_name": "GetQuotaAdjusterSettings",
+          "full_name": "google.api.cloudquotas.v1.QuotaAdjusterSettingsManager.GetQuotaAdjusterSettings",
+          "service": {
+            "short_name": "QuotaAdjusterSettingsManager",
+            "full_name": "google.api.cloudquotas.v1.QuotaAdjusterSettingsManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

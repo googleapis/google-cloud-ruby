@@ -43,6 +43,25 @@
           }
         }
       }
+    },
+    "QuotaAdjusterSettingsManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::CloudQuotas::V1::QuotaAdjusterSettingsManager::Client",
+          "rpcs": {
+            "UpdateQuotaAdjusterSettings": {
+              "methods": [
+                "update_quota_adjuster_settings"
+              ]
+            },
+            "GetQuotaAdjusterSettings": {
+              "methods": [
+                "get_quota_adjuster_settings"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
