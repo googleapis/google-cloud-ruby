@@ -327,6 +327,8 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
     project = "hello world"
     database_roles = ["hello world"]
     revoke_existing_roles = true
+    server_roles = ["hello world"]
+    revoke_existing_server_roles = true
     body = {}
 
     update_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -339,6 +341,9 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       assert_equal ["hello world"], request["database_roles"]
       assert_equal true, request["revoke_existing_roles"]
       assert request.has_revoke_existing_roles?
+      assert_equal ["hello world"], request["server_roles"]
+      assert_equal true, request["revoke_existing_server_roles"]
+      assert request.has_revoke_existing_server_roles?
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Sql::V1::User), request["body"]
       refute_nil options
     end
@@ -350,31 +355,31 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body }) do |response, operation|
+      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.update host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body do |response, operation|
+      c.update host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.update ::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body) do |response, operation|
+      c.update ::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body }, grpc_options) do |response, operation|
+      c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.update(::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body), grpc_options) do |response, operation|
+      c.update(::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

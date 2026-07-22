@@ -1346,6 +1346,10 @@ module Google
         # @!attribute [r] dns_names
         #   @return [::Array<::Google::Cloud::Sql::V1::DnsNameMapping>]
         #     Output only. The list of DNS names used by this instance.
+        # @!attribute [rw] database_center_integration_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Optional. If true, instance metadata is sent to the Database Center. If
+        #     false, instance metadata is not sent to the Database Center.
         class DatabaseInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2013,6 +2017,10 @@ module Google
         # @!attribute [rw] ssl_option
         #   @return [::Google::Cloud::Sql::V1::OnPremisesConfiguration::SslOption]
         #     Optional. SSL option for replica connection to the on-premises source.
+        # @!attribute [r] dms_managed
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the resource is managed by Database
+        #     Migration Service.
         class OnPremisesConfiguration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2091,11 +2099,25 @@ module Google
         # @!attribute [rw] database
         #   @return [::String]
         #     Optional. Name of the database on which the statement will be executed.
+        # @!attribute [rw] password_secret_version
+        #   @return [::String]
+        #     Optional. The resource name of the Secret Manager secret holding the
+        #     password for the user to log into the database. The secret should be
+        #     created using the regional endpoint (for API) or from the Regional
+        #     Secrets page (for UI), and stored in the same region as the Cloud SQL
+        #     instance. The expected resource name format is
+        #     `projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}`.
+        #     Used together with the `user` field.
+        #     The secret resource name will not be stored.
+        #
+        #     Note: The following fields are mutually exclusive: `password_secret_version`, `auto_iam_authn`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] auto_iam_authn
         #   @return [::Boolean]
         #     Optional. When set to `true`, the API caller identity associated with the
         #     request is used for database authentication. The API caller must be an
         #     IAM user in the database.
+        #
+        #     Note: The following fields are mutually exclusive: `auto_iam_authn`, `password_secret_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_limit
         #   @return [::Integer]
         #     Optional. The maximum number of rows returned per SQL statement.

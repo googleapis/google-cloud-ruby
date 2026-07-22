@@ -317,6 +317,8 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::Rest::ClientTest < Minitest::Te
     project = "hello world"
     database_roles = ["hello world"]
     revoke_existing_roles = true
+    server_roles = ["hello world"]
+    revoke_existing_server_roles = true
     body = {}
 
     update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -333,27 +335,27 @@ class ::Google::Cloud::Sql::V1::SqlUsersService::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body }) do |_result, response|
+        c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.update host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body do |_result, response|
+        c.update host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.update ::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body) do |_result, response|
+        c.update ::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body }, call_options) do |_result, response|
+        c.update({ host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.update(::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, body: body), call_options) do |_result, response|
+        c.update(::Google::Cloud::Sql::V1::SqlUsersUpdateRequest.new(host: host, instance: instance, name: name, project: project, database_roles: database_roles, revoke_existing_roles: revoke_existing_roles, server_roles: server_roles, revoke_existing_server_roles: revoke_existing_server_roles, body: body), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

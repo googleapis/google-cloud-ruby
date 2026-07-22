@@ -88,6 +88,7 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     operation = "hello world"
     project = "hello world"
+    location = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -103,27 +104,27 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.get({ operation: operation, project: project }) do |_result, response|
+        c.get({ operation: operation, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get operation: operation, project: project do |_result, response|
+        c.get operation: operation, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get ::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project) do |_result, response|
+        c.get ::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get({ operation: operation, project: project }, call_options) do |_result, response|
+        c.get({ operation: operation, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get(::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project), call_options) do |_result, response|
+        c.get(::Google::Cloud::Sql::V1::SqlOperationsGetRequest.new(operation: operation, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -145,6 +146,7 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::Rest::ClientTest < Minites
     max_results = 42
     page_token = "hello world"
     project = "hello world"
+    location = "hello world"
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -160,27 +162,27 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project }) do |_result, response|
+        c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list instance: instance, max_results: max_results, page_token: page_token, project: project do |_result, response|
+        c.list instance: instance, max_results: max_results, page_token: page_token, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list ::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project) do |_result, response|
+        c.list ::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project }, call_options) do |_result, response|
+        c.list({ instance: instance, max_results: max_results, page_token: page_token, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list(::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project), call_options) do |_result, response|
+        c.list(::Google::Cloud::Sql::V1::SqlOperationsListRequest.new(instance: instance, max_results: max_results, page_token: page_token, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -200,6 +202,7 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     operation = "hello world"
     project = "hello world"
+    location = "hello world"
 
     cancel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -215,27 +218,27 @@ class ::Google::Cloud::Sql::V1::SqlOperationsService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.cancel({ operation: operation, project: project }) do |_result, response|
+        c.cancel({ operation: operation, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.cancel operation: operation, project: project do |_result, response|
+        c.cancel operation: operation, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.cancel ::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project) do |_result, response|
+        c.cancel ::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.cancel({ operation: operation, project: project }, call_options) do |_result, response|
+        c.cancel({ operation: operation, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.cancel(::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project), call_options) do |_result, response|
+        c.cancel(::Google::Cloud::Sql::V1::SqlOperationsCancelRequest.new(operation: operation, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

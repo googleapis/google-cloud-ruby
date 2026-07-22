@@ -534,7 +534,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update(host: nil, instance: nil, name: nil, project: nil, database_roles: nil, revoke_existing_roles: nil, body: nil)
+              # @overload update(host: nil, instance: nil, name: nil, project: nil, database_roles: nil, revoke_existing_roles: nil, server_roles: nil, revoke_existing_server_roles: nil, body: nil)
               #   Pass arguments to `update` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -554,6 +554,14 @@ module Google
               #     Optional. Specifies whether to revoke existing roles that are not present
               #     in the `database_roles` field. If `false` or unset, the database roles
               #     specified in `database_roles` are added to the user's existing roles.
+              #   @param server_roles [::Array<::String>]
+              #     Optional. The server roles to grant to the SQL Server login. Existing
+              #     server roles will not be revoked if revoke_existing_roles is false.
+              #     body.server_roles will be ignored for update request.
+              #   @param revoke_existing_server_roles [::Boolean]
+              #     Optional. Specifies whether to revoke existing roles that are not present
+              #     in the `server_roles` field. If `false` or unset, the server roles
+              #     specified in `server_roles` are added to the user's existing server roles.
               #   @param body [::Google::Cloud::Sql::V1::User, ::Hash]
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Sql::V1::Operation]
