@@ -65,6 +65,11 @@ module Google
         #     Optional. Immutable. The deletion time of the membership, such as when a
         #     member left or was removed from a space. This field is output only, except
         #     when used to import historical memberships in import mode spaces.
+        # @!attribute [r] affiliation
+        #   @return [::Google::Apps::Chat::V1::Membership::Affiliation]
+        #     Output only. A user's relationship to the Workspace organization that owns
+        #     the space. In spaces owned by consumer accounts, the affiliation of all
+        #     members is `EXTERNAL`.
         class Membership
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,6 +160,28 @@ module Google
             # To learn more, see
             # [Manage space settings](https://support.google.com/chat/answer/13340792).
             ROLE_ASSISTANT_MANAGER = 4
+          end
+
+          # Represents the affiliation of a user to the Google Workspace organization
+          # that owns the space. This enum may have more values added in the future.
+          module Affiliation
+            # Default value. This value is unused.
+            AFFILIATION_UNSPECIFIED = 0
+
+            # An account managed by the same Google Workspace organization that owns
+            # the space.
+            INTERNAL = 1
+
+            # An account external to the Google Workspace organization that owns the
+            # space (e.g., a consumer account, or an account managed by a different
+            # Workspace organization).
+            EXTERNAL = 2
+
+            # An account managed by the Workspace organization that owns the space,
+            # but provisioned for a user who is external to the organization (e.g., a
+            # Guest user). To learn more about guests, see
+            # https://support.google.com/chat/answer/16997417.
+            MANAGED_EXTERNAL = 3
           end
         end
 
