@@ -1,0 +1,815 @@
+{
+  "client_library": {
+    "name": "google-cloud-commerce_producer-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.commerceproducer.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_ListServices_sync",
+      "title": "Snippet for the list_services call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_services.",
+      "file": "commerce_transaction/list_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_services",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::ListServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::ListServicesResponse",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "ListServices",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.ListServices",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_GetService_sync",
+      "title": "Snippet for the get_service call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_service.",
+      "file": "commerce_transaction/get_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::GetServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::Service",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "GetService",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.GetService",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_ListPrivateOffers_sync",
+      "title": "Snippet for the list_private_offers call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_private_offers.",
+      "file": "commerce_transaction/list_private_offers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_offers",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_private_offers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::ListPrivateOffersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::ListPrivateOffersResponse",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateOffers",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.ListPrivateOffers",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_GetPrivateOffer_sync",
+      "title": "Snippet for the get_private_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_private_offer.",
+      "file": "commerce_transaction/get_private_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_private_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::GetPrivateOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOffer",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.GetPrivateOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_CreatePrivateOffer_sync",
+      "title": "Snippet for the create_private_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#create_private_offer.",
+      "file": "commerce_transaction/create_private_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#create_private_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::CreatePrivateOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOffer",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.CreatePrivateOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_UpdatePrivateOffer_sync",
+      "title": "Snippet for the update_private_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#update_private_offer.",
+      "file": "commerce_transaction/update_private_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_private_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#update_private_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::UpdatePrivateOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOffer",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrivateOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.UpdatePrivateOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_PublishPrivateOffer_sync",
+      "title": "Snippet for the publish_private_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#publish_private_offer.",
+      "file": "commerce_transaction/publish_private_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "publish_private_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#publish_private_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::PublishPrivateOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOffer",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "PublishPrivateOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.PublishPrivateOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_CancelPrivateOffer_sync",
+      "title": "Snippet for the cancel_private_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#cancel_private_offer.",
+      "file": "commerce_transaction/cancel_private_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_private_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#cancel_private_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::CancelPrivateOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOffer",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "CancelPrivateOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.CancelPrivateOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_DeletePrivateOffer_sync",
+      "title": "Snippet for the delete_private_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#delete_private_offer.",
+      "file": "commerce_transaction/delete_private_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_private_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#delete_private_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::DeletePrivateOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "DeletePrivateOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.DeletePrivateOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_ListPrivateOfferDocuments_sync",
+      "title": "Snippet for the list_private_offer_documents call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_private_offer_documents.",
+      "file": "commerce_transaction/list_private_offer_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_offer_documents",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_private_offer_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::ListPrivateOfferDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::ListPrivateOfferDocumentsResponse",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateOfferDocuments",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.ListPrivateOfferDocuments",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_GetPrivateOfferDocument_sync",
+      "title": "Snippet for the get_private_offer_document call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_private_offer_document.",
+      "file": "commerce_transaction/get_private_offer_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_offer_document",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_private_offer_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::GetPrivateOfferDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOfferDocument",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateOfferDocument",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.GetPrivateOfferDocument",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_CreatePrivateOfferDocument_sync",
+      "title": "Snippet for the create_private_offer_document call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#create_private_offer_document.",
+      "file": "commerce_transaction/create_private_offer_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_offer_document",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#create_private_offer_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::CreatePrivateOfferDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOfferDocument",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateOfferDocument",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.CreatePrivateOfferDocument",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_UpdatePrivateOfferDocument_sync",
+      "title": "Snippet for the update_private_offer_document call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#update_private_offer_document.",
+      "file": "commerce_transaction/update_private_offer_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_private_offer_document",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#update_private_offer_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::UpdatePrivateOfferDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::PrivateOfferDocument",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrivateOfferDocument",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.UpdatePrivateOfferDocument",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_DeletePrivateOfferDocument_sync",
+      "title": "Snippet for the delete_private_offer_document call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#delete_private_offer_document.",
+      "file": "commerce_transaction/delete_private_offer_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_private_offer_document",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#delete_private_offer_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::DeletePrivateOfferDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "DeletePrivateOfferDocument",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.DeletePrivateOfferDocument",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_ListStandardOffers_sync",
+      "title": "Snippet for the list_standard_offers call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_standard_offers.",
+      "file": "commerce_transaction/list_standard_offers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_standard_offers",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_standard_offers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::ListStandardOffersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::ListStandardOffersResponse",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "ListStandardOffers",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.ListStandardOffers",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_GetStandardOffer_sync",
+      "title": "Snippet for the get_standard_offer call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_standard_offer.",
+      "file": "commerce_transaction/get_standard_offer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_standard_offer",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_standard_offer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::GetStandardOfferRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::StandardOffer",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "GetStandardOffer",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.GetStandardOffer",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_GetSku_sync",
+      "title": "Snippet for the get_sku call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_sku.",
+      "file": "commerce_transaction/get_sku.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sku",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_sku",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::GetSkuRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::Sku",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "GetSku",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.GetSku",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_ListSkus_sync",
+      "title": "Snippet for the list_skus call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_skus.",
+      "file": "commerce_transaction/list_skus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_skus",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_skus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::ListSkusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::ListSkusResponse",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "ListSkus",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.ListSkus",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_GetSkuGroup_sync",
+      "title": "Snippet for the get_sku_group call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_sku_group.",
+      "file": "commerce_transaction/get_sku_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sku_group",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#get_sku_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::GetSkuGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::SkuGroup",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "GetSkuGroup",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.GetSkuGroup",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "commerceproducer_v1beta_generated_CommerceTransaction_ListSkuGroups_sync",
+      "title": "Snippet for the list_sku_groups call in the CommerceTransaction service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_sku_groups.",
+      "file": "commerce_transaction/list_sku_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sku_groups",
+        "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client#list_sku_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CommerceProducer::V1beta::ListSkuGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CommerceProducer::V1beta::ListSkuGroupsResponse",
+        "client": {
+          "short_name": "CommerceTransaction::Client",
+          "full_name": "::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client"
+        },
+        "method": {
+          "short_name": "ListSkuGroups",
+          "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction.ListSkuGroups",
+          "service": {
+            "short_name": "CommerceTransaction",
+            "full_name": "google.cloud.commerceproducer.v1beta.CommerceTransaction"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

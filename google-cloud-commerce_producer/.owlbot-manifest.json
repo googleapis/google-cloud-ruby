@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-commerce_producer.gemspec",
+    "lib/google-cloud-commerce_producer.rb",
+    "lib/google/cloud/commerce_producer.rb",
+    "lib/google/cloud/commerce_producer/version.rb",
+    "test/google/cloud/commerce_producer/client_test.rb",
+    "test/google/cloud/commerce_producer/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
