@@ -30,6 +30,11 @@
                 "get_private_offer"
               ]
             },
+            "ResolveAmendmentTarget": {
+              "methods": [
+                "resolve_amendment_target"
+              ]
+            },
             "CreatePrivateOffer": {
               "methods": [
                 "create_private_offer"

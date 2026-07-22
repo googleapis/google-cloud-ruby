@@ -83,6 +83,66 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for resolving an amended offer.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for ResolveAmendmentTargetRequest
+        # @!attribute [rw] target_billing_account
+        #   @return [::String]
+        #     Required. The customer's billing account targeted by the offer. This is the
+        #     billing account for which the new private offer will be created on. Format:
+        #     billingAccounts/\\{billing_account}.
+        # @!attribute [rw] base_standard_offer
+        #   @return [::String]
+        #     Required. The base standard offer that the private offer will be based on.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/services/\\{service}/standardOffers/\\{standard_offer}.
+        class ResolveAmendmentTargetRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message in response to ResolveAmendmentTarget.
+        # @!attribute [rw] required_private_offer
+        #   @return [::String]
+        #     The resource name of an existing private offer that MUST be amended.
+        #
+        #     If this is set, the new private offer the client creates must populate
+        #     the `single_product_offer.amended_private_offer` field with this value.
+        #
+        #     Note: The following fields are mutually exclusive: `required_private_offer`, `required_standard_offer`, `optional_offers`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] required_standard_offer
+        #   @return [::String]
+        #     The resource name of an existing standard offer that MUST be amended.
+        #
+        #     If this is set, the new private offer the client creates must populate
+        #     the `single_product_offer.amended_standard_offer` field with this value.
+        #
+        #     Note: The following fields are mutually exclusive: `required_standard_offer`, `required_private_offer`, `optional_offers`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] optional_offers
+        #   @return [::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetResponse::OptionalOffers]
+        #     A list of existing offers that may optionally be amended.
+        #
+        #     Note: The following fields are mutually exclusive: `optional_offers`, `required_private_offer`, `required_standard_offer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ResolveAmendmentTargetResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A wrapper message containing offers that can optionally be amended.
+          # @!attribute [rw] private_offers
+          #   @return [::Array<::String>]
+          #     A list of existing private offers that are eligible to be amended.
+          #
+          #     When creating a new private offer, the client may choose to populate the
+          #     `single_product_offer.amended_private_offer` field with one of these
+          #     resource names. Alternatively, the client may leave the field unset to
+          #     create a brand new offer.
+          class OptionalOffers
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Message for creating a PrivateOffer
         # @!attribute [rw] parent
         #   @return [::String]

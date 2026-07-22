@@ -321,6 +321,68 @@ class ::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::ClientTest
     end
   end
 
+  def test_resolve_amendment_target
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    target_billing_account = "hello world"
+    base_standard_offer = "hello world"
+
+    resolve_amendment_target_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :resolve_amendment_target, name
+      assert_kind_of ::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["target_billing_account"]
+      assert_equal "hello world", request["base_standard_offer"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, resolve_amendment_target_client_stub do
+      # Create client
+      c = ::Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.resolve_amendment_target({ parent: parent, target_billing_account: target_billing_account, base_standard_offer: base_standard_offer }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.resolve_amendment_target parent: parent, target_billing_account: target_billing_account, base_standard_offer: base_standard_offer do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.resolve_amendment_target ::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest.new(parent: parent, target_billing_account: target_billing_account, base_standard_offer: base_standard_offer) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.resolve_amendment_target({ parent: parent, target_billing_account: target_billing_account, base_standard_offer: base_standard_offer }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.resolve_amendment_target(::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest.new(parent: parent, target_billing_account: target_billing_account, base_standard_offer: base_standard_offer), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, resolve_amendment_target_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_private_offer
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::CommerceProducer::V1beta::PrivateOffer.new

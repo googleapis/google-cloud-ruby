@@ -70,6 +70,7 @@
     "snippets/commerce_transaction/list_skus.rb",
     "snippets/commerce_transaction/list_standard_offers.rb",
     "snippets/commerce_transaction/publish_private_offer.rb",
+    "snippets/commerce_transaction/resolve_amendment_target.rb",
     "snippets/commerce_transaction/update_private_offer.rb",
     "snippets/commerce_transaction/update_private_offer_document.rb",
     "snippets/snippet_metadata_google.cloud.commerceproducer.v1beta.json",

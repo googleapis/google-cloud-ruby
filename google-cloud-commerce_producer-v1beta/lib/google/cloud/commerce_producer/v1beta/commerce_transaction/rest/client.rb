@@ -93,6 +93,8 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.resolve_amendment_target.timeout = 60.0
+
                   default_config.rpcs.create_private_offer.timeout = 60.0
 
                   default_config.rpcs.update_private_offer.timeout = 60.0
@@ -622,6 +624,94 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @commerce_transaction_stub.get_private_offer request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Resolves the existing offer that must be amended when creating a new
+              # PrivateOffer. Use this method to determine the correct amendment target
+              # before creating or publishing an offer.
+              #
+              # @overload resolve_amendment_target(request, options = nil)
+              #   Pass arguments to `resolve_amendment_target` via a request object, either of type
+              #   {::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload resolve_amendment_target(parent: nil, target_billing_account: nil, base_standard_offer: nil)
+              #   Pass arguments to `resolve_amendment_target` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for ResolveAmendmentTargetRequest
+              #   @param target_billing_account [::String]
+              #     Required. The customer's billing account targeted by the offer. This is the
+              #     billing account for which the new private offer will be created on. Format:
+              #     billingAccounts/\\{billing_account}.
+              #   @param base_standard_offer [::String]
+              #     Required. The base standard offer that the private offer will be based on.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/services/\\{service}/standardOffers/\\{standard_offer}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/commerce_producer/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::CommerceProducer::V1beta::CommerceTransaction::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest.new
+              #
+              #   # Call the resolve_amendment_target method.
+              #   result = client.resolve_amendment_target request
+              #
+              #   # The returned object is of type Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetResponse.
+              #   p result
+              #
+              def resolve_amendment_target request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CommerceProducer::V1beta::ResolveAmendmentTargetRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.resolve_amendment_target.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::CommerceProducer::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.resolve_amendment_target.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.resolve_amendment_target.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @commerce_transaction_stub.resolve_amendment_target request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -2159,6 +2249,11 @@ module Google
                   #
                   attr_reader :get_private_offer
                   ##
+                  # RPC-specific configuration for `resolve_amendment_target`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resolve_amendment_target
+                  ##
                   # RPC-specific configuration for `create_private_offer`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2249,6 +2344,8 @@ module Google
                     @list_private_offers = ::Gapic::Config::Method.new list_private_offers_config
                     get_private_offer_config = parent_rpcs.get_private_offer if parent_rpcs.respond_to? :get_private_offer
                     @get_private_offer = ::Gapic::Config::Method.new get_private_offer_config
+                    resolve_amendment_target_config = parent_rpcs.resolve_amendment_target if parent_rpcs.respond_to? :resolve_amendment_target
+                    @resolve_amendment_target = ::Gapic::Config::Method.new resolve_amendment_target_config
                     create_private_offer_config = parent_rpcs.create_private_offer if parent_rpcs.respond_to? :create_private_offer
                     @create_private_offer = ::Gapic::Config::Method.new create_private_offer_config
                     update_private_offer_config = parent_rpcs.update_private_offer if parent_rpcs.respond_to? :update_private_offer
