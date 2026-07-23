@@ -30,6 +30,10 @@ In order to use this library, you first need to go through the following steps:
 
 ```ruby
 require "google/cloud/sql/v1"
+
+client = ::Google::Cloud::Sql::V1::SqlBackupRunsService::Client.new
+request = ::Google::Cloud::Sql::V1::SqlBackupRunsDeleteRequest.new # (request fields as keyword arguments...)
+response = client.delete request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-sql-v1/latest)
@@ -70,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/sql/v1"
 require "logger"
 
-client = ::Google::Cloud::Sql::V1::SqlAvailableDatabaseVersionsService::Client.new do |config|
+client = ::Google::Cloud::Sql::V1::SqlBackupRunsService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
