@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.22.1 (2026-07-23)
+
+### Reverts
+
+* generate Gemfile.lock files and allow in .gitignore for Phase 2 sample ([#34998](https://github.com/googleapis/google-cloud-ruby/issues/34998)) 
+
 ### 0.22.0 (2026-06-11)
 
 #### Features
