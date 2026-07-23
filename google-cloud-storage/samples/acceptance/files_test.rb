@@ -336,8 +336,8 @@ describe "Files Snippets" do
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
-    
     end
+
     it "fetches the object contexts" do
       assert_output "Custom Contexts for #{remote_file_name} are:\nKey: #{custom_context_key1}, Value: #{custom_context_value1}\n" do
         get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
