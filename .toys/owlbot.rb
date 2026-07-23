@@ -345,6 +345,9 @@ def process_single_gem name, temp_staging_dir
   mkdir_p STAGING_DIR_NAME
   mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
   docker_run "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}", "--gem", name
+  cd name do
+    exec ["bundle", "lock"]
+  end
   return unless enable_tests
   cd name do
     exec ["bundle", "install"]

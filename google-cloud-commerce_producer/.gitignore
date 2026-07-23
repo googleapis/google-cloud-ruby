@@ -20,3 +20,4 @@ pkg/*
 
 # Ignore synth output
 __pycache__
+!Gemfile.lock
