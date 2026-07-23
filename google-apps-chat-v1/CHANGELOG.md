@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.27.0 (2026-07-23)
+
+#### Features
+
+* Addition of Membership Affiliation information ([#34989](https://github.com/googleapis/google-cloud-ruby/issues/34989)) 
+
 ### 0.26.0 (2026-07-13)
 
 #### Features
