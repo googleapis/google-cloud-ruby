@@ -367,7 +367,7 @@ describe "Files Snippets" do
     end
 
     it "filters out files on the basis of custom context key and value" do
-      assert_output "File: #{remote_file_name+"2"} has context key: #{custom_context_key2}\n" do
+      assert_output "File: #{remote_file_name2} has context key: #{custom_context_key2}\n" do
         list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
       end
     end
