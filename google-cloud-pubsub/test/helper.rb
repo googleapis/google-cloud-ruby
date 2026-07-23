@@ -58,7 +58,7 @@ class StreamingPullStub
   #
   def streaming_pull_internal request, options = nil
     @requests << request
-    @responses.shift.each
+    (@responses.shift || []).each
   end
 
   def acknowledge_internal subscription:, ack_ids:
