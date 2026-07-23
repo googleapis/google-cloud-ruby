@@ -328,17 +328,17 @@ describe "Files Snippets" do
     let(:custom_context_value1) { "my-custom-value" }
     let(:custom_context_key2) { "my-custom-key-2" }
     let(:custom_context_value2) { "my-custom-value-2" }
+    let(:remote_file_name2) { "path/file_name_#{SecureRandom.hex}.txt" }
 
     before(:each) do
       bucket.create_file local_file, remote_file_name
-      bucket.create_file local_file, remote_file_name+"2"
+      bucket.create_file local_file, remote_file_name2
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
-      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name+"2", custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     
     end
     it "fetches the object contexts" do
-
       assert_output "Custom Contexts for #{remote_file_name} are:\nKey: #{custom_context_key1}, Value: #{custom_context_value1}\n" do
         get_object_contexts bucket_name: bucket.name, file_name: remote_file_name
       end
@@ -350,13 +350,14 @@ describe "Files Snippets" do
     let(:custom_context_value1) { "my-custom-value" }
     let(:custom_context_key2) { "my-custom-key-2" }
     let(:custom_context_value2) { "my-custom-value-2" }
+    let(:remote_file_name2) { "path/file_name_#{SecureRandom.hex}.txt" }
 
     before(:each) do
       bucket.create_file local_file, remote_file_name
-      bucket.create_file local_file, remote_file_name+"2"
+      bucket.create_file local_file, remote_file_name2
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
-      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name+"2", custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     end
 
     it "filters out files on the basis of custom context key" do
