@@ -24,6 +24,8 @@ module Google
         #
         # Tracks ping and pong timestamps over the active gRPC stream to detect silent connection drops or freezes,
         # and triggers a stream restart when server responses exceed the configured pong deadline.
+        # This prevents firewalls and load balancers from dropping idle connections during periods of low
+        # message publisher volume, which minimizes message delivery latency by maintaining a healthy lease.
         class KeepaliveMonitor
           # Default interval in seconds between keep-alive ping requests.
           DEFAULT_INTERVAL = 30.0
