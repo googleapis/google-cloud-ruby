@@ -78,6 +78,410 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ClientTest < 
     end
   end
 
+  def test_create_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    folder = {}
+    folder_id = "hello world"
+    recursive = true
+    request_id = "hello world"
+
+    create_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_create_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_folder({ parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_folder parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_folder ::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_folder({ parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_folder(::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new(parent: parent, folder: folder, folder_id: folder_id, recursive: recursive, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_folder
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    delete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_delete_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_folder ::Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_folder(::Google::Cloud::Storage::Control::V2::DeleteFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_folder
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::Folder.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    get_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_folder name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_folder ::Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_folder({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_folder(::Google::Cloud::Storage::Control::V2::GetFolderRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_folders
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::ListFoldersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    prefix = "hello world"
+    delimiter = "hello world"
+    lexicographic_start = "hello world"
+    lexicographic_end = "hello world"
+    request_id = "hello world"
+
+    list_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_list_folders_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_folders_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_folders parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_folders ::Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_folders({ parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_folders(::Google::Cloud::Storage::Control::V2::ListFoldersRequest.new(parent: parent, page_size: page_size, page_token: page_token, prefix: prefix, delimiter: delimiter, lexicographic_start: lexicographic_start, lexicographic_end: lexicographic_end, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_folders_client_stub.call_count
+      end
+    end
+  end
+
+  def test_rename_folder
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    destination_folder_id = "hello world"
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    rename_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_rename_folder_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, rename_folder_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.rename_folder({ name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.rename_folder name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.rename_folder ::Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.rename_folder({ name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.rename_folder(::Google::Cloud::Storage::Control::V2::RenameFolderRequest.new(name: name, destination_folder_id: destination_folder_id, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, rename_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_folder_recursive
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    if_metageneration_match = 42
+    if_metageneration_not_match = 42
+    request_id = "hello world"
+
+    delete_folder_recursive_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_delete_folder_recursive_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_folder_recursive_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_folder_recursive({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_folder_recursive name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_folder_recursive ::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_folder_recursive({ name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_folder_recursive(::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest.new(name: name, if_metageneration_match: if_metageneration_match, if_metageneration_not_match: if_metageneration_not_match, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_folder_recursive_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_storage_layout
+    # Create test objects.
+    client_result = ::Google::Cloud::Storage::Control::V2::StorageLayout.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    prefix = "hello world"
+    request_id = "hello world"
+
+    get_storage_layout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::ServiceStub.stub :transcode_get_storage_layout_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_storage_layout_client_stub do
+        # Create client
+        c = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_storage_layout({ name: name, prefix: prefix, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_storage_layout name: name, prefix: prefix, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_storage_layout ::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: name, prefix: prefix, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_storage_layout({ name: name, prefix: prefix, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_storage_layout(::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest.new(name: name, prefix: prefix, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_storage_layout_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_project_intelligence_config
     # Create test objects.
     client_result = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new

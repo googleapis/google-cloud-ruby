@@ -75,6 +75,286 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the create_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::CreateFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::Folder]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::Folder]
+                #   A result object deserialized from the server's reply
+                def create_folder request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_create_folder_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_folder",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::Folder.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the delete_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::DeleteFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #   A result object deserialized from the server's reply
+                def delete_folder request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_delete_folder_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_folder",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the get_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::Folder]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::Folder]
+                #   A result object deserialized from the server's reply
+                def get_folder request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_folder_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_folder",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::Folder.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_folders REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ListFoldersRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::ListFoldersResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::ListFoldersResponse]
+                #   A result object deserialized from the server's reply
+                def list_folders request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_folders_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_folders",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::ListFoldersResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the rename_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::RenameFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Longrunning::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Longrunning::Operation]
+                #   A result object deserialized from the server's reply
+                def rename_folder request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_rename_folder_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "rename_folder",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the delete_folder_recursive REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Longrunning::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Longrunning::Operation]
+                #   A result object deserialized from the server's reply
+                def delete_folder_recursive request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_delete_folder_recursive_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_folder_recursive",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the get_storage_layout REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::StorageLayout]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::StorageLayout]
+                #   A result object deserialized from the server's reply
+                def get_storage_layout request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_storage_layout_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_storage_layout",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::StorageLayout.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # Baseline implementation for the get_project_intelligence_config REST call
                 #
                 # @param request_pb [::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest]
@@ -512,6 +792,156 @@ module Google
                     yield result, operation if block_given?
                     result
                   end
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the create_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::CreateFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_create_folder_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v2/{parent}/folders",
+                                                            body: "folder",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/buckets/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the delete_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::DeleteFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_delete_folder_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :delete,
+                                                            uri_template: "/v2/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_folder_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_folders REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ListFoldersRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_folders_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{parent}/folders",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/buckets/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the rename_folder REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::RenameFolderRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_rename_folder_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v2/{name}:rename",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the delete_folder_recursive REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::DeleteFolderRecursiveRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_delete_folder_recursive_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v2/{name}:deleteRecursive",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_storage_layout REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::GetStorageLayoutRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_storage_layout_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/storageLayout/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
                 end
 
                 ##

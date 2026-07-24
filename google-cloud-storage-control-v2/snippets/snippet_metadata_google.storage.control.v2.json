@@ -452,6 +452,46 @@
       ]
     },
     {
+      "region_tag": "storage_v2_generated_StorageControl_UpdateManagedFolder_sync",
+      "title": "Snippet for the update_managed_folder call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#update_managed_folder.",
+      "file": "storage_control/update_managed_folder.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_managed_folder",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#update_managed_folder",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::ManagedFolder",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "UpdateManagedFolder",
+          "full_name": "google.storage.control.v2.StorageControl.UpdateManagedFolder",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "storage_v2_generated_StorageControl_CreateAnywhereCache_sync",
       "title": "Snippet for the create_anywhere_cache call in the StorageControl service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#create_anywhere_cache.",
@@ -715,6 +755,166 @@
         "method": {
           "short_name": "ListAnywhereCaches",
           "full_name": "google.storage.control.v2.StorageControl.ListAnywhereCaches",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_CreateRapidCache_sync",
+      "title": "Snippet for the create_rapid_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#create_rapid_cache.",
+      "file": "storage_control/create_rapid_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rapid_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#create_rapid_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "CreateRapidCache",
+          "full_name": "google.storage.control.v2.StorageControl.CreateRapidCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_UpdateRapidCache_sync",
+      "title": "Snippet for the update_rapid_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#update_rapid_cache.",
+      "file": "storage_control/update_rapid_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_rapid_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#update_rapid_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "UpdateRapidCache",
+          "full_name": "google.storage.control.v2.StorageControl.UpdateRapidCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_GetRapidCache_sync",
+      "title": "Snippet for the get_rapid_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#get_rapid_cache.",
+      "file": "storage_control/get_rapid_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rapid_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#get_rapid_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::RapidCache",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "GetRapidCache",
+          "full_name": "google.storage.control.v2.StorageControl.GetRapidCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_ListRapidCaches_sync",
+      "title": "Snippet for the list_rapid_caches call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#list_rapid_caches.",
+      "file": "storage_control/list_rapid_caches.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rapid_caches",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#list_rapid_caches",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::ListRapidCachesResponse",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "ListRapidCaches",
+          "full_name": "google.storage.control.v2.StorageControl.ListRapidCaches",
           "service": {
             "short_name": "StorageControl",
             "full_name": "google.storage.control.v2.StorageControl"
