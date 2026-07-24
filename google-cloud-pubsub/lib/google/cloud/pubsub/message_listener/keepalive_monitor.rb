@@ -120,7 +120,7 @@ module Google
               # Only advance @last_ping_at if the previous ping was successfully ponged.
               # If a pong is outstanding (@last_pong_at < @last_ping_at), freezing @last_ping_at preserves the start time
               # of the un-ponged cycle so check_liveness! can accurately evaluate the elapsed deadline.
-              @last_ping_at = Process.clock_gettime(Process::CLOCK_MONOTONIC) if @last_pong_at >= @last_ping_at
+              @last_ping_at = Process.clock_gettime(Process::CLOCK_MONOTONIC) if @last_pong_at.nil? || @last_ping_at.nil? || @last_pong_at >= @last_ping_at
               @stream.send_ping_request!
             end
           end
