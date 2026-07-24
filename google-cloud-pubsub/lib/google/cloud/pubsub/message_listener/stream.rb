@@ -301,8 +301,7 @@ module Google
               @request_queue = EnumeratorQueue.new self
               @request_queue.push initial_input_request
               old_queue.each do |obj|
-                next if obj == self || obj.is_a?(Stream)
-                @request_queue.push obj
+                @request_queue.push obj unless obj == self
               end
             end
 

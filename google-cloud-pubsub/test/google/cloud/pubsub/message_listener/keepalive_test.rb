@@ -194,7 +194,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.instance_variable_set :@stopped, false
 
     wait_called = false
-    pause_cond = stream.instance_variable_get(:@backoff_cond)
+    pause_cond = stream.instance_variable_get(:@pause_cond)
 
     pause_cond.stub :wait, ->(_timeout) {
       wait_called = true
