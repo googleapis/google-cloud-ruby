@@ -37,7 +37,7 @@ module Google
             rpc :CreateSupportEventSubscription, ::Google::Cloud::Support::V2::CreateSupportEventSubscriptionRequest, ::Google::Cloud::Support::V2::SupportEventSubscription
             # Gets a support event subscription.
             rpc :GetSupportEventSubscription, ::Google::Cloud::Support::V2::GetSupportEventSubscriptionRequest, ::Google::Cloud::Support::V2::SupportEventSubscription
-            # Lists support event subscriptions.
+            # Lists support event subscriptions for an organization.
             rpc :ListSupportEventSubscriptions, ::Google::Cloud::Support::V2::ListSupportEventSubscriptionsRequest, ::Google::Cloud::Support::V2::ListSupportEventSubscriptionsResponse
             # Updates a support event subscription.
             rpc :UpdateSupportEventSubscription, ::Google::Cloud::Support::V2::UpdateSupportEventSubscriptionRequest, ::Google::Cloud::Support::V2::SupportEventSubscription
@@ -45,6 +45,38 @@ module Google
             rpc :DeleteSupportEventSubscription, ::Google::Cloud::Support::V2::DeleteSupportEventSubscriptionRequest, ::Google::Cloud::Support::V2::SupportEventSubscription
             # Undeletes a support event subscription.
             rpc :UndeleteSupportEventSubscription, ::Google::Cloud::Support::V2::UndeleteSupportEventSubscriptionRequest, ::Google::Cloud::Support::V2::SupportEventSubscription
+            # Expunges a support event subscription.
+            #
+            # EXAMPLES:
+            #
+            # cURL:
+            #
+            # ```shell
+            # support_event_subscription="organizations/123456789/supportEventSubscriptions/abcdef123456"
+            # curl \
+            #   --request POST \
+            #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            #   "https://cloudsupport.googleapis.com/v2/$support_event_subscription:expunge"
+            # ```
+            #
+            # Python:
+            #
+            # ```python
+            # import googleapiclient.discovery
+            #
+            # api_version = "v2"
+            # supportApiService = googleapiclient.discovery.build(
+            #     serviceName="cloudsupport",
+            #     version=api_version,
+            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
+            # )
+            #
+            # request = supportApiService.supportEventSubscriptions().expunge(
+            #     name="organizations/123456789/supportEventSubscriptions/abcdef123456"
+            # )
+            # print(request.execute())
+            # ```
+            rpc :ExpungeSupportEventSubscription, ::Google::Cloud::Support::V2::ExpungeSupportEventSubscriptionRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
