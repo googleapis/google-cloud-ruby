@@ -15,6 +15,7 @@
 require "google/cloud/pubsub/message_listener/sequencer"
 require "google/cloud/pubsub/message_listener/enumerator_queue"
 require "google/cloud/pubsub/message_listener/inventory"
+require "google/cloud/pubsub/message_listener/keepalive_monitor"
 require "google/cloud/pubsub/service"
 require "google/cloud/errors"
 require "monitor"
@@ -50,6 +51,25 @@ module Google
           attr_reader :exactly_once_delivery_enabled
 
           ##
+          # @private KeepaliveMonitor.
+          attr_reader :keepalive_monitor
+
+          # Initial backoff delay in seconds when reconnecting after a transient stream disconnection.
+          INITIAL_RECONNECT_DELAY = 1.0
+
+          # Maximum backoff delay in seconds for stream reconnection attempts.
+          MAX_RECONNECT_DELAY = 60.0
+
+          # Exponential backoff multiplier applied to reconnect delay on successive retry attempts.
+          RECONNECT_BACKOFF_MULTIPLIER = 1.5
+
+          # Inventory capacity ratio (80%) below which a flow-control paused stream will unpause.
+          UNPAUSE_INVENTORY_RATIO = 0.8
+
+          # The keep-alive streaming pull protocol version sent in the initial request during handshake.
+          PROTOCOL_VERSION = 1
+
+          ##
           # @private Create an empty Subscriber::Stream object.
           def initialize subscriber
             super() # to init MonitorMixin
@@ -59,7 +79,12 @@ module Google
             @request_queue = nil
             @stopped = nil
             @paused  = nil
+            # Condition variable used to cooperatively pause the background thread during flow control
+            # Governed by the Stream's MonitorMixin `synchronize` lock.
             @pause_cond = new_cond
+            # Condition variable used to cooperatively sleep the background thread during connection retries
+            # Governed by the Stream's MonitorMixin `synchronize` lock.
+            @backoff_cond = new_cond
             @exactly_once_delivery_enabled = false
 
             @inventory = Inventory.new self, **@subscriber.stream_inventory
@@ -68,17 +93,9 @@ module Google
 
             @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
 
-            @stream_keepalive_task = Concurrent::TimerTask.new(
-              execution_interval: 30
-            ) do
-              # push empty request every 30 seconds to keep stream alive
-              unless inventory.empty?
-                subscriber.service.logger.log :info, "subscriber-streams" do
-                  "sending keepAlive to stream for subscription #{@subscriber.subscription_name}"
-                end
-                push Google::Cloud::PubSub::V1::StreamingPullRequest.new
-              end
-            end.execute
+            @keepalive_monitor = KeepaliveMonitor.new self
+            @stream_open = false
+            @reconnect_delay = nil
           end
 
           def start
@@ -86,6 +103,7 @@ module Google
               break if @background_thread
 
               @inventory.start
+              @keepalive_monitor.start
 
               start_streaming!
             end
@@ -107,6 +125,9 @@ module Google
               # Signal to the background thread that we are stopped.
               @stopped = true
               @pause_cond.broadcast
+              @backoff_cond.broadcast
+
+              @keepalive_monitor.stop
 
               # Now that the reception thread is stopped, immediately stop the
               # callback thread pool. All queued callbacks will see the stream
@@ -124,6 +145,10 @@ module Google
             synchronize { @stopped }
           end
 
+          def stream_open?
+            synchronize { @stream_open }
+          end
+
           def paused?
             synchronize { @paused }
           end
@@ -137,6 +162,38 @@ module Google
             @callback_thread_pool.wait_for_termination timeout
 
             self
+          end
+
+
+          def request_queue_active?
+            !@request_queue.nil?
+          end
+
+          def send_ping_request!
+            push Google::Cloud::PubSub::V1::StreamingPullRequest.new
+          end
+
+          def restart_stream_for_timeout!
+            synchronize do
+              @stream_open = false
+              # Push self as a stream-closing sentinel to @request_queue.
+              # When EnumeratorQueue#each pops the sentinel object, it terminates the request enumerator,
+              # cleanly sending an HTTP/2 END_STREAM flag and unblocking the write-side gRPC C-core pipeline.
+              @request_queue&.push self
+              @background_thread&.raise RestartStream
+            end
+          end
+
+          def log_info msg
+            subscriber.service.logger.log :info, "subscriber-streams" do
+              msg
+            end
+          end
+
+          def log_error msg
+            subscriber.service.logger.log :error, "subscriber-streams" do
+              msg
+            end
           end
 
           ##
@@ -219,6 +276,15 @@ module Google
 
           # rubocop:disable all
 
+          def backoff_and_wait!
+            @reconnect_delay = @reconnect_delay ? [@reconnect_delay * RECONNECT_BACKOFF_MULTIPLIER, MAX_RECONNECT_DELAY].min : INITIAL_RECONNECT_DELAY
+            synchronize do
+              # Disable liveness checker during backoff sleep to prevent monitor task from interrupting and double-backing off
+              @stream_open = false
+              @backoff_cond.wait(@reconnect_delay + rand(0.0..0.5)) unless @stopped
+            end
+          end
+
           def background_run
             synchronize do
               # Don't allow a stream to restart if already stopped
@@ -240,14 +306,30 @@ module Google
               # Always create a new request queue
               @request_queue = EnumeratorQueue.new self
               @request_queue.push initial_input_request
-              old_queue.each { |obj| @request_queue.push obj }
+              old_queue.each do |obj|
+                @request_queue.push obj unless obj == self
+              end
             end
 
             # Call the StreamingPull API to get the response enumerator
             options = { :"metadata" => { :"x-goog-request-params" =>  @subscriber.subscription_name } }
+            # Temporarily disable the liveness monitor while establishing the gRPC connection
+            # to prevent check_liveness! from evaluating stale timestamps during the handshake.
+            synchronize do
+              @stream_open = false
+            end
             enum = @subscriber.service.streaming_pull @request_queue.each, options
             subscriber.service.logger.log :info, "subscriber-streams" do
               "rpc: streamingPull, subscription: #{@subscriber.subscription_name}, stream opened"
+            end
+
+            # Once the stream handshake completes, initialize ping/pong timestamps to monotonic now
+            # and mark @stream_open = true under synchronization.
+            # This ensures @keepalive_monitor evaluates liveness against a fresh window and prevents
+            # false-positive disconnect detections from stale timestamps prior to reconnecting.
+            synchronize do
+              @keepalive_monitor.record_handshake!
+              @stream_open = true
             end
 
             loop do
@@ -264,8 +346,17 @@ module Google
               begin
                 # Cannot synchronize the enumerator, causes deadlock
                 response = enum.next
-                new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
+                synchronize do
+                  @keepalive_monitor.record_pong!
+                  # Reset backoff delay only after successfully reading a frame from enum.next.
+                  # If the connection drops immediately upon reading, @reconnect_delay is preserved.
+                  @reconnect_delay = nil
+                end
                 received_messages = response.received_messages
+                # Skip processing properties and inventory on Pong frames (empty received_messages).
+                # Subscription properties on keep-alive Pongs are not valid.
+                next if received_messages.empty?
+                new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
 
                 # Use synchronize so changes happen atomically
                 synchronize do
@@ -310,11 +401,13 @@ module Google
               "#{status_code}; will be retried."
             end
             # Restart the stream with an incremental back for a retriable error.
+            backoff_and_wait!
             retry
           rescue RestartStream
             subscriber.service.logger.log :info, "subscriber-streams" do
               "Subscriber stream for subscription #{@subscriber.subscription_name} has ended; will be retried."
             end
+            backoff_and_wait!
             retry
           rescue StandardError => e
             subscriber.service.logger.log :error, "subscriber-streams" do
@@ -322,6 +415,7 @@ module Google
             end
             @subscriber.error! e
 
+            backoff_and_wait!
             retry
           end
 
@@ -417,21 +511,27 @@ module Google
           end
 
           def unpause_streaming!
-            return unless unpause_streaming?
+            synchronize do
+              return unless unpause_streaming?
 
-            @paused = nil
-            subscriber.service.logger.log :info, "subscriber-flow-control" do
-              "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
+              @paused = nil
+              # Record pong when unpausing flow control. While paused, incoming server pongs sit buffered in gRPC,
+              # leaving last_pong_at stale. Updating timestamp guarantees the monitor thread will not trigger an immediate
+              # false-positive restart while the reader thread wakes up to drain buffered frames.
+              @keepalive_monitor.record_pong!
+              subscriber.service.logger.log :info, "subscriber-flow-control" do
+                "subscriber for #{@subscriber.subscription_name} is unblocking client-side flow control"
+              end
+              # Signal to the background thread that we are unpaused
+              @pause_cond.broadcast
             end
-            # signal to the background thread that we are unpaused
-            @pause_cond.broadcast
           end
 
           def unpause_streaming?
             return false if @stopped
             return false if @paused.nil?
 
-            @inventory.count < @inventory.limit * 0.8
+            @inventory.count < @inventory.limit * UNPAUSE_INVENTORY_RATIO
           end
 
           def initial_input_request
@@ -443,6 +543,7 @@ module Google
               req.client_id = @subscriber.service.client_id
               req.max_outstanding_messages = @inventory.limit
               req.max_outstanding_bytes = @inventory.bytesize
+              req.protocol_version = PROTOCOL_VERSION
             end
           end
 

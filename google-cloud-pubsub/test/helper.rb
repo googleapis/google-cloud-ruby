@@ -58,7 +58,7 @@ class StreamingPullStub
   #
   def streaming_pull_internal request, options = nil
     @requests << request
-    @responses.shift.each
+    (@responses.shift || []).each
   end
 
   def acknowledge_internal subscription:, ack_ids:
@@ -336,6 +336,16 @@ class MockPubsub < Minitest::Spec
       seconds: duration.seconds,
       nanos: duration.nanos
     }
+  end
+
+  def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block
+    attempts = 0
+    while !block.call
+      fail msg if attempts >= max
+      attempts += 1
+      puts "Retrying #{attempts} out of #{max}." if output
+      sleep delay
+    end
   end
 
   # Register this spec type for when :storage is used.
