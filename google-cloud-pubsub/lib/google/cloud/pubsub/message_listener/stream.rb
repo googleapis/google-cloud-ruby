@@ -83,7 +83,9 @@ module Google
             @request_queue = nil
             @stopped = nil
             @paused  = nil
+            # Condition variable used to cooperatively pause the background thread during flow control
             @pause_cond = new_cond
+            # Condition variable used to cooperatively sleep the background thread during connection retries
             @backoff_cond = new_cond
             @exactly_once_delivery_enabled = false
 

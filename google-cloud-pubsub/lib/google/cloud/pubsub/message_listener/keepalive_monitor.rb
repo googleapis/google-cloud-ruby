@@ -34,20 +34,6 @@ module Google
           # Minimum floor in seconds (10ms) for the monitor polling interval to prevent CPU spinning.
           MIN_MONITOR_INTERVAL = 0.01
 
-          # @private The keep-alive interval in seconds used to send pings and maintain a healthy stream.
-          attr_reader :interval
-          # @private The deadline in seconds used to validate whether we received a pong back from the stream.
-          attr_reader :deadline
-          # @private The monotonic timestamp of the last ping sent.
-          attr_accessor :last_ping_at
-          # @private The monotonic timestamp of the last pong received.
-          attr_accessor :last_pong_at
-
-          # @private The background timer task for sending keepalive pings.
-          attr_reader :ping_task
-          # @private The background timer task for monitoring stream liveness.
-          attr_reader :monitor_task
-
           # Initializes the KeepaliveMonitor.
           #
           # @param [Stream] stream The parent streaming pull connection to monitor.

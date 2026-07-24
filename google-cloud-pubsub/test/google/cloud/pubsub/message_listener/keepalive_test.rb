@@ -34,12 +34,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     end
     listener.start
 
-    listener_retries = 0
-    until called
-      fail "callback was not called" if listener_retries > 100
-      listener_retries += 1
-      sleep 0.01
-    end
+    wait_until(max: 100, msg: "callback was not called") { called }
 
     listener.stop
     listener.wait!
@@ -62,12 +57,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.keepalive_monitor.instance_variable_set :@deadline, 0.05
     listener.start
 
-    listener_retries = 0
-    until called
-      fail "stream did not restart and deliver message" if listener_retries > 500
-      listener_retries += 1
-      sleep 0.01
-    end
+    wait_until(max: 500, msg: "stream did not restart and deliver message") { called }
 
     listener.stop
     listener.wait!
@@ -87,11 +77,11 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.instance_variable_set :@request_queue, queue
     stream.instance_variable_set :@stream_open, true
     stream.instance_variable_set :@stopped, false
-    stream.keepalive_monitor.last_ping_at = 0.0
-    stream.keepalive_monitor.last_pong_at = 1.0
+    stream.keepalive_monitor.instance_variable_set :@last_ping_at, 0.0
+    stream.keepalive_monitor.instance_variable_set :@last_pong_at, 1.0
 
     stream.keepalive_monitor.send_ping!
-    _(stream.keepalive_monitor.last_ping_at).must_be :>, 0.0
+    _(stream.keepalive_monitor.instance_variable_get(:@last_ping_at)).must_be :>, 0.0
   end
 
   it "does not restart stream when check_liveness! runs under active pongs" do
@@ -106,8 +96,8 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.instance_variable_set :@stream_open, true
     stream.instance_variable_set :@stopped, false
     stream.instance_variable_set :@paused, false
-    stream.keepalive_monitor.last_ping_at = now - 5.0
-    stream.keepalive_monitor.last_pong_at = now - 1.0
+    stream.keepalive_monitor.instance_variable_set :@last_ping_at, now - 5.0
+    stream.keepalive_monitor.instance_variable_set :@last_pong_at, now - 1.0
 
     stream.keepalive_monitor.check_liveness!
     _(stream.stream_open).must_equal true
@@ -123,8 +113,8 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
 
     now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     stream.instance_variable_set :@stream_open, true
-    stream.keepalive_monitor.last_ping_at = now - 30.0
-    stream.keepalive_monitor.last_pong_at = now - 35.0
+    stream.keepalive_monitor.instance_variable_set :@last_ping_at, now - 30.0
+    stream.keepalive_monitor.instance_variable_set :@last_pong_at, now - 35.0
     stream.instance_variable_set :@paused, true
     stream.instance_variable_set :@stopped, false
 
@@ -134,7 +124,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
 
     # 2. Unpausing must reset @last_pong_at to prevent immediate restart.
     stream.send(:unpause_streaming!)
-    _(stream.keepalive_monitor.last_pong_at).must_be :>=, now
+    _(stream.keepalive_monitor.instance_variable_get(:@last_pong_at)).must_be :>=, now
 
     # 3. Direct liveness check immediately after unpausing (simulates the monitor thread racing the background thread).
     # It should NOT close the stream because our reset made @last_pong_at newer than @last_ping_at.
@@ -153,17 +143,17 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream = listener.instance_variable_get(:@stream_pool).first
 
     # 1. Timers should be active on a started stream
-    refute_nil stream.instance_variable_get(:@keepalive_monitor)&.ping_task
-    refute_nil stream.instance_variable_get(:@keepalive_monitor)&.monitor_task
+    refute_nil stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@ping_task)
+    refute_nil stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@monitor_task)
 
-    first_keepalive = stream.instance_variable_get(:@keepalive_monitor)&.ping_task
-    first_monitor = stream.instance_variable_get(:@keepalive_monitor)&.monitor_task
+    first_keepalive = stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@ping_task)
+    first_monitor = stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@monitor_task)
 
     # 2. Stopping the stream must shutdown and nilify the timers
     listener.stop
     listener.wait!
-    assert_nil stream.instance_variable_get(:@keepalive_monitor)&.ping_task
-    assert_nil stream.instance_variable_get(:@keepalive_monitor)&.monitor_task
+    assert_nil stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@ping_task)
+    assert_nil stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@monitor_task)
     assert first_keepalive.shutdown?
     assert first_monitor.shutdown?
 
@@ -172,8 +162,8 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.instance_variable_set :@stopped, false
     stream.start
 
-    new_keepalive = stream.instance_variable_get(:@keepalive_monitor)&.ping_task
-    new_monitor = stream.instance_variable_get(:@keepalive_monitor)&.monitor_task
+    new_keepalive = stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@ping_task)
+    new_monitor = stream.instance_variable_get(:@keepalive_monitor)&.instance_variable_get(:@monitor_task)
 
     refute_nil new_keepalive
     refute_nil new_monitor
@@ -194,9 +184,9 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.instance_variable_set :@stopped, false
 
     wait_called = false
-    pause_cond = stream.instance_variable_get(:@pause_cond)
+    backoff_cond = stream.instance_variable_get(:@backoff_cond)
 
-    pause_cond.stub :wait, ->(_timeout) {
+    backoff_cond.stub :wait, ->(_timeout) {
       wait_called = true
       _(stream.instance_variable_get(:@stream_open)).must_equal false
     } do
@@ -207,37 +197,28 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
   end
 
   it "does not bleed self sentinel into the new request queue after restart_stream_for_timeout!" do
-    stub = StreamingPullStub.new [[]]
+    stub = StreamingPullStub.new [[], []]
     subscriber.service.mocked_subscription_admin = stub
 
+    called = false
     listener = subscriber.listen streams: 1 do |msg|
+      called = true
     end
     stream = listener.instance_variable_get(:@stream_pool).first
-
-    queue = Google::Cloud::PubSub::MessageListener::EnumeratorQueue.new stream
-    queue.push stream
-
-    stream.instance_variable_set :@request_queue, queue
-    stream.instance_variable_set :@stopped, false
-
-    passed_enum = nil
-    mock_pull = ->(req_enum, _options) {
-      passed_enum = req_enum
-      stream.instance_variable_set :@stopped, true
-      raise Google::Cloud::InvalidArgumentError.new("stop test execution")
-    }
-
-    subscriber.service.stub :streaming_pull, mock_pull do
-      begin
-        stream.send :background_run
-      rescue Google::Cloud::InvalidArgumentError
-      end
-    end
-
-    # Inspect items yielded by the request enumerator passed to streaming_pull
-    items_yielded = stream.instance_variable_get(:@request_queue).quit_and_dump_queue
-
-
-    refute_includes items_yielded, stream
+    listener.start
+    
+    # Wait for the first connection
+    wait_until(max: 100, msg: "stream did not connect") { stub.requests.count == 1 }
+    
+    # Trigger production-path timeout restart
+    stream.restart_stream_for_timeout!
+    
+    # Ensure stream correctly recreates the request_queue without sending the stream sentinel object
+    # to the gRPC client (which would cause a fatal crash rather than a graceful restart and a new request).
+    # Since backoff_and_wait! pauses for 1+ seconds, give it enough time to reconnect.
+    wait_until(delay: 0.1, max: 100, msg: "stream did not restart") { stub.requests.count >= 2 }
+    
+    listener.stop
+    listener.wait!
   end
 end
