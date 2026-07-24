@@ -1,5 +1,15 @@
 # Changelog
 
+### 5.0.0 (2026-07-24)
+
+### ⚠ BREAKING CHANGES
+
+* Added additional LineItem fields ([#34997](https://github.com/googleapis/google-cloud-ruby/issues/34997))
+
+#### Features
+
+* Added additional LineItem fields ([#34997](https://github.com/googleapis/google-cloud-ruby/issues/34997)) 
+
 ### 4.2.0 (2026-07-20)
 
 #### Features
