@@ -1131,6 +1131,5 @@
   ],
   "static": [
     ".OwlBot.yaml",
-    "Gemfile.lock"
   ]
 }
