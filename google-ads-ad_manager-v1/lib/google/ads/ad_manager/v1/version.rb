@@ -21,7 +21,7 @@ module Google
   module Ads
     module AdManager
       module V1
-        VERSION = "4.2.0"
+        VERSION = "5.0.0"
       end
     end
   end
