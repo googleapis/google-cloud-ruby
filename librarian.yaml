@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
+version: v0.30.1-0.20260724165537-df3b94174e4a
 sources:
   googleapis:
     commit: 6145fa8cc2b137bf4c0ed114e2e39c1157ea9722
@@ -25,3 +26,16 @@ tools:
   protoc:
     version: "33.2"
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+libraries:
+  - name: google-cloud-asset-v1
+    apis:
+      - path: google/cloud/asset/v1
+        ruby:
+          additional_protos:
+            - google/cloud/orgpolicy/v1/orgpolicy.proto
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ASSET
+            ruby-cloud-extra-dependencies: google-identity-access_context_manager-v1=>0.0+<2.a;google-cloud-os_config-v1=>0.0+<2.a
+    keep:
+      - lib/google/cloud/asset/v1/asset_service/helpers.rb
+      - test/google/cloud/asset/v1/additional_paths_test.rb
