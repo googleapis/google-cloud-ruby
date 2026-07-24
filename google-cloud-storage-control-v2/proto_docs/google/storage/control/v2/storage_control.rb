@@ -380,9 +380,60 @@ module Google
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The modification time of the managed folder.
+          # @!attribute [rw] rapid_cache_config
+          #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig]
+          #     Rapid Cache configuration for a managed prefix.
           class ManagedFolder
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Rapid Cache configuration for a managed prefix. This configuration is used
+            # to determine how the rapid cache behaves for objects under the managed
+            # folder.
+            # @!attribute [rw] policies
+            #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig::RapidCachePolicy}]
+            #     Optional. A map of rapid_cache_id to RapidCachePolicy for this prefix.
+            #     Currently, the key rapid_cache_id is the zone. However, the
+            #     field is generalized as rapid_cache_id to align the policy lifetime
+            #     with the cache instance lifetime. This allows for a future transition
+            #     from zone to a cache id if required.
+            class RapidCacheConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Rapid Cache policy for a managed folder.
+              # @!attribute [rw] rapid_cache_id
+              #   @return [::String]
+              #     Required. The identifier for the rapid cache.
+              # @!attribute [rw] ingest_on_write
+              #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig::RapidCachePolicy::IngestOnWrite]
+              #     Required. If enabled, objects in the Managed Folder will be ingested
+              #     into the cache when they are written.
+              class RapidCachePolicy
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # The behavior of the rapid cache when an object is written.
+                module IngestOnWrite
+                  # The behavior is not specified at this resource level.
+                  # It should be inherited from the parent resource's configuration.
+                  # This is the default value.
+                  INGEST_ON_WRITE_UNSPECIFIED = 0
+
+                  # Ingestion on write is explicitly enabled for this resource.
+                  INGEST_ON_WRITE_ENABLED = 1
+                end
+              end
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder::RapidCacheConfig::RapidCachePolicy]
+              class PoliciesEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
           end
 
           # Request message for GetManagedFolder.
@@ -498,6 +549,39 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for UpdateManagedFolder.
+          # @!attribute [rw] managed_folder
+          #   @return [::Google::Cloud::Storage::Control::V2::ManagedFolder]
+          #     Required. Properties of the managed folder being updated. Currently, this
+          #     RPC only supports updating the `rapid_cache_config` field in
+          #     `managed_folder`.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. Update mask for managed_folder.
+          #     Currently, this RPC only supports updating the `rapid_cache_config`
+          #     field in `managed_folder`. This field also supports update mask for the
+          #     subfields in the map of `rapid_cache_config`. The user can specify the
+          #     update mask for `rapid_cache_config.policies` and
+          #     `rapid_cache_config.policies.<key>`, but patching is not supported for
+          #     a field within `RapidCachePolicy.policies.<key>`, like
+          #     rapid_cache_config.policies.[key].ingest_on_write.
+          # @!attribute [rw] if_metageneration_match
+          #   @return [::Integer]
+          #     Optional. The operation succeeds conditional on the managed folder's
+          #     current metageneration matching the value here specified.
+          # @!attribute [rw] if_metageneration_not_match
+          #   @return [::Integer]
+          #     Optional. The operation succeeds conditional on the managed folder's
+          #     current metageneration NOT matching the value here specified.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class UpdateManagedFolderRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Message returned in the metadata field of the Operation resource for
           # CreateAnywhereCache operations.
           # @!attribute [rw] common_metadata
@@ -520,7 +604,45 @@ module Google
           #     Anywhere Cache entry Admission Policy in kebab-case (e.g.,
           #     "admit-on-first-miss"). Default admission policy (admit-on-first-miss) is
           #     applied if not specified in the create request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Optional. Specifies whether objects are ingested into the cache upon write.
+          #     Defaults to false.
           class CreateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # CreateRapidCache operations.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] rapid_cache_id
+          #   @return [::String]
+          #     Rapid Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Rapid Cache entry's TTL. A cache-level config that is applied to all new
+          #     cache entries on admission. Default ttl value (24hrs) is applied if not
+          #     specified in the create request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Anywhere Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). Default admission policy (admit-on-first-miss) is
+          #     applied if not specified in the create request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Optional. Specifies whether objects are ingested into the cache upon write.
+          #     Defaults to false.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Optional. The type of cache. Either rapid cache or rapid cache ultra.
+          class CreateRapidCacheMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -544,10 +666,48 @@ module Google
           #     update, this field equals to the new value specified in the Update request.
           # @!attribute [rw] admission_policy
           #   @return [::String]
-          #     L4 Cache entry Admission Policy in kebab-case (e.g.,
+          #     Optional. Anywhere Cache entry Admission Policy in kebab-case (e.g.,
           #     "admit-on-first-miss"). If `admission_policy` is pending
           #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Specifies whether objects are ingested into the cache upon write. If not
+          #     set, it defaults to false.
           class UpdateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # UpdateRapidCache operation.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] rapid_cache_id
+          #   @return [::String]
+          #     Rapid Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Rapid Cache entry's TTL between 1h and 7days. A cache-level config that
+          #     is applied to all new cache entries on admission. If `ttl` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Optional. Rapid Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). If `admission_policy` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Specifies whether objects are ingested into the cache upon write. If not
+          #     set, it defaults to false.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Optional. The type of cache. Either rapid cache or rapid cache ultra.
+          class UpdateRapidCacheMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -576,7 +736,8 @@ module Google
           #     create request.
           # @!attribute [r] state
           #   @return [::String]
-          #     Output only. Cache state including RUNNING, CREATING, DISABLED and PAUSED.
+          #     Output only. Cache state including `running`, `creating`, `disabled` and
+          #     `paused`.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Time when Anywhere cache instance is allocated.
@@ -589,6 +750,10 @@ module Google
           #     Output only. True if there is an active update operation against this cache
           #     instance. Subsequential update requests will be rejected if this field is
           #     true. Output only.
+          # @!attribute [rw] ingest_on_write
+          #   @return [::Boolean]
+          #     Optional. Specifies whether objects are ingested into the cache upon write.
+          #     Defaults to false.
           class AnywhereCache
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -733,6 +898,144 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # A Rapid Cache Instance.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Immutable. The resource name of this RapidCache.
+          #     Format:
+          #     projects/\\{project}/buckets/\\{bucket}/rapidCaches/\\{rapid_cache}
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     Immutable. The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] cache_type
+          #   @return [::String]
+          #     Immutable. The type of Rapid Cache this represents. Valid values include:
+          #     'rapid-cache' and 'rapid-cache-ultra'.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Cache entry TTL (ranges between 1h to 7d). This is a cache-level config
+          #     that defines how long a cache entry can live. Default ttl value (24hrs)
+          #     is applied if not specified in the create request. TTL must be in whole
+          #     seconds.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Cache admission policy. Valid policies includes:
+          #     no_read_admission, admit-on-first-miss and admit-on-second-miss. Defaults
+          #     to admit-on-first-miss for both AC and RCU. Default value is applied if not
+          #     specified in the create request.
+          # @!attribute [r] state
+          #   @return [::String]
+          #     Output only. Cache state including running, creating, and disabled.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Rapid cache instance is allocated.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Rapid cache instance is last updated, including
+          #     creation.
+          # @!attribute [r] pending_update
+          #   @return [::Boolean]
+          #     Output only. True if there is an active update operation against this cache
+          #     instance. Subsequential update requests will be rejected if this field is
+          #     true. Output only.
+          class RapidCache
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateRapidCache.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          #     Format: `projects/{project}/buckets/{bucket}`
+          # @!attribute [rw] rapid_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::RapidCache]
+          #     Required. The RapidCache to create. Default values for ingest_on_write, ttl
+          #     and admission_policy will be applied if not specified in the request.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class CreateRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateRapidCache.
+          # @!attribute [rw] rapid_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::RapidCache]
+          #     Required. The RapidCache to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. List of fields to be updated. Mutable fields of RapidCache
+          #     include `ttl`, `admission_policy` and `ingest_on_write`.
+          #
+          #     To specify ALL fields, specify a single field with the value `*`. Note: We
+          #     recommend against doing this. If a new field is introduced at a later time,
+          #     an older client updating with the `*` may accidentally reset the new
+          #     field's value.
+          #
+          #     Not specifying any fields is an error.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class UpdateRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for GetRapidCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class GetRapidCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListRapidCaches.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Maximum number of caches to return in a single response.
+          #     The service will use this parameter or 1,000 items, whichever is smaller.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A previously-returned page token representing part of the larger set of
+          #     results to view.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class ListRapidCachesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListRapidCaches.
+          # @!attribute [rw] rapid_caches
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::RapidCache>]
+          #     The list of rapid caches.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListRapidCachesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The `IntelligenceConfig` resource associated with your organization, folder,
           # or project.
           # @!attribute [rw] name
@@ -863,7 +1166,7 @@ module Google
             # signifies the edition used for configuring the `IntelligenceConfig`
             # resource and can only take the following values:
             # `EDITION_CONFIG_UNSPECIFIED`, `INHERIT`, `DISABLED`, `STANDARD` and
-            # `TRIAL`.
+            # `EVALUATE`.
             module EditionConfig
               # This is an unknown edition of the resource.
               EDITION_CONFIG_UNSPECIFIED = 0
@@ -885,17 +1188,14 @@ module Google
               # using filters. At the end of the trial period, the `IntelligenceConfig`
               # resource is upgraded to `STANDARD` edition.
               TRIAL = 5
+
+              # The `IntelligenceConfig` resource is of ESSENTIALS edition.
+              ESSENTIALS = 6
             end
           end
 
           # Request message to update the `IntelligenceConfig` resource associated with
           # your organization.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.update`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the organization.
           # @!attribute [rw] intelligence_config
           #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
           #     Required. The `IntelligenceConfig` resource to be updated.
@@ -915,12 +1215,6 @@ module Google
 
           # Request message to update the `IntelligenceConfig` resource associated with
           # your folder.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.update`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the folder.
           # @!attribute [rw] intelligence_config
           #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
           #     Required. The `IntelligenceConfig` resource to be updated.
@@ -940,12 +1234,6 @@ module Google
 
           # Request message to update the `IntelligenceConfig` resource associated with
           # your project.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.update`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the folder.
           # @!attribute [rw] intelligence_config
           #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
           #     Required. The `IntelligenceConfig` resource to be updated.
@@ -965,12 +1253,6 @@ module Google
 
           # Request message to get the `IntelligenceConfig` resource associated with your
           # organization.
-          #
-          # **IAM Permissions**
-          #
-          # Requires `storage.intelligenceConfigs.get`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the organization.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the `IntelligenceConfig` resource associated with
@@ -984,12 +1266,6 @@ module Google
 
           # Request message to get the `IntelligenceConfig` resource associated with your
           # folder.
-          #
-          # **IAM Permissions**
-          #
-          # Requires `storage.intelligenceConfigs.get`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
-          # the folder.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the `IntelligenceConfig` resource associated with
@@ -1003,12 +1279,6 @@ module Google
 
           # Request message to get the `IntelligenceConfig` resource associated with your
           # project.
-          #
-          # **IAM Permissions**:
-          #
-          # Requires `storage.intelligenceConfigs.get`
-          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission
-          # on the project.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the `IntelligenceConfig` resource associated with
@@ -1353,9 +1623,9 @@ module Google
 
           # An `IntelligenceFindingRevision` represents a specific revision of an
           # `IntelligenceFinding` resource.
-          # @!attribute [rw] name
+          # @!attribute [r] name
           #   @return [::String]
-          #     Identifier. The resource name of `IntelligenceFindingRevision`.
+          #     Output only. The resource name of `IntelligenceFindingRevision`.
           #     Format:
           #     `projects/{project}/locations/{location}/intelligenceFindings/{intelligence_finding}/revisions/{revision}`
           # @!attribute [r] snapshot
@@ -1429,7 +1699,7 @@ module Google
           end
 
           # Request message to summarize the intelligence findings for the specified
-          # scope(org, folder or project).
+          # scope (organization, folder or project).
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The scope to summarize the findings for.
@@ -1487,7 +1757,7 @@ module Google
           end
 
           # Response message to summarize the intelligence findings for a specified
-          # scope(org, folder or project).
+          # scope (organization, folder or project).
           # @!attribute [rw] finding_summaries
           #   @return [::Array<::Google::Cloud::Storage::Control::V2::FindingSummary>]
           #     The list of `FindingSummary` summaries.
@@ -1572,7 +1842,7 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The time of the most recent update among all the findings that
           #     this summary is based on.
-          # @!attribute [r] severity
+          # @!attribute [rw] severity
           #   @return [::Google::Cloud::Storage::Control::V2::FindingSeverity]
           #     Severity of the finding.
           # @!attribute [r] summary_details
