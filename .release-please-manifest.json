@@ -825,7 +825,7 @@
   "google-cloud-speech-v1p1beta1+FILLER": "0.0.0",
   "google-cloud-speech-v2": "1.8.0",
   "google-cloud-speech-v2+FILLER": "0.0.0",
-  "google-cloud-sql-v1": "0.2.0",
+  "google-cloud-sql-v1": "0.3.0",
   "google-cloud-sql-v1+FILLER": "0.0.0",
   "google-cloud-storage": "1.62.0",
   "google-cloud-storage+FILLER": "0.0.0",

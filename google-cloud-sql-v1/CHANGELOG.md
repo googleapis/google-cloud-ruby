@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2026-07-24)
+
+#### Features
+
+* add client library publishing configuration for SQL Admin ([#34995](https://github.com/googleapis/google-cloud-ruby/issues/34995)) 
+
 ### 0.2.0 (2026-06-30)
 
 #### Features
