@@ -54,10 +54,6 @@ module Google
           # @private KeepaliveMonitor.
           attr_reader :keepalive_monitor
 
-          ##
-          # @private Whether the bi-directional gRPC stream has completed its initial handshake and is actively open.
-          attr_reader :stream_open
-
           # Initial backoff delay in seconds when reconnecting after a transient stream disconnection.
           INITIAL_RECONNECT_DELAY = 1.0
 
@@ -84,8 +80,10 @@ module Google
             @stopped = nil
             @paused  = nil
             # Condition variable used to cooperatively pause the background thread during flow control
+            # Governed by the Stream's MonitorMixin `synchronize` lock.
             @pause_cond = new_cond
             # Condition variable used to cooperatively sleep the background thread during connection retries
+            # Governed by the Stream's MonitorMixin `synchronize` lock.
             @backoff_cond = new_cond
             @exactly_once_delivery_enabled = false
 
@@ -147,6 +145,10 @@ module Google
             synchronize { @stopped }
           end
 
+          def stream_open?
+            synchronize { @stream_open }
+          end
+
           def paused?
             synchronize { @paused }
           end
@@ -172,12 +174,14 @@ module Google
           end
 
           def restart_stream_for_timeout!
-            @stream_open = false
-            # Push self as a stream-closing sentinel to @request_queue.
-            # When EnumeratorQueue#each pops the sentinel object, it terminates the request enumerator,
-            # cleanly sending an HTTP/2 END_STREAM flag and unblocking the write-side gRPC C-core pipeline.
-            @request_queue&.push self
-            @background_thread&.raise RestartStream
+            synchronize do
+              @stream_open = false
+              # Push self as a stream-closing sentinel to @request_queue.
+              # When EnumeratorQueue#each pops the sentinel object, it terminates the request enumerator,
+              # cleanly sending an HTTP/2 END_STREAM flag and unblocking the write-side gRPC C-core pipeline.
+              @request_queue&.push self
+              @background_thread&.raise RestartStream
+            end
           end
 
           def log_info msg

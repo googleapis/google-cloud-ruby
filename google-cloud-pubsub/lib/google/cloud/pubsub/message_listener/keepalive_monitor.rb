@@ -112,7 +112,7 @@ module Google
             @stream.synchronize do
               # Push unconditional keep-alive pings only when the stream is actively open and request queue is active.
               # Note: ACKs are sent via unary RPCs (TimedUnaryBuffer), not over this stream.
-              return unless @stream.stream_open && !@stream.stopped? && @stream.request_queue_active?
+              return unless @stream.stream_open? && !@stream.stopped? && @stream.request_queue_active?
 
               @stream.log_info "sending keepAlive to stream for subscription #{@stream.subscriber.subscription_name}"
               # Only advance @last_ping_at if the previous ping was successfully ponged.
@@ -132,7 +132,7 @@ module Google
               # Do not check pong deadline if paused (client flow control inventory full).
               # When paused, background_run waits on condition variable and stops calling enum.next,
               # so incoming server pongs sit buffered in gRPC and last_pong_at stays un-updated.
-              return unless @stream.stream_open && @last_ping_at && @last_pong_at && !@stream.stopped? && !@stream.paused?
+              return unless @stream.stream_open? && @last_ping_at && @last_pong_at && !@stream.stopped? && !@stream.paused?
 
               now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
               if now - @last_ping_at >= @deadline && @last_pong_at < @last_ping_at

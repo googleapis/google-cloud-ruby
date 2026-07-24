@@ -50,7 +50,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive_integration, :mock_p
       sleep 0.15
 
       monitor = stream.keepalive_monitor
-      _(stream.stream_open).must_equal true
+      _(stream.stream_open?).must_equal true
       _(monitor.instance_variable_get(:@last_ping_at)).wont_be_nil
       _(monitor.instance_variable_get(:@last_pong_at)).wont_be_nil
       _(stub.requests.count).must_equal 1
@@ -83,7 +83,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive_integration, :mock_p
 
       # 1. When flow control paused, check_liveness! skips evaluation even if deadline exceeded
       monitor.check_liveness!
-      _(stream.stream_open).must_equal true
+      _(stream.stream_open?).must_equal true
 
       # 2. Unpausing refreshes last_pong_at under synchronization so reader thread drains pongs cleanly
       stream.send(:unpause_streaming!)
@@ -91,7 +91,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive_integration, :mock_p
 
       # 3. Liveness monitor firing immediately after unpause does not falsely close stream
       monitor.check_liveness!
-      _(stream.stream_open).must_equal true
+      _(stream.stream_open?).must_equal true
     end
   end
 
@@ -144,7 +144,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive_integration, :mock_p
 
       wait_until(max: 300, msg: "Stream did not reconnect after GRPC::Unavailable backoff") { delivered }
 
-      _(stream.stream_open).must_equal true
+      _(stream.stream_open?).must_equal true
       _(monitor.instance_variable_get(:@last_ping_at)).wont_be_nil
       _(monitor.instance_variable_get(:@last_pong_at)).wont_be_nil
 

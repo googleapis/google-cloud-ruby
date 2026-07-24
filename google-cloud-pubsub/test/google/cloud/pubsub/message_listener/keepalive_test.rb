@@ -100,7 +100,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     stream.keepalive_monitor.instance_variable_set :@last_pong_at, now - 1.0
 
     stream.keepalive_monitor.check_liveness!
-    _(stream.stream_open).must_equal true
+    _(stream.stream_open?).must_equal true
   end
 
   it "does not trigger false restarts on unpausing even if pause exceeded deadline" do
@@ -120,7 +120,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
 
     # 1. When paused, liveness checker should skip verification.
     stream.keepalive_monitor.check_liveness!
-    _(stream.stream_open).must_equal true
+    _(stream.stream_open?).must_equal true
 
     # 2. Unpausing must reset @last_pong_at to prevent immediate restart.
     stream.send(:unpause_streaming!)
@@ -129,7 +129,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     # 3. Direct liveness check immediately after unpausing (simulates the monitor thread racing the background thread).
     # It should NOT close the stream because our reset made @last_pong_at newer than @last_ping_at.
     stream.keepalive_monitor.check_liveness!
-    _(stream.stream_open).must_equal true
+    _(stream.stream_open?).must_equal true
   end
 
   it "re-creates and executes timer tasks if stopped and restarted" do
@@ -188,7 +188,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
 
     backoff_cond.stub :wait, ->(_timeout) {
       wait_called = true
-      _(stream.instance_variable_get(:@stream_open)).must_equal false
+      _(stream.stream_open?).must_equal false
     } do
       stream.send :backoff_and_wait!
     end
@@ -210,8 +210,12 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     # Wait for the first connection
     wait_until(max: 100, msg: "stream did not connect") { stub.requests.count == 1 }
     
-    # Trigger production-path timeout restart
-    stream.restart_stream_for_timeout!
+    # Trigger production-path timeout logically via the liveness monitor simulation
+    # Back-date variables and invoke the monitor exactly as it runs in the background
+    now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+    stream.keepalive_monitor.instance_variable_set :@last_ping_at, now - 60.0
+    stream.keepalive_monitor.instance_variable_set :@last_pong_at, now - 65.0
+    stream.keepalive_monitor.check_liveness!
     
     # Ensure stream correctly recreates the request_queue without sending the stream sentinel object
     # to the gRPC client (which would cause a fatal crash rather than a graceful restart and a new request).
