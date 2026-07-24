@@ -338,7 +338,7 @@ module Google
               end
 
               ##
-              # Lists support event subscriptions.
+              # Lists support event subscriptions for an organization.
               #
               # @overload list_support_event_subscriptions(request, options = nil)
               #   Pass arguments to `list_support_event_subscriptions` via a request object, either of type
@@ -688,6 +688,116 @@ module Google
               end
 
               ##
+              # Expunges a support event subscription.
+              #
+              # EXAMPLES:
+              #
+              # cURL:
+              #
+              # ```shell
+              # support_event_subscription="organizations/123456789/supportEventSubscriptions/abcdef123456"
+              # curl \
+              #   --request POST \
+              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+              #   "https://cloudsupport.googleapis.com/v2beta/$support_event_subscription:expunge"
+              # ```
+              #
+              # Python:
+              #
+              # ```python
+              # import googleapiclient.discovery
+              #
+              # api_version = "v2beta"
+              # supportApiService = googleapiclient.discovery.build(
+              #     serviceName="cloudsupport",
+              #     version=api_version,
+              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
+              # )
+              #
+              # request = supportApiService.supportEventSubscriptions().expunge(
+              #     name="organizations/123456789/supportEventSubscriptions/abcdef123456"
+              # )
+              # print(request.execute())
+              # ```
+              #
+              # @overload expunge_support_event_subscription(request, options = nil)
+              #   Pass arguments to `expunge_support_event_subscription` via a request object, either of type
+              #   {::Google::Cloud::Support::V2beta::ExpungeSupportEventSubscriptionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Support::V2beta::ExpungeSupportEventSubscriptionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload expunge_support_event_subscription(name: nil)
+              #   Pass arguments to `expunge_support_event_subscription` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the support event subscription to expunge.
+              #     Format:
+              #     organizations/\\{organization_id}/supportEventSubscriptions/\\{subscription_id}
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/support/v2beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Support::V2beta::SupportEventSubscriptionService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Support::V2beta::ExpungeSupportEventSubscriptionRequest.new
+              #
+              #   # Call the expunge_support_event_subscription method.
+              #   result = client.expunge_support_event_subscription request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def expunge_support_event_subscription request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Support::V2beta::ExpungeSupportEventSubscriptionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.expunge_support_event_subscription.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Support::V2beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.expunge_support_event_subscription.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.expunge_support_event_subscription.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @support_event_subscription_service_stub.expunge_support_event_subscription request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the SupportEventSubscriptionService REST API.
               #
               # This class represents the configuration for SupportEventSubscriptionService REST,
@@ -865,6 +975,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :undelete_support_event_subscription
+                  ##
+                  # RPC-specific configuration for `expunge_support_event_subscription`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :expunge_support_event_subscription
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -880,6 +995,8 @@ module Google
                     @delete_support_event_subscription = ::Gapic::Config::Method.new delete_support_event_subscription_config
                     undelete_support_event_subscription_config = parent_rpcs.undelete_support_event_subscription if parent_rpcs.respond_to? :undelete_support_event_subscription
                     @undelete_support_event_subscription = ::Gapic::Config::Method.new undelete_support_event_subscription_config
+                    expunge_support_event_subscription_config = parent_rpcs.expunge_support_event_subscription if parent_rpcs.respond_to? :expunge_support_event_subscription
+                    @expunge_support_event_subscription = ::Gapic::Config::Method.new expunge_support_event_subscription_config
 
                     yield self if block_given?
                   end
