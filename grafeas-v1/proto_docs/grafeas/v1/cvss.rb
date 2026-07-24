@@ -121,109 +121,217 @@ module Grafeas
     #   @return [::Float]
     # @!attribute [rw] attack_vector
     #   @return [::Grafeas::V1::CVSS::AttackVector]
-    #     Base Metrics
-    #     Represents the intrinsic characteristics of a vulnerability that are
-    #     constant over time and across user environments.
+    #     Attack Vector (AV). Defined in CVSS v2, v3, v4.
     # @!attribute [rw] attack_complexity
     #   @return [::Grafeas::V1::CVSS::AttackComplexity]
+    #     Attack Complexity (AC). Defined in CVSS v2, v3, v4.
     # @!attribute [rw] authentication
     #   @return [::Grafeas::V1::CVSS::Authentication]
+    #     Authentication (Au). Defined in CVSS v2.
     # @!attribute [rw] privileges_required
     #   @return [::Grafeas::V1::CVSS::PrivilegesRequired]
+    #     Privileges Required (PR). Defined in CVSS v3, v4.
     # @!attribute [rw] user_interaction
     #   @return [::Grafeas::V1::CVSS::UserInteraction]
+    #     User Interaction (UI). Defined in CVSS v3, v4.
     # @!attribute [rw] scope
     #   @return [::Grafeas::V1::CVSS::Scope]
+    #     Scope (S). Defined in CVSS v3.
     # @!attribute [rw] confidentiality_impact
     #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Confidentiality Impact (C). Defined in CVSS v2, v3.
     # @!attribute [rw] integrity_impact
     #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Integrity Impact (I). Defined in CVSS v2, v3.
     # @!attribute [rw] availability_impact
     #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Availability Impact (A). Defined in CVSS v2, v3.
+    # @!attribute [rw] attack_requirements
+    #   @return [::Grafeas::V1::CVSS::AttackRequirements]
+    #     Attack Requirements (AT). Defined in CVSS v4.
+    # @!attribute [rw] vulnerable_system_confidentiality_impact
+    #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Vulnerable System Confidentiality Impact (VC). Defined in CVSS v4.
+    # @!attribute [rw] vulnerable_system_integrity_impact
+    #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Vulnerable System Integrity Impact (VI). Defined in CVSS v4.
+    # @!attribute [rw] vulnerable_system_availability_impact
+    #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Vulnerable System Availability Impact (VA). Defined in CVSS v4.
+    # @!attribute [rw] subsequent_system_confidentiality_impact
+    #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Subsequent System Confidentiality Impact (SC). Defined in CVSS v4.
+    # @!attribute [rw] subsequent_system_integrity_impact
+    #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Subsequent System Integrity Impact (SI). Defined in CVSS v4.
+    # @!attribute [rw] subsequent_system_availability_impact
+    #   @return [::Grafeas::V1::CVSS::Impact]
+    #     Subsequent System Availability Impact (SA). Defined in CVSS v4.
+    # @!attribute [rw] exploit_maturity
+    #   @return [::Grafeas::V1::CVSS::ExploitMaturity]
+    #     Exploit Maturity (E). Defined in CVSS v4.
     class CVSS
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
 
+      # Attack Vector.
       module AttackVector
+        # Unspecified.
         ATTACK_VECTOR_UNSPECIFIED = 0
 
+        # Attack Vector: Network (AV:N). Defined in CVSS v2, v3, v4.
         ATTACK_VECTOR_NETWORK = 1
 
+        # Attack Vector: Adjacent (AV:A). Defined in CVSS v2, v3, v4.
         ATTACK_VECTOR_ADJACENT = 2
 
+        # Attack Vector: Local (AV:L). Defined in CVSS v2, v3, v4.
         ATTACK_VECTOR_LOCAL = 3
 
+        # Attack Vector: Physical (AV:P). Defined in CVSS v3, v4.
         ATTACK_VECTOR_PHYSICAL = 4
       end
 
+      # Attack Complexity.
       module AttackComplexity
+        # Unspecified.
         ATTACK_COMPLEXITY_UNSPECIFIED = 0
 
+        # Low attack complexity (AC:L). Defined in CVSS v2, v3, v4.
         ATTACK_COMPLEXITY_LOW = 1
 
+        # High attack complexity (AC:H). Defined in CVSS v2, v3, v4.
         ATTACK_COMPLEXITY_HIGH = 2
 
+        # Medium attack complexity (AC:M). Defined in CVSS v2.
         ATTACK_COMPLEXITY_MEDIUM = 3
       end
 
+      # Authentication.
       module Authentication
+        # Unspecified.
         AUTHENTICATION_UNSPECIFIED = 0
 
+        # Multiple authentication required (Au:M). Defined in CVSS v2.
         AUTHENTICATION_MULTIPLE = 1
 
+        # Single authentication required (Au:S). Defined in CVSS v2.
         AUTHENTICATION_SINGLE = 2
 
+        # No authentication required (Au:N). Defined in CVSS v2.
         AUTHENTICATION_NONE = 3
       end
 
+      # Privileges Required.
       module PrivilegesRequired
+        # Unspecified.
         PRIVILEGES_REQUIRED_UNSPECIFIED = 0
 
+        # No privileges required (PR:N). Defined in CVSS v3, v4.
         PRIVILEGES_REQUIRED_NONE = 1
 
+        # Low privileges required (PR:L). Defined in CVSS v3, v4.
         PRIVILEGES_REQUIRED_LOW = 2
 
+        # High privileges required (PR:H). Defined in CVSS v3, v4.
         PRIVILEGES_REQUIRED_HIGH = 3
       end
 
+      # User Interaction.
       module UserInteraction
+        # Unspecified.
         USER_INTERACTION_UNSPECIFIED = 0
 
+        # No user interaction required (UI:N). Defined in CVSS v3, v4.
         USER_INTERACTION_NONE = 1
 
+        # User interaction required (UI:R). Defined in CVSS v3.
         USER_INTERACTION_REQUIRED = 2
+
+        # Passive user interaction required (UI:P). Defined in CVSS v4.
+        USER_INTERACTION_PASSIVE = 3
+
+        # Active user interaction required (UI:A). Defined in CVSS v4.
+        USER_INTERACTION_ACTIVE = 4
       end
 
+      # Scope.
       module Scope
+        # Unspecified.
         SCOPE_UNSPECIFIED = 0
 
+        # Scope: Unchanged (S:U). Defined in CVSS v3.
         SCOPE_UNCHANGED = 1
 
+        # Scope: Changed (S:C). Defined in CVSS v3.
         SCOPE_CHANGED = 2
       end
 
+      # Impact.
       module Impact
+        # Unspecified.
         IMPACT_UNSPECIFIED = 0
 
+        # High impact (H). Defined in CVSS v3, v4.
         IMPACT_HIGH = 1
 
+        # Low impact (L). Defined in CVSS v3, v4.
         IMPACT_LOW = 2
 
+        # No impact (N). Defined in CVSS v2, v3, v4.
         IMPACT_NONE = 3
 
+        # Partial impact (P). Defined in CVSS v2.
         IMPACT_PARTIAL = 4
 
+        # Complete impact (C). Defined in CVSS v2.
         IMPACT_COMPLETE = 5
+      end
+
+      # Attack Requirements.
+      module AttackRequirements
+        # Unspecified.
+        ATTACK_REQUIREMENTS_UNSPECIFIED = 0
+
+        # No attack requirements (AT:N). Defined in CVSS v4.
+        ATTACK_REQUIREMENTS_NONE = 1
+
+        # Attack requirements: Present (AT:P). Defined in CVSS v4.
+        ATTACK_REQUIREMENTS_PRESENT = 2
+      end
+
+      # Exploit Maturity (E). Defined in CVSS v4.
+      module ExploitMaturity
+        # Unspecified.
+        EXPLOIT_MATURITY_UNSPECIFIED = 0
+
+        # Exploit maturity: Not defined (E:X). Defined in CVSS v4.
+        EXPLOIT_MATURITY_NOT_DEFINED = 1
+
+        # Exploit maturity: Attacked (E:A). Defined in CVSS v4.
+        EXPLOIT_MATURITY_ATTACKED = 2
+
+        # Exploit maturity: Proof-of-concept (E:P). Defined in CVSS v4.
+        EXPLOIT_MATURITY_POC = 3
+
+        # Exploit maturity: Unreported (E:U). Defined in CVSS v4.
+        EXPLOIT_MATURITY_UNREPORTED = 4
       end
     end
 
     # CVSS Version.
     module CVSSVersion
+      # Unspecified.
       CVSS_VERSION_UNSPECIFIED = 0
 
+      # CVSS v2.
       CVSS_VERSION_2 = 1
 
+      # CVSS v3.
       CVSS_VERSION_3 = 2
+
+      # CVSS v4.
+      CVSS_VERSION_4 = 3
     end
   end
 end
