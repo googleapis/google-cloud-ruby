@@ -75,132 +75,132 @@ module Google
 
                   default_config.rpcs.create_folder.timeout = 60.0
                   default_config.rpcs.create_folder.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_folder.timeout = 60.0
                   default_config.rpcs.get_folder.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.list_folders.timeout = 60.0
                   default_config.rpcs.list_folders.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.rename_folder.timeout = 60.0
                   default_config.rpcs.rename_folder.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.delete_folder_recursive.timeout = 60.0
                   default_config.rpcs.delete_folder_recursive.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_storage_layout.timeout = 60.0
                   default_config.rpcs.get_storage_layout.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_managed_folder.timeout = 60.0
                   default_config.rpcs.get_managed_folder.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.list_managed_folders.timeout = 60.0
                   default_config.rpcs.list_managed_folders.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.create_anywhere_cache.timeout = 60.0
                   default_config.rpcs.create_anywhere_cache.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.update_anywhere_cache.timeout = 60.0
                   default_config.rpcs.update_anywhere_cache.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.disable_anywhere_cache.timeout = 60.0
                   default_config.rpcs.disable_anywhere_cache.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.pause_anywhere_cache.timeout = 60.0
                   default_config.rpcs.pause_anywhere_cache.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.resume_anywhere_cache.timeout = 60.0
                   default_config.rpcs.resume_anywhere_cache.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_anywhere_cache.timeout = 60.0
                   default_config.rpcs.get_anywhere_cache.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.list_anywhere_caches.timeout = 60.0
                   default_config.rpcs.list_anywhere_caches.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_project_intelligence_config.timeout = 60.0
                   default_config.rpcs.get_project_intelligence_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.update_project_intelligence_config.timeout = 60.0
                   default_config.rpcs.update_project_intelligence_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_folder_intelligence_config.timeout = 60.0
                   default_config.rpcs.get_folder_intelligence_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.update_folder_intelligence_config.timeout = 60.0
                   default_config.rpcs.update_folder_intelligence_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_organization_intelligence_config.timeout = 60.0
                   default_config.rpcs.get_organization_intelligence_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.update_organization_intelligence_config.timeout = 60.0
                   default_config.rpcs.update_organization_intelligence_config.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_intelligence_finding.timeout = 60.0
                   default_config.rpcs.get_intelligence_finding.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.list_intelligence_findings.timeout = 60.0
                   default_config.rpcs.list_intelligence_findings.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.summarize_intelligence_findings.timeout = 60.0
                   default_config.rpcs.summarize_intelligence_findings.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.get_intelligence_finding_revision.timeout = 60.0
                   default_config.rpcs.get_intelligence_finding_revision.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config.rpcs.list_intelligence_finding_revisions.timeout = 60.0
                   default_config.rpcs.list_intelligence_finding_revisions.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 13, 2]
                   }
 
                   default_config
@@ -1471,6 +1471,115 @@ module Google
               end
 
               ##
+              # Updates a managed folder. Currently, this RPC only supports updating the
+              # `rapid_cache_config` field.
+              #
+              # @overload update_managed_folder(request, options = nil)
+              #   Pass arguments to `update_managed_folder` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_managed_folder(managed_folder: nil, update_mask: nil, if_metageneration_match: nil, if_metageneration_not_match: nil, request_id: nil)
+              #   Pass arguments to `update_managed_folder` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param managed_folder [::Google::Cloud::Storage::Control::V2::ManagedFolder, ::Hash]
+              #     Required. Properties of the managed folder being updated. Currently, this
+              #     RPC only supports updating the `rapid_cache_config` field in
+              #     `managed_folder`.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Update mask for managed_folder.
+              #     Currently, this RPC only supports updating the `rapid_cache_config`
+              #     field in `managed_folder`. This field also supports update mask for the
+              #     subfields in the map of `rapid_cache_config`. The user can specify the
+              #     update mask for `rapid_cache_config.policies` and
+              #     `rapid_cache_config.policies.<key>`, but patching is not supported for
+              #     a field within `RapidCachePolicy.policies.<key>`, like
+              #     rapid_cache_config.policies.[key].ingest_on_write.
+              #   @param if_metageneration_match [::Integer]
+              #     Optional. The operation succeeds conditional on the managed folder's
+              #     current metageneration matching the value here specified.
+              #   @param if_metageneration_not_match [::Integer]
+              #     Optional. The operation succeeds conditional on the managed folder's
+              #     current metageneration NOT matching the value here specified.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::ManagedFolder]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::ManagedFolder]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest.new
+              #
+              #   # Call the update_managed_folder method.
+              #   result = client.update_managed_folder request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::ManagedFolder.
+              #   p result
+              #
+              def update_managed_folder request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_managed_folder.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.managed_folder&.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.managed_folder.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_managed_folder.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_managed_folder.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :update_managed_folder, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates an Anywhere Cache instance.
               #
               # @overload create_anywhere_cache(request, options = nil)
@@ -2153,6 +2262,411 @@ module Google
 
                 @storage_control_stub.call_rpc :list_anywhere_caches, request, options: options do |response, operation|
                   response = ::Gapic::PagedEnumerable.new @storage_control_stub, :list_anywhere_caches, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Rapid Cache instance.
+              #
+              # @overload create_rapid_cache(request, options = nil)
+              #   Pass arguments to `create_rapid_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_rapid_cache(parent: nil, rapid_cache: nil, request_id: nil)
+              #   Pass arguments to `create_rapid_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The bucket to which this cache belongs.
+              #     Format: `projects/{project}/buckets/{bucket}`
+              #   @param rapid_cache [::Google::Cloud::Storage::Control::V2::RapidCache, ::Hash]
+              #     Required. The RapidCache to create. Default values for ingest_on_write, ttl
+              #     and admission_policy will be applied if not specified in the request.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest.new
+              #
+              #   # Call the create_rapid_cache method.
+              #   result = client.create_rapid_cache request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_rapid_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_rapid_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent && !request.parent.empty?
+                  header_params["bucket"] = request.parent
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_rapid_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_rapid_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :create_rapid_cache, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Rapid Cache instance.
+              #
+              # @overload update_rapid_cache(request, options = nil)
+              #   Pass arguments to `update_rapid_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_rapid_cache(rapid_cache: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_rapid_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param rapid_cache [::Google::Cloud::Storage::Control::V2::RapidCache, ::Hash]
+              #     Required. The RapidCache to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. List of fields to be updated. Mutable fields of RapidCache
+              #     include `ttl`, `admission_policy` and `ingest_on_write`.
+              #
+              #     To specify ALL fields, specify a single field with the value `*`. Note: We
+              #     recommend against doing this. If a new field is introduced at a later time,
+              #     an older client updating with the `*` may accidentally reset the new
+              #     field's value.
+              #
+              #     Not specifying any fields is an error.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest.new
+              #
+              #   # Call the update_rapid_cache method.
+              #   result = client.update_rapid_cache request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_rapid_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_rapid_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.rapid_cache&.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.rapid_cache.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_rapid_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_rapid_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :update_rapid_cache, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a Rapid Cache instance.
+              #
+              # @overload get_rapid_cache(request, options = nil)
+              #   Pass arguments to `get_rapid_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_rapid_cache(name: nil, request_id: nil)
+              #   Pass arguments to `get_rapid_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name field in the request should be:
+              #     `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::RapidCache]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::RapidCache]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetRapidCacheRequest.new
+              #
+              #   # Call the get_rapid_cache method.
+              #   result = client.get_rapid_cache request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::RapidCache.
+              #   p result
+              #
+              def get_rapid_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_rapid_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_rapid_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_rapid_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_rapid_cache, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Rapid Cache instances for a given bucket.
+              #
+              # @overload list_rapid_caches(request, options = nil)
+              #   Pass arguments to `list_rapid_caches` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_rapid_caches(parent: nil, page_size: nil, page_token: nil, request_id: nil)
+              #   Pass arguments to `list_rapid_caches` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The bucket to which this cache belongs.
+              #   @param page_size [::Integer]
+              #     Maximum number of caches to return in a single response.
+              #     The service will use this parameter or 1,000 items, whichever is smaller.
+              #   @param page_token [::String]
+              #     A previously-returned page token representing part of the larger set of
+              #     results to view.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::RapidCache>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::RapidCache>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::ListRapidCachesRequest.new
+              #
+              #   # Call the list_rapid_caches method.
+              #   result = client.list_rapid_caches request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Storage::Control::V2::RapidCache.
+              #     p item
+              #   end
+              #
+              def list_rapid_caches request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_rapid_caches.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent && !request.parent.empty?
+                  header_params["bucket"] = request.parent
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_rapid_caches.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_rapid_caches.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :list_rapid_caches, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @storage_control_stub, :list_rapid_caches, request, response, operation, options
                   yield response, operation if block_given?
                   throw :response, response
                 end
@@ -3104,7 +3618,7 @@ module Google
               end
 
               ##
-              # Lists the `IntelligenceFinding` resources for the specified project.
+              # Lists the `IntelligenceFinding` resources for the specified the project.
               #
               # @overload list_intelligence_findings(request, options = nil)
               #   Pass arguments to `list_intelligence_findings` via a request object, either of type
@@ -3212,8 +3726,8 @@ module Google
               end
 
               ##
-              # Summarize the intelligence findings for the specified scope(org, folder or
-              # project).
+              # Summarizes the intelligence findings for the specified scope (organization,
+              # folder or project).
               #
               # @overload summarize_intelligence_findings(request, options = nil)
               #   Pass arguments to `summarize_intelligence_findings` via a request object, either of type
@@ -3768,6 +4282,11 @@ module Google
                   #
                   attr_reader :list_managed_folders
                   ##
+                  # RPC-specific configuration for `update_managed_folder`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_managed_folder
+                  ##
                   # RPC-specific configuration for `create_anywhere_cache`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3802,6 +4321,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_anywhere_caches
+                  ##
+                  # RPC-specific configuration for `create_rapid_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_rapid_cache
+                  ##
+                  # RPC-specific configuration for `update_rapid_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_rapid_cache
+                  ##
+                  # RPC-specific configuration for `get_rapid_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_rapid_cache
+                  ##
+                  # RPC-specific configuration for `list_rapid_caches`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_rapid_caches
                   ##
                   # RPC-specific configuration for `get_project_intelligence_config`
                   # @return [::Gapic::Config::Method]
@@ -3897,6 +4436,8 @@ module Google
                     @get_managed_folder = ::Gapic::Config::Method.new get_managed_folder_config
                     list_managed_folders_config = parent_rpcs.list_managed_folders if parent_rpcs.respond_to? :list_managed_folders
                     @list_managed_folders = ::Gapic::Config::Method.new list_managed_folders_config
+                    update_managed_folder_config = parent_rpcs.update_managed_folder if parent_rpcs.respond_to? :update_managed_folder
+                    @update_managed_folder = ::Gapic::Config::Method.new update_managed_folder_config
                     create_anywhere_cache_config = parent_rpcs.create_anywhere_cache if parent_rpcs.respond_to? :create_anywhere_cache
                     @create_anywhere_cache = ::Gapic::Config::Method.new create_anywhere_cache_config
                     update_anywhere_cache_config = parent_rpcs.update_anywhere_cache if parent_rpcs.respond_to? :update_anywhere_cache
@@ -3911,6 +4452,14 @@ module Google
                     @get_anywhere_cache = ::Gapic::Config::Method.new get_anywhere_cache_config
                     list_anywhere_caches_config = parent_rpcs.list_anywhere_caches if parent_rpcs.respond_to? :list_anywhere_caches
                     @list_anywhere_caches = ::Gapic::Config::Method.new list_anywhere_caches_config
+                    create_rapid_cache_config = parent_rpcs.create_rapid_cache if parent_rpcs.respond_to? :create_rapid_cache
+                    @create_rapid_cache = ::Gapic::Config::Method.new create_rapid_cache_config
+                    update_rapid_cache_config = parent_rpcs.update_rapid_cache if parent_rpcs.respond_to? :update_rapid_cache
+                    @update_rapid_cache = ::Gapic::Config::Method.new update_rapid_cache_config
+                    get_rapid_cache_config = parent_rpcs.get_rapid_cache if parent_rpcs.respond_to? :get_rapid_cache
+                    @get_rapid_cache = ::Gapic::Config::Method.new get_rapid_cache_config
+                    list_rapid_caches_config = parent_rpcs.list_rapid_caches if parent_rpcs.respond_to? :list_rapid_caches
+                    @list_rapid_caches = ::Gapic::Config::Method.new list_rapid_caches_config
                     get_project_intelligence_config_config = parent_rpcs.get_project_intelligence_config if parent_rpcs.respond_to? :get_project_intelligence_config
                     @get_project_intelligence_config = ::Gapic::Config::Method.new get_project_intelligence_config_config
                     update_project_intelligence_config_config = parent_rpcs.update_project_intelligence_config if parent_rpcs.respond_to? :update_project_intelligence_config
