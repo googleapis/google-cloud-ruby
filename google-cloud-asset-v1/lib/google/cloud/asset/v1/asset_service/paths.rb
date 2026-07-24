@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,48 +74,6 @@ module Google
               resource = resources[args.keys.sort.join(":")]
               raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
-            end
-
-            ##
-            # Create a fully-qualified Folder resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `folders/{folder}`
-            #
-            # @param folder [String]
-            #
-            # @return [::String]
-            def folder_path folder:
-              "folders/#{folder}"
-            end
-
-            ##
-            # Create a fully-qualified Organization resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `organizations/{organization}`
-            #
-            # @param organization [String]
-            #
-            # @return [::String]
-            def organization_path organization:
-              "organizations/#{organization}"
-            end
-
-            ##
-            # Create a fully-qualified Project resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}`
-            #
-            # @param project [String]
-            #
-            # @return [::String]
-            def project_path project:
-              "projects/#{project}"
             end
 
             ##

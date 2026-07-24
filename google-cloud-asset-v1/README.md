@@ -2,7 +2,15 @@
 
 The Cloud Asset API manages the history and inventory of Google Cloud resources.
 
-A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services.
+# Cloud Asset API
+
+The Cloud Asset API keeps a history of Google Cloud asset metadata, and
+allows Google Cloud users to download a dump of all asset metadata for the
+resource types listed below within an organization or a project at a given
+timestamp.
+
+Read more documents here:
+https://cloud.google.com/asset-inventory/docs.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -39,9 +47,6 @@ response = client.export_assets request
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-asset-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/asset-inventory/)
-for general usage information.
 
 ## Debug Logging
 
