@@ -1,0 +1,88 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "grafeas.v1",
+  "libraryPackage": "::Grafeas::V1",
+  "services": {
+    "Grafeas": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Grafeas::V1::Grafeas::Client",
+          "rpcs": {
+            "GetOccurrence": {
+              "methods": [
+                "get_occurrence"
+              ]
+            },
+            "ListOccurrences": {
+              "methods": [
+                "list_occurrences"
+              ]
+            },
+            "DeleteOccurrence": {
+              "methods": [
+                "delete_occurrence"
+              ]
+            },
+            "CreateOccurrence": {
+              "methods": [
+                "create_occurrence"
+              ]
+            },
+            "BatchCreateOccurrences": {
+              "methods": [
+                "batch_create_occurrences"
+              ]
+            },
+            "UpdateOccurrence": {
+              "methods": [
+                "update_occurrence"
+              ]
+            },
+            "GetOccurrenceNote": {
+              "methods": [
+                "get_occurrence_note"
+              ]
+            },
+            "GetNote": {
+              "methods": [
+                "get_note"
+              ]
+            },
+            "ListNotes": {
+              "methods": [
+                "list_notes"
+              ]
+            },
+            "DeleteNote": {
+              "methods": [
+                "delete_note"
+              ]
+            },
+            "CreateNote": {
+              "methods": [
+                "create_note"
+              ]
+            },
+            "BatchCreateNotes": {
+              "methods": [
+                "batch_create_notes"
+              ]
+            },
+            "UpdateNote": {
+              "methods": [
+                "update_note"
+              ]
+            },
+            "ListNoteOccurrences": {
+              "methods": [
+                "list_note_occurrences"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
