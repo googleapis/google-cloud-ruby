@@ -331,7 +331,6 @@ describe "Files Snippets" do
 
     before(:each) do
       bucket.create_file local_file, remote_file_name
-      bucket.create_file local_file, remote_file_name+"2"
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
@@ -349,25 +348,40 @@ describe "Files Snippets" do
     let(:custom_context_value1) { "my-custom-value" }
     let(:custom_context_key2) { "my-custom-key-2" }
     let(:custom_context_value2) { "my-custom-value-2" }
+    let(:remote_file_name2) { "path/file_name_#{SecureRandom.hex}.txt" }
 
     before(:each) do
       bucket.create_file local_file, remote_file_name
-      bucket.create_file local_file, remote_file_name+"2"
+      bucket.create_file local_file, remote_file_name2
       
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name, custom_context_key: custom_context_key1, custom_context_value: custom_context_value1
-      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name+"2", custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      set_object_contexts bucket_name: bucket.name, file_name: remote_file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     end
 
+    
     it "filters out files on the basis of custom context key" do
-      assert_output "File: #{remote_file_name} has context key: #{custom_context_key1}\n" do
-        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
+      out = nil
+      5.times do
+        out, _err = capture_io do
+          list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
+        end
+        break unless out.empty?
+        sleep 1
       end
+      assert_equal "File: #{remote_file_name} has context key: #{custom_context_key1}\n", out
     end
+
 
     it "filters out files on the basis of custom context key and value" do
-      assert_output "File: #{remote_file_name+"2"} has context key: #{custom_context_key2}\n" do
-        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+      out = nil
+      5.times do
+        out, _err = capture_io do
+          list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
+        end
+        break unless out.empty?
+        sleep 1
       end
+      assert_equal "File: #{remote_file_name2} has context key: #{custom_context_key2}\n", out
     end
   end
 
