@@ -1667,6 +1667,10 @@
       "component": "google-cloud-sql-v1",
       "version_file": "lib/google/cloud/sql/v1/version.rb"
     },
+    "google-cloud-sql-v1beta4": {
+      "component": "google-cloud-sql-v1beta4",
+      "version_file": "lib/google/cloud/sql/v1beta4/version.rb"
+    },
     "google-cloud-storage": {
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
