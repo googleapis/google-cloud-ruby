@@ -68,15 +68,17 @@ module Google
         #     inbound traffic at the identified backends. If this field is not set,
         #     authentication is disabled(open) for this endpoint.
         # @!attribute [rw] client_tls_policy
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Optional. A URL referring to a ClientTlsPolicy resource. ClientTlsPolicy
-        #     can be set to specify the authentication for traffic from the proxy to the
-        #     actual endpoints. More specifically, it is applied to the outgoing traffic
-        #     from the proxy to the endpoint. This is typically used for sidecar model
-        #     where the proxy identifies itself as endpoint to the control plane, with
-        #     the connection between sidecar and endpoint requiring authentication. If
-        #     this field is not set, authentication is disabled(open). Applicable only
-        #     when EndpointPolicyType is SIDECAR_PROXY.
+        #     Optional. Deprecated: This field is not used and is a no-op.
+        #     A URL referring to a ClientTlsPolicy resource. ClientTlsPolicy can be set
+        #     to specify the authentication for traffic from the proxy to the actual
+        #     endpoints. More specifically, it is applied to the outgoing traffic from
+        #     the proxy to the endpoint. This is typically used for sidecar model where
+        #     the proxy identifies itself as endpoint to the control plane, with the
+        #     connection between sidecar and endpoint requiring authentication. If this
+        #     field is not set, authentication is disabled(open). Applicable only when
+        #     EndpointPolicyType is SIDECAR_PROXY.
         class EndpointPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
