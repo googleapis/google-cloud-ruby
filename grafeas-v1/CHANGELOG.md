@@ -1,5 +1,75 @@
 # Release History
 
+### 1.10.0 (2026-07-27)
+
+#### Features
+
+* A new enum `AttackRequirements` is added 
+* A new enum `ExploitMaturity` is added 
+* A new field `cvss_v4` is added to message `.grafeas.v1.VulnerabilityNote` 
+* A new field `cvss_v4` is added to message `.grafeas.v1.VulnerabilityOccurrence` 
+* A new field `exploit_maturity` is added to message `.grafeas.v1.CVSS` 
+* A new field `subsequent_system_availability_impact` is added to message `.grafeas.v1.CVSS` 
+* A new field `subsequent_system_confidentiality_impact` is added to message `.grafeas.v1.CVSS` 
+* A new field `subsequent_system_integrity_impact` is added to message `.grafeas.v1.CVSS` 
+* A new field `vulnerable_system_availability_impact` is added to message `.grafeas.v1.CVSS` 
+* A new field `vulnerable_system_confidentiality_impact` is added to message `.grafeas.v1.CVSS` 
+* A new field `vulnerable_system_integrity_impact` is added to message `.grafeas.v1.CVSS` 
+* A new field attack_requirements is added to message .grafeas.v1.CVSS 
+* A new value `CVSS_VERSION_4` is added to enum `CVSSVersion` 
+* A new value `USER_INTERACTION_ACTIVE` is added to enum `UserInteraction` 
+* A new value `USER_INTERACTION_PASSIVE` is added to enum `UserInteraction` 
+#### Documentation
+
+* A comment for enum `AttackComplexity` is changed 
+* A comment for enum `AttackVector` is changed 
+* A comment for enum `Authentication` is changed 
+* A comment for enum `Impact` is changed 
+* A comment for enum `PrivilegesRequired` is changed 
+* A comment for enum `Scope` is changed 
+* A comment for enum `UserInteraction` is changed 
+* A comment for enum value `ATTACK_COMPLEXITY_HIGH` in enum `AttackComplexity` is changed 
+* A comment for enum value `ATTACK_COMPLEXITY_LOW` in enum `AttackComplexity` is changed 
+* A comment for enum value `ATTACK_COMPLEXITY_MEDIUM` in enum `AttackComplexity` is changed 
+* A comment for enum value `ATTACK_COMPLEXITY_UNSPECIFIED` in enum `AttackComplexity` is changed 
+* A comment for enum value `ATTACK_VECTOR_ADJACENT` in enum `AttackVector` is changed 
+* A comment for enum value `ATTACK_VECTOR_LOCAL` in enum `AttackVector` is changed 
+* A comment for enum value `ATTACK_VECTOR_NETWORK` in enum `AttackVector` is changed 
+* A comment for enum value `ATTACK_VECTOR_PHYSICAL` in enum `AttackVector` is changed 
+* A comment for enum value `ATTACK_VECTOR_UNSPECIFIED` in enum `AttackVector` is changed 
+* A comment for enum value `AUTHENTICATION_MULTIPLE` in enum `Authentication` is changed 
+* A comment for enum value `AUTHENTICATION_NONE` in enum `Authentication` is changed 
+* A comment for enum value `AUTHENTICATION_SINGLE` in enum `Authentication` is changed 
+* A comment for enum value `AUTHENTICATION_UNSPECIFIED` in enum `Authentication` is changed 
+* A comment for enum value `CVSS_VERSION_2` in enum `CVSSVersion` is changed 
+* A comment for enum value `CVSS_VERSION_3` in enum `CVSSVersion` is changed 
+* A comment for enum value `CVSS_VERSION_UNSPECIFIED` in enum `CVSSVersion` is changed 
+* A comment for enum value `IMPACT_COMPLETE` in enum `Impact` is changed 
+* A comment for enum value `IMPACT_HIGH` in enum `Impact` is changed 
+* A comment for enum value `IMPACT_LOW` in enum `Impact` is changed 
+* A comment for enum value `IMPACT_NONE` in enum `Impact` is changed 
+* A comment for enum value `IMPACT_PARTIAL` in enum `Impact` is changed 
+* A comment for enum value `IMPACT_UNSPECIFIED` in enum `Impact` is changed 
+* A comment for enum value `PRIVILEGES_REQUIRED_HIGH` in enum `PrivilegesRequired` is changed 
+* A comment for enum value `PRIVILEGES_REQUIRED_LOW` in enum `PrivilegesRequired` is changed 
+* A comment for enum value `PRIVILEGES_REQUIRED_NONE` in enum `PrivilegesRequired` is changed 
+* A comment for enum value `PRIVILEGES_REQUIRED_UNSPECIFIED` in enum `PrivilegesRequired` is changed 
+* A comment for enum value `SCOPE_CHANGED` in enum `Scope` is changed 
+* A comment for enum value `SCOPE_UNCHANGED` in enum `Scope` is changed 
+* A comment for enum value `SCOPE_UNSPECIFIED` in enum `Scope` is changed 
+* A comment for enum value `USER_INTERACTION_NONE` in enum `UserInteraction` is changed 
+* A comment for enum value `USER_INTERACTION_REQUIRED` in enum `UserInteraction` is changed 
+* A comment for enum value `USER_INTERACTION_UNSPECIFIED` in enum `UserInteraction` is changed 
+* A comment for field `attack_complexity` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `attack_vector` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `authentication` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `availability_impact` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `confidentiality_impact` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `integrity_impact` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `privileges_required` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `scope` in message `.grafeas.v1.CVSS` is changed 
+* A comment for field `user_interaction` in message `.grafeas.v1.CVSS` is changed 
+
 ### 1.9.0 (2026-06-11)
 
 #### Features
