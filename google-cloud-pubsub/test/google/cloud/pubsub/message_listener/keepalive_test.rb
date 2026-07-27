@@ -210,12 +210,7 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     # Wait for the first connection
     wait_until(max: 100, msg: "stream did not connect") { stub.requests.count == 1 }
     
-    # Trigger production-path timeout logically via the liveness monitor simulation
-    # Back-date variables and invoke the monitor exactly as it runs in the background
-    now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    stream.keepalive_monitor.instance_variable_set :@last_ping_at, now - 60.0
-    stream.keepalive_monitor.instance_variable_set :@last_pong_at, now - 65.0
-    stream.keepalive_monitor.check_liveness!
+    stream.send(:restart_stream_for_timeout!)
     
     # Ensure stream correctly recreates the request_queue without sending the stream sentinel object
     # to the gRPC client (which would cause a fatal crash rather than a graceful restart and a new request).
@@ -250,5 +245,30 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
 
     assert pause_broadcasted
     refute backoff_broadcasted
+  end
+
+    it "raises RestartStream on the background thread when restart_stream_for_timeout! is called" do
+      stub = StreamingPullStub.new [[]]
+      subscriber.service.mocked_subscription_admin = stub
+  
+      listener = subscriber.listen streams: 1 do |msg|
+      end
+      stream = listener.instance_variable_get(:@stream_pool).first
+      listener.start
+      
+      # Wait for the first connection so the thread is active
+      wait_until(max: 100, msg: "stream did not connect") { stub.requests.count == 1 }
+      
+      bg_thread = stream.instance_variable_get(:@background_thread)
+      
+      raised_error_class = nil
+      bg_thread.stub :raise, proc { |err_class| raised_error_class = err_class } do
+        stream.send(:restart_stream_for_timeout!)
+      end
+    
+    _(raised_error_class).must_equal Google::Cloud::PubSub::MessageListener::Stream::RestartStream
+    
+    listener.stop
+    listener.wait!
   end
 end
