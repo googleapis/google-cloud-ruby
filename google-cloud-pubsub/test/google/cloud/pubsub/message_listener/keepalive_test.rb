@@ -225,4 +225,30 @@ describe Google::Cloud::PubSub::MessageListener, :keepalive, :mock_pubsub do
     listener.stop
     listener.wait!
   end
+
+  it "prevents flow-control unpausing from prematurely waking up the connection backoff wait" do
+    stub = StreamingPullStub.new [[]]
+    subscriber.service.mocked_subscription_admin = stub
+
+    listener = subscriber.listen streams: 1 do |msg|
+    end
+    stream = listener.instance_variable_get(:@stream_pool).first
+    
+    stream.instance_variable_set :@paused, true
+
+    pause_cond = stream.instance_variable_get(:@pause_cond)
+    backoff_cond = stream.instance_variable_get(:@backoff_cond)
+
+    pause_broadcasted = false
+    backoff_broadcasted = false
+
+    pause_cond.stub :broadcast, -> { pause_broadcasted = true } do
+      backoff_cond.stub :broadcast, -> { backoff_broadcasted = true } do
+        stream.send :unpause_streaming!
+      end
+    end
+
+    assert pause_broadcasted
+    refute backoff_broadcasted
+  end
 end
