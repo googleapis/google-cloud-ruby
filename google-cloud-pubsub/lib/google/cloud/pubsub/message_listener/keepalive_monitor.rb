@@ -26,6 +26,12 @@ module Google
         # and triggers a stream restart when server responses exceed the configured pong deadline.
         # This prevents firewalls and load balancers from dropping idle connections during periods of low
         # message publisher volume, which minimizes message delivery latency by maintaining a healthy lease.
+        #
+        # For users, this ensures highly reliable, resilient, and responsive message delivery operations.
+        # It directly prevents issues where Google Cloud Pub/Sub subscribers may unexpectedly stall
+        # or stop receiving messages for extended periods due to unnotified intermediate network disruptions
+        # (e.g., TCP halfway drops). By proactively maintaining the connection's liveness, subscribers
+        # avoid sudden latency spikes and lost leases.
         class KeepaliveMonitor
           # Default interval in seconds between keep-alive ping requests.
           DEFAULT_INTERVAL = 30.0
