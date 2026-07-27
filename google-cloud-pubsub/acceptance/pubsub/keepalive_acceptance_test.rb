@@ -76,11 +76,11 @@ describe Google::Cloud::PubSub, :keepalive_acceptance, :pubsub do
     sleep 4.5
 
     monitor = stream.keepalive_monitor
-    _(stream.stream_open).must_equal true
-    _(monitor.last_ping_at).wont_be_nil
-    _(monitor.last_pong_at).wont_be_nil
-    _(monitor.last_ping_at).must_be :>, 0.0
-    _(monitor.last_pong_at).must_be :>, 0.0
+    _(stream.stream_open?).must_equal true
+    _(monitor.instance_variable_get(:@last_ping_at)).wont_be_nil
+    _(monitor.instance_variable_get(:@last_pong_at)).wont_be_nil
+    _(monitor.instance_variable_get(:@last_ping_at)).must_be :>, 0.0
+    _(monitor.instance_variable_get(:@last_pong_at)).must_be :>, 0.0
 
     listener.stop
     listener.wait!
@@ -100,13 +100,13 @@ describe Google::Cloud::PubSub, :keepalive_acceptance, :pubsub do
 
     # Allow initial connection handshake against real GCP to establish
     sleep 1.0
-    _(stream.stream_open).must_equal true
+    _(stream.stream_open?).must_equal true
 
     now = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     # Validate unpause_streaming! atomically updates last_pong_at against real live listener thread
     stream.send(:unpause_streaming!)
-    _(monitor.last_pong_at).must_be :>=, now
-    _(stream.stream_open).must_equal true
+    _(monitor.instance_variable_get(:@last_pong_at)).must_be :>=, now
+    _(stream.stream_open?).must_equal true
 
     listener.stop
     listener.wait!
