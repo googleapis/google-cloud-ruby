@@ -40,7 +40,7 @@ module Google
                                                              endpoint_template: endpoint_template,
                                                              universe_domain: universe_domain,
                                                              credentials: credentials,
-                                                             numeric_enums: true,
+                                                             numeric_enums: false,
                                                              service_name: self.class,
                                                              raise_faraday_errors: false,
                                                              logger: logger

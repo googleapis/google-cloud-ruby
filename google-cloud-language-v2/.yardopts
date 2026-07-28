@@ -1,5 +1,5 @@
 --no-private
---title="Cloud Natural Language V2 API"
+--title="Google Cloud Language V2 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
