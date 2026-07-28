@@ -76,7 +76,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
         subscription: sub_path,
         stream_ack_deadline_seconds: 60,
         max_outstanding_messages: 1000,
-        max_outstanding_bytes: 100 * 1000 * 1000
+        max_outstanding_bytes: 100 * 1000 * 1000,
+        protocol_version: 1
       )]
     ]
 
@@ -141,7 +142,8 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
         subscription: sub_path,
         stream_ack_deadline_seconds: 60,
         max_outstanding_messages: 1000,
-        max_outstanding_bytes: 100 * 1000 * 1000
+        max_outstanding_bytes: 100 * 1000 * 1000,
+        protocol_version: 1
       )]
     ]
 
