@@ -1,0 +1,73 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.modelarmor.v1",
+  "libraryPackage": "::Google::Cloud::Modelarmor::V1",
+  "services": {
+    "ModelArmor": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client",
+          "rpcs": {
+            "ListTemplates": {
+              "methods": [
+                "list_templates"
+              ]
+            },
+            "GetTemplate": {
+              "methods": [
+                "get_template"
+              ]
+            },
+            "CreateTemplate": {
+              "methods": [
+                "create_template"
+              ]
+            },
+            "UpdateTemplate": {
+              "methods": [
+                "update_template"
+              ]
+            },
+            "DeleteTemplate": {
+              "methods": [
+                "delete_template"
+              ]
+            },
+            "GetFloorSetting": {
+              "methods": [
+                "get_floor_setting"
+              ]
+            },
+            "UpdateFloorSetting": {
+              "methods": [
+                "update_floor_setting"
+              ]
+            },
+            "SanitizeUserPrompt": {
+              "methods": [
+                "sanitize_user_prompt"
+              ]
+            },
+            "SanitizeModelResponse": {
+              "methods": [
+                "sanitize_model_response"
+              ]
+            },
+            "StreamSanitizeUserPrompt": {
+              "methods": [
+                "stream_sanitize_user_prompt"
+              ]
+            },
+            "StreamSanitizeModelResponse": {
+              "methods": [
+                "stream_sanitize_model_response"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

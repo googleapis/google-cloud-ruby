@@ -1,0 +1,455 @@
+{
+  "client_library": {
+    "name": "google-cloud-modelarmor-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.modelarmor.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_ListTemplates_sync",
+      "title": "Snippet for the list_templates call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#list_templates.",
+      "file": "model_armor/list_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_templates",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#list_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::ListTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::ListTemplatesResponse",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "ListTemplates",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.ListTemplates",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_GetTemplate_sync",
+      "title": "Snippet for the get_template call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#get_template.",
+      "file": "model_armor/get_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_template",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#get_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::GetTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::Template",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "GetTemplate",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.GetTemplate",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_CreateTemplate_sync",
+      "title": "Snippet for the create_template call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#create_template.",
+      "file": "model_armor/create_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_template",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#create_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::CreateTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::Template",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "CreateTemplate",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.CreateTemplate",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_UpdateTemplate_sync",
+      "title": "Snippet for the update_template call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#update_template.",
+      "file": "model_armor/update_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_template",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#update_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::UpdateTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::Template",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "UpdateTemplate",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.UpdateTemplate",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_DeleteTemplate_sync",
+      "title": "Snippet for the delete_template call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#delete_template.",
+      "file": "model_armor/delete_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_template",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#delete_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::DeleteTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "DeleteTemplate",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.DeleteTemplate",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_GetFloorSetting_sync",
+      "title": "Snippet for the get_floor_setting call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#get_floor_setting.",
+      "file": "model_armor/get_floor_setting.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_floor_setting",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#get_floor_setting",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::GetFloorSettingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::FloorSetting",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "GetFloorSetting",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.GetFloorSetting",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_UpdateFloorSetting_sync",
+      "title": "Snippet for the update_floor_setting call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#update_floor_setting.",
+      "file": "model_armor/update_floor_setting.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_floor_setting",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#update_floor_setting",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::UpdateFloorSettingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::FloorSetting",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "UpdateFloorSetting",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.UpdateFloorSetting",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_SanitizeUserPrompt_sync",
+      "title": "Snippet for the sanitize_user_prompt call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#sanitize_user_prompt.",
+      "file": "model_armor/sanitize_user_prompt.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sanitize_user_prompt",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#sanitize_user_prompt",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::SanitizeUserPromptRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::SanitizeUserPromptResponse",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "SanitizeUserPrompt",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.SanitizeUserPrompt",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_SanitizeModelResponse_sync",
+      "title": "Snippet for the sanitize_model_response call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#sanitize_model_response.",
+      "file": "model_armor/sanitize_model_response.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "sanitize_model_response",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#sanitize_model_response",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::SanitizeModelResponseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::SanitizeModelResponseResponse",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "SanitizeModelResponse",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.SanitizeModelResponse",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_StreamSanitizeUserPrompt_sync",
+      "title": "Snippet for the stream_sanitize_user_prompt call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#stream_sanitize_user_prompt.",
+      "file": "model_armor/stream_sanitize_user_prompt.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_sanitize_user_prompt",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#stream_sanitize_user_prompt",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::SanitizeUserPromptRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::SanitizeUserPromptResponse",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "StreamSanitizeUserPrompt",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.StreamSanitizeUserPrompt",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "modelarmor_v1_generated_ModelArmor_StreamSanitizeModelResponse_sync",
+      "title": "Snippet for the stream_sanitize_model_response call in the ModelArmor service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Modelarmor::V1::ModelArmor::Client#stream_sanitize_model_response.",
+      "file": "model_armor/stream_sanitize_model_response.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_sanitize_model_response",
+        "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client#stream_sanitize_model_response",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Modelarmor::V1::SanitizeModelResponseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Modelarmor::V1::SanitizeModelResponseResponse",
+        "client": {
+          "short_name": "ModelArmor::Client",
+          "full_name": "::Google::Cloud::Modelarmor::V1::ModelArmor::Client"
+        },
+        "method": {
+          "short_name": "StreamSanitizeModelResponse",
+          "full_name": "google.cloud.modelarmor.v1.ModelArmor.StreamSanitizeModelResponse",
+          "service": {
+            "short_name": "ModelArmor",
+            "full_name": "google.cloud.modelarmor.v1.ModelArmor"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
