@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.blockchainnodeengine.v1",
+  "libraryPackage": "::Google::Cloud::BlockchainNodeEngine::V1",
+  "services": {
+    "BlockchainNodeEngine": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client",
+          "rpcs": {
+            "ListBlockchainNodes": {
+              "methods": [
+                "list_blockchain_nodes"
+              ]
+            },
+            "GetBlockchainNode": {
+              "methods": [
+                "get_blockchain_node"
+              ]
+            },
+            "CreateBlockchainNode": {
+              "methods": [
+                "create_blockchain_node"
+              ]
+            },
+            "UpdateBlockchainNode": {
+              "methods": [
+                "update_blockchain_node"
+              ]
+            },
+            "DeleteBlockchainNode": {
+              "methods": [
+                "delete_blockchain_node"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

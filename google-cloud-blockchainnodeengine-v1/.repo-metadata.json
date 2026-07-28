@@ -1,0 +1,15 @@
+{
+    "api_id": "blockchainnodeengine.googleapis.com",
+    "api_shortname": "blockchainnodeengine",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-blockchainnodeengine-v1/latest",
+    "distribution_name": "google-cloud-blockchainnodeengine-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "blockchainnodeengine",
+    "name_pretty": "Blockchain Node Engine V1 API",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-blockchainnodeengine-v1 is the official client library for the Blockchain Node Engine V1 API. Note that google-cloud-blockchainnodeengine-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-blockchainnodeengine instead. See the readme for more details.",
+    "library_type": "GAPIC_AUTO"
+}

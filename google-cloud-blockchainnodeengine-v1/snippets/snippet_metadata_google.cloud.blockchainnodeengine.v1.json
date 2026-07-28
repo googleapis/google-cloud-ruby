@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-blockchainnodeengine-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.blockchainnodeengine.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "blockchainnodeengine_v1_generated_BlockchainNodeEngine_ListBlockchainNodes_sync",
+      "title": "Snippet for the list_blockchain_nodes call in the BlockchainNodeEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#list_blockchain_nodes.",
+      "file": "blockchain_node_engine/list_blockchain_nodes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_blockchain_nodes",
+        "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#list_blockchain_nodes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BlockchainNodeEngine::V1::ListBlockchainNodesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BlockchainNodeEngine::V1::ListBlockchainNodesResponse",
+        "client": {
+          "short_name": "BlockchainNodeEngine::Client",
+          "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client"
+        },
+        "method": {
+          "short_name": "ListBlockchainNodes",
+          "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine.ListBlockchainNodes",
+          "service": {
+            "short_name": "BlockchainNodeEngine",
+            "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "blockchainnodeengine_v1_generated_BlockchainNodeEngine_GetBlockchainNode_sync",
+      "title": "Snippet for the get_blockchain_node call in the BlockchainNodeEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#get_blockchain_node.",
+      "file": "blockchain_node_engine/get_blockchain_node.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_blockchain_node",
+        "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#get_blockchain_node",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BlockchainNodeEngine::V1::GetBlockchainNodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNode",
+        "client": {
+          "short_name": "BlockchainNodeEngine::Client",
+          "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client"
+        },
+        "method": {
+          "short_name": "GetBlockchainNode",
+          "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine.GetBlockchainNode",
+          "service": {
+            "short_name": "BlockchainNodeEngine",
+            "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "blockchainnodeengine_v1_generated_BlockchainNodeEngine_CreateBlockchainNode_sync",
+      "title": "Snippet for the create_blockchain_node call in the BlockchainNodeEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#create_blockchain_node.",
+      "file": "blockchain_node_engine/create_blockchain_node.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_blockchain_node",
+        "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#create_blockchain_node",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BlockchainNodeEngine::V1::CreateBlockchainNodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BlockchainNodeEngine::Client",
+          "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client"
+        },
+        "method": {
+          "short_name": "CreateBlockchainNode",
+          "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine.CreateBlockchainNode",
+          "service": {
+            "short_name": "BlockchainNodeEngine",
+            "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "blockchainnodeengine_v1_generated_BlockchainNodeEngine_UpdateBlockchainNode_sync",
+      "title": "Snippet for the update_blockchain_node call in the BlockchainNodeEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#update_blockchain_node.",
+      "file": "blockchain_node_engine/update_blockchain_node.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_blockchain_node",
+        "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#update_blockchain_node",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BlockchainNodeEngine::V1::UpdateBlockchainNodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BlockchainNodeEngine::Client",
+          "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdateBlockchainNode",
+          "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine.UpdateBlockchainNode",
+          "service": {
+            "short_name": "BlockchainNodeEngine",
+            "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "blockchainnodeengine_v1_generated_BlockchainNodeEngine_DeleteBlockchainNode_sync",
+      "title": "Snippet for the delete_blockchain_node call in the BlockchainNodeEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#delete_blockchain_node.",
+      "file": "blockchain_node_engine/delete_blockchain_node.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_blockchain_node",
+        "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client#delete_blockchain_node",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BlockchainNodeEngine::V1::DeleteBlockchainNodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BlockchainNodeEngine::Client",
+          "full_name": "::Google::Cloud::BlockchainNodeEngine::V1::BlockchainNodeEngine::Client"
+        },
+        "method": {
+          "short_name": "DeleteBlockchainNode",
+          "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine.DeleteBlockchainNode",
+          "service": {
+            "short_name": "BlockchainNodeEngine",
+            "full_name": "google.cloud.blockchainnodeengine.v1.BlockchainNodeEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
