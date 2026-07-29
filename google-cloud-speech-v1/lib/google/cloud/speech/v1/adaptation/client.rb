@@ -724,17 +724,38 @@ module Google
             # @example Basic example
             #   require "google/cloud/speech/v1"
             #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::Speech::V1::Adaptation::Client.new
+            #   # The custom class parent element
+            #   # parent = "projects/[PROJECT]/locations/us"
             #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::Speech::V1::CreateCustomClassRequest.new
+            #   # The id for the custom class
+            #   # custom_class_id = "passengerships"
             #
-            #   # Call the create_custom_class method.
-            #   result = client.create_custom_class request
+            #   client = Google::Cloud::Speech::V1::Adaptation::Client.new do |config|
+            #     config.endpoint = "https://us-speech.googleapis.com"
+            #   end
             #
-            #   # The returned object is of type Google::Cloud::Speech::V1::CustomClass.
-            #   p result
+            #   create_custom_class_request = {
+            #     custom_class: {
+            #       items: [
+            #         "RMS Queen Mary",
+            #         "Titanic"
+            #       ]
+            #     },
+            #     custom_class_id: custom_class_id,
+            #     parent: parent
+            #   }
+            #
+            #   puts("Calling the CreateCustomClass operation.")
+            #   created_custom_class = client.create_custom_class create_custom_class_request
+            #
+            #   puts("A Custom Class with the following name has been created.")
+            #   puts(created_custom_class.name)
+            #   puts("The Custom class contains the following items.")
+            #   items_list = created_custom_class.items
+            #   items_list.each do |item|
+            #     puts(item)
+            #   end
+            #   return created_custom_class
             #
             def create_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

@@ -204,6 +204,14 @@ module Google
               metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.list_operations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_operations.retry_policy

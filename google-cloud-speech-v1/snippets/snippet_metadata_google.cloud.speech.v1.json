@@ -332,6 +332,46 @@
       ]
     },
     {
+      "region_tag": "speech_v1_config_Adaptation_CreateCustomClass_Basic_sync",
+      "title": "Custom Class Creation",
+      "description": "Shows how to create a custom class",
+      "file": "adaptation/create_custom_class_basic.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_class",
+        "full_name": "::Google::Cloud::Speech::V1::Adaptation::Client#create_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1::CreateCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1::CustomClass",
+        "client": {
+          "short_name": "Adaptation::Client",
+          "full_name": "::Google::Cloud::Speech::V1::Adaptation::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomClass",
+          "full_name": "google.cloud.speech.v1.Adaptation.CreateCustomClass",
+          "service": {
+            "short_name": "Adaptation",
+            "full_name": "google.cloud.speech.v1.Adaptation"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 67,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "speech_v1_generated_Adaptation_CreateCustomClass_sync",
       "title": "Snippet for the create_custom_class call in the Adaptation service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V1::Adaptation::Client#create_custom_class.",
