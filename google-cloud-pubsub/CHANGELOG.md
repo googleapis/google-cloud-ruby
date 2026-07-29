@@ -1,5 +1,11 @@
 # Release History
 
+### 3.4.0 (2026-07-29)
+
+#### Features
+
+* implement streaming keep-alive logic ([#34653](https://github.com/googleapis/google-cloud-ruby/issues/34653)) 
+
 ### 3.3.0 (2026-06-11)
 
 #### Features
