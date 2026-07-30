@@ -473,7 +473,7 @@ module Google
                                                           uri_template: "/v1beta/{parent}/suggestionDenyListEntries:purge",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/dataStores(?:/.*)?$}, true]
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/dataStores(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
