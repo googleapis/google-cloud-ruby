@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.commerce.consumer.procurement.v1",
+  "libraryPackage": "::Google::Cloud::Commerce::Consumer::Procurement::V1",
+  "services": {
+    "LicenseManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client",
+          "rpcs": {
+            "GetLicensePool": {
+              "methods": [
+                "get_license_pool"
+              ]
+            },
+            "UpdateLicensePool": {
+              "methods": [
+                "update_license_pool"
+              ]
+            },
+            "Assign": {
+              "methods": [
+                "assign"
+              ]
+            },
+            "Unassign": {
+              "methods": [
+                "unassign"
+              ]
+            },
+            "EnumerateLicensedUsers": {
+              "methods": [
+                "enumerate_licensed_users"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ConsumerProcurementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client",
+          "rpcs": {
+            "PlaceOrder": {
+              "methods": [
+                "place_order"
+              ]
+            },
+            "GetOrder": {
+              "methods": [
+                "get_order"
+              ]
+            },
+            "ListOrders": {
+              "methods": [
+                "list_orders"
+              ]
+            },
+            "ModifyOrder": {
+              "methods": [
+                "modify_order"
+              ]
+            },
+            "CancelOrder": {
+              "methods": [
+                "cancel_order"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
