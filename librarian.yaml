@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
+version: v1.0.2-0.20260730005412-f52568e7df46
 sources:
   googleapis:
     commit: 6145fa8cc2b137bf4c0ed114e2e39c1157ea9722
@@ -25,3 +26,15 @@ tools:
   protoc:
     version: "33.2"
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
+libraries:
+  - name: google-cloud-asset
+    version: 1.10.0
+    apis:
+      - path: google/cloud/asset/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ASSET
+            ruby-cloud-migration-version: "1.0"
+    ruby:
+      wrapper_of:
+        - v1:0.29
