@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.accessapproval.v1",
+  "libraryPackage": "::Google::Cloud::AccessApproval::V1",
+  "services": {
+    "AccessApproval": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AccessApproval::V1::AccessApproval::Client",
+          "rpcs": {
+            "ListApprovalRequests": {
+              "methods": [
+                "list_approval_requests"
+              ]
+            },
+            "GetApprovalRequest": {
+              "methods": [
+                "get_approval_request"
+              ]
+            },
+            "ApproveApprovalRequest": {
+              "methods": [
+                "approve_approval_request"
+              ]
+            },
+            "DismissApprovalRequest": {
+              "methods": [
+                "dismiss_approval_request"
+              ]
+            },
+            "InvalidateApprovalRequest": {
+              "methods": [
+                "invalidate_approval_request"
+              ]
+            },
+            "GetAccessApprovalSettings": {
+              "methods": [
+                "get_access_approval_settings"
+              ]
+            },
+            "UpdateAccessApprovalSettings": {
+              "methods": [
+                "update_access_approval_settings"
+              ]
+            },
+            "DeleteAccessApprovalSettings": {
+              "methods": [
+                "delete_access_approval_settings"
+              ]
+            },
+            "GetAccessApprovalServiceAccount": {
+              "methods": [
+                "get_access_approval_service_account"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
