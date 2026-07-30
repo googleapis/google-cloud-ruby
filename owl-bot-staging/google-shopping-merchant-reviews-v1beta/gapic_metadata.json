@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.reviews.v1beta",
+  "libraryPackage": "::Google::Shopping::Merchant::Reviews::V1beta",
+  "services": {
+    "MerchantReviewsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Reviews::V1beta::MerchantReviewsService::Client",
+          "rpcs": {
+            "GetMerchantReview": {
+              "methods": [
+                "get_merchant_review"
+              ]
+            },
+            "ListMerchantReviews": {
+              "methods": [
+                "list_merchant_reviews"
+              ]
+            },
+            "InsertMerchantReview": {
+              "methods": [
+                "insert_merchant_review"
+              ]
+            },
+            "DeleteMerchantReview": {
+              "methods": [
+                "delete_merchant_review"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProductReviewsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Reviews::V1beta::ProductReviewsService::Client",
+          "rpcs": {
+            "GetProductReview": {
+              "methods": [
+                "get_product_review"
+              ]
+            },
+            "ListProductReviews": {
+              "methods": [
+                "list_product_reviews"
+              ]
+            },
+            "InsertProductReview": {
+              "methods": [
+                "insert_product_review"
+              ]
+            },
+            "DeleteProductReview": {
+              "methods": [
+                "delete_product_review"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
