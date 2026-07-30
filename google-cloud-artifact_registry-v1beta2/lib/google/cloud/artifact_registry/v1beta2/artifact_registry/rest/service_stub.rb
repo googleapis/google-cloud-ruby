@@ -1386,7 +1386,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1beta2/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/files(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/files(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
