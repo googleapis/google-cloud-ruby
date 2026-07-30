@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.13.0 (2026-07-30)
+
+#### Features
+
+* Add new CreateRapidCache (https://github.com/googleapis/google-cloud-ruby/pull/35015) 
+* Add new GetRapidCache 
+* Add new ListRapidCache 
+* Add new UpdateRapidCache 
+#### Documentation
+
+* Update reference documentation for the `StorageControl` service, including `IntelligenceFindings`, `AnywhereCache`, and related configuration messages. 
+
 ### 1.12.0 (2026-06-11)
 
 #### Features
