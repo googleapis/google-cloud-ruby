@@ -889,7 +889,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^operations(?:/.*)?$}, true]
+                                                            ["name", %r{^operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -911,7 +911,7 @@ module Google
                                                           uri_template: "/v1/{name}:cancel",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^operations(?:/.*)?$}, true]
+                                                            ["name", %r{^operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -664,7 +664,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -685,7 +685,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{parent}/{collection_id}",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true],
+                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true],
                                                             ["collection_id", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -716,7 +716,7 @@ module Google
                                                           uri_template: "/v1/{document.name}",
                                                           body: "document",
                                                           matches: [
-                                                            ["document.name", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["document.name", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -737,7 +737,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -855,7 +855,7 @@ module Google
                                                           uri_template: "/v1/{parent}:runQuery",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -907,7 +907,7 @@ module Google
                                                           uri_template: "/v1/{parent}:runAggregationQuery",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -937,7 +937,7 @@ module Google
                                                           uri_template: "/v1/{parent}:partitionQuery",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -967,7 +967,7 @@ module Google
                                                           uri_template: "/v1/{parent}:listCollectionIds",
                                                           body: "*",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/.*)?$}, true]
+                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1011,7 +1011,7 @@ module Google
                                                           uri_template: "/v1/{parent}/{collection_id}",
                                                           body: "document",
                                                           matches: [
-                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents(?:/.*)?$}, true],
+                                                            ["parent", %r{^projects/[^/]+/databases/[^/]+/documents(?:/(?<__wildcard__>.*))?$}, true],
                                                             ["collection_id", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
