@@ -1,0 +1,17 @@
+{
+    "api_id": "managedkafka.googleapis.com",
+    "api_shortname": "managedkafka",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-managed_kafka/latest",
+    "distribution_name": "google-cloud-managed_kafka",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "managedkafka",
+    "name_pretty": "Managed Service for Apache Kafka API",
+    "product_documentation": "https://cloud.google.com/managed-service-for-apache-kafka/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Manage Apache Kafka clusters and resources.",
+    "ruby-cloud-product-url": "https://cloud.google.com/managed-service-for-apache-kafka/docs",
+    "library_type": "GAPIC_AUTO"
+}
