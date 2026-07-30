@@ -3394,13 +3394,13 @@ module Google
 
                 header_params = {}
                 if request.pitr_snapshot&.database
-                  regex_match = %r{^projects/(?<project_id>[^/]+)(?:/.*)?$}.match request.pitr_snapshot.database
+                  regex_match = %r{^projects/(?<project_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.pitr_snapshot.database
                   if regex_match
                     header_params["project_id"] = regex_match["project_id".to_s]
                   end
                 end
                 if request.pitr_snapshot&.database
-                  regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/.*)?$}.match request.pitr_snapshot.database
+                  regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.pitr_snapshot.database
                   if regex_match
                     header_params["database_id"] = regex_match["database_id".to_s]
                   end

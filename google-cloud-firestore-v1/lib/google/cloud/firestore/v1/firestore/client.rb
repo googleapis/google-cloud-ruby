@@ -1336,13 +1336,13 @@ module Google
 
               header_params = {}
               if request.database
-                regex_match = %r{^projects/(?<project_id>[^/]+)(?:/.*)?$}.match request.database
+                regex_match = %r{^projects/(?<project_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.database
                 if regex_match
                   header_params["project_id"] = regex_match["project_id".to_s]
                 end
               end
               if request.database
-                regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/.*)?$}.match request.database
+                regex_match = %r{^projects/[^/]+/databases/(?<database_id>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.database
                 if regex_match
                   header_params["database_id"] = regex_match["database_id".to_s]
                 end
