@@ -405,6 +405,7 @@ class ::Google::Iam::V3::PolicyBindings::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     parent = "hello world"
+    filter = "hello world"
 
     search_target_policy_bindings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_target_policy_bindings, name
@@ -413,6 +414,7 @@ class ::Google::Iam::V3::PolicyBindings::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -423,35 +425,35 @@ class ::Google::Iam::V3::PolicyBindings::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }) do |response, operation|
+      c.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent do |response, operation|
+      c.search_target_policy_bindings target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.search_target_policy_bindings ::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent) do |response, operation|
+      c.search_target_policy_bindings ::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent }, grpc_options) do |response, operation|
+      c.search_target_policy_bindings({ target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.search_target_policy_bindings(::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent), grpc_options) do |response, operation|
+      c.search_target_policy_bindings(::Google::Iam::V3::SearchTargetPolicyBindingsRequest.new(target: target, page_size: page_size, page_token: page_token, parent: parent, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
