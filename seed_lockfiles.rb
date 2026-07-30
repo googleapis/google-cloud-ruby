@@ -41,15 +41,15 @@ end.sort
 
 # 2. Filter unseeded & eligible libraries
 unseeded_gems = all_gems.select do |dir|
-  # Skip if it already has a lockfile physically present
-  next false if File.exist?(File.join(dir, "Gemfile.lock"))
+  lockfile_path = File.join(dir, "Gemfile.lock")
   
-  # Skip if Gemfile.lock is still listed inside this gem's .gitignore
-  gitignore_path = File.join(dir, ".gitignore")
-  if File.exist?(gitignore_path)
-    is_ignored = File.readlines(gitignore_path).any? { |line| line.strip == "Gemfile.lock" }
-    next false if is_ignored
-  end
+  # Skip if it already has a lockfile physically present
+  next false if File.exist?(lockfile_path)
+  
+  # Ask Git directly if this path is ignored
+  is_ignored = system("git check-ignore -q #{lockfile_path}")
+  
+  next false if is_ignored
   
   true
 end
