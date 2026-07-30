@@ -1,0 +1,2055 @@
+{
+  "client_library": {
+    "name": "google-cloud-monitoring-v3",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.monitoring.v3",
+        "version": "v3"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "monitoring_v3_generated_AlertPolicyService_ListAlertPolicies_sync",
+      "title": "Snippet for the list_alert_policies call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#list_alert_policies.",
+      "file": "alert_policy_service/list_alert_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_alert_policies",
+        "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#list_alert_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListAlertPoliciesResponse",
+        "client": {
+          "short_name": "AlertPolicyService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client"
+        },
+        "method": {
+          "short_name": "ListAlertPolicies",
+          "full_name": "google.monitoring.v3.AlertPolicyService.ListAlertPolicies",
+          "service": {
+            "short_name": "AlertPolicyService",
+            "full_name": "google.monitoring.v3.AlertPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_AlertPolicyService_GetAlertPolicy_sync",
+      "title": "Snippet for the get_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#get_alert_policy.",
+      "file": "alert_policy_service/get_alert_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_alert_policy",
+        "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#get_alert_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::AlertPolicy",
+        "client": {
+          "short_name": "AlertPolicyService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client"
+        },
+        "method": {
+          "short_name": "GetAlertPolicy",
+          "full_name": "google.monitoring.v3.AlertPolicyService.GetAlertPolicy",
+          "service": {
+            "short_name": "AlertPolicyService",
+            "full_name": "google.monitoring.v3.AlertPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_AlertPolicyService_CreateAlertPolicy_sync",
+      "title": "Snippet for the create_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy.",
+      "file": "alert_policy_service/create_alert_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_alert_policy",
+        "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::AlertPolicy",
+        "client": {
+          "short_name": "AlertPolicyService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client"
+        },
+        "method": {
+          "short_name": "CreateAlertPolicy",
+          "full_name": "google.monitoring.v3.AlertPolicyService.CreateAlertPolicy",
+          "service": {
+            "short_name": "AlertPolicyService",
+            "full_name": "google.monitoring.v3.AlertPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_AlertPolicyService_DeleteAlertPolicy_sync",
+      "title": "Snippet for the delete_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#delete_alert_policy.",
+      "file": "alert_policy_service/delete_alert_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_alert_policy",
+        "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#delete_alert_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AlertPolicyService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAlertPolicy",
+          "full_name": "google.monitoring.v3.AlertPolicyService.DeleteAlertPolicy",
+          "service": {
+            "short_name": "AlertPolicyService",
+            "full_name": "google.monitoring.v3.AlertPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_AlertPolicyService_UpdateAlertPolicy_sync",
+      "title": "Snippet for the update_alert_policy call in the AlertPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::AlertPolicyService::Client#update_alert_policy.",
+      "file": "alert_policy_service/update_alert_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_alert_policy",
+        "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#update_alert_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::AlertPolicy",
+        "client": {
+          "short_name": "AlertPolicyService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::AlertPolicyService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAlertPolicy",
+          "full_name": "google.monitoring.v3.AlertPolicyService.UpdateAlertPolicy",
+          "service": {
+            "short_name": "AlertPolicyService",
+            "full_name": "google.monitoring.v3.AlertPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_GroupService_ListGroups_sync",
+      "title": "Snippet for the list_groups call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#list_groups.",
+      "file": "group_service/list_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_groups",
+        "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client#list_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListGroupsResponse",
+        "client": {
+          "short_name": "GroupService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client"
+        },
+        "method": {
+          "short_name": "ListGroups",
+          "full_name": "google.monitoring.v3.GroupService.ListGroups",
+          "service": {
+            "short_name": "GroupService",
+            "full_name": "google.monitoring.v3.GroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_GroupService_GetGroup_sync",
+      "title": "Snippet for the get_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#get_group.",
+      "file": "group_service/get_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_group",
+        "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client#get_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Group",
+        "client": {
+          "short_name": "GroupService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client"
+        },
+        "method": {
+          "short_name": "GetGroup",
+          "full_name": "google.monitoring.v3.GroupService.GetGroup",
+          "service": {
+            "short_name": "GroupService",
+            "full_name": "google.monitoring.v3.GroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_GroupService_CreateGroup_sync",
+      "title": "Snippet for the create_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#create_group.",
+      "file": "group_service/create_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_group",
+        "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client#create_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Group",
+        "client": {
+          "short_name": "GroupService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client"
+        },
+        "method": {
+          "short_name": "CreateGroup",
+          "full_name": "google.monitoring.v3.GroupService.CreateGroup",
+          "service": {
+            "short_name": "GroupService",
+            "full_name": "google.monitoring.v3.GroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_GroupService_UpdateGroup_sync",
+      "title": "Snippet for the update_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#update_group.",
+      "file": "group_service/update_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_group",
+        "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client#update_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Group",
+        "client": {
+          "short_name": "GroupService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGroup",
+          "full_name": "google.monitoring.v3.GroupService.UpdateGroup",
+          "service": {
+            "short_name": "GroupService",
+            "full_name": "google.monitoring.v3.GroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_GroupService_DeleteGroup_sync",
+      "title": "Snippet for the delete_group call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#delete_group.",
+      "file": "group_service/delete_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_group",
+        "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client#delete_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GroupService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client"
+        },
+        "method": {
+          "short_name": "DeleteGroup",
+          "full_name": "google.monitoring.v3.GroupService.DeleteGroup",
+          "service": {
+            "short_name": "GroupService",
+            "full_name": "google.monitoring.v3.GroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_GroupService_ListGroupMembers_sync",
+      "title": "Snippet for the list_group_members call in the GroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::GroupService::Client#list_group_members.",
+      "file": "group_service/list_group_members.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_group_members",
+        "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client#list_group_members",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListGroupMembersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListGroupMembersResponse",
+        "client": {
+          "short_name": "GroupService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::GroupService::Client"
+        },
+        "method": {
+          "short_name": "ListGroupMembers",
+          "full_name": "google.monitoring.v3.GroupService.ListGroupMembers",
+          "service": {
+            "short_name": "GroupService",
+            "full_name": "google.monitoring.v3.GroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_ListMonitoredResourceDescriptors_sync",
+      "title": "Snippet for the list_monitored_resource_descriptors call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#list_monitored_resource_descriptors.",
+      "file": "metric_service/list_monitored_resource_descriptors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_monitored_resource_descriptors",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#list_monitored_resource_descriptors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsResponse",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "ListMonitoredResourceDescriptors",
+          "full_name": "google.monitoring.v3.MetricService.ListMonitoredResourceDescriptors",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_GetMonitoredResourceDescriptor_sync",
+      "title": "Snippet for the get_monitored_resource_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#get_monitored_resource_descriptor.",
+      "file": "metric_service/get_monitored_resource_descriptor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_monitored_resource_descriptor",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#get_monitored_resource_descriptor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::MonitoredResourceDescriptor",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "GetMonitoredResourceDescriptor",
+          "full_name": "google.monitoring.v3.MetricService.GetMonitoredResourceDescriptor",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_ListMetricDescriptors_sync",
+      "title": "Snippet for the list_metric_descriptors call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#list_metric_descriptors.",
+      "file": "metric_service/list_metric_descriptors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_metric_descriptors",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#list_metric_descriptors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListMetricDescriptorsResponse",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "ListMetricDescriptors",
+          "full_name": "google.monitoring.v3.MetricService.ListMetricDescriptors",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_GetMetricDescriptor_sync",
+      "title": "Snippet for the get_metric_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#get_metric_descriptor.",
+      "file": "metric_service/get_metric_descriptor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_metric_descriptor",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#get_metric_descriptor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::MetricDescriptor",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "GetMetricDescriptor",
+          "full_name": "google.monitoring.v3.MetricService.GetMetricDescriptor",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_CreateMetricDescriptor_sync",
+      "title": "Snippet for the create_metric_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#create_metric_descriptor.",
+      "file": "metric_service/create_metric_descriptor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_metric_descriptor",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#create_metric_descriptor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::MetricDescriptor",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "CreateMetricDescriptor",
+          "full_name": "google.monitoring.v3.MetricService.CreateMetricDescriptor",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_DeleteMetricDescriptor_sync",
+      "title": "Snippet for the delete_metric_descriptor call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#delete_metric_descriptor.",
+      "file": "metric_service/delete_metric_descriptor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_metric_descriptor",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#delete_metric_descriptor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMetricDescriptor",
+          "full_name": "google.monitoring.v3.MetricService.DeleteMetricDescriptor",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_ListTimeSeries_sync",
+      "title": "Snippet for the list_time_series call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#list_time_series.",
+      "file": "metric_service/list_time_series.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_time_series",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#list_time_series",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListTimeSeriesResponse",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "ListTimeSeries",
+          "full_name": "google.monitoring.v3.MetricService.ListTimeSeries",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_CreateTimeSeries_sync",
+      "title": "Snippet for the create_time_series call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#create_time_series.",
+      "file": "metric_service/create_time_series.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_time_series",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#create_time_series",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "CreateTimeSeries",
+          "full_name": "google.monitoring.v3.MetricService.CreateTimeSeries",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_MetricService_CreateServiceTimeSeries_sync",
+      "title": "Snippet for the create_service_time_series call in the MetricService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::MetricService::Client#create_service_time_series.",
+      "file": "metric_service/create_service_time_series.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_time_series",
+        "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client#create_service_time_series",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "MetricService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::MetricService::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceTimeSeries",
+          "full_name": "google.monitoring.v3.MetricService.CreateServiceTimeSeries",
+          "service": {
+            "short_name": "MetricService",
+            "full_name": "google.monitoring.v3.MetricService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_ListNotificationChannelDescriptors_sync",
+      "title": "Snippet for the list_notification_channel_descriptors call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channel_descriptors.",
+      "file": "notification_channel_service/list_notification_channel_descriptors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_notification_channel_descriptors",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channel_descriptors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsResponse",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListNotificationChannelDescriptors",
+          "full_name": "google.monitoring.v3.NotificationChannelService.ListNotificationChannelDescriptors",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_GetNotificationChannelDescriptor_sync",
+      "title": "Snippet for the get_notification_channel_descriptor call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor.",
+      "file": "notification_channel_service/get_notification_channel_descriptor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notification_channel_descriptor",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetNotificationChannelDescriptor",
+          "full_name": "google.monitoring.v3.NotificationChannelService.GetNotificationChannelDescriptor",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_ListNotificationChannels_sync",
+      "title": "Snippet for the list_notification_channels call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channels.",
+      "file": "notification_channel_service/list_notification_channels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_notification_channels",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListNotificationChannelsResponse",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "ListNotificationChannels",
+          "full_name": "google.monitoring.v3.NotificationChannelService.ListNotificationChannels",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_GetNotificationChannel_sync",
+      "title": "Snippet for the get_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel.",
+      "file": "notification_channel_service/get_notification_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notification_channel",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::NotificationChannel",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetNotificationChannel",
+          "full_name": "google.monitoring.v3.NotificationChannelService.GetNotificationChannel",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_CreateNotificationChannel_sync",
+      "title": "Snippet for the create_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#create_notification_channel.",
+      "file": "notification_channel_service/create_notification_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_notification_channel",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#create_notification_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::NotificationChannel",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "CreateNotificationChannel",
+          "full_name": "google.monitoring.v3.NotificationChannelService.CreateNotificationChannel",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_UpdateNotificationChannel_sync",
+      "title": "Snippet for the update_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel.",
+      "file": "notification_channel_service/update_notification_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_notification_channel",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::NotificationChannel",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "UpdateNotificationChannel",
+          "full_name": "google.monitoring.v3.NotificationChannelService.UpdateNotificationChannel",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_DeleteNotificationChannel_sync",
+      "title": "Snippet for the delete_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#delete_notification_channel.",
+      "file": "notification_channel_service/delete_notification_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_notification_channel",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#delete_notification_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "DeleteNotificationChannel",
+          "full_name": "google.monitoring.v3.NotificationChannelService.DeleteNotificationChannel",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_SendNotificationChannelVerificationCode_sync",
+      "title": "Snippet for the send_notification_channel_verification_code call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#send_notification_channel_verification_code.",
+      "file": "notification_channel_service/send_notification_channel_verification_code.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "send_notification_channel_verification_code",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#send_notification_channel_verification_code",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "SendNotificationChannelVerificationCode",
+          "full_name": "google.monitoring.v3.NotificationChannelService.SendNotificationChannelVerificationCode",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_GetNotificationChannelVerificationCode_sync",
+      "title": "Snippet for the get_notification_channel_verification_code call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_verification_code.",
+      "file": "notification_channel_service/get_notification_channel_verification_code.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notification_channel_verification_code",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_verification_code",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "GetNotificationChannelVerificationCode",
+          "full_name": "google.monitoring.v3.NotificationChannelService.GetNotificationChannelVerificationCode",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_NotificationChannelService_VerifyNotificationChannel_sync",
+      "title": "Snippet for the verify_notification_channel call in the NotificationChannelService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::NotificationChannelService::Client#verify_notification_channel.",
+      "file": "notification_channel_service/verify_notification_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_notification_channel",
+        "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#verify_notification_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::NotificationChannel",
+        "client": {
+          "short_name": "NotificationChannelService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::NotificationChannelService::Client"
+        },
+        "method": {
+          "short_name": "VerifyNotificationChannel",
+          "full_name": "google.monitoring.v3.NotificationChannelService.VerifyNotificationChannel",
+          "service": {
+            "short_name": "NotificationChannelService",
+            "full_name": "google.monitoring.v3.NotificationChannelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_QueryService_QueryTimeSeries_sync",
+      "title": "Snippet for the query_time_series call in the QueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::QueryService::Client#query_time_series.",
+      "file": "query_service/query_time_series.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_time_series",
+        "full_name": "::Google::Cloud::Monitoring::V3::QueryService::Client#query_time_series",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::QueryTimeSeriesResponse",
+        "client": {
+          "short_name": "QueryService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::QueryService::Client"
+        },
+        "method": {
+          "short_name": "QueryTimeSeries",
+          "full_name": "google.monitoring.v3.QueryService.QueryTimeSeries",
+          "service": {
+            "short_name": "QueryService",
+            "full_name": "google.monitoring.v3.QueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_CreateService_sync",
+      "title": "Snippet for the create_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service.",
+      "file": "service_monitoring_service/create_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Service",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "CreateService",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.CreateService",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_GetService_sync",
+      "title": "Snippet for the get_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#get_service.",
+      "file": "service_monitoring_service/get_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#get_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Service",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "GetService",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.GetService",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_ListServices_sync",
+      "title": "Snippet for the list_services call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_services.",
+      "file": "service_monitoring_service/list_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_services",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListServicesResponse",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "ListServices",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.ListServices",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_UpdateService_sync",
+      "title": "Snippet for the update_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service.",
+      "file": "service_monitoring_service/update_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Service",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "UpdateService",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.UpdateService",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_DeleteService_sync",
+      "title": "Snippet for the delete_service call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service.",
+      "file": "service_monitoring_service/delete_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "DeleteService",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.DeleteService",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_sync",
+      "title": "Snippet for the create_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service_level_objective.",
+      "file": "service_monitoring_service/create_service_level_objective.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_level_objective",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#create_service_level_objective",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ServiceLevelObjective",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceLevelObjective",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.CreateServiceLevelObjective",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_GetServiceLevelObjective_sync",
+      "title": "Snippet for the get_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#get_service_level_objective.",
+      "file": "service_monitoring_service/get_service_level_objective.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_level_objective",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#get_service_level_objective",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ServiceLevelObjective",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "GetServiceLevelObjective",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.GetServiceLevelObjective",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_sync",
+      "title": "Snippet for the list_service_level_objectives call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_service_level_objectives.",
+      "file": "service_monitoring_service/list_service_level_objectives.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_level_objectives",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_service_level_objectives",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesResponse",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "ListServiceLevelObjectives",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.ListServiceLevelObjectives",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_UpdateServiceLevelObjective_sync",
+      "title": "Snippet for the update_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service_level_objective.",
+      "file": "service_monitoring_service/update_service_level_objective.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service_level_objective",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#update_service_level_objective",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ServiceLevelObjective",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServiceLevelObjective",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.UpdateServiceLevelObjective",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_ServiceMonitoringService_DeleteServiceLevelObjective_sync",
+      "title": "Snippet for the delete_service_level_objective call in the ServiceMonitoringService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service_level_objective.",
+      "file": "service_monitoring_service/delete_service_level_objective.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_level_objective",
+        "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#delete_service_level_objective",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ServiceMonitoringService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceLevelObjective",
+          "full_name": "google.monitoring.v3.ServiceMonitoringService.DeleteServiceLevelObjective",
+          "service": {
+            "short_name": "ServiceMonitoringService",
+            "full_name": "google.monitoring.v3.ServiceMonitoringService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_CreateSnooze_sync",
+      "title": "Snippet for the create_snooze call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#create_snooze.",
+      "file": "snooze_service/create_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#create_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "CreateSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.CreateSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_ListSnoozes_sync",
+      "title": "Snippet for the list_snoozes call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#list_snoozes.",
+      "file": "snooze_service/list_snoozes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snoozes",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#list_snoozes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListSnoozesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListSnoozesResponse",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "ListSnoozes",
+          "full_name": "google.monitoring.v3.SnoozeService.ListSnoozes",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_GetSnooze_sync",
+      "title": "Snippet for the get_snooze call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze.",
+      "file": "snooze_service/get_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#get_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "GetSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.GetSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_SnoozeService_UpdateSnooze_sync",
+      "title": "Snippet for the update_snooze call in the SnoozeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::SnoozeService::Client#update_snooze.",
+      "file": "snooze_service/update_snooze.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_snooze",
+        "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client#update_snooze",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateSnoozeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::Snooze",
+        "client": {
+          "short_name": "SnoozeService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::SnoozeService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSnooze",
+          "full_name": "google.monitoring.v3.SnoozeService.UpdateSnooze",
+          "service": {
+            "short_name": "SnoozeService",
+            "full_name": "google.monitoring.v3.SnoozeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_UptimeCheckService_ListUptimeCheckConfigs_sync",
+      "title": "Snippet for the list_uptime_check_configs call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#list_uptime_check_configs.",
+      "file": "uptime_check_service/list_uptime_check_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_uptime_check_configs",
+        "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client#list_uptime_check_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsResponse",
+        "client": {
+          "short_name": "UptimeCheckService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client"
+        },
+        "method": {
+          "short_name": "ListUptimeCheckConfigs",
+          "full_name": "google.monitoring.v3.UptimeCheckService.ListUptimeCheckConfigs",
+          "service": {
+            "short_name": "UptimeCheckService",
+            "full_name": "google.monitoring.v3.UptimeCheckService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_UptimeCheckService_GetUptimeCheckConfig_sync",
+      "title": "Snippet for the get_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#get_uptime_check_config.",
+      "file": "uptime_check_service/get_uptime_check_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_uptime_check_config",
+        "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client#get_uptime_check_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::UptimeCheckConfig",
+        "client": {
+          "short_name": "UptimeCheckService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client"
+        },
+        "method": {
+          "short_name": "GetUptimeCheckConfig",
+          "full_name": "google.monitoring.v3.UptimeCheckService.GetUptimeCheckConfig",
+          "service": {
+            "short_name": "UptimeCheckService",
+            "full_name": "google.monitoring.v3.UptimeCheckService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_UptimeCheckService_CreateUptimeCheckConfig_sync",
+      "title": "Snippet for the create_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#create_uptime_check_config.",
+      "file": "uptime_check_service/create_uptime_check_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_uptime_check_config",
+        "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client#create_uptime_check_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::UptimeCheckConfig",
+        "client": {
+          "short_name": "UptimeCheckService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client"
+        },
+        "method": {
+          "short_name": "CreateUptimeCheckConfig",
+          "full_name": "google.monitoring.v3.UptimeCheckService.CreateUptimeCheckConfig",
+          "service": {
+            "short_name": "UptimeCheckService",
+            "full_name": "google.monitoring.v3.UptimeCheckService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_UptimeCheckService_UpdateUptimeCheckConfig_sync",
+      "title": "Snippet for the update_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#update_uptime_check_config.",
+      "file": "uptime_check_service/update_uptime_check_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_uptime_check_config",
+        "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client#update_uptime_check_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::UptimeCheckConfig",
+        "client": {
+          "short_name": "UptimeCheckService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client"
+        },
+        "method": {
+          "short_name": "UpdateUptimeCheckConfig",
+          "full_name": "google.monitoring.v3.UptimeCheckService.UpdateUptimeCheckConfig",
+          "service": {
+            "short_name": "UptimeCheckService",
+            "full_name": "google.monitoring.v3.UptimeCheckService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_UptimeCheckService_DeleteUptimeCheckConfig_sync",
+      "title": "Snippet for the delete_uptime_check_config call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#delete_uptime_check_config.",
+      "file": "uptime_check_service/delete_uptime_check_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_uptime_check_config",
+        "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client#delete_uptime_check_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "UptimeCheckService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client"
+        },
+        "method": {
+          "short_name": "DeleteUptimeCheckConfig",
+          "full_name": "google.monitoring.v3.UptimeCheckService.DeleteUptimeCheckConfig",
+          "service": {
+            "short_name": "UptimeCheckService",
+            "full_name": "google.monitoring.v3.UptimeCheckService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "monitoring_v3_generated_UptimeCheckService_ListUptimeCheckIps_sync",
+      "title": "Snippet for the list_uptime_check_ips call in the UptimeCheckService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::V3::UptimeCheckService::Client#list_uptime_check_ips.",
+      "file": "uptime_check_service/list_uptime_check_ips.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_uptime_check_ips",
+        "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client#list_uptime_check_ips",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsResponse",
+        "client": {
+          "short_name": "UptimeCheckService::Client",
+          "full_name": "::Google::Cloud::Monitoring::V3::UptimeCheckService::Client"
+        },
+        "method": {
+          "short_name": "ListUptimeCheckIps",
+          "full_name": "google.monitoring.v3.UptimeCheckService.ListUptimeCheckIps",
+          "service": {
+            "short_name": "UptimeCheckService",
+            "full_name": "google.monitoring.v3.UptimeCheckService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
