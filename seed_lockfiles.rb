@@ -85,15 +85,12 @@ if options[:push]
 end
 
 # 4. Generate lockfiles SEQUENTIALLY
-platforms = %w[ruby x86_64-linux x86_64-darwin arm64-darwin x64-mingw-ucrt x64-mingw32]
-platform_args = platforms.map { |p| "--add-platform #{p}" }.join(" ")
-
 batch_gems.each_with_index do |gem_name, i|
   puts "⏳ [#{i + 1}/#{batch_gems.size}] Seeding #{gem_name}..."
 
   Dir.chdir(gem_name) do
     # Run bundle lock synchronously 
-    system("bundle lock #{platform_args}", exception: true)
+    system("bundle lock", exception: true)
   end
 
   # Stage the file sequentially so we safely avoid Git index lock conflicts
