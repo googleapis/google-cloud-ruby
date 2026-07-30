@@ -1296,14 +1296,14 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1324,14 +1324,14 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}/schema",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}/schema",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1352,14 +1352,14 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{parent}/versions",
                                                             matches: [
-                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :get,
                                                             uri_template: "/v1/{parent}/versions",
                                                             matches: [
-                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1436,14 +1436,14 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{parent}/subjects",
                                                             matches: [
-                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :get,
                                                             uri_template: "/v1/{parent}/subjects",
                                                             matches: [
-                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/.*)?$}, true]
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/schemas(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1693,7 +1693,7 @@ module Google
                                                             uri_template: "/v1/{name}",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/compatibility(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/compatibility(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
@@ -1701,7 +1701,7 @@ module Google
                                                             uri_template: "/v1/{name}",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/compatibility(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/compatibility(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1722,14 +1722,14 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/config(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/config(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/config(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/config(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1751,7 +1751,7 @@ module Google
                                                             uri_template: "/v1/{name}",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/config(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/config(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
@@ -1759,7 +1759,7 @@ module Google
                                                             uri_template: "/v1/{name}",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/config(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/config(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1780,14 +1780,14 @@ module Google
                                                             uri_method: :delete,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/config(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/config(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :delete,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/config(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/config(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1808,14 +1808,14 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/mode(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/mode(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/mode(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/mode(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1837,7 +1837,7 @@ module Google
                                                             uri_template: "/v1/{name}",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/mode(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/mode(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
@@ -1845,7 +1845,7 @@ module Google
                                                             uri_template: "/v1/{name}",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/mode(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/mode(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -1866,14 +1866,14 @@ module Google
                                                             uri_method: :delete,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/mode(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/mode(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                                                           .with_bindings(
                                                             uri_method: :delete,
                                                             uri_template: "/v1/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/mode(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/schemaRegistries/[^/]+/contexts/[^/]+/mode(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
