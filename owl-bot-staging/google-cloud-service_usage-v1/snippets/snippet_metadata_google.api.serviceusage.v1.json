@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-service_usage-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.api.serviceusage.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "serviceusage_v1_generated_ServiceUsage_EnableService_sync",
+      "title": "Snippet for the enable_service call in the ServiceUsage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#enable_service.",
+      "file": "service_usage/enable_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enable_service",
+        "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#enable_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceUsage::V1::EnableServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ServiceUsage::Client",
+          "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client"
+        },
+        "method": {
+          "short_name": "EnableService",
+          "full_name": "google.api.serviceusage.v1.ServiceUsage.EnableService",
+          "service": {
+            "short_name": "ServiceUsage",
+            "full_name": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "serviceusage_v1_generated_ServiceUsage_DisableService_sync",
+      "title": "Snippet for the disable_service call in the ServiceUsage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#disable_service.",
+      "file": "service_usage/disable_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_service",
+        "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#disable_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceUsage::V1::DisableServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ServiceUsage::Client",
+          "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client"
+        },
+        "method": {
+          "short_name": "DisableService",
+          "full_name": "google.api.serviceusage.v1.ServiceUsage.DisableService",
+          "service": {
+            "short_name": "ServiceUsage",
+            "full_name": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "serviceusage_v1_generated_ServiceUsage_GetService_sync",
+      "title": "Snippet for the get_service call in the ServiceUsage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#get_service.",
+      "file": "service_usage/get_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service",
+        "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#get_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceUsage::V1::GetServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ServiceUsage::V1::Service",
+        "client": {
+          "short_name": "ServiceUsage::Client",
+          "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client"
+        },
+        "method": {
+          "short_name": "GetService",
+          "full_name": "google.api.serviceusage.v1.ServiceUsage.GetService",
+          "service": {
+            "short_name": "ServiceUsage",
+            "full_name": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "serviceusage_v1_generated_ServiceUsage_ListServices_sync",
+      "title": "Snippet for the list_services call in the ServiceUsage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#list_services.",
+      "file": "service_usage/list_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_services",
+        "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#list_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceUsage::V1::ListServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ServiceUsage::V1::ListServicesResponse",
+        "client": {
+          "short_name": "ServiceUsage::Client",
+          "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client"
+        },
+        "method": {
+          "short_name": "ListServices",
+          "full_name": "google.api.serviceusage.v1.ServiceUsage.ListServices",
+          "service": {
+            "short_name": "ServiceUsage",
+            "full_name": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "serviceusage_v1_generated_ServiceUsage_BatchEnableServices_sync",
+      "title": "Snippet for the batch_enable_services call in the ServiceUsage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_enable_services.",
+      "file": "service_usage/batch_enable_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_enable_services",
+        "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_enable_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceUsage::V1::BatchEnableServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ServiceUsage::Client",
+          "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client"
+        },
+        "method": {
+          "short_name": "BatchEnableServices",
+          "full_name": "google.api.serviceusage.v1.ServiceUsage.BatchEnableServices",
+          "service": {
+            "short_name": "ServiceUsage",
+            "full_name": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "serviceusage_v1_generated_ServiceUsage_BatchGetServices_sync",
+      "title": "Snippet for the batch_get_services call in the ServiceUsage service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services.",
+      "file": "service_usage/batch_get_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_get_services",
+        "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ServiceUsage::V1::BatchGetServicesResponse",
+        "client": {
+          "short_name": "ServiceUsage::Client",
+          "full_name": "::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client"
+        },
+        "method": {
+          "short_name": "BatchGetServices",
+          "full_name": "google.api.serviceusage.v1.ServiceUsage.BatchGetServices",
+          "service": {
+            "short_name": "ServiceUsage",
+            "full_name": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

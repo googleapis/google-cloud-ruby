@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-service_control-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.api.servicecontrol.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "servicecontrol_v1_generated_QuotaController_AllocateQuota_sync",
+      "title": "Snippet for the allocate_quota call in the QuotaController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceControl::V1::QuotaController::Client#allocate_quota.",
+      "file": "quota_controller/allocate_quota.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "allocate_quota",
+        "full_name": "::Google::Cloud::ServiceControl::V1::QuotaController::Client#allocate_quota",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ServiceControl::V1::AllocateQuotaResponse",
+        "client": {
+          "short_name": "QuotaController::Client",
+          "full_name": "::Google::Cloud::ServiceControl::V1::QuotaController::Client"
+        },
+        "method": {
+          "short_name": "AllocateQuota",
+          "full_name": "google.api.servicecontrol.v1.QuotaController.AllocateQuota",
+          "service": {
+            "short_name": "QuotaController",
+            "full_name": "google.api.servicecontrol.v1.QuotaController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "servicecontrol_v1_generated_ServiceController_Check_sync",
+      "title": "Snippet for the check call in the ServiceController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceControl::V1::ServiceController::Client#check.",
+      "file": "service_controller/check.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check",
+        "full_name": "::Google::Cloud::ServiceControl::V1::ServiceController::Client#check",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceControl::V1::CheckRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ServiceControl::V1::CheckResponse",
+        "client": {
+          "short_name": "ServiceController::Client",
+          "full_name": "::Google::Cloud::ServiceControl::V1::ServiceController::Client"
+        },
+        "method": {
+          "short_name": "Check",
+          "full_name": "google.api.servicecontrol.v1.ServiceController.Check",
+          "service": {
+            "short_name": "ServiceController",
+            "full_name": "google.api.servicecontrol.v1.ServiceController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "servicecontrol_v1_generated_ServiceController_Report_sync",
+      "title": "Snippet for the report call in the ServiceController service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ServiceControl::V1::ServiceController::Client#report.",
+      "file": "service_controller/report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "report",
+        "full_name": "::Google::Cloud::ServiceControl::V1::ServiceController::Client#report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ServiceControl::V1::ReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ServiceControl::V1::ReportResponse",
+        "client": {
+          "short_name": "ServiceController::Client",
+          "full_name": "::Google::Cloud::ServiceControl::V1::ServiceController::Client"
+        },
+        "method": {
+          "short_name": "Report",
+          "full_name": "google.api.servicecontrol.v1.ServiceController.Report",
+          "service": {
+            "short_name": "ServiceController",
+            "full_name": "google.api.servicecontrol.v1.ServiceController"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
