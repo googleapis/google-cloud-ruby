@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.locationfinder.v1",
+  "libraryPackage": "::Google::Cloud::LocationFinder::V1",
+  "services": {
+    "CloudLocationFinder": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::LocationFinder::V1::CloudLocationFinder::Client",
+          "rpcs": {
+            "ListCloudLocations": {
+              "methods": [
+                "list_cloud_locations"
+              ]
+            },
+            "GetCloudLocation": {
+              "methods": [
+                "get_cloud_location"
+              ]
+            },
+            "SearchCloudLocations": {
+              "methods": [
+                "search_cloud_locations"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
