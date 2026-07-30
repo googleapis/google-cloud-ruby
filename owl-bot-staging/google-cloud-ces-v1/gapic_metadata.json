@@ -1,0 +1,320 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.ces.v1",
+  "libraryPackage": "::Google::Cloud::Ces::V1",
+  "services": {
+    "AgentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Ces::V1::AgentService::Client",
+          "rpcs": {
+            "ListApps": {
+              "methods": [
+                "list_apps"
+              ]
+            },
+            "GetApp": {
+              "methods": [
+                "get_app"
+              ]
+            },
+            "CreateApp": {
+              "methods": [
+                "create_app"
+              ]
+            },
+            "UpdateApp": {
+              "methods": [
+                "update_app"
+              ]
+            },
+            "DeleteApp": {
+              "methods": [
+                "delete_app"
+              ]
+            },
+            "ExportApp": {
+              "methods": [
+                "export_app"
+              ]
+            },
+            "ImportApp": {
+              "methods": [
+                "import_app"
+              ]
+            },
+            "ListAgents": {
+              "methods": [
+                "list_agents"
+              ]
+            },
+            "GetAgent": {
+              "methods": [
+                "get_agent"
+              ]
+            },
+            "CreateAgent": {
+              "methods": [
+                "create_agent"
+              ]
+            },
+            "UpdateAgent": {
+              "methods": [
+                "update_agent"
+              ]
+            },
+            "DeleteAgent": {
+              "methods": [
+                "delete_agent"
+              ]
+            },
+            "ListExamples": {
+              "methods": [
+                "list_examples"
+              ]
+            },
+            "GetExample": {
+              "methods": [
+                "get_example"
+              ]
+            },
+            "CreateExample": {
+              "methods": [
+                "create_example"
+              ]
+            },
+            "UpdateExample": {
+              "methods": [
+                "update_example"
+              ]
+            },
+            "DeleteExample": {
+              "methods": [
+                "delete_example"
+              ]
+            },
+            "ListTools": {
+              "methods": [
+                "list_tools"
+              ]
+            },
+            "GetTool": {
+              "methods": [
+                "get_tool"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "delete_conversation"
+              ]
+            },
+            "BatchDeleteConversations": {
+              "methods": [
+                "batch_delete_conversations"
+              ]
+            },
+            "CreateTool": {
+              "methods": [
+                "create_tool"
+              ]
+            },
+            "UpdateTool": {
+              "methods": [
+                "update_tool"
+              ]
+            },
+            "DeleteTool": {
+              "methods": [
+                "delete_tool"
+              ]
+            },
+            "ListGuardrails": {
+              "methods": [
+                "list_guardrails"
+              ]
+            },
+            "GetGuardrail": {
+              "methods": [
+                "get_guardrail"
+              ]
+            },
+            "CreateGuardrail": {
+              "methods": [
+                "create_guardrail"
+              ]
+            },
+            "UpdateGuardrail": {
+              "methods": [
+                "update_guardrail"
+              ]
+            },
+            "DeleteGuardrail": {
+              "methods": [
+                "delete_guardrail"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "list_deployments"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "get_deployment"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "create_deployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "update_deployment"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "delete_deployment"
+              ]
+            },
+            "ListToolsets": {
+              "methods": [
+                "list_toolsets"
+              ]
+            },
+            "GetToolset": {
+              "methods": [
+                "get_toolset"
+              ]
+            },
+            "CreateToolset": {
+              "methods": [
+                "create_toolset"
+              ]
+            },
+            "UpdateToolset": {
+              "methods": [
+                "update_toolset"
+              ]
+            },
+            "DeleteToolset": {
+              "methods": [
+                "delete_toolset"
+              ]
+            },
+            "ListAppVersions": {
+              "methods": [
+                "list_app_versions"
+              ]
+            },
+            "GetAppVersion": {
+              "methods": [
+                "get_app_version"
+              ]
+            },
+            "CreateAppVersion": {
+              "methods": [
+                "create_app_version"
+              ]
+            },
+            "DeleteAppVersion": {
+              "methods": [
+                "delete_app_version"
+              ]
+            },
+            "RestoreAppVersion": {
+              "methods": [
+                "restore_app_version"
+              ]
+            },
+            "ListChangelogs": {
+              "methods": [
+                "list_changelogs"
+              ]
+            },
+            "GetChangelog": {
+              "methods": [
+                "get_changelog"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Ces::V1::SessionService::Client",
+          "rpcs": {
+            "RunSession": {
+              "methods": [
+                "run_session"
+              ]
+            },
+            "StreamRunSession": {
+              "methods": [
+                "stream_run_session"
+              ]
+            },
+            "BidiRunSession": {
+              "methods": [
+                "bidi_run_session"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ToolService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Ces::V1::ToolService::Client",
+          "rpcs": {
+            "ExecuteTool": {
+              "methods": [
+                "execute_tool"
+              ]
+            },
+            "RetrieveToolSchema": {
+              "methods": [
+                "retrieve_tool_schema"
+              ]
+            },
+            "RetrieveTools": {
+              "methods": [
+                "retrieve_tools"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "WidgetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Ces::V1::WidgetService::Client",
+          "rpcs": {
+            "GenerateChatToken": {
+              "methods": [
+                "generate_chat_token"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
