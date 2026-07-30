@@ -831,7 +831,7 @@ module Google
                                                             uri_method: :delete,
                                                             uri_template: "/v2/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -852,7 +852,7 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v2/{name}",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -895,7 +895,7 @@ module Google
                                                             uri_template: "/v2/{name}:rename",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
@@ -917,7 +917,7 @@ module Google
                                                             uri_template: "/v2/{name}:deleteRecursive",
                                                             body: "*",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/folders(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
