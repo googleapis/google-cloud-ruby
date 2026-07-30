@@ -1,5 +1,28 @@
 # Changelog
 
+### 5.0.0 (2026-07-30)
+
+### ⚠ BREAKING CHANGES
+
+* Moved Schedule messages from report_messages.proto to report_delivery.proto
+* Added additional LineItem fields
+
+#### Features
+
+* Added additional LineItem fields 
+* Added BatchActivateContentBundles and BatchDeactivateContentBundles methods to ContentBundleService 
+* Added CreativeSetService 
+* Added OrderService write methods and additional stats fields. 
+* Added SlateService 
+* Added TargetingPresetService update methods 
+* Added the Creative entity 
+#### Bug Fixes
+
+* Moved Schedule messages from report_messages.proto to report_delivery.proto 
+#### Documentation
+
+* Updated method descriptions to use a consistent style 
+
 ### 4.2.0 (2026-07-20)
 
 #### Features
