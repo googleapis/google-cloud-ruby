@@ -1,0 +1,3015 @@
+{
+  "client_library": {
+    "name": "google-cloud-sql-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.sql.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupRunsService_Delete_sync",
+      "title": "Snippet for the delete call in the SqlBackupRunsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupRunsService::Client#delete.",
+      "file": "sql_backup_runs_service/delete.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client#delete",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlBackupRunsDeleteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlBackupRunsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client"
+        },
+        "method": {
+          "short_name": "Delete",
+          "full_name": "google.cloud.sql.v1.SqlBackupRunsService.Delete",
+          "service": {
+            "short_name": "SqlBackupRunsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupRunsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupRunsService_Get_sync",
+      "title": "Snippet for the get call in the SqlBackupRunsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupRunsService::Client#get.",
+      "file": "sql_backup_runs_service/get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client#get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlBackupRunsGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::BackupRun",
+        "client": {
+          "short_name": "SqlBackupRunsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client"
+        },
+        "method": {
+          "short_name": "Get",
+          "full_name": "google.cloud.sql.v1.SqlBackupRunsService.Get",
+          "service": {
+            "short_name": "SqlBackupRunsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupRunsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupRunsService_Insert_sync",
+      "title": "Snippet for the insert call in the SqlBackupRunsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupRunsService::Client#insert.",
+      "file": "sql_backup_runs_service/insert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client#insert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlBackupRunsInsertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlBackupRunsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client"
+        },
+        "method": {
+          "short_name": "Insert",
+          "full_name": "google.cloud.sql.v1.SqlBackupRunsService.Insert",
+          "service": {
+            "short_name": "SqlBackupRunsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupRunsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupRunsService_List_sync",
+      "title": "Snippet for the list call in the SqlBackupRunsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupRunsService::Client#list.",
+      "file": "sql_backup_runs_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlBackupRunsListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::BackupRunsListResponse",
+        "client": {
+          "short_name": "SqlBackupRunsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupRunsService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlBackupRunsService.List",
+          "service": {
+            "short_name": "SqlBackupRunsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupRunsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_AddServerCa_sync",
+      "title": "Snippet for the add_server_ca call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#add_server_ca.",
+      "file": "sql_instances_service/add_server_ca.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_server_ca",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#add_server_ca",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesAddServerCaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "AddServerCa",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.AddServerCa",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_AddServerCertificate_sync",
+      "title": "Snippet for the add_server_certificate call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#add_server_certificate.",
+      "file": "sql_instances_service/add_server_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_server_certificate",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#add_server_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesAddServerCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "AddServerCertificate",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.AddServerCertificate",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_AddEntraIdCertificate_sync",
+      "title": "Snippet for the add_entra_id_certificate call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#add_entra_id_certificate.",
+      "file": "sql_instances_service/add_entra_id_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_entra_id_certificate",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#add_entra_id_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesAddEntraIdCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "AddEntraIdCertificate",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.AddEntraIdCertificate",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Clone_sync",
+      "title": "Snippet for the call_clone call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#call_clone.",
+      "file": "sql_instances_service/call_clone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "call_clone",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#call_clone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesCloneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Clone",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Clone",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Delete_sync",
+      "title": "Snippet for the delete call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#delete.",
+      "file": "sql_instances_service/delete.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#delete",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesDeleteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Delete",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Delete",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_DemoteMaster_sync",
+      "title": "Snippet for the demote_master call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#demote_master.",
+      "file": "sql_instances_service/demote_master.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "demote_master",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#demote_master",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesDemoteMasterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "DemoteMaster",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.DemoteMaster",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Demote_sync",
+      "title": "Snippet for the demote call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#demote.",
+      "file": "sql_instances_service/demote.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "demote",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#demote",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesDemoteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Demote",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Demote",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Export_sync",
+      "title": "Snippet for the export call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#export.",
+      "file": "sql_instances_service/export.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#export",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesExportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Export",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Export",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Failover_sync",
+      "title": "Snippet for the failover call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#failover.",
+      "file": "sql_instances_service/failover.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "failover",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#failover",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesFailoverRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Failover",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Failover",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Reencrypt_sync",
+      "title": "Snippet for the reencrypt call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#reencrypt.",
+      "file": "sql_instances_service/reencrypt.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reencrypt",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#reencrypt",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesReencryptRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Reencrypt",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Reencrypt",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Get_sync",
+      "title": "Snippet for the get call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#get.",
+      "file": "sql_instances_service/get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::DatabaseInstance",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Get",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Get",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Import_sync",
+      "title": "Snippet for the import call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#import.",
+      "file": "sql_instances_service/import.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#import",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesImportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Import",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Import",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Insert_sync",
+      "title": "Snippet for the insert call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#insert.",
+      "file": "sql_instances_service/insert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#insert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesInsertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Insert",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Insert",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_List_sync",
+      "title": "Snippet for the list call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#list.",
+      "file": "sql_instances_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::InstancesListResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.List",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ListServerCas_sync",
+      "title": "Snippet for the list_server_cas call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#list_server_cas.",
+      "file": "sql_instances_service/list_server_cas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_server_cas",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#list_server_cas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesListServerCasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::InstancesListServerCasResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ListServerCas",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ListServerCas",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ListServerCertificates_sync",
+      "title": "Snippet for the list_server_certificates call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#list_server_certificates.",
+      "file": "sql_instances_service/list_server_certificates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_server_certificates",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#list_server_certificates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesListServerCertificatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::InstancesListServerCertificatesResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ListServerCertificates",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ListServerCertificates",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ListEntraIdCertificates_sync",
+      "title": "Snippet for the list_entra_id_certificates call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#list_entra_id_certificates.",
+      "file": "sql_instances_service/list_entra_id_certificates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_entra_id_certificates",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#list_entra_id_certificates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesListEntraIdCertificatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::InstancesListEntraIdCertificatesResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ListEntraIdCertificates",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ListEntraIdCertificates",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Patch_sync",
+      "title": "Snippet for the patch call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#patch.",
+      "file": "sql_instances_service/patch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "patch",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#patch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesPatchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Patch",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Patch",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_PromoteReplica_sync",
+      "title": "Snippet for the promote_replica call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#promote_replica.",
+      "file": "sql_instances_service/promote_replica.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "promote_replica",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#promote_replica",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesPromoteReplicaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "PromoteReplica",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.PromoteReplica",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Switchover_sync",
+      "title": "Snippet for the switchover call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#switchover.",
+      "file": "sql_instances_service/switchover.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "switchover",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#switchover",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesSwitchoverRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Switchover",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Switchover",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ResetSslConfig_sync",
+      "title": "Snippet for the reset_ssl_config call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#reset_ssl_config.",
+      "file": "sql_instances_service/reset_ssl_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_ssl_config",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#reset_ssl_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesResetSslConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ResetSslConfig",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ResetSslConfig",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Restart_sync",
+      "title": "Snippet for the restart call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#restart.",
+      "file": "sql_instances_service/restart.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restart",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#restart",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesRestartRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Restart",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Restart",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_RestoreBackup_sync",
+      "title": "Snippet for the restore_backup call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#restore_backup.",
+      "file": "sql_instances_service/restore_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_backup",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#restore_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesRestoreBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "RestoreBackup",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.RestoreBackup",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_RotateServerCa_sync",
+      "title": "Snippet for the rotate_server_ca call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#rotate_server_ca.",
+      "file": "sql_instances_service/rotate_server_ca.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rotate_server_ca",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#rotate_server_ca",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesRotateServerCaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "RotateServerCa",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.RotateServerCa",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_RotateServerCertificate_sync",
+      "title": "Snippet for the rotate_server_certificate call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#rotate_server_certificate.",
+      "file": "sql_instances_service/rotate_server_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rotate_server_certificate",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#rotate_server_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesRotateServerCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "RotateServerCertificate",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.RotateServerCertificate",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_RotateEntraIdCertificate_sync",
+      "title": "Snippet for the rotate_entra_id_certificate call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#rotate_entra_id_certificate.",
+      "file": "sql_instances_service/rotate_entra_id_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rotate_entra_id_certificate",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#rotate_entra_id_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesRotateEntraIdCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "RotateEntraIdCertificate",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.RotateEntraIdCertificate",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_StartReplica_sync",
+      "title": "Snippet for the start_replica call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#start_replica.",
+      "file": "sql_instances_service/start_replica.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_replica",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#start_replica",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesStartReplicaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "StartReplica",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.StartReplica",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_StopReplica_sync",
+      "title": "Snippet for the stop_replica call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#stop_replica.",
+      "file": "sql_instances_service/stop_replica.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_replica",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#stop_replica",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesStopReplicaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "StopReplica",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.StopReplica",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_TruncateLog_sync",
+      "title": "Snippet for the truncate_log call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#truncate_log.",
+      "file": "sql_instances_service/truncate_log.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "truncate_log",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#truncate_log",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesTruncateLogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "TruncateLog",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.TruncateLog",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_Update_sync",
+      "title": "Snippet for the update call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#update.",
+      "file": "sql_instances_service/update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "Update",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.Update",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_CreateEphemeral_sync",
+      "title": "Snippet for the create_ephemeral call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#create_ephemeral.",
+      "file": "sql_instances_service/create_ephemeral.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ephemeral",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#create_ephemeral",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesCreateEphemeralCertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SslCert",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "CreateEphemeral",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.CreateEphemeral",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_RescheduleMaintenance_sync",
+      "title": "Snippet for the reschedule_maintenance call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#reschedule_maintenance.",
+      "file": "sql_instances_service/reschedule_maintenance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reschedule_maintenance",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#reschedule_maintenance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesRescheduleMaintenanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "RescheduleMaintenance",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.RescheduleMaintenance",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_VerifyExternalSyncSettings_sync",
+      "title": "Snippet for the verify_external_sync_settings call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#verify_external_sync_settings.",
+      "file": "sql_instances_service/verify_external_sync_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_external_sync_settings",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#verify_external_sync_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesVerifyExternalSyncSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SqlInstancesVerifyExternalSyncSettingsResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "VerifyExternalSyncSettings",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.VerifyExternalSyncSettings",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_StartExternalSync_sync",
+      "title": "Snippet for the start_external_sync call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#start_external_sync.",
+      "file": "sql_instances_service/start_external_sync.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_external_sync",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#start_external_sync",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesStartExternalSyncRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "StartExternalSync",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.StartExternalSync",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_PerformDiskShrink_sync",
+      "title": "Snippet for the perform_disk_shrink call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#perform_disk_shrink.",
+      "file": "sql_instances_service/perform_disk_shrink.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "perform_disk_shrink",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#perform_disk_shrink",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesPerformDiskShrinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "PerformDiskShrink",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.PerformDiskShrink",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_GetDiskShrinkConfig_sync",
+      "title": "Snippet for the get_disk_shrink_config call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#get_disk_shrink_config.",
+      "file": "sql_instances_service/get_disk_shrink_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_disk_shrink_config",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#get_disk_shrink_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesGetDiskShrinkConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SqlInstancesGetDiskShrinkConfigResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "GetDiskShrinkConfig",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.GetDiskShrinkConfig",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ResetReplicaSize_sync",
+      "title": "Snippet for the reset_replica_size call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#reset_replica_size.",
+      "file": "sql_instances_service/reset_replica_size.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_replica_size",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#reset_replica_size",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesResetReplicaSizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ResetReplicaSize",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ResetReplicaSize",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_GetLatestRecoveryTime_sync",
+      "title": "Snippet for the get_latest_recovery_time call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#get_latest_recovery_time.",
+      "file": "sql_instances_service/get_latest_recovery_time.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_latest_recovery_time",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#get_latest_recovery_time",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesGetLatestRecoveryTimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SqlInstancesGetLatestRecoveryTimeResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "GetLatestRecoveryTime",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.GetLatestRecoveryTime",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ExecuteSql_sync",
+      "title": "Snippet for the execute_sql call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#execute_sql.",
+      "file": "sql_instances_service/execute_sql.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_sql",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#execute_sql",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SqlInstancesExecuteSqlResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ExecuteSql",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ExecuteSql",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_AcquireSsrsLease_sync",
+      "title": "Snippet for the acquire_ssrs_lease call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#acquire_ssrs_lease.",
+      "file": "sql_instances_service/acquire_ssrs_lease.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "acquire_ssrs_lease",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#acquire_ssrs_lease",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesAcquireSsrsLeaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SqlInstancesAcquireSsrsLeaseResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "AcquireSsrsLease",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.AcquireSsrsLease",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_ReleaseSsrsLease_sync",
+      "title": "Snippet for the release_ssrs_lease call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#release_ssrs_lease.",
+      "file": "sql_instances_service/release_ssrs_lease.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "release_ssrs_lease",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#release_ssrs_lease",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesReleaseSsrsLeaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SqlInstancesReleaseSsrsLeaseResponse",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "ReleaseSsrsLease",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.ReleaseSsrsLease",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_PreCheckMajorVersionUpgrade_sync",
+      "title": "Snippet for the pre_check_major_version_upgrade call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#pre_check_major_version_upgrade.",
+      "file": "sql_instances_service/pre_check_major_version_upgrade.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pre_check_major_version_upgrade",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#pre_check_major_version_upgrade",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesPreCheckMajorVersionUpgradeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "PreCheckMajorVersionUpgrade",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.PreCheckMajorVersionUpgrade",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlInstancesService_PointInTimeRestore_sync",
+      "title": "Snippet for the point_in_time_restore call in the SqlInstancesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlInstancesService::Client#point_in_time_restore.",
+      "file": "sql_instances_service/point_in_time_restore.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "point_in_time_restore",
+        "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client#point_in_time_restore",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlInstancesPointInTimeRestoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlInstancesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlInstancesService::Client"
+        },
+        "method": {
+          "short_name": "PointInTimeRestore",
+          "full_name": "google.cloud.sql.v1.SqlInstancesService.PointInTimeRestore",
+          "service": {
+            "short_name": "SqlInstancesService",
+            "full_name": "google.cloud.sql.v1.SqlInstancesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupsService_CreateBackup_sync",
+      "title": "Snippet for the create_backup call in the SqlBackupsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupsService::Client#create_backup.",
+      "file": "sql_backups_service/create_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client#create_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::CreateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlBackupsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client"
+        },
+        "method": {
+          "short_name": "CreateBackup",
+          "full_name": "google.cloud.sql.v1.SqlBackupsService.CreateBackup",
+          "service": {
+            "short_name": "SqlBackupsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupsService_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the SqlBackupsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupsService::Client#get_backup.",
+      "file": "sql_backups_service/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Backup",
+        "client": {
+          "short_name": "SqlBackupsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.cloud.sql.v1.SqlBackupsService.GetBackup",
+          "service": {
+            "short_name": "SqlBackupsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupsService_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the SqlBackupsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupsService::Client#list_backups.",
+      "file": "sql_backups_service/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::ListBackupsResponse",
+        "client": {
+          "short_name": "SqlBackupsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.cloud.sql.v1.SqlBackupsService.ListBackups",
+          "service": {
+            "short_name": "SqlBackupsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupsService_UpdateBackup_sync",
+      "title": "Snippet for the update_backup call in the SqlBackupsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupsService::Client#update_backup.",
+      "file": "sql_backups_service/update_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client#update_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::UpdateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlBackupsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackup",
+          "full_name": "google.cloud.sql.v1.SqlBackupsService.UpdateBackup",
+          "service": {
+            "short_name": "SqlBackupsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlBackupsService_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the SqlBackupsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlBackupsService::Client#delete_backup.",
+      "file": "sql_backups_service/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlBackupsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlBackupsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.cloud.sql.v1.SqlBackupsService.DeleteBackup",
+          "service": {
+            "short_name": "SqlBackupsService",
+            "full_name": "google.cloud.sql.v1.SqlBackupsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlConnectService_GetConnectSettings_sync",
+      "title": "Snippet for the get_connect_settings call in the SqlConnectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlConnectService::Client#get_connect_settings.",
+      "file": "sql_connect_service/get_connect_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connect_settings",
+        "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client#get_connect_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::GetConnectSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::ConnectSettings",
+        "client": {
+          "short_name": "SqlConnectService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client"
+        },
+        "method": {
+          "short_name": "GetConnectSettings",
+          "full_name": "google.cloud.sql.v1.SqlConnectService.GetConnectSettings",
+          "service": {
+            "short_name": "SqlConnectService",
+            "full_name": "google.cloud.sql.v1.SqlConnectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlConnectService_ResolveConnectSettings_sync",
+      "title": "Snippet for the resolve_connect_settings call in the SqlConnectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlConnectService::Client#resolve_connect_settings.",
+      "file": "sql_connect_service/resolve_connect_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resolve_connect_settings",
+        "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client#resolve_connect_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::ResolveConnectSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::ConnectSettings",
+        "client": {
+          "short_name": "SqlConnectService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client"
+        },
+        "method": {
+          "short_name": "ResolveConnectSettings",
+          "full_name": "google.cloud.sql.v1.SqlConnectService.ResolveConnectSettings",
+          "service": {
+            "short_name": "SqlConnectService",
+            "full_name": "google.cloud.sql.v1.SqlConnectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlConnectService_GenerateEphemeralCert_sync",
+      "title": "Snippet for the generate_ephemeral_cert call in the SqlConnectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlConnectService::Client#generate_ephemeral_cert.",
+      "file": "sql_connect_service/generate_ephemeral_cert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_ephemeral_cert",
+        "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client#generate_ephemeral_cert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::GenerateEphemeralCertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::GenerateEphemeralCertResponse",
+        "client": {
+          "short_name": "SqlConnectService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlConnectService::Client"
+        },
+        "method": {
+          "short_name": "GenerateEphemeralCert",
+          "full_name": "google.cloud.sql.v1.SqlConnectService.GenerateEphemeralCert",
+          "service": {
+            "short_name": "SqlConnectService",
+            "full_name": "google.cloud.sql.v1.SqlConnectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlDatabasesService_Delete_sync",
+      "title": "Snippet for the delete call in the SqlDatabasesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlDatabasesService::Client#delete.",
+      "file": "sql_databases_service/delete.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete",
+        "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client#delete",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlDatabasesDeleteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlDatabasesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client"
+        },
+        "method": {
+          "short_name": "Delete",
+          "full_name": "google.cloud.sql.v1.SqlDatabasesService.Delete",
+          "service": {
+            "short_name": "SqlDatabasesService",
+            "full_name": "google.cloud.sql.v1.SqlDatabasesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlDatabasesService_Get_sync",
+      "title": "Snippet for the get call in the SqlDatabasesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlDatabasesService::Client#get.",
+      "file": "sql_databases_service/get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get",
+        "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client#get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlDatabasesGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Database",
+        "client": {
+          "short_name": "SqlDatabasesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client"
+        },
+        "method": {
+          "short_name": "Get",
+          "full_name": "google.cloud.sql.v1.SqlDatabasesService.Get",
+          "service": {
+            "short_name": "SqlDatabasesService",
+            "full_name": "google.cloud.sql.v1.SqlDatabasesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlDatabasesService_Insert_sync",
+      "title": "Snippet for the insert call in the SqlDatabasesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlDatabasesService::Client#insert.",
+      "file": "sql_databases_service/insert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert",
+        "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client#insert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlDatabasesInsertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlDatabasesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client"
+        },
+        "method": {
+          "short_name": "Insert",
+          "full_name": "google.cloud.sql.v1.SqlDatabasesService.Insert",
+          "service": {
+            "short_name": "SqlDatabasesService",
+            "full_name": "google.cloud.sql.v1.SqlDatabasesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlDatabasesService_List_sync",
+      "title": "Snippet for the list call in the SqlDatabasesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlDatabasesService::Client#list.",
+      "file": "sql_databases_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlDatabasesListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::DatabasesListResponse",
+        "client": {
+          "short_name": "SqlDatabasesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlDatabasesService.List",
+          "service": {
+            "short_name": "SqlDatabasesService",
+            "full_name": "google.cloud.sql.v1.SqlDatabasesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlDatabasesService_Patch_sync",
+      "title": "Snippet for the patch call in the SqlDatabasesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlDatabasesService::Client#patch.",
+      "file": "sql_databases_service/patch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "patch",
+        "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client#patch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlDatabasesUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlDatabasesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client"
+        },
+        "method": {
+          "short_name": "Patch",
+          "full_name": "google.cloud.sql.v1.SqlDatabasesService.Patch",
+          "service": {
+            "short_name": "SqlDatabasesService",
+            "full_name": "google.cloud.sql.v1.SqlDatabasesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlDatabasesService_Update_sync",
+      "title": "Snippet for the update call in the SqlDatabasesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlDatabasesService::Client#update.",
+      "file": "sql_databases_service/update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update",
+        "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client#update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlDatabasesUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlDatabasesService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlDatabasesService::Client"
+        },
+        "method": {
+          "short_name": "Update",
+          "full_name": "google.cloud.sql.v1.SqlDatabasesService.Update",
+          "service": {
+            "short_name": "SqlDatabasesService",
+            "full_name": "google.cloud.sql.v1.SqlDatabasesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlFlagsService_List_sync",
+      "title": "Snippet for the list call in the SqlFlagsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlFlagsService::Client#list.",
+      "file": "sql_flags_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlFlagsService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlFlagsListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::FlagsListResponse",
+        "client": {
+          "short_name": "SqlFlagsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlFlagsService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlFlagsService.List",
+          "service": {
+            "short_name": "SqlFlagsService",
+            "full_name": "google.cloud.sql.v1.SqlFlagsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlOperationsService_Get_sync",
+      "title": "Snippet for the get call in the SqlOperationsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlOperationsService::Client#get.",
+      "file": "sql_operations_service/get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get",
+        "full_name": "::Google::Cloud::Sql::V1::SqlOperationsService::Client#get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlOperationsGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlOperationsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlOperationsService::Client"
+        },
+        "method": {
+          "short_name": "Get",
+          "full_name": "google.cloud.sql.v1.SqlOperationsService.Get",
+          "service": {
+            "short_name": "SqlOperationsService",
+            "full_name": "google.cloud.sql.v1.SqlOperationsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlOperationsService_List_sync",
+      "title": "Snippet for the list call in the SqlOperationsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlOperationsService::Client#list.",
+      "file": "sql_operations_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlOperationsService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlOperationsListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::OperationsListResponse",
+        "client": {
+          "short_name": "SqlOperationsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlOperationsService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlOperationsService.List",
+          "service": {
+            "short_name": "SqlOperationsService",
+            "full_name": "google.cloud.sql.v1.SqlOperationsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlOperationsService_Cancel_sync",
+      "title": "Snippet for the cancel call in the SqlOperationsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlOperationsService::Client#cancel.",
+      "file": "sql_operations_service/cancel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel",
+        "full_name": "::Google::Cloud::Sql::V1::SqlOperationsService::Client#cancel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlOperationsCancelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SqlOperationsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlOperationsService::Client"
+        },
+        "method": {
+          "short_name": "Cancel",
+          "full_name": "google.cloud.sql.v1.SqlOperationsService.Cancel",
+          "service": {
+            "short_name": "SqlOperationsService",
+            "full_name": "google.cloud.sql.v1.SqlOperationsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlSslCertsService_Delete_sync",
+      "title": "Snippet for the delete call in the SqlSslCertsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlSslCertsService::Client#delete.",
+      "file": "sql_ssl_certs_service/delete.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete",
+        "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client#delete",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlSslCertsDeleteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlSslCertsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client"
+        },
+        "method": {
+          "short_name": "Delete",
+          "full_name": "google.cloud.sql.v1.SqlSslCertsService.Delete",
+          "service": {
+            "short_name": "SqlSslCertsService",
+            "full_name": "google.cloud.sql.v1.SqlSslCertsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlSslCertsService_Get_sync",
+      "title": "Snippet for the get call in the SqlSslCertsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlSslCertsService::Client#get.",
+      "file": "sql_ssl_certs_service/get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get",
+        "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client#get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlSslCertsGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SslCert",
+        "client": {
+          "short_name": "SqlSslCertsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client"
+        },
+        "method": {
+          "short_name": "Get",
+          "full_name": "google.cloud.sql.v1.SqlSslCertsService.Get",
+          "service": {
+            "short_name": "SqlSslCertsService",
+            "full_name": "google.cloud.sql.v1.SqlSslCertsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlSslCertsService_Insert_sync",
+      "title": "Snippet for the insert call in the SqlSslCertsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlSslCertsService::Client#insert.",
+      "file": "sql_ssl_certs_service/insert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert",
+        "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client#insert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlSslCertsInsertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SslCertsInsertResponse",
+        "client": {
+          "short_name": "SqlSslCertsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client"
+        },
+        "method": {
+          "short_name": "Insert",
+          "full_name": "google.cloud.sql.v1.SqlSslCertsService.Insert",
+          "service": {
+            "short_name": "SqlSslCertsService",
+            "full_name": "google.cloud.sql.v1.SqlSslCertsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlSslCertsService_List_sync",
+      "title": "Snippet for the list call in the SqlSslCertsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlSslCertsService::Client#list.",
+      "file": "sql_ssl_certs_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlSslCertsListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::SslCertsListResponse",
+        "client": {
+          "short_name": "SqlSslCertsService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlSslCertsService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlSslCertsService.List",
+          "service": {
+            "short_name": "SqlSslCertsService",
+            "full_name": "google.cloud.sql.v1.SqlSslCertsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlTiersService_List_sync",
+      "title": "Snippet for the list call in the SqlTiersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlTiersService::Client#list.",
+      "file": "sql_tiers_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlTiersService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlTiersListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::TiersListResponse",
+        "client": {
+          "short_name": "SqlTiersService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlTiersService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlTiersService.List",
+          "service": {
+            "short_name": "SqlTiersService",
+            "full_name": "google.cloud.sql.v1.SqlTiersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlUsersService_Delete_sync",
+      "title": "Snippet for the delete call in the SqlUsersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlUsersService::Client#delete.",
+      "file": "sql_users_service/delete.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete",
+        "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client#delete",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlUsersDeleteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlUsersService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client"
+        },
+        "method": {
+          "short_name": "Delete",
+          "full_name": "google.cloud.sql.v1.SqlUsersService.Delete",
+          "service": {
+            "short_name": "SqlUsersService",
+            "full_name": "google.cloud.sql.v1.SqlUsersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlUsersService_Get_sync",
+      "title": "Snippet for the get call in the SqlUsersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlUsersService::Client#get.",
+      "file": "sql_users_service/get.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get",
+        "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client#get",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlUsersGetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::User",
+        "client": {
+          "short_name": "SqlUsersService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client"
+        },
+        "method": {
+          "short_name": "Get",
+          "full_name": "google.cloud.sql.v1.SqlUsersService.Get",
+          "service": {
+            "short_name": "SqlUsersService",
+            "full_name": "google.cloud.sql.v1.SqlUsersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlUsersService_Insert_sync",
+      "title": "Snippet for the insert call in the SqlUsersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlUsersService::Client#insert.",
+      "file": "sql_users_service/insert.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert",
+        "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client#insert",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlUsersInsertRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlUsersService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client"
+        },
+        "method": {
+          "short_name": "Insert",
+          "full_name": "google.cloud.sql.v1.SqlUsersService.Insert",
+          "service": {
+            "short_name": "SqlUsersService",
+            "full_name": "google.cloud.sql.v1.SqlUsersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlUsersService_List_sync",
+      "title": "Snippet for the list call in the SqlUsersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlUsersService::Client#list.",
+      "file": "sql_users_service/list.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list",
+        "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client#list",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlUsersListRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::UsersListResponse",
+        "client": {
+          "short_name": "SqlUsersService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client"
+        },
+        "method": {
+          "short_name": "List",
+          "full_name": "google.cloud.sql.v1.SqlUsersService.List",
+          "service": {
+            "short_name": "SqlUsersService",
+            "full_name": "google.cloud.sql.v1.SqlUsersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "sqladmin_v1_generated_SqlUsersService_Update_sync",
+      "title": "Snippet for the update call in the SqlUsersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Sql::V1::SqlUsersService::Client#update.",
+      "file": "sql_users_service/update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update",
+        "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client#update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Sql::V1::SqlUsersUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Sql::V1::Operation",
+        "client": {
+          "short_name": "SqlUsersService::Client",
+          "full_name": "::Google::Cloud::Sql::V1::SqlUsersService::Client"
+        },
+        "method": {
+          "short_name": "Update",
+          "full_name": "google.cloud.sql.v1.SqlUsersService.Update",
+          "service": {
+            "short_name": "SqlUsersService",
+            "full_name": "google.cloud.sql.v1.SqlUsersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
