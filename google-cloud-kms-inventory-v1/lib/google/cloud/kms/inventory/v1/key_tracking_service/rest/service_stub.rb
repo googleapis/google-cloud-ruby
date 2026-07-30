@@ -169,7 +169,7 @@ module Google
                                                             uri_method: :get,
                                                             uri_template: "/v1/{name}/protectedResourcesSummary",
                                                             matches: [
-                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/.*)?$}, true]
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb
