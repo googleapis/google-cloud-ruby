@@ -2,11 +2,10 @@
 # seed_lockfiles.rb
 #
 # Usage:
-#   ruby seed_lockfiles.rb --continue --size 25 --push
+#   ruby seed_lockfiles.rb --continue --size 15 --push
 
 require 'optparse'
 require 'fileutils'
-require 'thread'
 
 options = {
   batch_index: 0,
@@ -40,15 +39,25 @@ all_gems = Dir.glob("*/").map { |d| d.chomp('/') }.select do |dir|
   File.exist?(File.join(dir, "#{dir}.gemspec"))
 end.sort
 
-# 2. Filter unseeded libraries
+# 2. Filter unseeded & eligible libraries
 unseeded_gems = all_gems.select do |dir|
-  !File.exist?(File.join(dir, "Gemfile.lock"))
+  # Skip if it already has a lockfile physically present
+  next false if File.exist?(File.join(dir, "Gemfile.lock"))
+  
+  # Skip if Gemfile.lock is still listed inside this gem's .gitignore
+  gitignore_path = File.join(dir, ".gitignore")
+  if File.exist?(gitignore_path)
+    is_ignored = File.readlines(gitignore_path).any? { |line| line.strip == "Gemfile.lock" }
+    next false if is_ignored
+  end
+  
+  true
 end
 
-puts "🔍 [Seeder] Found #{unseeded_gems.size} libraries without a Gemfile.lock"
+puts "🔍 [Seeder] Found #{unseeded_gems.size} eligible libraries (no lockfile AND not .gitignored)"
 
 if unseeded_gems.empty?
-  puts "🎉 All libraries have been seeded!"
+  puts "🎉 All eligible libraries have been seeded!"
   exit 0
 end
 
@@ -66,7 +75,8 @@ if batch_gems.nil? || batch_gems.empty?
 end
 
 branch_name = "chore/seed-lockfiles-#{Time.now.to_i}"
-puts "📦 [Seeder] Batch targets #{batch_gems.size} gems."
+puts "📦 [Seeder] Batch targets #{batch_gems.size} gems:"
+batch_gems.each { |g| puts "   - #{g}" }
 
 # 3. Create branch if requested
 if options[:push]
@@ -74,33 +84,21 @@ if options[:push]
   system("git checkout -b #{branch_name}", exception: true)
 end
 
-# 4. Generate lockfiles CONCURRENTLY
-# We use a thread-safe Queue and a Mutex to prevent terminal print interleaving
-queue = Queue.new
-batch_gems.each { |g| queue << g }
-STDOUT_MUTEX = Mutex.new
-
+# 4. Generate lockfiles SEQUENTIALLY
 platforms = %w[ruby x86_64-linux x86_64-darwin arm64-darwin x64-mingw-ucrt x64-mingw32]
 platform_args = platforms.map { |p| "--add-platform #{p}" }.join(" ")
 
-workers = 8.times.map do
-  Thread.new do
-    loop do
-      # Non-blocking pop; raises ThreadError when the queue is identically empty
-      gem_name = queue.pop(true) rescue break
-      
-      STDOUT_MUTEX.synchronize { puts "⏳ Seeding #{gem_name}..." }
-      
-      # Run bundle lock with all requested generic, Mac, and Windows platforms
-      system("cd #{gem_name} && bundle lock #{platform_args}", exception: true)
-      
-      system("git add #{gem_name}/Gemfile.lock", exception: true) if options[:push]
-    end
-  end
-end
+batch_gems.each_with_index do |gem_name, i|
+  puts "⏳ [#{i + 1}/#{batch_gems.size}] Seeding #{gem_name}..."
 
-# Await completion of all threads
-workers.each(&:join)
+  Dir.chdir(gem_name) do
+    # Run bundle lock synchronously 
+    system("bundle lock #{platform_args}", exception: true)
+  end
+
+  # Stage the file sequentially so we safely avoid Git index lock conflicts
+  system("git add #{gem_name}/Gemfile.lock", exception: true) if options[:push]
+end
 
 # 5. Commit if requested
 if options[:push]
