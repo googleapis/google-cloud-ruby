@@ -1,0 +1,39 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-beyond_corp-app_connectors.gemspec"
+    - "Rakefile"
+    - "acceptance/**/*"
+    - "test/**/*"
+
+Bundler/OrderedGems:
+  Enabled: false
+Documentation:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "samples/**/acceptance/*.rb"
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-beyond_corp-app_connectors.rb"
+
+Style/BlockDelimiters:
+  Exclude:
+    - "samples/**/acceptance/*.rb"

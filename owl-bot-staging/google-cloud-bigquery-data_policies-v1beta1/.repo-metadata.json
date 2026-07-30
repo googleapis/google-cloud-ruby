@@ -1,0 +1,17 @@
+{
+    "api_id": "bigquerydatapolicy.googleapis.com",
+    "api_shortname": "bigquerydatapolicy",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_policies-v1beta1/latest",
+    "distribution_name": "google-cloud-bigquery-data_policies-v1beta1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "bigquerydatapolicy",
+    "name_pretty": "BigQuery Data Policy Service V1beta1 API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Data Policy Service provides APIs for managing the BigQuery label-policy bindings. Note that google-cloud-bigquery-data_policies-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-data_policies instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs",
+    "library_type": "GAPIC_AUTO"
+}
