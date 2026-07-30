@@ -590,7 +590,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -633,7 +633,7 @@ module Google
                                                           uri_template: "/v2/{product.name}",
                                                           body: "product",
                                                           matches: [
-                                                            ["product.name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["product.name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -654,7 +654,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v2/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -720,7 +720,7 @@ module Google
                                                           uri_template: "/v2/{inventory.name}:setInventory",
                                                           body: "*",
                                                           matches: [
-                                                            ["inventory.name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["inventory.name", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -742,7 +742,7 @@ module Google
                                                           uri_template: "/v2/{product}:addFulfillmentPlaces",
                                                           body: "*",
                                                           matches: [
-                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -764,7 +764,7 @@ module Google
                                                           uri_template: "/v2/{product}:removeFulfillmentPlaces",
                                                           body: "*",
                                                           matches: [
-                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -786,7 +786,7 @@ module Google
                                                           uri_template: "/v2/{product}:addLocalInventories",
                                                           body: "*",
                                                           matches: [
-                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -808,7 +808,7 @@ module Google
                                                           uri_template: "/v2/{product}:removeLocalInventories",
                                                           body: "*",
                                                           matches: [
-                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/.*)?$}, true]
+                                                            ["product", %r{^projects/[^/]+/locations/[^/]+/catalogs/[^/]+/branches/[^/]+/products(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
