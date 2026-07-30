@@ -68,7 +68,7 @@ module Google
           #    the entire file into memory. The stream is rewound before and after
           #    reading to ensure its position is not permanently changed.
           # 2. A file path (String or Pathname): It efficiently streams the file
-          #    directly via the digest C-extension.
+          #    to compute the digest without loading the entire file into memory.
           #
           # @param local_file [String, Pathname, IO] The local file path or IO
           #   stream for which to compute the digest.
