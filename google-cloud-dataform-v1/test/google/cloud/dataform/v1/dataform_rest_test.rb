@@ -1810,6 +1810,7 @@ class ::Google::Cloud::Dataform::V1::Dataform::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     workspace = "hello world"
+    pipeline_config = {}
 
     install_npm_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1825,27 +1826,27 @@ class ::Google::Cloud::Dataform::V1::Dataform::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.install_npm_packages({ workspace: workspace }) do |_result, response|
+        c.install_npm_packages({ workspace: workspace, pipeline_config: pipeline_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.install_npm_packages workspace: workspace do |_result, response|
+        c.install_npm_packages workspace: workspace, pipeline_config: pipeline_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.install_npm_packages ::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace) do |_result, response|
+        c.install_npm_packages ::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace, pipeline_config: pipeline_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.install_npm_packages({ workspace: workspace }, call_options) do |_result, response|
+        c.install_npm_packages({ workspace: workspace, pipeline_config: pipeline_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.install_npm_packages(::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace), call_options) do |_result, response|
+        c.install_npm_packages(::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace, pipeline_config: pipeline_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -2030,11 +2030,13 @@ class ::Google::Cloud::Dataform::V1::Dataform::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     workspace = "hello world"
+    pipeline_config = {}
 
     install_npm_packages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :install_npm_packages, name
       assert_kind_of ::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest, request
       assert_equal "hello world", request["workspace"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1::PipelineConfig), request["pipeline_config"]
       refute_nil options
     end
 
@@ -2045,31 +2047,31 @@ class ::Google::Cloud::Dataform::V1::Dataform::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.install_npm_packages({ workspace: workspace }) do |response, operation|
+      c.install_npm_packages({ workspace: workspace, pipeline_config: pipeline_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.install_npm_packages workspace: workspace do |response, operation|
+      c.install_npm_packages workspace: workspace, pipeline_config: pipeline_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.install_npm_packages ::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace) do |response, operation|
+      c.install_npm_packages ::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace, pipeline_config: pipeline_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.install_npm_packages({ workspace: workspace }, grpc_options) do |response, operation|
+      c.install_npm_packages({ workspace: workspace, pipeline_config: pipeline_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.install_npm_packages(::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace), grpc_options) do |response, operation|
+      c.install_npm_packages(::Google::Cloud::Dataform::V1::InstallNpmPackagesRequest.new(workspace: workspace, pipeline_config: pipeline_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
