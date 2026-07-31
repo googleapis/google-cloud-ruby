@@ -74,6 +74,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     name = "hello world"
     mask = {}
     transaction = "hello world"
+    request_options = {}
 
     get_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_document, name
@@ -82,6 +83,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -92,31 +94,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.get_document({ name: name, mask: mask, transaction: transaction }) do |response, operation|
+      c.get_document({ name: name, mask: mask, transaction: transaction, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.get_document name: name, mask: mask, transaction: transaction do |response, operation|
+      c.get_document name: name, mask: mask, transaction: transaction, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.get_document ::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction) do |response, operation|
+      c.get_document ::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.get_document({ name: name, mask: mask, transaction: transaction }, grpc_options) do |response, operation|
+      c.get_document({ name: name, mask: mask, transaction: transaction, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.get_document(::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction), grpc_options) do |response, operation|
+      c.get_document(::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -142,6 +144,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     mask = {}
     transaction = "hello world"
     show_missing = true
+    request_options = {}
 
     list_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_documents, name
@@ -155,6 +158,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       assert_equal true, request["show_missing"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -165,35 +169,35 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing }) do |response, operation|
+      c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list_documents parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing do |response, operation|
+      c.list_documents parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list_documents ::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing) do |response, operation|
+      c.list_documents ::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing }, grpc_options) do |response, operation|
+      c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list_documents(::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing), grpc_options) do |response, operation|
+      c.list_documents(::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -216,6 +220,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     update_mask = {}
     mask = {}
     current_document = {}
+    request_options = {}
 
     update_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_document, name
@@ -224,6 +229,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["update_mask"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Precondition), request["current_document"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -234,31 +240,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document }) do |response, operation|
+      c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.update_document document: document, update_mask: update_mask, mask: mask, current_document: current_document do |response, operation|
+      c.update_document document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.update_document ::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document) do |response, operation|
+      c.update_document ::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document }, grpc_options) do |response, operation|
+      c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.update_document(::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document), grpc_options) do |response, operation|
+      c.update_document(::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -278,12 +284,14 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     current_document = {}
+    request_options = {}
 
     delete_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_document, name
       assert_kind_of ::Google::Cloud::Firestore::V1::DeleteDocumentRequest, request
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Precondition), request["current_document"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -294,31 +302,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.delete_document({ name: name, current_document: current_document }) do |response, operation|
+      c.delete_document({ name: name, current_document: current_document, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.delete_document name: name, current_document: current_document do |response, operation|
+      c.delete_document name: name, current_document: current_document, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.delete_document ::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document) do |response, operation|
+      c.delete_document ::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.delete_document({ name: name, current_document: current_document }, grpc_options) do |response, operation|
+      c.delete_document({ name: name, current_document: current_document, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.delete_document(::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document), grpc_options) do |response, operation|
+      c.delete_document(::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,6 +348,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     documents = ["hello world"]
     mask = {}
     transaction = "hello world"
+    request_options = {}
 
     batch_get_documents_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :batch_get_documents, name
@@ -349,6 +358,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -359,7 +369,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction }) do |response, operation|
+      c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse, r
@@ -368,7 +378,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      c.batch_get_documents database: database, documents: documents, mask: mask, transaction: transaction do |response, operation|
+      c.batch_get_documents database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse, r
@@ -377,7 +387,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      c.batch_get_documents ::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction) do |response, operation|
+      c.batch_get_documents ::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse, r
@@ -386,7 +396,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction }, grpc_options) do |response, operation|
+      c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse, r
@@ -395,7 +405,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      c.batch_get_documents(::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction), grpc_options) do |response, operation|
+      c.batch_get_documents(::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse, r
@@ -418,12 +428,14 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     database = "hello world"
     options = {}
+    request_options = {}
 
     begin_transaction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :begin_transaction, name
       assert_kind_of ::Google::Cloud::Firestore::V1::BeginTransactionRequest, request
       assert_equal "hello world", request["database"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::TransactionOptions), request["options"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -434,31 +446,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.begin_transaction({ database: database, options: options }) do |response, operation|
+      c.begin_transaction({ database: database, options: options, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.begin_transaction database: database, options: options do |response, operation|
+      c.begin_transaction database: database, options: options, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.begin_transaction ::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options) do |response, operation|
+      c.begin_transaction ::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.begin_transaction({ database: database, options: options }, grpc_options) do |response, operation|
+      c.begin_transaction({ database: database, options: options, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.begin_transaction(::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options), grpc_options) do |response, operation|
+      c.begin_transaction(::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -479,6 +491,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     database = "hello world"
     writes = [{}]
     transaction = "hello world"
+    request_options = {}
 
     commit_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :commit, name
@@ -486,6 +499,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["database"]
       assert_kind_of ::Google::Cloud::Firestore::V1::Write, request["writes"].first
       assert_equal "hello world", request["transaction"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -496,31 +510,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.commit({ database: database, writes: writes, transaction: transaction }) do |response, operation|
+      c.commit({ database: database, writes: writes, transaction: transaction, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.commit database: database, writes: writes, transaction: transaction do |response, operation|
+      c.commit database: database, writes: writes, transaction: transaction, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.commit ::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction) do |response, operation|
+      c.commit ::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.commit({ database: database, writes: writes, transaction: transaction }, grpc_options) do |response, operation|
+      c.commit({ database: database, writes: writes, transaction: transaction, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.commit(::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction), grpc_options) do |response, operation|
+      c.commit(::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -540,12 +554,14 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     database = "hello world"
     transaction = "hello world"
+    request_options = {}
 
     rollback_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback, name
       assert_kind_of ::Google::Cloud::Firestore::V1::RollbackRequest, request
       assert_equal "hello world", request["database"]
       assert_equal "hello world", request["transaction"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -556,31 +572,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.rollback({ database: database, transaction: transaction }) do |response, operation|
+      c.rollback({ database: database, transaction: transaction, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.rollback database: database, transaction: transaction do |response, operation|
+      c.rollback database: database, transaction: transaction, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.rollback ::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction) do |response, operation|
+      c.rollback ::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.rollback({ database: database, transaction: transaction }, grpc_options) do |response, operation|
+      c.rollback({ database: database, transaction: transaction, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.rollback(::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction), grpc_options) do |response, operation|
+      c.rollback(::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -602,6 +618,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     structured_query = {}
     transaction = "hello world"
     explain_options = {}
+    request_options = {}
 
     run_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :run_query, name
@@ -612,6 +629,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::ExplainOptions), request["explain_options"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -622,7 +640,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options }) do |response, operation|
+      c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -631,7 +649,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      c.run_query parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options do |response, operation|
+      c.run_query parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -640,7 +658,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      c.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options) do |response, operation|
+      c.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -649,7 +667,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options }, grpc_options) do |response, operation|
+      c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -658,7 +676,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      c.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options), grpc_options) do |response, operation|
+      c.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -683,6 +701,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     structured_pipeline = {}
     transaction = "hello world"
     auto_commit_transaction = true
+    request_options = {}
 
     execute_pipeline_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :execute_pipeline, name
@@ -693,6 +712,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       assert_equal true, request["auto_commit_transaction"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -703,7 +723,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }) do |response, operation|
+      c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -712,7 +732,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      c.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction do |response, operation|
+      c.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -721,7 +741,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      c.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction) do |response, operation|
+      c.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -730,7 +750,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }, grpc_options) do |response, operation|
+      c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -739,7 +759,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      c.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction), grpc_options) do |response, operation|
+      c.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::ExecutePipelineResponse, r
@@ -764,6 +784,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     structured_aggregation_query = {}
     transaction = "hello world"
     explain_options = {}
+    request_options = {}
 
     run_aggregation_query_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :run_aggregation_query, name
@@ -774,6 +795,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.consistency_selector
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::ExplainOptions), request["explain_options"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -784,7 +806,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options }) do |response, operation|
+      c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -793,7 +815,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      c.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options do |response, operation|
+      c.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -802,7 +824,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      c.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options) do |response, operation|
+      c.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -811,7 +833,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options }, grpc_options) do |response, operation|
+      c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -820,7 +842,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      c.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options), grpc_options) do |response, operation|
+      c.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse, r
@@ -847,6 +869,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     page_token = "hello world"
     page_size = 42
     read_time = {}
+    request_options = {}
 
     partition_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :partition_query, name
@@ -859,6 +882,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
       assert_equal :read_time, request.consistency_selector
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -869,35 +893,35 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time }) do |response, operation|
+      c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.partition_query parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time do |response, operation|
+      c.partition_query parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.partition_query ::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time) do |response, operation|
+      c.partition_query ::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time }, grpc_options) do |response, operation|
+      c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.partition_query(::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time), grpc_options) do |response, operation|
+      c.partition_query(::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -921,6 +945,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     writes = [{}]
     stream_token = "hello world"
     labels = {}
+    request_options = {}
 
     write_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :write, name
@@ -936,8 +961,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels
+      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options
       enum_input = [request_hash, request_proto].to_enum
       c.write enum_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -948,8 +973,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels
+      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options
       stream_input = Gapic::StreamInput.new
       c.write stream_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -963,8 +988,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels
+      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options
       enum_input = [request_hash, request_proto].to_enum
       c.write enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -975,8 +1000,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels
+      request_hash = { database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::WriteRequest.new database: database, stream_id: stream_id, writes: writes, stream_token: stream_token, labels: labels, request_options: request_options
       stream_input = Gapic::StreamInput.new
       c.write stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -999,6 +1024,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
           assert_kind_of ::Google::Cloud::Firestore::V1::Write, r["writes"].first
           assert_equal "hello world", r["stream_token"]
           assert_equal({}, r["labels"].to_h)
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), r["request_options"]
         end
       end
     end
@@ -1015,6 +1041,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     database = "hello world"
     add_target = {}
     labels = {}
+    request_options = {}
 
     listen_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :listen, name
@@ -1030,8 +1057,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { database: database, add_target: add_target, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels
+      request_hash = { database: database, add_target: add_target, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels, request_options: request_options
       enum_input = [request_hash, request_proto].to_enum
       c.listen enum_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -1042,8 +1069,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { database: database, add_target: add_target, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels
+      request_hash = { database: database, add_target: add_target, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels, request_options: request_options
       stream_input = Gapic::StreamInput.new
       c.listen stream_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -1057,8 +1084,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { database: database, add_target: add_target, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels
+      request_hash = { database: database, add_target: add_target, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels, request_options: request_options
       enum_input = [request_hash, request_proto].to_enum
       c.listen enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -1069,8 +1096,8 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { database: database, add_target: add_target, labels: labels }
-      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels
+      request_hash = { database: database, add_target: add_target, labels: labels, request_options: request_options }
+      request_proto = ::Google::Cloud::Firestore::V1::ListenRequest.new database: database, add_target: add_target, labels: labels, request_options: request_options
       stream_input = Gapic::StreamInput.new
       c.listen stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -1092,6 +1119,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Target), r["add_target"]
           assert_equal :add_target, r.target_change
           assert_equal({}, r["labels"].to_h)
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), r["request_options"]
         end
       end
     end
@@ -1109,6 +1137,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     read_time = {}
+    request_options = {}
 
     list_collection_ids_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_collection_ids, name
@@ -1118,6 +1147,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["page_token"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
       assert_equal :read_time, request.consistency_selector
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -1128,31 +1158,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time }) do |response, operation|
+      c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list_collection_ids parent: parent, page_size: page_size, page_token: page_token, read_time: read_time do |response, operation|
+      c.list_collection_ids parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list_collection_ids ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time) do |response, operation|
+      c.list_collection_ids ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time }, grpc_options) do |response, operation|
+      c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list_collection_ids(::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time), grpc_options) do |response, operation|
+      c.list_collection_ids(::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1173,6 +1203,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     database = "hello world"
     writes = [{}]
     labels = {}
+    request_options = {}
 
     batch_write_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_write, name
@@ -1180,6 +1211,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["database"]
       assert_kind_of ::Google::Cloud::Firestore::V1::Write, request["writes"].first
       assert_equal({}, request["labels"].to_h)
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -1190,31 +1222,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.batch_write({ database: database, writes: writes, labels: labels }) do |response, operation|
+      c.batch_write({ database: database, writes: writes, labels: labels, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.batch_write database: database, writes: writes, labels: labels do |response, operation|
+      c.batch_write database: database, writes: writes, labels: labels, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.batch_write ::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels) do |response, operation|
+      c.batch_write ::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.batch_write({ database: database, writes: writes, labels: labels }, grpc_options) do |response, operation|
+      c.batch_write({ database: database, writes: writes, labels: labels, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.batch_write(::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels), grpc_options) do |response, operation|
+      c.batch_write(::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1237,6 +1269,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
     document_id = "hello world"
     document = {}
     mask = {}
+    request_options = {}
 
     create_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_document, name
@@ -1246,6 +1279,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       assert_equal "hello world", request["document_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::Document), request["document"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::DocumentMask), request["mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::V1::RequestOptions), request["request_options"]
       refute_nil options
     end
 
@@ -1256,31 +1290,31 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask }) do |response, operation|
+      c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.create_document parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask do |response, operation|
+      c.create_document parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.create_document ::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask) do |response, operation|
+      c.create_document ::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask }, grpc_options) do |response, operation|
+      c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.create_document(::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask), grpc_options) do |response, operation|
+      c.create_document(::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
