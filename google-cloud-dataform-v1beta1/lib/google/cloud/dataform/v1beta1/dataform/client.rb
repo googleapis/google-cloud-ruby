@@ -3343,13 +3343,16 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload install_npm_packages(workspace: nil)
+            # @overload install_npm_packages(workspace: nil, pipeline_config: nil)
             #   Pass arguments to `install_npm_packages` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param workspace [::String]
             #     Required. The workspace's name.
+            #   @param pipeline_config [::Google::Cloud::Dataform::V1beta1::PipelineConfig, ::Hash]
+            #     Optional. The pipeline options which defines the pipeline type and path
+            #     within the Git repository.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse]
