@@ -64,6 +64,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Detailed row-level warning with field paths.
+        # @!attribute [rw] reason
+        #   @return [::Google::Ads::DataManager::V1::WarningReason]
+        #     The warning reason.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The detailed warning message describing the issue.
+        # @!attribute [rw] field
+        #   @return [::String]
+        #     The field path that triggered the warning. Uses the same format as
+        #     [google.rpc.BadRequest.FieldViolation.field][google.rpc.BadRequest.FieldViolation.field].
+        class FieldWarning
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The processing error reason.
         # New reasons may be added in the future.
         module ProcessingErrorReason
@@ -210,6 +226,10 @@ module Google
 
           # A corresponding click can't be found that matches the provided attributes.
           PROCESSING_ERROR_REASON_CLICK_NOT_FOUND = 43
+
+          # External attribution data is missing. Sending events to a destination for
+          # an external attribution conversion action isn't supported.
+          PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING = 44
         end
 
         # The processing warning reason.
@@ -247,6 +267,77 @@ module Google
 
           # The system failed to authenticate with AWS.
           PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
+        end
+
+        # Reasons for non-blocking warnings returned during ingestion.
+        module WarningReason
+          # Unspecified warning reason.
+          WARNING_REASON_UNSPECIFIED = 0
+
+          # A custom variable in
+          # {::Google::Ads::DataManager::V1::Event#custom_variables `custom_variables`} is
+          # not enabled in the account.
+          WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 1
+
+          # A custom variable value in
+          # {::Google::Ads::DataManager::V1::Event#custom_variables `custom_variables`} is
+          # not among the predefined allowed values configured for the custom variable
+          # on the destination account.
+          WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED = 2
+
+          # The {::Google::Ads::DataManager::V1::Event#cart_data `cart_data`} is not
+          # supported with {::Google::Ads::DataManager::V1::AdIdentifiers#gbraid `gbraid`}
+          # or {::Google::Ads::DataManager::V1::AdIdentifiers#wbraid `wbraid`}.
+          WARNING_REASON_CART_DATA_NOT_SUPPORTED_WITH_GBRAID_OR_WBRAID = 3
+
+          # The
+          # {::Google::Ads::DataManager::V1::Item#merchant_product_id `merchant_product_id`}
+          # is missing in the cart item.
+          WARNING_REASON_CART_DATA_ITEM_MERCHANT_PRODUCT_ID_MISSING = 4
+
+          # The {::Google::Ads::DataManager::V1::Item#unit_price `unit_price`} is missing in
+          # the cart item.
+          WARNING_REASON_CART_DATA_ITEM_UNIT_PRICE_MISSING = 5
+
+          # Generic warning reason for issues that do not fit into other specific
+          # categories.
+          WARNING_REASON_GENERIC = 6
+
+          # The {::Google::Ads::DataManager::V1::Event#client_id `client_id`} is invalid.
+          WARNING_REASON_INVALID_CLIENT_ID = 7
+
+          # The
+          # {::Google::Ads::DataManager::V1::EventLocation#subdivision_code `subdivision_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_SUBDIVISION_CODE = 8
+
+          # The {::Google::Ads::DataManager::V1::EventLocation#region_code `region_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_REGION_CODE = 9
+
+          # The
+          # {::Google::Ads::DataManager::V1::EventLocation#subcontinent_code `subcontinent_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_SUBCONTINENT_CODE = 10
+
+          # The
+          # {::Google::Ads::DataManager::V1::EventLocation#continent_code `continent_code`}
+          # is invalid.
+          WARNING_REASON_INVALID_CONTINENT_CODE = 11
+
+          # The device {::Google::Ads::DataManager::V1::DeviceInfo#category `category`}
+          # is invalid.
+          WARNING_REASON_INVALID_DEVICE_CATEGORY = 12
+
+          # The device
+          # {::Google::Ads::DataManager::V1::DeviceInfo#screen_height `screen_height`} or
+          # {::Google::Ads::DataManager::V1::DeviceInfo#screen_width `screen_width`} is
+          # invalid.
+          WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION = 13
+
+          # The {::Google::Ads::DataManager::V1::CartData#merchant_id `merchant_id`} is
+          # invalid.
+          WARNING_REASON_INVALID_MERCHANT_ID = 14
         end
       end
     end

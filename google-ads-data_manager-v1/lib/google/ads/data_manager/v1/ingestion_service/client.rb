@@ -381,6 +381,90 @@ module Google
             end
 
             ##
+            # Removes all audience members from the provided destinations.
+            #
+            # @overload remove_all_audience_members(request, options = nil)
+            #   Pass arguments to `remove_all_audience_members` via a request object, either of type
+            #   {::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_all_audience_members(destinations: nil, remove_as_of_time: nil, validate_only: nil)
+            #   Pass arguments to `remove_all_audience_members` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param destinations [::Array<::Google::Ads::DataManager::V1::Destination, ::Hash>]
+            #     Required. The list of destinations to remove the users from.
+            #   @param remove_as_of_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. The remove as of time. If set, only audience members last added
+            #     before this time will be removed. If not set, it defaults to current time.
+            #     The remove as of time must not be in the future.
+            #   @param validate_only [::Boolean]
+            #     Optional. For testing purposes. If `true`, the request is validated but not
+            #     executed. Only errors are returned, not results.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Ads::DataManager::V1::RemoveAllAudienceMembersResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Ads::DataManager::V1::RemoveAllAudienceMembersResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/ads/data_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Ads::DataManager::V1::IngestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest.new
+            #
+            #   # Call the remove_all_audience_members method.
+            #   result = client.remove_all_audience_members request
+            #
+            #   # The returned object is of type Google::Ads::DataManager::V1::RemoveAllAudienceMembersResponse.
+            #   p result
+            #
+            def remove_all_audience_members request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_all_audience_members.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Ads::DataManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.remove_all_audience_members.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_all_audience_members.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @ingestion_service_stub.call_rpc :remove_all_audience_members, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Uploads a list of
             # {::Google::Ads::DataManager::V1::Event Event} resources from
             # the provided {::Google::Ads::DataManager::V1::Destination Destination}.
@@ -508,7 +592,7 @@ module Google
             #   @param ad_events [::Array<::Google::Ads::DataManager::V1::AdEvent, ::Hash>]
             #     Required. Required (at least 1). A list of ad events.
             #   @param encryption_info [::Google::Ads::DataManager::V1::EncryptionInfo, ::Hash]
-            #     Optional. Information about encryption keys which are used to encrypt the
+            #     Required. Information about encryption keys which are used to encrypt the
             #     data.
             #   @param validate_only [::Boolean]
             #     Optional. If true, the request is validated, but not executed.
@@ -842,6 +926,11 @@ module Google
                 #
                 attr_reader :remove_audience_members
                 ##
+                # RPC-specific configuration for `remove_all_audience_members`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_all_audience_members
+                ##
                 # RPC-specific configuration for `ingest_events`
                 # @return [::Gapic::Config::Method]
                 #
@@ -863,6 +952,8 @@ module Google
                   @ingest_audience_members = ::Gapic::Config::Method.new ingest_audience_members_config
                   remove_audience_members_config = parent_rpcs.remove_audience_members if parent_rpcs.respond_to? :remove_audience_members
                   @remove_audience_members = ::Gapic::Config::Method.new remove_audience_members_config
+                  remove_all_audience_members_config = parent_rpcs.remove_all_audience_members if parent_rpcs.respond_to? :remove_all_audience_members
+                  @remove_all_audience_members = ::Gapic::Config::Method.new remove_all_audience_members_config
                   ingest_events_config = parent_rpcs.ingest_events if parent_rpcs.respond_to? :ingest_events
                   @ingest_events = ::Gapic::Config::Method.new ingest_events_config
                   ingest_ad_events_config = parent_rpcs.ingest_ad_events if parent_rpcs.respond_to? :ingest_ad_events

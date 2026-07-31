@@ -74,6 +74,35 @@ module Google
         # @!attribute [rw] postal_code
         #   @return [::String]
         #     Required. The postal code of the user's address.
+        # @!attribute [rw] address_line
+        #   @return [::String]
+        #     Optional. The street and number of the user's address. Used only for
+        #     Google Analytics. This field is hashed and possibly encrypted.
+        #
+        #     Normalize the value before hashing:
+        #
+        #     - Remove symbol characters
+        #     - Convert to lowercase
+        #     - Remove leading and trailing whitespace
+        # @!attribute [rw] city
+        #   @return [::String]
+        #     Optional. The city of the user's address. Used only for Google Analytics.
+        #
+        #     The value should be normalized as such:
+        #
+        #     - Remove symbol characters
+        #     - Convert to lowercase
+        #     - Remove leading and trailing whitespace
+        # @!attribute [rw] administrative_area
+        #   @return [::String]
+        #     Optional. The administrative area (state/province) of the user's address.
+        #     Used only for Google Analytics.
+        #
+        #     The value should be normalized as such:
+        #
+        #     - Remove symbol characters
+        #     - Convert to lowercase
+        #     - Remove leading and trailing whitespace
         class AddressInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
