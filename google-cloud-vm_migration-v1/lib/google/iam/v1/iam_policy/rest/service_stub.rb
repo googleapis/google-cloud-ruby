@@ -208,7 +208,7 @@ module Google
                                                         uri_template: "/v1/{resource}:setIamPolicy",
                                                         body: "*",
                                                         matches: [
-                                                          ["resource", %r{^.*$}, true]
+                                                          ["resource", %r{^(?<__wildcard__>.*)$}, true]
                                                         ]
                                                       )
               transcoder.transcode request_pb
@@ -230,7 +230,7 @@ module Google
                                                         uri_template: "/v1/{resource}:getIamPolicy",
                                                         body: "*",
                                                         matches: [
-                                                          ["resource", %r{^.*$}, true]
+                                                          ["resource", %r{^(?<__wildcard__>.*)$}, true]
                                                         ]
                                                       )
               transcoder.transcode request_pb
@@ -252,7 +252,7 @@ module Google
                                                         uri_template: "/v1/{resource}:testIamPermissions",
                                                         body: "*",
                                                         matches: [
-                                                          ["resource", %r{^.*$}, true]
+                                                          ["resource", %r{^(?<__wildcard__>.*)$}, true]
                                                         ]
                                                       )
               transcoder.transcode request_pb
