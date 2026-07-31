@@ -147,6 +147,7 @@
     "snippets/ingestion_service/ingest_ad_events.rb",
     "snippets/ingestion_service/ingest_audience_members.rb",
     "snippets/ingestion_service/ingest_events.rb",
+    "snippets/ingestion_service/remove_all_audience_members.rb",
     "snippets/ingestion_service/remove_audience_members.rb",
     "snippets/ingestion_service/retrieve_request_status.rb",
     "snippets/marketing_data_insights_service/retrieve_insights.rb",

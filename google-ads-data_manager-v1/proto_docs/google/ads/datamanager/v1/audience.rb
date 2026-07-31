@@ -31,7 +31,7 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::UserData]
         #     User-provided data that identifies the user.
         #
-        #     Note: The following fields are mutually exclusive: `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`, `composite_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`, `composite_data`, `google_user_id_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pair_data
         #   @return [::Google::Ads::DataManager::V1::PairData]
         #     [Publisher Advertiser Identity Reconciliation (PAIR)
@@ -39,30 +39,40 @@ module Google
         #
         #     This feature is only available to data partners.
         #
-        #     Note: The following fields are mutually exclusive: `pair_data`, `user_data`, `mobile_data`, `user_id_data`, `ppid_data`, `composite_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `pair_data`, `user_data`, `mobile_data`, `user_id_data`, `ppid_data`, `composite_data`, `google_user_id_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mobile_data
         #   @return [::Google::Ads::DataManager::V1::MobileData]
         #     Data identifying the user's mobile devices.
         #
-        #     Note: The following fields are mutually exclusive: `mobile_data`, `user_data`, `pair_data`, `user_id_data`, `ppid_data`, `composite_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mobile_data`, `user_data`, `pair_data`, `user_id_data`, `ppid_data`, `composite_data`, `google_user_id_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_id_data
         #   @return [::Google::Ads::DataManager::V1::UserIdData]
         #     Data related to unique identifiers for a user, as defined by the
         #     advertiser.
         #
-        #     Note: The following fields are mutually exclusive: `user_id_data`, `user_data`, `pair_data`, `mobile_data`, `ppid_data`, `composite_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `user_id_data`, `user_data`, `pair_data`, `mobile_data`, `ppid_data`, `composite_data`, `google_user_id_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ppid_data
         #   @return [::Google::Ads::DataManager::V1::PpidData]
         #     Data related to publisher provided identifiers.
         #
         #     This feature is only available to data partners.
         #
-        #     Note: The following fields are mutually exclusive: `ppid_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `composite_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `ppid_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `composite_data`, `google_user_id_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] composite_data
         #   @return [::Google::Ads::DataManager::V1::CompositeData]
         #     Group of multiple identifier types.
         #
-        #     Note: The following fields are mutually exclusive: `composite_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `composite_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`, `google_user_id_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] google_user_id_data
+        #   @return [::Google::Ads::DataManager::V1::GoogleUserIdData]
+        #     Encrypted Google User IDs.
+        #
+        #     Note: The following fields are mutually exclusive: `google_user_id_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`, `composite_data`, `partner_provided_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] partner_provided_id_data
+        #   @return [::Google::Ads::DataManager::V1::PartnerProvidedIdData]
+        #     Partner-provided identifiers.
+        #
+        #     Note: The following fields are mutually exclusive: `partner_provided_id_data`, `user_data`, `pair_data`, `mobile_data`, `user_id_data`, `ppid_data`, `composite_data`, `google_user_id_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] consent
         #   @return [::Google::Ads::DataManager::V1::Consent]
         #     Optional. The consent setting for the user.
@@ -90,8 +100,10 @@ module Google
         # Mobile IDs for the audience. At least one mobile ID is required.
         # @!attribute [rw] mobile_ids
         #   @return [::Array<::String>]
-        #     Required. The list of mobile device IDs (advertising ID/IDFA). At most 10
-        #     `mobileIds` can be provided in a single
+        #     Required. The list of mobile device IDs (Android advertising ID, iOS IDFA
+        #     for Customer Match user lists and Android advertising ID, iOS IDFA,
+        #     Xbox or Microsoft ID, Amazon Fire TV ID, Roku ID, Generic Device ID for
+        #     basic user lists). At most 10 `mobileIds` can be provided in a single
         #     {::Google::Ads::DataManager::V1::AudienceMember AudienceMember}.
         class MobileData
           include ::Google::Protobuf::MessageExts
@@ -149,6 +161,26 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Last recorded interaction time from this IP address in a session.
         class IpData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Google user id data holding encrypted google user IDs. At least one google
+        # user ID is required.
+        # @!attribute [rw] google_user_ids
+        #   @return [::Array<::String>]
+        #     Required. The list of encrypted google user IDs.
+        class GoogleUserIdData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Partner-provided data holding the partner-provided identifiers. At least one
+        # partner-provided identifier is required.
+        # @!attribute [rw] partner_provided_ids
+        #   @return [::Array<::String>]
+        #     Required. The list of partner-provided identifiers.
+        class PartnerProvidedIdData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
