@@ -182,10 +182,10 @@ GEM
       path_expander (~> 2.0)
     minitest-focus (1.4.1)
       minitest (> 5.0)
-    minitest-reporters (1.5.0)
+    minitest-reporters (1.8.0)
       ansi
       builder
-      minitest (>= 5.0)
+      minitest (>= 5.0, < 7)
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
@@ -324,7 +324,7 @@ DEPENDENCIES
   minitest (~> 5.14)
   minitest-autotest (~> 1.0)
   minitest-focus (~> 1.1)
-  minitest-reporters (~> 1.5.0)
+  minitest-reporters (~> 1.8.0)
   minitest-rg (~> 5.2)
   ostruct (~> 0.6.3)
   rack (>= 0.1)
@@ -395,7 +395,7 @@ CHECKSUMS
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
   minitest-autotest (1.2.0) sha256=60d031cba705215450662b0060f03f96507682b346a19c27f6756751ad92d2b4
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
-  minitest-reporters (1.5.0) sha256=a693acddc67987cde96d33ad6766b8d3e8522bb4c8a20628352950c30d42f0a3
+  minitest-reporters (1.8.0) sha256=8ce5280fb73ad3178ae525454df169b6f28c1b38b1d088ea91815d3a370ba384
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
   minitest-server (1.0.10) sha256=275439bf3ffc433fcbe161733248f1d9749ebf122892cf010bf864aaa95cef75
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
