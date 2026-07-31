@@ -1197,6 +1197,10 @@ module Google
         # @!attribute [rw] workspace
         #   @return [::String]
         #     Required. The workspace's name.
+        # @!attribute [rw] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1::PipelineConfig]
+        #     Optional. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class InstallNpmPackagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1230,9 +1234,9 @@ module Google
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Optional. Specifies the time zone to be used when interpreting
-        #     cron_schedule. Must be a time zone name from the time zone database
-        #     (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left
-        #     unspecified, the default is UTC.
+        #     cron_schedule. Must be a time zone name from the [time zone
+        #     database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If
+        #     left unspecified, the default is `UTC`.
         # @!attribute [r] recent_scheduled_release_records
         #   @return [::Array<::Google::Cloud::Dataform::V1::ReleaseConfig::ScheduledReleaseRecord>]
         #     Output only. Records of the 10 most recent scheduled release attempts,
@@ -1425,6 +1429,10 @@ module Google
         #     Output only. Metadata indicating whether this resource is user-scoped.
         #     `CompilationResult` resource is `user_scoped` only if it is sourced
         #     from a workspace.
+        # @!attribute [r] gcs_repository_snapshot_metadata
+        #   @return [::Google::Cloud::Dataform::V1::GcsRepositorySnapshotMetadata]
+        #     Output only. Metadata about the repository snapshot used by scheduled
+        #     notebooks.
         class CompilationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1486,6 +1494,10 @@ module Google
         # @!attribute [rw] default_notebook_runtime_options
         #   @return [::Google::Cloud::Dataform::V1::NotebookRuntimeOptions]
         #     Optional. The default notebook runtime options.
+        # @!attribute [rw] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1::PipelineConfig]
+        #     Optional. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class CodeCompilationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1500,11 +1512,43 @@ module Google
           end
         end
 
+        # Metadata about a repository snapshot stored in Google Cloud Storage.
+        # @!attribute [r] repository_snapshot_uri
+        #   @return [::String]
+        #     Output only. The Google Cloud Storage URI of the repository snapshot.
+        # @!attribute [r] crc32c_checksum
+        #   @return [::String]
+        #     Output only. The crc32c checksum of the repository snapshot, big-endian
+        #     base64 encoded.
+        # @!attribute [r] generation
+        #   @return [::Integer]
+        #     Output only. The generation number of the Cloud Storage object. See
+        #     https://cloud.google.com/storage/docs/metadata#generation-number.
+        class GcsRepositorySnapshotMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configures the destination for a repository snapshot.
+        # @!attribute [rw] repository_snapshot_uri
+        #   @return [::String]
+        #     Optional. The Google Cloud Storage destination to upload the repository
+        #     snapshot to. Format: `gs://bucket-name/path/`.
+        class GcsRepositorySnapshotDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configures various aspects of Dataform notebook runtime.
         # @!attribute [rw] gcs_output_bucket
         #   @return [::String]
         #     Optional. The Google Cloud Storage location to upload the result to.
         #     Format: `gs://bucket-name`.
+        # @!attribute [rw] gcs_repository_snapshot_destination
+        #   @return [::Google::Cloud::Dataform::V1::GcsRepositorySnapshotDestination]
+        #     Optional. The Google Cloud Storage destination to upload the snapshot to.
+        #     For empty URI it defaults to the provided gcs_output_bucket.
+        #     Format: `gs://bucket-name/path/`.
         # @!attribute [rw] ai_platform_notebook_runtime_template
         #   @return [::String]
         #     Optional. The resource name of the [Colab runtime template]
@@ -1514,6 +1558,36 @@ module Google
         class NotebookRuntimeOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the pipeline type and path within the Git repository.
+        # @!attribute [rw] pipeline_type
+        #   @return [::Google::Cloud::Dataform::V1::PipelineConfig::PipelineType]
+        #     Required. The type of the pipeline.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. The relative path within the Git repository where the pipeline is
+        #     defined. For example, for a Dataform pipeline, it is a path to the folder
+        #     where `workflow_settings.yaml` or `dataform.json` is located.
+        class PipelineConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the pipeline. This may be extended in the future.
+          # In case of UNSPECIFIED, the error will be thrown.
+          module PipelineType
+            # Default value. This value is unused.
+            PIPELINE_TYPE_UNSPECIFIED = 0
+
+            # Regular Dataform pipeline.
+            DATAFORM = 1
+
+            # SQL single file asset.
+            SQL = 3
+
+            # Notebook single file asset.
+            NOTEBOOK = 4
+          end
         end
 
         # `ListCompilationResults` request message.
@@ -2082,9 +2156,9 @@ module Google
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Optional. Specifies the time zone to be used when interpreting
-        #     cron_schedule. Must be a time zone name from the time zone database
-        #     (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left
-        #     unspecified, the default is UTC.
+        #     cron_schedule. Must be a time zone name from the [time zone
+        #     database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If
+        #     left unspecified, the default is `UTC`.
         # @!attribute [r] recent_scheduled_execution_records
         #   @return [::Array<::Google::Cloud::Dataform::V1::WorkflowConfig::ScheduledExecutionRecord>]
         #     Output only. Records of the 10 most recent scheduled execution attempts,
@@ -2312,6 +2386,10 @@ module Google
         #     Output only. Metadata indicating whether this resource is user-scoped.
         #     `WorkflowInvocation` resource is `user_scoped` only if it is sourced
         #     from a compilation result and the compilation result is user-scoped.
+        # @!attribute [r] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1::PipelineConfig]
+        #     Output only. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class WorkflowInvocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2502,6 +2580,9 @@ module Google
           #     executed the notebook in contents and also the ID used for the outputs
           #     created in Google Cloud Storage buckets. Only set once the job has
           #     started to run.
+          # @!attribute [r] file_path
+          #   @return [::String]
+          #     Output only. The path to the notebook file in the repository.
           class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
