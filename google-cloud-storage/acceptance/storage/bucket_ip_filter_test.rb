@@ -110,4 +110,21 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.ip_filter.vpc_network_sources).must_be_nil
 
   end
+
+  it "configures ip_filter with multiple allowed_ip_cidr_ranges" do
+    multiple_ips_filter = {
+      mode: "Disabled",
+      public_network_source: {
+        allowed_ip_cidr_ranges: ["8.8.8.8/32", "8.8.4.4/32"]
+      }
+    }
+
+    safe_gcs_execute do
+      bucket.ip_filter = multiple_ips_filter
+    end
+
+    _(bucket.ip_filter.mode).must_equal "Disabled"
+    _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_include "8.8.8.8/32"
+    _(bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges).must_include "8.8.4.4/32"
+  end
 end

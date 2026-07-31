@@ -240,6 +240,25 @@ describe "Buckets Snippets" do
       end
     end
 
+    it "configures ip_filter with multiple allowed_ip_cidr_ranges" do
+      bucket = storage_client.bucket(bucket_name) || create_bucket_helper(bucket_name)
+      bucket = storage_client.bucket(bucket_name) # Ensure we get the full bucket instance
+
+      multiple_ips_filter = {
+        mode: "Disabled",
+        public_network_source: {
+          allowed_ip_cidr_ranges: ["8.8.8.8/32", "8.8.4.4/32"]
+        }
+      }
+
+      retry_resource_exhaustion do
+        bucket.ip_filter = multiple_ips_filter
+      end
+      bucket.reload! 
+      assert_equal "Disabled", bucket.ip_filter.mode
+      assert_includes bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges, "8.8.8.8/32"
+      assert_includes bucket.ip_filter.public_network_source.allowed_ip_cidr_ranges, "8.8.4.4/32"
+    end
   end
 
   describe "storage_bucket_encryption_enforcement_config" do
