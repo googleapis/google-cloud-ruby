@@ -90,6 +90,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "lib/google/cloud/asset/v1/asset_service/helpers.rb",
     "test/google/cloud/asset/v1/additional_paths_test.rb"
   ]
