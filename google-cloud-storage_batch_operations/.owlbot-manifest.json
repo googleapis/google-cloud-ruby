@@ -21,6 +21,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "samples/.rubocop.yml",
     "samples/Gemfile",
     "samples/Rakefile",

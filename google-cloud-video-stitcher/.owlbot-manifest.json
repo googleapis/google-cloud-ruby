@@ -21,6 +21,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "samples/Gemfile",
     "samples/Rakefile",
     "samples/acceptance/create_cdn_key_akamai_test.rb",
