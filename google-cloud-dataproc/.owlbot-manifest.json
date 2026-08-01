@@ -21,6 +21,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "MIGRATING.md",
     "acceptance/google/cloud/dataproc/cluster_controller_smoke_test.rb"
   ]
