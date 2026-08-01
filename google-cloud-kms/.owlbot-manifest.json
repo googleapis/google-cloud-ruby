@@ -21,6 +21,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "MIGRATING.md",
     "acceptance/google/cloud/kms/v1/smoke_test.rb",
     "lib/google/cloud/kms/helpers.rb",
