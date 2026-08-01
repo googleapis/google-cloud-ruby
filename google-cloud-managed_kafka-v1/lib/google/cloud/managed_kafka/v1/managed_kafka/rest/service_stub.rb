@@ -1163,7 +1163,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1185,7 +1185,7 @@ module Google
                                                           uri_template: "/v1/{consumer_group.name}",
                                                           body: "consumer_group",
                                                           matches: [
-                                                            ["consumer_group.name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/.*)?$}, true]
+                                                            ["consumer_group.name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1206,7 +1206,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1248,7 +1248,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1292,7 +1292,7 @@ module Google
                                                           uri_template: "/v1/{acl.name}",
                                                           body: "acl",
                                                           matches: [
-                                                            ["acl.name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/.*)?$}, true]
+                                                            ["acl.name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1313,7 +1313,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1335,7 +1335,7 @@ module Google
                                                           uri_template: "/v1/{acl}:addAclEntry",
                                                           body: "acl_entry",
                                                           matches: [
-                                                            ["acl", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/.*)?$}, true]
+                                                            ["acl", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1357,7 +1357,7 @@ module Google
                                                           uri_template: "/v1/{acl}:removeAclEntry",
                                                           body: "acl_entry",
                                                           matches: [
-                                                            ["acl", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/.*)?$}, true]
+                                                            ["acl", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/acls(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

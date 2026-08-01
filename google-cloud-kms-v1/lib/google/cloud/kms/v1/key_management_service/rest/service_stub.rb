@@ -2025,7 +2025,7 @@ module Google
                                                           uri_template: "/v1/{name}:encrypt",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/keyRings/[^/]+/cryptoKeys(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

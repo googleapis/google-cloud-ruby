@@ -891,70 +891,70 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^operations(?:/.*)?$}, true]
+                                                            ["name", %r{^operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/replays/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/replays/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/replays/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/replays/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/replays/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/replays/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/orgPolicyViolationsPreviews/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/orgPolicyViolationsPreviews/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/orgPolicyViolationsPreviews/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/orgPolicyViolationsPreviews/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/orgPolicyViolationsPreviews/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/orgPolicyViolationsPreviews/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/accessPolicySimulations/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/accessPolicySimulations/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/accessPolicySimulations/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/accessPolicySimulations/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/accessPolicySimulations/[^/]+/operations(?:/.*)?$}, true]
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/accessPolicySimulations/[^/]+/operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -975,7 +975,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^operations(?:/.*)?$}, true]
+                                                            ["name", %r{^operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -997,7 +997,7 @@ module Google
                                                           uri_template: "/v1/{name}:cancel",
                                                           body: "*",
                                                           matches: [
-                                                            ["name", %r{^operations(?:/.*)?$}, true]
+                                                            ["name", %r{^operations(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

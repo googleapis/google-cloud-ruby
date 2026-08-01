@@ -477,6 +477,65 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_search_messages
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::SearchMessagesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    view = :SEARCH_MESSAGES_VIEW_UNSPECIFIED
+
+    search_messages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_search_messages_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, search_messages_client_stub do
+        # Create client
+        c = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.search_messages parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.search_messages ::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.search_messages(::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, search_messages_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_attachment
     # Create test objects.
     client_result = ::Google::Apps::Chat::V1::Attachment.new

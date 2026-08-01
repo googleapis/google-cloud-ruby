@@ -11,10 +11,10 @@
   "semanticCommitScope": "deps",
   // Increase compatibility with other projects
   "rangeStrategy": "update-lockfile",
-  // Phase 1: Minimal lockfile maintenance across Core & Handwritten gems without proactive version bumps
+  // Lockfile maintenance across all gems in the monorepo without proactive version bumps
   "lockFileMaintenance": {
     "enabled": true,
-    "groupName": "core handwritten gems lockfiles",
+    "groupName": "maintain Gemfile.lock files",
     "automerge": false
     // Inherits "schedule:monthly" from extends preset
   },
@@ -26,22 +26,7 @@
       ],
       "groupName": "all patch updates"
     },
-    // Disable Renovate processing for non-Phase 1 gems during our phased rollout
-    {
-      "description": "Disable Renovate processing for non-Phase 1 gems during phased rollout",
-      "matchFileNames": [
-        "!google-cloud-core/**",
-        "!google-cloud-storage/**",
-        "!google-cloud-pubsub/**",
-        "!google-cloud-bigquery/**",
-        "!google-cloud-errors/**",
-        "!google-cloud-resource_manager/**",
-        "!google-cloud-bigtable/**",
-        "!google-cloud-logging/**",
-        "!google-cloud-monitoring/**"
-      ],
-      "enabled": false
-    },
+
     // Disable proactive rubygems version bumps across Phase 1 while keeping lockFileMaintenance enabled.
     // Note: Even though proactive package updates (`rubygems`) are disabled here, when `lockFileMaintenance`
     // runs (`bundle lock --update` via Renovate's bundler manager), it can still trigger `Gemfile` constraint updates

@@ -108,6 +108,11 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.search_messages.timeout = 30.0
+                  default_config.rpcs.search_messages.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.get_attachment.timeout = 30.0
                   default_config.rpcs.get_attachment.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -1439,6 +1444,279 @@ module Google
 
                 @chat_service_stub.delete_message request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Searches for messages in Google Chat that the calling user has access to.
+              # Returns a list of messages matching the search criteria.
+              #
+              # To search across all spaces the user has access to, set `parent` to
+              # `spaces/-`. Using any other value for `parent` results in an
+              # `INVALID_ARGUMENT` error. The returned messages have their `name` field
+              # populated with the full resource name, which includes the specific `space`
+              # in which the message resides.
+              #
+              # This API doesn't return all message types. The types of messages listed
+              # below aren't included in the response. Use
+              # {::Google::Apps::Chat::V1::ChatService::Rest::Client#list_messages ListMessages} to list all
+              # messages.
+              #
+              # - Private Messages that are visible to the authenticated user.
+              # - Messages posted by Chat apps in spaces or group chats.
+              # - Messages in a Chat app DM.
+              # - Messages from blocked users.
+              # - Messages in spaces that the caller has muted.
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+              # with one of the following [authorization
+              # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #   - `https://www.googleapis.com/auth/chat.messages.readonly`
+              #   - `https://www.googleapis.com/auth/chat.messages`
+              #
+              # @overload search_messages(request, options = nil)
+              #   Pass arguments to `search_messages` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::SearchMessagesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::SearchMessagesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload search_messages(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil, view: nil)
+              #   Pass arguments to `search_messages` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the space to search within.
+              #
+              #     To search across all spaces the user has access to, set this field to
+              #     `spaces/-`. Using any other value for `parent` results in an
+              #     `INVALID_ARGUMENT` error.
+              #
+              #     To limit the search to one or more spaces, use `space.name` or
+              #     `space.display_name` in the `filter`.
+              #   @param filter [::String]
+              #     Required. A search query.
+              #
+              #     The query can specify one or more search keywords, which are used to filter
+              #     the results,
+              #
+              #     You can also filter the results using the following message fields:
+              #
+              #     - `create_time`: Accepts a timestamp in
+              #       [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+              #       supported comparison operators are: `<` and `>=`.
+              #     - `sender.name`: The resource name of the sender (`users/{user}`). Only
+              #       supports `=`. You can use the e-mail as an alias for `{user}`. For
+              #       example, `users/example@gmail.com`, where `example@gmail.com` is the
+              #       e-mail of the Google Chat user.
+              #     - `space.name`: The resource name of the space where the message is posted.
+              #       (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+              #       search is performed across all direct messages and spaces the user has
+              #       access to as a space member.
+              #     - `space.display_name`: Supports the operator `:` (has) and filters spaces
+              #       based on a partial match of their display name. Results are limited to
+              #       the top five space matches. For example, `space.display_name:Project`
+              #       searches for messages in the top five spaces that contain the word
+              #       "Project" in their display names.
+              #     - `attachment`: Supports the operator `:*` (has any) to check for the
+              #       presence of attachments. If `attachment:*` is specified, only messages
+              #       that have at least one attachment are returned.
+              #     - `annotations.user_mentions.user.name`: The resource name of the mentioned
+              #       user (`users/{user}`). Only supports `:` (has). For example:
+              #       `annotations.user_mentions.user.name:"users/1234567890"` returns only
+              #       messages that contain a mention to the specified user. Alternatively, the
+              #       alias `me` can be used to filter for messages that mention the caller
+              #       user, for example: `annotations.user_mentions.user.name:users/me`. You
+              #       can also use the e-mail as an alias for `{user}`, for example,
+              #       `users/example@gmail.com`.
+              #
+              #     For advanced filtering, the following functions are also available:
+              #
+              #     - `has_link()`: Returns only messages that have at least one hyperlink in
+              #       the message text.
+              #     - `is_unread()`: Filters out messages that have been read by the calling
+              #       user.
+              #
+              #     Using the `space.display_name` filter requires that the calling credentials
+              #     include one of the following [authorization
+              #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
+              #     - `https://www.googleapis.com/auth/chat.spaces`
+              #
+              #     Using the `is_unread()` filter requires that the calling credentials
+              #     include one of the following [authorization
+              #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+              #
+              #     - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+              #     - `https://www.googleapis.com/auth/chat.users.readstate`
+              #
+              #
+              #     Across different fields, only `AND` operators are supported. A valid
+              #     example is `sender.name = "users/1234567890" AND is_unread()`. The word
+              #     `AND` is optional and is implied if omitted. For example, `sender.name =
+              #     "users/1234567890" is_unread()` is valid and is equivalent to the previous
+              #     example. An invalid example is `sender.name = "users/1234567890" OR
+              #     is_unread()` because `OR` is not supported between different fields.
+              #
+              #     Among the same field:
+              #
+              #     - `create_time` supports only `AND`, and can only be used to represent
+              #        an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+              #        create_time < "2023-01-01T00:00:00+00:00"`.
+              #     - `sender.name` supports only the `OR` operator, for example:
+              #       `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+              #     - `space.name` supports only the `OR` operator, for example:
+              #       `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+              #     - `space.display_name` supports the operators `AND` and `OR`, but not a
+              #       mix of both. For example:
+              #       `space.display_name:Project AND space.display_name:Tasks` returns
+              #       messages that are in spaces with display names containing both `Project`
+              #       and `Tasks`, whereas
+              #       `space.display_name:Project OR space.display_name:Tasks` returns messages
+              #       that are in spaces with display names containing either `Project` or
+              #       `Tasks` or both.
+              #     - `annotations.user_mentions.user.name` supports the operators `AND` and
+              #       `OR`, but not a mix of both. For example:
+              #       `annotations.user_mentions.user.name:"users/1234567890" AND
+              #       annotations.user_mentions.user.name:"users/0987654321"` returns only
+              #       messages that mentions both users, whereas
+              #       `annotations.user_mentions.user.name:"users/1234567890" OR
+              #       annotations.user_mentions.user.name:"users/0987654321"` returns messages
+              #       that mention either user or both.
+              #
+              #     Parentheses are required to disambiguate operator precedence when combining
+              #     `AND` and `OR` operators in the same query. For example:
+              #     `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+              #     Otherwise, parentheses are optional.
+              #
+              #     The following example queries are valid:
+              #
+              #     ```
+              #     "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+              #
+              #     sender.name = "users/example@gmail.com"
+              #
+              #     annotations.user_mentions.user.name:"users/0987654321"
+              #
+              #     attachment:* AND space.name = "spaces/ABCDEFGH"
+              #
+              #     tasks AND is_unread() AND sender.name = "users/1234567890"
+              #
+              #     "things to do" "urgent"
+              #
+              #     (sender.name = "users/1234567890")
+              #     AND (create_time < "2023-05-01T00:00:00Z")
+              #
+              #     tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+              #
+              #     "project one" is_unread()
+              #
+              #     space.display_name:Project tasks
+              #     ```
+              #
+              #     The maximum query length is 1,000 characters.
+              #
+              #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+              #     error.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of results to return. The service may return
+              #     fewer than this value.
+              #
+              #     If unspecified, at most 25 are returned.
+              #
+              #     The maximum value is 100. If you use a value more than 100, it's
+              #     automatically changed to 100.
+              #   @param page_token [::String]
+              #     Optional. A token, received from the previous search messages call. Provide
+              #     this parameter to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              #   @param order_by [::String]
+              #     Optional. How the results list is ordered.
+              #
+              #     Supported attributes to order by are:
+              #
+              #     - `create_time`: Sorts the results by the time of the message creation.
+              #       Default value.
+              #     - `relevance`: Sorts the results by relevance.
+              #       [Developer Preview](https://developers.google.com/workspace/preview).
+              #
+              #     The default ordering is `create_time desc`. Only a single order per query
+              #     (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+              #     is supported, and it must be specified after the order attribute.
+              #   @param view [::Google::Apps::Chat::V1::SearchMessagesRequest::SearchMessagesView]
+              #     Optional. Specifies what kind of search results view to return. The default
+              #     is `SEARCH_MESSAGES_VIEW_BASIC`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::SearchMessageResult>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::SearchMessageResult>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::SearchMessagesRequest.new
+              #
+              #   # Call the search_messages method.
+              #   result = client.search_messages request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::SearchMessageResult.
+              #     p item
+              #   end
+              #
+              def search_messages request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::SearchMessagesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.search_messages.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.search_messages.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.search_messages.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.search_messages request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :search_messages, "results", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6539,6 +6817,11 @@ module Google
                   #
                   attr_reader :delete_message
                   ##
+                  # RPC-specific configuration for `search_messages`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_messages
+                  ##
                   # RPC-specific configuration for `get_attachment`
                   # @return [::Gapic::Config::Method]
                   #
@@ -6760,6 +7043,8 @@ module Google
                     @update_message = ::Gapic::Config::Method.new update_message_config
                     delete_message_config = parent_rpcs.delete_message if parent_rpcs.respond_to? :delete_message
                     @delete_message = ::Gapic::Config::Method.new delete_message_config
+                    search_messages_config = parent_rpcs.search_messages if parent_rpcs.respond_to? :search_messages
+                    @search_messages = ::Gapic::Config::Method.new search_messages_config
                     get_attachment_config = parent_rpcs.get_attachment if parent_rpcs.respond_to? :get_attachment
                     @get_attachment = ::Gapic::Config::Method.new get_attachment_config
                     upload_attachment_config = parent_rpcs.upload_attachment if parent_rpcs.respond_to? :upload_attachment

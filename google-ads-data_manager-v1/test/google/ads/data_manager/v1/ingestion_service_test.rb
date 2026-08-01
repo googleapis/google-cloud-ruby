@@ -199,6 +199,68 @@ class ::Google::Ads::DataManager::V1::IngestionService::ClientTest < Minitest::T
     end
   end
 
+  def test_remove_all_audience_members
+    # Create GRPC objects.
+    grpc_response = ::Google::Ads::DataManager::V1::RemoveAllAudienceMembersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    destinations = [{}]
+    remove_as_of_time = {}
+    validate_only = true
+
+    remove_all_audience_members_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_all_audience_members, name
+      assert_kind_of ::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest, request
+      assert_kind_of ::Google::Ads::DataManager::V1::Destination, request["destinations"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["remove_as_of_time"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_all_audience_members_client_stub do
+      # Create client
+      c = ::Google::Ads::DataManager::V1::IngestionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.remove_all_audience_members({ destinations: destinations, remove_as_of_time: remove_as_of_time, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.remove_all_audience_members destinations: destinations, remove_as_of_time: remove_as_of_time, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.remove_all_audience_members ::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest.new(destinations: destinations, remove_as_of_time: remove_as_of_time, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.remove_all_audience_members({ destinations: destinations, remove_as_of_time: remove_as_of_time, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.remove_all_audience_members(::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest.new(destinations: destinations, remove_as_of_time: remove_as_of_time, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_all_audience_members_client_stub.call_rpc_count
+    end
+  end
+
   def test_ingest_events
     # Create GRPC objects.
     grpc_response = ::Google::Ads::DataManager::V1::IngestEventsResponse.new

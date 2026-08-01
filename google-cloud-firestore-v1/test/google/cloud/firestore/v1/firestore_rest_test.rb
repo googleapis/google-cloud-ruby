@@ -89,6 +89,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     name = "hello world"
     mask = {}
     transaction = "hello world"
+    request_options = {}
 
     get_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +105,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.get_document({ name: name, mask: mask, transaction: transaction }) do |_result, response|
+        c.get_document({ name: name, mask: mask, transaction: transaction, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get_document name: name, mask: mask, transaction: transaction do |_result, response|
+        c.get_document name: name, mask: mask, transaction: transaction, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get_document ::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction) do |_result, response|
+        c.get_document ::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get_document({ name: name, mask: mask, transaction: transaction }, call_options) do |_result, response|
+        c.get_document({ name: name, mask: mask, transaction: transaction, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get_document(::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction), call_options) do |_result, response|
+        c.get_document(::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -150,6 +151,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     mask = {}
     transaction = "hello world"
     show_missing = true
+    request_options = {}
 
     list_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -165,27 +167,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing }) do |_result, response|
+        c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_documents parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing do |_result, response|
+        c.list_documents parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_documents ::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing) do |_result, response|
+        c.list_documents ::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing }, call_options) do |_result, response|
+        c.list_documents({ parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_documents(::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing), call_options) do |_result, response|
+        c.list_documents(::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -207,6 +209,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     update_mask = {}
     mask = {}
     current_document = {}
+    request_options = {}
 
     update_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -222,27 +225,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document }) do |_result, response|
+        c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.update_document document: document, update_mask: update_mask, mask: mask, current_document: current_document do |_result, response|
+        c.update_document document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.update_document ::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document) do |_result, response|
+        c.update_document ::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document }, call_options) do |_result, response|
+        c.update_document({ document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.update_document(::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document), call_options) do |_result, response|
+        c.update_document(::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,6 +265,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     name = "hello world"
     current_document = {}
+    request_options = {}
 
     delete_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -277,27 +281,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.delete_document({ name: name, current_document: current_document }) do |_result, response|
+        c.delete_document({ name: name, current_document: current_document, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete_document name: name, current_document: current_document do |_result, response|
+        c.delete_document name: name, current_document: current_document, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete_document ::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document) do |_result, response|
+        c.delete_document ::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete_document({ name: name, current_document: current_document }, call_options) do |_result, response|
+        c.delete_document({ name: name, current_document: current_document, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete_document(::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document), call_options) do |_result, response|
+        c.delete_document(::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -319,6 +323,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     documents = ["hello world"]
     mask = {}
     transaction = "hello world"
+    request_options = {}
 
     batch_get_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -334,27 +339,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction }) do |_result, response|
+        c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        c.batch_get_documents database: database, documents: documents, mask: mask, transaction: transaction do |_result, response|
+        c.batch_get_documents database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        c.batch_get_documents ::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction) do |_result, response|
+        c.batch_get_documents ::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction }, call_options) do |_result, response|
+        c.batch_get_documents({ database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        c.batch_get_documents(::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction), call_options) do |_result, response|
+        c.batch_get_documents(::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -374,6 +379,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     database = "hello world"
     options = {}
+    request_options = {}
 
     begin_transaction_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -389,27 +395,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.begin_transaction({ database: database, options: options }) do |_result, response|
+        c.begin_transaction({ database: database, options: options, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.begin_transaction database: database, options: options do |_result, response|
+        c.begin_transaction database: database, options: options, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.begin_transaction ::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options) do |_result, response|
+        c.begin_transaction ::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.begin_transaction({ database: database, options: options }, call_options) do |_result, response|
+        c.begin_transaction({ database: database, options: options, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.begin_transaction(::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options), call_options) do |_result, response|
+        c.begin_transaction(::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -430,6 +436,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     database = "hello world"
     writes = [{}]
     transaction = "hello world"
+    request_options = {}
 
     commit_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -445,27 +452,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.commit({ database: database, writes: writes, transaction: transaction }) do |_result, response|
+        c.commit({ database: database, writes: writes, transaction: transaction, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.commit database: database, writes: writes, transaction: transaction do |_result, response|
+        c.commit database: database, writes: writes, transaction: transaction, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.commit ::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction) do |_result, response|
+        c.commit ::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.commit({ database: database, writes: writes, transaction: transaction }, call_options) do |_result, response|
+        c.commit({ database: database, writes: writes, transaction: transaction, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.commit(::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction), call_options) do |_result, response|
+        c.commit(::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -485,6 +492,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     database = "hello world"
     transaction = "hello world"
+    request_options = {}
 
     rollback_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -500,27 +508,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.rollback({ database: database, transaction: transaction }) do |_result, response|
+        c.rollback({ database: database, transaction: transaction, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.rollback database: database, transaction: transaction do |_result, response|
+        c.rollback database: database, transaction: transaction, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.rollback ::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction) do |_result, response|
+        c.rollback ::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.rollback({ database: database, transaction: transaction }, call_options) do |_result, response|
+        c.rollback({ database: database, transaction: transaction, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.rollback(::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction), call_options) do |_result, response|
+        c.rollback(::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,6 +550,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     structured_query = {}
     transaction = "hello world"
     explain_options = {}
+    request_options = {}
 
     run_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -557,27 +566,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options }) do |_result, response|
+        c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        c.run_query parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options do |_result, response|
+        c.run_query parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        c.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options) do |_result, response|
+        c.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options }, call_options) do |_result, response|
+        c.run_query({ parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        c.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options), call_options) do |_result, response|
+        c.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction, explain_options: explain_options, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -599,6 +608,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     structured_pipeline = {}
     transaction = "hello world"
     auto_commit_transaction = true
+    request_options = {}
 
     execute_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -614,27 +624,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }) do |_result, response|
+        c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        c.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction do |_result, response|
+        c.execute_pipeline database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        c.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction) do |_result, response|
+        c.execute_pipeline ::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction }, call_options) do |_result, response|
+        c.execute_pipeline({ database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        c.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction), call_options) do |_result, response|
+        c.execute_pipeline(::Google::Cloud::Firestore::V1::ExecutePipelineRequest.new(database: database, structured_pipeline: structured_pipeline, transaction: transaction, auto_commit_transaction: auto_commit_transaction, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -656,6 +666,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     structured_aggregation_query = {}
     transaction = "hello world"
     explain_options = {}
+    request_options = {}
 
     run_aggregation_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -671,27 +682,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options }) do |_result, response|
+        c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        c.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options do |_result, response|
+        c.run_aggregation_query parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        c.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options) do |_result, response|
+        c.run_aggregation_query ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options }, call_options) do |_result, response|
+        c.run_aggregation_query({ parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        c.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options), call_options) do |_result, response|
+        c.run_aggregation_query(::Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(parent: parent, structured_aggregation_query: structured_aggregation_query, transaction: transaction, explain_options: explain_options, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
@@ -715,6 +726,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     page_token = "hello world"
     page_size = 42
     read_time = {}
+    request_options = {}
 
     partition_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -730,27 +742,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time }) do |_result, response|
+        c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.partition_query parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time do |_result, response|
+        c.partition_query parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.partition_query ::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time) do |_result, response|
+        c.partition_query ::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time }, call_options) do |_result, response|
+        c.partition_query({ parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.partition_query(::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time), call_options) do |_result, response|
+        c.partition_query(::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size, read_time: read_time, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -772,6 +784,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     page_size = 42
     page_token = "hello world"
     read_time = {}
+    request_options = {}
 
     list_collection_ids_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -787,27 +800,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time }) do |_result, response|
+        c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.list_collection_ids parent: parent, page_size: page_size, page_token: page_token, read_time: read_time do |_result, response|
+        c.list_collection_ids parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.list_collection_ids ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time) do |_result, response|
+        c.list_collection_ids ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time }, call_options) do |_result, response|
+        c.list_collection_ids({ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.list_collection_ids(::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time), call_options) do |_result, response|
+        c.list_collection_ids(::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token, read_time: read_time, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -828,6 +841,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     database = "hello world"
     writes = [{}]
     labels = {}
+    request_options = {}
 
     batch_write_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -843,27 +857,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.batch_write({ database: database, writes: writes, labels: labels }) do |_result, response|
+        c.batch_write({ database: database, writes: writes, labels: labels, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.batch_write database: database, writes: writes, labels: labels do |_result, response|
+        c.batch_write database: database, writes: writes, labels: labels, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.batch_write ::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels) do |_result, response|
+        c.batch_write ::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.batch_write({ database: database, writes: writes, labels: labels }, call_options) do |_result, response|
+        c.batch_write({ database: database, writes: writes, labels: labels, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.batch_write(::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels), call_options) do |_result, response|
+        c.batch_write(::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -886,6 +900,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     document_id = "hello world"
     document = {}
     mask = {}
+    request_options = {}
 
     create_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -901,27 +916,27 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask }) do |_result, response|
+        c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.create_document parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask do |_result, response|
+        c.create_document parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.create_document ::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask) do |_result, response|
+        c.create_document ::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask }, call_options) do |_result, response|
+        c.create_document({ parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.create_document(::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask), call_options) do |_result, response|
+        c.create_document(::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask, request_options: request_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

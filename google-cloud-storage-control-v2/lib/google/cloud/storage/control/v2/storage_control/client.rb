@@ -509,7 +509,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -608,7 +608,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -838,7 +838,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -947,7 +947,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1044,7 +1044,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1244,7 +1244,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1343,7 +1343,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1555,7 +1555,7 @@ module Google
 
                 header_params = {}
                 if request.managed_folder&.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.managed_folder.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.managed_folder.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1769,7 +1769,7 @@ module Google
 
                 header_params = {}
                 if request.anywhere_cache&.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.anywhere_cache.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.anywhere_cache.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1867,7 +1867,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -1960,7 +1960,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -2053,7 +2053,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -2145,7 +2145,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -2456,7 +2456,7 @@ module Google
 
                 header_params = {}
                 if request.rapid_cache&.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.rapid_cache.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.rapid_cache.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -2550,7 +2550,7 @@ module Google
 
                 header_params = {}
                 if request.name
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -3289,7 +3289,7 @@ module Google
                   header_params["bucket"] = request.resource
                 end
                 if request.resource
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.resource
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -3396,7 +3396,7 @@ module Google
                   header_params["bucket"] = request.resource
                 end
                 if request.resource
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.resource
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
@@ -3499,13 +3499,13 @@ module Google
                   header_params["bucket"] = request.resource
                 end
                 if request.resource
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)/objects(?:/.*)?$}.match request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)/objects(?:/(?<__wildcard__>.*))?$}.match request.resource
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end
                 end
                 if request.resource
-                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)/managedFolders(?:/.*)?$}.match request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)/managedFolders(?:/(?<__wildcard__>.*))?$}.match request.resource
                   if regex_match
                     header_params["bucket"] = regex_match["bucket".to_s]
                   end

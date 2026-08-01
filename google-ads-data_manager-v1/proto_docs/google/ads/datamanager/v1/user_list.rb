@@ -223,6 +223,7 @@ module Google
             PAIR_ID = 4
 
             # Data Management Platform IDs:
+            #
             # - Google User ID
             # - Partner Provided ID
             # - Publisher Provided ID
@@ -231,6 +232,7 @@ module Google
             # - Roku ID
             # - Amazon Fire TV ID
             # - Xbox or Microsoft ID
+            # - Generic Device ID
             PSEUDONYMOUS_ID = 5
           end
         end

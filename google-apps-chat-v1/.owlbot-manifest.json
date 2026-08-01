@@ -127,6 +127,7 @@
     "snippets/chat_service/mark_as_do_not_disturb.rb",
     "snippets/chat_service/move_section_item.rb",
     "snippets/chat_service/position_section.rb",
+    "snippets/chat_service/search_messages.rb",
     "snippets/chat_service/search_spaces.rb",
     "snippets/chat_service/set_up_space.rb",
     "snippets/chat_service/update_availability.rb",

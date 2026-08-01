@@ -1171,7 +1171,7 @@ module Google
                                                           uri_template: "/v1beta/{resource}:removeIamPolicy",
                                                           body: "*",
                                                           matches: [
-                                                            ["resource", %r{^projects/[^/]+/locations/[^/]+/services/[^/]+(?:/.*)?$}, true]
+                                                            ["resource", %r{^projects/[^/]+/locations/[^/]+/services/[^/]+(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

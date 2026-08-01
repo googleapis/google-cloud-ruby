@@ -1,7 +1,7 @@
 {
-  "google-ads-ad_manager": "4.2.0",
+  "google-ads-ad_manager": "5.0.0",
   "google-ads-ad_manager+FILLER": "0.0.0",
-  "google-ads-ad_manager-v1": "4.2.0",
+  "google-ads-ad_manager-v1": "5.0.0",
   "google-ads-ad_manager-v1+FILLER": "0.0.0",
   "google-ads-data_manager": "0.4.0",
   "google-ads-data_manager+FILLER": "0.0.0",
@@ -833,7 +833,7 @@
   "google-cloud-storage+FILLER": "0.0.0",
   "google-cloud-storage-control": "1.4.0",
   "google-cloud-storage-control+FILLER": "0.0.0",
-  "google-cloud-storage-control-v2": "1.12.0",
+  "google-cloud-storage-control-v2": "1.13.0",
   "google-cloud-storage-control-v2+FILLER": "0.0.0",
   "google-cloud-storage_batch_operations": "1.0.0",
   "google-cloud-storage_batch_operations+FILLER": "0.0.0",

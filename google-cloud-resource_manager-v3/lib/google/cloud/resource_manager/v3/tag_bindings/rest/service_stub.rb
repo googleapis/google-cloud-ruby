@@ -287,7 +287,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v3/{name}",
                                                           matches: [
-                                                            ["name", %r{^tagBindings(?:/.*)?$}, true]
+                                                            ["name", %r{^tagBindings(?:/(?<__wildcard__>.*))?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

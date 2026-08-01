@@ -285,7 +285,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_document(name: nil, mask: nil, transaction: nil, read_time: nil)
+              # @overload get_document(name: nil, mask: nil, transaction: nil, read_time: nil, request_options: nil)
               #   Pass arguments to `get_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -310,6 +310,8 @@ module Google
               #     minute timestamp within the past 7 days.
               #
               #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::Document]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -381,7 +383,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_documents(parent: nil, collection_id: nil, page_size: nil, page_token: nil, order_by: nil, mask: nil, transaction: nil, read_time: nil, show_missing: nil)
+              # @overload list_documents(parent: nil, collection_id: nil, page_size: nil, page_token: nil, order_by: nil, mask: nil, transaction: nil, read_time: nil, show_missing: nil, request_options: nil)
               #   Pass arguments to `list_documents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -446,6 +448,8 @@ module Google
               #     {::Google::Cloud::Firestore::V1::Document#update_time `update_time`} set.
               #
               #     Requests with `show_missing` may not specify `where` or `order_by`.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::V1::Document>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -523,7 +527,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update_document(document: nil, update_mask: nil, mask: nil, current_document: nil)
+              # @overload update_document(document: nil, update_mask: nil, mask: nil, current_document: nil, request_options: nil)
               #   Pass arguments to `update_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -547,6 +551,8 @@ module Google
               #   @param current_document [::Google::Cloud::Firestore::V1::Precondition, ::Hash]
               #     An optional precondition on the document.
               #     The request will fail if this is set and not met by the target document.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::Document]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -618,7 +624,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_document(name: nil, current_document: nil)
+              # @overload delete_document(name: nil, current_document: nil, request_options: nil)
               #   Pass arguments to `delete_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -629,6 +635,8 @@ module Google
               #   @param current_document [::Google::Cloud::Firestore::V1::Precondition, ::Hash]
               #     An optional precondition on the document.
               #     The request will fail if this is set and not met by the target document.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -703,7 +711,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_get_documents(database: nil, documents: nil, mask: nil, transaction: nil, new_transaction: nil, read_time: nil)
+              # @overload batch_get_documents(database: nil, documents: nil, mask: nil, transaction: nil, new_transaction: nil, read_time: nil, request_options: nil)
               #   Pass arguments to `batch_get_documents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -740,6 +748,8 @@ module Google
               #     minute timestamp within the past 7 days.
               #
               #     Note: The following parameters are mutually exclusive: `read_time`, `transaction`, `new_transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -816,7 +826,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload begin_transaction(database: nil, options: nil)
+              # @overload begin_transaction(database: nil, options: nil, request_options: nil)
               #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -827,6 +837,8 @@ module Google
               #   @param options [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
               #     The options for the transaction.
               #     Defaults to a read-write transaction.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::BeginTransactionResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -898,7 +910,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload commit(database: nil, writes: nil, transaction: nil)
+              # @overload commit(database: nil, writes: nil, transaction: nil, request_options: nil)
               #   Pass arguments to `commit` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -912,6 +924,8 @@ module Google
               #     Always executed atomically and in order.
               #   @param transaction [::String]
               #     If set, applies all writes in this transaction, and commits it.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::CommitResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -983,7 +997,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload rollback(database: nil, transaction: nil)
+              # @overload rollback(database: nil, transaction: nil, request_options: nil)
               #   Pass arguments to `rollback` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -993,6 +1007,8 @@ module Google
               #     `projects/{project_id}/databases/{database_id}`.
               #   @param transaction [::String]
               #     Required. The transaction to roll back.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1064,7 +1080,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_query(parent: nil, structured_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil)
+              # @overload run_query(parent: nil, structured_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil, request_options: nil)
               #   Pass arguments to `run_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1102,6 +1118,8 @@ module Google
               #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -1178,7 +1196,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload execute_pipeline(database: nil, structured_pipeline: nil, transaction: nil, new_transaction: nil, read_time: nil, auto_commit_transaction: nil)
+              # @overload execute_pipeline(database: nil, structured_pipeline: nil, transaction: nil, new_transaction: nil, read_time: nil, auto_commit_transaction: nil, request_options: nil)
               #   Pass arguments to `execute_pipeline` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1213,6 +1231,8 @@ module Google
               #     Optional. Automatically commits the transaction after the pipeline has been
               #     executed. Only permitted in combination with `transaction` or
               #     `new_transaction`.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::ExecutePipelineResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -1301,7 +1321,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil)
+              # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil, explain_options: nil, request_options: nil)
               #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1339,6 +1359,8 @@ module Google
               #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -1417,7 +1439,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil, read_time: nil)
+              # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil, read_time: nil, request_options: nil)
               #   Pass arguments to `partition_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1469,6 +1491,8 @@ module Google
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1546,7 +1570,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil, read_time: nil)
+              # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil, read_time: nil, request_options: nil)
               #   Pass arguments to `list_collection_ids` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1570,6 +1594,8 @@ module Google
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1650,7 +1676,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_write(database: nil, writes: nil, labels: nil)
+              # @overload batch_write(database: nil, writes: nil, labels: nil, request_options: nil)
               #   Pass arguments to `batch_write` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1666,6 +1692,8 @@ module Google
               #     document more than once per request.
               #   @param labels [::Hash{::String => ::String}]
               #     Labels associated with this batch write.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::BatchWriteResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1737,7 +1765,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_document(parent: nil, collection_id: nil, document_id: nil, document: nil, mask: nil)
+              # @overload create_document(parent: nil, collection_id: nil, document_id: nil, document: nil, mask: nil, request_options: nil)
               #   Pass arguments to `create_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1760,6 +1788,8 @@ module Google
               #
               #     If the document has a field that is not present in this mask, that field
               #     will not be returned in the response.
+              #   @param request_options [::Google::Cloud::Firestore::V1::RequestOptions, ::Hash]
+              #     Optional. Any additional options for the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::Document]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

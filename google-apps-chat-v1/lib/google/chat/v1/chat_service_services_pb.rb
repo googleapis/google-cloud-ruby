@@ -244,6 +244,34 @@ module Google
             # When using app authentication, requests can only delete messages
             # created by the calling Chat app.
             rpc :DeleteMessage, ::Google::Apps::Chat::V1::DeleteMessageRequest, ::Google::Protobuf::Empty
+            # Searches for messages in Google Chat that the calling user has access to.
+            # Returns a list of messages matching the search criteria.
+            #
+            # To search across all spaces the user has access to, set `parent` to
+            # `spaces/-`. Using any other value for `parent` results in an
+            # `INVALID_ARGUMENT` error. The returned messages have their `name` field
+            # populated with the full resource name, which includes the specific `space`
+            # in which the message resides.
+            #
+            # This API doesn't return all message types. The types of messages listed
+            # below aren't included in the response. Use
+            # [ListMessages][google.chat.v1.ChatService.ListMessages] to list all
+            # messages.
+            #
+            # - Private Messages that are visible to the authenticated user.
+            # - Messages posted by Chat apps in spaces or group chats.
+            # - Messages in a Chat app DM.
+            # - Messages from blocked users.
+            # - Messages in spaces that the caller has muted.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.messages.readonly`
+            #   - `https://www.googleapis.com/auth/chat.messages`
+            rpc :SearchMessages, ::Google::Apps::Chat::V1::SearchMessagesRequest, ::Google::Apps::Chat::V1::SearchMessagesResponse
             # Gets the metadata of a message attachment. The attachment data is fetched
             # using the [media
             # API](https://developers.google.com/workspace/chat/api/reference/rest/v1/media/download).

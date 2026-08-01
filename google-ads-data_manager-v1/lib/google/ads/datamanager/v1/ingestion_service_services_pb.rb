@@ -41,6 +41,8 @@ module Google
             # [AudienceMember][google.ads.datamanager.v1.AudienceMember] resources from
             # the provided [Destination][google.ads.datamanager.v1.Destination].
             rpc :RemoveAudienceMembers, ::Google::Ads::DataManager::V1::RemoveAudienceMembersRequest, ::Google::Ads::DataManager::V1::RemoveAudienceMembersResponse
+            # Removes all audience members from the provided destinations.
+            rpc :RemoveAllAudienceMembers, ::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest, ::Google::Ads::DataManager::V1::RemoveAllAudienceMembersResponse
             # Uploads a list of
             # [Event][google.ads.datamanager.v1.Event] resources from
             # the provided [Destination][google.ads.datamanager.v1.Destination].

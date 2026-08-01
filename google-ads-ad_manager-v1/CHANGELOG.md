@@ -1,5 +1,29 @@
 # Changelog
 
+### 5.0.0 (2026-07-30)
+
+### ⚠ BREAKING CHANGES
+
+* Moved Schedule messages from report_messages.proto to report_delivery.proto
+* Added additional LineItem fields
+
+#### Features
+
+* Added `BatchActivateContentBundles` and `BatchDeactivateContentBundles` methods to `ContentBundleService` 
+* Added `SlateService` 
+* Added additional LineItem fields 
+* Added CreativeSetService 
+* Added OrderService write methods and additional stats fields. 
+* Added TargetingPresetService update methods 
+* Added the Creative entity 
+#### Bug Fixes
+
+* format owlbot json ([#35029](https://github.com/googleapis/google-cloud-ruby/issues/35029)) 
+* Moved Schedule messages from report_messages.proto to report_delivery.proto 
+#### Documentation
+
+* Updated method descriptions to use a consistent style 
+
 ### 4.2.0 (2026-07-20)
 
 #### Features

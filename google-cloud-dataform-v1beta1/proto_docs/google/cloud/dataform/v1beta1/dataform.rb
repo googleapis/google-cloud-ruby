@@ -1231,6 +1231,10 @@ module Google
         # @!attribute [rw] workspace
         #   @return [::String]
         #     Required. The workspace's name.
+        # @!attribute [rw] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
+        #     Optional. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class InstallNpmPackagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1264,9 +1268,9 @@ module Google
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Optional. Specifies the time zone to be used when interpreting
-        #     cron_schedule. Must be a time zone name from the time zone database
-        #     (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left
-        #     unspecified, the default is UTC.
+        #     cron_schedule. Must be a time zone name from the [time zone
+        #     database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If
+        #     left unspecified, the default is `UTC`.
         # @!attribute [r] recent_scheduled_release_records
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::ReleaseConfig::ScheduledReleaseRecord>]
         #     Output only. Records of the 10 most recent scheduled release attempts,
@@ -1459,6 +1463,10 @@ module Google
         #     Output only. Metadata indicating whether this resource is user-scoped.
         #     `CompilationResult` resource is `user_scoped` only if it is sourced
         #     from a workspace.
+        # @!attribute [r] gcs_repository_snapshot_metadata
+        #   @return [::Google::Cloud::Dataform::V1beta1::GcsRepositorySnapshotMetadata]
+        #     Output only. Metadata about the repository snapshot used by scheduled
+        #     notebooks.
         class CompilationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1482,6 +1490,88 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Represents a trigger configuration for a workflow.
+        # @!attribute [rw] condition
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowTriggerConfig::Condition]
+        #     Optional. The condition to use when triggering the workflow.
+        # @!attribute [rw] workflow_triggers
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::WorkflowTrigger>]
+        #     Required. The trigger definitions to invoke a workflow.
+        # @!attribute [rw] min_execution_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Minimum duration between two consecutive executions. If not
+        #     specified, the workflow will be executed every time trigger conditions are
+        #     met and there is no ongoing workflow execution.
+        # @!attribute [rw] max_wait_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The effective maximum wait time duration for the trigger
+        #     condition to be met. If not specified, the workflow won't be triggered
+        #     until conditions are met.
+        # @!attribute [r] recent_trigger_evaluation_records
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::TriggerEvaluationRecord>]
+        #     Output only. Records of the 10 most recent trigger evaluations, ordered
+        #     in descending order of `evaluation_time`. Updated whenever the service
+        #     evaluates the trigger conditions (via polling or upon receiving a push
+        #     event).
+        # @!attribute [r] last_successful_evaluation_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of the last successful trigger evaluation.
+        class WorkflowTriggerConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The condition to use when triggering the workflow.
+          module Condition
+            # If CONDITION_UNSPECIFIED, the default value is ANY.
+            CONDITION_UNSPECIFIED = 0
+
+            # If ALL, all the trigger config conditions must be met before a workflow
+            # is invoked.
+            ALL = 1
+
+            # If ANY, at least one of the trigger config conditions must be met
+            # before a workflow is invoked.
+            ANY = 2
+          end
+        end
+
+        # A record of an attempt to evaluate trigger conditions.
+        # @!attribute [r] evaluation_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of this trigger evaluation attempt.
+        # @!attribute [r] status
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The status of the trigger evaluation.
+        #     Success is indicated by a code of 0 (OK). Message will only be present
+        #     if the status code is non-zero.
+        class TriggerEvaluationRecord
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The trigger definition to invoke a workflow.
+        # @!attribute [rw] table_update_trigger
+        #   @return [::Google::Cloud::Dataform::V1beta1::TableUpdateTrigger]
+        #     The table update trigger configuration.
+        class WorkflowTrigger
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a table update trigger configuration.
+        # @!attribute [rw] table
+        #   @return [::Google::Cloud::Dataform::V1beta1::Target]
+        #     The target table to trigger the workflow.
+        # @!attribute [r] trigger_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The modification time of this table that resulted
+        #     in an invocation of the workflow. This would be updated by the triggering
+        #     service after a successful workflow invocation.
+        class TableUpdateTrigger
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configures various aspects of Dataform code compilation.
@@ -1520,6 +1610,10 @@ module Google
         # @!attribute [rw] default_notebook_runtime_options
         #   @return [::Google::Cloud::Dataform::V1beta1::NotebookRuntimeOptions]
         #     Optional. The default notebook runtime options.
+        # @!attribute [rw] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
+        #     Optional. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class CodeCompilationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1534,11 +1628,43 @@ module Google
           end
         end
 
+        # Metadata about a repository snapshot stored in Google Cloud Storage.
+        # @!attribute [r] repository_snapshot_uri
+        #   @return [::String]
+        #     Output only. The Google Cloud Storage URI of the repository snapshot.
+        # @!attribute [r] crc32c_checksum
+        #   @return [::String]
+        #     Output only. The crc32c checksum of the repository snapshot, big-endian
+        #     base64 encoded.
+        # @!attribute [r] generation
+        #   @return [::Integer]
+        #     Output only. The generation number of the Cloud Storage object. See
+        #     https://cloud.google.com/storage/docs/metadata#generation-number.
+        class GcsRepositorySnapshotMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configures the destination for a repository snapshot.
+        # @!attribute [rw] repository_snapshot_uri
+        #   @return [::String]
+        #     Optional. The Google Cloud Storage destination to upload the repository
+        #     snapshot to. Format: `gs://bucket-name/path/`.
+        class GcsRepositorySnapshotDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configures various aspects of Dataform notebook runtime.
         # @!attribute [rw] gcs_output_bucket
         #   @return [::String]
         #     Optional. The Google Cloud Storage location to upload the result to.
         #     Format: `gs://bucket-name`.
+        # @!attribute [rw] gcs_repository_snapshot_destination
+        #   @return [::Google::Cloud::Dataform::V1beta1::GcsRepositorySnapshotDestination]
+        #     Optional. The Google Cloud Storage destination to upload the snapshot to.
+        #     For empty URI it defaults to the provided gcs_output_bucket.
+        #     Format: `gs://bucket-name/path/`.
         # @!attribute [rw] ai_platform_notebook_runtime_template
         #   @return [::String]
         #     Optional. The resource name of the [Colab runtime template]
@@ -1548,6 +1674,36 @@ module Google
         class NotebookRuntimeOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the pipeline type and path within the Git repository.
+        # @!attribute [rw] pipeline_type
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig::PipelineType]
+        #     Required. The type of the pipeline.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. The relative path within the Git repository where the pipeline is
+        #     defined. For example, for a Dataform pipeline, it is a path to the folder
+        #     where `workflow_settings.yaml` or `dataform.json` is located.
+        class PipelineConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the pipeline. This may be extended in the future.
+          # In case of UNSPECIFIED, the error will be thrown.
+          module PipelineType
+            # Default value. This value is unused.
+            PIPELINE_TYPE_UNSPECIFIED = 0
+
+            # Regular Dataform pipeline.
+            DATAFORM = 1
+
+            # SQL single file asset.
+            SQL = 3
+
+            # Notebook single file asset.
+            NOTEBOOK = 4
+          end
         end
 
         # `ListCompilationResults` request message.
@@ -2116,9 +2272,9 @@ module Google
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Optional. Specifies the time zone to be used when interpreting
-        #     cron_schedule. Must be a time zone name from the time zone database
-        #     (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If left
-        #     unspecified, the default is UTC.
+        #     cron_schedule. Must be a time zone name from the [time zone
+        #     database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). If
+        #     left unspecified, the default is `UTC`.
         # @!attribute [r] recent_scheduled_execution_records
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::WorkflowConfig::ScheduledExecutionRecord>]
         #     Output only. Records of the 10 most recent scheduled execution attempts,
@@ -2138,6 +2294,10 @@ module Google
         #     Output only. All the metadata information that is used internally to serve
         #     the resource. For example: timestamps, flags, status fields, etc. The
         #     format of this field is a JSON string.
+        # @!attribute [rw] workflow_trigger_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowTriggerConfig]
+        #     Optional. Trigger configuration for this workflow.
+        #     If present, the workflow will be triggered based on the specified triggers.
         class WorkflowConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2346,6 +2506,10 @@ module Google
         #     Output only. Metadata indicating whether this resource is user-scoped.
         #     `WorkflowInvocation` resource is `user_scoped` only if it is sourced
         #     from a compilation result and the compilation result is user-scoped.
+        # @!attribute [r] pipeline_config
+        #   @return [::Google::Cloud::Dataform::V1beta1::PipelineConfig]
+        #     Output only. The pipeline options which defines the pipeline type and path
+        #     within the Git repository.
         class WorkflowInvocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2536,6 +2700,9 @@ module Google
           #     executed the notebook in contents and also the ID used for the outputs
           #     created in Google Cloud Storage buckets. Only set once the job has
           #     started to run.
+          # @!attribute [r] file_path
+          #   @return [::String]
+          #     Output only. The path to the notebook file in the repository.
           class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

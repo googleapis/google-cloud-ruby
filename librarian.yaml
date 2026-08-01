@@ -38,3 +38,15 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.29
+  - name: google-cloud-asset-v1
+    apis:
+      - path: google/cloud/asset/v1
+        ruby:
+          additional_protos:
+            - google/cloud/orgpolicy/v1/orgpolicy.proto
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ASSET
+            ruby-cloud-extra-dependencies: google-identity-access_context_manager-v1=>0.0+<2.a;google-cloud-os_config-v1=>0.0+<2.a
+    keep:
+      - lib/google/cloud/asset/v1/asset_service/helpers.rb
+      - test/google/cloud/asset/v1/additional_paths_test.rb

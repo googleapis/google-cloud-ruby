@@ -114,6 +114,15 @@ module Google
             PESSIMISTIC = 2
           end
         end
+
+        # Options for a server request.
+        # @!attribute [rw] request_tags
+        #   @return [::Array<::String>]
+        #     The request tags for the request.
+        class RequestOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
