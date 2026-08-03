@@ -21,6 +21,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "samples/Gemfile",
     "samples/Rakefile",
     "samples/acceptance/data/ChromeCast.mp4",

@@ -21,6 +21,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "samples/Gemfile",
     "samples/Rakefile",
     "samples/acceptance/predict_text_prompt_test.rb",
