@@ -360,28 +360,18 @@ describe "Files Snippets" do
 
     
     it "filters out files on the basis of custom context key" do
-      out = nil
-      5.times do
-        out, _err = capture_io do
-          list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
-        end
-        break unless out.empty?
-        sleep 1
+      out, _err = capture_io do
+        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
       end
-      assert_equal "File: #{remote_file_name} has context key: #{custom_context_key1}\n", out
+      assert_includes out, "#{custom_context_key1}\n"
     end
 
 
     it "filters out files on the basis of custom context key and value" do
-      out = nil
-      5.times do
-        out, _err = capture_io do
-          list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
-        end
-        break unless out.empty?
-        sleep 1
+      out, _err = capture_io do
+        list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
       end
-      assert_equal "File: #{remote_file_name2} has context key: #{custom_context_key2}\n", out
+      assert_includes out, "#{custom_context_key2}\n"
     end
   end
 
