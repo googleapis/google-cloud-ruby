@@ -831,7 +831,7 @@
   "google-cloud-sql-v1beta4+FILLER": "0.0.0",
   "google-cloud-storage": "1.62.0",
   "google-cloud-storage+FILLER": "0.0.0",
-  "google-cloud-storage-control": "1.4.0",
+  "google-cloud-storage-control": "1.4.1",
   "google-cloud-storage-control+FILLER": "0.0.0",
   "google-cloud-storage-control-v2": "1.13.0",
   "google-cloud-storage-control-v2+FILLER": "0.0.0",
