@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.6.0 (2026-08-04)
+
+#### Features
+
+* new iam v3 client for AccessPolicies ([#35042](https://github.com/googleapis/google-cloud-ruby/issues/35042)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35067](https://github.com/googleapis/google-cloud-ruby/issues/35067)) 
+#### Documentation
+
+* Updated comments across various messages, fields, enums, and methods in the IAM v3beta API, including PolicyBinding, PolicyKind, ListPolicyBindingsRequest, and SearchTargetPolicyBindingsRequest to improve clarity 
+
 ### 0.5.0 (2026-06-11)
 
 #### Features
