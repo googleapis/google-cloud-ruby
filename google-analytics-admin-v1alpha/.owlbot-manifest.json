@@ -204,6 +204,7 @@
     "snippets/analytics_admin_service/update_measurement_protocol_secret.rb",
     "snippets/analytics_admin_service/update_property.rb",
     "snippets/analytics_admin_service/update_reporting_data_annotation.rb",
+    "snippets/analytics_admin_service/update_reporting_identity_settings.rb",
     "snippets/analytics_admin_service/update_search_ads360_link.rb",
     "snippets/analytics_admin_service/update_sk_ad_network_conversion_value_schema.rb",
     "snippets/analytics_admin_service/update_subproperty_event_filter.rb",

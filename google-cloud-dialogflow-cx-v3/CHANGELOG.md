@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.12.1 (2026-06-22)
+
+#### Documentation
+
+* clarified OUTPUT_AUDIO_ENCODING_MP3 bit rate with deprecation and DETECT_INTENT_RESPONSE_VIEW_BASIC ([#34639](https://github.com/googleapis/google-cloud-ruby/issues/34639)) 
+
 ### 1.12.0 (2026-06-11)
 
 #### Features

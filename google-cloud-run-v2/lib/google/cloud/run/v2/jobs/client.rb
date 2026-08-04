@@ -386,7 +386,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -591,7 +591,7 @@ module Google
 
               header_params = {}
               if request.job&.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.job.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.job.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -696,7 +696,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end
@@ -804,7 +804,7 @@ module Google
 
               header_params = {}
               if request.name
-                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/(?<__wildcard__>.*))?$}.match request.name
                 if regex_match
                   header_params["location"] = regex_match["location".to_s]
                 end

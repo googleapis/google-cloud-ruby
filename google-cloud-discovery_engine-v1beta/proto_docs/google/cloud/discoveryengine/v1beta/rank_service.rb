@@ -44,6 +44,8 @@ module Google
         # @!attribute [rw] score
         #   @return [::Float]
         #     The score of this record based on the given query and selected model.
+        #     The score will be rounded to 4 decimal places. If the score is close to 0,
+        #     it will be rounded to 0.00001 to avoid returning unset.
         class RankingRecord
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -60,7 +62,7 @@ module Google
         #   @return [::String]
         #     The identifier of the model to use. It is one of:
         #
-        #     * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
+        #     * `semantic-ranker-512@latest`: Semantic ranking model with maximum input
         #     token size 512.
         #
         #     It is set to `semantic-ranker-512@latest` by default if unspecified.
@@ -73,7 +75,7 @@ module Google
         #     The query to use.
         # @!attribute [rw] records
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::RankingRecord>]
-        #     Required. A list of records to rank. At most 200 records to rank.
+        #     Required. A list of records to rank.
         # @!attribute [rw] ignore_record_details_in_response
         #   @return [::Boolean]
         #     If true, the response will contain only record ID and score. By default, it

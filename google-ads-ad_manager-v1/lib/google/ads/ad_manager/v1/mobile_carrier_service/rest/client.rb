@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `MobileCarrier` object.
+              # Retrieves a `MobileCarrier` object.
               #
               # @overload get_mobile_carrier(request, options = nil)
               #   Pass arguments to `get_mobile_carrier` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `MobileCarrier` objects.
+              # Lists `MobileCarrier` objects.
               #
               # @overload list_mobile_carriers(request, options = nil)
               #   Pass arguments to `list_mobile_carriers` via a request object, either of type

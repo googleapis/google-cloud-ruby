@@ -22,6 +22,86 @@ module Google
     module AdManager
       module V1
         # Wrapper message for
+        # {::Google::Ads::AdManager::V1::LineItemCostTypeEnum::LineItemCostType LineItemCostType}.
+        class LineItemCostTypeEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes the LineItem actions that are billable.
+          module LineItemCostType
+            # Not specified value.
+            LINE_ITEM_COST_TYPE_UNSPECIFIED = 0
+
+            # Starting February 22, 2024 the CPA LineItemCostType will only be read as
+            # part of Spotlight deprecation, learn more at:
+            # https://support.google.com/admanager/answer/7519021#spotlight
+            #
+            # Cost per action. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::BULK LineItemTypeEnum.LineItemType.BULK}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::NETWORK LineItemTypeEnum.LineItemType.NETWORK}
+            CPA = 1
+
+            # Cost per click. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::BULK LineItemTypeEnum.LineItemType.BULK}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::NETWORK LineItemTypeEnum.LineItemType.NETWORK}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::PRICE_PRIORITY LineItemTypeEnum.LineItemType.PRICE_PRIORITY}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::HOUSE LineItemTypeEnum.LineItemType.HOUSE}
+            CPC = 2
+
+            # Cost per day. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::NETWORK LineItemTypeEnum.LineItemType.NETWORK}
+            CPD = 3
+
+            # Cost per mille (thousand) impressions. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::BULK LineItemTypeEnum.LineItemType.BULK}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::NETWORK LineItemTypeEnum.LineItemType.NETWORK}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::PRICE_PRIORITY LineItemTypeEnum.LineItemType.PRICE_PRIORITY}
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::HOUSE LineItemTypeEnum.LineItemType.HOUSE}
+            CPM = 4
+
+            # Cost per mille (thousand) Active View viewable impressions. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
+            VCPM = 5
+
+            # Cost per millie (thousand) in-target impressions. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
+            CPM_IN_TARGET = 6
+
+            # Cost for the entire flight of the deal. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be must be
+            # one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
+            CPF = 7
+
+            # Cost per completed view. The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            #
+            # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
+            CPCV = 8
+          end
+        end
+
+        # Wrapper message for
         # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType LineItemType}.
         class LineItemTypeEnum
           include ::Google::Protobuf::MessageExts
@@ -82,6 +162,76 @@ module Google
 
             # The type of LineItem used for configuring audience extension campaigns.
             AUDIENCE_EXTENSION = 14
+          end
+        end
+
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::LineItemReservationStatusEnum::LineItemReservationStatus LineItemReservationStatus}.
+        class LineItemReservationStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines the different reservation statuses of a line item.
+          module LineItemReservationStatus
+            # No value specified
+            LINE_ITEM_RESERVATION_STATUS_UNSPECIFIED = 0
+
+            # Indicates that inventory has been reserved for the line item.
+            RESERVED = 1
+
+            # Indicates that inventory has not been reserved for the line item.
+            UNRESERVED = 2
+          end
+        end
+
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::LineItemComputedStatusEnum::LineItemComputedStatus LineItemComputedStatus}.
+        class LineItemComputedStatusEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes the computed LineItem status that is derived from the current
+          # state of the LineItem.
+          module LineItemComputedStatus
+            # No value specified.
+            LINE_ITEM_COMPUTED_STATUS_UNSPECIFIED = 0
+
+            # The LineItem has been canceled and is no longer eligible to serve. This
+            # is a legacy status.
+            CANCELED = 1
+
+            # The LineItem has completed its run.
+            COMPLETED = 2
+
+            # The LineItem has begun serving.
+            DELIVERING = 3
+
+            # The LineItem has past its endDateTime with an auto extension, but hasn't
+            # met its goal.
+            DELIVERY_EXTENDED = 4
+
+            # The LineItem has been disapproved and is not eligible to serve.
+            DISAPPROVED = 5
+
+            # The LineItem is still being drafted.
+            DRAFT = 6
+
+            # The LineItem is inactive. It is either caused by missing creatives or the
+            # network disabling auto-activation.
+            INACTIVE = 7
+
+            # The LineItem has been paused from serving.
+            PAUSED = 8
+
+            # The LineItem has been paused and its reserved inventory has been
+            # released. The LineItem will not serve.
+            PAUSED_INVENTORY_RELEASED = 9
+
+            # The LineItem has been submitted for approval.
+            PENDING_APPROVAL = 10
+
+            # The LineItem has been activated and is ready to serve.
+            READY = 11
           end
         end
       end

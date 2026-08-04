@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Site` object.
+              # Retrieves a `Site` object.
               #
               # @overload get_site(request, options = nil)
               #   Pass arguments to `get_site` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Site` objects.
+              # Lists `Site` objects.
               #
               # @overload list_sites(request, options = nil)
               #   Pass arguments to `list_sites` via a request object, either of type
@@ -371,7 +371,7 @@ module Google
               end
 
               ##
-              # API to create a `Site` object.
+              # Creates a `Site` object.
               #
               # @overload create_site(request, options = nil)
               #   Pass arguments to `create_site` via a request object, either of type
@@ -452,7 +452,7 @@ module Google
               end
 
               ##
-              # API to batch create `Site` objects.
+              # Creates `Site` objects.
               #
               # @overload batch_create_sites(request, options = nil)
               #   Pass arguments to `batch_create_sites` via a request object, either of type
@@ -536,7 +536,7 @@ module Google
               end
 
               ##
-              # API to update a `Site` object.
+              # Updates a `Site` object.
               #
               # @overload update_site(request, options = nil)
               #   Pass arguments to `update_site` via a request object, either of type
@@ -618,7 +618,7 @@ module Google
               end
 
               ##
-              # API to batch update `Site` objects.
+              # Batch updates `Site` objects.
               #
               # @overload batch_update_sites(request, options = nil)
               #   Pass arguments to `batch_update_sites` via a request object, either of type

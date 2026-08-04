@@ -89,6 +89,18 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     end
   end
 
+  def test_inspect_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.inspect_template_path project: "value0", location: "value1", inspect_template: "value2"
+      assert_equal "projects/value0/locations/value1/inspectTemplates/value2", path
+    end
+  end
+
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -170,6 +182,18 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
 
       path = client.repository_path project: "value0", location: "value1", repository: "value2"
       assert_equal "projects/value0/locations/value1/repositories/value2", path
+    end
+  end
+
+  def test_service_account_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_account_path project: "value0", service_account: "value1"
+      assert_equal "projects/value0/serviceAccounts/value1", path
     end
   end
 

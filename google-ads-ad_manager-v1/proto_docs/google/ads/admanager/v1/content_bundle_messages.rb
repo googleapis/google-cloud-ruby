@@ -37,6 +37,14 @@ module Google
         #     Required. The name of the
         #     {::Google::Ads::AdManager::V1::ContentBundle ContentBundle}. This attribute is
         #     required and has a maximum length of 255 characters.
+        # @!attribute [r] status
+        #   @return [::Google::Ads::AdManager::V1::ContentBundleStatusEnum::ContentBundleStatus]
+        #     Output only. The ContentBundleStatus of the
+        #     {::Google::Ads::AdManager::V1::ContentBundle ContentBundle}. This attribute is
+        #     read-only and defaults to [ContentBundleStatus.INACTIVE][].
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the `ContentBundle` was last modified.
         class ContentBundle
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

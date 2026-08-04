@@ -73,8 +73,15 @@ module Google
             #
             # This command will delete the queue even if it has tasks in it.
             #
-            # Note: If you delete a queue, a queue with the same name can't be created
-            # for 7 days.
+            # Note : If you delete a queue, you may be prevented from creating a new
+            # queue with the same name as the deleted queue for a tombstone window of up
+            # to 3 days. During this window, the CreateQueue operation may appear to
+            # recreate the queue, but this can be misleading. If you attempt to create
+            # a queue with the same name as one that is in the tombstone window, run
+            # GetQueue to confirm that the queue creation was successful. If GetQueue
+            # returns 200 response code, your queue was successfully created with the
+            # name of the previously deleted queue. Otherwise, your queue did not
+            # successfully recreate.
             #
             # WARNING: Using this method may have unintended side effects if you are
             # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -157,6 +164,10 @@ module Google
             # time.
             rpc :ListTasks, ::Google::Cloud::Tasks::V2beta3::ListTasksRequest, ::Google::Cloud::Tasks::V2beta3::ListTasksResponse
             # Gets a task.
+            #
+            # After a task is successfully executed or has exhausted its retry attempts,
+            # the task is deleted. A `GetTask` request for a deleted task returns a
+            # `NOT_FOUND` error.
             rpc :GetTask, ::Google::Cloud::Tasks::V2beta3::GetTaskRequest, ::Google::Cloud::Tasks::V2beta3::Task
             # Creates a task and adds it to a queue.
             #
@@ -164,12 +175,24 @@ module Google
             #
             # * The maximum task size is 100KB.
             rpc :CreateTask, ::Google::Cloud::Tasks::V2beta3::CreateTaskRequest, ::Google::Cloud::Tasks::V2beta3::Task
+            # Creates a batch of tasks and adds them to a queue.
+            # This call is not atomic.
+            #
+            # All tasks must be for the same queue.
+            # A maximum of 100 tasks can be created in a single batch.
+            rpc :BatchCreateTasks, ::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest, ::Google::Longrunning::Operation
             # Deletes a task.
             #
             # A task can be deleted if it is scheduled or dispatched. A task
             # cannot be deleted if it has executed successfully or permanently
             # failed.
             rpc :DeleteTask, ::Google::Cloud::Tasks::V2beta3::DeleteTaskRequest, ::Google::Protobuf::Empty
+            # Deletes a batch of tasks.
+            # This is a non-atomic operation: if deletion fails for some tasks, it
+            # can still succeed for others. The metadata field of
+            # google.longrunning.Operation contains details of failed deletions.
+            # A maximum of 1000 tasks can be deleted in a batch.
+            rpc :BatchDeleteTasks, ::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest, ::Google::Longrunning::Operation
             # Forces a task to run now.
             #
             # When this method is called, Cloud Tasks will dispatch the task, even if
@@ -183,8 +206,8 @@ module Google
             # a task to be dispatched now.
             #
             # The dispatched task is returned. That is, the task that is returned
-            # contains the [status][Task.status] after the task is dispatched but
-            # before the task is received by its target.
+            # contains the [status][google.cloud.tasks.v2beta3.Task.first_attempt] after
+            # the task is dispatched but before the task is received by its target.
             #
             # If Cloud Tasks receives a successful response from the task's
             # target, then the task will be deleted; otherwise the task's
@@ -198,6 +221,18 @@ module Google
             # [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
             # task that has already succeeded or permanently failed.
             rpc :RunTask, ::Google::Cloud::Tasks::V2beta3::RunTaskRequest, ::Google::Cloud::Tasks::V2beta3::Task
+            # Creates or Updates a CMEK config.
+            #
+            # Updates the Customer Managed Encryption Key associated with the Cloud Tasks
+            # location (Creates if the key does not already exist). All new tasks created
+            # in the location will be encrypted at-rest with the KMS-key provided in the
+            # config.
+            rpc :UpdateCmekConfig, ::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest, ::Google::Cloud::Tasks::V2beta3::CmekConfig
+            # Gets the CMEK config.
+            #
+            # Gets the Customer Managed Encryption Key configured with the Cloud Tasks
+            # lcoation. By default there is no kms_key configured.
+            rpc :GetCmekConfig, ::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest, ::Google::Cloud::Tasks::V2beta3::CmekConfig
           end
 
           Stub = Service.rpc_stub_class

@@ -56,7 +56,7 @@ module Google
         #     `PERMISSION_DENIED` error is returned.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of
+        #     Optional. Maximum number of
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Evaluation Evaluation}s to return. If
         #     unspecified, defaults to 100. The maximum allowed value is 1000. Values
         #     above 1000 will be coerced to 1000.
@@ -64,7 +64,7 @@ module Google
         #     If this field is negative, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token
+        #     Optional. A page token
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsResponse#next_page_token ListEvaluationsResponse.next_page_token},
         #     received from a previous
         #     {::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluations EvaluationService.ListEvaluations}
@@ -128,19 +128,21 @@ module Google
         #     Required. The evaluation resource name, such as
         #     `projects/{project}/locations/{location}/evaluations/{evaluation}`.
         #
-        #     If the caller does not have permission to list [EvaluationResult][]
-        #     under this evaluation, regardless of whether or not this evaluation
-        #     set exists, a `PERMISSION_DENIED` error is returned.
+        #     If the caller does not have permission to list
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse::EvaluationResult ListEvaluationResultsResponse.EvaluationResult}
+        #     under this evaluation, regardless of whether or not this evaluation set
+        #     exists, a `PERMISSION_DENIED` error is returned.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of [EvaluationResult][] to return. If unspecified,
-        #     defaults to 100. The maximum allowed value is 1000. Values above 1000 will
-        #     be coerced to 1000.
+        #     Optional. Maximum number of
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse::EvaluationResult ListEvaluationResultsResponse.EvaluationResult}
+        #     to return. If unspecified, defaults to 100. The maximum allowed value is
+        #     1000. Values above 1000 will be coerced to 1000.
         #
         #     If this field is negative, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token
+        #     Optional. A page token
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse#next_page_token ListEvaluationResultsResponse.next_page_token},
         #     received from a previous
         #     {::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluation_results EvaluationService.ListEvaluationResults}
@@ -160,8 +162,8 @@ module Google
         # method.
         # @!attribute [rw] evaluation_results
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse::EvaluationResult>]
-        #     The
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse::EvaluationResult EvaluationResult}s.
+        #     The evaluation results for the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery SampleQuery}s.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token that can be sent as

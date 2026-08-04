@@ -297,6 +297,61 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_delete_team_folder_tree
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_team_folder_tree_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_team_folder_tree_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_team_folder_tree_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_team_folder_tree({ name: name, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_team_folder_tree name: name, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_team_folder_tree ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest.new(name: name, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_team_folder_tree({ name: name, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_team_folder_tree(::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest.new(name: name, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_team_folder_tree_client_stub.call_count
+      end
+    end
+  end
+
   def test_query_team_folder_contents
     # Create test objects.
     client_result = ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse.new
@@ -628,6 +683,61 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
 
         # Verify method calls
         assert_equal 5, delete_folder_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_folder_tree
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_folder_tree_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_folder_tree_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_folder_tree_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_folder_tree({ name: name, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_folder_tree name: name, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_folder_tree ::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest.new(name: name, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_folder_tree({ name: name, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_folder_tree(::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest.new(name: name, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_folder_tree_client_stub.call_count
       end
     end
   end
@@ -1077,6 +1187,61 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
 
         # Verify method calls
         assert_equal 5, delete_repository_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_repository_long_running
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_repository_long_running_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ServiceStub.stub :transcode_delete_repository_long_running_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_repository_long_running_client_stub do
+        # Create client
+        c = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_repository_long_running({ name: name, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_repository_long_running name: name, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_repository_long_running ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest.new(name: name, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_repository_long_running({ name: name, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_repository_long_running(::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest.new(name: name, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_repository_long_running_client_stub.call_count
       end
     end
   end
@@ -2147,6 +2312,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
     path = "hello world"
     page_size = 42
     page_token = "hello world"
+    view = :DIRECTORY_CONTENTS_VIEW_UNSPECIFIED
 
     query_directory_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -2162,27 +2328,27 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::ClientTest < Minitest:
         end
 
         # Use hash object
-        c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }) do |_result, response|
+        c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token do |_result, response|
+        c.query_directory_contents workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token) do |_result, response|
+        c.query_directory_contents ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        c.query_directory_contents({ workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        c.query_directory_contents(::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest.new(workspace: workspace, path: path, page_size: page_size, page_token: page_token, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

@@ -162,6 +162,12 @@ module Google
         #   @return [::String]
         #     A [GKE Pod](https://cloud.google.com/kubernetes-engine/docs/concepts/pod)
         #     URI.
+        # @!attribute [rw] dms_private_connection
+        #   @return [::String]
+        #     A [DMS Private
+        #     Connection](https://docs.cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.privateConnections)
+        #     name format:
+        #     projects/\\{project}/locations/\\{location}/privateConnections/\\{privateConnection}.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudFunctionEndpoint]
         #     A [Cloud Function](https://cloud.google.com/functions). Applicable only to
@@ -176,6 +182,13 @@ module Google
         #     A [Cloud Run](https://cloud.google.com/run)
         #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
         #     Applicable only to source endpoint.
+        # @!attribute [rw] cloud_run_job
+        #   @return [::String]
+        #     A [Cloud Run](https://cloud.google.com/run)
+        #     [job](https://docs.cloud.google.com/run/docs/reference/rest/v2/projects.locations.jobs#Job)
+        #     URI.
+        #     Applicable only to source endpoint.
+        #     The format is: projects/\\{project}/locations/\\{location}/jobs/\\{job}
         # @!attribute [rw] network
         #   @return [::String]
         #     A VPC network URI. For source endpoints, used according to the

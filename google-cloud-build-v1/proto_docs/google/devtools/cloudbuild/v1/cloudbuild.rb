@@ -2222,6 +2222,9 @@ module Google
 
             # E2 machine with 1 CPU.
             E2_MEDIUM = 7
+
+            # E2 machine with 2 CPUs.
+            E2_STANDARD_2 = 11
           end
 
           # Specifies the behavior when there is an error in the substitution checks.

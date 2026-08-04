@@ -29,7 +29,7 @@ module Google
             ##
             # REST client for the QuotaController service.
             #
-            # [Google Quota Control API](/service-control/overview)
+            # [Google Quota Control API](https://cloud.google.com/service-control/overview)
             #
             # Allows clients to allocate and release quota against a [managed
             # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
@@ -209,7 +209,8 @@ module Google
               #     Name of the service as specified in the service configuration. For example,
               #     `"pubsub.googleapis.com"`.
               #
-              #     See [google.api.Service][google.api.Service] for the definition of a service name.
+              #     See [google.api.Service][google.api.Service] for the definition of a
+              #     service name.
               #   @param allocate_operation [::Google::Cloud::ServiceControl::V1::QuotaOperation, ::Hash]
               #     Operation that describes the quota allocation.
               #   @param service_config_id [::String]

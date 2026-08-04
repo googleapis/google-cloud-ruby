@@ -107,7 +107,13 @@ module Google
           #     Required. The Git remote's URL.
           # @!attribute [rw] default_branch
           #   @return [::String]
-          #     Required. The Git remote's default branch name.
+          #     Optional. The Git remote's default branch name.
+          #     If not set, `main` will be used.
+          # @!attribute [r] effective_default_branch
+          #   @return [::String]
+          #     Output only. The Git remote's effective default branch name.
+          #     This is the default branch name of the Git remote if it is set,
+          #     otherwise it is `main`.
           # @!attribute [rw] authentication_token_secret_version
           #   @return [::String]
           #     Optional. The name of the Secret Manager secret version to use as an
@@ -116,6 +122,11 @@ module Google
           # @!attribute [rw] ssh_authentication_config
           #   @return [::Google::Cloud::Dataform::V1beta1::Repository::GitRemoteSettings::SshAuthenticationConfig]
           #     Optional. Authentication fields for remote uris using SSH protocol.
+          # @!attribute [rw] git_repository_link
+          #   @return [::String]
+          #     Optional. Resource name for the `GitRepositoryLink` used for machine
+          #     credentials. Must be in the format
+          #     `projects/*/locations/*/connections/*/gitRepositoryLinks/*`
           # @!attribute [r] token_status
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Dataform::V1beta1::Repository::GitRemoteSettings::TokenStatus]
@@ -316,6 +327,30 @@ module Google
         #     configs or workflow configs. If any of such resources exists in the
         #     repository, the request will fail.*.
         class DeleteRepositoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteRepositoryLongRunning` response message.
+        class DeleteRepositoryLongRunningResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteRepositoryLongRunning` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The repository's name.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, child resources of this repository (compilation
+        #     results and workflow invocations) will also be deleted. Otherwise, the
+        #     request will only succeed if the repository has no child resources.
+        #
+        #     **Note:** *This flag doesn't support deletion of workspaces, release
+        #     configs or workflow configs. If any of such resources exists in the
+        #     repository, the request will fail.*
+        class DeleteRepositoryLongRunningRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -555,6 +590,9 @@ module Google
 
             # The token was used successfully to authenticate against the Git remote.
             VALID = 3
+
+            # The token is not accessible due to permission issues.
+            PERMISSION_DENIED = 4
           end
         end
 
@@ -907,6 +945,12 @@ module Google
         #     When paginating, all other parameters provided to
         #     `QueryDirectoryContents`, with the exception of `page_size`, must match the
         #     call that provided the page token.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Dataform::V1beta1::DirectoryContentsView]
+        #     Optional. Specifies the metadata to return for each directory entry.
+        #     If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+        #     Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+        #     CMEK-protected workspaces.
         class QueryDirectoryContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -928,15 +972,33 @@ module Google
         # Represents a single entry in a directory.
         # @!attribute [rw] file
         #   @return [::String]
-        #     A file in the directory.
+        #     A file in the directory. The path is returned including the full
+        #     folder structure from the root.
         #
         #     Note: The following fields are mutually exclusive: `file`, `directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] directory
         #   @return [::String]
-        #     A child directory in the directory.
+        #     A child directory in the directory. The path is returned including
+        #     the full folder structure from the root.
         #
         #     Note: The following fields are mutually exclusive: `directory`, `file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Dataform::V1beta1::FilesystemEntryMetadata]
+        #     Entry with metadata.
         class DirectoryEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents metadata for a single entry in a filesystem.
+        # @!attribute [r] size_bytes
+        #   @return [::Integer]
+        #     Output only. Provides the size of the entry in bytes. For directories, this
+        #     will be 0.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Represents the time of the last modification of the entry.
+        class FilesystemEntryMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2470,9 +2532,10 @@ module Google
           #     Output only. The code contents of a Notebook to be run.
           # @!attribute [r] job_id
           #   @return [::String]
-          #     Output only. The ID of the Vertex job that executed the notebook in
-          #     contents and also the ID used for the outputs created in Google Cloud
-          #     Storage buckets. Only set once the job has started to run.
+          #     Output only. The ID of the Gemini Enterprise Agent Platform job that
+          #     executed the notebook in contents and also the ID used for the outputs
+          #     created in Google Cloud Storage buckets. Only set once the job has
+          #     started to run.
           class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2692,8 +2755,8 @@ module Google
         #     Optional. The containing Folder resource name. This should take
         #     the format: projects/\\{project}/locations/\\{location}/folders/\\{folder},
         #     projects/\\{project}/locations/\\{location}/teamFolders/\\{teamFolder}, or just
-        #     projects/\\{project}/locations/\\{location} if this is a root Folder. This
-        #     field can only be updated through MoveFolder.
+        #     "" if this is a root Folder. This field can only be updated through
+        #     MoveFolder.
         # @!attribute [r] team_folder_name
         #   @return [::String]
         #     Output only. The resource name of the TeamFolder that this Folder is
@@ -2729,7 +2792,10 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::Folder]
         #     Required. The Folder to create.
         # @!attribute [rw] folder_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
+        #     Deprecated: This field is not used. The resource name is generated
+        #     automatically.
         #     The ID to use for the Folder, which will become the final component of
         #     the Folder's resource name.
         class CreateFolderRequest
@@ -2784,10 +2850,91 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `DeleteFolderTree` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The Folder's name.
+        #     Format: projects/\\{project}/locations/\\{location}/folders/\\{folder}
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If `false` (default): The operation will fail if any
+        #     Repository within the folder hierarchy has associated Release Configs or
+        #     Workflow Configs.
+        #
+        #     If `true`: The operation will attempt to delete everything, including any
+        #     Release Configs and Workflow Configs linked to Repositories within the
+        #     folder hierarchy. This permanently removes schedules and resources.
+        class DeleteFolderTreeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `DeleteTeamFolderTree` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The TeamFolder's name.
+        #     Format: projects/\\{project}/locations/\\{location}/teamFolders/\\{team_folder}
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If `false` (default): The operation will fail if any
+        #     Repository within the folder hierarchy has associated Release Configs or
+        #     Workflow Configs.
+        #
+        #     If `true`: The operation will attempt to delete everything, including any
+        #     Release Configs and Workflow Configs linked to Repositories within the
+        #     folder hierarchy. This permanently removes schedules and resources.
+        class DeleteTeamFolderTreeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains metadata about the progress of the DeleteFolderTree Long-running
+        # operations.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] target
+        #   @return [::String]
+        #     Output only. Resource name of the target of the operation.
+        #     Format: projects/\\{project}/locations/\\{location}/folders/\\{folder} or
+        #     projects/\\{project}/locations/\\{location}/teamFolders/\\{team_folder}
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeMetadata::State]
+        #     Output only. The state of the operation.
+        # @!attribute [r] percent_complete
+        #   @return [::Integer]
+        #     Output only. Percent complete of the operation [0, 100].
+        class DeleteFolderTreeMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Different states of the DeleteFolderTree operation.
+          module State
+            # The state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The operation was initialized and recorded by the server, but not yet
+            # started.
+            INITIALIZED = 1
+
+            # The operation is in progress.
+            IN_PROGRESS = 2
+
+            # The operation has completed successfully.
+            SUCCEEDED = 3
+
+            # The operation has failed.
+            FAILED = 4
+          end
+        end
+
         # `QueryFolderContents` request message.
         # @!attribute [rw] folder
         #   @return [::String]
-        #     Required. Name of the folder whose contents to list.
+        #     Required. Resource name of the Folder to list contents for.
         #     Format: projects/*/locations/*/folders/*
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -2809,15 +2956,17 @@ module Google
         #     order. Supported keywords: display_name (default), create_time,
         #     last_modified_time.
         #     Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class QueryFolderContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2855,7 +3004,7 @@ module Google
         # `QueryUserRootContents` request message.
         # @!attribute [rw] location
         #   @return [::String]
-        #     Required. Location of the user root folder whose contents to list.
+        #     Required. Location of the user root folder to list contents for.
         #     Format: projects/*/locations/*
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -2876,15 +3025,17 @@ module Google
         #     Will order Folders before Repositories, and then by `order_by` in ascending
         #     order. Supported keywords: display_name (default), created_at,
         #     last_modified_at. Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class QueryUserRootContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2956,7 +3107,10 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::TeamFolder]
         #     Required. The TeamFolder to create.
         # @!attribute [rw] team_folder_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
+        #     Deprecated: This field is not used. The resource name is generated
+        #     automatically.
         #     The ID to use for the TeamFolder, which will become the final component of
         #     the TeamFolder's resource name.
         class CreateTeamFolderRequest
@@ -2998,7 +3152,7 @@ module Google
         # `QueryTeamFolderContents` request message.
         # @!attribute [rw] team_folder
         #   @return [::String]
-        #     Required. Name of the team_folder whose contents to list.
+        #     Required. Resource name of the TeamFolder to list contents for.
         #     Format: `projects/*/locations/*/teamFolders/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -3020,15 +3174,17 @@ module Google
         #     order. Supported keywords: `display_name` (default), `create_time`,
         #     last_modified_time.
         #     Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class QueryTeamFolderContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3070,9 +3226,9 @@ module Google
         #     Format: `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Maximum number of TeamFolders to return. The server may return
-        #     fewer items than requested. If unspecified, the server will pick an
-        #     appropriate default.
+        #     Optional. Maximum number of `TeamFolders` to return. The server may return
+        #     fewer items than requested. If unspecified, the server will pick a default
+        #     of `page_size` = 50.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Page token received from a previous `SearchTeamFolders` call.
@@ -3086,15 +3242,17 @@ module Google
         #     Optional. Field to additionally sort results by.
         #     Supported keywords: `display_name` (default), `create_time`,
         #     `last_modified_time`. Examples:
-        #       - `orderBy="display_name"`
-        #       - `orderBy="display_name desc"`
+        #
+        #     * `orderBy="display_name"`
+        #     * `orderBy="display_name desc"`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filtering for the returned list. Filtering is currently
         #     only supported on the `display_name` field.
         #
         #     Example:
-        #      - `filter="display_name="MyFolder""`
+        #
+        #     * `filter="display_name="MyFolder""`
         class SearchTeamFoldersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3200,6 +3358,64 @@ module Google
             # The move has failed.
             FAILED = 4
           end
+        end
+
+        # Represents metadata about the progress of the DeleteRepository long-running
+        # operation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] target
+        #   @return [::String]
+        #     Output only. Server-defined resource path for the target of the operation.
+        #     Format: projects/\\{project}/locations/\\{location}/repositories/\\{repository}
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningMetadata::State]
+        #     Output only. The state of the operation.
+        # @!attribute [r] percent_complete
+        #   @return [::Integer]
+        #     Output only. Percent complete of the operation [0, 100].
+        # @!attribute [r] child_resources_count
+        #   @return [::Integer]
+        #     Output only. The total number of child resources (Compilation Results,
+        #     Workflow Executions) that will be deleted.
+        # @!attribute [r] remaining_child_resources_count
+        #   @return [::Integer]
+        #     Output only. The remaining number of child resources to be deleted.
+        class DeleteRepositoryLongRunningMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Different states of the DeleteRepositoryLongRunning operation.
+          module State
+            # The state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The operation is running.
+            RUNNING = 1
+
+            # The operation has completed successfully.
+            SUCCEEDED = 2
+
+            # The operation has failed.
+            FAILED = 3
+          end
+        end
+
+        # Represents the level of detail to return for directory contents.
+        module DirectoryContentsView
+          # The default unset value. Defaults to DIRECTORY_CONTENTS_VIEW_BASIC.
+          DIRECTORY_CONTENTS_VIEW_UNSPECIFIED = 0
+
+          # Includes only the file or directory name. This is the default behavior.
+          DIRECTORY_CONTENTS_VIEW_BASIC = 1
+
+          # Includes all metadata for each file or directory. Currently not supported
+          # by CMEK-protected workspaces.
+          DIRECTORY_CONTENTS_VIEW_METADATA = 2
         end
       end
     end

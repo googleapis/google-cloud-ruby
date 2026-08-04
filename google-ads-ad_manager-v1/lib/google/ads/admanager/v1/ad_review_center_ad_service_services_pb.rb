@@ -33,14 +33,14 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.AdReviewCenterAdService'
 
-            # API to search for AdReviewCenterAds.
+            # Searches for AdReviewCenterAds.
             rpc :SearchAdReviewCenterAds, ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsRequest, ::Google::Ads::AdManager::V1::SearchAdReviewCenterAdsResponse
-            # API to batch allow AdReviewCenterAds.
+            # Batch allows AdReviewCenterAds.
             # This method supports partial success. Some operations may succeed while
             # others fail. Callers should check the failedRequests field in the response
             # to determine which operations failed.
             rpc :BatchAllowAdReviewCenterAds, ::Google::Ads::AdManager::V1::BatchAllowAdReviewCenterAdsRequest, ::Google::Longrunning::Operation
-            # API to batch block AdReviewCenterAds.
+            # Batch blocks AdReviewCenterAds.
             # This method supports partial success. Some operations may succeed while
             # others fail. Callers should check the failedRequests field in the response
             # to determine which operations failed.

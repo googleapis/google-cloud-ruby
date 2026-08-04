@@ -42,6 +42,9 @@ module Google
             rpc :UpdateTeamFolder, ::Google::Cloud::Dataform::V1beta1::UpdateTeamFolderRequest, ::Google::Cloud::Dataform::V1beta1::TeamFolder
             # Deletes a single TeamFolder.
             rpc :DeleteTeamFolder, ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderRequest, ::Google::Protobuf::Empty
+            # Deletes a TeamFolder with its contents (Folders, Repositories, Workspaces,
+            # ReleaseConfigs, and WorkflowConfigs).
+            rpc :DeleteTeamFolderTree, ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest, ::Google::Longrunning::Operation
             # Returns the contents of a given TeamFolder.
             rpc :QueryTeamFolderContents, ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse
             # Returns all TeamFolders in a given location that the caller has access to
@@ -55,6 +58,9 @@ module Google
             rpc :UpdateFolder, ::Google::Cloud::Dataform::V1beta1::UpdateFolderRequest, ::Google::Cloud::Dataform::V1beta1::Folder
             # Deletes a single Folder.
             rpc :DeleteFolder, ::Google::Cloud::Dataform::V1beta1::DeleteFolderRequest, ::Google::Protobuf::Empty
+            # Deletes a Folder with its contents (Folders, Repositories, Workspaces,
+            # ReleaseConfigs, and WorkflowConfigs).
+            rpc :DeleteFolderTree, ::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest, ::Google::Longrunning::Operation
             # Returns the contents of a given Folder.
             rpc :QueryFolderContents, ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse
             # Returns the contents of a caller's root folder in a given location.
@@ -81,6 +87,8 @@ module Google
             rpc :UpdateRepository, ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Deletes a single Repository.
             rpc :DeleteRepository, ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest, ::Google::Protobuf::Empty
+            # Deletes a single repository asynchronously.
+            rpc :DeleteRepositoryLongRunning, ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest, ::Google::Longrunning::Operation
             # Moves a Repository to a new location.
             rpc :MoveRepository, ::Google::Cloud::Dataform::V1beta1::MoveRepositoryRequest, ::Google::Longrunning::Operation
             # Applies a Git commit to a Repository. The Repository must not have a value

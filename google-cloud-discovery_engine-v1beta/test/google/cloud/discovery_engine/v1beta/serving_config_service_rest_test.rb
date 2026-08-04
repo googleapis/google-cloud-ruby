@@ -78,6 +78,116 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Clie
     end
   end
 
+  def test_create_serving_config
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    serving_config = {}
+    serving_config_id = "hello world"
+
+    create_serving_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::ServiceStub.stub :transcode_create_serving_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_serving_config_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_serving_config({ parent: parent, serving_config: serving_config, serving_config_id: serving_config_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_serving_config parent: parent, serving_config: serving_config, serving_config_id: serving_config_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::CreateServingConfigRequest.new(parent: parent, serving_config: serving_config, serving_config_id: serving_config_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_serving_config({ parent: parent, serving_config: serving_config, serving_config_id: serving_config_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::CreateServingConfigRequest.new(parent: parent, serving_config: serving_config, serving_config_id: serving_config_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_serving_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_serving_config
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_serving_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::ServiceStub.stub :transcode_delete_serving_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_serving_config_client_stub do
+        # Create client
+        c = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.delete_serving_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.delete_serving_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.delete_serving_config ::Google::Cloud::DiscoveryEngine::V1beta::DeleteServingConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.delete_serving_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.delete_serving_config(::Google::Cloud::DiscoveryEngine::V1beta::DeleteServingConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_serving_config_client_stub.call_count
+      end
+    end
+  end
+
   def test_update_serving_config
     # Create test objects.
     client_result = ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig.new

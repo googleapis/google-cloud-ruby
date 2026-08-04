@@ -326,6 +326,8 @@ module Google
               #   @param team_folder [::Google::Cloud::Dataform::V1beta1::TeamFolder, ::Hash]
               #     Required. The TeamFolder to create.
               #   @param team_folder_id [::String]
+              #     Deprecated: This field is not used. The resource name is generated
+              #     automatically.
               #     The ID to use for the TeamFolder, which will become the final component of
               #     the TeamFolder's resource name.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -546,6 +548,103 @@ module Google
               end
 
               ##
+              # Deletes a TeamFolder with its contents (Folders, Repositories, Workspaces,
+              # ReleaseConfigs, and WorkflowConfigs).
+              #
+              # @overload delete_team_folder_tree(request, options = nil)
+              #   Pass arguments to `delete_team_folder_tree` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_team_folder_tree(name: nil, force: nil)
+              #   Pass arguments to `delete_team_folder_tree` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The TeamFolder's name.
+              #     Format: projects/\\{project}/locations/\\{location}/teamFolders/\\{team_folder}
+              #   @param force [::Boolean]
+              #     Optional. If `false` (default): The operation will fail if any
+              #     Repository within the folder hierarchy has associated Release Configs or
+              #     Workflow Configs.
+              #
+              #     If `true`: The operation will attempt to delete everything, including any
+              #     Release Configs and Workflow Configs linked to Repositories within the
+              #     folder hierarchy. This permanently removes schedules and resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest.new
+              #
+              #   # Call the delete_team_folder_tree method.
+              #   result = client.delete_team_folder_tree request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_team_folder_tree request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::DeleteTeamFolderTreeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_team_folder_tree.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_team_folder_tree.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_team_folder_tree.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.delete_team_folder_tree request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns the contents of a given TeamFolder.
               #
               # @overload query_team_folder_contents(request, options = nil)
@@ -564,7 +663,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param team_folder [::String]
-              #     Required. Name of the team_folder whose contents to list.
+              #     Required. Resource name of the TeamFolder to list contents for.
               #     Format: `projects/*/locations/*/teamFolders/*`.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of paths to return. The server may return fewer
@@ -583,14 +682,16 @@ module Google
               #     order. Supported keywords: `display_name` (default), `create_time`,
               #     last_modified_time.
               #     Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryTeamFolderContentsResponse::TeamFolderContentsEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -678,9 +779,9 @@ module Google
               #     Required. Location in which to query TeamFolders.
               #     Format: `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Optional. Maximum number of TeamFolders to return. The server may return
-              #     fewer items than requested. If unspecified, the server will pick an
-              #     appropriate default.
+              #     Optional. Maximum number of `TeamFolders` to return. The server may return
+              #     fewer items than requested. If unspecified, the server will pick a default
+              #     of `page_size` = 50.
               #   @param page_token [::String]
               #     Optional. Page token received from a previous `SearchTeamFolders` call.
               #     Provide this to retrieve the subsequent page.
@@ -692,14 +793,16 @@ module Google
               #     Optional. Field to additionally sort results by.
               #     Supported keywords: `display_name` (default), `create_time`,
               #     `last_modified_time`. Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::SearchTeamFoldersResponse::TeamFolderSearchResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -866,6 +969,8 @@ module Google
               #   @param folder [::Google::Cloud::Dataform::V1beta1::Folder, ::Hash]
               #     Required. The Folder to create.
               #   @param folder_id [::String]
+              #     Deprecated: This field is not used. The resource name is generated
+              #     automatically.
               #     The ID to use for the Folder, which will become the final component of
               #     the Folder's resource name.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1088,6 +1193,103 @@ module Google
               end
 
               ##
+              # Deletes a Folder with its contents (Folders, Repositories, Workspaces,
+              # ReleaseConfigs, and WorkflowConfigs).
+              #
+              # @overload delete_folder_tree(request, options = nil)
+              #   Pass arguments to `delete_folder_tree` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_folder_tree(name: nil, force: nil)
+              #   Pass arguments to `delete_folder_tree` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The Folder's name.
+              #     Format: projects/\\{project}/locations/\\{location}/folders/\\{folder}
+              #   @param force [::Boolean]
+              #     Optional. If `false` (default): The operation will fail if any
+              #     Repository within the folder hierarchy has associated Release Configs or
+              #     Workflow Configs.
+              #
+              #     If `true`: The operation will attempt to delete everything, including any
+              #     Release Configs and Workflow Configs linked to Repositories within the
+              #     folder hierarchy. This permanently removes schedules and resources.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest.new
+              #
+              #   # Call the delete_folder_tree method.
+              #   result = client.delete_folder_tree request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_folder_tree request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::DeleteFolderTreeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_folder_tree.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_folder_tree.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_folder_tree.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.delete_folder_tree request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns the contents of a given Folder.
               #
               # @overload query_folder_contents(request, options = nil)
@@ -1106,7 +1308,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param folder [::String]
-              #     Required. Name of the folder whose contents to list.
+              #     Required. Resource name of the Folder to list contents for.
               #     Format: projects/*/locations/*/folders/*
               #   @param page_size [::Integer]
               #     Optional. Maximum number of paths to return. The server may return fewer
@@ -1125,14 +1327,16 @@ module Google
               #     order. Supported keywords: display_name (default), create_time,
               #     last_modified_time.
               #     Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryFolderContentsResponse::FolderContentsEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1218,7 +1422,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param location [::String]
-              #     Required. Location of the user root folder whose contents to list.
+              #     Required. Location of the user root folder to list contents for.
               #     Format: projects/*/locations/*
               #   @param page_size [::Integer]
               #     Optional. Maximum number of paths to return. The server may return fewer
@@ -1236,14 +1440,16 @@ module Google
               #     Will order Folders before Repositories, and then by `order_by` in ascending
               #     order. Supported keywords: display_name (default), created_at,
               #     last_modified_at. Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::QueryUserRootContentsResponse::RootContentsEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1833,6 +2039,101 @@ module Google
 
                 @dataform_stub.delete_repository request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single repository asynchronously.
+              #
+              # @overload delete_repository_long_running(request, options = nil)
+              #   Pass arguments to `delete_repository_long_running` via a request object, either of type
+              #   {::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_repository_long_running(name: nil, force: nil)
+              #   Pass arguments to `delete_repository_long_running` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The repository's name.
+              #   @param force [::Boolean]
+              #     Optional. If set to true, child resources of this repository (compilation
+              #     results and workflow invocations) will also be deleted. Otherwise, the
+              #     request will only succeed if the repository has no child resources.
+              #
+              #     **Note:** *This flag doesn't support deletion of workspaces, release
+              #     configs or workflow configs. If any of such resources exists in the
+              #     repository, the request will fail.*
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataform/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest.new
+              #
+              #   # Call the delete_repository_long_running method.
+              #   result = client.delete_repository_long_running request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_repository_long_running request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryLongRunningRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_repository_long_running.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_repository_long_running.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_repository_long_running.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataform_stub.delete_repository_long_running request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3465,7 +3766,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload query_directory_contents(workspace: nil, path: nil, page_size: nil, page_token: nil)
+              # @overload query_directory_contents(workspace: nil, path: nil, page_size: nil, page_token: nil, view: nil)
               #   Pass arguments to `query_directory_contents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3486,6 +3787,11 @@ module Google
               #     When paginating, all other parameters provided to
               #     `QueryDirectoryContents`, with the exception of `page_size`, must match the
               #     call that provided the page token.
+              #   @param view [::Google::Cloud::Dataform::V1beta1::DirectoryContentsView]
+              #     Optional. Specifies the metadata to return for each directory entry.
+              #     If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+              #     Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+              #     CMEK-protected workspaces.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::DirectoryEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -6550,6 +6856,11 @@ module Google
                   #
                   attr_reader :delete_team_folder
                   ##
+                  # RPC-specific configuration for `delete_team_folder_tree`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_team_folder_tree
+                  ##
                   # RPC-specific configuration for `query_team_folder_contents`
                   # @return [::Gapic::Config::Method]
                   #
@@ -6579,6 +6890,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_folder
+                  ##
+                  # RPC-specific configuration for `delete_folder_tree`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_folder_tree
                   ##
                   # RPC-specific configuration for `query_folder_contents`
                   # @return [::Gapic::Config::Method]
@@ -6619,6 +6935,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_repository
+                  ##
+                  # RPC-specific configuration for `delete_repository_long_running`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_repository_long_running
                   ##
                   # RPC-specific configuration for `move_repository`
                   # @return [::Gapic::Config::Method]
@@ -6895,6 +7216,8 @@ module Google
                     @update_team_folder = ::Gapic::Config::Method.new update_team_folder_config
                     delete_team_folder_config = parent_rpcs.delete_team_folder if parent_rpcs.respond_to? :delete_team_folder
                     @delete_team_folder = ::Gapic::Config::Method.new delete_team_folder_config
+                    delete_team_folder_tree_config = parent_rpcs.delete_team_folder_tree if parent_rpcs.respond_to? :delete_team_folder_tree
+                    @delete_team_folder_tree = ::Gapic::Config::Method.new delete_team_folder_tree_config
                     query_team_folder_contents_config = parent_rpcs.query_team_folder_contents if parent_rpcs.respond_to? :query_team_folder_contents
                     @query_team_folder_contents = ::Gapic::Config::Method.new query_team_folder_contents_config
                     search_team_folders_config = parent_rpcs.search_team_folders if parent_rpcs.respond_to? :search_team_folders
@@ -6907,6 +7230,8 @@ module Google
                     @update_folder = ::Gapic::Config::Method.new update_folder_config
                     delete_folder_config = parent_rpcs.delete_folder if parent_rpcs.respond_to? :delete_folder
                     @delete_folder = ::Gapic::Config::Method.new delete_folder_config
+                    delete_folder_tree_config = parent_rpcs.delete_folder_tree if parent_rpcs.respond_to? :delete_folder_tree
+                    @delete_folder_tree = ::Gapic::Config::Method.new delete_folder_tree_config
                     query_folder_contents_config = parent_rpcs.query_folder_contents if parent_rpcs.respond_to? :query_folder_contents
                     @query_folder_contents = ::Gapic::Config::Method.new query_folder_contents_config
                     query_user_root_contents_config = parent_rpcs.query_user_root_contents if parent_rpcs.respond_to? :query_user_root_contents
@@ -6923,6 +7248,8 @@ module Google
                     @update_repository = ::Gapic::Config::Method.new update_repository_config
                     delete_repository_config = parent_rpcs.delete_repository if parent_rpcs.respond_to? :delete_repository
                     @delete_repository = ::Gapic::Config::Method.new delete_repository_config
+                    delete_repository_long_running_config = parent_rpcs.delete_repository_long_running if parent_rpcs.respond_to? :delete_repository_long_running
+                    @delete_repository_long_running = ::Gapic::Config::Method.new delete_repository_long_running_config
                     move_repository_config = parent_rpcs.move_repository if parent_rpcs.respond_to? :move_repository
                     @move_repository = ::Gapic::Config::Method.new move_repository_config
                     commit_repository_changes_config = parent_rpcs.commit_repository_changes if parent_rpcs.respond_to? :commit_repository_changes

@@ -231,7 +231,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_evaluation(app: nil, evaluations: nil, evaluation_dataset: nil, display_name: nil, app_version: nil, config: nil, run_count: nil, persona_run_configs: nil, optimization_config: nil, scheduled_evaluation_run: nil, golden_run_method: nil, generate_latency_report: nil)
+            # @overload run_evaluation(app: nil, evaluations: nil, evaluation_dataset: nil, display_name: nil, app_version: nil, config: nil, run_count: nil, persona_run_configs: nil, optimization_config: nil, scheduled_evaluation_run: nil, golden_run_method: nil, generate_latency_report: nil, evaluation_run_caching_settings: nil)
             #   Pass arguments to `run_evaluation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -277,6 +277,8 @@ module Google
             #     not set, default to STABLE.
             #   @param generate_latency_report [::Boolean]
             #     Optional. Whether to generate a latency report for the evaluation run.
+            #   @param evaluation_run_caching_settings [::Google::Cloud::Ces::V1beta::EvaluationRunCachingSettings, ::Hash]
+            #     Optional. The caching settings to use for the evaluation run.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -554,7 +556,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_evaluation(conversation: nil, source: nil)
+            # @overload generate_evaluation(conversation: nil, source: nil, evaluation_type: nil)
             #   Pass arguments to `generate_evaluation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -566,6 +568,9 @@ module Google
             #   @param source [::Google::Cloud::Ces::V1beta::Conversation::Source]
             #     Optional. Indicate the source of the conversation. If not set, all sources
             #     will be searched.
+            #   @param evaluation_type [::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest::EvaluationType]
+            #     Optional. The type of evaluation to generate. Defaults to GOLDEN if
+            #     unspecified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

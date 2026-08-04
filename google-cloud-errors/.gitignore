@@ -14,3 +14,6 @@ jsondoc/*
 
 # directories left by gh-pages
 _site/*
+
+# Allow tracking Gemfile.lock for Phase 1 rollout
+!Gemfile.lock

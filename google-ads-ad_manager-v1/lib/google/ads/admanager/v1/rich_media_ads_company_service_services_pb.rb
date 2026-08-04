@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.RichMediaAdsCompanyService'
 
-            # API to retrieve a `RichMediaAdsCompany` object.
+            # Retrieves a `RichMediaAdsCompany` object.
             rpc :GetRichMediaAdsCompany, ::Google::Ads::AdManager::V1::GetRichMediaAdsCompanyRequest, ::Google::Ads::AdManager::V1::RichMediaAdsCompany
-            # API to retrieve a list of `RichMediaAdsCompany` objects.
+            # Lists `RichMediaAdsCompany` objects.
             rpc :ListRichMediaAdsCompanies, ::Google::Ads::AdManager::V1::ListRichMediaAdsCompaniesRequest, ::Google::Ads::AdManager::V1::ListRichMediaAdsCompaniesResponse
           end
 

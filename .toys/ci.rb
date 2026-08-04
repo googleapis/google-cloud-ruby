@@ -237,8 +237,8 @@ def interpret_github_event
       logger.info "Using local commits"
       [base_commit, head_commit]
     end
-  base_ref = nil if base_ref&.empty?
-  head_ref = nil if head_ref&.empty?
+  base_ref = nil if base_ref && base_ref.empty?
+  head_ref = nil if head_ref && head_ref.empty?
   [base_ref, head_ref]
 end
 

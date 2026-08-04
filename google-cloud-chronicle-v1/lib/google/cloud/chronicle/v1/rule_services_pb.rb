@@ -43,6 +43,8 @@ module Google
             rpc :UpdateRule, ::Google::Cloud::Chronicle::V1::UpdateRuleRequest, ::Google::Cloud::Chronicle::V1::Rule
             # Deletes a Rule.
             rpc :DeleteRule, ::Google::Cloud::Chronicle::V1::DeleteRuleRequest, ::Google::Protobuf::Empty
+            # Verifies the given rule text.
+            rpc :VerifyRuleText, ::Google::Cloud::Chronicle::V1::VerifyRuleTextRequest, ::Google::Cloud::Chronicle::V1::VerifyRuleTextResponse
             # Lists all revisions of the rule.
             rpc :ListRuleRevisions, ::Google::Cloud::Chronicle::V1::ListRuleRevisionsRequest, ::Google::Cloud::Chronicle::V1::ListRuleRevisionsResponse
             # Create a Retrohunt.

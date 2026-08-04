@@ -71,7 +71,7 @@ module Google
         #     Optional. Immutable. Indicates whether key portability is enabled for the
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance SingleTenantHsmInstance}.
         #     This can only be set at creation time. Key portability features are
-        #     disabled by default and not yet available in GA.
+        #     disabled by default.
         class SingleTenantHsmInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,7 +226,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::PENDING_TWO_FACTOR_AUTH_REGISTRATION PENDING_TWO_FACTOR_AUTH_REGISTRATION}
         #     state to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] disable_single_tenant_hsm_instance
         #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::DisableSingleTenantHsmInstance]
         #     Disable the
@@ -237,7 +237,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::ACTIVE ACTIVE} state
         #     to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `disable_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `disable_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enable_single_tenant_hsm_instance
         #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::EnableSingleTenantHsmInstance]
         #     Enable the
@@ -248,7 +248,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::DISABLED DISABLED}
         #     state to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `enable_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `enable_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_single_tenant_hsm_instance
         #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::DeleteSingleTenantHsmInstance]
         #     Delete the
@@ -264,7 +264,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::PENDING_TWO_FACTOR_AUTH_REGISTRATION PENDING_TWO_FACTOR_AUTH_REGISTRATION}
         #     state to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `delete_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `delete_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] add_quorum_member
         #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::AddQuorumMember]
         #     Add a quorum member to the
@@ -277,7 +277,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::ACTIVE ACTIVE} state
         #     to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `add_quorum_member`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `add_quorum_member`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] remove_quorum_member
         #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::RemoveQuorumMember]
         #     Remove a quorum member from the
@@ -290,7 +290,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::ACTIVE ACTIVE} state
         #     to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `remove_quorum_member`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `remove_quorum_member`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `refresh_single_tenant_hsm_instance`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] refresh_single_tenant_hsm_instance
         #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::RefreshSingleTenantHsmInstance]
         #     Refreshes the
@@ -305,7 +305,15 @@ module Google
         #     {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::ACTIVE ACTIVE} state
         #     to perform this operation.
         #
-        #     Note: The following fields are mutually exclusive: `refresh_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `refresh_single_tenant_hsm_instance`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `upgrade_key_trust`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] upgrade_key_trust
+        #   @return [::Google::Cloud::Kms::V1::SingleTenantHsmInstanceProposal::UpgradeKeyTrust]
+        #     Promotes a key with the AES_WRAPPING purpose to a trusted wrapping key.
+        #     The key must be in the
+        #     [ACTIVE][CryptoKeyVersion.CryptoKeyVersionState.ACTIVE] state to perform
+        #     this operation.
+        #
+        #     Note: The following fields are mutually exclusive: `upgrade_key_trust`, `register_two_factor_auth_keys`, `disable_single_tenant_hsm_instance`, `enable_single_tenant_hsm_instance`, `delete_single_tenant_hsm_instance`, `add_quorum_member`, `remove_quorum_member`, `refresh_single_tenant_hsm_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SingleTenantHsmInstanceProposal
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -469,6 +477,23 @@ module Google
           # {::Google::Cloud::Kms::V1::SingleTenantHsmInstance::State::ACTIVE ACTIVE} state to
           # perform this operation.
           class RefreshSingleTenantHsmInstance
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Promotes a key with the AES_WRAPPING purpose to a trusted wrapping key.
+          # The key must be in the
+          # [ACTIVE][CryptoKeyVersion.CryptoKeyVersionState.ACTIVE] state to perform
+          # this operation.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
+          #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to promote.
+          # @!attribute [rw] two_factor_public_key_pem
+          #   @return [::String]
+          #     Required. The public key associated with the 2FA key that will sign the
+          #     login nonce for this operation.
+          class UpgradeKeyTrust
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

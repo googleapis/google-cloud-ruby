@@ -41,6 +41,33 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientPathsTest <
     end
   end
 
+  def test_agent_gateway_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.agent_gateway_path project: "value0", location: "value1", agent_gateway: "value2"
+      assert_equal "projects/value0/locations/value1/agentGateways/value2", path
+    end
+  end
+
+  def test_cmek_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.cmek_config_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/cmekConfig", path
+
+      path = client.cmek_config_path project: "value0", location: "value1", cmek_config: "value2"
+      assert_equal "projects/value0/locations/value1/cmekConfigs/value2", path
+    end
+  end
+
   def test_collection_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -50,6 +77,30 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::ClientPathsTest <
 
       path = client.collection_path project: "value0", location: "value1", collection: "value2"
       assert_equal "projects/value0/locations/value1/collections/value2", path
+    end
+  end
+
+  def test_crypto_key_versions_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_versions_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3", crypto_key_version: "value4"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3/cryptoKeyVersions/value4", path
+    end
+  end
+
+  def test_crypto_keys_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_keys_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
     end
   end
 

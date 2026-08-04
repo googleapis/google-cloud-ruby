@@ -303,6 +303,62 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     end
   end
 
+  def test_configure_exascale_cloud_exadata_infrastructure
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    total_storage_size_gb = 42
+    request_id = "hello world"
+
+    configure_exascale_cloud_exadata_infrastructure_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_configure_exascale_cloud_exadata_infrastructure_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, configure_exascale_cloud_exadata_infrastructure_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.configure_exascale_cloud_exadata_infrastructure name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.configure_exascale_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.configure_exascale_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, configure_exascale_cloud_exadata_infrastructure_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_cloud_vm_clusters
     # Create test objects.
     client_result = ::Google::Cloud::OracleDatabase::V1::ListCloudVmClustersResponse.new
@@ -3766,60 +3822,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     end
   end
 
-  def test_get_goldengate_deployment_version
-    # Create test objects.
-    client_result = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_deployment_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_goldengate_deployment_version_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, get_goldengate_deployment_version_client_stub do
-        # Create client
-        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        c.get_goldengate_deployment_version({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        c.get_goldengate_deployment_version name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        c.get_goldengate_deployment_version ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        c.get_goldengate_deployment_version({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        c.get_goldengate_deployment_version(::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, get_goldengate_deployment_version_client_stub.call_count
-      end
-    end
-  end
-
   def test_list_goldengate_deployment_versions
     # Create test objects.
     client_result = ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentVersionsResponse.new
@@ -3873,60 +3875,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, list_goldengate_deployment_versions_client_stub.call_count
-      end
-    end
-  end
-
-  def test_get_goldengate_deployment_type
-    # Create test objects.
-    client_result = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_deployment_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_goldengate_deployment_type_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, get_goldengate_deployment_type_client_stub do
-        # Create client
-        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        c.get_goldengate_deployment_type({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        c.get_goldengate_deployment_type name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        c.get_goldengate_deployment_type ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        c.get_goldengate_deployment_type({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        c.get_goldengate_deployment_type(::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, get_goldengate_deployment_type_client_stub.call_count
       end
     end
   end
@@ -3989,60 +3937,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     end
   end
 
-  def test_get_goldengate_deployment_environment
-    # Create test objects.
-    client_result = ::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_deployment_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_goldengate_deployment_environment_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, get_goldengate_deployment_environment_client_stub do
-        # Create client
-        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        c.get_goldengate_deployment_environment({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        c.get_goldengate_deployment_environment name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        c.get_goldengate_deployment_environment ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        c.get_goldengate_deployment_environment({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        c.get_goldengate_deployment_environment(::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, get_goldengate_deployment_environment_client_stub.call_count
-      end
-    end
-  end
-
   def test_list_goldengate_deployment_environments
     # Create test objects.
     client_result = ::Google::Cloud::OracleDatabase::V1::ListGoldengateDeploymentEnvironmentsResponse.new
@@ -4095,60 +3989,6 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, list_goldengate_deployment_environments_client_stub.call_count
-      end
-    end
-  end
-
-  def test_get_goldengate_connection_type
-    # Create test objects.
-    client_result = ::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_goldengate_connection_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_goldengate_connection_type_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, get_goldengate_connection_type_client_stub do
-        # Create client
-        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        c.get_goldengate_connection_type({ name: name }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        c.get_goldengate_connection_type name: name do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        c.get_goldengate_connection_type ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest.new(name: name) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        c.get_goldengate_connection_type({ name: name }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        c.get_goldengate_connection_type(::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest.new(name: name), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, get_goldengate_connection_type_client_stub.call_count
       end
     end
   end

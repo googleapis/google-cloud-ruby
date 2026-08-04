@@ -33,17 +33,17 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.PlacementService'
 
-            # API to retrieve a `Placement` object.
+            # Retrieves a `Placement` object.
             rpc :GetPlacement, ::Google::Ads::AdManager::V1::GetPlacementRequest, ::Google::Ads::AdManager::V1::Placement
-            # API to retrieve a list of `Placement` objects.
+            # Lists `Placement` objects.
             rpc :ListPlacements, ::Google::Ads::AdManager::V1::ListPlacementsRequest, ::Google::Ads::AdManager::V1::ListPlacementsResponse
-            # API to create an `Placement` object.
+            # Creates an `Placement` object.
             rpc :CreatePlacement, ::Google::Ads::AdManager::V1::CreatePlacementRequest, ::Google::Ads::AdManager::V1::Placement
-            # API to update an `Placement` object.
+            # Updates an `Placement` object.
             rpc :UpdatePlacement, ::Google::Ads::AdManager::V1::UpdatePlacementRequest, ::Google::Ads::AdManager::V1::Placement
-            # API to batch create `Placement` objects.
+            # Creates `Placement` objects.
             rpc :BatchCreatePlacements, ::Google::Ads::AdManager::V1::BatchCreatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchCreatePlacementsResponse
-            # API to batch update `Placement` objects.
+            # Batch updates `Placement` objects.
             rpc :BatchUpdatePlacements, ::Google::Ads::AdManager::V1::BatchUpdatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchUpdatePlacementsResponse
             # Activates a list of `Placement` objects.
             rpc :BatchActivatePlacements, ::Google::Ads::AdManager::V1::BatchActivatePlacementsRequest, ::Google::Ads::AdManager::V1::BatchActivatePlacementsResponse

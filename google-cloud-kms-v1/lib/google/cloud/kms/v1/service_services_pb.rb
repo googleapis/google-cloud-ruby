@@ -123,6 +123,31 @@ module Google
             # version. Otherwise, a new version will be created, and will be assigned the
             # next sequential id within the [CryptoKey][google.cloud.kms.v1.CryptoKey].
             rpc :ImportCryptoKeyVersion, ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, ::Google::Cloud::Kms::V1::CryptoKeyVersion
+            # Import wrapped key material into a
+            # [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with a trusted
+            # key.
+            #
+            # All requests must specify a [CryptoKey][google.cloud.kms.v1.CryptoKey]. If
+            # a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] is additionally
+            # specified in the request, key material will be reimported into that
+            # version. Otherwise, a new version will be created, and will be assigned the
+            # next sequential id within the [CryptoKey][google.cloud.kms.v1.CryptoKey].
+            #
+            # The [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] will have
+            # trusted_wrapping_enabled set to true.
+            rpc :ImportTrustedKeyWrappedCryptoKeyVersion, ::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest, ::Google::Cloud::Kms::V1::CryptoKeyVersion
+            # Exports a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with a
+            # trusted key.
+            #
+            # The [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] must have
+            # trusted_wrapping_enabled set to true. The
+            # [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] of the
+            # [wrapping_key] must have the
+            # [AES_WRAPPING][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.AES_WRAPPING]
+            # purpose. The [wrapping_key] must have the
+            # [AES_256_KWP][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm.AES_256_KWP]
+            # algorithm.
+            rpc :ExportTrustedKeyWrappedCryptoKeyVersion, ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest, ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse
             # Create a new [ImportJob][google.cloud.kms.v1.ImportJob] within a
             # [KeyRing][google.cloud.kms.v1.KeyRing].
             #

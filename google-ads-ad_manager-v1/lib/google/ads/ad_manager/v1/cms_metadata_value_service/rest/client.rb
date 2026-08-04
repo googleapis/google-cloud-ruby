@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `CmsMetadataValue` object.
+              # Retrieves a `CmsMetadataValue` object.
               #
               # @overload get_cms_metadata_value(request, options = nil)
               #   Pass arguments to `get_cms_metadata_value` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `CmsMetadataValue` objects.
+              # Lists `CmsMetadataValue` objects.
               #
               # @overload list_cms_metadata_values(request, options = nil)
               #   Pass arguments to `list_cms_metadata_values` via a request object, either of type
@@ -370,7 +370,7 @@ module Google
               end
 
               ##
-              # API to activate a list of `CmsMetadataValue` objects.
+              # Activates a list of `CmsMetadataValue` objects.
               #
               # @overload batch_activate_cms_metadata_values(request, options = nil)
               #   Pass arguments to `batch_activate_cms_metadata_values` via a request object, either of type
@@ -453,7 +453,7 @@ module Google
               end
 
               ##
-              # API to deactivate a list of `CmsMetadataValue` objects.
+              # Deactivates a list of `CmsMetadataValue` objects.
               #
               # @overload batch_deactivate_cms_metadata_values(request, options = nil)
               #   Pass arguments to `batch_deactivate_cms_metadata_values` via a request object, either of type

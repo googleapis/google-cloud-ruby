@@ -33,17 +33,17 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ContactService'
 
-            # API to retrieve a `Contact` object.
+            # Retrieves a `Contact` object.
             rpc :GetContact, ::Google::Ads::AdManager::V1::GetContactRequest, ::Google::Ads::AdManager::V1::Contact
-            # API to retrieve a list of `Contact` objects.
+            # Lists `Contact` objects.
             rpc :ListContacts, ::Google::Ads::AdManager::V1::ListContactsRequest, ::Google::Ads::AdManager::V1::ListContactsResponse
-            # API to create a `Contact` object.
+            # Creates a `Contact` object.
             rpc :CreateContact, ::Google::Ads::AdManager::V1::CreateContactRequest, ::Google::Ads::AdManager::V1::Contact
-            # API to batch create `Contact` objects.
+            # Creates `Contact` objects.
             rpc :BatchCreateContacts, ::Google::Ads::AdManager::V1::BatchCreateContactsRequest, ::Google::Ads::AdManager::V1::BatchCreateContactsResponse
-            # API to update a `Contact` object.
+            # Updates a `Contact` object.
             rpc :UpdateContact, ::Google::Ads::AdManager::V1::UpdateContactRequest, ::Google::Ads::AdManager::V1::Contact
-            # API to batch update `Contact` objects.
+            # Batch updates `Contact` objects.
             rpc :BatchUpdateContacts, ::Google::Ads::AdManager::V1::BatchUpdateContactsRequest, ::Google::Ads::AdManager::V1::BatchUpdateContactsResponse
           end
 

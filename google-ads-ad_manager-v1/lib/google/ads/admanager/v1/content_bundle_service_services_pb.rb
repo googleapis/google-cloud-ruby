@@ -33,10 +33,14 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ContentBundleService'
 
-            # API to retrieve a `ContentBundle` object.
+            # Retrieves a `ContentBundle` object.
             rpc :GetContentBundle, ::Google::Ads::AdManager::V1::GetContentBundleRequest, ::Google::Ads::AdManager::V1::ContentBundle
-            # API to retrieve a list of `ContentBundle` objects.
+            # Lists `ContentBundle` objects.
             rpc :ListContentBundles, ::Google::Ads::AdManager::V1::ListContentBundlesRequest, ::Google::Ads::AdManager::V1::ListContentBundlesResponse
+            # Activate a list of `ContentBundle` objects.
+            rpc :BatchActivateContentBundles, ::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest, ::Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse
+            # Deactivates a list of `ContentBundle` objects.
+            rpc :BatchDeactivateContentBundles, ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest, ::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse
           end
 
           Stub = Service.rpc_stub_class

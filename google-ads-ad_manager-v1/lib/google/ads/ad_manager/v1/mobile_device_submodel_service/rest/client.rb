@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `MobileDeviceSubmodel` object.
+              # Retrieves a `MobileDeviceSubmodel` object.
               #
               # @overload get_mobile_device_submodel(request, options = nil)
               #   Pass arguments to `get_mobile_device_submodel` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `MobileDeviceSubmodel` objects.
+              # Lists `MobileDeviceSubmodel` objects.
               #
               # @overload list_mobile_device_submodels(request, options = nil)
               #   Pass arguments to `list_mobile_device_submodels` via a request object, either of type

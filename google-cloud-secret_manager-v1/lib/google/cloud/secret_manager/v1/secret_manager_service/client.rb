@@ -1686,6 +1686,190 @@ module Google
             end
 
             ##
+            # Enables the managed rotation feature for a
+            # {::Google::Cloud::SecretManager::V1::Secret Secret}. This method can only be
+            # triggered once for a secret. In order to do further rotations, RotateSecret
+            # should be used. This method will add a secret version and update the
+            # password in Cloud SQL.
+            #
+            # @overload enable_managed_rotation(request, options = nil)
+            #   Pass arguments to `enable_managed_rotation` via a request object, either of type
+            #   {::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload enable_managed_rotation(parent: nil, cloud_sql_single_user_credentials: nil)
+            #   Pass arguments to `enable_managed_rotation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
+            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
+            #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
+            #   @param cloud_sql_single_user_credentials [::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest::CloudSQLSingleUserCredentials, ::Hash]
+            #     Credentials required for Cloud SQL DB for Single user Managed Rotation.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secret_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new
+            #
+            #   # Call the enable_managed_rotation method.
+            #   result = client.enable_managed_rotation request
+            #
+            #   # The returned object is of type Google::Cloud::SecretManager::V1::SecretVersion.
+            #   p result
+            #
+            def enable_managed_rotation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.enable_managed_rotation.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.enable_managed_rotation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.enable_managed_rotation.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secret_manager_service_stub.call_rpc :enable_managed_rotation, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Do a managed rotation for a {::Google::Cloud::SecretManager::V1::Secret Secret}.
+            # This can only be triggered after Managed rotation has been enabled.
+            # This method will add a secret version and update the password in Cloud SQL.
+            #
+            # @overload rotate_secret(request, options = nil)
+            #   Pass arguments to `rotate_secret` via a request object, either of type
+            #   {::Google::Cloud::SecretManager::V1::RotateSecretRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecretManager::V1::RotateSecretRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload rotate_secret(parent: nil)
+            #   Pass arguments to `rotate_secret` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
+            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
+            #     `projects/*/secrets/*` or `projects/*/locations/*/secrets/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secret_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecretManager::V1::RotateSecretRequest.new
+            #
+            #   # Call the rotate_secret method.
+            #   result = client.rotate_secret request
+            #
+            #   # The returned object is of type Google::Cloud::SecretManager::V1::SecretVersion.
+            #   p result
+            #
+            def rotate_secret request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::RotateSecretRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.rotate_secret.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.rotate_secret.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.rotate_secret.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secret_manager_service_stub.call_rpc :rotate_secret, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the SecretManagerService API.
             #
             # This class represents the configuration for SecretManagerService,
@@ -1945,6 +2129,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
+                ##
+                # RPC-specific configuration for `enable_managed_rotation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :enable_managed_rotation
+                ##
+                # RPC-specific configuration for `rotate_secret`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :rotate_secret
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1978,6 +2172,10 @@ module Google
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                  enable_managed_rotation_config = parent_rpcs.enable_managed_rotation if parent_rpcs.respond_to? :enable_managed_rotation
+                  @enable_managed_rotation = ::Gapic::Config::Method.new enable_managed_rotation_config
+                  rotate_secret_config = parent_rpcs.rotate_secret if parent_rpcs.respond_to? :rotate_secret
+                  @rotate_secret = ::Gapic::Config::Method.new rotate_secret_config
 
                   yield self if block_given?
                 end

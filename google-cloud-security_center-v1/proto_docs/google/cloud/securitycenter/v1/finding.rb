@@ -263,6 +263,15 @@ module Google
         # @!attribute [rw] external_exposure
         #   @return [::Google::Cloud::SecurityCenter::V1::ExternalExposure]
         #     External exposure associated with the finding.
+        # @!attribute [rw] agent
+        #   @return [::Google::Cloud::SecurityCenter::V1::Agent]
+        #     Primary Agent that the specified finding was flagged for
+        # @!attribute [rw] agent_sessions
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::AgentSession>]
+        #     Conversational session(s) where the finding occurred.
+        # @!attribute [rw] agent_anomaly
+        #   @return [::Google::Cloud::SecurityCenter::V1::AgentAnomaly]
+        #     Details about behavior anomalies detected in AI agents.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

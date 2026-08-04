@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve an AdUnit object.
+              # Retrieves an `AdUnit` object.
               #
               # @overload get_ad_unit(request, options = nil)
               #   Pass arguments to `get_ad_unit` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of AdUnit objects.
+              # Lists `AdUnit` objects.
               #
               # @overload list_ad_units(request, options = nil)
               #   Pass arguments to `list_ad_units` via a request object, either of type
@@ -378,7 +378,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of AdUnitSize objects.
+              # Lists `AdUnitSize` objects.
               #
               # @overload list_ad_unit_sizes(request, options = nil)
               #   Pass arguments to `list_ad_unit_sizes` via a request object, either of type
@@ -484,7 +484,7 @@ module Google
               end
 
               ##
-              # API to create an `AdUnit` object.
+              # Creates an `AdUnit` object.
               #
               # @overload create_ad_unit(request, options = nil)
               #   Pass arguments to `create_ad_unit` via a request object, either of type
@@ -565,7 +565,7 @@ module Google
               end
 
               ##
-              # API to update an `AdUnit` object.
+              # Updates an `AdUnit` object.
               #
               # @overload update_ad_unit(request, options = nil)
               #   Pass arguments to `update_ad_unit` via a request object, either of type
@@ -648,7 +648,7 @@ module Google
               end
 
               ##
-              # API to batch create `AdUnit` objects.
+              # Creates `AdUnit` objects.
               #
               # @overload batch_create_ad_units(request, options = nil)
               #   Pass arguments to `batch_create_ad_units` via a request object, either of type
@@ -732,7 +732,7 @@ module Google
               end
 
               ##
-              # API to batch update `AdUnit` objects.
+              # Batch updates `AdUnit` objects.
               #
               # @overload batch_update_ad_units(request, options = nil)
               #   Pass arguments to `batch_update_ad_units` via a request object, either of type
@@ -816,7 +816,7 @@ module Google
               end
 
               ##
-              # API to batch activate `AdUnit` objects.
+              # Batch activates `AdUnit` objects.
               #
               # @overload batch_activate_ad_units(request, options = nil)
               #   Pass arguments to `batch_activate_ad_units` via a request object, either of type

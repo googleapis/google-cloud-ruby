@@ -41,9 +41,27 @@ module Google
         #     and would like to give consent to.
         #
         #     Acceptable version is `2022-11-23`, and this may change over time.
+        # @!attribute [rw] saas_params
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest::SaasParams]
+        #     Optional. Parameters for Agentspace.
         class ProvisionProjectRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Parameters for Agentspace.
+          # @!attribute [rw] accept_biz_qos
+          #   @return [::Boolean]
+          #     Optional. Set to `true` to specify that caller has read and would like to
+          #     give consent to the [Terms for Agent Space quality of service].
+          # @!attribute [rw] is_biz
+          #   @return [::Boolean]
+          #     Optional. Indicates if the current request is for Biz edition (= true) or
+          #     not
+          #     (= false).
+          class SaasParams
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Metadata associated with a project provision operation.

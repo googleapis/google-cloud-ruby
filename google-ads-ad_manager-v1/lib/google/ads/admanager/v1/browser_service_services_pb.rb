@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.BrowserService'
 
-            # API to retrieve a `Browser` object.
+            # Retrieves a `Browser` object.
             rpc :GetBrowser, ::Google::Ads::AdManager::V1::GetBrowserRequest, ::Google::Ads::AdManager::V1::Browser
-            # API to retrieve a list of `Browser` objects.
+            # Lists `Browser` objects.
             rpc :ListBrowsers, ::Google::Ads::AdManager::V1::ListBrowsersRequest, ::Google::Ads::AdManager::V1::ListBrowsersResponse
           end
 

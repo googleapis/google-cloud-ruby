@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-ads-ad_manager-v1",
-    "version": "4.1.0",
+    "version": "5.0.0",
     "language": "RUBY",
     "apis": [
       {
@@ -327,6 +327,606 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_GetAdRule_sync",
+      "title": "Snippet for the get_ad_rule call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#get_ad_rule.",
+      "file": "ad_rule_service/get_ad_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_ad_rule",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#get_ad_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetAdRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdRule",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetAdRule",
+          "full_name": "google.ads.admanager.v1.AdRuleService.GetAdRule",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_ListAdRules_sync",
+      "title": "Snippet for the list_ad_rules call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#list_ad_rules.",
+      "file": "ad_rule_service/list_ad_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_ad_rules",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#list_ad_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListAdRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListAdRulesResponse",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListAdRules",
+          "full_name": "google.ads.admanager.v1.AdRuleService.ListAdRules",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_CreateAdRule_sync",
+      "title": "Snippet for the create_ad_rule call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#create_ad_rule.",
+      "file": "ad_rule_service/create_ad_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ad_rule",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#create_ad_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateAdRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdRule",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateAdRule",
+          "full_name": "google.ads.admanager.v1.AdRuleService.CreateAdRule",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_BatchCreateAdRules_sync",
+      "title": "Snippet for the batch_create_ad_rules call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_create_ad_rules.",
+      "file": "ad_rule_service/batch_create_ad_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_ad_rules",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_create_ad_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateAdRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateAdRulesResponse",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateAdRules",
+          "full_name": "google.ads.admanager.v1.AdRuleService.BatchCreateAdRules",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_UpdateAdRule_sync",
+      "title": "Snippet for the update_ad_rule call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#update_ad_rule.",
+      "file": "ad_rule_service/update_ad_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_ad_rule",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#update_ad_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateAdRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdRule",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateAdRule",
+          "full_name": "google.ads.admanager.v1.AdRuleService.UpdateAdRule",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_BatchUpdateAdRules_sync",
+      "title": "Snippet for the batch_update_ad_rules call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_update_ad_rules.",
+      "file": "ad_rule_service/batch_update_ad_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_ad_rules",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_update_ad_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateAdRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateAdRulesResponse",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateAdRules",
+          "full_name": "google.ads.admanager.v1.AdRuleService.BatchUpdateAdRules",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_BatchActivateAdRules_sync",
+      "title": "Snippet for the batch_activate_ad_rules call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_activate_ad_rules.",
+      "file": "ad_rule_service/batch_activate_ad_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_ad_rules",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_activate_ad_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateAdRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateAdRulesResponse",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateAdRules",
+          "full_name": "google.ads.admanager.v1.AdRuleService.BatchActivateAdRules",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_BatchDeactivateAdRules_sync",
+      "title": "Snippet for the batch_deactivate_ad_rules call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_deactivate_ad_rules.",
+      "file": "ad_rule_service/batch_deactivate_ad_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_ad_rules",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_deactivate_ad_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateAdRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateAdRulesResponse",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateAdRules",
+          "full_name": "google.ads.admanager.v1.AdRuleService.BatchDeactivateAdRules",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdRuleService_BatchDeleteAdRules_sync",
+      "title": "Snippet for the batch_delete_ad_rules call in the AdRuleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_delete_ad_rules.",
+      "file": "ad_rule_service/batch_delete_ad_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_ad_rules",
+        "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client#batch_delete_ad_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeleteAdRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AdRuleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdRuleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteAdRules",
+          "full_name": "google.ads.admanager.v1.AdRuleService.BatchDeleteAdRules",
+          "service": {
+            "short_name": "AdRuleService",
+            "full_name": "google.ads.admanager.v1.AdRuleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdSpotService_GetAdSpot_sync",
+      "title": "Snippet for the get_ad_spot call in the AdSpotService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdSpotService::Rest::Client#get_ad_spot.",
+      "file": "ad_spot_service/get_ad_spot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_ad_spot",
+        "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client#get_ad_spot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetAdSpotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdSpot",
+        "client": {
+          "short_name": "AdSpotService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetAdSpot",
+          "full_name": "google.ads.admanager.v1.AdSpotService.GetAdSpot",
+          "service": {
+            "short_name": "AdSpotService",
+            "full_name": "google.ads.admanager.v1.AdSpotService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdSpotService_ListAdSpots_sync",
+      "title": "Snippet for the list_ad_spots call in the AdSpotService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdSpotService::Rest::Client#list_ad_spots.",
+      "file": "ad_spot_service/list_ad_spots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_ad_spots",
+        "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client#list_ad_spots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListAdSpotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListAdSpotsResponse",
+        "client": {
+          "short_name": "AdSpotService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListAdSpots",
+          "full_name": "google.ads.admanager.v1.AdSpotService.ListAdSpots",
+          "service": {
+            "short_name": "AdSpotService",
+            "full_name": "google.ads.admanager.v1.AdSpotService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdSpotService_CreateAdSpot_sync",
+      "title": "Snippet for the create_ad_spot call in the AdSpotService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdSpotService::Rest::Client#create_ad_spot.",
+      "file": "ad_spot_service/create_ad_spot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ad_spot",
+        "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client#create_ad_spot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateAdSpotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdSpot",
+        "client": {
+          "short_name": "AdSpotService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateAdSpot",
+          "full_name": "google.ads.admanager.v1.AdSpotService.CreateAdSpot",
+          "service": {
+            "short_name": "AdSpotService",
+            "full_name": "google.ads.admanager.v1.AdSpotService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdSpotService_BatchCreateAdSpots_sync",
+      "title": "Snippet for the batch_create_ad_spots call in the AdSpotService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdSpotService::Rest::Client#batch_create_ad_spots.",
+      "file": "ad_spot_service/batch_create_ad_spots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_ad_spots",
+        "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client#batch_create_ad_spots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateAdSpotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateAdSpotsResponse",
+        "client": {
+          "short_name": "AdSpotService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateAdSpots",
+          "full_name": "google.ads.admanager.v1.AdSpotService.BatchCreateAdSpots",
+          "service": {
+            "short_name": "AdSpotService",
+            "full_name": "google.ads.admanager.v1.AdSpotService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdSpotService_UpdateAdSpot_sync",
+      "title": "Snippet for the update_ad_spot call in the AdSpotService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdSpotService::Rest::Client#update_ad_spot.",
+      "file": "ad_spot_service/update_ad_spot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_ad_spot",
+        "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client#update_ad_spot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateAdSpotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdSpot",
+        "client": {
+          "short_name": "AdSpotService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateAdSpot",
+          "full_name": "google.ads.admanager.v1.AdSpotService.UpdateAdSpot",
+          "service": {
+            "short_name": "AdSpotService",
+            "full_name": "google.ads.admanager.v1.AdSpotService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdSpotService_BatchUpdateAdSpots_sync",
+      "title": "Snippet for the batch_update_ad_spots call in the AdSpotService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdSpotService::Rest::Client#batch_update_ad_spots.",
+      "file": "ad_spot_service/batch_update_ad_spots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_ad_spots",
+        "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client#batch_update_ad_spots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateAdSpotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateAdSpotsResponse",
+        "client": {
+          "short_name": "AdSpotService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdSpotService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateAdSpots",
+          "full_name": "google.ads.admanager.v1.AdSpotService.BatchUpdateAdSpots",
+          "service": {
+            "short_name": "AdSpotService",
+            "full_name": "google.ads.admanager.v1.AdSpotService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1372,6 +1972,326 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_CdnConfigService_GetCdnConfig_sync",
+      "title": "Snippet for the get_cdn_config call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#get_cdn_config.",
+      "file": "cdn_config_service/get_cdn_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cdn_config",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#get_cdn_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetCdnConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CdnConfig",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetCdnConfig",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.GetCdnConfig",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_ListCdnConfigs_sync",
+      "title": "Snippet for the list_cdn_configs call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#list_cdn_configs.",
+      "file": "cdn_config_service/list_cdn_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cdn_configs",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#list_cdn_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListCdnConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListCdnConfigsResponse",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListCdnConfigs",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.ListCdnConfigs",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_CreateCdnConfig_sync",
+      "title": "Snippet for the create_cdn_config call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#create_cdn_config.",
+      "file": "cdn_config_service/create_cdn_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cdn_config",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#create_cdn_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateCdnConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CdnConfig",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCdnConfig",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.CreateCdnConfig",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_BatchCreateCdnConfigs_sync",
+      "title": "Snippet for the batch_create_cdn_configs call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_create_cdn_configs.",
+      "file": "cdn_config_service/batch_create_cdn_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_cdn_configs",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_create_cdn_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateCdnConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateCdnConfigsResponse",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateCdnConfigs",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.BatchCreateCdnConfigs",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_UpdateCdnConfig_sync",
+      "title": "Snippet for the update_cdn_config call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#update_cdn_config.",
+      "file": "cdn_config_service/update_cdn_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cdn_config",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#update_cdn_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateCdnConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CdnConfig",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCdnConfig",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.UpdateCdnConfig",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_BatchUpdateCdnConfigs_sync",
+      "title": "Snippet for the batch_update_cdn_configs call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_update_cdn_configs.",
+      "file": "cdn_config_service/batch_update_cdn_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_cdn_configs",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_update_cdn_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateCdnConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateCdnConfigsResponse",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateCdnConfigs",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.BatchUpdateCdnConfigs",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_BatchActivateCdnConfigs_sync",
+      "title": "Snippet for the batch_activate_cdn_configs call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_activate_cdn_configs.",
+      "file": "cdn_config_service/batch_activate_cdn_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_cdn_configs",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_activate_cdn_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateCdnConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateCdnConfigsResponse",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateCdnConfigs",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.BatchActivateCdnConfigs",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CdnConfigService_BatchArchiveCdnConfigs_sync",
+      "title": "Snippet for the batch_archive_cdn_configs call in the CdnConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_archive_cdn_configs.",
+      "file": "cdn_config_service/batch_archive_cdn_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_archive_cdn_configs",
+        "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client#batch_archive_cdn_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchArchiveCdnConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchArchiveCdnConfigsResponse",
+        "client": {
+          "short_name": "CdnConfigService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CdnConfigService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchArchiveCdnConfigs",
+          "full_name": "google.ads.admanager.v1.CdnConfigService.BatchArchiveCdnConfigs",
+          "service": {
+            "short_name": "CdnConfigService",
+            "full_name": "google.ads.admanager.v1.CdnConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_CmsMetadataKeyService_GetCmsMetadataKey_sync",
       "title": "Snippet for the get_cms_metadata_key call in the CmsMetadataKeyService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client#get_cms_metadata_key.",
@@ -2092,6 +3012,86 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_ContentBundleService_BatchActivateContentBundles_sync",
+      "title": "Snippet for the batch_activate_content_bundles call in the ContentBundleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ContentBundleService::Rest::Client#batch_activate_content_bundles.",
+      "file": "content_bundle_service/batch_activate_content_bundles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_content_bundles",
+        "full_name": "::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client#batch_activate_content_bundles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateContentBundlesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateContentBundlesResponse",
+        "client": {
+          "short_name": "ContentBundleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateContentBundles",
+          "full_name": "google.ads.admanager.v1.ContentBundleService.BatchActivateContentBundles",
+          "service": {
+            "short_name": "ContentBundleService",
+            "full_name": "google.ads.admanager.v1.ContentBundleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ContentBundleService_BatchDeactivateContentBundles_sync",
+      "title": "Snippet for the batch_deactivate_content_bundles call in the ContentBundleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ContentBundleService::Rest::Client#batch_deactivate_content_bundles.",
+      "file": "content_bundle_service/batch_deactivate_content_bundles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_content_bundles",
+        "full_name": "::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client#batch_deactivate_content_bundles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateContentBundlesResponse",
+        "client": {
+          "short_name": "ContentBundleService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ContentBundleService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateContentBundles",
+          "full_name": "google.ads.admanager.v1.ContentBundleService.BatchDeactivateContentBundles",
+          "service": {
+            "short_name": "ContentBundleService",
+            "full_name": "google.ads.admanager.v1.ContentBundleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_ContentLabelService_GetContentLabel_sync",
       "title": "Snippet for the get_content_label call in the ContentLabelService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ContentLabelService::Rest::Client#get_content_label.",
@@ -2247,6 +3247,166 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeSetService_GetCreativeSet_sync",
+      "title": "Snippet for the get_creative_set call in the CreativeSetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#get_creative_set.",
+      "file": "creative_set_service/get_creative_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_creative_set",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#get_creative_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetCreativeSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CreativeSet",
+        "client": {
+          "short_name": "CreativeSetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetCreativeSet",
+          "full_name": "google.ads.admanager.v1.CreativeSetService.GetCreativeSet",
+          "service": {
+            "short_name": "CreativeSetService",
+            "full_name": "google.ads.admanager.v1.CreativeSetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeSetService_ListCreativeSets_sync",
+      "title": "Snippet for the list_creative_sets call in the CreativeSetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#list_creative_sets.",
+      "file": "creative_set_service/list_creative_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_creative_sets",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#list_creative_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListCreativeSetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListCreativeSetsResponse",
+        "client": {
+          "short_name": "CreativeSetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListCreativeSets",
+          "full_name": "google.ads.admanager.v1.CreativeSetService.ListCreativeSets",
+          "service": {
+            "short_name": "CreativeSetService",
+            "full_name": "google.ads.admanager.v1.CreativeSetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeSetService_CreateCreativeSet_sync",
+      "title": "Snippet for the create_creative_set call in the CreativeSetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#create_creative_set.",
+      "file": "creative_set_service/create_creative_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_creative_set",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#create_creative_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateCreativeSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CreativeSet",
+        "client": {
+          "short_name": "CreativeSetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCreativeSet",
+          "full_name": "google.ads.admanager.v1.CreativeSetService.CreateCreativeSet",
+          "service": {
+            "short_name": "CreativeSetService",
+            "full_name": "google.ads.admanager.v1.CreativeSetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeSetService_UpdateCreativeSet_sync",
+      "title": "Snippet for the update_creative_set call in the CreativeSetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#update_creative_set.",
+      "file": "creative_set_service/update_creative_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_creative_set",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client#update_creative_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateCreativeSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CreativeSet",
+        "client": {
+          "short_name": "CreativeSetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeSetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCreativeSet",
+          "full_name": "google.ads.admanager.v1.CreativeSetService.UpdateCreativeSet",
+          "service": {
+            "short_name": "CreativeSetService",
+            "full_name": "google.ads.admanager.v1.CreativeSetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -3047,6 +4207,246 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingValueService_CreateCustomTargetingValue_sync",
+      "title": "Snippet for the create_custom_targeting_value call in the CustomTargetingValueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#create_custom_targeting_value.",
+      "file": "custom_targeting_value_service/create_custom_targeting_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_targeting_value",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#create_custom_targeting_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateCustomTargetingValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CustomTargetingValue",
+        "client": {
+          "short_name": "CustomTargetingValueService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomTargetingValue",
+          "full_name": "google.ads.admanager.v1.CustomTargetingValueService.CreateCustomTargetingValue",
+          "service": {
+            "short_name": "CustomTargetingValueService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingValueService_BatchCreateCustomTargetingValues_sync",
+      "title": "Snippet for the batch_create_custom_targeting_values call in the CustomTargetingValueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_create_custom_targeting_values.",
+      "file": "custom_targeting_value_service/batch_create_custom_targeting_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_custom_targeting_values",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_create_custom_targeting_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesResponse",
+        "client": {
+          "short_name": "CustomTargetingValueService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateCustomTargetingValues",
+          "full_name": "google.ads.admanager.v1.CustomTargetingValueService.BatchCreateCustomTargetingValues",
+          "service": {
+            "short_name": "CustomTargetingValueService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingValueService_UpdateCustomTargetingValue_sync",
+      "title": "Snippet for the update_custom_targeting_value call in the CustomTargetingValueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#update_custom_targeting_value.",
+      "file": "custom_targeting_value_service/update_custom_targeting_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_custom_targeting_value",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#update_custom_targeting_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateCustomTargetingValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CustomTargetingValue",
+        "client": {
+          "short_name": "CustomTargetingValueService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomTargetingValue",
+          "full_name": "google.ads.admanager.v1.CustomTargetingValueService.UpdateCustomTargetingValue",
+          "service": {
+            "short_name": "CustomTargetingValueService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingValueService_BatchUpdateCustomTargetingValues_sync",
+      "title": "Snippet for the batch_update_custom_targeting_values call in the CustomTargetingValueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_update_custom_targeting_values.",
+      "file": "custom_targeting_value_service/batch_update_custom_targeting_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_custom_targeting_values",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_update_custom_targeting_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesResponse",
+        "client": {
+          "short_name": "CustomTargetingValueService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateCustomTargetingValues",
+          "full_name": "google.ads.admanager.v1.CustomTargetingValueService.BatchUpdateCustomTargetingValues",
+          "service": {
+            "short_name": "CustomTargetingValueService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingValueService_BatchActivateCustomTargetingValues_sync",
+      "title": "Snippet for the batch_activate_custom_targeting_values call in the CustomTargetingValueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_activate_custom_targeting_values.",
+      "file": "custom_targeting_value_service/batch_activate_custom_targeting_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_custom_targeting_values",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_activate_custom_targeting_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesResponse",
+        "client": {
+          "short_name": "CustomTargetingValueService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateCustomTargetingValues",
+          "full_name": "google.ads.admanager.v1.CustomTargetingValueService.BatchActivateCustomTargetingValues",
+          "service": {
+            "short_name": "CustomTargetingValueService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CustomTargetingValueService_BatchDeactivateCustomTargetingValues_sync",
+      "title": "Snippet for the batch_deactivate_custom_targeting_values call in the CustomTargetingValueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_deactivate_custom_targeting_values.",
+      "file": "custom_targeting_value_service/batch_deactivate_custom_targeting_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_custom_targeting_values",
+        "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client#batch_deactivate_custom_targeting_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesResponse",
+        "client": {
+          "short_name": "CustomTargetingValueService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateCustomTargetingValues",
+          "full_name": "google.ads.admanager.v1.CustomTargetingValueService.BatchDeactivateCustomTargetingValues",
+          "service": {
+            "short_name": "CustomTargetingValueService",
+            "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -4092,6 +5492,446 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_LiveStreamService_GetLiveStream_sync",
+      "title": "Snippet for the get_live_stream call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#get_live_stream.",
+      "file": "live_stream_service/get_live_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_live_stream",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#get_live_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetLiveStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::LiveStream",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetLiveStream",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.GetLiveStream",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_ListLiveStreams_sync",
+      "title": "Snippet for the list_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#list_live_streams.",
+      "file": "live_stream_service/list_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#list_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.ListLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_CreateLiveStream_sync",
+      "title": "Snippet for the create_live_stream call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#create_live_stream.",
+      "file": "live_stream_service/create_live_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_live_stream",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#create_live_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateLiveStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::LiveStream",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateLiveStream",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.CreateLiveStream",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchCreateLiveStreams_sync",
+      "title": "Snippet for the batch_create_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_create_live_streams.",
+      "file": "live_stream_service/batch_create_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_create_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchCreateLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_UpdateLiveStream_sync",
+      "title": "Snippet for the update_live_stream call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#update_live_stream.",
+      "file": "live_stream_service/update_live_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_live_stream",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#update_live_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateLiveStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::LiveStream",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateLiveStream",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.UpdateLiveStream",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchUpdateLiveStreams_sync",
+      "title": "Snippet for the batch_update_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_update_live_streams.",
+      "file": "live_stream_service/batch_update_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_update_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchUpdateLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchActivateLiveStreams_sync",
+      "title": "Snippet for the batch_activate_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_activate_live_streams.",
+      "file": "live_stream_service/batch_activate_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_activate_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchActivateLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchPauseLiveStreams_sync",
+      "title": "Snippet for the batch_pause_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_pause_live_streams.",
+      "file": "live_stream_service/batch_pause_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_pause_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_pause_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchPauseLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchPauseLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchPauseLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchPauseLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchArchiveLiveStreams_sync",
+      "title": "Snippet for the batch_archive_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_archive_live_streams.",
+      "file": "live_stream_service/batch_archive_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_archive_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_archive_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchArchiveLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchArchiveLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchArchiveLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchArchiveLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchPauseAdsLiveStreams_sync",
+      "title": "Snippet for the batch_pause_ads_live_streams call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_pause_ads_live_streams.",
+      "file": "live_stream_service/batch_pause_ads_live_streams.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_pause_ads_live_streams",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_pause_ads_live_streams",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchPauseAdsLiveStreamsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchPauseAdsLiveStreamsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchPauseAdsLiveStreams",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchPauseAdsLiveStreams",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_LiveStreamService_BatchRefreshMasterPlaylists_sync",
+      "title": "Snippet for the batch_refresh_master_playlists call in the LiveStreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_refresh_master_playlists.",
+      "file": "live_stream_service/batch_refresh_master_playlists.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_refresh_master_playlists",
+        "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client#batch_refresh_master_playlists",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchRefreshMasterPlaylistsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchRefreshMasterPlaylistsResponse",
+        "client": {
+          "short_name": "LiveStreamService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::LiveStreamService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchRefreshMasterPlaylists",
+          "full_name": "google.ads.admanager.v1.LiveStreamService.BatchRefreshMasterPlaylists",
+          "service": {
+            "short_name": "LiveStreamService",
+            "full_name": "google.ads.admanager.v1.LiveStreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_McmEarningsService_FetchMcmEarnings_sync",
       "title": "Snippet for the fetch_mcm_earnings call in the McmEarningsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::McmEarningsService::Rest::Client#fetch_mcm_earnings.",
@@ -4687,6 +6527,726 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchCreateOrders_sync",
+      "title": "Snippet for the batch_create_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_create_orders.",
+      "file": "order_service/batch_create_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_create_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchCreateOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchUpdateOrders_sync",
+      "title": "Snippet for the batch_update_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_update_orders.",
+      "file": "order_service/batch_update_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_update_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchUpdateOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchApproveOrders_sync",
+      "title": "Snippet for the batch_approve_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_approve_orders.",
+      "file": "order_service/batch_approve_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_approve_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_approve_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchApproveOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchApproveOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchApproveOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchApproveOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchApproveAndOverbookOrders_sync",
+      "title": "Snippet for the batch_approve_and_overbook_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_approve_and_overbook_orders.",
+      "file": "order_service/batch_approve_and_overbook_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_approve_and_overbook_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_approve_and_overbook_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchApproveAndOverbookOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchApproveAndOverbookOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchApproveAndOverbookOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchSubmitOrdersForApproval_sync",
+      "title": "Snippet for the batch_submit_orders_for_approval call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_submit_orders_for_approval.",
+      "file": "order_service/batch_submit_orders_for_approval.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_submit_orders_for_approval",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_submit_orders_for_approval",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchSubmitOrdersForApproval",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchSubmitOrdersForApproval",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchSubmitOrdersForApprovalAndOverbook_sync",
+      "title": "Snippet for the batch_submit_orders_for_approval_and_overbook call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_submit_orders_for_approval_and_overbook.",
+      "file": "order_service/batch_submit_orders_for_approval_and_overbook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_submit_orders_for_approval_and_overbook",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_submit_orders_for_approval_and_overbook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalAndOverbookResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchSubmitOrdersForApprovalAndOverbook",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchSubmitOrdersForApprovalAndOverbook",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchSubmitOrdersForApprovalWithoutReservationChanges_sync",
+      "title": "Snippet for the batch_submit_orders_for_approval_without_reservation_changes call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_submit_orders_for_approval_without_reservation_changes.",
+      "file": "order_service/batch_submit_orders_for_approval_without_reservation_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_submit_orders_for_approval_without_reservation_changes",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_submit_orders_for_approval_without_reservation_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchSubmitOrdersForApprovalWithoutReservationChangesResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchSubmitOrdersForApprovalWithoutReservationChanges",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchSubmitOrdersForApprovalWithoutReservationChanges",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchPauseOrders_sync",
+      "title": "Snippet for the batch_pause_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_pause_orders.",
+      "file": "order_service/batch_pause_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_pause_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_pause_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchPauseOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchPauseOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchPauseOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchPauseOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchResumeOrders_sync",
+      "title": "Snippet for the batch_resume_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_resume_orders.",
+      "file": "order_service/batch_resume_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_resume_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_resume_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchResumeOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchResumeOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchResumeOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchResumeOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchResumeAndOverbookOrders_sync",
+      "title": "Snippet for the batch_resume_and_overbook_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_resume_and_overbook_orders.",
+      "file": "order_service/batch_resume_and_overbook_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_resume_and_overbook_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_resume_and_overbook_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchResumeAndOverbookOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchResumeAndOverbookOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchResumeAndOverbookOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchApproveOrdersWithoutReservation_sync",
+      "title": "Snippet for the batch_approve_orders_without_reservation call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_approve_orders_without_reservation.",
+      "file": "order_service/batch_approve_orders_without_reservation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_approve_orders_without_reservation",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_approve_orders_without_reservation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchApproveOrdersWithoutReservationResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchApproveOrdersWithoutReservation",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchApproveOrdersWithoutReservation",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchArchiveOrders_sync",
+      "title": "Snippet for the batch_archive_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_archive_orders.",
+      "file": "order_service/batch_archive_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_archive_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_archive_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchArchiveOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchArchiveOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchArchiveOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchArchiveOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchUnarchiveOrders_sync",
+      "title": "Snippet for the batch_unarchive_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_unarchive_orders.",
+      "file": "order_service/batch_unarchive_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_unarchive_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_unarchive_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUnarchiveOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUnarchiveOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUnarchiveOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchUnarchiveOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchDeleteOrders_sync",
+      "title": "Snippet for the batch_delete_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_delete_orders.",
+      "file": "order_service/batch_delete_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_delete_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeleteOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeleteOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchDeleteOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchDisapproveOrders_sync",
+      "title": "Snippet for the batch_disapprove_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_disapprove_orders.",
+      "file": "order_service/batch_disapprove_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_disapprove_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_disapprove_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDisapproveOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDisapproveOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDisapproveOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchDisapproveOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchDisapproveOrdersWithoutReservationChanges_sync",
+      "title": "Snippet for the batch_disapprove_orders_without_reservation_changes call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_disapprove_orders_without_reservation_changes.",
+      "file": "order_service/batch_disapprove_orders_without_reservation_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_disapprove_orders_without_reservation_changes",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_disapprove_orders_without_reservation_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDisapproveOrdersWithoutReservationChangesResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDisapproveOrdersWithoutReservationChanges",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchDisapproveOrdersWithoutReservationChanges",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchRetractOrders_sync",
+      "title": "Snippet for the batch_retract_orders call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_retract_orders.",
+      "file": "order_service/batch_retract_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_retract_orders",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_retract_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchRetractOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchRetractOrdersResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchRetractOrders",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchRetractOrders",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OrderService_BatchRetractOrdersWithoutReservationChanges_sync",
+      "title": "Snippet for the batch_retract_orders_without_reservation_changes call in the OrderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_retract_orders_without_reservation_changes.",
+      "file": "order_service/batch_retract_orders_without_reservation_changes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_retract_orders_without_reservation_changes",
+        "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client#batch_retract_orders_without_reservation_changes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchRetractOrdersWithoutReservationChangesResponse",
+        "client": {
+          "short_name": "OrderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OrderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchRetractOrdersWithoutReservationChanges",
+          "full_name": "google.ads.admanager.v1.OrderService.BatchRetractOrdersWithoutReservationChanges",
+          "service": {
+            "short_name": "OrderService",
+            "full_name": "google.ads.admanager.v1.OrderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -6172,6 +8732,726 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_SlateService_GetSlate_sync",
+      "title": "Snippet for the get_slate call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#get_slate.",
+      "file": "slate_service/get_slate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_slate",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#get_slate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetSlateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Slate",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetSlate",
+          "full_name": "google.ads.admanager.v1.SlateService.GetSlate",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_ListSlates_sync",
+      "title": "Snippet for the list_slates call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#list_slates.",
+      "file": "slate_service/list_slates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_slates",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#list_slates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListSlatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListSlatesResponse",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListSlates",
+          "full_name": "google.ads.admanager.v1.SlateService.ListSlates",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_CreateSlate_sync",
+      "title": "Snippet for the create_slate call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#create_slate.",
+      "file": "slate_service/create_slate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_slate",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#create_slate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateSlateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Slate",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateSlate",
+          "full_name": "google.ads.admanager.v1.SlateService.CreateSlate",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_BatchCreateSlates_sync",
+      "title": "Snippet for the batch_create_slates call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_create_slates.",
+      "file": "slate_service/batch_create_slates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_slates",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_create_slates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateSlatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateSlatesResponse",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateSlates",
+          "full_name": "google.ads.admanager.v1.SlateService.BatchCreateSlates",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_UpdateSlate_sync",
+      "title": "Snippet for the update_slate call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#update_slate.",
+      "file": "slate_service/update_slate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_slate",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#update_slate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateSlateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Slate",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateSlate",
+          "full_name": "google.ads.admanager.v1.SlateService.UpdateSlate",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_BatchUpdateSlates_sync",
+      "title": "Snippet for the batch_update_slates call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_update_slates.",
+      "file": "slate_service/batch_update_slates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_slates",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_update_slates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateSlatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateSlatesResponse",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateSlates",
+          "full_name": "google.ads.admanager.v1.SlateService.BatchUpdateSlates",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_BatchArchiveSlates_sync",
+      "title": "Snippet for the batch_archive_slates call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_archive_slates.",
+      "file": "slate_service/batch_archive_slates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_archive_slates",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_archive_slates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchArchiveSlatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchArchiveSlatesResponse",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchArchiveSlates",
+          "full_name": "google.ads.admanager.v1.SlateService.BatchArchiveSlates",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SlateService_BatchUnarchiveSlates_sync",
+      "title": "Snippet for the batch_unarchive_slates call in the SlateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_unarchive_slates.",
+      "file": "slate_service/batch_unarchive_slates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_unarchive_slates",
+        "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client#batch_unarchive_slates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUnarchiveSlatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUnarchiveSlatesResponse",
+        "client": {
+          "short_name": "SlateService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SlateService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUnarchiveSlates",
+          "full_name": "google.ads.admanager.v1.SlateService.BatchUnarchiveSlates",
+          "service": {
+            "short_name": "SlateService",
+            "full_name": "google.ads.admanager.v1.SlateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SuggestedAdUnitService_GetSuggestedAdUnit_sync",
+      "title": "Snippet for the get_suggested_ad_unit call in the SuggestedAdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client#get_suggested_ad_unit.",
+      "file": "suggested_ad_unit_service/get_suggested_ad_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_suggested_ad_unit",
+        "full_name": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client#get_suggested_ad_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetSuggestedAdUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::SuggestedAdUnit",
+        "client": {
+          "short_name": "SuggestedAdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetSuggestedAdUnit",
+          "full_name": "google.ads.admanager.v1.SuggestedAdUnitService.GetSuggestedAdUnit",
+          "service": {
+            "short_name": "SuggestedAdUnitService",
+            "full_name": "google.ads.admanager.v1.SuggestedAdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SuggestedAdUnitService_ListSuggestedAdUnits_sync",
+      "title": "Snippet for the list_suggested_ad_units call in the SuggestedAdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client#list_suggested_ad_units.",
+      "file": "suggested_ad_unit_service/list_suggested_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_suggested_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client#list_suggested_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListSuggestedAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListSuggestedAdUnitsResponse",
+        "client": {
+          "short_name": "SuggestedAdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListSuggestedAdUnits",
+          "full_name": "google.ads.admanager.v1.SuggestedAdUnitService.ListSuggestedAdUnits",
+          "service": {
+            "short_name": "SuggestedAdUnitService",
+            "full_name": "google.ads.admanager.v1.SuggestedAdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_SuggestedAdUnitService_BatchApproveSuggestedAdUnits_sync",
+      "title": "Snippet for the batch_approve_suggested_ad_units call in the SuggestedAdUnitService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client#batch_approve_suggested_ad_units.",
+      "file": "suggested_ad_unit_service/batch_approve_suggested_ad_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_approve_suggested_ad_units",
+        "full_name": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client#batch_approve_suggested_ad_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchApproveSuggestedAdUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchApproveSuggestedAdUnitsResponse",
+        "client": {
+          "short_name": "SuggestedAdUnitService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::SuggestedAdUnitService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchApproveSuggestedAdUnits",
+          "full_name": "google.ads.admanager.v1.SuggestedAdUnitService.BatchApproveSuggestedAdUnits",
+          "service": {
+            "short_name": "SuggestedAdUnitService",
+            "full_name": "google.ads.admanager.v1.SuggestedAdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_GetTargetingPreset_sync",
+      "title": "Snippet for the get_targeting_preset call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#get_targeting_preset.",
+      "file": "targeting_preset_service/get_targeting_preset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_targeting_preset",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#get_targeting_preset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetTargetingPresetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::TargetingPreset",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetTargetingPreset",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.GetTargetingPreset",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_ListTargetingPresets_sync",
+      "title": "Snippet for the list_targeting_presets call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#list_targeting_presets.",
+      "file": "targeting_preset_service/list_targeting_presets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_targeting_presets",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#list_targeting_presets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListTargetingPresetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListTargetingPresetsResponse",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListTargetingPresets",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.ListTargetingPresets",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_CreateTargetingPreset_sync",
+      "title": "Snippet for the create_targeting_preset call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#create_targeting_preset.",
+      "file": "targeting_preset_service/create_targeting_preset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_targeting_preset",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#create_targeting_preset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateTargetingPresetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::TargetingPreset",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateTargetingPreset",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.CreateTargetingPreset",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_BatchCreateTargetingPresets_sync",
+      "title": "Snippet for the batch_create_targeting_presets call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#batch_create_targeting_presets.",
+      "file": "targeting_preset_service/batch_create_targeting_presets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_targeting_presets",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#batch_create_targeting_presets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateTargetingPresetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateTargetingPresetsResponse",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateTargetingPresets",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.BatchCreateTargetingPresets",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_UpdateTargetingPreset_sync",
+      "title": "Snippet for the update_targeting_preset call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#update_targeting_preset.",
+      "file": "targeting_preset_service/update_targeting_preset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_targeting_preset",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#update_targeting_preset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateTargetingPresetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::TargetingPreset",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateTargetingPreset",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.UpdateTargetingPreset",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_BatchUpdateTargetingPresets_sync",
+      "title": "Snippet for the batch_update_targeting_presets call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#batch_update_targeting_presets.",
+      "file": "targeting_preset_service/batch_update_targeting_presets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_targeting_presets",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#batch_update_targeting_presets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateTargetingPresetsResponse",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateTargetingPresets",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.BatchUpdateTargetingPresets",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_TargetingPresetService_BatchDeactivateTargetingPresets_sync",
+      "title": "Snippet for the batch_deactivate_targeting_presets call in the TargetingPresetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#batch_deactivate_targeting_presets.",
+      "file": "targeting_preset_service/batch_deactivate_targeting_presets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_targeting_presets",
+        "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client#batch_deactivate_targeting_presets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateTargetingPresetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateTargetingPresetsResponse",
+        "client": {
+          "short_name": "TargetingPresetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::TargetingPresetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateTargetingPresets",
+          "full_name": "google.ads.admanager.v1.TargetingPresetService.BatchDeactivateTargetingPresets",
+          "service": {
+            "short_name": "TargetingPresetService",
+            "full_name": "google.ads.admanager.v1.TargetingPresetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_TaxonomyCategoryService_GetTaxonomyCategory_sync",
       "title": "Snippet for the get_taxonomy_category call in the TaxonomyCategoryService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::TaxonomyCategoryService::Rest::Client#get_taxonomy_category.",
@@ -6567,6 +9847,86 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ThirdPartyCompanyService_GetThirdPartyCompany_sync",
+      "title": "Snippet for the get_third_party_company call in the ThirdPartyCompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ThirdPartyCompanyService::Rest::Client#get_third_party_company.",
+      "file": "third_party_company_service/get_third_party_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_third_party_company",
+        "full_name": "::Google::Ads::AdManager::V1::ThirdPartyCompanyService::Rest::Client#get_third_party_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetThirdPartyCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ThirdPartyCompany",
+        "client": {
+          "short_name": "ThirdPartyCompanyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ThirdPartyCompanyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetThirdPartyCompany",
+          "full_name": "google.ads.admanager.v1.ThirdPartyCompanyService.GetThirdPartyCompany",
+          "service": {
+            "short_name": "ThirdPartyCompanyService",
+            "full_name": "google.ads.admanager.v1.ThirdPartyCompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ThirdPartyCompanyService_ListThirdPartyCompanies_sync",
+      "title": "Snippet for the list_third_party_companies call in the ThirdPartyCompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ThirdPartyCompanyService::Rest::Client#list_third_party_companies.",
+      "file": "third_party_company_service/list_third_party_companies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_third_party_companies",
+        "full_name": "::Google::Ads::AdManager::V1::ThirdPartyCompanyService::Rest::Client#list_third_party_companies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListThirdPartyCompaniesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListThirdPartyCompaniesResponse",
+        "client": {
+          "short_name": "ThirdPartyCompanyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ThirdPartyCompanyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListThirdPartyCompanies",
+          "full_name": "google.ads.admanager.v1.ThirdPartyCompanyService.ListThirdPartyCompanies",
+          "service": {
+            "short_name": "ThirdPartyCompanyService",
+            "full_name": "google.ads.admanager.v1.ThirdPartyCompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]

@@ -9421,6 +9421,66 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_update_reporting_identity_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    reporting_identity_settings = {}
+    update_mask = {}
+
+    update_reporting_identity_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_reporting_identity_settings, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateReportingIdentitySettingsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings), request["reporting_identity_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_reporting_identity_settings_client_stub do
+      # Create client
+      c = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_reporting_identity_settings({ reporting_identity_settings: reporting_identity_settings, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_reporting_identity_settings reporting_identity_settings: reporting_identity_settings, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_reporting_identity_settings ::Google::Analytics::Admin::V1alpha::UpdateReportingIdentitySettingsRequest.new(reporting_identity_settings: reporting_identity_settings, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_reporting_identity_settings({ reporting_identity_settings: reporting_identity_settings, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_reporting_identity_settings(::Google::Analytics::Admin::V1alpha::UpdateReportingIdentitySettingsRequest.new(reporting_identity_settings: reporting_identity_settings, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_reporting_identity_settings_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_user_provided_data_settings
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::UserProvidedDataSettings.new

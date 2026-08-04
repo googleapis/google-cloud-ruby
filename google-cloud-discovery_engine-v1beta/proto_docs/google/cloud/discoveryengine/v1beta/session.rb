@@ -41,6 +41,10 @@ module Google
         # @!attribute [rw] turns
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Session::Turn>]
         #     Turns.
+        # @!attribute [rw] labels
+        #   @return [::Array<::String>]
+        #     Optional. The labels for the session.
+        #     Can be set as filter in ListSessionsRequest.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the session started.
@@ -51,6 +55,12 @@ module Google
         #   @return [::Boolean]
         #     Optional. Whether the session is pinned, pinned session will be displayed
         #     on the top of the session list.
+        # @!attribute [r] pending_async_assist_operation_id
+        #   @return [::String]
+        #     Output only. Full resource name of an in-progress AsyncAssist operation for
+        #     this session, e.g.
+        #     `projects/*/locations/*/collections/*/engines/*/sessions/*/operations/*`.
+        #     Set when the operation starts and cleared when it finishes.
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,12 +85,23 @@ module Google
           #     {::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest#include_answer_details GetSessionRequest.include_answer_details}
           #     is set to true, this field will be populated when getting answer query
           #     session.
+          # @!attribute [r] detailed_assist_answer
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::AssistAnswer]
+          #     Output only. In
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_session ConversationalSearchService.GetSession}
+          #     API, if
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest#include_answer_details GetSessionRequest.include_answer_details}
+          #     is set to true, this field will be populated when getting assistant
+          #     session.
           # @!attribute [rw] query_config
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. Represents metadata related to the query config, for example
           #     LLM model and version used, model parameters (temperature, grounding
           #     parameters, etc.). The prefix "google." is reserved for Google-developed
           #     functionality.
+          # @!attribute [rw] live
+          #   @return [::Boolean]
+          #     Optional. Indicates whether this turn is a live turn.
           class Turn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

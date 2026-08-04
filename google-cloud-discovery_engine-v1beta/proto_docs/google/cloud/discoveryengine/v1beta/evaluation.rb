@@ -82,7 +82,7 @@ module Google
           #     * {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#user_pseudo_id SearchRequest.user_pseudo_id}
           # @!attribute [rw] query_set_spec
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Evaluation::EvaluationSpec::QuerySetSpec]
-          #     Required. The specification of the query set.
+          #     Optional. The specification of the query set.
           class EvaluationSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,7 +90,7 @@ module Google
             # Describes the specification of the query set.
             # @!attribute [rw] sample_query_set
             #   @return [::String]
-            #     Required. The full resource name of the
+            #     Optional. The full resource name of the
             #     {::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet SampleQuerySet}
             #     used for the evaluation, in the format of
             #     `projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}`.

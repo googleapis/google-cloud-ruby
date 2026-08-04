@@ -84,6 +84,16 @@
               "methods": [
                 "test_iam_permissions"
               ]
+            },
+            "EnableManagedRotation": {
+              "methods": [
+                "enable_managed_rotation"
+              ]
+            },
+            "RotateSecret": {
+              "methods": [
+                "rotate_secret"
+              ]
             }
           }
         }

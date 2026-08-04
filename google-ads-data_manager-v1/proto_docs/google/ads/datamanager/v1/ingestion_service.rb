@@ -68,6 +68,9 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     The auto-generated ID of the request.
+        # @!attribute [rw] field_warnings
+        #   @return [::Array<::Google::Ads::DataManager::V1::FieldWarning>]
+        #     Detailed row-level warnings with field paths.
         class IngestAudienceMembersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -109,6 +112,36 @@ module Google
         #   @return [::String]
         #     The auto-generated ID of the request.
         class RemoveAudienceMembersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to remove all users from an audience in the provided destinations.
+        # Returns a
+        # {::Google::Ads::DataManager::V1::RemoveAllAudienceMembersResponse RemoveAllAudienceMembersResponse}.
+        # @!attribute [rw] destinations
+        #   @return [::Array<::Google::Ads::DataManager::V1::Destination>]
+        #     Required. The list of destinations to remove the users from.
+        # @!attribute [rw] remove_as_of_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The remove as of time. If set, only audience members last added
+        #     before this time will be removed. If not set, it defaults to current time.
+        #     The remove as of time must not be in the future.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. For testing purposes. If `true`, the request is validated but not
+        #     executed. Only errors are returned, not results.
+        class RemoveAllAudienceMembersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response from the
+        # {::Google::Ads::DataManager::V1::RemoveAllAudienceMembersRequest RemoveAllAudienceMembersRequest}.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     The auto-generated ID of the request.
+        class RemoveAllAudienceMembersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -157,7 +190,33 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     The auto-generated ID of the request.
+        # @!attribute [rw] field_warnings
+        #   @return [::Array<::Google::Ads::DataManager::V1::FieldWarning>]
+        #     Detailed row-level warnings with field paths.
         class IngestEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to upload ad events.
+        # @!attribute [rw] ad_events
+        #   @return [::Array<::Google::Ads::DataManager::V1::AdEvent>]
+        #     Required. Required (at least 1). A list of ad events.
+        # @!attribute [rw] encryption_info
+        #   @return [::Google::Ads::DataManager::V1::EncryptionInfo]
+        #     Required. Information about encryption keys which are used to encrypt the
+        #     data.
+        # @!attribute [rw] validate_only
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Boolean]
+        #     Optional. If true, the request is validated, but not executed.
+        class IngestAdEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response from an ad event ingestion operation.
+        class IngestAdEventsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

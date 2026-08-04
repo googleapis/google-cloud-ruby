@@ -1,5 +1,26 @@
 # Changelog
 
+### 1.47.0 (2026-07-21)
+
+#### Features
+
+* add Route to GroundingChunk.Maps in Vertex AI v1 ([#34981](https://github.com/googleapis/google-cloud-ruby/issues/34981)) 
+#### Documentation
+
+* expand GroundingChunk.Maps documentation to describe route support 
+
+### 1.46.0 (2026-07-13)
+
+#### Features
+
+* expose retrieval_queries in GroundingMetadata for the v1 API ([#34743](https://github.com/googleapis/google-cloud-ruby/issues/34743)) 
+
+### 1.45.0 (2026-07-09)
+
+#### Features
+
+* Add identity_type to Reasoning Engine public protos ([#34717](https://github.com/googleapis/google-cloud-ruby/issues/34717)) 
+
 ### 1.44.0 (2026-06-11)
 
 #### Features

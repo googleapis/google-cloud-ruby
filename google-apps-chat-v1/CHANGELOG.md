@@ -1,5 +1,29 @@
 # Changelog
 
+### 0.27.0 (2026-07-23)
+
+#### Features
+
+* Addition of Membership Affiliation information ([#34989](https://github.com/googleapis/google-cloud-ruby/issues/34989)) 
+
+### 0.26.0 (2026-07-13)
+
+#### Features
+
+* Add access permission settings to Space resource for configuring space discovery and join permissions ([#34741](https://github.com/googleapis/google-cloud-ruby/issues/34741)) 
+
+### 0.25.0 (2026-07-09)
+
+#### Features
+
+* Add Availability Api's ([#34718](https://github.com/googleapis/google-cloud-ruby/issues/34718)) 
+
+### 0.24.0 (2026-06-18)
+
+#### Features
+
+* add new FORWARD QuoteType enum in the QuotedMessageMetadata proto ([#34630](https://github.com/googleapis/google-cloud-ruby/issues/34630)) 
+
 ### 0.23.0 (2026-06-11)
 
 #### Features

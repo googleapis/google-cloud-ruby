@@ -906,6 +906,115 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ClientTest
     end
   end
 
+  def test_enable_managed_rotation
+    # Create test objects.
+    client_result = ::Google::Cloud::SecretManager::V1::SecretVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    cloud_sql_single_user_credentials = {}
+
+    enable_managed_rotation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_enable_managed_rotation_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, enable_managed_rotation_client_stub do
+        # Create client
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.enable_managed_rotation({ parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.enable_managed_rotation parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.enable_managed_rotation ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new(parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.enable_managed_rotation({ parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.enable_managed_rotation(::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new(parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, enable_managed_rotation_client_stub.call_count
+      end
+    end
+  end
+
+  def test_rotate_secret
+    # Create test objects.
+    client_result = ::Google::Cloud::SecretManager::V1::SecretVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    rotate_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::ServiceStub.stub :transcode_rotate_secret_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, rotate_secret_client_stub do
+        # Create client
+        c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.rotate_secret({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.rotate_secret parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.rotate_secret ::Google::Cloud::SecretManager::V1::RotateSecretRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.rotate_secret({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.rotate_secret(::Google::Cloud::SecretManager::V1::RotateSecretRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, rotate_secret_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

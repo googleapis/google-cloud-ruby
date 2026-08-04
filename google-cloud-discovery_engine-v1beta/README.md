@@ -31,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/discovery_engine/v1beta"
 
-client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new
-request = ::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryRequest.new # (request fields as keyword arguments...)
-response = client.complete_query request
+client = ::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client.new
+request = ::Google::Cloud::DiscoveryEngine::V1beta::UpdateAclConfigRequest.new # (request fields as keyword arguments...)
+response = client.update_acl_config request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1beta/latest)
@@ -74,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/discovery_engine/v1beta"
 require "logger"
 
-client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new do |config|
+client = ::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

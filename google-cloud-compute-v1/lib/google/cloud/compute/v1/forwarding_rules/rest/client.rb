@@ -515,7 +515,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(forwarding_rule: nil, project: nil, region: nil)
+              # @overload get(forwarding_rule: nil, project: nil, region: nil, view: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -526,6 +526,8 @@ module Google
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
+              #   @param view [::String]
+              #     Check the View enum for the list of possible values.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::ForwardingRule]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

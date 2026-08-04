@@ -79,6 +79,38 @@ module Google
             # require critical update. After preview, there will be no critical update
             # needed for backup.
             rpc :BackupInstance, ::Google::Cloud::Memorystore::V1::BackupInstanceRequest, ::Google::Longrunning::Operation
+            # Initiates the migration of a source instance to the target Memorystore
+            # instance.
+            #
+            # After the successful completion of this operation, the target instance
+            # will:
+            # 1. Set up replication with the source instance and replicate any writes to
+            # the source instance.
+            # 2. Only allow reads.
+            rpc :StartMigration, ::Google::Cloud::Memorystore::V1::StartMigrationRequest, ::Google::Longrunning::Operation
+            # Finalizes the migration process.
+            #
+            # After the successful completion of this operation, the target instance
+            # will:
+            # 1. Stop replicating from the source instance.
+            # 2. Allow both reads and writes.
+            rpc :FinishMigration, ::Google::Cloud::Memorystore::V1::FinishMigrationRequest, ::Google::Longrunning::Operation
+            # Lists all the token auth users for a token based auth enabled instance.
+            rpc :ListTokenAuthUsers, ::Google::Cloud::Memorystore::V1::ListTokenAuthUsersRequest, ::Google::Cloud::Memorystore::V1::ListTokenAuthUsersResponse
+            # Gets a specific token auth user for a token based auth enabled instance.
+            rpc :GetTokenAuthUser, ::Google::Cloud::Memorystore::V1::GetTokenAuthUserRequest, ::Google::Cloud::Memorystore::V1::TokenAuthUser
+            # Lists all the auth tokens for a specific token auth user.
+            rpc :ListAuthTokens, ::Google::Cloud::Memorystore::V1::ListAuthTokensRequest, ::Google::Cloud::Memorystore::V1::ListAuthTokensResponse
+            # Gets a token based auth enabled instance's auth token for a given user.
+            rpc :GetAuthToken, ::Google::Cloud::Memorystore::V1::GetAuthTokenRequest, ::Google::Cloud::Memorystore::V1::AuthToken
+            # Adds a token auth user for a token based auth enabled instance.
+            rpc :AddTokenAuthUser, ::Google::Cloud::Memorystore::V1::AddTokenAuthUserRequest, ::Google::Longrunning::Operation
+            # Deletes a token auth user for a token based auth enabled instance.
+            rpc :DeleteTokenAuthUser, ::Google::Cloud::Memorystore::V1::DeleteTokenAuthUserRequest, ::Google::Longrunning::Operation
+            # Adds a token for a user of a token based auth enabled instance.
+            rpc :AddAuthToken, ::Google::Cloud::Memorystore::V1::AddAuthTokenRequest, ::Google::Longrunning::Operation
+            # Deletes a token for a user of a token based auth enabled instance.
+            rpc :DeleteAuthToken, ::Google::Cloud::Memorystore::V1::DeleteAuthTokenRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

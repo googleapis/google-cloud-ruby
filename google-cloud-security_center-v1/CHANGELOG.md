@@ -1,5 +1,11 @@
 # Release History
 
+### 1.11.0 (2026-07-16)
+
+#### Features
+
+* add agent, agent_sessions, and agent_anomaly fields to Finding ([#34760](https://github.com/googleapis/google-cloud-ruby/issues/34760)) 
+
 ### 1.10.0 (2026-06-11)
 
 #### Features

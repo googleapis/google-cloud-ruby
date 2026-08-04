@@ -59,6 +59,8 @@ module Google
         #     <ul style="list-style-type:none">
         #       <li><code>displayName</code></li>
         #       <li><code>name</code></li>
+        #       <li><code>status</code></li>
+        #       <li><code>updateTime</code></li>
         #     </ul>
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -96,6 +98,47 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListContentBundlesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchActivateContentBundles` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `ContentBundles` will be activated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `ContentBundle`s to activate.
+        #     Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+        class BatchActivateContentBundlesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateContentBundles` method.
+        class BatchActivateContentBundlesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeactivateContentBundles` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `ContentBundles` will be
+        #     deactivated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the `ContentBundle`s to deactivate.
+        #     Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+        class BatchDeactivateContentBundlesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeactivateContentBundles` method.
+        class BatchDeactivateContentBundlesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.LineItemService'
 
-            # API to retrieve a `LineItem` object.
+            # Retrieves a `LineItem` object.
             rpc :GetLineItem, ::Google::Ads::AdManager::V1::GetLineItemRequest, ::Google::Ads::AdManager::V1::LineItem
-            # API to retrieve a list of `LineItem` objects.
+            # Lists `LineItem` objects.
             rpc :ListLineItems, ::Google::Ads::AdManager::V1::ListLineItemsRequest, ::Google::Ads::AdManager::V1::ListLineItemsResponse
           end
 

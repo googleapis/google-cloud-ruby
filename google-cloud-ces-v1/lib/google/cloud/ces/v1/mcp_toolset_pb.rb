@@ -7,9 +7,10 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/cloud/ces/v1/auth_pb'
 require 'google/cloud/ces/v1/common_pb'
+require 'google/cloud/ces/v1/schema_pb'
 
 
-descriptor_data = "\n%google/cloud/ces/v1/mcp_toolset.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/cloud/ces/v1/auth.proto\x1a google/cloud/ces/v1/common.proto\"\x86\x03\n\nMcpToolset\x12\x1b\n\x0eserver_address\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12G\n\x12\x61pi_authentication\x18\x02 \x01(\x0b\x32&.google.cloud.ces.v1.ApiAuthenticationB\x03\xe0\x41\x01\x12R\n\x18service_directory_config\x18\x03 \x01(\x0b\x32+.google.cloud.ces.v1.ServiceDirectoryConfigB\x03\xe0\x41\x01\x12\x37\n\ntls_config\x18\x04 \x01(\x0b\x32\x1e.google.cloud.ces.v1.TlsConfigB\x03\xe0\x41\x01\x12O\n\x0e\x63ustom_headers\x18\x05 \x03(\x0b\x32\x32.google.cloud.ces.v1.McpToolset.CustomHeadersEntryB\x03\xe0\x41\x01\x1a\x34\n\x12\x43ustomHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42W\n\x17\x63om.google.cloud.ces.v1B\x0fMcpToolsetProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
+descriptor_data = "\n%google/cloud/ces/v1/mcp_toolset.proto\x12\x13google.cloud.ces.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1egoogle/cloud/ces/v1/auth.proto\x1a google/cloud/ces/v1/common.proto\x1a google/cloud/ces/v1/schema.proto\"\xc9\x03\n\nMcpToolset\x12\x1b\n\x0eserver_address\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12G\n\x12\x61pi_authentication\x18\x02 \x01(\x0b\x32&.google.cloud.ces.v1.ApiAuthenticationB\x03\xe0\x41\x01\x12R\n\x18service_directory_config\x18\x03 \x01(\x0b\x32+.google.cloud.ces.v1.ServiceDirectoryConfigB\x03\xe0\x41\x01\x12\x37\n\ntls_config\x18\x04 \x01(\x0b\x32\x1e.google.cloud.ces.v1.TlsConfigB\x03\xe0\x41\x01\x12O\n\x0e\x63ustom_headers\x18\x05 \x03(\x0b\x32\x32.google.cloud.ces.v1.McpToolset.CustomHeadersEntryB\x03\xe0\x41\x01\x12\x41\n\x0etool_overrides\x18\x06 \x03(\x0b\x32$.google.cloud.ces.v1.McpToolOverrideB\x03\xe0\x41\x01\x1a\x34\n\x12\x43ustomHeadersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xa2\x01\n\x0fMcpToolOverride\x12\x11\n\x04tool\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x1a\n\rname_override\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14\x64\x65scription_override\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12=\n\x08snapshot\x18\x04 \x01(\x0b\x32&.google.cloud.ces.v1.McpToolDefinitionB\x03\xe0\x41\x03\"\x9e\x01\n\x11McpToolDefinition\x12\x18\n\x0b\x64\x65scription\x18\x01 \x01(\tB\x03\xe0\x41\x03\x12\x36\n\x0cinput_schema\x18\x02 \x01(\x0b\x32\x1b.google.cloud.ces.v1.SchemaB\x03\xe0\x41\x03\x12\x37\n\routput_schema\x18\x03 \x01(\x0b\x32\x1b.google.cloud.ces.v1.SchemaB\x03\xe0\x41\x03\x42W\n\x17\x63om.google.cloud.ces.v1B\x0fMcpToolsetProtoP\x01Z)cloud.google.com/go/ces/apiv1/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)
@@ -19,6 +20,8 @@ module Google
     module Ces
       module V1
         McpToolset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.ces.v1.McpToolset").msgclass
+        McpToolOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.ces.v1.McpToolOverride").msgclass
+        McpToolDefinition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.ces.v1.McpToolDefinition").msgclass
       end
     end
   end

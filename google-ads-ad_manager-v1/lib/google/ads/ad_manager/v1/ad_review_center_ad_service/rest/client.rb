@@ -191,7 +191,7 @@ module Google
               # Service calls
 
               ##
-              # API to search for AdReviewCenterAds.
+              # Searches for AdReviewCenterAds.
               #
               # @overload search_ad_review_center_ads(request, options = nil)
               #   Pass arguments to `search_ad_review_center_ads` via a request object, either of type
@@ -325,7 +325,7 @@ module Google
               end
 
               ##
-              # API to batch allow AdReviewCenterAds.
+              # Batch allows AdReviewCenterAds.
               # This method supports partial success. Some operations may succeed while
               # others fail. Callers should check the failedRequests field in the response
               # to determine which operations failed.
@@ -432,7 +432,7 @@ module Google
               end
 
               ##
-              # API to batch block AdReviewCenterAds.
+              # Batch blocks AdReviewCenterAds.
               # This method supports partial success. Some operations may succeed while
               # others fail. Callers should check the failedRequests field in the response
               # to determine which operations failed.

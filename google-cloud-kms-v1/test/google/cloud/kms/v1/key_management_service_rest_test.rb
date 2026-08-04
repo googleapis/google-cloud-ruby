@@ -594,6 +594,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
 
     # Create request parameters for a unary method.
     name = "hello world"
+    public_key_format = :PUBLIC_KEY_FORMAT_UNSPECIFIED
 
     get_import_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -609,27 +610,27 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.get_import_job({ name: name }) do |_result, response|
+        c.get_import_job({ name: name, public_key_format: public_key_format }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get_import_job name: name do |_result, response|
+        c.get_import_job name: name, public_key_format: public_key_format do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name) do |_result, response|
+        c.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get_import_job({ name: name }, call_options) do |_result, response|
+        c.get_import_job({ name: name, public_key_format: public_key_format }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), call_options) do |_result, response|
+        c.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name, public_key_format: public_key_format), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -761,6 +762,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     crypto_key_id = "hello world"
     crypto_key = {}
     skip_initial_version_creation = true
+    trusted_wrapping_enabled = true
 
     create_crypto_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -776,27 +778,27 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation }) do |_result, response|
+        c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.create_crypto_key parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation do |_result, response|
+        c.create_crypto_key parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation) do |_result, response|
+        c.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation }, call_options) do |_result, response|
+        c.create_crypto_key({ parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation), call_options) do |_result, response|
+        c.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation, trusted_wrapping_enabled: trusted_wrapping_enabled), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -983,6 +985,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     import_job = "hello world"
     wrapped_key = "hello world"
     rsa_aes_wrapped_key = "hello world"
+    trusted_wrapping_enabled = true
 
     import_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -998,32 +1001,145 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |_result, response|
+        c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |_result, response|
+        c.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |_result, response|
+        c.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, call_options) do |_result, response|
+        c.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key), call_options) do |_result, response|
+        c.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key, trusted_wrapping_enabled: trusted_wrapping_enabled), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, import_crypto_key_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_import_trusted_key_wrapped_crypto_key_version
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::CryptoKeyVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    importing_key = "hello world"
+    crypto_key_version = "hello world"
+    wrapped_key = "hello world"
+    algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
+
+    import_trusted_key_wrapped_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_import_trusted_key_wrapped_crypto_key_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_trusted_key_wrapped_crypto_key_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.import_trusted_key_wrapped_crypto_key_version({ parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.import_trusted_key_wrapped_crypto_key_version parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.import_trusted_key_wrapped_crypto_key_version ::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new(parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.import_trusted_key_wrapped_crypto_key_version({ parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.import_trusted_key_wrapped_crypto_key_version(::Google::Cloud::Kms::V1::ImportTrustedKeyWrappedCryptoKeyVersionRequest.new(parent: parent, importing_key: importing_key, crypto_key_version: crypto_key_version, wrapped_key: wrapped_key, algorithm: algorithm), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_trusted_key_wrapped_crypto_key_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_export_trusted_key_wrapped_crypto_key_version
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    wrapping_key = "hello world"
+
+    export_trusted_key_wrapped_crypto_key_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_export_trusted_key_wrapped_crypto_key_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, export_trusted_key_wrapped_crypto_key_version_client_stub do
+        # Create client
+        c = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.export_trusted_key_wrapped_crypto_key_version({ name: name, wrapping_key: wrapping_key }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.export_trusted_key_wrapped_crypto_key_version name: name, wrapping_key: wrapping_key do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.export_trusted_key_wrapped_crypto_key_version ::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new(name: name, wrapping_key: wrapping_key) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.export_trusted_key_wrapped_crypto_key_version({ name: name, wrapping_key: wrapping_key }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.export_trusted_key_wrapped_crypto_key_version(::Google::Cloud::Kms::V1::ExportTrustedKeyWrappedCryptoKeyVersionRequest.new(name: name, wrapping_key: wrapping_key), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, export_trusted_key_wrapped_crypto_key_version_client_stub.call_count
       end
     end
   end

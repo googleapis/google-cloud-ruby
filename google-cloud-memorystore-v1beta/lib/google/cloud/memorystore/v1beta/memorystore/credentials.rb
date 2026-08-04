@@ -26,7 +26,9 @@ module Google
           # Credentials for the Memorystore API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
-              "https://www.googleapis.com/auth/cloud-platform"
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/memorystore.read-only",
+              "https://www.googleapis.com/auth/memorystore.read-write"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

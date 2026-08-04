@@ -24,7 +24,8 @@ module Google
     module ServiceControl
       module V1
         module ServiceController
-          # [Google Service Control API](/service-control/overview)
+          # [Google Service Control
+          # API](https://cloud.google.com/service-control/overview)
           #
           # Lets clients check and report operations against a [managed
           # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
@@ -47,8 +48,8 @@ module Google
             # propagation, therefore callers MUST NOT depend on the `Check` method having
             # the latest policy information.
             #
-            # NOTE: the [CheckRequest][google.api.servicecontrol.v1.CheckRequest] has
-            # the size limit (wire-format byte size) of 1MB.
+            # NOTE: the [CheckRequest][google.api.servicecontrol.v1.CheckRequest] has the
+            # size limit (wire-format byte size) of 1MB.
             #
             # This method requires the `servicemanagement.services.check` permission
             # on the specified service. For more information, see

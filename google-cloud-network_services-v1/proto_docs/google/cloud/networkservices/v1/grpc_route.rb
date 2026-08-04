@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the GrpcRoute resource. It matches pattern
-        #     `projects/*/locations/global/grpcRoutes/<grpc_route_name>`
+        #     `projects/*/locations/*/grpcRoutes/<grpc_route_name>`
         # @!attribute [r] self_link
         #   @return [::String]
         #     Output only. Server-defined URL of this resource
@@ -82,7 +82,7 @@ module Google
         #     one of the routing rules to route the requests served by the mesh.
         #
         #     Each mesh reference should match the pattern:
-        #     `projects/*/locations/global/meshes/<mesh_name>`
+        #     `projects/*/locations/*/meshes/<mesh_name>`
         # @!attribute [rw] gateways
         #   @return [::Array<::String>]
         #     Optional. Gateways defines a list of gateways this GrpcRoute is attached
@@ -90,7 +90,7 @@ module Google
         #     gateway.
         #
         #     Each gateway reference should match the pattern:
-        #     `projects/*/locations/global/gateways/<gateway_name>`
+        #     `projects/*/locations/*/gateways/<gateway_name>`
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::NetworkServices::V1::GrpcRoute::RouteRule>]
         #     Required. A list of detailed rules defining how to route traffic.
@@ -378,7 +378,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the GrpcRoutes should be
-        #     listed, specified in the format `projects/*/locations/global`.
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of GrpcRoutes to return per call.
@@ -421,7 +421,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the GrpcRoute to get. Must be in the format
-        #     `projects/*/locations/global/grpcRoutes/*`.
+        #     `projects/*/locations/*/grpcRoutes/*`.
         class GetGrpcRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -431,7 +431,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the GrpcRoute. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] grpc_route_id
         #   @return [::String]
         #     Required. Short name of the GrpcRoute resource to be created.
@@ -463,7 +463,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the GrpcRoute to delete. Must be in the format
-        #     `projects/*/locations/global/grpcRoutes/*`.
+        #     `projects/*/locations/*/grpcRoutes/*`.
         class DeleteGrpcRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -72,4 +72,15 @@ class Google::Cloud::Support::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::Support::V2::CommentService::Client, client
     end
   end
+
+  def test_support_event_subscription_service_grpc
+    skip unless Google::Cloud::Support.support_event_subscription_service_available?
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Support.support_event_subscription_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Support::V2::SupportEventSubscriptionService::Client, client
+    end
+  end
 end

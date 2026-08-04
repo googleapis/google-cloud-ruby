@@ -25,6 +25,7 @@ require "google/cloud/tasks/v2beta3/bindings_override"
 
 require "google/cloud/tasks/v2beta3/cloud_tasks/credentials"
 require "google/cloud/tasks/v2beta3/cloud_tasks/paths"
+require "google/cloud/tasks/v2beta3/cloud_tasks/rest/operations"
 require "google/cloud/tasks/v2beta3/cloud_tasks/rest/client"
 
 module Google

@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.11.0 (2026-07-20)
+
+#### Features
+
+* Add support for Basic Auth feature to Memorystore for Valkey ([#34900](https://github.com/googleapis/google-cloud-ruby/issues/34900)) 
+
+### 1.10.0 (2026-07-10)
+
+#### Features
+
+* Add support for self managed migrations feature to Memorystore for Valkey ([#34725](https://github.com/googleapis/google-cloud-ruby/issues/34725)) 
+
 ### 1.9.0 (2026-06-11)
 
 #### Features

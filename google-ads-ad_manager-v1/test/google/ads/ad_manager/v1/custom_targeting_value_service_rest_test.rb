@@ -191,6 +191,336 @@ class ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ClientTes
     end
   end
 
+  def test_create_custom_targeting_value
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::CustomTargetingValue.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    custom_targeting_value = {}
+
+    create_custom_targeting_value_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ServiceStub.stub :transcode_create_custom_targeting_value_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_custom_targeting_value_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_custom_targeting_value({ parent: parent, custom_targeting_value: custom_targeting_value }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_custom_targeting_value parent: parent, custom_targeting_value: custom_targeting_value do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_custom_targeting_value ::Google::Ads::AdManager::V1::CreateCustomTargetingValueRequest.new(parent: parent, custom_targeting_value: custom_targeting_value) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_custom_targeting_value({ parent: parent, custom_targeting_value: custom_targeting_value }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_custom_targeting_value(::Google::Ads::AdManager::V1::CreateCustomTargetingValueRequest.new(parent: parent, custom_targeting_value: custom_targeting_value), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_custom_targeting_value_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_custom_targeting_values
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_custom_targeting_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ServiceStub.stub :transcode_batch_create_custom_targeting_values_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_custom_targeting_values_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_custom_targeting_values({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_custom_targeting_values parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_custom_targeting_values ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_custom_targeting_values({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_custom_targeting_values(::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_custom_targeting_values_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_custom_targeting_value
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::CustomTargetingValue.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    custom_targeting_value = {}
+    update_mask = {}
+
+    update_custom_targeting_value_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ServiceStub.stub :transcode_update_custom_targeting_value_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_custom_targeting_value_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_custom_targeting_value({ custom_targeting_value: custom_targeting_value, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_custom_targeting_value custom_targeting_value: custom_targeting_value, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_custom_targeting_value ::Google::Ads::AdManager::V1::UpdateCustomTargetingValueRequest.new(custom_targeting_value: custom_targeting_value, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_custom_targeting_value({ custom_targeting_value: custom_targeting_value, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_custom_targeting_value(::Google::Ads::AdManager::V1::UpdateCustomTargetingValueRequest.new(custom_targeting_value: custom_targeting_value, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_custom_targeting_value_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_custom_targeting_values
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_custom_targeting_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ServiceStub.stub :transcode_batch_update_custom_targeting_values_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_custom_targeting_values_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_custom_targeting_values({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_custom_targeting_values parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_custom_targeting_values ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_custom_targeting_values({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_custom_targeting_values(::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_custom_targeting_values_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_custom_targeting_values
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_activate_custom_targeting_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ServiceStub.stub :transcode_batch_activate_custom_targeting_values_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_custom_targeting_values_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_activate_custom_targeting_values({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_activate_custom_targeting_values parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_activate_custom_targeting_values ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_activate_custom_targeting_values({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_activate_custom_targeting_values(::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_custom_targeting_values_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_custom_targeting_values
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_deactivate_custom_targeting_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::ServiceStub.stub :transcode_batch_deactivate_custom_targeting_values_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_custom_targeting_values_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CustomTargetingValueService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_deactivate_custom_targeting_values({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_deactivate_custom_targeting_values parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_deactivate_custom_targeting_values ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_deactivate_custom_targeting_values({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_deactivate_custom_targeting_values(::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_custom_targeting_values_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

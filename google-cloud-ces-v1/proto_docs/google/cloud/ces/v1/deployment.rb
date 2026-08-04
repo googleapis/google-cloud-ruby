@@ -21,6 +21,64 @@ module Google
   module Cloud
     module Ces
       module V1
+        # Experiment for the deployment.
+        # @!attribute [rw] version_release
+        #   @return [::Google::Cloud::Ces::V1::ExperimentConfig::VersionRelease]
+        #     Optional. Version release for the experiment.
+        class ExperimentConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Version release for the experiment.
+          # @!attribute [rw] state
+          #   @return [::Google::Cloud::Ces::V1::ExperimentConfig::State]
+          #     Optional. State of the version release.
+          # @!attribute [rw] traffic_allocations
+          #   @return [::Array<::Google::Cloud::Ces::V1::ExperimentConfig::VersionRelease::TrafficAllocation>]
+          #     Optional. Traffic allocations for the version release.
+          class VersionRelease
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Traffic allocation for the version release.
+            # @!attribute [rw] id
+            #   @return [::String]
+            #     Optional. Id of the traffic allocation.
+            #     Free format string, up to 128 characters.
+            # @!attribute [rw] traffic_percentage
+            #   @return [::Integer]
+            #     Optional. Traffic percentage of the traffic allocation.
+            #     Must be between 0 and 100.
+            # @!attribute [rw] app_version
+            #   @return [::String]
+            #     Optional. App version of the traffic allocation.
+            #     Format:
+            #     `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
+            class TrafficAllocation
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # State of the experiment.
+          module State
+            # Unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # Deprecated: This state is no longer used.
+            PENDING = 1
+
+            # Running state. Experiment is running and valid.
+            RUNNING = 2
+
+            # Deprecated: This state is no longer used.
+            DONE = 3
+
+            # Deprecated: This state is no longer used.
+            EXPIRED = 4
+          end
+        end
+
         # A deployment represents an immutable, queryable version of the app.
         # It is used to deploy an app version with a specific channel profile.
         # @!attribute [rw] name
@@ -52,7 +110,54 @@ module Google
         #     Output only. Etag used to ensure the object hasn't changed during a
         #     read-modify-write operation. If the etag is empty, the update will
         #     overwrite any concurrent changes.
+        # @!attribute [rw] experiment_config
+        #   @return [::Google::Cloud::Ces::V1::ExperimentConfig]
+        #     Optional. Experiment configuration for the deployment.
+        # @!attribute [rw] whatsapp_credentials
+        #   @return [::Google::Cloud::Ces::V1::WhatsAppCredentials]
+        #     Optional. Input only. Ephemeral WhatsApp credentials required when
+        #     configuring a WhatsApp channel profile.
+        # @!attribute [rw] instagram_credentials
+        #   @return [::Google::Cloud::Ces::V1::InstagramCredentials]
+        #     Optional. Input only. Ephemeral Instagram credentials required when
+        #     configuring a Instagram channel profile.
         class Deployment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Ephemeral Meta credentials for WhatsApp native integration.
+        # @!attribute [rw] auth_code
+        #   @return [::String]
+        #     Required. The Meta auth code provided by the embedded signup flow.
+        # @!attribute [rw] pin
+        #   @return [::String]
+        #     Required. The 6-digit PIN created by the user for two-step verification.
+        # @!attribute [rw] phone_number
+        #   @return [::String]
+        #     Required. The phone number to register with WhatsApp.
+        # @!attribute [rw] business_account_id
+        #   @return [::String]
+        #     Required. The Business Account ID to use for the phone number.
+        # @!attribute [rw] waba_id
+        #   @return [::String]
+        #     Required. The WhatsApp Business Account ID.
+        # @!attribute [rw] conversation_profile_id
+        #   @return [::String]
+        #     Required. The Conversation Profile ID to use for the deployment.
+        class WhatsAppCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Ephemeral Meta credentials for Instagram native integration.
+        # @!attribute [rw] auth_code
+        #   @return [::String]
+        #     Required. The Meta auth code provided by the embedded signup flow.
+        # @!attribute [rw] conversation_profile_id
+        #   @return [::String]
+        #     Required. The Conversation Profile ID to use for the deployment.
+        class InstagramCredentials
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -44,6 +44,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Availability resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/availability`
+            #
+            # @param user [String]
+            #
+            # @return [::String]
+            def availability_path user:
+              "users/#{user}/availability"
+            end
+
+            ##
             # Create a fully-qualified CustomEmoji resource string.
             #
             # The resource will be in the following format:

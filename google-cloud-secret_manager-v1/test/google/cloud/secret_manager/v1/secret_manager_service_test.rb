@@ -979,6 +979,125 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
     end
   end
 
+  def test_enable_managed_rotation
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecretManager::V1::SecretVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    cloud_sql_single_user_credentials = {}
+
+    enable_managed_rotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :enable_managed_rotation, name
+      assert_kind_of ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest::CloudSQLSingleUserCredentials), request["cloud_sql_single_user_credentials"]
+      assert_equal :cloud_sql_single_user_credentials, request.credentials
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, enable_managed_rotation_client_stub do
+      # Create client
+      c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.enable_managed_rotation({ parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.enable_managed_rotation parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.enable_managed_rotation ::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new(parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.enable_managed_rotation({ parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.enable_managed_rotation(::Google::Cloud::SecretManager::V1::EnableManagedRotationRequest.new(parent: parent, cloud_sql_single_user_credentials: cloud_sql_single_user_credentials), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, enable_managed_rotation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_rotate_secret
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecretManager::V1::SecretVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    rotate_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rotate_secret, name
+      assert_kind_of ::Google::Cloud::SecretManager::V1::RotateSecretRequest, request
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rotate_secret_client_stub do
+      # Create client
+      c = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.rotate_secret({ parent: parent }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.rotate_secret parent: parent do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.rotate_secret ::Google::Cloud::SecretManager::V1::RotateSecretRequest.new(parent: parent) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.rotate_secret({ parent: parent }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.rotate_secret(::Google::Cloud::SecretManager::V1::RotateSecretRequest.new(parent: parent), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rotate_secret_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

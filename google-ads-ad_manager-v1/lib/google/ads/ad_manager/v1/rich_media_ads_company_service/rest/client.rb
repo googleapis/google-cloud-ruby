@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `RichMediaAdsCompany` object.
+              # Retrieves a `RichMediaAdsCompany` object.
               #
               # @overload get_rich_media_ads_company(request, options = nil)
               #   Pass arguments to `get_rich_media_ads_company` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `RichMediaAdsCompany` objects.
+              # Lists `RichMediaAdsCompany` objects.
               #
               # @overload list_rich_media_ads_companies(request, options = nil)
               #   Pass arguments to `list_rich_media_ads_companies` via a request object, either of type

@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.8.0 (2026-07-07)
+
+#### Features
+
+* Support per-repository identity for repositories ([#34710](https://github.com/googleapis/google-cloud-ruby/issues/34710)) 
+
 ### 2.7.0 (2026-06-11)
 
 #### Features

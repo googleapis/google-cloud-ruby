@@ -168,9 +168,12 @@ Google::Cloud.configure do |config|
   # Shared parameters
   config.project_id = "your-project-id"
   config.keyfile = "/path/to/key.json"
+  config.quota_project = "your-billing-project"
+
   # Or Error Reporting specific parameters
   config.error_reporting.project_id = "your-project-id"
   config.error_reporting.keyfile = "/path/to/key.json"
+  config.error_reporting.quota_project = "your-billing-project"
 end
 ```
 

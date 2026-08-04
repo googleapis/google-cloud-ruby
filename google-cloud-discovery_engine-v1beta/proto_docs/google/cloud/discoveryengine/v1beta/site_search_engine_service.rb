@@ -482,9 +482,7 @@ module Google
         #     `site_search_engine`.
         # @!attribute [rw] site_credential
         #   @return [::String]
-        #     Optional. Full resource name of the [SiteCredential][], such as
-        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/siteCredentials/*`.
-        #     Only set to crawl private URIs.
+        #     Optional. Credential id to use for crawling.
         class RecrawlUrisRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -560,6 +558,12 @@ module Google
         # @!attribute [rw] invalid_uris_count
         #   @return [::Integer]
         #     Total number of unique URIs in the request that have invalid format.
+        # @!attribute [rw] noindex_uris
+        #   @return [::Array<::String>]
+        #     URIs that have no index meta tag. Sample limited to 1000.
+        # @!attribute [rw] noindex_uris_count
+        #   @return [::Integer]
+        #     Total number of URIs that have no index meta tag.
         # @!attribute [rw] uris_not_matching_target_sites
         #   @return [::Array<::String>]
         #     Unique URIs in the request that don't match any TargetSite in the

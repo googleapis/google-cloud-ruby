@@ -15,17 +15,21 @@
 require "simplecov"
 
 gem "minitest"
+
+if ENV["CI"] || ENV["KOKORO_JOB_NAME"]
+  # Load JUnit XML formatter from googleapis/ruby-common-tools to write tmp/reports/sponge_log.xml for Kokoro/TestGrid.
+  begin
+    require "gapic/minitest_junit_preloader"
+  rescue LoadError
+    # Do nothing if preloader is not available (e.g. local runs)
+  end
+end
+
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
 require "google/cloud/bigquery"
 require "google/cloud/storage"
-
-# Generate JUnit format test reports
-if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
-  require "minitest/reporters"
-  Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::JUnitReporter.new]
-end
 
 # Create shared bigquery object so we don't create new for each test
 $bigquery = Google::Cloud::Bigquery.new retries: 10

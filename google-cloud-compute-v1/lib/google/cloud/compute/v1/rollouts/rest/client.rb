@@ -71,6 +71,8 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.advance.timeout = 600.0
+
                   default_config.rpcs.cancel.timeout = 600.0
 
                   default_config.rpcs.delete.timeout = 600.0
@@ -84,6 +86,10 @@ module Google
                   default_config.rpcs.list.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
+
+                  default_config.rpcs.pause.timeout = 600.0
+
+                  default_config.rpcs.resume.timeout = 600.0
 
                   default_config
                 end
@@ -202,6 +208,111 @@ module Google
               end
 
               # Service calls
+
+              ##
+              # Advances a Rollout to the next wave, or completes it if no waves remain.
+              #
+              # @overload advance(request, options = nil)
+              #   Pass arguments to `advance` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AdvanceRolloutRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::AdvanceRolloutRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload advance(current_wave_number: nil, project: nil, request_id: nil, rollout: nil)
+              #   Pass arguments to `advance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param current_wave_number [::Integer]
+              #     Required. Wave number of the current wave.
+              #   @param project [::String]
+              #     Required. Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param rollout [::String]
+              #     Required. Name of the Rollout resource to advance.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Rollouts::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AdvanceRolloutRequest.new
+              #
+              #   # Call the advance method.
+              #   result = client.advance request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def advance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AdvanceRolloutRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.advance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.advance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.advance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @rollouts_stub.advance request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
 
               ##
               # Cancels a Rollout.
@@ -663,6 +774,220 @@ module Google
               end
 
               ##
+              # Pauses a Rollout.
+              #
+              # @overload pause(request, options = nil)
+              #   Pass arguments to `pause` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PauseRolloutRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PauseRolloutRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload pause(etag: nil, project: nil, request_id: nil, rollout: nil)
+              #   Pass arguments to `pause` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param etag [::String]
+              #     The etag of the Rollout.
+              #     If this is provided, the request will only succeed if the etag matches
+              #     the current etag of the Rollout.
+              #   @param project [::String]
+              #     Required. Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param rollout [::String]
+              #     Required. Name of the Rollout resource to pause.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Rollouts::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PauseRolloutRequest.new
+              #
+              #   # Call the pause method.
+              #   result = client.pause request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def pause request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PauseRolloutRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.pause.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.pause.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.pause.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @rollouts_stub.pause request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Resumes a Rollout.
+              #
+              # @overload resume(request, options = nil)
+              #   Pass arguments to `resume` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ResumeRolloutRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ResumeRolloutRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload resume(etag: nil, project: nil, request_id: nil, rollout: nil)
+              #   Pass arguments to `resume` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param etag [::String]
+              #     The etag of the Rollout.
+              #     If this is provided, the request will only succeed if the etag matches
+              #     the current etag of the Rollout.
+              #   @param project [::String]
+              #     Required. Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so
+              #     that if you must retry your request, the server will know to ignore the
+              #     request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same
+              #     request ID, the server can check if original operation with the same
+              #     request ID was received, and if so, will ignore the second request. This
+              #     prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be
+              #     a valid UUID with the exception that zero UUID is not supported
+              #     (00000000-0000-0000-0000-000000000000).
+              #   @param rollout [::String]
+              #     Required. Name of the Rollout resource to resume.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Rollouts::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ResumeRolloutRequest.new
+              #
+              #   # Call the resume method.
+              #   result = client.resume request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def resume request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ResumeRolloutRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.resume.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.resume.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.resume.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @rollouts_stub.resume request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Rollouts REST API.
               #
               # This class represents the configuration for Rollouts REST,
@@ -678,17 +1003,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # cancel to 20 seconds,
+              #   # advance to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
               #   ::Google::Cloud::Compute::V1::Rollouts::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.cancel.timeout = 20.0
+              #     config.rpcs.advance.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
               #   client = ::Google::Cloud::Compute::V1::Rollouts::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.cancel.timeout = 20.0
+              #     config.rpcs.advance.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -811,6 +1136,11 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `advance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :advance
+                  ##
                   # RPC-specific configuration for `cancel`
                   # @return [::Gapic::Config::Method]
                   #
@@ -830,9 +1160,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
+                  ##
+                  # RPC-specific configuration for `pause`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :pause
+                  ##
+                  # RPC-specific configuration for `resume`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resume
 
                   # @private
                   def initialize parent_rpcs = nil
+                    advance_config = parent_rpcs.advance if parent_rpcs.respond_to? :advance
+                    @advance = ::Gapic::Config::Method.new advance_config
                     cancel_config = parent_rpcs.cancel if parent_rpcs.respond_to? :cancel
                     @cancel = ::Gapic::Config::Method.new cancel_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
@@ -841,6 +1183,10 @@ module Google
                     @get = ::Gapic::Config::Method.new get_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    pause_config = parent_rpcs.pause if parent_rpcs.respond_to? :pause
+                    @pause = ::Gapic::Config::Method.new pause_config
+                    resume_config = parent_rpcs.resume if parent_rpcs.respond_to? :resume
+                    @resume = ::Gapic::Config::Method.new resume_config
 
                     yield self if block_given?
                   end

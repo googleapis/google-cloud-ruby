@@ -27,7 +27,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the Mesh resource. It matches pattern
-        #     `projects/*/locations/global/meshes/<mesh_name>`.
+        #     `projects/*/locations/*/meshes/<mesh_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
         #     Output only. Server-defined URL of this resource
@@ -75,7 +75,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the Meshes should be
-        #     listed, specified in the format `projects/*/locations/global`.
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Meshes to return per call.
@@ -117,7 +117,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the Mesh to get. Must be in the format
-        #     `projects/*/locations/global/meshes/*`.
+        #     `projects/*/locations/*/meshes/*`.
         class GetMeshRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -127,7 +127,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the Mesh. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] mesh_id
         #   @return [::String]
         #     Required. Short name of the Mesh resource to be created.
@@ -159,7 +159,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the Mesh to delete. Must be in the format
-        #     `projects/*/locations/global/meshes/*`.
+        #     `projects/*/locations/*/meshes/*`.
         class DeleteMeshRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

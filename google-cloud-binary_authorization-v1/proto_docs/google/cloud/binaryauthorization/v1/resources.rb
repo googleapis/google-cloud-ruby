@@ -21,7 +21,8 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1
-        # A {::Google::Cloud::BinaryAuthorization::V1::Policy policy} for container image binary authorization.
+        # A {::Google::Cloud::BinaryAuthorization::V1::Policy policy} for container image
+        # binary authorization.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name, in the format `projects/*/policy`. There is
@@ -42,7 +43,12 @@ module Google
         #     third-party infrastructure images from Binary Authorization policies.
         # @!attribute [rw] cluster_admission_rules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1::AdmissionRule}]
-        #     Optional. Per-cluster admission rules. Cluster spec format:
+        #     Optional. A valid policy has only one of the following rule maps non-empty,
+        #     i.e. only one of `cluster_admission_rules`,
+        #     `kubernetes_namespace_admission_rules`,
+        #     `kubernetes_service_account_admission_rules`,
+        #     or `istio_service_identity_admission_rules` can be non-empty.
+        #     Per-cluster admission rules. Cluster spec format:
         #     `location.clusterId`. There can be at most one admission rule per cluster
         #     spec.
         #     A `location` is either a compute zone (e.g. us-central1-a) or a region
@@ -51,19 +57,20 @@ module Google
         #     https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters.
         # @!attribute [rw] kubernetes_namespace_admission_rules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1::AdmissionRule}]
-        #     Optional. Per-kubernetes-namespace admission rules. K8s namespace spec format:
-        #     [a-z.-]+, e.g. 'some-namespace'
+        #     Optional. Per-kubernetes-namespace admission rules. K8s namespace spec
+        #     format:
+        #     `[a-z.-]+`, e.g. `some-namespace`
         # @!attribute [rw] kubernetes_service_account_admission_rules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1::AdmissionRule}]
         #     Optional. Per-kubernetes-service-account admission rules. Service account
-        #     spec format: `namespace:serviceaccount`. e.g. 'test-ns:default'
+        #     spec format: `namespace:serviceaccount`. e.g. `test-ns:default`
         # @!attribute [rw] istio_service_identity_admission_rules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1::AdmissionRule}]
         #     Optional. Per-istio-service-identity admission rules. Istio service
         #     identity spec format:
-        #     spiffe://<domain>/ns/<namespace>/sa/<serviceaccount> or
-        #     <domain>/ns/<namespace>/sa/<serviceaccount>
-        #     e.g. spiffe://example.com/ns/test-ns/sa/default
+        #     `spiffe://<domain>/ns/<namespace>/sa/<serviceaccount>` or
+        #     `<domain>/ns/<namespace>/sa/<serviceaccount>`
+        #     e.g. `spiffe://example.com/ns/test-ns/sa/default`
         # @!attribute [rw] default_admission_rule
         #   @return [::Google::Cloud::BinaryAuthorization::V1::AdmissionRule]
         #     Required. Default admission rule for a cluster without a per-cluster, per-
@@ -71,6 +78,11 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the policy was last updated.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. A checksum, returned by the server, that can be sent on update
+        #     requests to ensure the policy has an up-to-date value before attempting to
+        #     update it. See https://google.aip.dev/154.
         class Policy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,7 +124,7 @@ module Google
           end
 
           module GlobalPolicyEvaluationMode
-            # Not specified: DISABLE is assumed.
+            # Not specified: `DISABLE` is assumed.
             GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED = 0
 
             # Enables system policy evaluation.
@@ -123,8 +135,10 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1::AdmissionWhitelistPattern admission allowlist pattern} exempts images
-        # from checks by {::Google::Cloud::BinaryAuthorization::V1::AdmissionRule admission rules}.
+        # An [admission allowlist
+        # pattern][google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern]
+        # exempts images from checks by [admission
+        # rules][google.cloud.binaryauthorization.v1.AdmissionRule].
         # @!attribute [rw] name_pattern
         #   @return [::String]
         #     An image name pattern to allowlist, in the form `registry/path/to/image`.
@@ -136,13 +150,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1::AdmissionRule admission rule} specifies either that all container images
-        # used in a pod creation request must be attested to by one or more
-        # {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors}, that all pod creations will be allowed, or that all
-        # pod creations will be denied.
+        # An {::Google::Cloud::BinaryAuthorization::V1::AdmissionRule admission rule}
+        # specifies either that all container images used in a pod creation request
+        # must be attested to by one or more
+        # {::Google::Cloud::BinaryAuthorization::V1::Attestor attestors}, that all pod
+        # creations will be allowed, or that all pod creations will be denied.
         #
-        # Images matching an {::Google::Cloud::BinaryAuthorization::V1::AdmissionWhitelistPattern admission allowlist pattern}
-        # are exempted from admission rules and will never block a pod creation.
+        # Images matching an [admission allowlist
+        # pattern][google.cloud.binaryauthorization.v1.AdmissionWhitelistPattern] are
+        # exempted from admission rules and will never block a pod creation.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::BinaryAuthorization::V1::AdmissionRule::EvaluationMode]
         #     Required. How this admission rule will be evaluated.
@@ -154,8 +170,8 @@ module Google
         #     to a policy the principal issuing the policy change request must be able
         #     to read the attestor resource.
         #
-        #     Note: this field must be non-empty when the evaluation_mode field specifies
-        #     REQUIRE_ATTESTATION, otherwise it must be empty.
+        #     Note: this field must be non-empty when the `evaluation_mode` field
+        #     specifies `REQUIRE_ATTESTATION`, otherwise it must be empty.
         # @!attribute [rw] enforcement_mode
         #   @return [::Google::Cloud::BinaryAuthorization::V1::AdmissionRule::EnforcementMode]
         #     Required. The action when a pod creation is denied by the admission rule.
@@ -167,11 +183,11 @@ module Google
             # Do not use.
             EVALUATION_MODE_UNSPECIFIED = 0
 
-            # This rule allows all all pod creations.
+            # This rule allows all pod creations.
             ALWAYS_ALLOW = 1
 
             # This rule allows a pod creation if all the attestors listed in
-            # 'require_attestations_by' have valid attestations for all of the
+            # `require_attestations_by` have valid attestations for all of the
             # images in the pod spec.
             REQUIRE_ATTESTATION = 2
 
@@ -194,9 +210,9 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} that attests to container image
-        # artifacts. An existing attestor cannot be modified except where
-        # indicated.
+        # An {::Google::Cloud::BinaryAuthorization::V1::Attestor attestor} that attests to
+        # container image artifacts. An existing attestor cannot be modified except
+        # where indicated.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name, in the format:
@@ -212,18 +228,24 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the attestor was last updated.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. A checksum, returned by the server, that can be sent on update
+        #     requests to ensure the attestor has an up-to-date value before attempting
+        #     to update it. See https://google.aip.dev/154.
         class Attestor
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1::UserOwnedGrafeasNote user owned Grafeas note} references a Grafeas
-        # Attestation.Authority Note created by the user.
+        # An [user owned Grafeas
+        # note][google.cloud.binaryauthorization.v1.UserOwnedGrafeasNote] references a
+        # Grafeas Attestation.Authority Note created by the user.
         # @!attribute [rw] note_reference
         #   @return [::String]
         #     Required. The Grafeas resource name of a Attestation.Authority Note,
-        #     created by the user, in the format: `projects/*/notes/*`. This field may
-        #     not be updated.
+        #     created by the user, in the format: `projects/[PROJECT_ID]/notes/*`. This
+        #     field may not be updated. A project ID must be used, not a project number.
         #
         #     An attestation by this attestor is stored as a Grafeas
         #     Attestation.Authority Occurrence that names a container image and that
@@ -242,12 +264,13 @@ module Google
         # @!attribute [r] delegation_service_account_email
         #   @return [::String]
         #     Output only. This field will contain the service account email address
-        #     that this Attestor will use as the principal when querying Container
+        #     that this attestor will use as the principal when querying Container
         #     Analysis. Attestor administrators must grant this service account the
-        #     IAM role needed to read attestations from the [note_reference][Note] in
-        #     Container Analysis (`containeranalysis.notes.occurrences.viewer`).
+        #     IAM role needed to read attestations from the
+        #     {::Google::Cloud::BinaryAuthorization::V1::UserOwnedGrafeasNote#note_reference note_reference}
+        #     in Container Analysis (`containeranalysis.notes.occurrences.viewer`).
         #
-        #     This email address is fixed for the lifetime of the Attestor, but callers
+        #     This email address is fixed for the lifetime of the attestor, but callers
         #     should not make any other assumptions about the service account email;
         #     future versions may use an email based on a different naming pattern.
         class UserOwnedGrafeasNote
@@ -255,10 +278,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A public key in the PkixPublicKey format (see
-        # https://tools.ietf.org/html/rfc5280#section-4.1.2.7 for details).
-        # Public keys of this type are typically textually encoded using the PEM
-        # format.
+        # A public key in the PkixPublicKey
+        # [format](https://tools.ietf.org/html/rfc5280#section-4.1.2.7). Public keys of
+        # this type are typically textually encoded using the PEM format.
         # @!attribute [rw] public_key_pem
         #   @return [::String]
         #     A PEM-encoded public key, as described in
@@ -270,6 +292,22 @@ module Google
         #     These signature algorithm must match the structure and any object
         #     identifiers encoded in `public_key_pem` (i.e. this algorithm must match
         #     that of the public key).
+        # @!attribute [rw] key_id
+        #   @return [::String]
+        #     Optional. The ID of this public key.
+        #     Signatures verified by Binary Authorization must include the ID of the
+        #     public key that can be used to verify them. The ID must match exactly
+        #     contents of the `key_id` field exactly.
+        #
+        #     The ID may be explicitly provided by the caller, but it MUST be a valid
+        #     RFC3986 URI. If `key_id` is left blank and this `PkixPublicKey` is not used
+        #     in the context of a wrapper (see next paragraph), a default key ID will be
+        #     computed based on the digest of the DER encoding of the public key.
+        #
+        #     If this `PkixPublicKey` is used in the context of a wrapper that has its
+        #     own notion of key ID (e.g. `AttestorPublicKey`), then this field can
+        #     either match that value exactly, or be left blank, in which case it behaves
+        #     exactly as though it is equal to that wrapper value.
         class PkixPublicKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -277,9 +315,10 @@ module Google
           # Represents a signature algorithm and other information necessary to verify
           # signatures with a given public key.
           # This is based primarily on the public key types supported by Tink's
-          # PemKeyType, which is in turn based on KMS's supported signing algorithms.
-          # See https://cloud.google.com/kms/docs/algorithms. In the future, BinAuthz
-          # might support additional public key types independently of Tink and/or KMS.
+          # PemKeyType, which is in turn based on KMS's supported signing
+          # [algorithms](https://cloud.google.com/kms/docs/algorithms). In the future,
+          # Binary Authorization might support additional public key types
+          # independently of Tink and/or KMS.
           module SignatureAlgorithm
             # Not specified.
             SIGNATURE_ALGORITHM_UNSPECIFIED = 0
@@ -287,14 +326,26 @@ module Google
             # RSASSA-PSS 2048 bit key with a SHA256 digest.
             RSA_PSS_2048_SHA256 = 1
 
+            # RSASSA-PSS 2048 bit key with a SHA256 digest.
+            RSA_SIGN_PSS_2048_SHA256 = 1
+
             # RSASSA-PSS 3072 bit key with a SHA256 digest.
             RSA_PSS_3072_SHA256 = 2
+
+            # RSASSA-PSS 3072 bit key with a SHA256 digest.
+            RSA_SIGN_PSS_3072_SHA256 = 2
 
             # RSASSA-PSS 4096 bit key with a SHA256 digest.
             RSA_PSS_4096_SHA256 = 3
 
+            # RSASSA-PSS 4096 bit key with a SHA256 digest.
+            RSA_SIGN_PSS_4096_SHA256 = 3
+
             # RSASSA-PSS 4096 bit key with a SHA512 digest.
             RSA_PSS_4096_SHA512 = 4
+
+            # RSASSA-PSS 4096 bit key with a SHA512 digest.
+            RSA_SIGN_PSS_4096_SHA512 = 4
 
             # RSASSA-PKCS1-v1_5 with a 2048 bit key and a SHA256 digest.
             RSA_SIGN_PKCS1_2048_SHA256 = 5
@@ -325,33 +376,36 @@ module Google
 
             # ECDSA on the NIST P-521 curve with a SHA512 digest.
             EC_SIGN_P521_SHA512 = 11
+
+            # ML-DSA-65 Post-Quantum Cryptography signature algorithm.
+            ML_DSA_65 = 13
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1::AttestorPublicKey attestor public key} that will be used to verify
-        # attestations signed by this attestor.
+        # An [attestor public
+        # key][google.cloud.binaryauthorization.v1.AttestorPublicKey] that will be used
+        # to verify attestations signed by this attestor.
         # @!attribute [rw] comment
         #   @return [::String]
         #     Optional. A descriptive comment. This field may be updated.
         # @!attribute [rw] id
         #   @return [::String]
         #     The ID of this public key.
-        #     Signatures verified by BinAuthz must include the ID of the public key that
-        #     can be used to verify them, and that ID must match the contents of this
-        #     field exactly.
-        #     Additional restrictions on this field can be imposed based on which public
-        #     key type is encapsulated. See the documentation on `public_key` cases below
-        #     for details.
+        #     Signatures verified by Binary Authorization must include the ID of the
+        #     public key that can be used to verify them, and that ID must match the
+        #     contents of this field exactly. Additional restrictions on this field can
+        #     be imposed based on which public key type is encapsulated. See the
+        #     documentation on `public_key` cases below for details.
         # @!attribute [rw] ascii_armored_pgp_public_key
         #   @return [::String]
         #     ASCII-armored representation of a PGP public key, as the entire output by
         #     the command `gpg --export --armor foo@example.com` (either LF or CRLF
         #     line endings).
-        #     When using this field, `id` should be left blank.  The BinAuthz API
-        #     handlers will calculate the ID and fill it in automatically.  BinAuthz
-        #     computes this ID as the OpenPGP RFC4880 V4 fingerprint, represented as
-        #     upper-case hex.  If `id` is provided by the caller, it will be
-        #     overwritten by the API-calculated ID.
+        #     When using this field, `id` should be left blank.  The Binary
+        #     Authorization API handlers will calculate the ID and fill it in
+        #     automatically.  Binary Authorization computes this ID as the OpenPGP
+        #     RFC4880 V4 fingerprint, represented as upper-case hex.  If `id` is
+        #     provided by the caller, it will be overwritten by the API-calculated ID.
         #
         #     Note: The following fields are mutually exclusive: `ascii_armored_pgp_public_key`, `pkix_public_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pkix_public_key

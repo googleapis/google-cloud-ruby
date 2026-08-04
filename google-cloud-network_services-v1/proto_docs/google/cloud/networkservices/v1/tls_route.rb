@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the TlsRoute resource. It matches pattern
-        #     `projects/*/locations/global/tlsRoutes/tls_route_name>`.
+        #     `projects/*/locations/*/tlsRoutes/tls_route_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
         #     Output only. Server-defined URL of this resource
@@ -51,7 +51,7 @@ module Google
         #     one of the routing rules to route the requests served by the mesh.
         #
         #     Each mesh reference should match the pattern:
-        #     `projects/*/locations/global/meshes/<mesh_name>`
+        #     `projects/*/locations/*/meshes/<mesh_name>`
         #
         #     The attached Mesh should be of a type SIDECAR
         # @!attribute [rw] gateways
@@ -60,7 +60,15 @@ module Google
         #     as one of the routing rules to route the requests served by the gateway.
         #
         #     Each gateway reference should match the pattern:
-        #     `projects/*/locations/global/gateways/<gateway_name>`
+        #     `projects/*/locations/*/gateways/<gateway_name>`
+        # @!attribute [rw] target_proxies
+        #   @return [::Array<::String>]
+        #     Optional. TargetProxies defines a list of TargetTcpProxies this TlsRoute is
+        #     attached to, as one of the routing rules to route the requests served by
+        #     the TargetTcpProxy.
+        #
+        #     Each TargetTcpProxy reference should match the pattern:
+        #     `projects/*/locations/*/targetTcpProxies/<target_tcp_proxy_name>`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Set of label tags associated with the TlsRoute resource.
@@ -152,7 +160,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the TlsRoutes should be
-        #     listed, specified in the format `projects/*/locations/global`.
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of TlsRoutes to return per call.
@@ -195,7 +203,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the TlsRoute to get. Must be in the format
-        #     `projects/*/locations/global/tlsRoutes/*`.
+        #     `projects/*/locations/*/tlsRoutes/*`.
         class GetTlsRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -205,7 +213,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the TlsRoute. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] tls_route_id
         #   @return [::String]
         #     Required. Short name of the TlsRoute resource to be created.
@@ -237,7 +245,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the TlsRoute to delete. Must be in the format
-        #     `projects/*/locations/global/tlsRoutes/*`.
+        #     `projects/*/locations/*/tlsRoutes/*`.
         class DeleteTlsRouteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

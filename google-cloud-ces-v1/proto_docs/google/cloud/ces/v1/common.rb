@@ -202,6 +202,12 @@ module Google
         #   @return [::String]
         #     Optional. The noise suppression level of the channel profile.
         #     Available values are "low", "moderate", "high", "very_high".
+        # @!attribute [rw] whatsapp_config
+        #   @return [::Google::Cloud::Ces::V1::ChannelProfile::WhatsAppConfig]
+        #     Optional. Configuration specific to WhatsApp deployments.
+        # @!attribute [rw] instagram_config
+        #   @return [::Google::Cloud::Ces::V1::ChannelProfile::InstagramConfig]
+        #     Optional. Configuration specific to Instagram deployments.
         class ChannelProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,6 +309,48 @@ module Google
             end
           end
 
+          # Configuration specific to WhatsApp deployments.
+          # @!attribute [rw] waba_id
+          #   @return [::String]
+          #     Required. The WhatsApp Business Account ID.
+          # @!attribute [rw] phone_number_id
+          #   @return [::String]
+          #     Required. The Meta phone number ID.
+          # @!attribute [rw] phone_number
+          #   @return [::String]
+          #     Optional. The phone number in E.164 format.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The fetched Meta business page name.
+          # @!attribute [r] thumbnail_url
+          #   @return [::String]
+          #     Output only. The fetched Meta business profile thumbnail URL.
+          # @!attribute [r] description
+          #   @return [::String]
+          #     Output only. The description of the Meta business page or profile.
+          class WhatsAppConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration specific to Instagram deployments.
+          # @!attribute [rw] instagram_account_id
+          #   @return [::String]
+          #     Required. The Instagram Account ID.
+          # @!attribute [r] display_name
+          #   @return [::String]
+          #     Output only. The fetched Meta business page name.
+          # @!attribute [r] thumbnail_url
+          #   @return [::String]
+          #     Output only. The fetched Meta business profile thumbnail URL.
+          # @!attribute [r] description
+          #   @return [::String]
+          #     Output only. The description of the Meta business page or profile.
+          class InstagramConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The type of the channel profile.
           module ChannelType
             # Unknown channel type.
@@ -323,11 +371,20 @@ module Google
             # Contact Center as a Service (CCaaS) channel.
             CONTACT_CENTER_AS_A_SERVICE = 6
 
+            # Contact Center as a Service (CCaaS Chat) channel.
+            CONTACT_CENTER_AS_A_SERVICE_CHAT = 11
+
             # Five9 channel.
             FIVE9 = 7
 
             # Third party contact center integration channel.
             CONTACT_CENTER_INTEGRATION = 8
+
+            # WhatsApp channel.
+            WHATSAPP = 9
+
+            # Instagram channel.
+            INSTAGRAM = 10
           end
         end
 

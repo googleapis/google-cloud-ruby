@@ -33,21 +33,21 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.TeamService'
 
-            # API to retrieve a `Team` object.
+            # Retrieves a `Team` object.
             rpc :GetTeam, ::Google::Ads::AdManager::V1::GetTeamRequest, ::Google::Ads::AdManager::V1::Team
-            # API to retrieve a list of `Team` objects.
+            # Lists `Team` objects.
             rpc :ListTeams, ::Google::Ads::AdManager::V1::ListTeamsRequest, ::Google::Ads::AdManager::V1::ListTeamsResponse
-            # API to create a `Team` object.
+            # Creates a `Team` object.
             rpc :CreateTeam, ::Google::Ads::AdManager::V1::CreateTeamRequest, ::Google::Ads::AdManager::V1::Team
-            # API to batch create `Team` objects.
+            # Creates `Team` objects.
             rpc :BatchCreateTeams, ::Google::Ads::AdManager::V1::BatchCreateTeamsRequest, ::Google::Ads::AdManager::V1::BatchCreateTeamsResponse
-            # API to update a `Team` object.
+            # Updates a `Team` object.
             rpc :UpdateTeam, ::Google::Ads::AdManager::V1::UpdateTeamRequest, ::Google::Ads::AdManager::V1::Team
-            # API to batch update `Team` objects.
+            # Batch updates `Team` objects.
             rpc :BatchUpdateTeams, ::Google::Ads::AdManager::V1::BatchUpdateTeamsRequest, ::Google::Ads::AdManager::V1::BatchUpdateTeamsResponse
-            # API to batch activate `Team` objects.
+            # Batch activates `Team` objects.
             rpc :BatchActivateTeams, ::Google::Ads::AdManager::V1::BatchActivateTeamsRequest, ::Google::Ads::AdManager::V1::BatchActivateTeamsResponse
-            # API to batch deactivate `Team` objects.
+            # Batch deactivates `Team` objects.
             rpc :BatchDeactivateTeams, ::Google::Ads::AdManager::V1::BatchDeactivateTeamsRequest, ::Google::Ads::AdManager::V1::BatchDeactivateTeamsResponse
           end
 

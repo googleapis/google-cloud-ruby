@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/commerceproducer/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-commerce_producer/$1

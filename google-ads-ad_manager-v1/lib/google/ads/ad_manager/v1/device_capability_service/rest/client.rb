@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `DeviceCapability` object.
+              # Retrieves a `DeviceCapability` object.
               #
               # @overload get_device_capability(request, options = nil)
               #   Pass arguments to `get_device_capability` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `DeviceCapability` objects.
+              # Lists `DeviceCapability` objects.
               #
               # @overload list_device_capabilities(request, options = nil)
               #   Pass arguments to `list_device_capabilities` via a request object, either of type

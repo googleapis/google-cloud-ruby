@@ -235,6 +235,12 @@ module Google
         # @!attribute [rw] initial_config
         #   @return [::Google::Cloud::SecureSourceManager::V1::Repository::InitialConfig]
         #     Input only. Initial configurations for the repository.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. Repository level service account (BYOSA).
+        # @!attribute [rw] scan_config
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Repository::ScanConfig]
+        #     Optional. Provides configuration for scanning.
         class Repository
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -395,6 +401,27 @@ module Google
           class InitialConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for scanning.
+          # @!attribute [rw] secret_scan_config
+          #   @return [::Google::Cloud::SecureSourceManager::V1::Repository::ScanConfig::SecretScanConfig]
+          #     Optional. Configuration for secret scanning.
+          class ScanConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for secret scanning.
+            # @!attribute [rw] enabled
+            #   @return [::Boolean]
+            #     Optional. Enables secret scanning for the repository.
+            # @!attribute [rw] inspect_template
+            #   @return [::String]
+            #     Optional. The DLP inspect template to use for secret scanning.
+            class SecretScanConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
 

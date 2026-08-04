@@ -106,6 +106,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.search_messages.timeout = 30.0
+                default_config.rpcs.search_messages.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.get_attachment.timeout = 30.0
                 default_config.rpcs.get_attachment.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -228,6 +233,31 @@ module Google
 
                 default_config.rpcs.get_thread_read_state.timeout = 30.0
                 default_config.rpcs.get_thread_read_state.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_availability.timeout = 30.0
+                default_config.rpcs.get_availability.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.mark_as_active.timeout = 30.0
+                default_config.rpcs.mark_as_active.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.mark_as_away.timeout = 30.0
+                default_config.rpcs.mark_as_away.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.mark_as_do_not_disturb.timeout = 30.0
+                default_config.rpcs.mark_as_do_not_disturb.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.update_availability.timeout = 30.0
+                default_config.rpcs.update_availability.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
@@ -1476,6 +1506,286 @@ module Google
             end
 
             ##
+            # Searches for messages in Google Chat that the calling user has access to.
+            # Returns a list of messages matching the search criteria.
+            #
+            # To search across all spaces the user has access to, set `parent` to
+            # `spaces/-`. Using any other value for `parent` results in an
+            # `INVALID_ARGUMENT` error. The returned messages have their `name` field
+            # populated with the full resource name, which includes the specific `space`
+            # in which the message resides.
+            #
+            # This API doesn't return all message types. The types of messages listed
+            # below aren't included in the response. Use
+            # {::Google::Apps::Chat::V1::ChatService::Client#list_messages ListMessages} to list all
+            # messages.
+            #
+            # - Private Messages that are visible to the authenticated user.
+            # - Messages posted by Chat apps in spaces or group chats.
+            # - Messages in a Chat app DM.
+            # - Messages from blocked users.
+            # - Messages in spaces that the caller has muted.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.messages.readonly`
+            #   - `https://www.googleapis.com/auth/chat.messages`
+            #
+            # @overload search_messages(request, options = nil)
+            #   Pass arguments to `search_messages` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::SearchMessagesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::SearchMessagesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_messages(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil, view: nil)
+            #   Pass arguments to `search_messages` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the space to search within.
+            #
+            #     To search across all spaces the user has access to, set this field to
+            #     `spaces/-`. Using any other value for `parent` results in an
+            #     `INVALID_ARGUMENT` error.
+            #
+            #     To limit the search to one or more spaces, use `space.name` or
+            #     `space.display_name` in the `filter`.
+            #   @param filter [::String]
+            #     Required. A search query.
+            #
+            #     The query can specify one or more search keywords, which are used to filter
+            #     the results,
+            #
+            #     You can also filter the results using the following message fields:
+            #
+            #     - `create_time`: Accepts a timestamp in
+            #       [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+            #       supported comparison operators are: `<` and `>=`.
+            #     - `sender.name`: The resource name of the sender (`users/{user}`). Only
+            #       supports `=`. You can use the e-mail as an alias for `{user}`. For
+            #       example, `users/example@gmail.com`, where `example@gmail.com` is the
+            #       e-mail of the Google Chat user.
+            #     - `space.name`: The resource name of the space where the message is posted.
+            #       (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+            #       search is performed across all direct messages and spaces the user has
+            #       access to as a space member.
+            #     - `space.display_name`: Supports the operator `:` (has) and filters spaces
+            #       based on a partial match of their display name. Results are limited to
+            #       the top five space matches. For example, `space.display_name:Project`
+            #       searches for messages in the top five spaces that contain the word
+            #       "Project" in their display names.
+            #     - `attachment`: Supports the operator `:*` (has any) to check for the
+            #       presence of attachments. If `attachment:*` is specified, only messages
+            #       that have at least one attachment are returned.
+            #     - `annotations.user_mentions.user.name`: The resource name of the mentioned
+            #       user (`users/{user}`). Only supports `:` (has). For example:
+            #       `annotations.user_mentions.user.name:"users/1234567890"` returns only
+            #       messages that contain a mention to the specified user. Alternatively, the
+            #       alias `me` can be used to filter for messages that mention the caller
+            #       user, for example: `annotations.user_mentions.user.name:users/me`. You
+            #       can also use the e-mail as an alias for `{user}`, for example,
+            #       `users/example@gmail.com`.
+            #
+            #     For advanced filtering, the following functions are also available:
+            #
+            #     - `has_link()`: Returns only messages that have at least one hyperlink in
+            #       the message text.
+            #     - `is_unread()`: Filters out messages that have been read by the calling
+            #       user.
+            #
+            #     Using the `space.display_name` filter requires that the calling credentials
+            #     include one of the following [authorization
+            #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
+            #     - `https://www.googleapis.com/auth/chat.spaces`
+            #
+            #     Using the `is_unread()` filter requires that the calling credentials
+            #     include one of the following [authorization
+            #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #     - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+            #     - `https://www.googleapis.com/auth/chat.users.readstate`
+            #
+            #
+            #     Across different fields, only `AND` operators are supported. A valid
+            #     example is `sender.name = "users/1234567890" AND is_unread()`. The word
+            #     `AND` is optional and is implied if omitted. For example, `sender.name =
+            #     "users/1234567890" is_unread()` is valid and is equivalent to the previous
+            #     example. An invalid example is `sender.name = "users/1234567890" OR
+            #     is_unread()` because `OR` is not supported between different fields.
+            #
+            #     Among the same field:
+            #
+            #     - `create_time` supports only `AND`, and can only be used to represent
+            #        an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+            #        create_time < "2023-01-01T00:00:00+00:00"`.
+            #     - `sender.name` supports only the `OR` operator, for example:
+            #       `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+            #     - `space.name` supports only the `OR` operator, for example:
+            #       `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+            #     - `space.display_name` supports the operators `AND` and `OR`, but not a
+            #       mix of both. For example:
+            #       `space.display_name:Project AND space.display_name:Tasks` returns
+            #       messages that are in spaces with display names containing both `Project`
+            #       and `Tasks`, whereas
+            #       `space.display_name:Project OR space.display_name:Tasks` returns messages
+            #       that are in spaces with display names containing either `Project` or
+            #       `Tasks` or both.
+            #     - `annotations.user_mentions.user.name` supports the operators `AND` and
+            #       `OR`, but not a mix of both. For example:
+            #       `annotations.user_mentions.user.name:"users/1234567890" AND
+            #       annotations.user_mentions.user.name:"users/0987654321"` returns only
+            #       messages that mentions both users, whereas
+            #       `annotations.user_mentions.user.name:"users/1234567890" OR
+            #       annotations.user_mentions.user.name:"users/0987654321"` returns messages
+            #       that mention either user or both.
+            #
+            #     Parentheses are required to disambiguate operator precedence when combining
+            #     `AND` and `OR` operators in the same query. For example:
+            #     `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+            #     Otherwise, parentheses are optional.
+            #
+            #     The following example queries are valid:
+            #
+            #     ```
+            #     "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+            #
+            #     sender.name = "users/example@gmail.com"
+            #
+            #     annotations.user_mentions.user.name:"users/0987654321"
+            #
+            #     attachment:* AND space.name = "spaces/ABCDEFGH"
+            #
+            #     tasks AND is_unread() AND sender.name = "users/1234567890"
+            #
+            #     "things to do" "urgent"
+            #
+            #     (sender.name = "users/1234567890")
+            #     AND (create_time < "2023-05-01T00:00:00Z")
+            #
+            #     tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+            #
+            #     "project one" is_unread()
+            #
+            #     space.display_name:Project tasks
+            #     ```
+            #
+            #     The maximum query length is 1,000 characters.
+            #
+            #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+            #     error.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return. The service may return
+            #     fewer than this value.
+            #
+            #     If unspecified, at most 25 are returned.
+            #
+            #     The maximum value is 100. If you use a value more than 100, it's
+            #     automatically changed to 100.
+            #   @param page_token [::String]
+            #     Optional. A token, received from the previous search messages call. Provide
+            #     this parameter to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided should match the call that
+            #     provided the page token. Passing different values to the other parameters
+            #     might lead to unexpected results.
+            #   @param order_by [::String]
+            #     Optional. How the results list is ordered.
+            #
+            #     Supported attributes to order by are:
+            #
+            #     - `create_time`: Sorts the results by the time of the message creation.
+            #       Default value.
+            #     - `relevance`: Sorts the results by relevance.
+            #       [Developer Preview](https://developers.google.com/workspace/preview).
+            #
+            #     The default ordering is `create_time desc`. Only a single order per query
+            #     (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+            #     is supported, and it must be specified after the order attribute.
+            #   @param view [::Google::Apps::Chat::V1::SearchMessagesRequest::SearchMessagesView]
+            #     Optional. Specifies what kind of search results view to return. The default
+            #     is `SEARCH_MESSAGES_VIEW_BASIC`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::SearchMessageResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::SearchMessageResult>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::SearchMessagesRequest.new
+            #
+            #   # Call the search_messages method.
+            #   result = client.search_messages request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Apps::Chat::V1::SearchMessageResult.
+            #     p item
+            #   end
+            #
+            def search_messages request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::SearchMessagesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_messages.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_messages.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_messages.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :search_messages, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @chat_service_stub, :search_messages, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets the metadata of a message attachment. The attachment data is fetched
             # using the [media
             # API](https://developers.google.com/workspace/chat/api/reference/rest/v1/media/download).
@@ -2587,6 +2897,24 @@ module Google
             #     To learn more, see [Make a space discoverable to specific
             #     users](https://developers.google.com/workspace/chat/space-target-audience).
             #     `access_settings.audience` is not supported with `useAdminAccess`.
+            #
+            #     `access_settings.access_permission_settings`: Updates the [access
+            #     permission
+            #     settings](https://support.google.com/chat/answer/11971020) of who can
+            #     discover and join the space where `spaceType` field is `SPACE`. Principals
+            #     allowed to join the space must also be allowed to discover it. To update
+            #     access permission settings for a space, the authenticating user must be a
+            #     space manager or assistant manager and omit all other field masks in the
+            #     request. You can't update this field if the space is in [import
+            #     mode](https://developers.google.com/workspace/chat/import-data-overview).
+            #     To learn more, see [Make a space discoverable to specific
+            #     users](https://developers.google.com/workspace/chat/space-target-audience).
+            #     `access_settings.access_permission_settings` is not supported with
+            #     `useAdminAccess`.
+            #     The supported field masks include:
+            #
+            #     - `access_settings.access_permission_settings.discoverSpaceSetting`
+            #     - `access_settings.access_permission_settings.joinSpaceSetting`
             #
             #     `permission_settings`: Supports changing the
             #     [permission settings](https://support.google.com/chat/answer/13340792)
@@ -4750,6 +5078,542 @@ module Google
             end
 
             ##
+            # Returns availability information for a human user in Google Chat. For
+            # example, this can be used to check if a user is online or away, or to
+            # retrieve their custom status message.
+            #
+            # This method only retrieves the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability.readonly`
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            #
+            # @overload get_availability(request, options = nil)
+            #   Pass arguments to `get_availability` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::GetAvailabilityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::GetAvailabilityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_availability(name: nil)
+            #   Pass arguments to `get_availability` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the availability to retrieve.
+            #
+            #     Format: users/\\{user}/availability
+            #
+            #     `{user}` is the id for the Person in the People API or Admin SDK directory
+            #     API. For example, `users/123456789`.
+            #
+            #     The user's email address or `me` can also be used as an alias to refer to
+            #     the caller.  For example, `users/user@example.com` or `users/me`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::Availability]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::Availability]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::GetAvailabilityRequest.new
+            #
+            #   # Call the get_availability method.
+            #   result = client.get_availability request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::Availability.
+            #   p result
+            #
+            def get_availability request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::GetAvailabilityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_availability.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_availability.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_availability.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :get_availability, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Marks user as `ACTIVE` in Google Chat.
+            #
+            # Sets the user's availability state to `ACTIVE`. The `ACTIVE` state
+            # lasts until the specified expiration, at which point the user's state
+            # becomes `AWAY`. Note that if the user is actively using Chat, the `ACTIVE`
+            # state duration may extend beyond the provided expiration.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            #
+            # @overload mark_as_active(request, options = nil)
+            #   Pass arguments to `mark_as_active` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::MarkAsActiveRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::MarkAsActiveRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mark_as_active(name: nil, expire_time: nil, ttl: nil)
+            #   Pass arguments to `mark_as_active` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the availability to mark as active.
+            #     Format: users/\\{user}/availability
+            #
+            #     `{user}` is the id for the Person in the People API or Admin SDK directory
+            #     API. For example, `users/123456789`.
+            #
+            #     The user's email address or `me` can also be used as an alias to refer to
+            #     the caller.  For example, `users/user@example.com` or `users/me`.
+            #   @param expire_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     The absolute timestamp when the ACTIVE state expires.
+            #
+            #     Note: The following parameters are mutually exclusive: `expire_time`, `ttl`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param ttl [::Google::Protobuf::Duration, ::Hash]
+            #     The duration from the current time until the ACTIVE state expires.
+            #     Using a short TTL can effectively reset the user's state to be based
+            #     on activity after this brief duration.
+            #
+            #     Note: The following parameters are mutually exclusive: `ttl`, `expire_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::Availability]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::Availability]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::MarkAsActiveRequest.new
+            #
+            #   # Call the mark_as_active method.
+            #   result = client.mark_as_active request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::Availability.
+            #   p result
+            #
+            def mark_as_active request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::MarkAsActiveRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mark_as_active.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mark_as_active.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mark_as_active.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :mark_as_active, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Marks user as `AWAY` in Google Chat.
+            #
+            # Sets the user's state to away and is not affected by the user's
+            # activity.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            #
+            # @overload mark_as_away(request, options = nil)
+            #   Pass arguments to `mark_as_away` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::MarkAsAwayRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::MarkAsAwayRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mark_as_away(name: nil)
+            #   Pass arguments to `mark_as_away` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the availability to mark as away.
+            #     Format: users/\\{user}/availability
+            #
+            #     `{user}` is the id for the Person in the People API or Admin SDK directory
+            #     API. For example, `users/123456789`.
+            #
+            #     The user's email address or `me` can also be used as an alias to refer to
+            #     the caller.  For example, `users/user@example.com` or `users/me`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::Availability]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::Availability]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::MarkAsAwayRequest.new
+            #
+            #   # Call the mark_as_away method.
+            #   result = client.mark_as_away request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::Availability.
+            #   p result
+            #
+            def mark_as_away request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::MarkAsAwayRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mark_as_away.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mark_as_away.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mark_as_away.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :mark_as_away, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Marks user as `DO_NOT_DISTURB` in Google Chat.
+            #
+            # Sets a user's availability state to `DO_NOT_DISTURB` until a specified
+            # expiration time.
+            # When in `DO_NOT_DISTURB`, users typically won't receive notifications.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with [authorization
+            # scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            #
+            # @overload mark_as_do_not_disturb(request, options = nil)
+            #   Pass arguments to `mark_as_do_not_disturb` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mark_as_do_not_disturb(name: nil, expire_time: nil, ttl: nil)
+            #   Pass arguments to `mark_as_do_not_disturb` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the availability to mark as Do Not Disturb.
+            #     Format: users/\\{user}/availability
+            #
+            #     `{user}` is the id for the Person in the People API or Admin SDK directory
+            #     API. For example, `users/123456789`.
+            #
+            #     The user's email address or `me` can also be used as an alias to refer to
+            #     the caller.  For example, `users/user@example.com` or `users/me`.
+            #   @param expire_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     The absolute timestamp when the DND state expires.
+            #
+            #     Note: The following parameters are mutually exclusive: `expire_time`, `ttl`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param ttl [::Google::Protobuf::Duration, ::Hash]
+            #     The duration from the current time until the DND state expires.
+            #
+            #     Note: The following parameters are mutually exclusive: `ttl`, `expire_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::Availability]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::Availability]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest.new
+            #
+            #   # Call the mark_as_do_not_disturb method.
+            #   result = client.mark_as_do_not_disturb request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::Availability.
+            #   p result
+            #
+            def mark_as_do_not_disturb request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::MarkAsDoNotDisturbRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mark_as_do_not_disturb.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mark_as_do_not_disturb.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mark_as_do_not_disturb.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :mark_as_do_not_disturb, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates availability information for a human user. Only the `custom_status`
+            # field can be updated through this method.
+            #
+            # This method only updates the authenticated user's availability.
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+            # with one of the following [authorization
+            # scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+            #
+            #   - `https://www.googleapis.com/auth/chat.users.availability`
+            #
+            # @overload update_availability(request, options = nil)
+            #   Pass arguments to `update_availability` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::UpdateAvailabilityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::UpdateAvailabilityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_availability(availability: nil, update_mask: nil)
+            #   Pass arguments to `update_availability` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param availability [::Google::Apps::Chat::V1::Availability, ::Hash]
+            #     Required. The availability to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to update.
+            #     The only field that can be updated is `custom_status`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::Availability]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::Availability]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::UpdateAvailabilityRequest.new
+            #
+            #   # Call the update_availability method.
+            #   result = client.update_availability request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::Availability.
+            #   p result
+            #
+            def update_availability request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::UpdateAvailabilityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_availability.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.availability&.name
+                header_params["availability.name"] = request.availability.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_availability.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_availability.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :update_availability, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Returns an event from a Google Chat space. The [event
             # payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
             # contains the most recent version of the resource that changed. For example,
@@ -6276,6 +7140,11 @@ module Google
                 #
                 attr_reader :delete_message
                 ##
+                # RPC-specific configuration for `search_messages`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_messages
+                ##
                 # RPC-specific configuration for `get_attachment`
                 # @return [::Gapic::Config::Method]
                 #
@@ -6401,6 +7270,31 @@ module Google
                 #
                 attr_reader :get_thread_read_state
                 ##
+                # RPC-specific configuration for `get_availability`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_availability
+                ##
+                # RPC-specific configuration for `mark_as_active`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :mark_as_active
+                ##
+                # RPC-specific configuration for `mark_as_away`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :mark_as_away
+                ##
+                # RPC-specific configuration for `mark_as_do_not_disturb`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :mark_as_do_not_disturb
+                ##
+                # RPC-specific configuration for `update_availability`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_availability
+                ##
                 # RPC-specific configuration for `get_space_event`
                 # @return [::Gapic::Config::Method]
                 #
@@ -6472,6 +7366,8 @@ module Google
                   @update_message = ::Gapic::Config::Method.new update_message_config
                   delete_message_config = parent_rpcs.delete_message if parent_rpcs.respond_to? :delete_message
                   @delete_message = ::Gapic::Config::Method.new delete_message_config
+                  search_messages_config = parent_rpcs.search_messages if parent_rpcs.respond_to? :search_messages
+                  @search_messages = ::Gapic::Config::Method.new search_messages_config
                   get_attachment_config = parent_rpcs.get_attachment if parent_rpcs.respond_to? :get_attachment
                   @get_attachment = ::Gapic::Config::Method.new get_attachment_config
                   upload_attachment_config = parent_rpcs.upload_attachment if parent_rpcs.respond_to? :upload_attachment
@@ -6522,6 +7418,16 @@ module Google
                   @update_space_read_state = ::Gapic::Config::Method.new update_space_read_state_config
                   get_thread_read_state_config = parent_rpcs.get_thread_read_state if parent_rpcs.respond_to? :get_thread_read_state
                   @get_thread_read_state = ::Gapic::Config::Method.new get_thread_read_state_config
+                  get_availability_config = parent_rpcs.get_availability if parent_rpcs.respond_to? :get_availability
+                  @get_availability = ::Gapic::Config::Method.new get_availability_config
+                  mark_as_active_config = parent_rpcs.mark_as_active if parent_rpcs.respond_to? :mark_as_active
+                  @mark_as_active = ::Gapic::Config::Method.new mark_as_active_config
+                  mark_as_away_config = parent_rpcs.mark_as_away if parent_rpcs.respond_to? :mark_as_away
+                  @mark_as_away = ::Gapic::Config::Method.new mark_as_away_config
+                  mark_as_do_not_disturb_config = parent_rpcs.mark_as_do_not_disturb if parent_rpcs.respond_to? :mark_as_do_not_disturb
+                  @mark_as_do_not_disturb = ::Gapic::Config::Method.new mark_as_do_not_disturb_config
+                  update_availability_config = parent_rpcs.update_availability if parent_rpcs.respond_to? :update_availability
+                  @update_availability = ::Gapic::Config::Method.new update_availability_config
                   get_space_event_config = parent_rpcs.get_space_event if parent_rpcs.respond_to? :get_space_event
                   @get_space_event = ::Gapic::Config::Method.new get_space_event_config
                   list_space_events_config = parent_rpcs.list_space_events if parent_rpcs.respond_to? :list_space_events

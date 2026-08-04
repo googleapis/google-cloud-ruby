@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ContentLabelService'
 
-            # API to retrieve a `ContentLabel` object.
+            # Retrieves a `ContentLabel` object.
             rpc :GetContentLabel, ::Google::Ads::AdManager::V1::GetContentLabelRequest, ::Google::Ads::AdManager::V1::ContentLabel
-            # API to retrieve a list of `ContentLabel` objects.
+            # Lists `ContentLabel` objects.
             rpc :ListContentLabels, ::Google::Ads::AdManager::V1::ListContentLabelsRequest, ::Google::Ads::AdManager::V1::ListContentLabelsResponse
           end
 

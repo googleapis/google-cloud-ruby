@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Company` object.
+              # Retrieves a `Company` object.
               #
               # @overload get_company(request, options = nil)
               #   Pass arguments to `get_company` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Company` objects.
+              # Lists `Company` objects.
               #
               # @overload list_companies(request, options = nil)
               #   Pass arguments to `list_companies` via a request object, either of type

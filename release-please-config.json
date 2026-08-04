@@ -107,6 +107,14 @@
       "component": "google-cloud-advisory_notifications-v1",
       "version_file": "lib/google/cloud/advisory_notifications/v1/version.rb"
     },
+    "google-cloud-agent_registry": {
+      "component": "google-cloud-agent_registry",
+      "version_file": "lib/google/cloud/agent_registry/version.rb"
+    },
+    "google-cloud-agent_registry-v1": {
+      "component": "google-cloud-agent_registry-v1",
+      "version_file": "lib/google/cloud/agent_registry/v1/version.rb"
+    },
     "google-cloud-ai_platform": {
       "component": "google-cloud-ai_platform",
       "version_file": "lib/google/cloud/ai_platform/version.rb"
@@ -519,6 +527,14 @@
       "component": "google-cloud-commerce-consumer-procurement-v1",
       "version_file": "lib/google/cloud/commerce/consumer/procurement/v1/version.rb"
     },
+    "google-cloud-commerce_producer": {
+      "component": "google-cloud-commerce_producer",
+      "version_file": "lib/google/cloud/commerce_producer/version.rb"
+    },
+    "google-cloud-commerce_producer-v1beta": {
+      "component": "google-cloud-commerce_producer-v1beta",
+      "version_file": "lib/google/cloud/commerce_producer/v1beta/version.rb"
+    },
     "google-cloud-compute": {
       "component": "google-cloud-compute",
       "version_file": "lib/google/cloud/compute/version.rb"
@@ -598,6 +614,14 @@
     "google-cloud-data_catalog-lineage": {
       "component": "google-cloud-data_catalog-lineage",
       "version_file": "lib/google/cloud/data_catalog/lineage/version.rb"
+    },
+    "google-cloud-data_catalog-lineage-config_management": {
+      "component": "google-cloud-data_catalog-lineage-config_management",
+      "version_file": "lib/google/cloud/data_catalog/lineage/config_management/version.rb"
+    },
+    "google-cloud-data_catalog-lineage-config_management-v1": {
+      "component": "google-cloud-data_catalog-lineage-config_management-v1",
+      "version_file": "lib/google/cloud/data_catalog/lineage/config_management/v1/version.rb"
     },
     "google-cloud-data_catalog-lineage-v1": {
       "component": "google-cloud-data_catalog-lineage-v1",
@@ -1207,6 +1231,10 @@
       "component": "google-cloud-network_security",
       "version_file": "lib/google/cloud/network_security/version.rb"
     },
+    "google-cloud-network_security-v1": {
+      "component": "google-cloud-network_security-v1",
+      "version_file": "lib/google/cloud/network_security/v1/version.rb"
+    },
     "google-cloud-network_security-v1beta1": {
       "component": "google-cloud-network_security-v1beta1",
       "version_file": "lib/google/cloud/network_security/v1beta1/version.rb"
@@ -1354,6 +1382,14 @@
     "google-cloud-privileged_access_manager-v1": {
       "component": "google-cloud-privileged_access_manager-v1",
       "version_file": "lib/google/cloud/privileged_access_manager/v1/version.rb"
+    },
+    "google-cloud-product_registry": {
+      "component": "google-cloud-product_registry",
+      "version_file": "lib/google/cloud/product_registry/version.rb"
+    },
+    "google-cloud-product_registry-v1": {
+      "component": "google-cloud-product_registry-v1",
+      "version_file": "lib/google/cloud/product_registry/v1/version.rb"
     },
     "google-cloud-profiler": {
       "component": "google-cloud-profiler",
@@ -1627,6 +1663,14 @@
       "component": "google-cloud-speech-v2",
       "version_file": "lib/google/cloud/speech/v2/version.rb"
     },
+    "google-cloud-sql-v1": {
+      "component": "google-cloud-sql-v1",
+      "version_file": "lib/google/cloud/sql/v1/version.rb"
+    },
+    "google-cloud-sql-v1beta4": {
+      "component": "google-cloud-sql-v1beta4",
+      "version_file": "lib/google/cloud/sql/v1beta4/version.rb"
+    },
     "google-cloud-storage": {
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
@@ -1754,6 +1798,14 @@
     "google-cloud-translate-v3": {
       "component": "google-cloud-translate-v3",
       "version_file": "lib/google/cloud/translate/v3/version.rb"
+    },
+    "google-cloud-vector_search": {
+      "component": "google-cloud-vector_search",
+      "version_file": "lib/google/cloud/vector_search/version.rb"
+    },
+    "google-cloud-vector_search-v1": {
+      "component": "google-cloud-vector_search-v1",
+      "version_file": "lib/google/cloud/vector_search/v1/version.rb"
     },
     "google-cloud-video-live_stream": {
       "component": "google-cloud-video-live_stream",
@@ -1978,6 +2030,14 @@
     "google-maps-fleet_engine-v1": {
       "component": "google-maps-fleet_engine-v1",
       "version_file": "lib/google/maps/fleet_engine/v1/version.rb"
+    },
+    "google-maps-isochrones": {
+      "component": "google-maps-isochrones",
+      "version_file": "lib/google/maps/isochrones/version.rb"
+    },
+    "google-maps-isochrones-v1": {
+      "component": "google-maps-isochrones-v1",
+      "version_file": "lib/google/maps/isochrones/v1/version.rb"
     },
     "google-shopping-css": {
       "component": "google-shopping-css",

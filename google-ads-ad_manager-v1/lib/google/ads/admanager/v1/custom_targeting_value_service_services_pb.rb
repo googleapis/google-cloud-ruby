@@ -33,10 +33,22 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.CustomTargetingValueService'
 
-            # API to retrieve a `CustomTargetingValue` object.
+            # Retrieves a `CustomTargetingValue` object.
             rpc :GetCustomTargetingValue, ::Google::Ads::AdManager::V1::GetCustomTargetingValueRequest, ::Google::Ads::AdManager::V1::CustomTargetingValue
-            # API to retrieve a list of `CustomTargetingValue` objects.
+            # Lists `CustomTargetingValue` objects.
             rpc :ListCustomTargetingValues, ::Google::Ads::AdManager::V1::ListCustomTargetingValuesRequest, ::Google::Ads::AdManager::V1::ListCustomTargetingValuesResponse
+            # Creates a `CustomTargetingValue` object.
+            rpc :CreateCustomTargetingValue, ::Google::Ads::AdManager::V1::CreateCustomTargetingValueRequest, ::Google::Ads::AdManager::V1::CustomTargetingValue
+            # Creates `CustomTargetingValue` objects.
+            rpc :BatchCreateCustomTargetingValues, ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesRequest, ::Google::Ads::AdManager::V1::BatchCreateCustomTargetingValuesResponse
+            # Updates a `CustomTargetingValue` object.
+            rpc :UpdateCustomTargetingValue, ::Google::Ads::AdManager::V1::UpdateCustomTargetingValueRequest, ::Google::Ads::AdManager::V1::CustomTargetingValue
+            # Batch updates `CustomTargetingValue` objects.
+            rpc :BatchUpdateCustomTargetingValues, ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesRequest, ::Google::Ads::AdManager::V1::BatchUpdateCustomTargetingValuesResponse
+            # Batch activates `CustomTargetingValue` objects.
+            rpc :BatchActivateCustomTargetingValues, ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesRequest, ::Google::Ads::AdManager::V1::BatchActivateCustomTargetingValuesResponse
+            # Deactivates a list of `CustomTargetingValue` objects.
+            rpc :BatchDeactivateCustomTargetingValues, ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesRequest, ::Google::Ads::AdManager::V1::BatchDeactivateCustomTargetingValuesResponse
           end
 
           Stub = Service.rpc_stub_class

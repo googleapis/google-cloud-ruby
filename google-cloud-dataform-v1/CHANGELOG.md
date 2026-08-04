@@ -1,5 +1,21 @@
 # Changelog
 
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.5.0 (2026-06-30)
+
+#### Features
+
+* Add Developer Connect integration for Git repository authentication ([#34672](https://github.com/googleapis/google-cloud-ruby/issues/34672)) 
+* Add effective default branch field for repositories 
+#### Documentation
+
+* Clarify field usage guidelines and default values in API reference documentation 
+
 ### 0.4.0 (2026-06-11)
 
 #### Features

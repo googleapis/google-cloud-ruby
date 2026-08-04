@@ -52,17 +52,22 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestAudienceMembersStatus]
         #     The status of the ingest audience members request.
         #
-        #     Note: The following fields are mutually exclusive: `audience_members_ingestion_status`, `events_ingestion_status`, `audience_members_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `audience_members_ingestion_status`, `events_ingestion_status`, `audience_members_removal_status`, `remove_all_audience_members_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] events_ingestion_status
         #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestEventsStatus]
         #     The status of the ingest events request.
         #
-        #     Note: The following fields are mutually exclusive: `events_ingestion_status`, `audience_members_ingestion_status`, `audience_members_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `events_ingestion_status`, `audience_members_ingestion_status`, `audience_members_removal_status`, `remove_all_audience_members_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] audience_members_removal_status
         #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveAudienceMembersStatus]
         #     The status of the remove audience members request.
         #
-        #     Note: The following fields are mutually exclusive: `audience_members_removal_status`, `audience_members_ingestion_status`, `events_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `audience_members_removal_status`, `audience_members_ingestion_status`, `events_ingestion_status`, `remove_all_audience_members_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] remove_all_audience_members_status
+        #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveAllAudienceMembersStatus]
+        #     The status of the remove all audience members request.
+        #
+        #     Note: The following fields are mutually exclusive: `remove_all_audience_members_status`, `audience_members_ingestion_status`, `events_ingestion_status`, `audience_members_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RequestStatusPerDestination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,32 +77,43 @@ module Google
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestUserDataStatus]
           #     The status of the user data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`, `google_user_id_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mobile_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestMobileDataStatus]
           #     The status of the mobile data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `mobile_data_ingestion_status`, `user_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mobile_data_ingestion_status`, `user_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`, `google_user_id_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pair_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestPairDataStatus]
           #     The status of the pair data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `pair_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `pair_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`, `google_user_id_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] user_id_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestUserIdDataStatus]
           #     The status of the user id data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `user_id_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `user_id_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`, `google_user_id_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ppid_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestPpidDataStatus]
           #     The status of the ppid data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `ppid_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `composite_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `ppid_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `composite_data_ingestion_status`, `google_user_id_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] composite_data_ingestion_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestCompositeDataStatus]
           #     The status of the composite data ingestion to the destination.
           #
-          #     Note: The following fields are mutually exclusive: `composite_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `composite_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `google_user_id_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] google_user_id_data_ingestion_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestGoogleUserIdDataStatus]
+          #     The status of the google user id data ingestion to the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `google_user_id_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`, `partner_provided_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] partner_provided_id_data_ingestion_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::IngestPartnerProvidedIdDataStatus]
+          #     The status of the partner provided id data ingestion to the
+          #     destination.
+          #
+          #     Note: The following fields are mutually exclusive: `partner_provided_id_data_ingestion_status`, `user_data_ingestion_status`, `mobile_data_ingestion_status`, `pair_data_ingestion_status`, `user_id_data_ingestion_status`, `ppid_data_ingestion_status`, `composite_data_ingestion_status`, `google_user_id_data_ingestion_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class IngestAudienceMembersStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,33 +124,50 @@ module Google
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveUserDataStatus]
           #     The status of the user data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`, `google_user_id_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mobile_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveMobileDataStatus]
           #     The status of the mobile data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `mobile_data_removal_status`, `user_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mobile_data_removal_status`, `user_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`, `google_user_id_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pair_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemovePairDataStatus]
           #     The status of the pair data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `pair_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `pair_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`, `google_user_id_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] user_id_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveUserIdDataStatus]
           #     The status of the user id data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `user_id_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `user_id_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`, `google_user_id_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ppid_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemovePpidDataStatus]
           #     The status of the ppid data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `ppid_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `composite_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `ppid_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `composite_data_removal_status`, `google_user_id_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] composite_data_removal_status
           #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveCompositeDataStatus]
           #     The status of the composite data removal from the destination.
           #
-          #     Note: The following fields are mutually exclusive: `composite_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `composite_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `google_user_id_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] google_user_id_data_removal_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemoveGoogleUserIdDataStatus]
+          #     The status of the google user id data removal from the destination.
+          #
+          #     Note: The following fields are mutually exclusive: `google_user_id_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`, `partner_provided_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] partner_provided_id_data_removal_status
+          #   @return [::Google::Ads::DataManager::V1::RequestStatusPerDestination::RemovePartnerProvidedIdDataStatus]
+          #     The status of the partner provided id data removal from the
+          #     destination.
+          #
+          #     Note: The following fields are mutually exclusive: `partner_provided_id_data_removal_status`, `user_data_removal_status`, `mobile_data_removal_status`, `pair_data_removal_status`, `user_id_data_removal_status`, `ppid_data_removal_status`, `composite_data_removal_status`, `google_user_id_data_removal_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class RemoveAudienceMembersStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the remove all audience members request.
+          class RemoveAllAudienceMembersStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -351,6 +384,72 @@ module Google
           #     by data type. Includes all data types in the request, regardless
           #     of whether they were successfully removed or not.
           class RemoveCompositeDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the google user id data ingestion to the destination
+          # containing stats related to the ingestion.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the upload request for the
+          #     destination. Includes all audience members in the request, regardless of
+          #     whether they were successfully ingested or not.
+          # @!attribute [rw] google_user_id_count
+          #   @return [::Integer]
+          #     The total count of google user ids sent in the upload request for the
+          #     destination. Includes all google user ids in the request, regardless of
+          #     whether they were successfully ingested or not.
+          class IngestGoogleUserIdDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the google user id data removal from the destination.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the removal request. Includes
+          #     all audience members in the request, regardless of whether they were
+          #     successfully removed or not.
+          # @!attribute [rw] google_user_id_count
+          #   @return [::Integer]
+          #     The total count of google user ids sent in the removal request. Includes
+          #     all google user ids in the request, regardless of whether they were
+          #     successfully removed or not.
+          class RemoveGoogleUserIdDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the partner provided id data ingestion to the destination
+          # containing stats related to the ingestion.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the upload request for the
+          #     destination. Includes all audience members in the request, regardless of
+          #     whether they were successfully ingested or not.
+          # @!attribute [rw] partner_provided_id_count
+          #   @return [::Integer]
+          #     The total count of partner provided ids sent in the upload request for
+          #     the destination. Includes all partner provided ids in the request,
+          #     regardless of whether they were successfully ingested or not.
+          class IngestPartnerProvidedIdDataStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The status of the partner provided id data removal from the destination.
+          # @!attribute [rw] record_count
+          #   @return [::Integer]
+          #     The total count of audience members sent in the removal request. Includes
+          #     all audience members in the request, regardless of whether they were
+          #     successfully removed or not.
+          # @!attribute [rw] partner_provided_id_count
+          #   @return [::Integer]
+          #     The total count of partner provided ids sent in the removal request.
+          #     Includes all partner provided ids in the request, regardless of whether
+          #     they were successfully removed or not.
+          class RemovePartnerProvidedIdDataStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

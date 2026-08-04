@@ -209,6 +209,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified RapidCache resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/rapidCaches/{rapid_cache}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param rapid_cache [String]
+              #
+              # @return [::String]
+              def rapid_cache_path project:, bucket:, rapid_cache:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/rapidCaches/#{rapid_cache}"
+              end
+
+              ##
               # Create a fully-qualified StorageLayout resource string.
               #
               # The resource will be in the following format:

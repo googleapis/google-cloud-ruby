@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.OperatingSystemVersionService'
 
-            # API to retrieve a `OperatingSystemVersion` object.
+            # Retrieves a `OperatingSystemVersion` object.
             rpc :GetOperatingSystemVersion, ::Google::Ads::AdManager::V1::GetOperatingSystemVersionRequest, ::Google::Ads::AdManager::V1::OperatingSystemVersion
-            # API to retrieve a list of `OperatingSystemVersion` objects.
+            # Lists `OperatingSystemVersion` objects.
             rpc :ListOperatingSystemVersions, ::Google::Ads::AdManager::V1::ListOperatingSystemVersionsRequest, ::Google::Ads::AdManager::V1::ListOperatingSystemVersionsResponse
           end
 

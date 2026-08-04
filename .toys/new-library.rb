@@ -14,9 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-desc "A tool that generates a new client library"
+desc "A tool that generates new client libraries"
 
 required_arg :proto_namespace
+
+remaining_args :additional_proto_namespaces do
+  desc "Additional proto namespaces to generate"
+end
 
 flag :piper_client, "--piper-client=NAME" do
   desc "Name of the piper client"
@@ -71,16 +75,14 @@ include "yoshi-pr-generator"
 def run
   setup
   set :branch_name, "gen/#{gem_name}" unless branch_name
-  commit_message = "feat: Initial generation of #{gem_name}"
+  commit_message = "feat: Initial generation of #{gem_names.join ', '}"
   yoshi_pr_generator.capture enabled: !git_remote.nil?,
                              remote: git_remote,
                              branch_name: branch_name,
                              commit_message: commit_message do
-    write_owlbot_config
-    write_owlbot_script
-    call_owlbot
-    create_release_please_configs if bootstrap_releases
-    test_library if enable_tests
+    all_proto_namespaces.zip(gem_names).each do |namespace, gem_name|
+      generate_library namespace, gem_name
+    end
   end
 end
 
@@ -88,13 +90,24 @@ def setup
   require "erb"
 
   Dir.chdir context_directory
-  error "#{owlbot_config_path} already exists" if File.file? owlbot_config_path
+  gem_names.each do |gem_name|
+    config_path = owlbot_config_path_for gem_name
+    error "#{config_path} already exists" if File.file? config_path
+  end
   yoshi_utils.git_ensure_identity
   if enable_fork
     set :git_remote, "pull-request-fork" unless git_remote
     yoshi_utils.gh_ensure_fork remote: git_remote
   end
-  mkdir_p gem_name
+  gem_names.each { |gem_name| mkdir_p gem_name }
+end
+
+def generate_library namespace, gem_name
+  write_owlbot_config namespace, gem_name
+  write_owlbot_script gem_name
+  call_owlbot gem_name
+  create_release_please_configs gem_name if bootstrap_releases
+  test_library gem_name if enable_tests
 end
 
 def ensure_docker
@@ -103,26 +116,27 @@ def ensure_docker
   logger.info "Verified docker present"
 end
 
-def write_owlbot_config
+def write_owlbot_config proto_namespace, gem_name
   template = File.read find_data "owlbot-config-template.erb"
-  File.write owlbot_config_path, ERB.new(template).result(binding)
+  File.write owlbot_config_path_for(gem_name), ERB.new(template).result(binding)
 end
 
-def write_owlbot_script
+def write_owlbot_script gem_name
   return unless interactive
   error "No EDITOR set" unless editor
   template = File.read find_data "owlbot-script-template.erb"
-  File.write owlbot_script_path, ERB.new(template).result(binding)
-  exec [editor, owlbot_script_path]
-  new_content = File.read owlbot_script_path
+  script_path = owlbot_script_path_for gem_name
+  File.write script_path, ERB.new(template).result(binding)
+  exec [editor, script_path]
+  new_content = File.read script_path
   error "Aborted" if new_content.to_s.strip.empty?
   lines = new_content.split "\n"
   return unless lines.all? { |line| line.strip.empty? || line.start_with?("#") || line.strip == "OwlBot.move_files" }
   puts "Omitting .owlbot.rb"
-  rm owlbot_script_path
+  rm script_path
 end
 
-def call_owlbot
+def call_owlbot gem_name
   cmd = ["owlbot", gem_name]
   cmd << "--pull" if pull
   cmd << "--protos-path" << protos_path if protos_path
@@ -138,7 +152,7 @@ def call_owlbot
   exec_tool cmd
 end
 
-def create_release_please_configs
+def create_release_please_configs gem_name
   manifest = JSON.parse File.read manifest_name
   manifest[gem_name] = "0.0.1"
   manifest = add_fillers(manifest).sort.to_h
@@ -147,21 +161,18 @@ def create_release_please_configs
   config = JSON.parse File.read config_name
   config["packages"][gem_name] = {
     "component" => gem_name,
-    "version_file" => gem_version_file,
+    "version_file" => gem_version_file_for(gem_name),
   }
   config["packages"] = config["packages"].sort.to_h
   File.write config_name, "#{JSON.pretty_generate config}\n"
 end
 
-def gem_version_file
-  @gem_version_file ||= begin
-    version_path = gem_name.tr "-", "/"
-    version_file = File.join "lib", version_path, "version.rb"
-    version_file_full = File.join gem_name, version_file
-    raise "Unable to find #{version_file_full}" unless File.file? version_file_full
-    version_file
-  end
-  @gem_version_file
+def gem_version_file_for gem_name
+  version_path = gem_name.tr "-", "/"
+  version_file = File.join "lib", version_path, "version.rb"
+  version_file_full = File.join gem_name, version_file
+  raise "Unable to find #{version_file_full}" unless File.file? version_file_full
+  version_file
 end
 
 def add_fillers manifest
@@ -172,18 +183,18 @@ def add_fillers manifest
   manifest
 end
 
-def test_library
+def test_library gem_name
   Dir.chdir gem_name do
     exec ["bundle", "install"]
     exec ["toys", "ci", "--rubocop", "--yard", "--test"]
   end
 end
 
-def owlbot_config_path
+def owlbot_config_path_for gem_name
   File.join gem_name, ".OwlBot.yaml"
 end
 
-def owlbot_script_path
+def owlbot_script_path_for gem_name
   File.join gem_name, ".owlbot.rb"
 end
 
@@ -199,16 +210,32 @@ def bazel_base_dir
     end
 end
 
-def gem_name
-  @gem_name ||= begin
-    build_file_path = File.join bazel_base_dir, proto_namespace, "BUILD.bazel"
-    bazel_rules_content = File.read build_file_path
-    if bazel_rules_content =~ /"ruby-cloud-gem-name=([\w-]+)"/
-      Regexp.last_match[1]
-    else
-      error "Unable to find gem name rule in #{build_file_path}"
-    end
+def gem_name_for namespace
+  build_file_path = File.join bazel_base_dir, namespace, "BUILD.bazel"
+  bazel_rules_content = File.read build_file_path
+  if bazel_rules_content =~ /"ruby-cloud-gem-name=([\w-]+)"/
+    Regexp.last_match[1]
+  else
+    error "Unable to find gem name rule in #{build_file_path}"
   end
+end
+
+def gem_names
+  @gem_names ||= all_proto_namespaces.map { |namespace| gem_name_for namespace }
+end
+
+def all_proto_namespaces
+  @all_proto_namespaces ||= begin
+    raw_list = [proto_namespace] + additional_proto_namespaces
+    namespaces = raw_list.flat_map { |namespace| namespace.split(/[\s,]+/) }.reject(&:empty?)
+    # Sort versioned namespaces (e.g. ending in v1) first so that wrappers (e.g. without v1)
+    # can find them in the repository directories when the wrapper is generated.
+    namespaces.sort_by { |namespace| namespace =~ %r{/v\d} ? 0 : 1 }
+  end
+end
+
+def gem_name
+  @gem_name ||= gem_names.first
 end
 
 def copyright_year

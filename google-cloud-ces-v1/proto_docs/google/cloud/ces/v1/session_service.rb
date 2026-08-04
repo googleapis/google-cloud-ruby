@@ -21,6 +21,32 @@ module Google
   module Cloud
     module Ces
       module V1
+        # Mock tool calls configuration for the session.
+        # @!attribute [rw] mocked_tool_calls
+        #   @return [::Array<::Google::Cloud::Ces::V1::MockedToolCall>]
+        #     Optional. All tool calls to mock for the duration of the session.
+        # @!attribute [rw] unmatched_tool_call_behavior
+        #   @return [::Google::Cloud::Ces::V1::MockConfig::UnmatchedToolCallBehavior]
+        #     Required. Beavhior for tool calls that don't match any args patterns in
+        #     mocked_tool_calls.
+        class MockConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # What to do when a tool call doesn't match any mocked tool calls.
+          module UnmatchedToolCallBehavior
+            # Default value. This value is unused.
+            UNMATCHED_TOOL_CALL_BEHAVIOR_UNSPECIFIED = 0
+
+            # Throw an error for any tool calls that don't match a mock expected input
+            # pattern.
+            FAIL = 1
+
+            # For unmatched tool calls, pass the tool call through to real tool.
+            PASS_THROUGH = 2
+          end
+        end
+
         # InputAudioConfig configures how the CES agent should interpret the incoming
         # audio data.
         # @!attribute [rw] audio_encoding
@@ -181,6 +207,9 @@ module Google
           # @!attribute [rw] text
           #   @return [::String]
           #     Text used for citation.
+          # @!attribute [rw] requires_attribution
+          #   @return [::Boolean]
+          #     Whether this citation requires attribution to be shown to the end users.
           class CitedChunk
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,6 +337,9 @@ module Google
         #     Optional. Diagnostic information contains execution details during the
         #     processing of the input. Only populated in the last SessionOutput (with
         #     `turn_completed=true`) for each turn.
+        # @!attribute [rw] context
+        #   @return [::Array<::Google::Protobuf::Any>]
+        #     Context messages for external supervision guardrails.
         class SessionOutput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

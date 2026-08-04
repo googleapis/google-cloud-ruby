@@ -145,6 +145,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::ClientTest < 
     include_tail_suggestions = true
     boost_spec = {}
     suggestion_types = [:SUGGESTION_TYPE_UNSPECIFIED]
+    suggestion_type_specs = [{}]
+    experiment_ids = ["hello world"]
 
     advanced_complete_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :advanced_complete_query, name
@@ -157,6 +159,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::ClientTest < 
       assert_equal true, request["include_tail_suggestions"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest::BoostSpec), request["boost_spec"]
       assert_equal [:SUGGESTION_TYPE_UNSPECIFIED], request["suggestion_types"]
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest::SuggestionTypeSpec, request["suggestion_type_specs"].first
+      assert_equal ["hello world"], request["experiment_ids"]
       refute_nil options
     end
 
@@ -167,31 +171,31 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::ClientTest < 
       end
 
       # Use hash object
-      c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types }) do |response, operation|
+      c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.advanced_complete_query completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types do |response, operation|
+      c.advanced_complete_query completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.advanced_complete_query ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types) do |response, operation|
+      c.advanced_complete_query ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types }, grpc_options) do |response, operation|
+      c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.advanced_complete_query(::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types), grpc_options) do |response, operation|
+      c.advanced_complete_query(::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -458,6 +462,73 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::ClientTest < 
 
       # Verify method calls
       assert_equal 5, purge_completion_suggestions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_remove_suggestion
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    search_history_suggestion = "hello world"
+    completion_config = "hello world"
+    user_pseudo_id = "hello world"
+    user_info = {}
+    remove_time = {}
+
+    remove_suggestion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_suggestion, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest, request
+      assert_equal "hello world", request["search_history_suggestion"]
+      assert_equal :search_history_suggestion, request.suggestion
+      assert_equal "hello world", request["completion_config"]
+      assert_equal "hello world", request["user_pseudo_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::UserInfo), request["user_info"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["remove_time"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_suggestion_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.remove_suggestion({ search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.remove_suggestion search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.remove_suggestion ::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest.new(search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.remove_suggestion({ search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.remove_suggestion(::Google::Cloud::DiscoveryEngine::V1beta::RemoveSuggestionRequest.new(search_history_suggestion: search_history_suggestion, completion_config: completion_config, user_pseudo_id: user_pseudo_id, user_info: user_info, remove_time: remove_time), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_suggestion_client_stub.call_rpc_count
     end
   end
 

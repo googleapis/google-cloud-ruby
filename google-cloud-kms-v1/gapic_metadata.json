@@ -241,6 +241,16 @@
                 "import_crypto_key_version"
               ]
             },
+            "ImportTrustedKeyWrappedCryptoKeyVersion": {
+              "methods": [
+                "import_trusted_key_wrapped_crypto_key_version"
+              ]
+            },
+            "ExportTrustedKeyWrappedCryptoKeyVersion": {
+              "methods": [
+                "export_trusted_key_wrapped_crypto_key_version"
+              ]
+            },
             "CreateImportJob": {
               "methods": [
                 "create_import_job"

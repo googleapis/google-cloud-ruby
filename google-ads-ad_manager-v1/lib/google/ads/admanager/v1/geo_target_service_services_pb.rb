@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.GeoTargetService'
 
-            # API to retrieve a `GeoTarget` object.
+            # Retrieves a `GeoTarget` object.
             rpc :GetGeoTarget, ::Google::Ads::AdManager::V1::GetGeoTargetRequest, ::Google::Ads::AdManager::V1::GeoTarget
-            # API to retrieve a list of `GeoTarget` objects.
+            # Lists `GeoTarget` objects.
             rpc :ListGeoTargets, ::Google::Ads::AdManager::V1::ListGeoTargetsRequest, ::Google::Ads::AdManager::V1::ListGeoTargetsResponse
           end
 

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve an `AdBreak` object.
+              # Retrieves an `AdBreak` object.
               #
               # Query an ad break by its resource name or custom asset key. Check the
               # resource's `breakState` field to determine its state.
@@ -263,7 +263,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `AdBreak` objects.
+              # Lists `AdBreak` objects.
               #
               # By default, when no `orderBy` query parameter is specified, ad breaks are
               # ordered reverse chronologically. However, ad breaks with a 'breakState' of
@@ -376,7 +376,7 @@ module Google
               end
 
               ##
-              # API to create an `AdBreak` object.
+              # Creates an `AdBreak` object.
               #
               # Informs DAI of an upcoming ad break for a live stream event, with an
               # optional expected start time. DAI will begin decisioning ads for the break
@@ -483,7 +483,7 @@ module Google
               end
 
               ##
-              # API to update an `AdBreak` object.
+              # Updates an `AdBreak` object.
               #
               # Modify an ad break when its state is
               # {::Google::Ads::AdManager::V1::AdBreakStateEnum::AdBreakState::SCHEDULED `SCHEDULED`}.
@@ -568,7 +568,7 @@ module Google
               end
 
               ##
-              # API to delete an `AdBreak` object.
+              # Deletes an `AdBreak` object.
               #
               # Deletes and cancels an incomplete ad break, mitigating the need to wait
               # for the current break to serve before recreating an ad break. You can

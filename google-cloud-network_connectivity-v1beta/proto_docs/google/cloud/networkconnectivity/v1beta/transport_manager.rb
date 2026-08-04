@@ -59,6 +59,9 @@ module Google
         #   @return [::String]
         #     Output only. Human readable name of this profile, used to identify this
         #     profile in the UI.
+        # @!attribute [r] provider_type
+        #   @return [::Google::Cloud::NetworkConnectivity::V1beta::RemoteTransportProfile::ProviderType]
+        #     Output only. Provider type for this profile.
         class RemoteTransportProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -161,6 +164,18 @@ module Google
             # Enough capacity to fulfill an order.
             OPEN = 2
           end
+
+          # Provider type for this profile.
+          module ProviderType
+            # Unspecified provider type.
+            PROVIDER_TYPE_UNSPECIFIED = 0
+
+            # Represents a Cloud service provider.
+            CLOUD = 1
+
+            # Represents a Network service provider.
+            NETWORK = 2
+          end
         end
 
         # Message for requesting list of RemoteTransportProfiles.
@@ -209,6 +224,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for getting a RemoteTransportProfile from an activation key.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for ParseFromActivationKeyRequest.
+        # @!attribute [rw] activation_key
+        #   @return [::String]
+        #     Required. The activation key to get the RemoteTransportProfile for.
+        class ParseFromActivationKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to getting a RemoteTransportProfile from an activation
+        # key.
+        # @!attribute [rw] remote_transport_profile
+        #   @return [::Google::Cloud::NetworkConnectivity::V1beta::RemoteTransportProfile]
+        #     The RemoteTransportProfile that was parsed from the activation key.
+        class ParseFromActivationKeyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message describing Transport object.
         # @!attribute [rw] name
         #   @return [::String]
@@ -227,13 +264,13 @@ module Google
         #     Optional. Description of the Transport.
         # @!attribute [rw] remote_profile
         #   @return [::String]
-        #     Optional. Name of the remoteTransportProfile that this Transport is
-        #     connecting to.
+        #     Optional. Immutable. Name of the remoteTransportProfile that this Transport
+        #     is connecting to.
         # @!attribute [rw] provided_activation_key
         #   @return [::String]
-        #     Optional. Key used for establishing a connection with the remote transport.
-        #     This key can only be provided if the profile supports an INPUT key flow and
-        #     the resource is in the PENDING_KEY state.
+        #     Optional. Immutable. Key used for establishing a connection with the remote
+        #     transport. This key can only be provided if the profile supports an INPUT
+        #     key flow and the resource is in the PENDING_KEY state.
         # @!attribute [r] generated_activation_key
         #   @return [::String]
         #     Output only. Google-generated activation key. This is only output if the
@@ -265,22 +302,41 @@ module Google
         #     bandwidth associated with the connectivity.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Optional. Resource URI of the Network that will be peered with this
-        #     Transport. This field must be provided during resource creation and cannot
-        #     be changed.
+        #     Optional. Immutable. Resource URI of the Network that will be peered with
+        #     this Transport. This field must be provided during resource creation and
+        #     cannot be changed.
         # @!attribute [rw] advertised_routes
         #   @return [::Array<::String>]
         #     Optional. List of IP Prefixes that will be advertised to the remote
         #     provider. Both IPv4 and IPv6 addresses are supported.
         # @!attribute [rw] remote_account_id
         #   @return [::String]
-        #     Optional. The user supplied account id for the CSP associated with the
-        #     remote profile.
+        #     Optional. Immutable. The user supplied account id for the CSP associated
+        #     with the remote profile.
         # @!attribute [r] peering_network
         #   @return [::String]
         #     Output only. VPC Network URI that was created for the VPC Peering
         #     connection to the provided `network`. If VPC Peering is disconnected, this
         #     can be used to re-establish.
+        # @!attribute [rw] hub
+        #   @return [::String]
+        #     Optional. Immutable. The NCC Hub that the Transport should attach to. The
+        #     hub must be in the same project as the Transport. Format:
+        #     `{hub}` or `projects/{project}/locations/global/hubs/{hub}`
+        # @!attribute [rw] psc_routing_enabled
+        #   @return [::Boolean]
+        #     Optional. Immutable. Controls whether a Routing VPC Spoke should be created
+        #     and attached to the NCC Hub. This will provide Private Service Connect
+        #     (PSC) connectivity through NCC. This can only be set when the Transport is
+        #     first created.
+        # @!attribute [rw] auto_accept
+        #   @return [::Boolean]
+        #     Optional. Immutable. Controls whether resources proposed by the Transport
+        #     are automatically accepted on behalf of the user. List of actions that can
+        #     be automatically accepted are:
+        #     1. VPC Peering creation
+        #     2. Routing VPC Spoke creation
+        #     3. Hybrid Spoke creation
         class Transport
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -437,6 +493,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the resource.
+        # @!attribute [rw] skip_cache
+        #   @return [::Boolean]
+        #     Optional. If set to true, the response will bypass any caches and return
+        #     the freshest possible data.
         class GetStatusRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

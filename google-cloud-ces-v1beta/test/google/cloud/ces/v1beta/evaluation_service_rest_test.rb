@@ -98,6 +98,7 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     scheduled_evaluation_run = "hello world"
     golden_run_method = :GOLDEN_RUN_METHOD_UNSPECIFIED
     generate_latency_report = true
+    evaluation_run_caching_settings = {}
 
     run_evaluation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -113,27 +114,27 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }) do |_result, response|
+        c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.run_evaluation app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report do |_result, response|
+        c.run_evaluation app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.run_evaluation ::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report) do |_result, response|
+        c.run_evaluation ::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }, call_options) do |_result, response|
+        c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.run_evaluation(::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report), call_options) do |_result, response|
+        c.run_evaluation(::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -265,6 +266,7 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     conversation = "hello world"
     source = :SOURCE_UNSPECIFIED
+    evaluation_type = :EVALUATION_TYPE_UNSPECIFIED
 
     generate_evaluation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -280,27 +282,27 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        c.generate_evaluation({ conversation: conversation, source: source }) do |_result, response|
+        c.generate_evaluation({ conversation: conversation, source: source, evaluation_type: evaluation_type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.generate_evaluation conversation: conversation, source: source do |_result, response|
+        c.generate_evaluation conversation: conversation, source: source, evaluation_type: evaluation_type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.generate_evaluation ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source) do |_result, response|
+        c.generate_evaluation ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source, evaluation_type: evaluation_type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.generate_evaluation({ conversation: conversation, source: source }, call_options) do |_result, response|
+        c.generate_evaluation({ conversation: conversation, source: source, evaluation_type: evaluation_type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.generate_evaluation(::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source), call_options) do |_result, response|
+        c.generate_evaluation(::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source, evaluation_type: evaluation_type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

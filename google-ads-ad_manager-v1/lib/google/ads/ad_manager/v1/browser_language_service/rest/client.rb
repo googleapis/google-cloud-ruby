@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `BrowserLanguage` object.
+              # Retrieves a `BrowserLanguage` object.
               #
               # @overload get_browser_language(request, options = nil)
               #   Pass arguments to `get_browser_language` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `BrowserLanguage` objects.
+              # Lists `BrowserLanguage` objects.
               #
               # @overload list_browser_languages(request, options = nil)
               #   Pass arguments to `list_browser_languages` via a request object, either of type

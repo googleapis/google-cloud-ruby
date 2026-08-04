@@ -33,17 +33,17 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.SiteService'
 
-            # API to retrieve a `Site` object.
+            # Retrieves a `Site` object.
             rpc :GetSite, ::Google::Ads::AdManager::V1::GetSiteRequest, ::Google::Ads::AdManager::V1::Site
-            # API to retrieve a list of `Site` objects.
+            # Lists `Site` objects.
             rpc :ListSites, ::Google::Ads::AdManager::V1::ListSitesRequest, ::Google::Ads::AdManager::V1::ListSitesResponse
-            # API to create a `Site` object.
+            # Creates a `Site` object.
             rpc :CreateSite, ::Google::Ads::AdManager::V1::CreateSiteRequest, ::Google::Ads::AdManager::V1::Site
-            # API to batch create `Site` objects.
+            # Creates `Site` objects.
             rpc :BatchCreateSites, ::Google::Ads::AdManager::V1::BatchCreateSitesRequest, ::Google::Ads::AdManager::V1::BatchCreateSitesResponse
-            # API to update a `Site` object.
+            # Updates a `Site` object.
             rpc :UpdateSite, ::Google::Ads::AdManager::V1::UpdateSiteRequest, ::Google::Ads::AdManager::V1::Site
-            # API to batch update `Site` objects.
+            # Batch updates `Site` objects.
             rpc :BatchUpdateSites, ::Google::Ads::AdManager::V1::BatchUpdateSitesRequest, ::Google::Ads::AdManager::V1::BatchUpdateSitesResponse
             # Deactivates a list of `Site` objects.
             rpc :BatchDeactivateSites, ::Google::Ads::AdManager::V1::BatchDeactivateSitesRequest, ::Google::Ads::AdManager::V1::BatchDeactivateSitesResponse

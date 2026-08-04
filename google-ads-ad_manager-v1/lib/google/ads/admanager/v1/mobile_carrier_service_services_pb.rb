@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.MobileCarrierService'
 
-            # API to retrieve a `MobileCarrier` object.
+            # Retrieves a `MobileCarrier` object.
             rpc :GetMobileCarrier, ::Google::Ads::AdManager::V1::GetMobileCarrierRequest, ::Google::Ads::AdManager::V1::MobileCarrier
-            # API to retrieve a list of `MobileCarrier` objects.
+            # Lists `MobileCarrier` objects.
             rpc :ListMobileCarriers, ::Google::Ads::AdManager::V1::ListMobileCarriersRequest, ::Google::Ads::AdManager::V1::ListMobileCarriersResponse
           end
 

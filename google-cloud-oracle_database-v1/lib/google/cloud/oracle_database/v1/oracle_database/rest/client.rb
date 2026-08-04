@@ -801,6 +801,99 @@ module Google
               end
 
               ##
+              # Configures Exascale for a single Exadata Infrastructure.
+              #
+              # @overload configure_exascale_cloud_exadata_infrastructure(request, options = nil)
+              #   Pass arguments to `configure_exascale_cloud_exadata_infrastructure` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload configure_exascale_cloud_exadata_infrastructure(name: nil, total_storage_size_gb: nil, request_id: nil)
+              #   Pass arguments to `configure_exascale_cloud_exadata_infrastructure` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Cloud Exadata Infrastructure in the following
+              #     format:
+              #     projects/\\{project}/locations/\\{location}/cloudExadataInfrastructures/\\{cloud_exadata_infrastructure}.
+              #   @param total_storage_size_gb [::Integer]
+              #     Required. The total storage to be allocated to Exascale in GBs.
+              #   @param request_id [::String]
+              #     Optional. An optional ID to identify the request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new
+              #
+              #   # Call the configure_exascale_cloud_exadata_infrastructure method.
+              #   result = client.configure_exascale_cloud_exadata_infrastructure request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def configure_exascale_cloud_exadata_infrastructure request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.configure_exascale_cloud_exadata_infrastructure.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.configure_exascale_cloud_exadata_infrastructure.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.configure_exascale_cloud_exadata_infrastructure.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.configure_exascale_cloud_exadata_infrastructure request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists the VM Clusters in a given project and location.
               #
               # @overload list_cloud_vm_clusters(request, options = nil)
@@ -6618,86 +6711,6 @@ module Google
               end
 
               ##
-              # Gets details of a single GoldengateDeploymentVersion.
-              #
-              # @overload get_goldengate_deployment_version(request, options = nil)
-              #   Pass arguments to `get_goldengate_deployment_version` via a request object, either of type
-              #   {::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload get_goldengate_deployment_version(name: nil)
-              #   Pass arguments to `get_goldengate_deployment_version` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param name [::String]
-              #     Required. The name of the GoldengateDeploymentVersion to retrieve.
-              #     Format:
-              #     projects/\\{project}/locations/\\{location}/goldengateDeploymentVersions/\\{goldengate_deployment_version}
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/oracle_database/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest.new
-              #
-              #   # Call the get_goldengate_deployment_version method.
-              #   result = client.get_goldengate_deployment_version request
-              #
-              #   # The returned object is of type Google::Cloud::OracleDatabase::V1::GoldengateDeploymentVersion.
-              #   p result
-              #
-              def get_goldengate_deployment_version request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentVersionRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.get_goldengate_deployment_version.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.get_goldengate_deployment_version.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_goldengate_deployment_version.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @oracle_database_stub.get_goldengate_deployment_version request, options do |result, operation|
-                  yield result, operation if block_given?
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
               # Lists GoldengateDeploymentVersions in a given project and location.
               #
               # @overload list_goldengate_deployment_versions(request, options = nil)
@@ -6787,86 +6800,6 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_goldengate_deployment_versions, "goldengate_deployment_versions", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Gets details of a single GoldenGateDeploymentType.
-              #
-              # @overload get_goldengate_deployment_type(request, options = nil)
-              #   Pass arguments to `get_goldengate_deployment_type` via a request object, either of type
-              #   {::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload get_goldengate_deployment_type(name: nil)
-              #   Pass arguments to `get_goldengate_deployment_type` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param name [::String]
-              #     Required. The name of the GoldengateDeploymentType to retrieve.
-              #     Format:
-              #     projects/\\{project}/locations/\\{location}/goldengateDeploymentTypes/\\{goldengate_deployment_type}
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/oracle_database/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest.new
-              #
-              #   # Call the get_goldengate_deployment_type method.
-              #   result = client.get_goldengate_deployment_type request
-              #
-              #   # The returned object is of type Google::Cloud::OracleDatabase::V1::GoldengateDeploymentType.
-              #   p result
-              #
-              def get_goldengate_deployment_type request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentTypeRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.get_goldengate_deployment_type.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.get_goldengate_deployment_type.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_goldengate_deployment_type.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @oracle_database_stub.get_goldengate_deployment_type request, options do |result, operation|
-                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6972,85 +6905,6 @@ module Google
               end
 
               ##
-              # Gets details of a single GoldengateDeploymentEnvironment.
-              #
-              # @overload get_goldengate_deployment_environment(request, options = nil)
-              #   Pass arguments to `get_goldengate_deployment_environment` via a request object, either of type
-              #   {::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload get_goldengate_deployment_environment(name: nil)
-              #   Pass arguments to `get_goldengate_deployment_environment` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param name [::String]
-              #     Required. Name of the resource with the format:
-              #     projects/\\{project}/locations/\\{location}/goldengateDeploymentEnvironments/\\{goldengate_deployment_environment}
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/oracle_database/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest.new
-              #
-              #   # Call the get_goldengate_deployment_environment method.
-              #   result = client.get_goldengate_deployment_environment request
-              #
-              #   # The returned object is of type Google::Cloud::OracleDatabase::V1::GoldengateDeploymentEnvironment.
-              #   p result
-              #
-              def get_goldengate_deployment_environment request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetGoldengateDeploymentEnvironmentRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.get_goldengate_deployment_environment.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.get_goldengate_deployment_environment.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_goldengate_deployment_environment.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @oracle_database_stub.get_goldengate_deployment_environment request, options do |result, operation|
-                  yield result, operation if block_given?
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
               # Lists GoldengateDeploymentEnvironments in a given project and location.
               #
               # @overload list_goldengate_deployment_environments(request, options = nil)
@@ -7137,85 +6991,6 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_goldengate_deployment_environments, "goldengate_deployment_environments", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Gets details of a single GoldengateConnectionType.
-              #
-              # @overload get_goldengate_connection_type(request, options = nil)
-              #   Pass arguments to `get_goldengate_connection_type` via a request object, either of type
-              #   {::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload get_goldengate_connection_type(name: nil)
-              #   Pass arguments to `get_goldengate_connection_type` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param name [::String]
-              #     Required. Name of the resource in the format:
-              #     projects/\\{project}/locations/\\{location}/goldengateConnectionTypes/\\{goldengate_connection_type}
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::OracleDatabase::V1::GoldengateConnectionType]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/oracle_database/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest.new
-              #
-              #   # Call the get_goldengate_connection_type method.
-              #   result = client.get_goldengate_connection_type request
-              #
-              #   # The returned object is of type Google::Cloud::OracleDatabase::V1::GoldengateConnectionType.
-              #   p result
-              #
-              def get_goldengate_connection_type request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetGoldengateConnectionTypeRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.get_goldengate_connection_type.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.get_goldengate_connection_type.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_goldengate_connection_type.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @oracle_database_stub.get_goldengate_connection_type request, options do |result, operation|
-                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8168,6 +7943,11 @@ module Google
                   #
                   attr_reader :delete_cloud_exadata_infrastructure
                   ##
+                  # RPC-specific configuration for `configure_exascale_cloud_exadata_infrastructure`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :configure_exascale_cloud_exadata_infrastructure
+                  ##
                   # RPC-specific configuration for `list_cloud_vm_clusters`
                   # @return [::Gapic::Config::Method]
                   #
@@ -8478,40 +8258,20 @@ module Google
                   #
                   attr_reader :delete_goldengate_connection
                   ##
-                  # RPC-specific configuration for `get_goldengate_deployment_version`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :get_goldengate_deployment_version
-                  ##
                   # RPC-specific configuration for `list_goldengate_deployment_versions`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_goldengate_deployment_versions
-                  ##
-                  # RPC-specific configuration for `get_goldengate_deployment_type`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :get_goldengate_deployment_type
                   ##
                   # RPC-specific configuration for `list_goldengate_deployment_types`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_goldengate_deployment_types
                   ##
-                  # RPC-specific configuration for `get_goldengate_deployment_environment`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :get_goldengate_deployment_environment
-                  ##
                   # RPC-specific configuration for `list_goldengate_deployment_environments`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_goldengate_deployment_environments
-                  ##
-                  # RPC-specific configuration for `get_goldengate_connection_type`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :get_goldengate_connection_type
                   ##
                   # RPC-specific configuration for `list_goldengate_connection_types`
                   # @return [::Gapic::Config::Method]
@@ -8563,6 +8323,8 @@ module Google
                     @create_cloud_exadata_infrastructure = ::Gapic::Config::Method.new create_cloud_exadata_infrastructure_config
                     delete_cloud_exadata_infrastructure_config = parent_rpcs.delete_cloud_exadata_infrastructure if parent_rpcs.respond_to? :delete_cloud_exadata_infrastructure
                     @delete_cloud_exadata_infrastructure = ::Gapic::Config::Method.new delete_cloud_exadata_infrastructure_config
+                    configure_exascale_cloud_exadata_infrastructure_config = parent_rpcs.configure_exascale_cloud_exadata_infrastructure if parent_rpcs.respond_to? :configure_exascale_cloud_exadata_infrastructure
+                    @configure_exascale_cloud_exadata_infrastructure = ::Gapic::Config::Method.new configure_exascale_cloud_exadata_infrastructure_config
                     list_cloud_vm_clusters_config = parent_rpcs.list_cloud_vm_clusters if parent_rpcs.respond_to? :list_cloud_vm_clusters
                     @list_cloud_vm_clusters = ::Gapic::Config::Method.new list_cloud_vm_clusters_config
                     get_cloud_vm_cluster_config = parent_rpcs.get_cloud_vm_cluster if parent_rpcs.respond_to? :get_cloud_vm_cluster
@@ -8687,20 +8449,12 @@ module Google
                     @create_goldengate_connection = ::Gapic::Config::Method.new create_goldengate_connection_config
                     delete_goldengate_connection_config = parent_rpcs.delete_goldengate_connection if parent_rpcs.respond_to? :delete_goldengate_connection
                     @delete_goldengate_connection = ::Gapic::Config::Method.new delete_goldengate_connection_config
-                    get_goldengate_deployment_version_config = parent_rpcs.get_goldengate_deployment_version if parent_rpcs.respond_to? :get_goldengate_deployment_version
-                    @get_goldengate_deployment_version = ::Gapic::Config::Method.new get_goldengate_deployment_version_config
                     list_goldengate_deployment_versions_config = parent_rpcs.list_goldengate_deployment_versions if parent_rpcs.respond_to? :list_goldengate_deployment_versions
                     @list_goldengate_deployment_versions = ::Gapic::Config::Method.new list_goldengate_deployment_versions_config
-                    get_goldengate_deployment_type_config = parent_rpcs.get_goldengate_deployment_type if parent_rpcs.respond_to? :get_goldengate_deployment_type
-                    @get_goldengate_deployment_type = ::Gapic::Config::Method.new get_goldengate_deployment_type_config
                     list_goldengate_deployment_types_config = parent_rpcs.list_goldengate_deployment_types if parent_rpcs.respond_to? :list_goldengate_deployment_types
                     @list_goldengate_deployment_types = ::Gapic::Config::Method.new list_goldengate_deployment_types_config
-                    get_goldengate_deployment_environment_config = parent_rpcs.get_goldengate_deployment_environment if parent_rpcs.respond_to? :get_goldengate_deployment_environment
-                    @get_goldengate_deployment_environment = ::Gapic::Config::Method.new get_goldengate_deployment_environment_config
                     list_goldengate_deployment_environments_config = parent_rpcs.list_goldengate_deployment_environments if parent_rpcs.respond_to? :list_goldengate_deployment_environments
                     @list_goldengate_deployment_environments = ::Gapic::Config::Method.new list_goldengate_deployment_environments_config
-                    get_goldengate_connection_type_config = parent_rpcs.get_goldengate_connection_type if parent_rpcs.respond_to? :get_goldengate_connection_type
-                    @get_goldengate_connection_type = ::Gapic::Config::Method.new get_goldengate_connection_type_config
                     list_goldengate_connection_types_config = parent_rpcs.list_goldengate_connection_types if parent_rpcs.respond_to? :list_goldengate_connection_types
                     @list_goldengate_connection_types = ::Gapic::Config::Method.new list_goldengate_connection_types_config
                     list_db_versions_config = parent_rpcs.list_db_versions if parent_rpcs.respond_to? :list_db_versions

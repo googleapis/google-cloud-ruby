@@ -33,13 +33,13 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ReportService'
 
-            # API to retrieve a `Report` object.
+            # Retrieves a `Report` object.
             rpc :GetReport, ::Google::Ads::AdManager::V1::GetReportRequest, ::Google::Ads::AdManager::V1::Report
-            # API to retrieve a list of `Report` objects.
+            # Lists `Report` objects.
             rpc :ListReports, ::Google::Ads::AdManager::V1::ListReportsRequest, ::Google::Ads::AdManager::V1::ListReportsResponse
-            # API to create a `Report` object.
+            # Creates a `Report` object.
             rpc :CreateReport, ::Google::Ads::AdManager::V1::CreateReportRequest, ::Google::Ads::AdManager::V1::Report
-            # API to update a `Report` object.
+            # Updates a `Report` object.
             rpc :UpdateReport, ::Google::Ads::AdManager::V1::UpdateReportRequest, ::Google::Ads::AdManager::V1::Report
             # Initiates the execution of an existing report asynchronously. Users can
             # get the report by polling this operation using

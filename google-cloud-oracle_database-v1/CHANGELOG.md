@@ -1,5 +1,27 @@
 # Changelog
 
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.16.0 (2026-06-25)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale on Dedicated Infrastructure ([#34649](https://github.com/googleapis/google-cloud-ruby/issues/34649)) 
+
+### 0.15.0 (2026-06-17)
+
+### ⚠ BREAKING CHANGES
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618))
+
+#### Bug Fixes
+
+* Remove unsupported Get APIs support ([#34618](https://github.com/googleapis/google-cloud-ruby/issues/34618)) 
+
 ### 0.14.0 (2026-06-11)
 
 #### Features

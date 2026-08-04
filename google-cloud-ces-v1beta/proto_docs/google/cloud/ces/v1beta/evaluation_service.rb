@@ -134,9 +134,25 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::Conversation::Source]
         #     Optional. Indicate the source of the conversation. If not set, all sources
         #     will be searched.
+        # @!attribute [rw] evaluation_type
+        #   @return [::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest::EvaluationType]
+        #     Optional. The type of evaluation to generate. Defaults to GOLDEN if
+        #     unspecified.
         class GenerateEvaluationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of evaluation to generate.
+          module EvaluationType
+            # Unspecified type. Defaults to GOLDEN.
+            EVALUATION_TYPE_UNSPECIFIED = 0
+
+            # Golden evaluation.
+            GOLDEN = 1
+
+            # Scenario evaluation.
+            SCENARIO = 2
+          end
         end
 
         # Request message for

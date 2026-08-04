@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "minitest/focus"
+require "ostruct"
 
 require "google/cloud/error_reporting"
 
@@ -73,13 +74,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud#error_reporting" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [Hash]
+      mock.expect :report_error_event, nil, [], project_name: String, event: Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent
     end
   end
 
   doctest.before "Google::Cloud.error_reporting" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [Hash]
+      mock.expect :report_error_event, nil, [], project_name: String, event: Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent
     end
   end
 
@@ -89,13 +90,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::ErrorReporting::ErrorEvent" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [Hash]
+      mock.expect :report_error_event, nil, [], project_name: String, event: Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent
     end
   end
 
   doctest.before "Google::Cloud::ErrorReporting::Project" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [Hash]
+      mock.expect :report_error_event, nil, [], project_name: String, event: Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent
     end
   end
 
@@ -103,7 +104,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::ErrorReporting::Service" do
     mock_error_reporting do |mock|
-      mock.expect :report_error_event, nil, [Hash]
+      mock.expect :report_error_event, nil, [], project_name: String, event: Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent
     end
   end
 end

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2026-07-20)
+
+#### Documentation
+
+* Update `DocumentView.DOCUMENT_VIEW_BASIC` comment to include `content_length_bytes` ([#34959](https://github.com/googleapis/google-cloud-ruby/issues/34959)) 
+
 ### 0.2.0 (2026-06-11)
 
 #### Features

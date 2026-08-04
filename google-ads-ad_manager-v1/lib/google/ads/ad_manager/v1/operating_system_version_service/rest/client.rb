@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `OperatingSystemVersion` object.
+              # Retrieves a `OperatingSystemVersion` object.
               #
               # @overload get_operating_system_version(request, options = nil)
               #   Pass arguments to `get_operating_system_version` via a request object, either of type
@@ -257,7 +257,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `OperatingSystemVersion` objects.
+              # Lists `OperatingSystemVersion` objects.
               #
               # @overload list_operating_system_versions(request, options = nil)
               #   Pass arguments to `list_operating_system_versions` via a request object, either of type

@@ -33,13 +33,13 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.PrivateAuctionDealService'
 
-            # API to retrieve a `PrivateAuctionDeal` object.
+            # Retrieves a `PrivateAuctionDeal` object.
             rpc :GetPrivateAuctionDeal, ::Google::Ads::AdManager::V1::GetPrivateAuctionDealRequest, ::Google::Ads::AdManager::V1::PrivateAuctionDeal
-            # API to retrieve a list of `PrivateAuctionDeal` objects.
+            # Lists `PrivateAuctionDeal` objects.
             rpc :ListPrivateAuctionDeals, ::Google::Ads::AdManager::V1::ListPrivateAuctionDealsRequest, ::Google::Ads::AdManager::V1::ListPrivateAuctionDealsResponse
-            # API to create a `PrivateAuctionDeal` object.
+            # Creates a `PrivateAuctionDeal` object.
             rpc :CreatePrivateAuctionDeal, ::Google::Ads::AdManager::V1::CreatePrivateAuctionDealRequest, ::Google::Ads::AdManager::V1::PrivateAuctionDeal
-            # API to update a `PrivateAuctionDeal` object.
+            # Updates a `PrivateAuctionDeal` object.
             rpc :UpdatePrivateAuctionDeal, ::Google::Ads::AdManager::V1::UpdatePrivateAuctionDealRequest, ::Google::Ads::AdManager::V1::PrivateAuctionDeal
           end
 

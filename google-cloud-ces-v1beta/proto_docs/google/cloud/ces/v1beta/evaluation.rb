@@ -1529,6 +1529,9 @@ module Google
         # @!attribute [rw] generate_latency_report
         #   @return [::Boolean]
         #     Optional. Whether to generate a latency report for the evaluation run.
+        # @!attribute [rw] evaluation_run_caching_settings
+        #   @return [::Google::Cloud::Ces::V1beta::EvaluationRunCachingSettings]
+        #     Optional. The caching settings to use for the evaluation run.
         class RunEvaluationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

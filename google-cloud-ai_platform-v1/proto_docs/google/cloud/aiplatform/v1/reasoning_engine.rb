@@ -59,6 +59,12 @@ module Google
         #     Optional. The OSS agent framework used to develop the agent.
         #     Currently supported values: "google-adk", "langchain", "langgraph", "ag2",
         #     "llama-index", "custom".
+        # @!attribute [rw] identity_type
+        #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::IdentityType]
+        #     Optional. The identity type to use for the Reasoning Engine. If not
+        #     specified, the `service_account` field will be used if set, otherwise the
+        #     default Vertex AI Reasoning Engine Service Agent in the project will be
+        #     used.
         class ReasoningEngineSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,6 +270,22 @@ module Google
           class ContainerSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The identity type to use for the Reasoning Engine.
+          module IdentityType
+            # Default value. Use a custom service account if the `service_account`
+            # field is set, otherwise use the default Vertex AI Reasoning Engine
+            # Service Agent in the project. Same behavior as SERVICE_ACCOUNT.
+            IDENTITY_TYPE_UNSPECIFIED = 0
+
+            # Use a custom service account if the `service_account` field is set,
+            # otherwise use the default Vertex AI Reasoning Engine Service Agent in the
+            # project.
+            SERVICE_ACCOUNT = 2
+
+            # Use Agent Identity. The `service_account` field must not be set.
+            AGENT_IDENTITY = 3
           end
         end
 

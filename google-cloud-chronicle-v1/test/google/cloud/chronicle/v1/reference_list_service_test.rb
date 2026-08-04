@@ -314,6 +314,68 @@ class ::Google::Cloud::Chronicle::V1::ReferenceListService::ClientTest < Minites
     end
   end
 
+  def test_verify_reference_list
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Chronicle::V1::VerifyReferenceListResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    syntax_type = :REFERENCE_LIST_SYNTAX_TYPE_UNSPECIFIED
+    entries = [{}]
+
+    verify_reference_list_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :verify_reference_list, name
+      assert_kind_of ::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal :REFERENCE_LIST_SYNTAX_TYPE_UNSPECIFIED, request["syntax_type"]
+      assert_kind_of ::Google::Cloud::Chronicle::V1::ReferenceListEntry, request["entries"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, verify_reference_list_client_stub do
+      # Create client
+      c = ::Google::Cloud::Chronicle::V1::ReferenceListService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.verify_reference_list({ instance: instance, syntax_type: syntax_type, entries: entries }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.verify_reference_list instance: instance, syntax_type: syntax_type, entries: entries do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.verify_reference_list ::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest.new(instance: instance, syntax_type: syntax_type, entries: entries) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.verify_reference_list({ instance: instance, syntax_type: syntax_type, entries: entries }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.verify_reference_list(::Google::Cloud::Chronicle::V1::VerifyReferenceListRequest.new(instance: instance, syntax_type: syntax_type, entries: entries), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, verify_reference_list_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

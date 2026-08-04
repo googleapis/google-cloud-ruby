@@ -33,7 +33,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.UserService'
 
-            # API to retrieve a User object.
+            # Retrieves a `User` object.
             #
             # To get the current user, the resource name
             # `networks/{networkCode}/users/me` can be used.

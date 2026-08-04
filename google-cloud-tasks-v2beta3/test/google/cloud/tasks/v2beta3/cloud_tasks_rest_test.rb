@@ -851,6 +851,62 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ClientTest < Minitest::
     end
   end
 
+  def test_batch_create_tasks
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+    request_id = "hello world"
+
+    batch_create_tasks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ServiceStub.stub :transcode_batch_create_tasks_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_tasks_client_stub do
+        # Create client
+        c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_tasks({ parent: parent, requests: requests, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_tasks parent: parent, requests: requests, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_tasks ::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest.new(parent: parent, requests: requests, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_tasks({ parent: parent, requests: requests, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_tasks(::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest.new(parent: parent, requests: requests, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_tasks_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_task
     # Create test objects.
     client_result = ::Google::Protobuf::Empty.new
@@ -901,6 +957,62 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ClientTest < Minitest::
 
         # Verify method calls
         assert_equal 5, delete_task_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_delete_tasks
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+    request_id = "hello world"
+
+    batch_delete_tasks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ServiceStub.stub :transcode_batch_delete_tasks_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_delete_tasks_client_stub do
+        # Create client
+        c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_delete_tasks({ parent: parent, names: names, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_delete_tasks parent: parent, names: names, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_delete_tasks ::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest.new(parent: parent, names: names, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_delete_tasks({ parent: parent, names: names, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_delete_tasks(::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest.new(parent: parent, names: names, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_delete_tasks_client_stub.call_count
       end
     end
   end
@@ -956,6 +1068,115 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ClientTest < Minitest::
 
         # Verify method calls
         assert_equal 5, run_task_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_cmek_config
+    # Create test objects.
+    client_result = ::Google::Cloud::Tasks::V2beta3::CmekConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    cmek_config = {}
+    update_mask = {}
+
+    update_cmek_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ServiceStub.stub :transcode_update_cmek_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_cmek_config_client_stub do
+        # Create client
+        c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_cmek_config({ cmek_config: cmek_config, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_cmek_config cmek_config: cmek_config, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_cmek_config ::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest.new(cmek_config: cmek_config, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_cmek_config({ cmek_config: cmek_config, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_cmek_config(::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest.new(cmek_config: cmek_config, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_cmek_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_cmek_config
+    # Create test objects.
+    client_result = ::Google::Cloud::Tasks::V2beta3::CmekConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_cmek_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ServiceStub.stub :transcode_get_cmek_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_cmek_config_client_stub do
+        # Create client
+        c = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_cmek_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_cmek_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_cmek_config ::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_cmek_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_cmek_config(::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_cmek_config_client_stub.call_count
       end
     end
   end

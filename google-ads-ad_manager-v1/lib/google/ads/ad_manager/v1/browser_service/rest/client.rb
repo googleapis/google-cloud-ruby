@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `Browser` object.
+              # Retrieves a `Browser` object.
               #
               # @overload get_browser(request, options = nil)
               #   Pass arguments to `get_browser` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `Browser` objects.
+              # Lists `Browser` objects.
               #
               # @overload list_browsers(request, options = nil)
               #   Pass arguments to `list_browsers` via a request object, either of type

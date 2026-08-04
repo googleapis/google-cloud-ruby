@@ -59,6 +59,12 @@ module Google
           #   @return [::String]
           #     Optional. Location of the product inside the store. Maximum length is 20
           #     bytes.
+          # @!attribute [rw] local_shipping_label
+          #   @return [::String]
+          #     Optional. Specifies a label associated with the shipping for the
+          #     `LocalInventory` resource. Can be used to group local shipping services to
+          #     this particular inventory item. For accepted field format, see the [Local
+          #     delivery](https://support.google.com/merchants/answer/14819809#localdelivery)
           # @!attribute [rw] loyalty_programs
           #   @return [::Array<::Google::Shopping::Merchant::Inventories::V1::InventoryLoyaltyProgram>]
           #     Optional. An optional list of loyalty programs containing applicable
@@ -76,6 +82,16 @@ module Google
           #     for details on supported countries and loyalty program configuration.
           #     For local inventory specific details, see the [Local inventory data
           #     specification](https://support.google.com/merchants/answer/3061342).
+          # @!attribute [rw] custom_attributes
+          #   @return [::Array<::Google::Shopping::Type::CustomAttribute>]
+          #     Optional. A list of custom (merchant-provided) attributes. It can also be
+          #     used for submitting any attribute of the data specification in its generic
+          #     form (for example, `{ "name": "size type", "value": "regular" }`). This is
+          #     useful for submitting attributes not explicitly exposed by the API. Maximum
+          #     allowed number of characters for each custom attribute is 10240 (represents
+          #     sum of characters for name and value). Maximum 2500 custom attributes can
+          #     be set, with total size of 102.4kB. Underscores in custom
+          #     attribute names are replaced by spaces upon insertion.
           class LocalInventoryAttributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

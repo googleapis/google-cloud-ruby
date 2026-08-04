@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `CmsMetadataKey` object.
+              # Retrieves a `CmsMetadataKey` object.
               #
               # @overload get_cms_metadata_key(request, options = nil)
               #   Pass arguments to `get_cms_metadata_key` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `CmsMetadataKey` objects.
+              # Lists `CmsMetadataKey` objects.
               #
               # @overload list_cms_metadata_keys(request, options = nil)
               #   Pass arguments to `list_cms_metadata_keys` via a request object, either of type
@@ -369,7 +369,7 @@ module Google
               end
 
               ##
-              # API to activate a list of `CmsMetadataKey` objects.
+              # Activates a list of `CmsMetadataKey` objects.
               #
               # @overload batch_activate_cms_metadata_keys(request, options = nil)
               #   Pass arguments to `batch_activate_cms_metadata_keys` via a request object, either of type
@@ -451,7 +451,7 @@ module Google
               end
 
               ##
-              # API to deactivate a list of `CmsMetadataKey` objects.
+              # Deactivates a list of `CmsMetadataKey` objects.
               #
               # @overload batch_deactivate_cms_metadata_keys(request, options = nil)
               #   Pass arguments to `batch_deactivate_cms_metadata_keys` via a request object, either of type

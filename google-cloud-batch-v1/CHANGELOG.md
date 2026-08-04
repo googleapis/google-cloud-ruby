@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.1 (2026-07-23)
+
+#### Documentation
+
+* restrict `allowed_locations` region or zone values to the same region where the job is created ([#34994](https://github.com/googleapis/google-cloud-ruby/issues/34994)) 
+
 ### 1.8.0 (2026-06-11)
 
 #### Features

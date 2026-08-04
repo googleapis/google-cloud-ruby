@@ -19,6 +19,7 @@
 require "google/cloud/support/v2/case_attachment_service"
 require "google/cloud/support/v2/case_service"
 require "google/cloud/support/v2/comment_service"
+require "google/cloud/support/v2/support_event_subscription_service"
 require "google/cloud/support/v2/version"
 
 module Google

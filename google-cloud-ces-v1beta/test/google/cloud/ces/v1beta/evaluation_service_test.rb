@@ -83,6 +83,7 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::ClientTest < Minitest::Te
     scheduled_evaluation_run = "hello world"
     golden_run_method = :GOLDEN_RUN_METHOD_UNSPECIFIED
     generate_latency_report = true
+    evaluation_run_caching_settings = {}
 
     run_evaluation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_evaluation, name
@@ -100,6 +101,7 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::ClientTest < Minitest::Te
       assert_equal "hello world", request["scheduled_evaluation_run"]
       assert_equal :GOLDEN_RUN_METHOD_UNSPECIFIED, request["golden_run_method"]
       assert_equal true, request["generate_latency_report"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Ces::V1beta::EvaluationRunCachingSettings), request["evaluation_run_caching_settings"]
       refute_nil options
     end
 
@@ -110,35 +112,35 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }) do |response, operation|
+      c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.run_evaluation app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report do |response, operation|
+      c.run_evaluation app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.run_evaluation ::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report) do |response, operation|
+      c.run_evaluation ::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report }, grpc_options) do |response, operation|
+      c.run_evaluation({ app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.run_evaluation(::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report), grpc_options) do |response, operation|
+      c.run_evaluation(::Google::Cloud::Ces::V1beta::RunEvaluationRequest.new(app: app, evaluations: evaluations, evaluation_dataset: evaluation_dataset, display_name: display_name, app_version: app_version, config: config, run_count: run_count, persona_run_configs: persona_run_configs, optimization_config: optimization_config, scheduled_evaluation_run: scheduled_evaluation_run, golden_run_method: golden_run_method, generate_latency_report: generate_latency_report, evaluation_run_caching_settings: evaluation_run_caching_settings), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -283,12 +285,14 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     conversation = "hello world"
     source = :SOURCE_UNSPECIFIED
+    evaluation_type = :EVALUATION_TYPE_UNSPECIFIED
 
     generate_evaluation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_evaluation, name
       assert_kind_of ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest, request
       assert_equal "hello world", request["conversation"]
       assert_equal :SOURCE_UNSPECIFIED, request["source"]
+      assert_equal :EVALUATION_TYPE_UNSPECIFIED, request["evaluation_type"]
       refute_nil options
     end
 
@@ -299,35 +303,35 @@ class ::Google::Cloud::Ces::V1beta::EvaluationService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      c.generate_evaluation({ conversation: conversation, source: source }) do |response, operation|
+      c.generate_evaluation({ conversation: conversation, source: source, evaluation_type: evaluation_type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.generate_evaluation conversation: conversation, source: source do |response, operation|
+      c.generate_evaluation conversation: conversation, source: source, evaluation_type: evaluation_type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.generate_evaluation ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source) do |response, operation|
+      c.generate_evaluation ::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source, evaluation_type: evaluation_type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.generate_evaluation({ conversation: conversation, source: source }, grpc_options) do |response, operation|
+      c.generate_evaluation({ conversation: conversation, source: source, evaluation_type: evaluation_type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.generate_evaluation(::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source), grpc_options) do |response, operation|
+      c.generate_evaluation(::Google::Cloud::Ces::V1beta::GenerateEvaluationRequest.new(conversation: conversation, source: source, evaluation_type: evaluation_type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

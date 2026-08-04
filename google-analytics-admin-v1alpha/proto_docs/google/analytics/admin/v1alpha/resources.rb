@@ -398,6 +398,10 @@ module Google
         #     Note: The Property-Moving UI can be used to change the parent.
         #     Format: accounts/\\{account}, properties/\\{property}
         #     Example: "accounts/100", "properties/200"
+        # @!attribute [rw] can_edit
+        #   @return [::Boolean]
+        #     If true, then the user has a Google Analytics role that permits them to
+        #     edit the property.
         class PropertySummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

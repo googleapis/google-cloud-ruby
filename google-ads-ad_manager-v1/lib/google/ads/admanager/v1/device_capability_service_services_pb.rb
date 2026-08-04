@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.DeviceCapabilityService'
 
-            # API to retrieve a `DeviceCapability` object.
+            # Retrieves a `DeviceCapability` object.
             rpc :GetDeviceCapability, ::Google::Ads::AdManager::V1::GetDeviceCapabilityRequest, ::Google::Ads::AdManager::V1::DeviceCapability
-            # API to retrieve a list of `DeviceCapability` objects.
+            # Lists `DeviceCapability` objects.
             rpc :ListDeviceCapabilities, ::Google::Ads::AdManager::V1::ListDeviceCapabilitiesRequest, ::Google::Ads::AdManager::V1::ListDeviceCapabilitiesResponse
           end
 

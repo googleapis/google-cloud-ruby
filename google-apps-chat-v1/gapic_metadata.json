@@ -45,6 +45,11 @@
                 "delete_message"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "search_messages"
+              ]
+            },
             "GetAttachment": {
               "methods": [
                 "get_attachment"
@@ -168,6 +173,31 @@
             "GetThreadReadState": {
               "methods": [
                 "get_thread_read_state"
+              ]
+            },
+            "GetAvailability": {
+              "methods": [
+                "get_availability"
+              ]
+            },
+            "MarkAsActive": {
+              "methods": [
+                "mark_as_active"
+              ]
+            },
+            "MarkAsAway": {
+              "methods": [
+                "mark_as_away"
+              ]
+            },
+            "MarkAsDoNotDisturb": {
+              "methods": [
+                "mark_as_do_not_disturb"
+              ]
+            },
+            "UpdateAvailability": {
+              "methods": [
+                "update_availability"
               ]
             },
             "GetSpaceEvent": {

@@ -337,6 +337,9 @@ module Google
         #     Optional. Diagnostic information contains execution details during the
         #     processing of the input. Only populated in the last SessionOutput (with
         #     `turn_completed=true`) for each turn.
+        # @!attribute [rw] context
+        #   @return [::Array<::Google::Protobuf::Any>]
+        #     Context messages for external supervision guardrails.
         class SessionOutput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

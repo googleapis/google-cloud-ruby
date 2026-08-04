@@ -1,5 +1,23 @@
 # Changelog
 
+### 1.0.0 (2026-07-17)
+
+#### Features
+
+* Release stable version 
+
+### 0.3.0 (2026-07-10)
+
+#### Features
+
+* update public libraries for CES v1 ([#34719](https://github.com/googleapis/google-cloud-ruby/issues/34719)) 
+
+### 0.2.1 (2026-07-01)
+
+#### Bug Fixes
+
+* add routing annotations to BidiRunSession in v1 and v1beta ([#34695](https://github.com/googleapis/google-cloud-ruby/issues/34695)) 
+
 ### 0.2.0 (2026-06-11)
 
 #### Features

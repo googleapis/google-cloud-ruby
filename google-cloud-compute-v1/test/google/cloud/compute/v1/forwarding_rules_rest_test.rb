@@ -207,6 +207,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::Rest::ClientTest < Minitest
     forwarding_rule = "hello world"
     project = "hello world"
     region = "hello world"
+    view = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -222,27 +223,27 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        c.get({ forwarding_rule: forwarding_rule, project: project, region: region }) do |_result, response|
+        c.get({ forwarding_rule: forwarding_rule, project: project, region: region, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.get forwarding_rule: forwarding_rule, project: project, region: region do |_result, response|
+        c.get forwarding_rule: forwarding_rule, project: project, region: region, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.get ::Google::Cloud::Compute::V1::GetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region) do |_result, response|
+        c.get ::Google::Cloud::Compute::V1::GetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.get({ forwarding_rule: forwarding_rule, project: project, region: region }, call_options) do |_result, response|
+        c.get({ forwarding_rule: forwarding_rule, project: project, region: region, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.get(::Google::Cloud::Compute::V1::GetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region), call_options) do |_result, response|
+        c.get(::Google::Cloud::Compute::V1::GetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

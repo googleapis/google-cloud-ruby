@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the EndpointPolicy resource. It matches pattern
-        #     `projects/{project}/locations/global/endpointPolicies/{endpoint_policy}`.
+        #     `projects/{project}/locations/*/endpointPolicies/{endpoint_policy}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the resource was created.
@@ -68,15 +68,17 @@ module Google
         #     inbound traffic at the identified backends. If this field is not set,
         #     authentication is disabled(open) for this endpoint.
         # @!attribute [rw] client_tls_policy
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Optional. A URL referring to a ClientTlsPolicy resource. ClientTlsPolicy
-        #     can be set to specify the authentication for traffic from the proxy to the
-        #     actual endpoints. More specifically, it is applied to the outgoing traffic
-        #     from the proxy to the endpoint. This is typically used for sidecar model
-        #     where the proxy identifies itself as endpoint to the control plane, with
-        #     the connection between sidecar and endpoint requiring authentication. If
-        #     this field is not set, authentication is disabled(open). Applicable only
-        #     when EndpointPolicyType is SIDECAR_PROXY.
+        #     Optional. Deprecated: This field is not used and is a no-op.
+        #     A URL referring to a ClientTlsPolicy resource. ClientTlsPolicy can be set
+        #     to specify the authentication for traffic from the proxy to the actual
+        #     endpoints. More specifically, it is applied to the outgoing traffic from
+        #     the proxy to the endpoint. This is typically used for sidecar model where
+        #     the proxy identifies itself as endpoint to the control plane, with the
+        #     connection between sidecar and endpoint requiring authentication. If this
+        #     field is not set, authentication is disabled(open). Applicable only when
+        #     EndpointPolicyType is SIDECAR_PROXY.
         class EndpointPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,7 +109,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the EndpointPolicies should
-        #     be listed, specified in the format `projects/*/locations/global`.
+        #     be listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of EndpointPolicies to return per call.
@@ -151,7 +153,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the EndpointPolicy to get. Must be in the format
-        #     `projects/*/locations/global/endpointPolicies/*`.
+        #     `projects/*/locations/*/endpointPolicies/*`.
         class GetEndpointPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -161,7 +163,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the EndpointPolicy. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] endpoint_policy_id
         #   @return [::String]
         #     Required. Short name of the EndpointPolicy resource to be created.
@@ -194,7 +196,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the EndpointPolicy to delete. Must be in the format
-        #     `projects/*/locations/global/endpointPolicies/*`.
+        #     `projects/*/locations/*/endpointPolicies/*`.
         class DeleteEndpointPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

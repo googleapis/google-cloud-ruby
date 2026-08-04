@@ -89,6 +89,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Rest::ClientTest
     name = "hello world"
     accept_data_use_terms = true
     data_use_terms_version = "hello world"
+    saas_params = {}
 
     provision_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +105,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Rest::ClientTest
         end
 
         # Use hash object
-        c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }) do |_result, response|
+        c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version do |_result, response|
+        c.provision_project name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.provision_project ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version) do |_result, response|
+        c.provision_project ::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version }, call_options) do |_result, response|
+        c.provision_project({ name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.provision_project(::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version), call_options) do |_result, response|
+        c.provision_project(::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest.new(name: name, accept_data_use_terms: accept_data_use_terms, data_use_terms_version: data_use_terms_version, saas_params: saas_params), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

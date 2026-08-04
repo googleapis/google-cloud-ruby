@@ -426,6 +426,93 @@ module Google
             end
 
             ##
+            # Gets details of a single RemoteTransportProfile given an activation key.
+            #
+            # @overload parse_from_activation_key(request, options = nil)
+            #   Pass arguments to `parse_from_activation_key` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload parse_from_activation_key(parent: nil, activation_key: nil)
+            #   Pass arguments to `parse_from_activation_key` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ParseFromActivationKeyRequest.
+            #   @param activation_key [::String]
+            #     Required. The activation key to get the RemoteTransportProfile for.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1beta::TransportManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest.new
+            #
+            #   # Call the parse_from_activation_key method.
+            #   result = client.parse_from_activation_key request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyResponse.
+            #   p result
+            #
+            def parse_from_activation_key request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1beta::ParseFromActivationKeyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.parse_from_activation_key.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.parse_from_activation_key.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.parse_from_activation_key.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @transport_manager_stub.call_rpc :parse_from_activation_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists Transports in a given project and location.
             #
             # @overload list_transports(request, options = nil)
@@ -623,13 +710,16 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_status(name: nil)
+            # @overload get_status(name: nil, skip_cache: nil)
             #   Pass arguments to `get_status` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
             #     Required. Name of the resource.
+            #   @param skip_cache [::Boolean]
+            #     Optional. If set to true, the response will bypass any caches and return
+            #     the freshest possible data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::NetworkConnectivity::V1beta::GetStatusResponse]
@@ -1226,6 +1316,11 @@ module Google
                 #
                 attr_reader :get_remote_transport_profile
                 ##
+                # RPC-specific configuration for `parse_from_activation_key`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :parse_from_activation_key
+                ##
                 # RPC-specific configuration for `list_transports`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1262,6 +1357,8 @@ module Google
                   @list_remote_transport_profiles = ::Gapic::Config::Method.new list_remote_transport_profiles_config
                   get_remote_transport_profile_config = parent_rpcs.get_remote_transport_profile if parent_rpcs.respond_to? :get_remote_transport_profile
                   @get_remote_transport_profile = ::Gapic::Config::Method.new get_remote_transport_profile_config
+                  parse_from_activation_key_config = parent_rpcs.parse_from_activation_key if parent_rpcs.respond_to? :parse_from_activation_key
+                  @parse_from_activation_key = ::Gapic::Config::Method.new parse_from_activation_key_config
                   list_transports_config = parent_rpcs.list_transports if parent_rpcs.respond_to? :list_transports
                   @list_transports = ::Gapic::Config::Method.new list_transports_config
                   get_transport_config = parent_rpcs.get_transport if parent_rpcs.respond_to? :get_transport

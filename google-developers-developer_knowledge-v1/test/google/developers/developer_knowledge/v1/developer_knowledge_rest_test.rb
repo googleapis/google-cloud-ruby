@@ -245,6 +245,60 @@ class ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Cl
     end
   end
 
+  def test_answer_query
+    # Create test objects.
+    client_result = ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    query = "hello world"
+
+    answer_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::ServiceStub.stub :transcode_answer_query_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, answer_query_client_stub do
+        # Create client
+        c = ::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.answer_query({ query: query }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.answer_query query: query do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.answer_query ::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.answer_query({ query: query }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.answer_query(::Google::Developers::DeveloperKnowledge::V1::AnswerQueryRequest.new(query: query), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, answer_query_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

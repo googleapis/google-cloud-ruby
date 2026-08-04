@@ -1340,6 +1340,11 @@ module Google
             # Basic response view omits the following fields:
             # -
             # {::Google::Cloud::Dialogflow::CX::V3::QueryResult#diagnostic_info QueryResult.diagnostic_info}
+            # - [QueryResult.generative_info][]
+            # -
+            # {::Google::Cloud::Dialogflow::CX::V3::QueryResult#trace_blocks QueryResult.trace_blocks}
+            # -
+            # {::Google::Cloud::Dialogflow::CX::V3::QueryResult#data_store_connection_signals QueryResult.data_store_connection_signals}
             DETECT_INTENT_RESPONSE_VIEW_BASIC = 2
 
             # Default response view omits the following fields:

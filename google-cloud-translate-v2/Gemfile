@@ -9,6 +9,7 @@ gem "ostruct", "~> 0.6.3"
 gem "minitest", "~> 5.16"
 gem "minitest-focus", "~> 1.1"
 gem "minitest-rg", "~> 5.2"
+gem "minitest-reporters", "~> 1.5.0", require: false
 gem "ostruct", "~> 0.6.3"
 gem "rake", ">= 12.0"
 gem "redcarpet", "~> 3.0"

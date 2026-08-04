@@ -25,6 +25,74 @@ module Google
           # Path helper methods for the OrderService API.
           module Paths
             ##
+            # Create a fully-qualified Company resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/companies/{company}`
+            #
+            # @param network_code [String]
+            # @param company [String]
+            #
+            # @return [::String]
+            def company_path network_code:, company:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/companies/#{company}"
+            end
+
+            ##
+            # Create a fully-qualified Contact resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/contacts/{contact}`
+            #
+            # @param network_code [String]
+            # @param contact [String]
+            #
+            # @return [::String]
+            def contact_path network_code:, contact:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/contacts/#{contact}"
+            end
+
+            ##
+            # Create a fully-qualified CustomField resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customFields/{custom_field}`
+            #
+            # @param network_code [String]
+            # @param custom_field [String]
+            #
+            # @return [::String]
+            def custom_field_path network_code:, custom_field:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customFields/#{custom_field}"
+            end
+
+            ##
+            # Create a fully-qualified Label resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/labels/{label}`
+            #
+            # @param network_code [String]
+            # @param label [String]
+            #
+            # @return [::String]
+            def label_path network_code:, label:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/labels/#{label}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:
@@ -53,6 +121,40 @@ module Google
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
 
               "networks/#{network_code}/orders/#{order}"
+            end
+
+            ##
+            # Create a fully-qualified Team resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/teams/{team}`
+            #
+            # @param network_code [String]
+            # @param team [String]
+            #
+            # @return [::String]
+            def team_path network_code:, team:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/teams/#{team}"
+            end
+
+            ##
+            # Create a fully-qualified User resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/users/{user}`
+            #
+            # @param network_code [String]
+            # @param user [String]
+            #
+            # @return [::String]
+            def user_path network_code:, user:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/users/#{user}"
             end
 
             extend self

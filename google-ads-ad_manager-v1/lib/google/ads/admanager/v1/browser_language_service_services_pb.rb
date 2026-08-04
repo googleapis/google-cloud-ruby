@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.BrowserLanguageService'
 
-            # API to retrieve a `BrowserLanguage` object.
+            # Retrieves a `BrowserLanguage` object.
             rpc :GetBrowserLanguage, ::Google::Ads::AdManager::V1::GetBrowserLanguageRequest, ::Google::Ads::AdManager::V1::BrowserLanguage
-            # API to retrieve a list of `BrowserLanguage` objects.
+            # Lists `BrowserLanguage` objects.
             rpc :ListBrowserLanguages, ::Google::Ads::AdManager::V1::ListBrowserLanguagesRequest, ::Google::Ads::AdManager::V1::ListBrowserLanguagesResponse
           end
 

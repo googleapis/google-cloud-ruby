@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the CustomTargetingValueService API.
           module Paths
             ##
+            # Create a fully-qualified CustomTargetingKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/customTargetingKeys/{custom_targeting_key}`
+            #
+            # @param network_code [String]
+            # @param custom_targeting_key [String]
+            #
+            # @return [::String]
+            def custom_targeting_key_path network_code:, custom_targeting_key:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/customTargetingKeys/#{custom_targeting_key}"
+            end
+
+            ##
             # Create a fully-qualified CustomTargetingValue resource string.
             #
             # The resource will be in the following format:

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a Network object.
+              # Retrieves a `Network` object.
               #
               # @overload get_network(request, options = nil)
               #   Pass arguments to `get_network` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve all the networks the current user has access to.
+              # Retrieves all the networks the current user has access to.
               #
               # @overload list_networks(request, options = nil)
               #   Pass arguments to `list_networks` via a request object, either of type

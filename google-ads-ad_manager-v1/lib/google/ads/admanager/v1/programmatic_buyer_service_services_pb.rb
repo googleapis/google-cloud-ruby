@@ -33,9 +33,9 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.ProgrammaticBuyerService'
 
-            # API to retrieve a `ProgrammaticBuyer` object.
+            # Retrieves a `ProgrammaticBuyer` object.
             rpc :GetProgrammaticBuyer, ::Google::Ads::AdManager::V1::GetProgrammaticBuyerRequest, ::Google::Ads::AdManager::V1::ProgrammaticBuyer
-            # API to retrieve a list of `ProgrammaticBuyer` objects.
+            # Lists `ProgrammaticBuyer` objects.
             rpc :ListProgrammaticBuyers, ::Google::Ads::AdManager::V1::ListProgrammaticBuyersRequest, ::Google::Ads::AdManager::V1::ListProgrammaticBuyersResponse
           end
 

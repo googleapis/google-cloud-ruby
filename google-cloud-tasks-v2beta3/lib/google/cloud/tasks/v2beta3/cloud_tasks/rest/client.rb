@@ -130,6 +130,16 @@ module Google
 
                   default_config.rpcs.run_task.timeout = 20.0
 
+                  default_config.rpcs.update_cmek_config.timeout = 20.0
+                  default_config.rpcs.update_cmek_config.retry_policy = {
+                    initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_cmek_config.timeout = 20.0
+                  default_config.rpcs.get_cmek_config.retry_policy = {
+                    initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -204,6 +214,13 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
+                end
+
                 @cloud_tasks_stub = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -231,6 +248,13 @@ module Google
                   config.logger = @cloud_tasks_stub.logger if config.respond_to? :logger=
                 end
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Operations]
+              #
+              attr_reader :operations_client
 
               ##
               # Get the associated client for mix-in of the Locations.
@@ -664,8 +688,15 @@ module Google
               #
               # This command will delete the queue even if it has tasks in it.
               #
-              # Note: If you delete a queue, a queue with the same name can't be created
-              # for 7 days.
+              # Note : If you delete a queue, you may be prevented from creating a new
+              # queue with the same name as the deleted queue for a tombstone window of up
+              # to 3 days. During this window, the CreateQueue operation may appear to
+              # recreate the queue, but this can be misleading. If you attempt to create
+              # a queue with the same name as one that is in the tombstone window, run
+              # GetQueue to confirm that the queue creation was successful. If GetQueue
+              # returns 200 response code, your queue was successfully created with the
+              # name of the previously deleted queue. Otherwise, your queue did not
+              # successfully recreate.
               #
               # WARNING: Using this method may have unintended side effects if you are
               # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -1423,6 +1454,10 @@ module Google
               ##
               # Gets a task.
               #
+              # After a task is successfully executed or has exhausted its retry attempts,
+              # the task is deleted. A `GetTask` request for a deleted task returns a
+              # `NOT_FOUND` error.
+              #
               # @overload get_task(request, options = nil)
               #   Pass arguments to `get_task` via a request object, either of type
               #   {::Google::Cloud::Tasks::V2beta3::GetTaskRequest} or an equivalent Hash.
@@ -1559,11 +1594,10 @@ module Google
               #     a task's ID is identical to that of an existing task or a task
               #     that was deleted or executed recently then the call will fail
               #     with [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS].
-              #     If the task's queue was created using Cloud Tasks, then another task with
-              #     the same name can't be created for ~1 hour after the original task was
-              #     deleted or executed. If the task's queue was created using queue.yaml or
-              #     queue.xml, then another task with the same name can't be created
-              #     for ~9 days after the original task was deleted or executed.
+              #     The IDs of deleted tasks are not immediately available for reuse.  It can
+              #     take up to 24 hours (or 9 days if the task's queue was created using a
+              #     queue.yaml or queue.xml) for the task ID to be released and made available
+              #     again.
               #
               #     Because there is an extra lookup cost to identify duplicate task
               #     names, these {::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client#create_task CreateTask}
@@ -1641,6 +1675,112 @@ module Google
 
                 @cloud_tasks_stub.create_task request, options do |result, operation|
                   yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a batch of tasks and adds them to a queue.
+              # This call is not atomic.
+              #
+              # All tasks must be for the same queue.
+              # A maximum of 100 tasks can be created in a single batch.
+              #
+              # @overload batch_create_tasks(request, options = nil)
+              #   Pass arguments to `batch_create_tasks` via a request object, either of type
+              #   {::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_tasks(parent: nil, requests: nil, request_id: nil)
+              #   Pass arguments to `batch_create_tasks` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The queue name. For example:
+              #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+              #
+              #     The queue must already exist.
+              #   @param requests [::Array<::Google::Cloud::Tasks::V2beta3::CreateTaskRequest, ::Hash>]
+              #     Required. The list of requests to create tasks.
+              #     The queue specified in parent field of each CreateTaskRequest will be
+              #     the same. This validation happens on the client side as well as in the
+              #     handler.
+              #     BatchCreateTasksRequest.parent will also be the same value as the
+              #     individual CreateTaskRequest.parent .
+              #     The maximum number of requests is 100.
+              #   @param request_id [::String]
+              #     Optional. This field will be used to identify the long running operation,
+              #     avoiding duplication when user retries. If not provided, then a UUID will
+              #     be generated at server side.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest.new
+              #
+              #   # Call the batch_create_tasks method.
+              #   result = client.batch_create_tasks request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def batch_create_tasks request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta3::BatchCreateTasksRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_tasks.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Tasks::V2beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_tasks.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_tasks.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_tasks_stub.batch_create_tasks request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1730,6 +1870,108 @@ module Google
               end
 
               ##
+              # Deletes a batch of tasks.
+              # This is a non-atomic operation: if deletion fails for some tasks, it
+              # can still succeed for others. The metadata field of
+              # google.longrunning.Operation contains details of failed deletions.
+              # A maximum of 1000 tasks can be deleted in a batch.
+              #
+              # @overload batch_delete_tasks(request, options = nil)
+              #   Pass arguments to `batch_delete_tasks` via a request object, either of type
+              #   {::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_delete_tasks(parent: nil, names: nil, request_id: nil)
+              #   Pass arguments to `batch_delete_tasks` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The queue name. For example:
+              #     Format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the tasks to delete.
+              #     A maximum of 1000 tasks can be deleted in a batch.
+              #     For example:
+              #     Format:
+              #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+              #   @param request_id [::String]
+              #     Optional. This field will be used to identify the long running operation,
+              #     avoiding duplication when user retries. If not provided, then a UUID will
+              #     be generated at server side.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest.new
+              #
+              #   # Call the batch_delete_tasks method.
+              #   result = client.batch_delete_tasks request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def batch_delete_tasks request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta3::BatchDeleteTasksRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_delete_tasks.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Tasks::V2beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_tasks.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_delete_tasks.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_tasks_stub.batch_delete_tasks request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Forces a task to run now.
               #
               # When this method is called, Cloud Tasks will dispatch the task, even if
@@ -1743,8 +1985,8 @@ module Google
               # a task to be dispatched now.
               #
               # The dispatched task is returned. That is, the task that is returned
-              # contains the [status][Task.status] after the task is dispatched but
-              # before the task is received by its target.
+              # contains the {::Google::Cloud::Tasks::V2beta3::Task#first_attempt status} after
+              # the task is dispatched but before the task is received by its target.
               #
               # If Cloud Tasks receives a successful response from the task's
               # target, then the task will be deleted; otherwise the task's
@@ -1842,6 +2084,173 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_tasks_stub.run_task request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates or Updates a CMEK config.
+              #
+              # Updates the Customer Managed Encryption Key associated with the Cloud Tasks
+              # location (Creates if the key does not already exist). All new tasks created
+              # in the location will be encrypted at-rest with the KMS-key provided in the
+              # config.
+              #
+              # @overload update_cmek_config(request, options = nil)
+              #   Pass arguments to `update_cmek_config` via a request object, either of type
+              #   {::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_cmek_config(cmek_config: nil, update_mask: nil)
+              #   Pass arguments to `update_cmek_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param cmek_config [::Google::Cloud::Tasks::V2beta3::CmekConfig, ::Hash]
+              #     Required. The config to update.  Its name attribute distinguishes it.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     List of fields to be updated in this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Tasks::V2beta3::CmekConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Tasks::V2beta3::CmekConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest.new
+              #
+              #   # Call the update_cmek_config method.
+              #   result = client.update_cmek_config request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::CmekConfig.
+              #   p result
+              #
+              def update_cmek_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta3::UpdateCmekConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_cmek_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Tasks::V2beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_cmek_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_cmek_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_tasks_stub.update_cmek_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the CMEK config.
+              #
+              # Gets the Customer Managed Encryption Key configured with the Cloud Tasks
+              # lcoation. By default there is no kms_key configured.
+              #
+              # @overload get_cmek_config(request, options = nil)
+              #   Pass arguments to `get_cmek_config` via a request object, either of type
+              #   {::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_cmek_config(name: nil)
+              #   Pass arguments to `get_cmek_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The config resource name. For example:
+              #     projects/PROJECT_ID/locations/LOCATION_ID/cmekConfig`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Tasks::V2beta3::CmekConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Tasks::V2beta3::CmekConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/tasks/v2beta3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest.new
+              #
+              #   # Call the get_cmek_config method.
+              #   result = client.get_cmek_config request
+              #
+              #   # The returned object is of type Google::Cloud::Tasks::V2beta3::CmekConfig.
+              #   p result
+              #
+              def get_cmek_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta3::GetCmekConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_cmek_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Tasks::V2beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_cmek_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_cmek_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_tasks_stub.get_cmek_config request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -2074,15 +2483,35 @@ module Google
                   #
                   attr_reader :create_task
                   ##
+                  # RPC-specific configuration for `batch_create_tasks`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_tasks
+                  ##
                   # RPC-specific configuration for `delete_task`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_task
                   ##
+                  # RPC-specific configuration for `batch_delete_tasks`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_tasks
+                  ##
                   # RPC-specific configuration for `run_task`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :run_task
+                  ##
+                  # RPC-specific configuration for `update_cmek_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_cmek_config
+                  ##
+                  # RPC-specific configuration for `get_cmek_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_cmek_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2114,10 +2543,18 @@ module Google
                     @get_task = ::Gapic::Config::Method.new get_task_config
                     create_task_config = parent_rpcs.create_task if parent_rpcs.respond_to? :create_task
                     @create_task = ::Gapic::Config::Method.new create_task_config
+                    batch_create_tasks_config = parent_rpcs.batch_create_tasks if parent_rpcs.respond_to? :batch_create_tasks
+                    @batch_create_tasks = ::Gapic::Config::Method.new batch_create_tasks_config
                     delete_task_config = parent_rpcs.delete_task if parent_rpcs.respond_to? :delete_task
                     @delete_task = ::Gapic::Config::Method.new delete_task_config
+                    batch_delete_tasks_config = parent_rpcs.batch_delete_tasks if parent_rpcs.respond_to? :batch_delete_tasks
+                    @batch_delete_tasks = ::Gapic::Config::Method.new batch_delete_tasks_config
                     run_task_config = parent_rpcs.run_task if parent_rpcs.respond_to? :run_task
                     @run_task = ::Gapic::Config::Method.new run_task_config
+                    update_cmek_config_config = parent_rpcs.update_cmek_config if parent_rpcs.respond_to? :update_cmek_config
+                    @update_cmek_config = ::Gapic::Config::Method.new update_cmek_config_config
+                    get_cmek_config_config = parent_rpcs.get_cmek_config if parent_rpcs.respond_to? :get_cmek_config
+                    @get_cmek_config = ::Gapic::Config::Method.new get_cmek_config_config
 
                     yield self if block_given?
                   end

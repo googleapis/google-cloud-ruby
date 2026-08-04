@@ -59,6 +59,14 @@ module Google
             rpc :ListConversations, ::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsRequest, ::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsResponse
             # Answer query method.
             rpc :AnswerQuery, ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest, ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse
+            # Answer query method (streaming).
+            #
+            # It takes one
+            # [AnswerQueryRequest][google.cloud.discoveryengine.v1beta.AnswerQueryRequest]
+            # and returns multiple
+            # [AnswerQueryResponse][google.cloud.discoveryengine.v1beta.AnswerQueryResponse]
+            # messages in a stream.
+            rpc :StreamAnswerQuery, ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest, stream(::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse)
             # Gets a Answer.
             rpc :GetAnswer, ::Google::Cloud::DiscoveryEngine::V1beta::GetAnswerRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Answer
             # Creates a Session.

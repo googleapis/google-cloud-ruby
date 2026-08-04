@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.8.0 (2026-07-27)
+
+#### Features
+
+* A new method `ExpungeSupportEventSubscription` is added to service `SupportEventSubscriptionService` 
+#### Bug Fixes
+
+* align HTTP paths with enforced matching ([#35019](https://github.com/googleapis/google-cloud-ruby/issues/35019)) 
+
+### 0.7.0 (2026-06-30)
+
+#### Features
+
+* A new service `SupportEventSubscription` is added ([#34681](https://github.com/googleapis/google-cloud-ruby/issues/34681)) 
+
 ### 0.6.0 (2026-06-11)
 
 #### Features

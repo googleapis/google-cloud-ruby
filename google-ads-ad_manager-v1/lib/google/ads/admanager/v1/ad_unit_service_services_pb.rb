@@ -33,21 +33,21 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.ads.admanager.v1.AdUnitService'
 
-            # API to retrieve an AdUnit object.
+            # Retrieves an `AdUnit` object.
             rpc :GetAdUnit, ::Google::Ads::AdManager::V1::GetAdUnitRequest, ::Google::Ads::AdManager::V1::AdUnit
-            # API to retrieve a list of AdUnit objects.
+            # Lists `AdUnit` objects.
             rpc :ListAdUnits, ::Google::Ads::AdManager::V1::ListAdUnitsRequest, ::Google::Ads::AdManager::V1::ListAdUnitsResponse
-            # API to retrieve a list of AdUnitSize objects.
+            # Lists `AdUnitSize` objects.
             rpc :ListAdUnitSizes, ::Google::Ads::AdManager::V1::ListAdUnitSizesRequest, ::Google::Ads::AdManager::V1::ListAdUnitSizesResponse
-            # API to create an `AdUnit` object.
+            # Creates an `AdUnit` object.
             rpc :CreateAdUnit, ::Google::Ads::AdManager::V1::CreateAdUnitRequest, ::Google::Ads::AdManager::V1::AdUnit
-            # API to update an `AdUnit` object.
+            # Updates an `AdUnit` object.
             rpc :UpdateAdUnit, ::Google::Ads::AdManager::V1::UpdateAdUnitRequest, ::Google::Ads::AdManager::V1::AdUnit
-            # API to batch create `AdUnit` objects.
+            # Creates `AdUnit` objects.
             rpc :BatchCreateAdUnits, ::Google::Ads::AdManager::V1::BatchCreateAdUnitsRequest, ::Google::Ads::AdManager::V1::BatchCreateAdUnitsResponse
-            # API to batch update `AdUnit` objects.
+            # Batch updates `AdUnit` objects.
             rpc :BatchUpdateAdUnits, ::Google::Ads::AdManager::V1::BatchUpdateAdUnitsRequest, ::Google::Ads::AdManager::V1::BatchUpdateAdUnitsResponse
-            # API to batch activate `AdUnit` objects.
+            # Batch activates `AdUnit` objects.
             rpc :BatchActivateAdUnits, ::Google::Ads::AdManager::V1::BatchActivateAdUnitsRequest, ::Google::Ads::AdManager::V1::BatchActivateAdUnitsResponse
             # Deactivates a list of `AdUnit` objects.
             rpc :BatchDeactivateAdUnits, ::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsRequest, ::Google::Ads::AdManager::V1::BatchDeactivateAdUnitsResponse

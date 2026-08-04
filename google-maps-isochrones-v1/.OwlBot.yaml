@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/maps/isochrones/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-maps-isochrones-v1/$1

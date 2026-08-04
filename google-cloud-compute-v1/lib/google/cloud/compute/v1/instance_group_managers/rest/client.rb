@@ -779,13 +779,16 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(instance_group_manager: nil, project: nil, request_id: nil, zone: nil)
+              # @overload delete(instance_group_manager: nil, no_graceful_shutdown: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param instance_group_manager [::String]
               #     The name of the managed instance group to delete.
+              #   @param no_graceful_shutdown [::Boolean]
+              #     When set, graceful shutdown is skipped for instance deletion even if it's
+              #     configured for the instances.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
@@ -900,7 +903,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_instances(instance_group_manager: nil, instance_group_managers_delete_instances_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              # @overload delete_instances(instance_group_manager: nil, instance_group_managers_delete_instances_request_resource: nil, no_graceful_shutdown: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `delete_instances` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -909,6 +912,9 @@ module Google
               #     The name of the managed instance group.
               #   @param instance_group_managers_delete_instances_request_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersDeleteInstancesRequest, ::Hash]
               #     The body resource for this request
+              #   @param no_graceful_shutdown [::Boolean]
+              #     When set, graceful shutdown is skipped for instance deletion even if it's
+              #     configured for the instances.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
@@ -2263,7 +2269,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload recreate_instances(instance_group_manager: nil, instance_group_managers_recreate_instances_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              # @overload recreate_instances(instance_group_manager: nil, instance_group_managers_recreate_instances_request_resource: nil, no_graceful_shutdown: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `recreate_instances` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2272,6 +2278,9 @@ module Google
               #     The name of the managed instance group.
               #   @param instance_group_managers_recreate_instances_request_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersRecreateInstancesRequest, ::Hash]
               #     The body resource for this request
+              #   @param no_graceful_shutdown [::Boolean]
+              #     When set, graceful shutdown is skipped for instance recreation even if it's
+              #     configured for the instances.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
@@ -3002,7 +3011,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload stop_instances(instance_group_manager: nil, instance_group_managers_stop_instances_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              # @overload stop_instances(instance_group_manager: nil, instance_group_managers_stop_instances_request_resource: nil, no_graceful_shutdown: nil, project: nil, request_id: nil, zone: nil)
               #   Pass arguments to `stop_instances` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3011,6 +3020,9 @@ module Google
               #     The name of the managed instance group.
               #   @param instance_group_managers_stop_instances_request_resource [::Google::Cloud::Compute::V1::InstanceGroupManagersStopInstancesRequest, ::Hash]
               #     The body resource for this request
+              #   @param no_graceful_shutdown [::Boolean]
+              #     When set, graceful shutdown is skipped for instance stopping even if it's
+              #     configured for the instances.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]

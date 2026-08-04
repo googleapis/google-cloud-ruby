@@ -24,7 +24,7 @@ module Google
         # Message for requesting list of QuotaInfos
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Parent value of QuotaInfo resources.
+        #     Required. Identifier. Parent value of QuotaInfo resources.
         #     Listing across different resource containers (such as 'projects/-') is not
         #     allowed.
         #
@@ -60,7 +60,7 @@ module Google
         # Message for getting a QuotaInfo
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the quota info.
+        #     Required. Identifier. The resource name of the quota info.
         #
         #     An example name:
         #     `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
@@ -72,7 +72,7 @@ module Google
         # Message for requesting list of QuotaPreferences
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Parent value of QuotaPreference resources.
+        #     Required. Identifier. Parent value of QuotaPreference resources.
         #     Listing across different resource containers (such as 'projects/-') is not
         #     allowed.
         #
@@ -129,7 +129,7 @@ module Google
         # Message for getting a QuotaPreference
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the resource
+        #     Required. Identifier. Name of the resource
         #
         #     Example name:
         #     `projects/123/locations/global/quota_preferences/my-config-for-us-east1`
@@ -141,7 +141,7 @@ module Google
         # Message for creating a QuotaPreference
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Value for parent.
+        #     Required. Identifier. Value for parent.
         #
         #     Example:
         #     `projects/123/locations/global`

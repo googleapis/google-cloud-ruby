@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.12.0 (2026-07-21)
+
+#### Features
+
+* [Memorystore for Redis Cluster] add Cluster.AsyncClusterEndpointsDeletionEnabled ([#34960](https://github.com/googleapis/google-cloud-ruby/issues/34960)) 
+
 ### 0.11.0 (2026-06-11)
 
 #### Features

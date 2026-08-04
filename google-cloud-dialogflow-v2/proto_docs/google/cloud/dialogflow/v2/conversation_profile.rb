@@ -79,6 +79,9 @@ module Google
         #     languages.
         #     This should be a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
         #     language tag. Example: "en-US".
+        # @!attribute [rw] sip_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SipConfig]
+        #     Optional. Configuration for SIP connections.
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     The time zone of this conversational profile from the
@@ -295,6 +298,20 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::V2::RaiSettings]
           #     Optional. Settings for Responsible AI checks.
           #     Supported features:  KNOWLEDGE_ASSIST
+          # @!attribute [rw] suggestion_trigger_event
+          #   @return [::Google::Cloud::Dialogflow::V2::TriggerEvent]
+          #     Optional. The trigger event for suggestion.
+          #     If unspecified, it will be `CUSTOMER_MESSAGE`.
+          #     Supported features: KNOWLEDGE_ASSIST
+          #     For KNOWLEDGE_ASSIST, these four trigger events are supported:
+          #     1. TRIGGER_EVENT_UNSPECIFIED
+          #     2. END_OF_UTTERANCE
+          #     3. CUSTOMER_MESSAGE
+          #     4. AGENT_MESSAGE
+          # @!attribute [rw] disable_query_search_context
+          #   @return [::Boolean]
+          #     Optional. If true, disable appending available search context to the
+          #     search query. Supported features: KNOWLEDGE_ASSIST
           # @!attribute [rw] suggestion_trigger_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionTriggerSettings]
           #     Settings of suggestion trigger.
@@ -745,6 +762,39 @@ module Google
         #     to Stackdriver in the conversation project as JSON format
         #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} protos.
         class LoggingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Defines the SIP configuration.
+        # @!attribute [rw] create_conversation_on_the_fly
+        #   @return [::Boolean]
+        #     Asks Dialogflow Telephony to create the conversation provided in the SIP
+        #     header on the fly when the call comes in.
+        # @!attribute [rw] inactive_start
+        #   @return [::Boolean]
+        #     Starts the conversation with inactive SDP directives
+        # @!attribute [rw] max_audio_recording_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Max duration for audio recording.
+        #     Overrides the default value of 15 min.
+        #     Max value is 8 hours.
+        # @!attribute [rw] allow_virtual_agent_interaction
+        #   @return [::Boolean]
+        #     Allows interactions with a Dialogflow virtual agent even if the call is
+        #     connected for SIPREC purposes.
+        # @!attribute [rw] keep_conversation_running
+        #   @return [::Boolean]
+        #     Keeps the conversation running even if the call is disconnected.
+        # @!attribute [rw] copy_inbound_call_leg_headers
+        #   @return [::Array<::String>]
+        #     List of inbound call leg headers to be copied to outbound call legs created
+        #     later.
+        # @!attribute [rw] ignore_reinvite_media_direction
+        #   @return [::Boolean]
+        #     Ignores any media direction in the reINVITE SDP offer. Reuse the previous
+        #     media direction.
+        class SipConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

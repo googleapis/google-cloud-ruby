@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.6.0 (2026-07-23)
+
+#### Features
+
+* publish Cloud Quotas v1 GA client library protos and GAPIC Bazel rules ([#34993](https://github.com/googleapis/google-cloud-ruby/issues/34993)) 
+
 ### 2.5.0 (2026-06-11)
 
 #### Features

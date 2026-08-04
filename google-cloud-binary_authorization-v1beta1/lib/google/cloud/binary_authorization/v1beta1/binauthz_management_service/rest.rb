@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/binary_authorization/v1beta1/version"
+require "google/cloud/binary_authorization/v1beta1/bindings_override"
 
 require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/credentials"
 require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/paths"

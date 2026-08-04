@@ -4,11 +4,13 @@
 
 require 'google/protobuf'
 
+require 'google/ads/admanager/v1/content_bundle_enums_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n5google/ads/admanager/v1/content_bundle_messages.proto\x12\x17google.ads.admanager.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc4\x01\n\rContentBundle\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x19\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x02:\x84\x01\xea\x41\x80\x01\n&admanager.googleapis.com/ContentBundle\x12\x37networks/{network_code}/contentBundles/{content_bundle}*\x0e\x63ontentBundles2\rcontentBundleB\xce\x01\n\x1b\x63om.google.ads.admanager.v1B\x1a\x43ontentBundleMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n5google/ads/admanager/v1/content_bundle_messages.proto\x12\x17google.ads.admanager.v1\x1a\x32google/ads/admanager/v1/content_bundle_enums.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd5\x02\n\rContentBundle\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x19\n\x0c\x64isplay_name\x18\x03 \x01(\tB\x03\xe0\x41\x02\x12Y\n\x06status\x18\x04 \x01(\x0e\x32\x44.google.ads.admanager.v1.ContentBundleStatusEnum.ContentBundleStatusB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03:\x84\x01\xea\x41\x80\x01\n&admanager.googleapis.com/ContentBundle\x12\x37networks/{network_code}/contentBundles/{content_bundle}*\x0e\x63ontentBundles2\rcontentBundleB\xce\x01\n\x1b\x63om.google.ads.admanager.v1B\x1a\x43ontentBundleMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

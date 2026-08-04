@@ -26,6 +26,8 @@ module Google
           # Credentials for the ReferenceListService API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
+              "https://www.googleapis.com/auth/chronicle",
+              "https://www.googleapis.com/auth/chronicle.readonly",
               "https://www.googleapis.com/auth/cloud-platform"
             ]
             self.env_vars = [

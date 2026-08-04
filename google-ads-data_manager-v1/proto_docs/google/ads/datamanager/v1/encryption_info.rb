@@ -26,12 +26,24 @@ module Google
         #   @return [::Google::Ads::DataManager::V1::GcpWrappedKeyInfo]
         #     Google Cloud Platform wrapped key information.
         #
-        #     Note: The following fields are mutually exclusive: `gcp_wrapped_key_info`, `aws_wrapped_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gcp_wrapped_key_info`, `aws_wrapped_key_info`, `coordinator_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_wrapped_key_info
         #   @return [::Google::Ads::DataManager::V1::AwsWrappedKeyInfo]
         #     Amazon Web Services wrapped key information.
         #
-        #     Note: The following fields are mutually exclusive: `aws_wrapped_key_info`, `gcp_wrapped_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `aws_wrapped_key_info`, `gcp_wrapped_key_info`, `coordinator_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] coordinator_key_info
+        #   @return [::Google::Ads::DataManager::V1::CoordinatorKeyInfo]
+        #     Key information for the chosen coordinator key.
+        #
+        #     This is not supported for the
+        #     {::Google::Ads::DataManager::V1::IngestionService::Client#ingest_events IngestEvents},
+        #     {::Google::Ads::DataManager::V1::IngestionService::Client#ingest_audience_members IngestAudienceMembers},
+        #     and
+        #     {::Google::Ads::DataManager::V1::IngestionService::Client#remove_audience_members RemoveAudienceMembers}
+        #     methods.
+        #
+        #     Note: The following fields are mutually exclusive: `coordinator_key_info`, `gcp_wrapped_key_info`, `aws_wrapped_key_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EncryptionInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,6 +113,15 @@ module Google
             # Algorithm XChaCha20-Poly1305
             XCHACHA20_POLY1305 = 1
           end
+        end
+
+        # Information about the coordinator key.
+        # @!attribute [rw] key_id
+        #   @return [::String]
+        #     Required. The ID of the chosen coordinator key.
+        class CoordinatorKeyInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

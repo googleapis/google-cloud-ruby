@@ -560,13 +560,4 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     assert_equal actual_request, expected_request
   end
 
-  def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block
-    attempts = 0
-    while !block.call
-      fail msg if attempts >= max
-      attempts += 1
-      puts "Retrying #{attempts} out of #{max}." if output
-      sleep delay
-    end
-  end
 end

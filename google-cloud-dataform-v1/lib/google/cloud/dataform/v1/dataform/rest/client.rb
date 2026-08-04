@@ -658,7 +658,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param team_folder [::String]
-              #     Required. Name of the team_folder whose contents to list.
+              #     Required. Resource name of the TeamFolder to list contents for.
               #     Format: `projects/*/locations/*/teamFolders/*`.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of paths to return. The server may return fewer
@@ -677,14 +677,16 @@ module Google
               #     order. Supported keywords: `display_name` (default), `create_time`,
               #     last_modified_time.
               #     Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1::QueryTeamFolderContentsResponse::TeamFolderContentsEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -772,9 +774,9 @@ module Google
               #     Required. Location in which to query TeamFolders.
               #     Format: `projects/*/locations/*`.
               #   @param page_size [::Integer]
-              #     Optional. Maximum number of TeamFolders to return. The server may return
-              #     fewer items than requested. If unspecified, the server will pick an
-              #     appropriate default.
+              #     Optional. Maximum number of `TeamFolders` to return. The server may return
+              #     fewer items than requested. If unspecified, the server will pick a default
+              #     of `page_size` = 50.
               #   @param page_token [::String]
               #     Optional. Page token received from a previous `SearchTeamFolders` call.
               #     Provide this to retrieve the subsequent page.
@@ -786,14 +788,16 @@ module Google
               #     Optional. Field to additionally sort results by.
               #     Supported keywords: `display_name` (default), `create_time`,
               #     `last_modified_time`. Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1::SearchTeamFoldersResponse::TeamFolderSearchResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1294,7 +1298,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param folder [::String]
-              #     Required. Name of the folder whose contents to list.
+              #     Required. Resource name of the Folder to list contents for.
               #     Format: projects/*/locations/*/folders/*
               #   @param page_size [::Integer]
               #     Optional. Maximum number of paths to return. The server may return fewer
@@ -1313,14 +1317,16 @@ module Google
               #     order. Supported keywords: display_name (default), create_time,
               #     last_modified_time.
               #     Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1::QueryFolderContentsResponse::FolderContentsEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1406,7 +1412,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param location [::String]
-              #     Required. Location of the user root folder whose contents to list.
+              #     Required. Location of the user root folder to list contents for.
               #     Format: projects/*/locations/*
               #   @param page_size [::Integer]
               #     Optional. Maximum number of paths to return. The server may return fewer
@@ -1424,14 +1430,16 @@ module Google
               #     Will order Folders before Repositories, and then by `order_by` in ascending
               #     order. Supported keywords: display_name (default), created_at,
               #     last_modified_at. Examples:
-              #       - `orderBy="display_name"`
-              #       - `orderBy="display_name desc"`
+              #
+              #     * `orderBy="display_name"`
+              #     * `orderBy="display_name desc"`
               #   @param filter [::String]
               #     Optional. Optional filtering for the returned list. Filtering is currently
               #     only supported on the `display_name` field.
               #
               #     Example:
-              #      - `filter="display_name="MyFolder""`
+              #
+              #     * `filter="display_name="MyFolder""`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1::QueryUserRootContentsResponse::RootContentsEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

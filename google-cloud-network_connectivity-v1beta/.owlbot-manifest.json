@@ -117,6 +117,7 @@
     "snippets/transport_manager/get_transport.rb",
     "snippets/transport_manager/list_remote_transport_profiles.rb",
     "snippets/transport_manager/list_transports.rb",
+    "snippets/transport_manager/parse_from_activation_key.rb",
     "snippets/transport_manager/update_transport.rb",
     "test/google/cloud/network_connectivity/v1beta/data_transfer_service_operations_test.rb",
     "test/google/cloud/network_connectivity/v1beta/data_transfer_service_paths_test.rb",

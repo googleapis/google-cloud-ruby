@@ -64,6 +64,9 @@ module Google
               rpc :GetManagedFolder, ::Google::Cloud::Storage::Control::V2::GetManagedFolderRequest, ::Google::Cloud::Storage::Control::V2::ManagedFolder
               # Retrieves a list of managed folders for a given bucket.
               rpc :ListManagedFolders, ::Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest, ::Google::Cloud::Storage::Control::V2::ListManagedFoldersResponse
+              # Updates a managed folder. Currently, this RPC only supports updating the
+              # `rapid_cache_config` field.
+              rpc :UpdateManagedFolder, ::Google::Cloud::Storage::Control::V2::UpdateManagedFolderRequest, ::Google::Cloud::Storage::Control::V2::ManagedFolder
               # Creates an Anywhere Cache instance.
               rpc :CreateAnywhereCache, ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest, ::Google::Longrunning::Operation
               # Updates an Anywhere Cache instance. Mutable fields include `ttl` and
@@ -82,6 +85,14 @@ module Google
               rpc :GetAnywhereCache, ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest, ::Google::Cloud::Storage::Control::V2::AnywhereCache
               # Lists Anywhere Cache instances for a given bucket.
               rpc :ListAnywhereCaches, ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest, ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesResponse
+              # Creates a Rapid Cache instance.
+              rpc :CreateRapidCache, ::Google::Cloud::Storage::Control::V2::CreateRapidCacheRequest, ::Google::Longrunning::Operation
+              # Updates a Rapid Cache instance.
+              rpc :UpdateRapidCache, ::Google::Cloud::Storage::Control::V2::UpdateRapidCacheRequest, ::Google::Longrunning::Operation
+              # Gets a Rapid Cache instance.
+              rpc :GetRapidCache, ::Google::Cloud::Storage::Control::V2::GetRapidCacheRequest, ::Google::Cloud::Storage::Control::V2::RapidCache
+              # Lists Rapid Cache instances for a given bucket.
+              rpc :ListRapidCaches, ::Google::Cloud::Storage::Control::V2::ListRapidCachesRequest, ::Google::Cloud::Storage::Control::V2::ListRapidCachesResponse
               # Returns the Project scoped singleton IntelligenceConfig resource.
               rpc :GetProjectIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
               # Updates the Project scoped singleton IntelligenceConfig resource.
@@ -116,10 +127,10 @@ module Google
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
               # Gets the `IntelligenceFinding` for a project.
               rpc :GetIntelligenceFinding, ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceFinding
-              # Lists the `IntelligenceFinding` resources for the specified project.
+              # Lists the `IntelligenceFinding` resources for the specified the project.
               rpc :ListIntelligenceFindings, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsRequest, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingsResponse
-              # Summarize the intelligence findings for the specified scope(org, folder or
-              # project).
+              # Summarizes the intelligence findings for the specified scope (organization,
+              # folder or project).
               rpc :SummarizeIntelligenceFindings, ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsRequest, ::Google::Cloud::Storage::Control::V2::SummarizeIntelligenceFindingsResponse
               # Gets the `IntelligenceFindingRevision` resource.
               rpc :GetIntelligenceFindingRevision, ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision

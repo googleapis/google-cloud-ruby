@@ -238,7 +238,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Parent value of QuotaInfo resources.
+            #     Required. Identifier. Parent value of QuotaInfo resources.
             #     Listing across different resource containers (such as 'projects/-') is not
             #     allowed.
             #
@@ -341,7 +341,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the quota info.
+            #     Required. Identifier. The resource name of the quota info.
             #
             #     An example name:
             #     `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
@@ -429,7 +429,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Parent value of QuotaPreference resources.
+            #     Required. Identifier. Parent value of QuotaPreference resources.
             #     Listing across different resource containers (such as 'projects/-') is not
             #     allowed.
             #
@@ -548,7 +548,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the resource
+            #     Required. Identifier. Name of the resource
             #
             #     Example name:
             #     `projects/123/locations/global/quota_preferences/my-config-for-us-east1`
@@ -636,7 +636,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Value for parent.
+            #     Required. Identifier. Value for parent.
             #
             #     Example:
             #     `projects/123/locations/global`

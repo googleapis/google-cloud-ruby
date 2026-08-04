@@ -25,21 +25,24 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels describing the metric value.
-        #     See comments on {::Google::Cloud::ServiceControl::V1::Operation#labels google.api.servicecontrol.v1.Operation.labels} for
-        #     the overriding relationship.
-        #     Note that this map must not contain monitored resource labels.
+        #     See comments on
+        #     {::Google::Cloud::ServiceControl::V1::Operation#labels google.api.servicecontrol.v1.Operation.labels}
+        #     for the overriding relationship. Note that this map must not contain
+        #     monitored resource labels.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The start of the time period over which this metric value's measurement
         #     applies. The time period has different semantics for different metric
         #     types (cumulative, delta, and gauge). See the metric definition
         #     documentation in the service configuration for details. If not specified,
-        #     {::Google::Cloud::ServiceControl::V1::Operation#start_time google.api.servicecontrol.v1.Operation.start_time} will be used.
+        #     {::Google::Cloud::ServiceControl::V1::Operation#start_time google.api.servicecontrol.v1.Operation.start_time}
+        #     will be used.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The end of the time period over which this metric value's measurement
         #     applies.  If not specified,
-        #     {::Google::Cloud::ServiceControl::V1::Operation#end_time google.api.servicecontrol.v1.Operation.end_time} will be used.
+        #     {::Google::Cloud::ServiceControl::V1::Operation#end_time google.api.servicecontrol.v1.Operation.end_time}
+        #     will be used.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A boolean value.

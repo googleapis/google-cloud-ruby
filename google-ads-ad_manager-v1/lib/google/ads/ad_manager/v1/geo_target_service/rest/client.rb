@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `GeoTarget` object.
+              # Retrieves a `GeoTarget` object.
               #
               # @overload get_geo_target(request, options = nil)
               #   Pass arguments to `get_geo_target` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `GeoTarget` objects.
+              # Lists `GeoTarget` objects.
               #
               # @overload list_geo_targets(request, options = nil)
               #   Pass arguments to `list_geo_targets` via a request object, either of type

@@ -83,8 +83,8 @@ module Google
         #
         #     * [Markup
         #     syntax](https://developers.google.com/workspace/chat/format-messages)
-        #     for bold, italic, strikethrough, monospace, monospace block, and bulleted
-        #     list.
+        #     for bold, italic, strikethrough, monospace, monospace block, bulleted
+        #     list, and block quote.
         #
         #     * [User
         #     mentions](https://developers.google.com/workspace/chat/format-messages#messages-@mention)
@@ -161,8 +161,8 @@ module Google
         #     Optional. User-uploaded attachment.
         # @!attribute [r] matched_url
         #   @return [::Google::Apps::Chat::V1::MatchedUrl]
-        #     Output only. A URL in `spaces.messages.text` that matches a link preview
-        #     pattern. For more information, see [Preview
+        #     Output only. A URL in the Chat message `text` field that matches a link
+        #     preview pattern. For more information, see [Preview
         #     links](https://developers.google.com/workspace/chat/preview-links).
         # @!attribute [r] thread_reply
         #   @return [::Boolean]
@@ -247,10 +247,6 @@ module Google
 
         # Information about a message that another message quotes.
         #
-        # When you create a message, you can quote messages within the same
-        # thread, or quote a root message to create a new root message.
-        # However, you can't quote a message reply from a different thread.
-        #
         # When you update a message, you can't add or replace the
         # `quotedMessageMetadata` field, but you can remove it.
         #
@@ -291,16 +287,21 @@ module Google
             # Reserved. This value is unused.
             QUOTE_TYPE_UNSPECIFIED = 0
 
-            # If quote_type is `REPLY`, you can do the following:
+            # When `quote_type` is `REPLY`, you can do the following:
             #
             # * If you're replying in a thread, you can quote another message in that
             # thread.
             #
             # * If you're creating a root message, you can quote another root message
             # in that space.
-            #
-            # You can't quote a message reply from a different thread.
             REPLY = 1
+
+            # When `quote_type` is `FORWARD`, you can quote a:
+            #
+            # * Message from a different space.
+            #
+            # * Message reply from a different thread in the same space.
+            FORWARD = 2
           end
         end
 
@@ -643,9 +644,9 @@ module Google
             # (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
             NOTIFICATION_TYPE_FORCE_NOTIFY = 2
 
-            # Silence the notification as if the recipients have [Chat Do Not
-            # Disturb](https://support.google.com/chat/answer/9093489) enabled or
-            # have muted the space.
+            # Do not notify recipients, and do not mark the message as unread.
+            # This behaves similarly to the user muting the conversation or enabling
+            # [Chat Do Not Disturb](https://support.google.com/chat/answer/9093489).
             #
             # Requires [app authentication]
             # (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
@@ -797,6 +798,241 @@ module Google
         #   @return [::Google::Apps::Card::V1::Card]
         #     A card. Maximum size is 32 KB.
         class CardWithId
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for searching messages.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the space to search within.
+        #
+        #     To search across all spaces the user has access to, set this field to
+        #     `spaces/-`. Using any other value for `parent` results in an
+        #     `INVALID_ARGUMENT` error.
+        #
+        #     To limit the search to one or more spaces, use `space.name` or
+        #     `space.display_name` in the `filter`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Required. A search query.
+        #
+        #     The query can specify one or more search keywords, which are used to filter
+        #     the results,
+        #
+        #     You can also filter the results using the following message fields:
+        #
+        #     - `create_time`: Accepts a timestamp in
+        #       [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+        #       supported comparison operators are: `<` and `>=`.
+        #     - `sender.name`: The resource name of the sender (`users/{user}`). Only
+        #       supports `=`. You can use the e-mail as an alias for `{user}`. For
+        #       example, `users/example@gmail.com`, where `example@gmail.com` is the
+        #       e-mail of the Google Chat user.
+        #     - `space.name`: The resource name of the space where the message is posted.
+        #       (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+        #       search is performed across all direct messages and spaces the user has
+        #       access to as a space member.
+        #     - `space.display_name`: Supports the operator `:` (has) and filters spaces
+        #       based on a partial match of their display name. Results are limited to
+        #       the top five space matches. For example, `space.display_name:Project`
+        #       searches for messages in the top five spaces that contain the word
+        #       "Project" in their display names.
+        #     - `attachment`: Supports the operator `:*` (has any) to check for the
+        #       presence of attachments. If `attachment:*` is specified, only messages
+        #       that have at least one attachment are returned.
+        #     - `annotations.user_mentions.user.name`: The resource name of the mentioned
+        #       user (`users/{user}`). Only supports `:` (has). For example:
+        #       `annotations.user_mentions.user.name:"users/1234567890"` returns only
+        #       messages that contain a mention to the specified user. Alternatively, the
+        #       alias `me` can be used to filter for messages that mention the caller
+        #       user, for example: `annotations.user_mentions.user.name:users/me`. You
+        #       can also use the e-mail as an alias for `{user}`, for example,
+        #       `users/example@gmail.com`.
+        #
+        #     For advanced filtering, the following functions are also available:
+        #
+        #     - `has_link()`: Returns only messages that have at least one hyperlink in
+        #       the message text.
+        #     - `is_unread()`: Filters out messages that have been read by the calling
+        #       user.
+        #
+        #     Using the `space.display_name` filter requires that the calling credentials
+        #     include one of the following [authorization
+        #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+        #
+        #     - `https://www.googleapis.com/auth/chat.spaces.readonly`
+        #     - `https://www.googleapis.com/auth/chat.spaces`
+        #
+        #     Using the `is_unread()` filter requires that the calling credentials
+        #     include one of the following [authorization
+        #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+        #
+        #     - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+        #     - `https://www.googleapis.com/auth/chat.users.readstate`
+        #
+        #
+        #     Across different fields, only `AND` operators are supported. A valid
+        #     example is `sender.name = "users/1234567890" AND is_unread()`. The word
+        #     `AND` is optional and is implied if omitted. For example, `sender.name =
+        #     "users/1234567890" is_unread()` is valid and is equivalent to the previous
+        #     example. An invalid example is `sender.name = "users/1234567890" OR
+        #     is_unread()` because `OR` is not supported between different fields.
+        #
+        #     Among the same field:
+        #
+        #     - `create_time` supports only `AND`, and can only be used to represent
+        #        an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+        #        create_time < "2023-01-01T00:00:00+00:00"`.
+        #     - `sender.name` supports only the `OR` operator, for example:
+        #       `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+        #     - `space.name` supports only the `OR` operator, for example:
+        #       `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+        #     - `space.display_name` supports the operators `AND` and `OR`, but not a
+        #       mix of both. For example:
+        #       `space.display_name:Project AND space.display_name:Tasks` returns
+        #       messages that are in spaces with display names containing both `Project`
+        #       and `Tasks`, whereas
+        #       `space.display_name:Project OR space.display_name:Tasks` returns messages
+        #       that are in spaces with display names containing either `Project` or
+        #       `Tasks` or both.
+        #     - `annotations.user_mentions.user.name` supports the operators `AND` and
+        #       `OR`, but not a mix of both. For example:
+        #       `annotations.user_mentions.user.name:"users/1234567890" AND
+        #       annotations.user_mentions.user.name:"users/0987654321"` returns only
+        #       messages that mentions both users, whereas
+        #       `annotations.user_mentions.user.name:"users/1234567890" OR
+        #       annotations.user_mentions.user.name:"users/0987654321"` returns messages
+        #       that mention either user or both.
+        #
+        #     Parentheses are required to disambiguate operator precedence when combining
+        #     `AND` and `OR` operators in the same query. For example:
+        #     `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+        #     Otherwise, parentheses are optional.
+        #
+        #     The following example queries are valid:
+        #
+        #     ```
+        #     "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+        #
+        #     sender.name = "users/example@gmail.com"
+        #
+        #     annotations.user_mentions.user.name:"users/0987654321"
+        #
+        #     attachment:* AND space.name = "spaces/ABCDEFGH"
+        #
+        #     tasks AND is_unread() AND sender.name = "users/1234567890"
+        #
+        #     "things to do" "urgent"
+        #
+        #     (sender.name = "users/1234567890")
+        #     AND (create_time < "2023-05-01T00:00:00Z")
+        #
+        #     tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+        #
+        #     "project one" is_unread()
+        #
+        #     space.display_name:Project tasks
+        #     ```
+        #
+        #     The maximum query length is 1,000 characters.
+        #
+        #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+        #     error.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return. The service may return
+        #     fewer than this value.
+        #
+        #     If unspecified, at most 25 are returned.
+        #
+        #     The maximum value is 100. If you use a value more than 100, it's
+        #     automatically changed to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token, received from the previous search messages call. Provide
+        #     this parameter to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided should match the call that
+        #     provided the page token. Passing different values to the other parameters
+        #     might lead to unexpected results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. How the results list is ordered.
+        #
+        #     Supported attributes to order by are:
+        #
+        #     - `create_time`: Sorts the results by the time of the message creation.
+        #       Default value.
+        #     - `relevance`: Sorts the results by relevance.
+        #       [Developer Preview](https://developers.google.com/workspace/preview).
+        #
+        #     The default ordering is `create_time desc`. Only a single order per query
+        #     (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+        #     is supported, and it must be specified after the order attribute.
+        # @!attribute [rw] view
+        #   @return [::Google::Apps::Chat::V1::SearchMessagesRequest::SearchMessagesView]
+        #     Optional. Specifies what kind of search results view to return. The default
+        #     is `SEARCH_MESSAGES_VIEW_BASIC`.
+        class SearchMessagesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The kinds of view that are supported for partial search results.
+          module SearchMessagesView
+            # The default / unset value.
+            # The API will default to the BASIC view.
+            SEARCH_MESSAGES_VIEW_UNSPECIFIED = 0
+
+            # Includes only the matched messages in the results, but no additional
+            # metadata. This is the default value.
+            SEARCH_MESSAGES_VIEW_BASIC = 1
+
+            # Includes everything in the results: the matched messages and additional
+            # metadata.
+            SEARCH_MESSAGES_VIEW_FULL = 2
+          end
+        end
+
+        # Response message for searching messages.
+        # @!attribute [rw] results
+        #   @return [::Array<::Google::Apps::Chat::V1::SearchMessageResult>]
+        #     The list of search results that matched the query.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be used to retrieve the next page. If this field is empty,
+        #     there are no subsequent pages.
+        class SearchMessagesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A single result item from a message search.
+        # @!attribute [rw] message
+        #   @return [::Google::Apps::Chat::V1::Message]
+        #     The matched message.
+        # @!attribute [rw] read
+        #   @return [::Boolean]
+        #     Indicates if the matched message is read by the calling user.
+        #
+        #     Only returned if the request view is `SEARCH_MESSAGES_VIEW_FULL` and the
+        #     calling credentials include one of the following [authorization
+        #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+        #
+        #       - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+        #       - `https://www.googleapis.com/auth/chat.users.readstate`
+        # @!attribute [rw] space_mute_setting
+        #   @return [::Google::Apps::Chat::V1::SpaceNotificationSetting::MuteSetting]
+        #     The mute setting of the calling user for the space where the message is
+        #     posted. The caller app can use this information to decide how to process
+        #     the message depending on whether the space is muted for the user or not.
+        #
+        #     Only returned if the request view is `SEARCH_MESSAGES_VIEW_FULL` and the
+        #     calling credentials include the following [authorization
+        #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+        #
+        #       - `https://www.googleapis.com/auth/chat.users.spacesettings`
+        class SearchMessageResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

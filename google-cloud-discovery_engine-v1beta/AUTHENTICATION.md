@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/discovery_engine/v1beta"
 
-client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new do |config|
+client = ::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/cloud/discovery_engine/v1beta"
 
-::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.configure do |config|
+::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new
+client = ::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/discovery_engine/v1beta"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client.new
+client = ::Google::Cloud::DiscoveryEngine::V1beta::AclConfigService::Client.new
 ```
 
 ### Local ADC file

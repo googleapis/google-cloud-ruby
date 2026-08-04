@@ -34,29 +34,51 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.discoveryengine.v1beta.EngineService'
 
-            # Creates a [Engine][google.cloud.discoveryengine.v1beta.Engine].
+            # Creates an [Engine][google.cloud.discoveryengine.v1beta.Engine].
             rpc :CreateEngine, ::Google::Cloud::DiscoveryEngine::V1beta::CreateEngineRequest, ::Google::Longrunning::Operation
-            # Deletes a [Engine][google.cloud.discoveryengine.v1beta.Engine].
+            # Deletes an [Engine][google.cloud.discoveryengine.v1beta.Engine].
             rpc :DeleteEngine, ::Google::Cloud::DiscoveryEngine::V1beta::DeleteEngineRequest, ::Google::Longrunning::Operation
             # Updates an [Engine][google.cloud.discoveryengine.v1beta.Engine]
             rpc :UpdateEngine, ::Google::Cloud::DiscoveryEngine::V1beta::UpdateEngineRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Engine
-            # Gets a [Engine][google.cloud.discoveryengine.v1beta.Engine].
+            # Gets an [Engine][google.cloud.discoveryengine.v1beta.Engine].
             rpc :GetEngine, ::Google::Cloud::DiscoveryEngine::V1beta::GetEngineRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Engine
             # Lists all the [Engine][google.cloud.discoveryengine.v1beta.Engine]s
             # associated with the project.
             rpc :ListEngines, ::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest, ::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesResponse
-            # Pauses the training of an existing engine. Only applicable if
+            # Pauses the training of an existing
+            # [Engine][google.cloud.discoveryengine.v1beta.Engine]. Only applicable if
             # [SolutionType][google.cloud.discoveryengine.v1beta.SolutionType] is
             # [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
             rpc :PauseEngine, ::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Engine
-            # Resumes the training of an existing engine. Only applicable if
+            # Resumes the training of an existing
+            # [Engine][google.cloud.discoveryengine.v1beta.Engine]. Only applicable if
             # [SolutionType][google.cloud.discoveryengine.v1beta.SolutionType] is
             # [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
             rpc :ResumeEngine, ::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest, ::Google::Cloud::DiscoveryEngine::V1beta::Engine
-            # Tunes an existing engine. Only applicable if
+            # Tunes an existing [Engine][google.cloud.discoveryengine.v1beta.Engine].
+            # Only applicable if
             # [SolutionType][google.cloud.discoveryengine.v1beta.SolutionType] is
             # [SOLUTION_TYPE_RECOMMENDATION][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
             rpc :TuneEngine, ::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest, ::Google::Longrunning::Operation
+            # Gets the IAM access control policy for an
+            # [Engine][google.cloud.discoveryengine.v1beta.Engine]. A `NOT_FOUND` error
+            # is returned if the resource does not exist. An empty policy is returned if
+            # the resource exists but does not have a policy set on it.
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Sets the IAM access control policy for an
+            # [Engine][google.cloud.discoveryengine.v1beta.Engine]. A `NOT_FOUND` error
+            # is returned if the resource does not exist.
+            #
+            # **Important:** When setting a policy directly on an Engine resource,
+            # the only recommended roles in the bindings are:
+            # `roles/discoveryengine.admin`,
+            # `roles/discoveryengine.agentspaceAdmin`,
+            # `roles/discoveryengine.user`,
+            # `roles/discoveryengine.agentspaceUser`,
+            # `roles/discoveryengine.viewer`,
+            # `roles/discoveryengine.agentspaceViewer`.
+            # Attempting to grant any other role will result in a warning in logging.
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
           end
 
           Stub = Service.rpc_stub_class

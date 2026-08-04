@@ -21,6 +21,343 @@ module Google
   module Ads
     module AdManager
       module V1
+        # Request message for `BatchApproveAndOverbookOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to approve and overbook.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        # @!attribute [rw] skip_inventory_check
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the inventory check should be skipped when
+        #     performing this action.
+        class BatchApproveAndOverbookOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchApproveAndOverbookOrders` method.
+        class BatchApproveAndOverbookOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchApproveOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to approve.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        # @!attribute [rw] skip_inventory_check
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the inventory check should be skipped when
+        #     performing this action.
+        class BatchApproveOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchApproveOrders` method.
+        class BatchApproveOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchSubmitOrdersForApproval` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to submit for approval.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        # @!attribute [rw] skip_inventory_check
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the inventory check should be skipped when
+        #     performing this action.
+        class BatchSubmitOrdersForApprovalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchSubmitOrdersForApproval` method.
+        class BatchSubmitOrdersForApprovalResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchSubmitOrdersForApprovalAndOverbook` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to submit for approval and
+        #     overbook. Format: `networks/{network_code}/orders/{order_id}`
+        class BatchSubmitOrdersForApprovalAndOverbookRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchSubmitOrdersForApprovalAndOverbook` method.
+        class BatchSubmitOrdersForApprovalAndOverbookResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchPauseOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to pause.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchPauseOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchPauseOrders` method.
+        class BatchPauseOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchResumeOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to resume.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        # @!attribute [rw] skip_inventory_check
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the inventory check should be skipped when
+        #     performing this action.
+        class BatchResumeOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchResumeOrders` method.
+        class BatchResumeOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchResumeAndOverbookOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to resume and overbook.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchResumeAndOverbookOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchResumeAndOverbookOrders` method.
+        class BatchResumeAndOverbookOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchApproveOrdersWithoutReservation` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to approve.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchApproveOrdersWithoutReservationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchApproveOrdersWithoutReservation` method.
+        class BatchApproveOrdersWithoutReservationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchArchiveOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to archive.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchArchiveOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchArchiveOrders` method.
+        class BatchArchiveOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchUnarchiveOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to extract.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchUnarchiveOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUnarchiveOrders` method.
+        class BatchUnarchiveOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDeleteOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to delete.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchDeleteOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDeleteOrders` method.
+        class BatchDeleteOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDisapproveOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to disapprove.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchDisapproveOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDisapproveOrders` method.
+        class BatchDisapproveOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchDisapproveOrdersWithoutReservationChanges` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to disapprove without
+        #     reservation changes. Format: `networks/{network_code}/orders/{order_id}`
+        class BatchDisapproveOrdersWithoutReservationChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchDisapproveOrdersWithoutReservationChanges` method.
+        class BatchDisapproveOrdersWithoutReservationChangesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchRetractOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to retract.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchRetractOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchRetractOrders` method.
+        class BatchRetractOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for `BatchRetractOrdersWithoutReservationChanges` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to retract.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchRetractOrdersWithoutReservationChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchRetractOrdersWithoutReservationChanges` method.
+        class BatchRetractOrdersWithoutReservationChangesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # `BatchSubmitOrdersForApprovalWithoutReservationChanges` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of Orders.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The resource names of the orders to submit for approval.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        class BatchSubmitOrdersForApprovalWithoutReservationChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for
+        # `BatchSubmitOrdersForApprovalWithoutReservationChanges` method.
+        class BatchSubmitOrdersForApprovalWithoutReservationChangesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request object for `GetOrder` method.
         # @!attribute [rw] name
         #   @return [::String]
@@ -65,6 +402,7 @@ module Google
         #       <li><code>displayName</code></li>
         #       <li><code>endTime</code></li>
         #       <li><code>externalOrderId</code></li>
+        #       <li><code>impressionsDelivered</code></li>
         #       <li><code>name</code></li>
         #       <li><code>orderId</code></li>
         #       <li><code>poNumber</code></li>
@@ -74,6 +412,8 @@ module Google
         #       <li><code>secondaryTraffickers</code></li>
         #       <li><code>startTime</code></li>
         #       <li><code>status</code></li>
+        #       <li><code>totalClicksDelivered</code></li>
+        #       <li><code>totalViewableImpressionsDelivered</code></li>
         #       <li><code>trafficker</code></li>
         #       <li><code>updateTime</code></li>
         #     </ul>
@@ -113,6 +453,84 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateOrder` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this Order will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] order
+        #   @return [::Google::Ads::AdManager::V1::Order]
+        #     Required. The `Order` to create.
+        class CreateOrderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateOrder` method.
+        # @!attribute [rw] order
+        #   @return [::Google::Ads::AdManager::V1::Order]
+        #     Required. The `Order` to update.
+        #
+        #     The Order's name is used to identify the order to update.
+        #     Format: `networks/{network_code}/orders/{order_id}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateOrderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Orders` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateOrderRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateOrderRequest>]
+        #     Required. The `Order` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateOrders` method.
+        # @!attribute [rw] orders
+        #   @return [::Array<::Google::Ads::AdManager::V1::Order>]
+        #     The `Order` objects created.
+        class BatchCreateOrdersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateOrders` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `Orders` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the UpdateOrderRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateOrderRequest>]
+        #     Required. The `Order` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateOrdersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateOrders` method.
+        # @!attribute [rw] orders
+        #   @return [::Array<::Google::Ads::AdManager::V1::Order>]
+        #     The `Order` objects updated.
+        class BatchUpdateOrdersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
