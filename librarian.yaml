@@ -39,7 +39,7 @@ libraries:
       wrapper_of:
         - v1:0.29
   - name: google-cloud-asset-v1
-    version: 1.9.0
+    version: 1.9.1
     apis:
       - path: google/cloud/asset/v1
         ruby:
