@@ -358,6 +358,7 @@ describe "Files Snippets" do
       set_object_contexts bucket_name: bucket.name, file_name: remote_file_name2, custom_context_key: custom_context_key2, custom_context_value: custom_context_value2
     end
 
+
     it "filters out files on the basis of custom context key" do
       out, _err = capture_io do
         list_object_contexts bucket_name: bucket.name, custom_context_key: custom_context_key1
