@@ -13,6 +13,8 @@
 # limitations under the License.
 
 require "minitest/focus"
+require "minitest/mock"
+require "ostruct"
 
 require "google/cloud/firestore"
 
@@ -64,8 +66,20 @@ module Google
         def last_error
         end
       end
-      DocumentListener = StubbedListener
-      QueryListener = StubbedListener
+
+      class DocumentReference
+        def listen &callback
+          StubbedListener.new.start
+        end
+        alias on_snapshot listen
+      end
+
+      class Query
+        def listen &callback
+          StubbedListener.new.start
+        end
+        alias on_snapshot listen
+      end
     end
   end
 end
@@ -89,6 +103,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Firestore::V1::FirestoreClient"
   doctest.skip "Google::Cloud::Firestore::V1beta1::FirestoreClient"
   doctest.skip "Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient"
+  doctest.skip "Google::Cloud::Firestore::BulkWriter"
 
   doctest.before "Google::Cloud#firestore" do
     mock_firestore
