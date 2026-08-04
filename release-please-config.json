@@ -5,7 +5,7 @@
   "include-component-in-tag": true,
   "include-v-in-tag": true,
   "prerelease": false,
-  "release-type": "ruby-yoshi",
+  "release-type": "ruby-librarian",
   "skip-github-release": false,
   "separate-pull-requests": true,
   "tag-separator": "/",
