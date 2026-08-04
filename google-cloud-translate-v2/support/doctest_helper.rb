@@ -14,6 +14,8 @@
 
 require "google/cloud/translate/v2"
 require "minitest/focus"
+require "minitest/mock"
+require "ostruct"
 
 module Google
   module Cloud
@@ -55,7 +57,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Translate::V2.new" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"]], to: "la", from: nil, format: nil, model: nil, cid: nil
     end
   end
 
@@ -64,7 +66,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Translate::V2::Api" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"]], to: "la", from: nil, format: nil, model: nil, cid: nil
     end
   end
 
@@ -82,21 +84,21 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Translate::V2::Api#translate" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!", model: "base" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"]], to: "la", from: nil, format: nil, model: nil, cid: nil
     end
   end
 
   doctest.before "Google::Cloud::Translate::V2::Api#translate@Using the neural machine translation model:" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!", model: "nmt" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: "nmt", cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"]], to: "la", from: nil, format: nil, model: "nmt", cid: nil
     end
   end
 
   doctest.before "Google::Cloud::Translate::V2::Api#translate@Setting the `from` language." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: nil, translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: "en", format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"]], to: "la", from: "en", format: nil, model: nil, cid: nil
     end
   end
 
@@ -104,14 +106,14 @@ YARD::Doctest.configure do |doctest|
     mock_translate do |mock|
       res_attrs_1 = { detectedSourceLanguage: nil, translatedText: "Salve amice." }
       res_attrs_2 = { detectedSourceLanguage: nil, translatedText: "Vide te mox." }
-      mock.expect :translate, list_translations_response([res_attrs_1, res_attrs_2]), [["Hello my friend.", "See you soon."], to: "la", from: "en", format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs_1, res_attrs_2]), [["Hello my friend.", "See you soon."]], to: "la", from: "en", format: nil, model: nil, cid: nil
     end
   end
 
   doctest.before "Google::Cloud::Translate::V2::Api#translate@Preserving HTML tags." do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: nil, translatedText: "<strong>Salve</strong> mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["<strong>Hello</strong> world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["<strong>Hello</strong> world!"]], to: "la", from: nil, format: nil, model: nil, cid: nil
     end
   end
 
@@ -162,7 +164,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Translate::V2::Translation" do
     mock_translate do |mock|
       res_attrs = { detectedSourceLanguage: "en", translatedText: "Salve mundi!" }
-      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"], to: "la", from: nil, format: nil, model: nil, cid: nil]
+      mock.expect :translate, list_translations_response([res_attrs]), [["Hello world!"]], to: "la", from: nil, format: nil, model: nil, cid: nil
     end
   end
 end
