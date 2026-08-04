@@ -1,5 +1,12 @@
 # Release History
 
+### 1.9.1 (2026-08-04)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35045](https://github.com/googleapis/google-cloud-ruby/issues/35045)) 
+* onboard google-cloud-asset-v1 to Librarian ([#35014](https://github.com/googleapis/google-cloud-ruby/issues/35014)) 
+
 ### 1.9.0 (2026-06-11)
 
 #### Features
