@@ -2,9 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     // Use pre-determined best practices, including monorepo groupings & GitHub Action digest pinning
-    "config:best-practices",
-    // Create version bump PRs globally on a monthly basis (first day of the month)
-    "schedule:monthly"
+    "config:best-practices"
+  ],
+  // Restrict Renovate's execution to weekend window
+  "schedule": [
+    "after 8pm on Friday and before 6am on Monday"
   ],
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
@@ -16,15 +18,16 @@
     "enabled": true,
     "groupName": "maintain Gemfile.lock files",
     "automerge": false
-    // Inherits "schedule:monthly" from extends preset
+    // Inherits weekend schedule from root config
   },
   "packageRules": [
-    // Group all patch updates across all dependencies into a single PR
+    // Group all minor and patch updates across all dependencies into a single collective PR
     {
       "matchUpdateTypes": [
+        "minor",
         "patch"
       ],
-      "groupName": "all patch updates"
+      "groupName": "all minor and patch dependencies"
     },
 
     // Disable proactive rubygems version bumps across Phase 1 while keeping lockFileMaintenance enabled.
