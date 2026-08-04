@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2026-08-04)
+
+#### Features
+
+* Upgrade protobuf to v33.2 ([#35100](https://github.com/googleapis/google-cloud-ruby/issues/35100)) 
+
 ### 0.6.0 (2026-06-11)
 
 #### Features
