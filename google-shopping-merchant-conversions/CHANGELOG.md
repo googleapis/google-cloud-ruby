@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.5.0 (2026-08-04)
+
+#### Features
+
+* Upgrade protobuf to v33.2 ([#35100](https://github.com/googleapis/google-cloud-ruby/issues/35100)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35067](https://github.com/googleapis/google-cloud-ruby/issues/35067)) 
+
 ### 0.4.0 (2026-06-11)
 
 #### Features
