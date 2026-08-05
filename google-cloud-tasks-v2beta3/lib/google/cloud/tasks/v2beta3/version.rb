@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Tasks
       module V2beta3
-        VERSION = "0.20.0"
+        VERSION = "0.20.1"
       end
     end
   end
