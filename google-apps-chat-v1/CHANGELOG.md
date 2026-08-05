@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.28.0 (2026-08-05)
+
+#### Features
+
+* Addition of the Search Messages API ([#35039](https://github.com/googleapis/google-cloud-ruby/issues/35039)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
 ### 0.27.0 (2026-07-23)
 
 #### Features
