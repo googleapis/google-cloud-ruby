@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.33.0
 sources:
   googleapis:
     commit: 57394718a71457aa37ab002352b22081976bdd91
@@ -27,6 +26,371 @@ tools:
     version: "33.2"
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 libraries:
+  - name: google-ads-ad_manager
+    apis:
+      - path: google/ads/admanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-ads-ad_manager-v1
+    apis:
+      - path: google/ads/admanager/v1
+    skip_generate: true
+  - name: google-ads-data_manager
+    apis:
+      - path: google/ads/datamanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-ads-data_manager-v1
+    apis:
+      - path: google/ads/datamanager/v1
+    skip_generate: true
+  - name: google-ads-marketing_platform-admin
+    apis:
+      - path: google/marketingplatform/admin/v1alpha
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1alpha:0.0
+  - name: google-ads-marketing_platform-admin-v1alpha
+    apis:
+      - path: google/marketingplatform/admin/v1alpha
+    skip_generate: true
+  - name: google-analytics-admin
+    apis:
+      - path: google/analytics/admin/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ANALYTICS_ADMIN
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1alpha:0.27
+  - name: google-analytics-admin-v1alpha
+    apis:
+      - path: google/analytics/admin/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ANALYTICS_ADMIN
+    skip_generate: true
+  - name: google-analytics-data
+    apis:
+      - path: google/analytics/data/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ANALYTICS_DATA
+            ruby-cloud-service-override: BetaAnalyticsData=AnalyticsData
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.11
+  - name: google-analytics-data-v1beta
+    apis:
+      - path: google/analytics/data/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ANALYTICS_DATA
+            ruby-cloud-service-override: BetaAnalyticsData=AnalyticsData
+    skip_generate: true
+  - name: google-apps-chat
+    apis:
+      - path: google/chat/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-apps-chat-v1
+    apis:
+      - path: google/chat/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-apps-card-v1=>0.0+<2.a
+    skip_generate: true
+  - name: google-apps-events-subscriptions
+    apis:
+      - path: google/apps/events/subscriptions/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-apps-events-subscriptions-v1
+    apis:
+      - path: google/apps/events/subscriptions/v1
+    skip_generate: true
+  - name: google-apps-events-subscriptions-v1beta
+    apis:
+      - path: google/apps/events/subscriptions/v1beta
+    skip_generate: true
+  - name: google-apps-meet
+    apis:
+      - path: google/apps/meet/v2
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.0
+  - name: google-apps-meet-v2
+    apis:
+      - path: google/apps/meet/v2
+    skip_generate: true
+  - name: google-apps-meet-v2beta
+    apis:
+      - path: google/apps/meet/v2beta
+    skip_generate: true
+  - name: google-area120-tables
+    apis:
+      - path: google/area120/tables/v1alpha1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: AREA120_TABLES
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1alpha1:0.7
+  - name: google-area120-tables-v1alpha1
+    apis:
+      - path: google/area120/tables/v1alpha1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: AREA120_TABLES
+    skip_generate: true
+  - name: google-cloud-access_approval
+    apis:
+      - path: google/cloud/accessapproval/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ACCESS_APPROVAL
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.11
+  - name: google-cloud-access_approval-v1
+    apis:
+      - path: google/cloud/accessapproval/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ACCESS_APPROVAL
+    skip_generate: true
+  - name: google-cloud-advisory_notifications
+    apis:
+      - path: google/cloud/advisorynotifications/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-cloud-advisory_notifications-v1
+    apis:
+      - path: google/cloud/advisorynotifications/v1
+    skip_generate: true
+  - name: google-cloud-agent_registry
+    apis:
+      - path: google/cloud/agentregistry/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-agent_registry-v1
+    apis:
+      - path: google/cloud/agentregistry/v1
+    skip_generate: true
+  - name: google-cloud-ai_platform
+    apis:
+      - path: google/cloud/aiplatform/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::AIPlatform
+            ruby-cloud-service-override: AiPlatform=AIPlatform
+    keep:
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/predict_text_prompt_test.rb
+      - samples/predict_text_prompt.rb
+      - test/README.md
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-ai_platform-v1
+    apis:
+      - path: google/cloud/aiplatform/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::AIPlatform::V1
+            ruby-cloud-service-override: AiPlatform=AIPlatform
+    skip_generate: true
+  - name: google-cloud-alloy_db
+    apis:
+      - path: google/cloud/alloydb/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::AlloyDB
+            ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-alloy_db-v1
+    apis:
+      - path: google/cloud/alloydb/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1
+            ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
+    skip_generate: true
+  - name: google-cloud-alloy_db-v1alpha
+    apis:
+      - path: google/cloud/alloydb/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1alpha
+            ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
+    skip_generate: true
+  - name: google-cloud-alloy_db-v1beta
+    apis:
+      - path: google/cloud/alloydb/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1beta
+            ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
+    skip_generate: true
+  - name: google-cloud-api_gateway
+    apis:
+      - path: google/cloud/apigateway/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: API_GATEWAY
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-api_gateway-v1
+    apis:
+      - path: google/cloud/apigateway/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: API_GATEWAY
+    skip_generate: true
+  - name: google-cloud-api_hub
+    apis:
+      - path: google/cloud/apihub/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-api_hub-v1
+    apis:
+      - path: google/cloud/apihub/v1
+    skip_generate: true
+  - name: google-cloud-api_keys
+    apis:
+      - path: google/api/apikeys/v2
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.5
+  - name: google-cloud-api_keys-v2
+    apis:
+      - path: google/api/apikeys/v2
+    skip_generate: true
+  - name: google-cloud-api_registry
+    apis:
+      - path: google/cloud/apiregistry/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-api_registry-v1beta
+    apis:
+      - path: google/cloud/apiregistry/v1beta
+    skip_generate: true
+  - name: google-cloud-apigee_connect
+    apis:
+      - path: google/cloud/apigeeconnect/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: APIGEE_CONNECT
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.6
+  - name: google-cloud-apigee_connect-v1
+    apis:
+      - path: google/cloud/apigeeconnect/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: APIGEE_CONNECT
+    skip_generate: true
+  - name: google-cloud-apigee_registry
+    skip_generate: true
+  - name: google-cloud-apigee_registry-v1
+    apis:
+      - path: google/cloud/apigeeregistry/v1
+    skip_generate: true
+  - name: google-cloud-app_engine
+    apis:
+      - path: google/appengine/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: APP_ENGINE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.9
+  - name: google-cloud-app_engine-v1
+    apis:
+      - path: google/appengine/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: APP_ENGINE
+    skip_generate: true
+  - name: google-cloud-app_hub
+    apis:
+      - path: google/cloud/apphub/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-app_hub-v1
+    apis:
+      - path: google/cloud/apphub/v1
+    skip_generate: true
+  - name: google-cloud-app_optimize
+    apis:
+      - path: google/cloud/appoptimize/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-app_optimize-v1beta
+    apis:
+      - path: google/cloud/appoptimize/v1beta
+    skip_generate: true
+  - name: google-cloud-artifact_registry
+    apis:
+      - path: google/devtools/artifactregistry/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ARTIFACT_REGISTRY
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.3
+  - name: google-cloud-artifact_registry-v1
+    apis:
+      - path: google/devtools/artifactregistry/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ARTIFACT_REGISTRY
+    skip_generate: true
+  - name: google-cloud-artifact_registry-v1beta2
+    apis:
+      - path: google/devtools/artifactregistry/v1beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ARTIFACT_REGISTRY
+    skip_generate: true
   - name: google-cloud-asset
     version: 1.10.1
     apis:
@@ -51,11 +415,3876 @@ libraries:
     keep:
       - lib/google/cloud/asset/v1/asset_service/helpers.rb
       - test/google/cloud/asset/v1/additional_paths_test.rb
-  - name: google-maps-route_optimization-v1
-    version: 0.0.1
+  - name: google-cloud-assured_workloads
     apis:
-      - path: google/maps/routeoptimization/v1
-    copyright_year: "2026"
+      - path: google/cloud/assuredworkloads/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ASSURED_WORKLOADS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-assured_workloads-v1
+    apis:
+      - path: google/cloud/assuredworkloads/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ASSURED_WORKLOADS
+    skip_generate: true
+  - name: google-cloud-assured_workloads-v1beta1
+    apis:
+      - path: google/cloud/assuredworkloads/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ASSURED_WORKLOADS
+    skip_generate: true
+  - name: google-cloud-audit_manager
+    apis:
+      - path: google/cloud/auditmanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-audit_manager-v1
+    apis:
+      - path: google/cloud/auditmanager/v1
+    skip_generate: true
+  - name: google-cloud-automl
+    apis:
+      - path: google/cloud/automl/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: AUTOML
+            ruby-cloud-gem-namespace: Google::Cloud::AutoML
+            ruby-cloud-migration-version: "1.0"
+            ruby-cloud-namespace-override: AutoMl=AutoML
+            ruby-cloud-path-override: auto_ml=automl
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/automl/v1beta1/automl_service_smoke_test.rb
+      - lib/google/cloud/automl/helpers.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-automl-v1
+    apis:
+      - path: google/cloud/automl/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: AUTOML
+            ruby-cloud-namespace-override: AutoMl=AutoML;Automl=AutoML
+            ruby-cloud-path-override: auto_ml=automl
+            ruby-cloud-yard-strict: "false"
+    keep:
+      - lib/google/cloud/automl/v1/_helpers.rb
+    skip_generate: true
+  - name: google-cloud-automl-v1beta1
+    apis:
+      - path: google/cloud/automl/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: AUTOML
+            ruby-cloud-namespace-override: AutoMl=AutoML;Automl=AutoML
+            ruby-cloud-path-override: auto_ml=automl
+    keep:
+      - lib/google/cloud/automl/v1beta1/_helpers.rb
+    skip_generate: true
+  - name: google-cloud-backupdr
+    apis:
+      - path: google/cloud/backupdr/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Backupdr=BackupDR
+            ruby-cloud-path-override: backup_dr=backupdr
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-backupdr-v1
+    apis:
+      - path: google/cloud/backupdr/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Backupdr=BackupDR
+            ruby-cloud-path-override: backup_dr=backupdr
+    skip_generate: true
+  - name: google-cloud-bare_metal_solution
+    apis:
+      - path: google/cloud/baremetalsolution/v2
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:1.0
+  - name: google-cloud-bare_metal_solution-v2
+    apis:
+      - path: google/cloud/baremetalsolution/v2
+    skip_generate: true
+  - name: google-cloud-batch
+    apis:
+      - path: google/cloud/batch/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-batch-v1
+    apis:
+      - path: google/cloud/batch/v1
+    skip_generate: true
+  - name: google-cloud-beyond_corp
+    apis:
+      - path: google/cloud/beyondcorp/appconnections/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.4
+  - name: google-cloud-beyond_corp-app_connections-v1
+    apis:
+      - path: google/cloud/beyondcorp/appconnections/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
+    skip_generate: true
+  - name: google-cloud-beyond_corp-app_connectors-v1
+    apis:
+      - path: google/cloud/beyondcorp/appconnectors/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
+    skip_generate: true
+  - name: google-cloud-beyond_corp-app_gateways-v1
+    apis:
+      - path: google/cloud/beyondcorp/appgateways/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
+    skip_generate: true
+  - name: google-cloud-beyond_corp-client_gateways-v1
+    apis:
+      - path: google/cloud/beyondcorp/clientgateways/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
+    skip_generate: true
+  - name: google-cloud-bigquery-analytics_hub
+    apis:
+      - path: google/cloud/bigquery/analyticshub/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.5
+  - name: google-cloud-bigquery-analytics_hub-v1
+    apis:
+      - path: google/cloud/bigquery/analyticshub/v1
+    skip_generate: true
+  - name: google-cloud-bigquery-connection
+    apis:
+      - path: google/cloud/bigquery/connection/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_CONNECTION
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.17
+  - name: google-cloud-bigquery-connection-v1
+    apis:
+      - path: google/cloud/bigquery/connection/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_CONNECTION
+    skip_generate: true
+  - name: google-cloud-bigquery-data_exchange
+    apis:
+      - path: google/cloud/bigquery/dataexchange/v1beta1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.6
+  - name: google-cloud-bigquery-data_exchange-v1beta1
+    apis:
+      - path: google/cloud/bigquery/dataexchange/v1beta1
+    skip_generate: true
+  - name: google-cloud-bigquery-data_policies
+    apis:
+      - path: google/cloud/bigquery/datapolicies/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-bigquery-data_policies-v1
+    apis:
+      - path: google/cloud/bigquery/datapolicies/v1
+    skip_generate: true
+  - name: google-cloud-bigquery-data_policies-v1beta1
+    apis:
+      - path: google/cloud/bigquery/datapolicies/v1beta1
+    skip_generate: true
+  - name: google-cloud-bigquery-data_transfer
+    apis:
+      - path: google/cloud/bigquery/datatransfer/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATA_TRANSFER
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/bigquery/data_transfer/v1/data_transfer_service_smoke_test.rb
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/quickstart.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.12
+  - name: google-cloud-bigquery-data_transfer-v1
+    apis:
+      - path: google/cloud/bigquery/datatransfer/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATA_TRANSFER
+            ruby-cloud-yard-strict: "false"
+    skip_generate: true
+  - name: google-cloud-bigquery-migration
+    apis:
+      - path: google/cloud/bigquery/migration/v2
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.9
+  - name: google-cloud-bigquery-migration-v2
+    apis:
+      - path: google/cloud/bigquery/migration/v2
+    skip_generate: true
+  - name: google-cloud-bigquery-reservation
+    apis:
+      - path: google/cloud/bigquery/reservation/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_RESERVATION
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.11
+  - name: google-cloud-bigquery-reservation-v1
+    apis:
+      - path: google/cloud/bigquery/reservation/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_RESERVATION
+    skip_generate: true
+  - name: google-cloud-bigquery-storage
+    apis:
+      - path: google/cloud/bigquery/storage/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_STORAGE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.25
+  - name: google-cloud-bigquery-storage-v1
+    apis:
+      - path: google/cloud/bigquery/storage/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_STORAGE
+    skip_generate: true
+  - name: google-cloud-bigtable-admin-v2
+    apis:
+      - path: google/bigtable/admin/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGTABLE
+            ruby-cloud-wrapper-gem-override: google-cloud-bigtable
+    keep:
+      - lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/helpers.rb
+      - test/google/cloud/bigtable/admin/v2/bigtable_table_admin_helpers_test.rb
+      - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
+    skip_generate: true
+  - name: google-cloud-bigtable-v2
+    apis:
+      - path: google/bigtable/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGTABLE
+    keep:
+      - lib/google/cloud/bigtable/v2/bigtable/helpers.rb
+      - test/google/cloud/bigtable/v2/bigtable/helpers_test.rb
+    skip_generate: true
+  - name: google-cloud-billing
+    apis:
+      - path: google/cloud/billing/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BILLING
+            ruby-cloud-factory-method-suffix: _service
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.17
+  - name: google-cloud-billing-budgets
+    apis:
+      - path: google/cloud/billing/budgets/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BILLING_BUDGETS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-billing-budgets-v1
+    apis:
+      - path: google/cloud/billing/budgets/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BILLING_BUDGETS
+    skip_generate: true
+  - name: google-cloud-billing-budgets-v1beta1
+    apis:
+      - path: google/cloud/billing/budgets/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BILLING_BUDGETS
+    skip_generate: true
+  - name: google-cloud-billing-v1
+    apis:
+      - path: google/cloud/billing/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BILLING
+    skip_generate: true
+  - name: google-cloud-binary_authorization
+    apis:
+      - path: google/cloud/binaryauthorization/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BINARY_AUTHORIZATION
+            ruby-cloud-service-override: BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-binary_authorization-v1
+    apis:
+      - path: google/cloud/binaryauthorization/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BINARY_AUTHORIZATION
+            ruby-cloud-extra-dependencies: grafeas-v1=>0.0+<2.a
+            ruby-cloud-service-override: BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper
+            ruby-cloud-yard-strict: "false"
+    skip_generate: true
+  - name: google-cloud-binary_authorization-v1beta1
+    apis:
+      - path: google/cloud/binaryauthorization/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BINARY_AUTHORIZATION
+            ruby-cloud-service-override: BinauthzManagementServiceV1Beta1=BinauthzManagementService;SystemPolicyV1Beta1=SystemPolicy
+    skip_generate: true
+  - name: google-cloud-build
+    apis:
+      - path: google/devtools/cloudbuild/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_BUILD
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.26
+  - name: google-cloud-build-v1
+    apis:
+      - path: google/devtools/cloudbuild/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_BUILD
+    skip_generate: true
+  - name: google-cloud-build-v2
+    apis:
+      - path: google/devtools/cloudbuild/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_BUILD
+    skip_generate: true
+  - name: google-cloud-capacity_planner
+    apis:
+      - path: google/cloud/capacityplanner/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-capacity_planner-v1beta
+    apis:
+      - path: google/cloud/capacityplanner/v1beta
+    skip_generate: true
+  - name: google-cloud-certificate_manager
+    apis:
+      - path: google/cloud/certificatemanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-certificate_manager-v1
+    apis:
+      - path: google/cloud/certificatemanager/v1
+    skip_generate: true
+  - name: google-cloud-ces
+    apis:
+      - path: google/cloud/ces/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-ces-v1
+    apis:
+      - path: google/cloud/ces/v1
+    skip_generate: true
+  - name: google-cloud-ces-v1beta
+    apis:
+      - path: google/cloud/ces/v1beta
+    skip_generate: true
+  - name: google-cloud-channel
+    apis:
+      - path: google/cloud/channel/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CHANNEL
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-channel-v1
+    apis:
+      - path: google/cloud/channel/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CHANNEL
+    skip_generate: true
+  - name: google-cloud-chronicle
+    apis:
+      - path: google/cloud/chronicle/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-chronicle-v1
+    apis:
+      - path: google/cloud/chronicle/v1
+    skip_generate: true
+  - name: google-cloud-cloud_controls_partner
+    apis:
+      - path: google/cloud/cloudcontrolspartner/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-cloud_controls_partner-v1
+    apis:
+      - path: google/cloud/cloudcontrolspartner/v1
+    skip_generate: true
+  - name: google-cloud-cloud_controls_partner-v1beta
+    apis:
+      - path: google/cloud/cloudcontrolspartner/v1beta
+    skip_generate: true
+  - name: google-cloud-cloud_dms
+    apis:
+      - path: google/cloud/clouddms/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATABASE_MIGRATION
+            ruby-cloud-namespace-override: CloudDms=CloudDMS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.7
+  - name: google-cloud-cloud_dms-v1
+    apis:
+      - path: google/cloud/clouddms/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATABASE_MIGRATION
+            ruby-cloud-gem-namespace: Google::Cloud::CloudDMS::V1
+            ruby-cloud-namespace-override: CloudDms=CloudDMS
+    skip_generate: true
+  - name: google-cloud-cloud_quotas
+    apis:
+      - path: google/api/cloudquotas/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-cloud_quotas-v1
+    apis:
+      - path: google/api/cloudquotas/v1
+    skip_generate: true
+  - name: google-cloud-cloud_quotas-v1beta
+    apis:
+      - path: google/api/cloudquotas/v1beta
+    skip_generate: true
+  - name: google-cloud-cloud_security_compliance
+    apis:
+      - path: google/cloud/cloudsecuritycompliance/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-cloud_security_compliance-v1
+    apis:
+      - path: google/cloud/cloudsecuritycompliance/v1
+    skip_generate: true
+  - name: google-cloud-commerce-consumer-procurement
+    apis:
+      - path: google/cloud/commerce/consumer/procurement/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.1
+  - name: google-cloud-commerce-consumer-procurement-v1
+    apis:
+      - path: google/cloud/commerce/consumer/procurement/v1
+    skip_generate: true
+  - name: google-cloud-commerce_producer
+    apis:
+      - path: google/cloud/commerceproducer/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-commerce_producer-v1beta
+    apis:
+      - path: google/cloud/commerceproducer/v1beta
+    skip_generate: true
+  - name: google-cloud-compute
+    apis:
+      - path: google/cloud/compute/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: COMPUTE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.15
+  - name: google-cloud-compute-v1
+    apis:
+      - path: google/cloud/compute/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: COMPUTE
+            ruby-cloud-extra-dependencies: google-cloud-common=~> 1.0
+    keep:
+      - acceptance/google/cloud/compute/v1/addresses_smoke_test.rb
+      - acceptance/google/cloud/compute/v1/firewalls_smoke_test.rb
+      - acceptance/google/cloud/compute/v1/instances_smoke_test.rb
+      - acceptance/google/cloud/compute/v1/pagination_smoke_test.rb
+      - acceptance/google/cloud/compute/v1/query_params_smoke_test.rb
+      - gapic_metadata.json
+      - lib/google/cloud/compute/v1/accelerator_types/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/addresses/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/autoscalers/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/backend_buckets/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/backend_services/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/disk_types/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/disks/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/external_vpn_gateways/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/firewall_policies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/firewalls/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/forwarding_rules/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/global_addresses/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/global_forwarding_rules/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/global_network_endpoint_groups/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/global_operations/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/global_organization_operations/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/global_public_delegated_prefixes/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/health_checks/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/images/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/instance_group_managers/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/instance_groups/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/instance_templates/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/instances/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/interconnect_attachments/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/interconnect_locations/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/interconnects/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/license_codes/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/licenses/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/machine_types/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/network_endpoint_groups/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/networks/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/node_groups/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/node_templates/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/node_types/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/packet_mirrorings/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/projects/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/public_advertised_prefixes/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/public_delegated_prefixes/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_autoscalers/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_backend_services/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_commitments/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_disk_types/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_disks/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_health_check_services/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_health_checks/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_instance_group_managers/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_instance_groups/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_instances/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_network_endpoint_groups/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_notification_endpoints/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_operations/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_ssl_certificates/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_target_http_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_target_https_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/region_url_maps/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/regions/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/reservations/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/resource_policies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/routers/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/routes/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/security_policies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/snapshots/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/ssl_certificates/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/ssl_policies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/subnetworks/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_grpc_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_http_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_https_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_instances/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_pools/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_ssl_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_tcp_proxies/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/target_vpn_gateways/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/url_maps/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/vpn_gateways/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/vpn_tunnels/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/zone_operations/rest/grpc_transcoding.rb
+      - lib/google/cloud/compute/v1/zones/rest/grpc_transcoding.rb
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/default_values_test.rb
+      - samples/acceptance/firewall_test.rb
+      - samples/acceptance/helper.rb
+      - samples/acceptance/pagination_test.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/default_values.rb
+      - samples/firewall.rb
+      - samples/pagination.rb
+      - samples/quickstart.rb
+    skip_generate: true
+  - name: google-cloud-confidential_computing
+    apis:
+      - path: google/cloud/confidentialcomputing/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.7
+  - name: google-cloud-confidential_computing-v1
+    apis:
+      - path: google/cloud/confidentialcomputing/v1
+    skip_generate: true
+  - name: google-cloud-config_delivery
+    apis:
+      - path: google/cloud/configdelivery/v1alpha
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-config_delivery-v1
+    apis:
+      - path: google/cloud/configdelivery/v1
+    skip_generate: true
+  - name: google-cloud-config_service
+    apis:
+      - path: google/cloud/config/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-config_service-v1
+    apis:
+      - path: google/cloud/config/v1
+    skip_generate: true
+  - name: google-cloud-connectors
+    apis:
+      - path: google/cloud/connectors/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-connectors-v1
+    apis:
+      - path: google/cloud/connectors/v1
+    skip_generate: true
+  - name: google-cloud-contact_center_insights
+    apis:
+      - path: google/cloud/contactcenterinsights/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.20
+  - name: google-cloud-contact_center_insights-v1
+    apis:
+      - path: google/cloud/contactcenterinsights/v1
+    skip_generate: true
+  - name: google-cloud-container
+    apis:
+      - path: google/container/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CONTAINER
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/container/v1/cluster_manager_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.6
+  - name: google-cloud-container-v1
+    apis:
+      - path: google/container/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CONTAINER
+    skip_generate: true
+  - name: google-cloud-container-v1beta1
+    apis:
+      - path: google/container/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CONTAINER
+    skip_generate: true
+  - name: google-cloud-container_analysis
+    apis:
+      - path: google/devtools/containeranalysis/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CONTAINER_ANALYSIS
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/container_analysis/v1/grafeas_service_smoke_test.rb
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/sample_test.rb
+      - samples/sample.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.9
+  - name: google-cloud-container_analysis-v1
+    apis:
+      - path: google/devtools/containeranalysis/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CONTAINER_ANALYSIS
+            ruby-cloud-extra-dependencies: grafeas-v1=>=0.4+<2.a
+    keep:
+      - lib/google/cloud/container_analysis/v1/container_analysis/helpers.rb
+      - test/google/cloud/container_analysis/v1/grafeas_client_test.rb
+    skip_generate: true
+  - name: google-cloud-data_catalog
+    apis:
+      - path: google/cloud/datacatalog/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATA_CATALOG
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-data_catalog-lineage
+    apis:
+      - path: google/cloud/datacatalog/lineage/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.6
+  - name: google-cloud-data_catalog-lineage-config_management
+    apis:
+      - path: google/cloud/datacatalog/lineage/configmanagement/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-data_catalog-lineage-config_management-v1
+    apis:
+      - path: google/cloud/datacatalog/lineage/configmanagement/v1
+    skip_generate: true
+  - name: google-cloud-data_catalog-lineage-v1
+    apis:
+      - path: google/cloud/datacatalog/lineage/v1
+    skip_generate: true
+  - name: google-cloud-data_catalog-v1
+    apis:
+      - path: google/cloud/datacatalog/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATA_CATALOG
+    skip_generate: true
+  - name: google-cloud-data_catalog-v1beta1
+    apis:
+      - path: google/cloud/datacatalog/v1beta1
+    skip_generate: true
+  - name: google-cloud-data_fusion
+    apis:
+      - path: google/cloud/datafusion/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-data_fusion-v1
+    apis:
+      - path: google/cloud/datafusion/v1
+    skip_generate: true
+  - name: google-cloud-data_labeling
+    apis:
+      - path: google/cloud/datalabeling/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATA_LABELING
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.7
+  - name: google-cloud-data_labeling-v1beta1
+    apis:
+      - path: google/cloud/datalabeling/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATA_LABELING
+    skip_generate: true
+  - name: google-cloud-database_center
+    apis:
+      - path: google/cloud/databasecenter/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-database_center-v1beta
+    apis:
+      - path: google/cloud/databasecenter/v1beta
+    skip_generate: true
+  - name: google-cloud-dataflow
+    apis:
+      - path: google/dataflow/v1beta3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATAFLOW
+            ruby-cloud-service-override: JobsV1Beta3=Jobs;MessagesV1Beta3=Messages;MetricsV1Beta3=Metrics;SnapshotsV1Beta3=Snapshots
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta3:0.8
+  - name: google-cloud-dataflow-v1beta3
+    apis:
+      - path: google/dataflow/v1beta3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATAFLOW
+            ruby-cloud-service-override: JobsV1Beta3=Jobs;MessagesV1Beta3=Messages;MetricsV1Beta3=Metrics;SnapshotsV1Beta3=Snapshots
+    skip_generate: true
+  - name: google-cloud-dataform
+    apis:
+      - path: google/cloud/dataform/v1beta1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.6
+  - name: google-cloud-dataform-v1
+    apis:
+      - path: google/cloud/dataform/v1
+    skip_generate: true
+  - name: google-cloud-dataform-v1beta1
+    apis:
+      - path: google/cloud/dataform/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-cloud-common=~>1.9
+    skip_generate: true
+  - name: google-cloud-dataplex
+    apis:
+      - path: google/cloud/dataplex/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-dataplex-v1
+    apis:
+      - path: google/cloud/dataplex/v1
+    skip_generate: true
+  - name: google-cloud-dataproc
+    apis:
+      - path: google/cloud/dataproc/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATAPROC
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/dataproc/cluster_controller_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.24
+  - name: google-cloud-dataproc-v1
+    apis:
+      - path: google/cloud/dataproc/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATAPROC
+    skip_generate: true
+  - name: google-cloud-dataqna
+    apis:
+      - path: google/cloud/dataqna/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_DATAQNA
+            ruby-cloud-namespace-override: Dataqna=DataQnA
+            ruby-cloud-path-override: data_qn_a=dataqna
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1alpha:0.6
+  - name: google-cloud-dataqna-v1alpha
+    apis:
+      - path: google/cloud/dataqna/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: BIGQUERY_DATAQNA
+            ruby-cloud-namespace-override: Dataqna=DataQnA
+            ruby-cloud-path-override: data_qn_a=dataqna
+    skip_generate: true
+  - name: google-cloud-datastore-admin
+    apis:
+      - path: google/datastore/admin/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATASTORE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.11
+  - name: google-cloud-datastore-admin-v1
+    apis:
+      - path: google/datastore/admin/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATASTORE
+    keep:
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/snippets_test.rb
+      - samples/index.yaml
+      - samples/snippets.rb
+    skip_generate: true
+  - name: google-cloud-datastore-v1
+    apis:
+      - path: google/datastore/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DATASTORE
+    skip_generate: true
+  - name: google-cloud-datastream
+    apis:
+      - path: google/cloud/datastream/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-datastream-v1
+    apis:
+      - path: google/cloud/datastream/v1
+    skip_generate: true
+  - name: google-cloud-datastream-v1alpha1
+    apis:
+      - path: google/cloud/datastream/v1alpha1
+    skip_generate: true
+  - name: google-cloud-deploy
+    apis:
+      - path: google/cloud/deploy/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-deploy-v1
+    apis:
+      - path: google/cloud/deploy/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-yard-strict: "false"
+    skip_generate: true
+  - name: google-cloud-developer_connect
+    apis:
+      - path: google/cloud/developerconnect/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-developer_connect-v1
+    apis:
+      - path: google/cloud/developerconnect/v1
+    skip_generate: true
+  - name: google-cloud-device_streaming
+    apis:
+      - path: google/cloud/devicestreaming/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-device_streaming-v1
+    apis:
+      - path: google/cloud/devicestreaming/v1
+    skip_generate: true
+  - name: google-cloud-dialogflow
+    apis:
+      - path: google/cloud/dialogflow/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DIALOGFLOW
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/dialogflow_smoke_test.rb
+      - acceptance/helper.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.32
+  - name: google-cloud-dialogflow-cx
+    apis:
+      - path: google/cloud/dialogflow/cx/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DIALOGFLOW
+            ruby-cloud-namespace-override: Cx=CX
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v3:0.24
+  - name: google-cloud-dialogflow-cx-v3
+    apis:
+      - path: google/cloud/dialogflow/cx/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DIALOGFLOW
+            ruby-cloud-namespace-override: Cx=CX
+    skip_generate: true
+  - name: google-cloud-dialogflow-v2
+    apis:
+      - path: google/cloud/dialogflow/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DIALOGFLOW
+    skip_generate: true
+  - name: google-cloud-discovery_engine
+    apis:
+      - path: google/cloud/discoveryengine/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-discovery_engine-v1
+    apis:
+      - path: google/cloud/discoveryengine/v1
+    skip_generate: true
+  - name: google-cloud-discovery_engine-v1beta
+    apis:
+      - path: google/cloud/discoveryengine/v1beta
+    skip_generate: true
+  - name: google-cloud-dlp
+    apis:
+      - path: google/privacy/dlp/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DLP
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/dlp/v2/dlp_service_smoke_test.rb
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/data/test.txt
+      - samples/acceptance/quickstart_test.rb
+      - samples/acceptance/sample_test.rb
+      - samples/quickstart.rb
+      - samples/sample.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.20
+  - name: google-cloud-dlp-v2
+    apis:
+      - path: google/privacy/dlp/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DLP
+    skip_generate: true
+  - name: google-cloud-document_ai
+    apis:
+      - path: google/cloud/documentai/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DOCUMENT_AI
+            ruby-cloud-namespace-override: DocumentAi=DocumentAI
+    keep:
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/data/invoice.pdf
+      - samples/acceptance/quickstart_test.rb
+      - samples/quickstart.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.4
+  - name: google-cloud-document_ai-v1
+    apis:
+      - path: google/cloud/documentai/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DOCUMENT_AI
+            ruby-cloud-namespace-override: DocumentAi=DocumentAI
+    skip_generate: true
+  - name: google-cloud-document_ai-v1beta3
+    apis:
+      - path: google/cloud/documentai/v1beta3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DOCUMENT_AI
+            ruby-cloud-namespace-override: DocumentAi=DocumentAI
+    skip_generate: true
+  - name: google-cloud-domains
+    apis:
+      - path: google/cloud/domains/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DOMAINS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-domains-v1
+    apis:
+      - path: google/cloud/domains/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DOMAINS
+    skip_generate: true
+  - name: google-cloud-domains-v1beta1
+    apis:
+      - path: google/cloud/domains/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: DOMAINS
+    skip_generate: true
+  - name: google-cloud-edge_container
+    apis:
+      - path: google/cloud/edgecontainer/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-edge_container-v1
+    apis:
+      - path: google/cloud/edgecontainer/v1
+    skip_generate: true
+  - name: google-cloud-edge_network
+    apis:
+      - path: google/cloud/edgenetwork/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-edge_network-v1
+    apis:
+      - path: google/cloud/edgenetwork/v1
+    skip_generate: true
+  - name: google-cloud-error_reporting-v1beta1
+    apis:
+      - path: google/devtools/clouderrorreporting/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ERROR_REPORTING
+    skip_generate: true
+  - name: google-cloud-essential_contacts
+    apis:
+      - path: google/cloud/essentialcontacts/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ESSENTIAL_CONTACTS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.6
+  - name: google-cloud-essential_contacts-v1
+    apis:
+      - path: google/cloud/essentialcontacts/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ESSENTIAL_CONTACTS
+    skip_generate: true
+  - name: google-cloud-eventarc
+    apis:
+      - path: google/cloud/eventarc/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: EVENTARC
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-eventarc-publishing
+    apis:
+      - path: google/cloud/eventarc/publishing/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: EVENTARC
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-cloud-eventarc-publishing-v1
+    apis:
+      - path: google/cloud/eventarc/publishing/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: EVENTARC
+    skip_generate: true
+  - name: google-cloud-eventarc-v1
+    apis:
+      - path: google/cloud/eventarc/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: EVENTARC
+    skip_generate: true
+  - name: google-cloud-filestore
+    apis:
+      - path: google/cloud/filestore/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-filestore-v1
+    apis:
+      - path: google/cloud/filestore/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-cloud-common=~>1.0
+    skip_generate: true
+  - name: google-cloud-financial_services
+    apis:
+      - path: google/cloud/financialservices/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-financial_services-v1
+    apis:
+      - path: google/cloud/financialservices/v1
+    skip_generate: true
+  - name: google-cloud-firestore-admin
+    apis:
+      - path: google/firestore/admin/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: FIRESTORE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.14
+  - name: google-cloud-firestore-admin-v1
+    apis:
+      - path: google/firestore/admin/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: FIRESTORE
+    skip_generate: true
+  - name: google-cloud-firestore-v1
+    apis:
+      - path: google/firestore/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: FIRESTORE
+    skip_generate: true
+  - name: google-cloud-functions
+    apis:
+      - path: google/cloud/functions/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: FUNCTIONS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:1.0
+  - name: google-cloud-functions-v1
+    apis:
+      - path: google/cloud/functions/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: FUNCTIONS
+    skip_generate: true
+  - name: google-cloud-functions-v2
+    apis:
+      - path: google/cloud/functions/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: FUNCTIONS
+    skip_generate: true
+  - name: google-cloud-gdc_hardware_management
+    apis:
+      - path: google/cloud/gdchardwaremanagement/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::GDCHardwareManagement
+            ruby-cloud-service-override: GdcHardwareManagement=GDCHardwareManagement
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1alpha:0.0
+  - name: google-cloud-gdc_hardware_management-v1alpha
+    apis:
+      - path: google/cloud/gdchardwaremanagement/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::GDCHardwareManagement::V1alpha
+            ruby-cloud-service-override: GdcHardwareManagement=GDCHardwareManagement
+    skip_generate: true
+  - name: google-cloud-gemini_data_analytics
+    apis:
+      - path: google/cloud/geminidataanalytics/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-gemini_data_analytics-v1
+    apis:
+      - path: google/cloud/geminidataanalytics/v1
+    skip_generate: true
+  - name: google-cloud-gemini_data_analytics-v1beta
+    apis:
+      - path: google/cloud/geminidataanalytics/v1beta
+    skip_generate: true
+  - name: google-cloud-gke_backup
+    apis:
+      - path: google/cloud/gkebackup/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-gke_backup-v1
+    apis:
+      - path: google/cloud/gkebackup/v1
+    skip_generate: true
+  - name: google-cloud-gke_connect-gateway
+    apis:
+      - path: google/cloud/gkeconnect/gateway/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GKE_CONNECT_GATEWAY
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.2
+  - name: google-cloud-gke_connect-gateway-v1
+    apis:
+      - path: google/cloud/gkeconnect/gateway/v1
+    skip_generate: true
+  - name: google-cloud-gke_connect-gateway-v1beta1
+    apis:
+      - path: google/cloud/gkeconnect/gateway/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GKE_CONNECT_GATEWAY
+    skip_generate: true
+  - name: google-cloud-gke_hub
+    apis:
+      - path: google/cloud/gkehub/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GKE_HUB
+    keep:
+      - lib/google/cloud/gke_hub/helpers.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-gke_hub-v1
+    apis:
+      - path: google/cloud/gkehub/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GKE_HUB
+    skip_generate: true
+  - name: google-cloud-gke_hub-v1beta1
+    apis:
+      - path: google/cloud/gkehub/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GKE_HUB
+    skip_generate: true
+  - name: google-cloud-gke_multi_cloud
+    apis:
+      - path: google/cloud/gkemulticloud/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-cloud-gke_multi_cloud-v1
+    apis:
+      - path: google/cloud/gkemulticloud/v1
+    skip_generate: true
+  - name: google-cloud-gke_recommender
+    apis:
+      - path: google/cloud/gkerecommender/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-gke_recommender-v1
+    apis:
+      - path: google/cloud/gkerecommender/v1
+    skip_generate: true
+  - name: google-cloud-gsuite_add_ons
+    apis:
+      - path: google/cloud/gsuiteaddons/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::GSuiteAddOns
+            ruby-cloud-namespace-override: GsuiteAddOns=GSuiteAddOns
+            ruby-cloud-path-override: g_suite_add_ons=gsuite_add_ons
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.5
+  - name: google-cloud-gsuite_add_ons-v1
+    apis:
+      - path: google/cloud/gsuiteaddons/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-apps-script-type=>0.0+<2.a
+            ruby-cloud-gem-namespace: Google::Cloud::GSuiteAddOns::V1
+            ruby-cloud-namespace-override: GsuiteAddOns=GSuiteAddOns
+            ruby-cloud-path-override: g_suite_add_ons=gsuite_add_ons
+    skip_generate: true
+  - name: google-cloud-hypercompute_cluster
+    apis:
+      - path: google/cloud/hypercomputecluster/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-hypercompute_cluster-v1beta
+    apis:
+      - path: google/cloud/hypercomputecluster/v1beta
+    skip_generate: true
+  - name: google-cloud-iap
+    apis:
+      - path: google/cloud/iap/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: IAP
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.11
+  - name: google-cloud-iap-v1
+    apis:
+      - path: google/cloud/iap/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: IAP
+    skip_generate: true
+  - name: google-cloud-ids
+    apis:
+      - path: google/cloud/ids/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Ids=IDS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-ids-v1
+    apis:
+      - path: google/cloud/ids/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Ids=IDS
+    skip_generate: true
+  - name: google-cloud-kms
+    apis:
+      - path: google/cloud/kms/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: KMS
+            ruby-cloud-migration-version: "2.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/kms/v1/smoke_test.rb
+      - lib/google/cloud/kms/helpers.rb
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/snippets_test.rb
+      - samples/snippets.rb
+      - test/google/cloud/kms/client_helper_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.26
+  - name: google-cloud-kms-inventory
+    apis:
+      - path: google/cloud/kms/inventory/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-cloud-kms-inventory-v1
+    apis:
+      - path: google/cloud/kms/inventory/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-cloud-kms-v1=>0.0+<2.a
+    skip_generate: true
+  - name: google-cloud-kms-v1
+    apis:
+      - path: google/cloud/kms/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: KMS
+    keep:
+      - lib/google/cloud/kms/v1/_helpers.rb
+      - lib/google/cloud/kms/v1/iam_policy.rb
+      - lib/google/cloud/kms/v1/iam_policy/client.rb
+      - lib/google/cloud/kms/v1/iam_policy/credentials.rb
+      - test/google/cloud/kms/v1/iam_policy_test.rb
+    skip_generate: true
+  - name: google-cloud-language
+    apis:
+      - path: google/cloud/language/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: LANGUAGE
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/language/v1/language_service_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:1.0
+        - v1:1.0
+  - name: google-cloud-language-v1
+    apis:
+      - path: google/cloud/language/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: LANGUAGE
+    skip_generate: true
+  - name: google-cloud-language-v1beta2
+    apis:
+      - path: google/cloud/language/v1beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: LANGUAGE
+    skip_generate: true
+  - name: google-cloud-language-v2
+    apis:
+      - path: google/cloud/language/v2
+    skip_generate: true
+  - name: google-cloud-license_manager
+    apis:
+      - path: google/cloud/licensemanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-license_manager-v1
+    apis:
+      - path: google/cloud/licensemanager/v1
+    skip_generate: true
+  - name: google-cloud-life_sciences
+    apis:
+      - path: google/cloud/lifesciences/v2beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: LIFE_SCIENCES
+            ruby-cloud-service-override: WorkflowsServiceV2Beta=WorkflowsService
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2beta:0.7
+  - name: google-cloud-life_sciences-v2beta
+    apis:
+      - path: google/cloud/lifesciences/v2beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: LIFE_SCIENCES
+            ruby-cloud-service-override: WorkflowsServiceV2Beta=WorkflowsService
+    skip_generate: true
+  - name: google-cloud-location
+    keep:
+      - README.md
+      - .repo-metadata.json
+    skip_generate: true
+  - name: google-cloud-location_finder
+    apis:
+      - path: google/cloud/locationfinder/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-location_finder-v1
+    apis:
+      - path: google/cloud/locationfinder/v1
+    skip_generate: true
+  - name: google-cloud-logging-v2
+    apis:
+      - path: google/logging/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: LOGGING
+            ruby-cloud-service-override: ConfigServiceV2=ConfigService;LoggingServiceV2=LoggingService;MetricsServiceV2=MetricsService
+            ruby-cloud-yard-strict: "false"
+    skip_generate: true
+  - name: google-cloud-lustre
+    apis:
+      - path: google/cloud/lustre/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-lustre-v1
+    apis:
+      - path: google/cloud/lustre/v1
+    skip_generate: true
+  - name: google-cloud-maintenance-api
+    apis:
+      - path: google/cloud/maintenance/api/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-cloud-maintenance-api-v1
+    apis:
+      - path: google/cloud/maintenance/api/v1
+    skip_generate: true
+  - name: google-cloud-maintenance-api-v1beta
+    apis:
+      - path: google/cloud/maintenance/api/v1beta
+    skip_generate: true
+  - name: google-cloud-managed_identities
+    apis:
+      - path: google/cloud/managedidentities/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MANAGED_IDENTITIES
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.7
+  - name: google-cloud-managed_identities-v1
+    apis:
+      - path: google/cloud/managedidentities/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MANAGED_IDENTITIES
+    skip_generate: true
+  - name: google-cloud-managed_kafka
+    apis:
+      - path: google/cloud/managedkafka/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-managed_kafka-schema_registry
+    apis:
+      - path: google/cloud/managedkafka/schemaregistry/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-managed_kafka-schema_registry-v1
+    apis:
+      - path: google/cloud/managedkafka/schemaregistry/v1
+    skip_generate: true
+  - name: google-cloud-managed_kafka-v1
+    apis:
+      - path: google/cloud/managedkafka/v1
+    skip_generate: true
+  - name: google-cloud-media_translation
+    apis:
+      - path: google/cloud/mediatranslation/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MEDIA_TRANSLATION
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.8
+  - name: google-cloud-media_translation-v1beta1
+    apis:
+      - path: google/cloud/mediatranslation/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MEDIA_TRANSLATION
+    skip_generate: true
+  - name: google-cloud-memcache
+    apis:
+      - path: google/cloud/memcache/v1beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MEMCACHE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-memcache-v1
+    apis:
+      - path: google/cloud/memcache/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MEMCACHE
+    skip_generate: true
+  - name: google-cloud-memcache-v1beta2
+    apis:
+      - path: google/cloud/memcache/v1beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MEMCACHE
+    skip_generate: true
+  - name: google-cloud-memorystore
+    apis:
+      - path: google/cloud/memorystore/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-memorystore-v1
+    apis:
+      - path: google/cloud/memorystore/v1
+    skip_generate: true
+  - name: google-cloud-memorystore-v1beta
+    apis:
+      - path: google/cloud/memorystore/v1beta
+    skip_generate: true
+  - name: google-cloud-metastore
+    apis:
+      - path: google/cloud/metastore/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: METASTORE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-metastore-v1
+    apis:
+      - path: google/cloud/metastore/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: METASTORE
+    skip_generate: true
+  - name: google-cloud-metastore-v1beta
+    apis:
+      - path: google/cloud/metastore/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: METASTORE
+    skip_generate: true
+  - name: google-cloud-migration_center
+    apis:
+      - path: google/cloud/migrationcenter/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-migration_center-v1
+    apis:
+      - path: google/cloud/migrationcenter/v1
+    skip_generate: true
+  - name: google-cloud-monitoring
+    apis:
+      - path: google/monitoring/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/monitoring/v3/metric_service_smoke_test.rb
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/metrics_test.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/acceptance/uptime_check_test.rb
+      - samples/metrics.rb
+      - samples/quickstart.rb
+      - samples/uptime_check.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v3:0.15
+  - name: google-cloud-monitoring-dashboard-v1
+    apis:
+      - path: google/monitoring/dashboard/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING_DASHBOARD
+            ruby-cloud-wrapper-gem-override: google-cloud-monitoring
+    skip_generate: true
+  - name: google-cloud-monitoring-metrics_scope-v1
+    apis:
+      - path: google/monitoring/metricsscope/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-cloud-monitoring
+    skip_generate: true
+  - name: google-cloud-monitoring-v3
+    apis:
+      - path: google/monitoring/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: MONITORING
+    skip_generate: true
+  - name: google-cloud-netapp
+    apis:
+      - path: google/cloud/netapp/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Netapp=NetApp
+            ruby-cloud-path-override: net_app=netapp
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-netapp-v1
+    apis:
+      - path: google/cloud/netapp/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: Netapp=NetApp
+            ruby-cloud-path-override: net_app=netapp
+    skip_generate: true
+  - name: google-cloud-network_connectivity
+    apis:
+      - path: google/cloud/networkconnectivity/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: NETWORK_CONNECTIVITY
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.3
+  - name: google-cloud-network_connectivity-v1
+    apis:
+      - path: google/cloud/networkconnectivity/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: NETWORK_CONNECTIVITY
+    skip_generate: true
+  - name: google-cloud-network_connectivity-v1alpha1
+    apis:
+      - path: google/cloud/networkconnectivity/v1alpha1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: NETWORK_CONNECTIVITY
+    skip_generate: true
+  - name: google-cloud-network_connectivity-v1beta
+    apis:
+      - path: google/cloud/networkconnectivity/v1beta
+    skip_generate: true
+  - name: google-cloud-network_management
+    apis:
+      - path: google/cloud/networkmanagement/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-network_management-v1
+    apis:
+      - path: google/cloud/networkmanagement/v1
+    skip_generate: true
+  - name: google-cloud-network_security
+    apis:
+      - path: google/cloud/networksecurity/v1beta1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.7
+  - name: google-cloud-network_security-v1
+    apis:
+      - path: google/cloud/networksecurity/v1
+    skip_generate: true
+  - name: google-cloud-network_security-v1beta1
+    apis:
+      - path: google/cloud/networksecurity/v1beta1
+    skip_generate: true
+  - name: google-cloud-network_services
+    apis:
+      - path: google/cloud/networkservices/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-network_services-v1
+    apis:
+      - path: google/cloud/networkservices/v1
+    skip_generate: true
+  - name: google-cloud-notebooks
+    apis:
+      - path: google/cloud/notebooks/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: NOTEBOOKS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+        - v2:1.0
+  - name: google-cloud-notebooks-v1
+    apis:
+      - path: google/cloud/notebooks/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: NOTEBOOKS
+    skip_generate: true
+  - name: google-cloud-notebooks-v1beta1
+    apis:
+      - path: google/cloud/notebooks/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: NOTEBOOKS
+    skip_generate: true
+  - name: google-cloud-notebooks-v2
+    apis:
+      - path: google/cloud/notebooks/v2
+    skip_generate: true
+  - name: google-cloud-optimization
+    apis:
+      - path: google/cloud/optimization/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-cloud-optimization-v1
+    apis:
+      - path: google/cloud/optimization/v1
+    skip_generate: true
+  - name: google-cloud-oracle_database
+    apis:
+      - path: google/cloud/oracledatabase/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-oracle_database-v1
+    apis:
+      - path: google/cloud/oracledatabase/v1
+    skip_generate: true
+  - name: google-cloud-orchestration-airflow-service
+    apis:
+      - path: google/cloud/orchestration/airflow/service/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.9
+  - name: google-cloud-orchestration-airflow-service-v1
+    apis:
+      - path: google/cloud/orchestration/airflow/service/v1
+    skip_generate: true
+  - name: google-cloud-org_policy
+    apis:
+      - path: google/cloud/orgpolicy/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ORG_POLICY
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.9
+  - name: google-cloud-org_policy-v2
+    apis:
+      - path: google/cloud/orgpolicy/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: ORG_POLICY
+    skip_generate: true
+  - name: google-cloud-os_config
+    apis:
+      - path: google/cloud/osconfig/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: OS_CONFIG
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.15
+  - name: google-cloud-os_config-v1
+    apis:
+      - path: google/cloud/osconfig/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: OS_CONFIG
+    skip_generate: true
+  - name: google-cloud-os_config-v1alpha
+    apis:
+      - path: google/cloud/osconfig/v1alpha
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: OS_CONFIG
+    skip_generate: true
+  - name: google-cloud-os_login
+    apis:
+      - path: google/cloud/oslogin/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: OS_LOGIN
+    keep:
+      - MIGRATING.md
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-os_login-v1
+    apis:
+      - path: google/cloud/oslogin/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: OS_LOGIN
+    skip_generate: true
+  - name: google-cloud-os_login-v1beta
+    apis:
+      - path: google/cloud/oslogin/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: OS_LOGIN
+    skip_generate: true
+  - name: google-cloud-parallelstore
+    apis:
+      - path: google/cloud/parallelstore/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-parallelstore-v1
+    apis:
+      - path: google/cloud/parallelstore/v1
+    skip_generate: true
+  - name: google-cloud-parallelstore-v1beta
+    apis:
+      - path: google/cloud/parallelstore/v1beta
+    skip_generate: true
+  - name: google-cloud-parameter_manager
+    apis:
+      - path: google/cloud/parametermanager/v1
+    keep:
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/create_param_test.rb
+      - samples/acceptance/create_param_version_test.rb
+      - samples/acceptance/create_param_version_with_secret_test.rb
+      - samples/acceptance/create_param_with_kms_key_test.rb
+      - samples/acceptance/create_regional_param_test.rb
+      - samples/acceptance/create_regional_param_version_test.rb
+      - samples/acceptance/create_regional_param_version_with_secret_test.rb
+      - samples/acceptance/create_regional_param_with_kms_key_test.rb
+      - samples/acceptance/create_structured_param_test.rb
+      - samples/acceptance/create_structured_param_version_test.rb
+      - samples/acceptance/create_structured_regional_param_test.rb
+      - samples/acceptance/create_structured_regional_param_version_test.rb
+      - samples/acceptance/delete_param_test.rb
+      - samples/acceptance/delete_param_version_test.rb
+      - samples/acceptance/delete_regional_param_test.rb
+      - samples/acceptance/delete_regional_param_version_test.rb
+      - samples/acceptance/disable_param_version_test.rb
+      - samples/acceptance/disable_regional_param_version_test.rb
+      - samples/acceptance/enable_param_version_test.rb
+      - samples/acceptance/enable_regional_param_version_test.rb
+      - samples/acceptance/get_param_test.rb
+      - samples/acceptance/get_param_version_test.rb
+      - samples/acceptance/get_regional_param_test.rb
+      - samples/acceptance/get_regional_param_version_test.rb
+      - samples/acceptance/helper.rb
+      - samples/acceptance/list_param_versions_test.rb
+      - samples/acceptance/list_params_test.rb
+      - samples/acceptance/list_regional_param_versions_test.rb
+      - samples/acceptance/list_regional_params_test.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/acceptance/regional_helper.rb
+      - samples/acceptance/regional_quickstart_test.rb
+      - samples/acceptance/remove_param_kms_key_test.rb
+      - samples/acceptance/remove_regional_param_kms_key_test.rb
+      - samples/acceptance/render_param_version_test.rb
+      - samples/acceptance/render_regional_param_version_test.rb
+      - samples/acceptance/update_param_kms_key_test.rb
+      - samples/acceptance/update_regional_param_kms_key_test.rb
+      - samples/create_param.rb
+      - samples/create_param_version.rb
+      - samples/create_param_version_with_secret.rb
+      - samples/create_param_with_kms_key.rb
+      - samples/create_regional_param.rb
+      - samples/create_regional_param_version.rb
+      - samples/create_regional_param_version_with_secret.rb
+      - samples/create_regional_param_with_kms_key.rb
+      - samples/create_structured_param.rb
+      - samples/create_structured_param_version.rb
+      - samples/create_structured_regional_param.rb
+      - samples/create_structured_regional_param_version.rb
+      - samples/delete_param.rb
+      - samples/delete_param_version.rb
+      - samples/delete_regional_param.rb
+      - samples/delete_regional_param_version.rb
+      - samples/disable_param_version.rb
+      - samples/disable_regional_param_version.rb
+      - samples/enable_param_version.rb
+      - samples/enable_regional_param_version.rb
+      - samples/get_param.rb
+      - samples/get_param_version.rb
+      - samples/get_regional_param.rb
+      - samples/get_regional_param_version.rb
+      - samples/list_param_versions.rb
+      - samples/list_params.rb
+      - samples/list_regional_param_versions.rb
+      - samples/list_regional_params.rb
+      - samples/quickstart.rb
+      - samples/regional_quickstart.rb
+      - samples/remove_param_kms_key.rb
+      - samples/remove_regional_param_kms_key.rb
+      - samples/render_param_version.rb
+      - samples/render_regional_param_version.rb
+      - samples/update_param_kms_key.rb
+      - samples/update_regional_param_kms_key.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-parameter_manager-v1
+    apis:
+      - path: google/cloud/parametermanager/v1
+    skip_generate: true
+  - name: google-cloud-phishing_protection
+    apis:
+      - path: google/cloud/phishingprotection/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PHISHING_PROTECTION
+            ruby-cloud-migration-version: "0.10"
+            ruby-cloud-service-override: PhishingProtectionServiceV1Beta1=PhishingProtectionService
+    keep:
+      - MIGRATING.md
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.8
+  - name: google-cloud-phishing_protection-v1beta1
+    apis:
+      - path: google/cloud/phishingprotection/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PHISHING_PROTECTION
+            ruby-cloud-service-override: PhishingProtectionServiceV1Beta1=PhishingProtectionService
+    skip_generate: true
+  - name: google-cloud-policy_simulator
+    apis:
+      - path: google/cloud/policysimulator/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.3
+  - name: google-cloud-policy_simulator-v1
+    apis:
+      - path: google/cloud/policysimulator/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-cloud-org_policy-v2=~>1.0
+    skip_generate: true
+  - name: google-cloud-policy_troubleshooter
+    apis:
+      - path: google/cloud/policytroubleshooter/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: POLICY_TROUBLESHOOTER
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.10
+  - name: google-cloud-policy_troubleshooter-iam-v3
+    apis:
+      - path: google/cloud/policytroubleshooter/iam/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-iam-v1=>0.5+<2.a;google-iam-v2=>0.3+<2.a
+    skip_generate: true
+  - name: google-cloud-policy_troubleshooter-v1
+    apis:
+      - path: google/cloud/policytroubleshooter/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: POLICY_TROUBLESHOOTER
+    skip_generate: true
+  - name: google-cloud-private_catalog
+    apis:
+      - path: google/cloud/privatecatalog/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PRIVATE_CATALOG
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.6
+  - name: google-cloud-private_catalog-v1beta1
+    apis:
+      - path: google/cloud/privatecatalog/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PRIVATE_CATALOG
+            ruby-cloud-yard-strict: "false"
+    skip_generate: true
+  - name: google-cloud-privileged_access_manager
+    apis:
+      - path: google/cloud/privilegedaccessmanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-privileged_access_manager-v1
+    apis:
+      - path: google/cloud/privilegedaccessmanager/v1
+    skip_generate: true
+  - name: google-cloud-product_registry
+    apis:
+      - path: google/cloud/productregistry/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-product_registry-v1
+    apis:
+      - path: google/cloud/productregistry/v1
+    skip_generate: true
+  - name: google-cloud-profiler
+    apis:
+      - path: google/devtools/cloudprofiler/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PROFILER
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.9
+  - name: google-cloud-profiler-v2
+    apis:
+      - path: google/devtools/cloudprofiler/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PROFILER
+    skip_generate: true
+  - name: google-cloud-pubsub-v1
+    apis:
+      - path: google/pubsub/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PUBSUB
+            ruby-cloud-namespace-override: Pubsub=PubSub
+            ruby-cloud-path-override: pub_sub=pubsub
+            ruby-cloud-service-override: Publisher=TopicAdmin;Subscriber=SubscriptionAdmin
+    keep:
+      - lib/google/cloud/pubsub/v1/_helpers.rb
+      - lib/google/cloud/pubsub/v1/iam_policy.rb
+      - lib/google/cloud/pubsub/v1/iam_policy/client.rb
+      - lib/google/cloud/pubsub/v1/iam_policy/credentials.rb
+      - lib/google/cloud/pubsub/v1/publisher.rb
+      - lib/google/cloud/pubsub/v1/publisher/credentials.rb
+      - lib/google/cloud/pubsub/v1/subscriber.rb
+      - lib/google/cloud/pubsub/v1/subscriber/credentials.rb
+      - lib/google/cloud/pubsub/v1/subscription_admin/helpers.rb
+      - lib/google/cloud/pubsub/v1/topic_admin/helpers.rb
+      - test/google/cloud/pubsub/v1/iam_policy_test.rb
+      - test/google/cloud/pubsub/v1/subscription_admin/helpers_test.rb
+      - test/google/cloud/pubsub/v1/topic_admin/helpers_test.rb
+    skip_generate: true
+  - name: google-cloud-rapid_migration_assessment
+    apis:
+      - path: google/cloud/rapidmigrationassessment/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-rapid_migration_assessment-v1
+    apis:
+      - path: google/cloud/rapidmigrationassessment/v1
+    skip_generate: true
+  - name: google-cloud-recaptcha_enterprise
+    apis:
+      - path: google/cloud/recaptchaenterprise/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
+    keep:
+      - MIGRATING.md
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/create_assessment_test.rb
+      - samples/acceptance/data/test_template.html
+      - samples/acceptance/site_key_test.rb
+      - samples/recaptcha_enterprise_create_assessment.rb
+      - samples/recaptcha_enterprise_create_site_key.rb
+      - samples/recaptcha_enterprise_delete_site_key.rb
+      - samples/recaptcha_enterprise_get_metrics_site_key.rb
+      - samples/recaptcha_enterprise_get_site_key.rb
+      - samples/recaptcha_enterprise_list_site_keys.rb
+      - samples/recaptcha_enterprise_migrate_site_key.rb
+      - samples/recaptcha_enterprise_update_site_key.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.6
+  - name: google-cloud-recaptcha_enterprise-v1
+    apis:
+      - path: google/cloud/recaptchaenterprise/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
+    skip_generate: true
+  - name: google-cloud-recaptcha_enterprise-v1beta1
+    apis:
+      - path: google/cloud/recaptchaenterprise/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
+            ruby-cloud-service-override: RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService
+    skip_generate: true
+  - name: google-cloud-recommendation_engine
+    apis:
+      - path: google/cloud/recommendationengine/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECOMMENDATION_ENGINE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.8
+  - name: google-cloud-recommendation_engine-v1beta1
+    apis:
+      - path: google/cloud/recommendationengine/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECOMMENDATION_ENGINE
+    skip_generate: true
+  - name: google-cloud-recommender
+    apis:
+      - path: google/cloud/recommender/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECOMMENDER
+            ruby-cloud-factory-method-suffix: _service
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.17
+  - name: google-cloud-recommender-v1
+    apis:
+      - path: google/cloud/recommender/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RECOMMENDER
+    skip_generate: true
+  - name: google-cloud-redis
+    apis:
+      - path: google/cloud/redis/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: REDIS
+    keep:
+      - MIGRATING.md
+      - acceptance/redis_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-redis-cluster
+    apis:
+      - path: google/cloud/redis/cluster/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-redis-cluster-v1
+    apis:
+      - path: google/cloud/redis/cluster/v1
+    skip_generate: true
+  - name: google-cloud-redis-cluster-v1beta1
+    apis:
+      - path: google/cloud/redis/cluster/v1beta1
+    skip_generate: true
+  - name: google-cloud-redis-v1
+    apis:
+      - path: google/cloud/redis/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: REDIS
+    skip_generate: true
+  - name: google-cloud-redis-v1beta1
+    apis:
+      - path: google/cloud/redis/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: REDIS
+    skip_generate: true
+  - name: google-cloud-resource_manager
+    apis:
+      - path: google/cloud/resourcemanager/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v3:1.2
+  - name: google-cloud-resource_manager-v3
+    apis:
+      - path: google/cloud/resourcemanager/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RESOURCE_MANAGER
+    skip_generate: true
+  - name: google-cloud-retail
+    apis:
+      - path: google/cloud/retail/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RETAIL
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:2.0
+  - name: google-cloud-retail-v2
+    apis:
+      - path: google/cloud/retail/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: RETAIL
+    skip_generate: true
+  - name: google-cloud-run-client
+    apis:
+      - path: google/cloud/run/v2
+    keep:
+      - lib/google/cloud/run/client/version.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.17
+  - name: google-cloud-run-v2
+    apis:
+      - path: google/cloud/run/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-cloud-run-client
+    skip_generate: true
+  - name: google-cloud-saas_platform-saas_service_mgmt
+    apis:
+      - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta1:0.0
+  - name: google-cloud-saas_platform-saas_service_mgmt-v1beta1
+    apis:
+      - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
+    skip_generate: true
+  - name: google-cloud-scheduler
+    apis:
+      - path: google/cloud/scheduler/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SCHEDULER
+    keep:
+      - MIGRATING.md
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/sample_server_test.rb
+      - samples/acceptance/scheduler_test.rb
+      - samples/app.rb
+      - samples/app.yaml
+      - samples/create_job.rb
+      - samples/delete_job.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-scheduler-v1
+    apis:
+      - path: google/cloud/scheduler/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SCHEDULER
+    skip_generate: true
+  - name: google-cloud-scheduler-v1beta1
+    apis:
+      - path: google/cloud/scheduler/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SCHEDULER
+    skip_generate: true
+  - name: google-cloud-secret_manager
+    apis:
+      - path: google/cloud/secretmanager/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECRET_MANAGER
+    keep:
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/access_regional_secret_version_test.rb
+      - samples/acceptance/access_secret_version_test.rb
+      - samples/acceptance/add_regional_secret_version_test.rb
+      - samples/acceptance/add_secret_version_test.rb
+      - samples/acceptance/create_regional_secret_test.rb
+      - samples/acceptance/create_regional_secret_with_annotations_test.rb
+      - samples/acceptance/create_regional_secret_with_delayed_destroy_test.rb
+      - samples/acceptance/create_regional_secret_with_labels_test.rb
+      - samples/acceptance/create_regional_secret_with_tags_test.rb
+      - samples/acceptance/create_secret_test.rb
+      - samples/acceptance/create_secret_with_annotations_test.rb
+      - samples/acceptance/create_secret_with_delayed_destroy_test.rb
+      - samples/acceptance/create_secret_with_labels_test.rb
+      - samples/acceptance/create_secret_with_tags_test.rb
+      - samples/acceptance/create_ummr_secret_test.rb
+      - samples/acceptance/delete_regional_secret_test.rb
+      - samples/acceptance/delete_regional_secret_with_etag_test.rb
+      - samples/acceptance/delete_secret_test.rb
+      - samples/acceptance/destroy_regional_secret_version_test.rb
+      - samples/acceptance/destroy_regional_secret_version_with_etag_test.rb
+      - samples/acceptance/destroy_secret_version_test.rb
+      - samples/acceptance/disable_regional_secret_delayed_destroy_test.rb
+      - samples/acceptance/disable_regional_secret_version_test.rb
+      - samples/acceptance/disable_regional_secret_version_with_etag_test.rb
+      - samples/acceptance/disable_secret_delayed_destroy_test.rb
+      - samples/acceptance/disable_secret_version_test.rb
+      - samples/acceptance/edit_regional_secret_annotations_test.rb
+      - samples/acceptance/edit_secret_annotations_test.rb
+      - samples/acceptance/enable_regional_secret_version_test.rb
+      - samples/acceptance/enable_regional_secret_version_with_etag_test.rb
+      - samples/acceptance/enable_secret_version_test.rb
+      - samples/acceptance/get_regional_secret_test.rb
+      - samples/acceptance/get_regional_secret_version_test.rb
+      - samples/acceptance/get_secret_test.rb
+      - samples/acceptance/get_secret_version_test.rb
+      - samples/acceptance/helper.rb
+      - samples/acceptance/iam_grant_access_regional_test.rb
+      - samples/acceptance/iam_grant_access_test.rb
+      - samples/acceptance/iam_revoke_access_regional_test.rb
+      - samples/acceptance/iam_revoke_access_test.rb
+      - samples/acceptance/list_regional_secret_versions_test.rb
+      - samples/acceptance/list_regional_secret_versions_with_filter_test.rb
+      - samples/acceptance/list_regional_secrets_test.rb
+      - samples/acceptance/list_regional_secrets_with_filter_test.rb
+      - samples/acceptance/list_secret_versions_test.rb
+      - samples/acceptance/list_secrets_test.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/acceptance/regional_helper.rb
+      - samples/acceptance/regional_quickstart_test.rb
+      - samples/acceptance/regional_snippets_test.rb
+      - samples/acceptance/snippets_test.rb
+      - samples/acceptance/update_regional_secret_test.rb
+      - samples/acceptance/update_regional_secret_with_alias_test.rb
+      - samples/acceptance/update_regional_secret_with_delayed_destroy_test.rb
+      - samples/acceptance/update_regional_secret_with_etag_test.rb
+      - samples/acceptance/update_secret_test.rb
+      - samples/acceptance/update_secret_with_alias_test.rb
+      - samples/acceptance/update_secret_with_delayed_destroy_test.rb
+      - samples/acceptance/view_regional_secret_annotations_test.rb
+      - samples/acceptance/view_regional_secret_labels_test.rb
+      - samples/acceptance/view_secret_annotations_test.rb
+      - samples/acceptance/view_secret_labels_test.rb
+      - samples/access_regional_secret_version.rb
+      - samples/access_secret_version.rb
+      - samples/add_regional_secret_version.rb
+      - samples/add_secret_version.rb
+      - samples/create_regional_secret.rb
+      - samples/create_regional_secret_with_annotations.rb
+      - samples/create_regional_secret_with_delayed_destroy.rb
+      - samples/create_regional_secret_with_labels.rb
+      - samples/create_regional_secret_with_tags.rb
+      - samples/create_secret.rb
+      - samples/create_secret_with_annotations.rb
+      - samples/create_secret_with_delayed_destroy.rb
+      - samples/create_secret_with_labels.rb
+      - samples/create_secret_with_tags.rb
+      - samples/create_ummr_secret.rb
+      - samples/delete_regional_secret.rb
+      - samples/delete_regional_secret_with_etag.rb
+      - samples/delete_secret.rb
+      - samples/destroy_regional_secret_version.rb
+      - samples/destroy_regional_secret_version_with_etag.rb
+      - samples/destroy_secret_version.rb
+      - samples/disable_regional_secret_delayed_destroy.rb
+      - samples/disable_regional_secret_version.rb
+      - samples/disable_regional_secret_version_with_etag.rb
+      - samples/disable_secret_delayed_destroy.rb
+      - samples/disable_secret_version.rb
+      - samples/edit_regional_secret_annotations.rb
+      - samples/edit_secret_annotations.rb
+      - samples/enable_regional_secret_version.rb
+      - samples/enable_regional_secret_version_with_etag.rb
+      - samples/enable_secret_version.rb
+      - samples/get_regional_secret.rb
+      - samples/get_regional_secret_version.rb
+      - samples/get_secret.rb
+      - samples/get_secret_version.rb
+      - samples/iam_grant_access.rb
+      - samples/iam_grant_access_regional.rb
+      - samples/iam_revoke_access.rb
+      - samples/iam_revoke_access_regional.rb
+      - samples/list_regional_secret_versions.rb
+      - samples/list_regional_secret_versions_with_filter.rb
+      - samples/list_regional_secrets.rb
+      - samples/list_regional_secrets_with_filter.rb
+      - samples/list_secret_versions.rb
+      - samples/list_secrets.rb
+      - samples/quickstart.rb
+      - samples/regional_quickstart.rb
+      - samples/regional_snippets.rb
+      - samples/snippets.rb
+      - samples/update_regional_secret.rb
+      - samples/update_regional_secret_with_alias.rb
+      - samples/update_regional_secret_with_delayed_destroy.rb
+      - samples/update_regional_secret_with_etag.rb
+      - samples/update_secret.rb
+      - samples/update_secret_with_alias.rb
+      - samples/update_secret_with_delayed_destroy.rb
+      - samples/view_regional_secret_annotations.rb
+      - samples/view_regional_secret_labels.rb
+      - samples/view_secret_annotations.rb
+      - samples/view_secret_labels.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-secret_manager-v1
+    apis:
+      - path: google/cloud/secretmanager/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECRET_MANAGER
+    skip_generate: true
+  - name: google-cloud-secret_manager-v1beta1
+    apis:
+      - path: google/cloud/secrets/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECRET_MANAGER
+    skip_generate: true
+  - name: google-cloud-secret_manager-v1beta2
+    apis:
+      - path: google/cloud/secretmanager/v1beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECRET_MANAGER
+    skip_generate: true
+  - name: google-cloud-secure_source_manager
+    apis:
+      - path: google/cloud/securesourcemanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-secure_source_manager-v1
+    apis:
+      - path: google/cloud/securesourcemanager/v1
+    skip_generate: true
+  - name: google-cloud-security-private_ca
+    apis:
+      - path: google/cloud/security/privateca/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PRIVATE_CA
+            ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-security-private_ca-v1
+    apis:
+      - path: google/cloud/security/privateca/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PRIVATE_CA
+            ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA::V1
+    skip_generate: true
+  - name: google-cloud-security-private_ca-v1beta1
+    apis:
+      - path: google/cloud/security/privateca/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: PRIVATE_CA
+            ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA::V1beta1
+    skip_generate: true
+  - name: google-cloud-security-public_ca
+    apis:
+      - path: google/cloud/security/publicca/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::Security::PublicCA
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-security-public_ca-v1
+    apis:
+      - path: google/cloud/security/publicca/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::Security::PublicCA::V1
+    skip_generate: true
+  - name: google-cloud-security-public_ca-v1beta1
+    apis:
+      - path: google/cloud/security/publicca/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::Security::PublicCA::V1beta1
+    skip_generate: true
+  - name: google-cloud-security_center
+    apis:
+      - path: google/cloud/securitycenter/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECURITY_CENTER
+    keep:
+      - MIGRATING.md
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/notification_test.rb
+      - samples/notification.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:1.0
+        - v1:1.0
+  - name: google-cloud-security_center-v1
+    apis:
+      - path: google/cloud/securitycenter/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECURITY_CENTER
+    skip_generate: true
+  - name: google-cloud-security_center-v1p1beta1
+    apis:
+      - path: google/cloud/securitycenter/v1p1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECURITY_CENTER
+    skip_generate: true
+  - name: google-cloud-security_center-v2
+    apis:
+      - path: google/cloud/securitycenter/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SECURITY_CENTER
+    skip_generate: true
+  - name: google-cloud-security_center_management
+    apis:
+      - path: google/cloud/securitycentermanagement/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-security_center_management-v1
+    apis:
+      - path: google/cloud/securitycentermanagement/v1
+    skip_generate: true
+  - name: google-cloud-service_control
+    apis:
+      - path: google/api/servicecontrol/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_CONTROL
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.9
+  - name: google-cloud-service_control-v1
+    apis:
+      - path: google/api/servicecontrol/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_CONTROL
+    skip_generate: true
+  - name: google-cloud-service_directory
+    apis:
+      - path: google/cloud/servicedirectory/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_DIRECTORY
+    keep:
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/acceptance/servicedirectory_test.rb
+      - samples/quickstart.rb
+      - samples/servicedirectory.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-service_directory-v1
+    apis:
+      - path: google/cloud/servicedirectory/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_DIRECTORY
+    skip_generate: true
+  - name: google-cloud-service_directory-v1beta1
+    apis:
+      - path: google/cloud/servicedirectory/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_DIRECTORY
+    skip_generate: true
+  - name: google-cloud-service_health
+    apis:
+      - path: google/cloud/servicehealth/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-service_health-v1
+    apis:
+      - path: google/cloud/servicehealth/v1
+    skip_generate: true
+  - name: google-cloud-service_management
+    apis:
+      - path: google/api/servicemanagement/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_MANAGEMENT
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.10
+  - name: google-cloud-service_management-v1
+    apis:
+      - path: google/api/servicemanagement/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_MANAGEMENT
+    skip_generate: true
+  - name: google-cloud-service_usage
+    apis:
+      - path: google/api/serviceusage/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_USAGE
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.6
+  - name: google-cloud-service_usage-v1
+    apis:
+      - path: google/api/serviceusage/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SERVICE_USAGE
+    skip_generate: true
+  - name: google-cloud-shell
+    apis:
+      - path: google/cloud/shell/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_SHELL
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.7
+  - name: google-cloud-shell-v1
+    apis:
+      - path: google/cloud/shell/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_SHELL
+    skip_generate: true
+  - name: google-cloud-spanner-admin-database-v1
+    apis:
+      - path: google/spanner/admin/database/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPANNER
+            ruby-cloud-wrapper-gem-override: google-cloud-spanner
+    skip_generate: true
+  - name: google-cloud-spanner-admin-instance-v1
+    apis:
+      - path: google/spanner/admin/instance/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPANNER
+            ruby-cloud-wrapper-gem-override: google-cloud-spanner
+    skip_generate: true
+  - name: google-cloud-spanner-v1
+    apis:
+      - path: google/spanner/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPANNER
+    skip_generate: true
+  - name: google-cloud-speech
+    apis:
+      - path: google/cloud/speech/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPEECH
+    keep:
+      - MIGRATING.md
+      - acceptance/data
+      - acceptance/google/cloud/speech/speech_smoke_test.rb
+      - samples/speech_samples.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:1.0
+        - v1:1.2
+  - name: google-cloud-speech-v1
+    apis:
+      - path: google/cloud/speech/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPEECH
+    keep:
+      - acceptance/data
+      - acceptance/google/cloud/speech/v1/speech_smoke_test.rb
+    skip_generate: true
+  - name: google-cloud-speech-v1p1beta1
+    apis:
+      - path: google/cloud/speech/v1p1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPEECH
+    keep:
+      - acceptance/data
+      - acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb
+    skip_generate: true
+  - name: google-cloud-speech-v2
+    apis:
+      - path: google/cloud/speech/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: SPEECH
+    skip_generate: true
+  - name: google-cloud-sql-v1
+    apis:
+      - path: google/cloud/sql/v1
+    skip_generate: true
+  - name: google-cloud-sql-v1beta4
+    apis:
+      - path: google/cloud/sql/v1beta4
+    skip_generate: true
+  - name: google-cloud-storage-control
+    apis:
+      - path: google/storage/control/v2
+    keep:
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/helper.rb
+      - samples/acceptance/storage_control_anywhere_cache_test.rb
+      - samples/acceptance/storage_control_folders_test.rb
+      - samples/acceptance/storage_control_managed_folders_test.rb
+      - samples/acceptance/storage_control_quickstart_test.rb
+      - samples/storage_control_create_anywhere_cache.rb
+      - samples/storage_control_create_folder.rb
+      - samples/storage_control_delete_folder.rb
+      - samples/storage_control_disable_anywhere_cache.rb
+      - samples/storage_control_get_anywhere_cache.rb
+      - samples/storage_control_get_folder.rb
+      - samples/storage_control_list_anywhere_caches.rb
+      - samples/storage_control_list_folders.rb
+      - samples/storage_control_managed_folder_create.rb
+      - samples/storage_control_managed_folder_delete.rb
+      - samples/storage_control_managed_folder_get.rb
+      - samples/storage_control_managed_folder_list.rb
+      - samples/storage_control_pause_anywhere_cache.rb
+      - samples/storage_control_quickstart_sample.rb
+      - samples/storage_control_rename_folder.rb
+      - samples/storage_control_resume_anywhere_cache.rb
+      - samples/storage_control_update_anywhere_cache.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.0
+  - name: google-cloud-storage-control-v2
+    apis:
+      - path: google/storage/control/v2
+    skip_generate: true
+  - name: google-cloud-storage_batch_operations
+    apis:
+      - path: google/cloud/storagebatchoperations/v1
+    keep:
+      - samples/.rubocop.yml
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/batch_job_test.rb
+      - samples/acceptance/helper.rb
+      - samples/storage_batch_cancel_job.rb
+      - samples/storage_batch_create_job.rb
+      - samples/storage_batch_delete_job.rb
+      - samples/storage_batch_get_job.rb
+      - samples/storage_batch_list_jobs.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-storage_batch_operations-v1
+    apis:
+      - path: google/cloud/storagebatchoperations/v1
+    skip_generate: true
+  - name: google-cloud-storage_insights
+    apis:
+      - path: google/cloud/storageinsights/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-storage_insights-v1
+    apis:
+      - path: google/cloud/storageinsights/v1
+    skip_generate: true
+  - name: google-cloud-storage_transfer
+    apis:
+      - path: google/storagetransfer/v1
+    keep:
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/check_latest_transfer_operation_test.rb
+      - samples/acceptance/event_driven_gcs_transfer_test.rb
+      - samples/acceptance/helper.rb
+      - samples/acceptance/manifest_request_test.rb
+      - samples/acceptance/nearline_request_test.rb
+      - samples/acceptance/posix_download_request_test.rb
+      - samples/acceptance/posix_to_posix_request_test.rb
+      - samples/acceptance/quickstart_test.rb
+      - samples/acceptance/transfer_from_posix_request_test.rb
+      - samples/check_latest_transfer_operation.rb
+      - samples/event_driven_gcs_transfer.rb
+      - samples/manifest_request.rb
+      - samples/nearline_request.rb
+      - samples/posix_download_request.rb
+      - samples/posix_to_posix_request.rb
+      - samples/quickstart.rb
+      - samples/transfer_from_posix_request.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.9
+  - name: google-cloud-storage_transfer-v1
+    apis:
+      - path: google/storagetransfer/v1
+    skip_generate: true
+  - name: google-cloud-support
+    apis:
+      - path: google/cloud/support/v2
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.3
+  - name: google-cloud-support-v2
+    apis:
+      - path: google/cloud/support/v2
+    skip_generate: true
+  - name: google-cloud-support-v2beta
+    apis:
+      - path: google/cloud/support/v2beta
+    skip_generate: true
+  - name: google-cloud-talent
+    apis:
+      - path: google/cloud/talent/v4
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TALENT
+    keep:
+      - MIGRATING.md
+      - acceptance/helper.rb
+      - acceptance/talent_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v4:1.3
+  - name: google-cloud-talent-v4
+    apis:
+      - path: google/cloud/talent/v4
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TALENT
+    skip_generate: true
+  - name: google-cloud-talent-v4beta1
+    apis:
+      - path: google/cloud/talent/v4beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TALENT
+    skip_generate: true
+  - name: google-cloud-tasks
+    apis:
+      - path: google/cloud/tasks/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TASKS
+    keep:
+      - MIGRATING.md
+      - samples/Gemfile
+      - samples/README.md
+      - samples/Rakefile
+      - samples/create_http_task.rb
+      - samples/test/task_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:1.2
+  - name: google-cloud-tasks-v2
+    apis:
+      - path: google/cloud/tasks/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TASKS
+    skip_generate: true
+  - name: google-cloud-tasks-v2beta2
+    apis:
+      - path: google/cloud/tasks/v2beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TASKS
+    skip_generate: true
+  - name: google-cloud-tasks-v2beta3
+    apis:
+      - path: google/cloud/tasks/v2beta3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TASKS
+    skip_generate: true
+  - name: google-cloud-telco_automation
+    apis:
+      - path: google/cloud/telcoautomation/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-telco_automation-v1
+    apis:
+      - path: google/cloud/telcoautomation/v1
+    skip_generate: true
+  - name: google-cloud-text_to_speech
+    apis:
+      - path: google/cloud/texttospeech/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TEXTTOSPEECH
+    keep:
+      - MIGRATING.md
+      - acceptance/helper.rb
+      - acceptance/tts_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.7
+  - name: google-cloud-text_to_speech-v1
+    apis:
+      - path: google/cloud/texttospeech/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TEXTTOSPEECH
+    skip_generate: true
+  - name: google-cloud-text_to_speech-v1beta1
+    apis:
+      - path: google/cloud/texttospeech/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TEXTTOSPEECH
+    skip_generate: true
+  - name: google-cloud-tpu
+    apis:
+      - path: google/cloud/tpu/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_TPU
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.6
+  - name: google-cloud-tpu-v1
+    apis:
+      - path: google/cloud/tpu/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: CLOUD_TPU
+    skip_generate: true
+  - name: google-cloud-trace-v1
+    apis:
+      - path: google/devtools/cloudtrace/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TRACE
+    skip_generate: true
+  - name: google-cloud-trace-v2
+    apis:
+      - path: google/devtools/cloudtrace/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TRACE
+    skip_generate: true
+  - name: google-cloud-translate
+    apis:
+      - path: google/cloud/translate/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TRANSLATE
+            ruby-cloud-migration-version: "3.0"
+    keep:
+      - MIGRATING.md
+      - OVERVIEW.md
+      - acceptance/translate_v2_helper.rb
+      - acceptance/translate_v2_smoke_test.rb
+      - acceptance/translate_v3_helper.rb
+      - acceptance/translate_v3_smoke_test.rb
+      - lib/google/cloud/translate/helpers.rb
+      - test/google/cloud/translate/helpers_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v3:0.11
+        - v2:0.0
+  - name: google-cloud-translate-v3
+    apis:
+      - path: google/cloud/translate/v3
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TRANSLATE
+    skip_generate: true
+  - name: google-cloud-vector_search
+    apis:
+      - path: google/cloud/vectorsearch/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-vector_search-v1
+    apis:
+      - path: google/cloud/vectorsearch/v1
+    skip_generate: true
+  - name: google-cloud-video-live_stream
+    apis:
+      - path: google/cloud/video/livestream/v1
+    keep:
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/asset_definition.rb
+      - samples/acceptance/channel_definition.rb
+      - samples/acceptance/create_asset_test.rb
+      - samples/acceptance/create_channel_event_test.rb
+      - samples/acceptance/create_channel_test.rb
+      - samples/acceptance/create_channel_with_backup_input_test.rb
+      - samples/acceptance/create_input_test.rb
+      - samples/acceptance/delete_asset_test.rb
+      - samples/acceptance/delete_channel_event_test.rb
+      - samples/acceptance/delete_channel_test.rb
+      - samples/acceptance/delete_input_test.rb
+      - samples/acceptance/event_definition.rb
+      - samples/acceptance/get_asset_test.rb
+      - samples/acceptance/get_channel_event_test.rb
+      - samples/acceptance/get_channel_test.rb
+      - samples/acceptance/get_input_test.rb
+      - samples/acceptance/get_pool_test.rb
+      - samples/acceptance/helper.rb
+      - samples/acceptance/input_definition.rb
+      - samples/acceptance/list_assets_test.rb
+      - samples/acceptance/list_channel_events_test.rb
+      - samples/acceptance/list_channels_test.rb
+      - samples/acceptance/list_inputs_test.rb
+      - samples/acceptance/start_channel_test.rb
+      - samples/acceptance/stop_channel_test.rb
+      - samples/acceptance/update_channel_test.rb
+      - samples/acceptance/update_input_test.rb
+      - samples/acceptance/update_pool_test.rb
+      - samples/create_asset.rb
+      - samples/create_channel.rb
+      - samples/create_channel_event.rb
+      - samples/create_channel_with_backup_input.rb
+      - samples/create_input.rb
+      - samples/delete_asset.rb
+      - samples/delete_channel.rb
+      - samples/delete_channel_event.rb
+      - samples/delete_input.rb
+      - samples/get_asset.rb
+      - samples/get_channel.rb
+      - samples/get_channel_event.rb
+      - samples/get_input.rb
+      - samples/get_pool.rb
+      - samples/list_assets.rb
+      - samples/list_channel_events.rb
+      - samples/list_channels.rb
+      - samples/list_inputs.rb
+      - samples/start_channel.rb
+      - samples/stop_channel.rb
+      - samples/update_channel.rb
+      - samples/update_input.rb
+      - samples/update_pool.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-video-live_stream-v1
+    apis:
+      - path: google/cloud/video/livestream/v1
+    skip_generate: true
+  - name: google-cloud-video-stitcher
+    apis:
+      - path: google/cloud/video/stitcher/v1
+    keep:
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/create_cdn_key_akamai_test.rb
+      - samples/acceptance/create_cdn_key_test.rb
+      - samples/acceptance/create_live_config_test.rb
+      - samples/acceptance/create_live_session_test.rb
+      - samples/acceptance/create_slate_test.rb
+      - samples/acceptance/create_vod_config_test.rb
+      - samples/acceptance/create_vod_session_test.rb
+      - samples/acceptance/delete_cdn_key_test.rb
+      - samples/acceptance/delete_live_config_test.rb
+      - samples/acceptance/delete_slate_test.rb
+      - samples/acceptance/delete_vod_config_test.rb
+      - samples/acceptance/get_cdn_key_test.rb
+      - samples/acceptance/get_live_ad_tag_detail_test.rb
+      - samples/acceptance/get_live_config_test.rb
+      - samples/acceptance/get_live_session_test.rb
+      - samples/acceptance/get_slate_test.rb
+      - samples/acceptance/get_vod_ad_tag_detail_test.rb
+      - samples/acceptance/get_vod_config_test.rb
+      - samples/acceptance/get_vod_session_test.rb
+      - samples/acceptance/get_vod_stitch_detail_test.rb
+      - samples/acceptance/helper.rb
+      - samples/acceptance/list_cdn_keys_test.rb
+      - samples/acceptance/list_live_ad_tag_details_test.rb
+      - samples/acceptance/list_live_configs_test.rb
+      - samples/acceptance/list_slates_test.rb
+      - samples/acceptance/list_vod_ad_tag_details_test.rb
+      - samples/acceptance/list_vod_configs_test.rb
+      - samples/acceptance/list_vod_stitch_details_test.rb
+      - samples/acceptance/update_cdn_key_akamai_test.rb
+      - samples/acceptance/update_cdn_key_test.rb
+      - samples/acceptance/update_slate_test.rb
+      - samples/acceptance/update_vod_config_test.rb
+      - samples/create_cdn_key.rb
+      - samples/create_cdn_key_akamai.rb
+      - samples/create_live_config.rb
+      - samples/create_live_session.rb
+      - samples/create_slate.rb
+      - samples/create_vod_config.rb
+      - samples/create_vod_session.rb
+      - samples/delete_cdn_key.rb
+      - samples/delete_live_config.rb
+      - samples/delete_slate.rb
+      - samples/delete_vod_config.rb
+      - samples/get_cdn_key.rb
+      - samples/get_live_ad_tag_detail.rb
+      - samples/get_live_config.rb
+      - samples/get_live_session.rb
+      - samples/get_slate.rb
+      - samples/get_vod_ad_tag_detail.rb
+      - samples/get_vod_config.rb
+      - samples/get_vod_session.rb
+      - samples/get_vod_stitch_detail.rb
+      - samples/list_cdn_keys.rb
+      - samples/list_live_ad_tag_details.rb
+      - samples/list_live_configs.rb
+      - samples/list_slates.rb
+      - samples/list_vod_ad_tag_details.rb
+      - samples/list_vod_configs.rb
+      - samples/list_vod_stitch_details.rb
+      - samples/update_cdn_key.rb
+      - samples/update_cdn_key_akamai.rb
+      - samples/update_slate.rb
+      - samples/update_vod_config.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-cloud-video-stitcher-v1
+    apis:
+      - path: google/cloud/video/stitcher/v1
+    skip_generate: true
+  - name: google-cloud-video-transcoder
+    apis:
+      - path: google/cloud/video/transcoder/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TRANSCODER
+    keep:
+      - samples/Gemfile
+      - samples/Rakefile
+      - samples/acceptance/data/ChromeCast.mp4
+      - samples/acceptance/data/ForBiggerEscapes.mp4
+      - samples/acceptance/data/ForBiggerJoyrides.mp4
+      - samples/acceptance/data/overlay.jpg
+      - samples/acceptance/helper.rb
+      - samples/acceptance/job_template_test.rb
+      - samples/acceptance/job_test.rb
+      - samples/create_job_from_ad_hoc.rb
+      - samples/create_job_from_preset.rb
+      - samples/create_job_from_preset_batch_mode.rb
+      - samples/create_job_from_template.rb
+      - samples/create_job_template.rb
+      - samples/create_job_with_animated_overlay.rb
+      - samples/create_job_with_concatenated_inputs.rb
+      - samples/create_job_with_periodic_images_spritesheet.rb
+      - samples/create_job_with_set_number_images_spritesheet.rb
+      - samples/create_job_with_static_overlay.rb
+      - samples/delete_job.rb
+      - samples/delete_job_template.rb
+      - samples/get_job.rb
+      - samples/get_job_state.rb
+      - samples/get_job_template.rb
+      - samples/list_job_templates.rb
+      - samples/list_jobs.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-video-transcoder-v1
+    apis:
+      - path: google/cloud/video/transcoder/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: TRANSCODER
+    skip_generate: true
+  - name: google-cloud-video_intelligence
+    apis:
+      - path: google/cloud/videointelligence/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
+    keep:
+      - MIGRATING.md
+      - acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-video_intelligence-v1
+    apis:
+      - path: google/cloud/videointelligence/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
+    skip_generate: true
+  - name: google-cloud-video_intelligence-v1beta2
+    apis:
+      - path: google/cloud/videointelligence/v1beta2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
+    skip_generate: true
+  - name: google-cloud-video_intelligence-v1p1beta1
+    apis:
+      - path: google/cloud/videointelligence/v1p1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
+    skip_generate: true
+  - name: google-cloud-video_intelligence-v1p2beta1
+    apis:
+      - path: google/cloud/videointelligence/v1p2beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
+    skip_generate: true
+  - name: google-cloud-video_intelligence-v1p3beta1
+    apis:
+      - path: google/cloud/videointelligence/v1p3beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VIDEO_INTELLIGENCE
+    skip_generate: true
+  - name: google-cloud-vision
+    apis:
+      - path: google/cloud/vision/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VISION
+    keep:
+      - MIGRATING.md
+      - acceptance/data
+      - acceptance/google/cloud/vision/image_annotator_smoke_test.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-vision-v1
+    apis:
+      - path: google/cloud/vision/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VISION
+    keep:
+      - .toys/generate-helpers.rb
+      - acceptance/data
+      - acceptance/google/cloud/vision/v1/helpers_smoke_test.rb
+      - acceptance/google/cloud/vision/v1/image_annotator_smoke_test.rb
+      - lib/google/cloud/vision/v1/image_annotator/helpers.rb
+      - owlbot-templates/helpers_smoke_test.erb
+      - owlbot-templates/image_annotator_helpers.erb
+      - owlbot-templates/image_annotator_helpers_test.erb
+      - test/google/cloud/vision/v1/image_annotator_helpers_test.rb
+    skip_generate: true
+  - name: google-cloud-vision-v1p3beta1
+    apis:
+      - path: google/cloud/vision/v1p3beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VISION
+    keep:
+      - .toys/generate-helpers.rb
+      - acceptance/data
+      - acceptance/google/cloud/vision/v1p3beta1/helpers_smoke_test.rb
+      - acceptance/google/cloud/vision/v1p3beta1/image_annotator_smoke_test.rb
+      - lib/google/cloud/vision/v1p3beta1/image_annotator/helpers.rb
+      - owlbot-templates/helpers_smoke_test.erb
+      - owlbot-templates/image_annotator_helpers.erb
+      - owlbot-templates/image_annotator_helpers_test.erb
+      - test/google/cloud/vision/v1p3beta1/image_annotator_helpers_test.rb
+    skip_generate: true
+  - name: google-cloud-vision-v1p4beta1
+    apis:
+      - path: google/cloud/vision/v1p4beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VISION
+    keep:
+      - .toys/generate-helpers.rb
+      - acceptance/data
+      - acceptance/google/cloud/vision/v1p4beta1/helpers_smoke_test.rb
+      - lib/google/cloud/vision/v1p4beta1/image_annotator/helpers.rb
+      - owlbot-templates/helpers_smoke_test.erb
+      - owlbot-templates/image_annotator_helpers.erb
+      - owlbot-templates/image_annotator_helpers_test.erb
+      - test/google/cloud/vision/v1p4beta1/image_annotator_helpers_test.rb
+    skip_generate: true
+  - name: google-cloud-vision_ai
+    apis:
+      - path: google/cloud/visionai/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::VisionAI
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-vision_ai-v1
+    apis:
+      - path: google/cloud/visionai/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-gem-namespace: Google::Cloud::VisionAI::V1
+    skip_generate: true
+  - name: google-cloud-vm_migration
+    apis:
+      - path: google/cloud/vmmigration/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: VmMigration=VMMigration
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-vm_migration-v1
+    apis:
+      - path: google/cloud/vmmigration/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-namespace-override: VmMigration=VMMigration
+    skip_generate: true
+  - name: google-cloud-vmware_engine
+    apis:
+      - path: google/cloud/vmwareengine/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-vmware_engine-v1
+    apis:
+      - path: google/cloud/vmwareengine/v1
+    skip_generate: true
+  - name: google-cloud-vpc_access
+    apis:
+      - path: google/cloud/vpcaccess/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VPC_ACCESS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.7
+  - name: google-cloud-vpc_access-v1
+    apis:
+      - path: google/cloud/vpcaccess/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: VPC_ACCESS
+    skip_generate: true
+  - name: google-cloud-web_risk
+    apis:
+      - path: google/cloud/webrisk/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WEBRISK
+    keep:
+      - MIGRATING.md
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-web_risk-v1
+    apis:
+      - path: google/cloud/webrisk/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WEBRISK
+    skip_generate: true
+  - name: google-cloud-web_risk-v1beta1
+    apis:
+      - path: google/cloud/webrisk/v1beta1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WEBRISK
+            ruby-cloud-service-override: WebRiskServiceV1Beta1=WebRiskService
+    skip_generate: true
+  - name: google-cloud-web_security_scanner
+    apis:
+      - path: google/cloud/websecurityscanner/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.2
+  - name: google-cloud-web_security_scanner-v1
+    apis:
+      - path: google/cloud/websecurityscanner/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
+    skip_generate: true
+  - name: google-cloud-web_security_scanner-v1beta
+    apis:
+      - path: google/cloud/websecurityscanner/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
+    skip_generate: true
+  - name: google-cloud-workflows
+    apis:
+      - path: google/cloud/workflows/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:2.0
+  - name: google-cloud-workflows-executions-v1
+    apis:
+      - path: google/cloud/workflows/executions/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+            ruby-cloud-wrapper-gem-override: google-cloud-workflows
+    skip_generate: true
+  - name: google-cloud-workflows-executions-v1beta
+    apis:
+      - path: google/cloud/workflows/executions/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+            ruby-cloud-wrapper-gem-override: google-cloud-workflows
+    skip_generate: true
+  - name: google-cloud-workflows-v1
+    apis:
+      - path: google/cloud/workflows/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+    skip_generate: true
+  - name: google-cloud-workflows-v1beta
+    apis:
+      - path: google/cloud/workflows/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: WORKFLOWS
+    skip_generate: true
+  - name: google-cloud-workload_manager
+    apis:
+      - path: google/cloud/workloadmanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-cloud-workload_manager-v1
+    apis:
+      - path: google/cloud/workloadmanager/v1
+    skip_generate: true
+  - name: google-cloud-workstations
+    apis:
+      - path: google/cloud/workstations/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:1.0
+  - name: google-cloud-workstations-v1
+    apis:
+      - path: google/cloud/workstations/v1
+    skip_generate: true
+  - name: google-cloud-workstations-v1beta
+    apis:
+      - path: google/cloud/workstations/v1beta
+    skip_generate: true
+  - name: google-developers-developer_knowledge
+    apis:
+      - path: google/developers/knowledge/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-developers-developer_knowledge-v1
+    apis:
+      - path: google/developers/knowledge/v1
+    skip_generate: true
+  - name: google-iam-client
+    apis:
+      - path: google/iam/v2
+    keep:
+      - lib/google/iam/client/version.rb
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v2:0.5
+  - name: google-iam-credentials
+    apis:
+      - path: google/iam/credentials/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: IAM_CREDENTIALS
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.8
+  - name: google-iam-credentials-v1
+    apis:
+      - path: google/iam/credentials/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: IAM_CREDENTIALS
+    skip_generate: true
+  - name: google-iam-v1
+    apis:
+      - path: google/iam/v1
+    keep:
+      - README.md
+    skip_generate: true
+  - name: google-iam-v1beta
+    apis:
+      - path: google/iam/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: IAM
+    skip_generate: true
+  - name: google-iam-v2
+    apis:
+      - path: google/iam/v2
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-wrapper-gem-override: google-iam-client
+    skip_generate: true
+  - name: google-iam-v3
+    apis:
+      - path: google/iam/v3
+    skip_generate: true
+  - name: google-iam-v3beta
+    apis:
+      - path: google/iam/v3beta
+    skip_generate: true
+  - name: google-identity-access_context_manager
+    apis:
+      - path: google/identity/accesscontextmanager/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.7
+  - name: google-identity-access_context_manager-v1
+    apis:
+      - path: google/identity/accesscontextmanager/v1
+    skip_generate: true
+  - name: google-maps-fleet_engine
+    apis:
+      - path: google/maps/fleetengine/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-maps-fleet_engine-delivery
+    apis:
+      - path: google/maps/fleetengine/delivery/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-maps-fleet_engine-delivery-v1
+    apis:
+      - path: google/maps/fleetengine/delivery/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-geo-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-maps-fleet_engine-v1
+    apis:
+      - path: google/maps/fleetengine/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-geo-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-maps-isochrones
+    apis:
+      - path: google/maps/isochrones/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-maps-isochrones-v1
+    apis:
+      - path: google/maps/isochrones/v1
+    skip_generate: true
   - name: google-maps-route_optimization
     version: 0.0.1
     apis:
@@ -64,3 +4293,293 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.0
+  - name: google-maps-route_optimization-v1
+    version: 0.0.1
+    apis:
+      - path: google/maps/routeoptimization/v1
+    copyright_year: "2026"
+  - name: google-shopping-css
+    apis:
+      - path: google/shopping/css/v1
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.0
+  - name: google-shopping-css-v1
+    apis:
+      - path: google/shopping/css/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-accounts
+    apis:
+      - path: google/shopping/merchant/accounts/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.2
+  - name: google-shopping-merchant-accounts-v1
+    apis:
+      - path: google/shopping/merchant/accounts/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-accounts-v1beta
+    apis:
+      - path: google/shopping/merchant/accounts/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-conversions
+    apis:
+      - path: google/shopping/merchant/conversions/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-conversions-v1
+    apis:
+      - path: google/shopping/merchant/conversions/v1
+    skip_generate: true
+  - name: google-shopping-merchant-conversions-v1beta
+    apis:
+      - path: google/shopping/merchant/conversions/v1beta
+    skip_generate: true
+  - name: google-shopping-merchant-data_sources
+    apis:
+      - path: google/shopping/merchant/datasources/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.2
+  - name: google-shopping-merchant-data_sources-v1
+    apis:
+      - path: google/shopping/merchant/datasources/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-data_sources-v1beta
+    apis:
+      - path: google/shopping/merchant/datasources/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-inventories
+    apis:
+      - path: google/shopping/merchant/inventories/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.2
+  - name: google-shopping-merchant-inventories-v1
+    apis:
+      - path: google/shopping/merchant/inventories/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-inventories-v1beta
+    apis:
+      - path: google/shopping/merchant/inventories/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-issue_resolution
+    apis:
+      - path: google/shopping/merchant/issueresolution/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-issue_resolution-v1
+    apis:
+      - path: google/shopping/merchant/issueresolution/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-issue_resolution-v1beta
+    apis:
+      - path: google/shopping/merchant/issueresolution/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-lfp
+    apis:
+      - path: google/shopping/merchant/lfp/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-lfp-v1
+    apis:
+      - path: google/shopping/merchant/lfp/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-lfp-v1beta
+    apis:
+      - path: google/shopping/merchant/lfp/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-notifications
+    apis:
+      - path: google/shopping/merchant/notifications/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-notifications-v1
+    apis:
+      - path: google/shopping/merchant/notifications/v1
+    skip_generate: true
+  - name: google-shopping-merchant-notifications-v1beta
+    apis:
+      - path: google/shopping/merchant/notifications/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-order_tracking
+    apis:
+      - path: google/shopping/merchant/ordertracking/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-order_tracking-v1
+    apis:
+      - path: google/shopping/merchant/ordertracking/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-order_tracking-v1beta
+    apis:
+      - path: google/shopping/merchant/ordertracking/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-products
+    apis:
+      - path: google/shopping/merchant/products/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-products-v1
+    apis:
+      - path: google/shopping/merchant/products/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-products-v1beta
+    apis:
+      - path: google/shopping/merchant/products/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-promotions
+    apis:
+      - path: google/shopping/merchant/promotions/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-promotions-v1
+    apis:
+      - path: google/shopping/merchant/promotions/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-promotions-v1beta
+    apis:
+      - path: google/shopping/merchant/promotions/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-quota
+    apis:
+      - path: google/shopping/merchant/quota/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-quota-v1
+    apis:
+      - path: google/shopping/merchant/quota/v1
+    skip_generate: true
+  - name: google-shopping-merchant-quota-v1beta
+    apis:
+      - path: google/shopping/merchant/quota/v1beta
+    skip_generate: true
+  - name: google-shopping-merchant-reports
+    apis:
+      - path: google/shopping/merchant/reports/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.3
+  - name: google-shopping-merchant-reports-v1
+    apis:
+      - path: google/shopping/merchant/reports/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=~>1.0
+    skip_generate: true
+  - name: google-shopping-merchant-reports-v1beta
+    apis:
+      - path: google/shopping/merchant/reports/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: google-shopping-merchant-reviews
+    apis:
+      - path: google/shopping/merchant/reviews/v1beta
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1beta:0.0
+  - name: google-shopping-merchant-reviews-v1beta
+    apis:
+      - path: google/shopping/merchant/reviews/v1beta
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-extra-dependencies: google-shopping-type=>0.0+<2.a
+    skip_generate: true
+  - name: grafeas
+    apis:
+      - path: grafeas/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GRAFEAS
+            ruby-cloud-migration-version: "1.0"
+    keep:
+      - MIGRATING.md
+    skip_generate: true
+    ruby:
+      wrapper_of:
+        - v1:0.14
+  - name: grafeas-v1
+    apis:
+      - path: grafeas/v1
+        ruby:
+          ruby_cloud_opts:
+            ruby-cloud-env-prefix: GRAFEAS
+    skip_generate: true
