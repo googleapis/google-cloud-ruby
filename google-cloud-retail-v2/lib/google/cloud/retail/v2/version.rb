@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Retail
       module V2
-        VERSION = "2.9.0"
+        VERSION = "2.9.1"
       end
     end
   end
