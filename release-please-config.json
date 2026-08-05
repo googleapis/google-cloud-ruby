@@ -4,12 +4,6 @@
   "draft": false,
   "include-component-in-tag": true,
   "include-v-in-tag": true,
-  "prerelease": false,
-  "release-type": "ruby-librarian",
-  "skip-github-release": false,
-  "separate-pull-requests": true,
-  "tag-separator": "/",
-  "sequential-calls": true,
   "packages": {
     "google-ads-ad_manager": {
       "component": "google-ads-ad_manager",
@@ -2039,6 +2033,14 @@
       "component": "google-maps-isochrones-v1",
       "version_file": "lib/google/maps/isochrones/v1/version.rb"
     },
+    "google-maps-route_optimization-v1": {
+      "component": "google-maps-route_optimization-v1",
+      "version_file": "lib/google/maps/route_optimization/v1/version.rb"
+    },
+    "google-maps-route_optimization": {
+      "component": "google-maps-route_optimization",
+      "version_file": "lib/google/maps/route_optimization/version.rb"
+    },
     "google-shopping-css": {
       "component": "google-shopping-css",
       "version_file": "lib/google/shopping/css/version.rb"
@@ -2215,5 +2217,11 @@
       "component": "stackdriver-core",
       "version_file": "lib/stackdriver/core/version.rb"
     }
-  }
+  },
+  "prerelease": false,
+  "release-type": "ruby-librarian",
+  "separate-pull-requests": true,
+  "sequential-calls": true,
+  "skip-github-release": false,
+  "tag-separator": "/"
 }
