@@ -67,6 +67,13 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(project.universe_domain).must_equal "googleapis.com"
   end
 
+  it "enables invocation id and idempotency token header request options by default" do
+    service = Google::Cloud::Storage::Service.new "my-project", default_credentials
+    _(service.service.request_options.add_invocation_id_header).must_equal true
+    _(service.service.request_options.add_idempotency_token_header).must_equal true
+  end
+
+  
   it "supports setting a universe domain argument" do
     service = Google::Cloud::Storage::Service.new "my-project", default_credentials, universe_domain: "mydomain1.com"
     _(service.universe_domain).must_equal "mydomain1.com"
