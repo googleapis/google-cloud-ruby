@@ -1,0 +1,17 @@
+{
+    "api_id": "routeoptimization.googleapis.com",
+    "api_shortname": "routeoptimization",
+    "client_documentation": "https://rubydoc.info/gems/google-maps-route_optimization",
+    "distribution_name": "google-maps-route_optimization",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "routeoptimization",
+    "name_pretty": "Route Optimization API",
+    "product_documentation": "https://developers.google.com/maps/documentation/route-optimization",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Route Optimization API assigns tasks and routes to a vehicle fleet, optimizing against the objectives and constraints that you supply for your transportation goals.",
+    "ruby-cloud-product-url": "https://developers.google.com/maps/documentation/route-optimization",
+    "library_type": "GAPIC_AUTO"
+}
