@@ -191,7 +191,7 @@
   "google-cloud-bigtable-v2+FILLER": "0.0.0",
   "google-cloud-billing": "1.8.1",
   "google-cloud-billing+FILLER": "0.0.0",
-  "google-cloud-billing-budgets": "3.2.0",
+  "google-cloud-billing-budgets": "3.2.1",
   "google-cloud-billing-budgets+FILLER": "0.0.0",
   "google-cloud-billing-budgets-v1": "1.6.0",
   "google-cloud-billing-budgets-v1+FILLER": "0.0.0",
