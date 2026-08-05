@@ -543,7 +543,7 @@
   "google-cloud-maintenance-api+FILLER": "0.0.0",
   "google-cloud-maintenance-api-v1": "1.0.0",
   "google-cloud-maintenance-api-v1+FILLER": "0.0.0",
-  "google-cloud-maintenance-api-v1beta": "1.0.0",
+  "google-cloud-maintenance-api-v1beta": "1.0.1",
   "google-cloud-maintenance-api-v1beta+FILLER": "0.0.0",
   "google-cloud-managed_identities": "1.6.1",
   "google-cloud-managed_identities+FILLER": "0.0.0",
