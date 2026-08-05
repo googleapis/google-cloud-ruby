@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 (2026-08-05)
+
+#### Features
+
+* add workflow trigger configuration support ([#35075](https://github.com/googleapis/google-cloud-ruby/issues/35075)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35051](https://github.com/googleapis/google-cloud-ruby/issues/35051)) 
+
 ### 1.0.0 (2026-07-17)
 
 #### Features
