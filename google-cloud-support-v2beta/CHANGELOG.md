@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2026-08-05)
+
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
 ### 0.8.0 (2026-07-27)
 
 #### Features
