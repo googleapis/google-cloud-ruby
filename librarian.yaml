@@ -51,3 +51,16 @@ libraries:
     keep:
       - lib/google/cloud/asset/v1/asset_service/helpers.rb
       - test/google/cloud/asset/v1/additional_paths_test.rb
+  - name: google-maps-route_optimization-v1
+    version: 0.0.1
+    apis:
+      - path: google/maps/routeoptimization/v1
+    copyright_year: "2026"
+  - name: google-maps-route_optimization
+    version: 0.0.1
+    apis:
+      - path: google/maps/routeoptimization/v1
+    copyright_year: "2026"
+    ruby:
+      wrapper_of:
+        - v1:0.0
