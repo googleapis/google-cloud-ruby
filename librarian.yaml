@@ -2047,6 +2047,7 @@ libraries:
     apis:
       - path: google/cloud/licensemanager/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-life_sciences
     apis:
       - path: google/cloud/lifesciences/v2beta
