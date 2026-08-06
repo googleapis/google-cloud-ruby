@@ -1813,6 +1813,7 @@ libraries:
     apis:
       - path: google/cloud/gkebackup/v1
     skip_generate: true
+    version: 1.8.1
   - name: google-cloud-gke_connect-gateway
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
