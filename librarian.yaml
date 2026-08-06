@@ -973,6 +973,7 @@ libraries:
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
     skip_generate: true
+    version: 1.9.1
   - name: google-cloud-commerce_producer
     apis:
       - path: google/cloud/commerceproducer/v1beta
