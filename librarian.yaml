@@ -196,6 +196,7 @@ libraries:
     apis:
       - path: google/cloud/agentregistry/v1
     skip_generate: true
+    version: 0.1.1
   - name: google-cloud-ai_platform
     apis:
       - path: google/cloud/aiplatform/v1
