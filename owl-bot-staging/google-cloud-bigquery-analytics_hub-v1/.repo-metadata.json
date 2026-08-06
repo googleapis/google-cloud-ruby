@@ -1,0 +1,17 @@
+{
+    "api_id": "analyticshub.googleapis.com",
+    "api_shortname": "analyticshub",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-analytics_hub-v1/latest",
+    "distribution_name": "google-cloud-bigquery-analytics_hub-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "analyticshub",
+    "name_pretty": "Analytics Hub V1 API",
+    "product_documentation": "https://cloud.google.com/bigquery/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Analytics Hub is a data exchange platform that enables you to share data and insights at scale across organizational boundaries with a robust security and privacy framework. With Analytics Hub, you can discover and access a data library curated by various data providers. Note that google-cloud-bigquery-analytics_hub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-analytics_hub instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs",
+    "library_type": "GAPIC_AUTO"
+}
