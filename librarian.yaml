@@ -2246,6 +2246,7 @@ libraries:
             ruby-cloud-env-prefix: MONITORING_DASHBOARD
             ruby-cloud-wrapper-gem-override: google-cloud-monitoring
     skip_generate: true
+    version: 1.7.1
   - name: google-cloud-monitoring-metrics_scope-v1
     apis:
       - path: google/monitoring/metricsscope/v1
