@@ -708,6 +708,7 @@ libraries:
       - test/google/cloud/bigtable/admin/v2/bigtable_table_admin_helpers_test.rb
       - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
     skip_generate: true
+    version: 1.18.1
   - name: google-cloud-bigtable-v2
     apis:
       - path: google/bigtable/v2
