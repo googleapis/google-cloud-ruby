@@ -619,6 +619,7 @@ libraries:
     apis:
       - path: google/cloud/bigquery/dataexchange/v1beta1
     skip_generate: true
+    version: 0.13.1
   - name: google-cloud-bigquery-data_policies
     apis:
       - path: google/cloud/bigquery/datapolicies/v1
