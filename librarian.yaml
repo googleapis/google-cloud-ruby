@@ -3153,6 +3153,7 @@ libraries:
             ruby-cloud-env-prefix: PRIVATE_CA
             ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA::V1
     skip_generate: true
+    version: 2.8.1
   - name: google-cloud-security-private_ca-v1beta1
     apis:
       - path: google/cloud/security/privateca/v1beta1
