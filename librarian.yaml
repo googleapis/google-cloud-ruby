@@ -284,6 +284,7 @@ libraries:
     apis:
       - path: google/cloud/apihub/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-api_keys
     apis:
       - path: google/api/apikeys/v2
