@@ -831,6 +831,7 @@ libraries:
     apis:
       - path: google/cloud/capacityplanner/v1beta
     skip_generate: true
+    version: 0.5.1
   - name: google-cloud-certificate_manager
     apis:
       - path: google/cloud/certificatemanager/v1
