@@ -939,6 +939,7 @@ libraries:
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-commerce-consumer-procurement
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
