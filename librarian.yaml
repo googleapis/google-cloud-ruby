@@ -357,6 +357,7 @@ libraries:
     apis:
       - path: google/cloud/apphub/v1
     skip_generate: true
+    version: 1.7.1
   - name: google-cloud-app_optimize
     apis:
       - path: google/cloud/appoptimize/v1beta
