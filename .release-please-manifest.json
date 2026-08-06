@@ -587,7 +587,7 @@
   "google-cloud-monitoring+FILLER": "0.0.0",
   "google-cloud-monitoring-dashboard-v1": "1.7.1",
   "google-cloud-monitoring-dashboard-v1+FILLER": "0.0.0",
-  "google-cloud-monitoring-metrics_scope-v1": "1.8.0",
+  "google-cloud-monitoring-metrics_scope-v1": "1.8.1",
   "google-cloud-monitoring-metrics_scope-v1+FILLER": "0.0.0",
   "google-cloud-monitoring-v3": "1.10.1",
   "google-cloud-monitoring-v3+FILLER": "0.0.0",
