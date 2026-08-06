@@ -2033,6 +2033,7 @@ libraries:
             ruby-cloud-env-prefix: LIFE_SCIENCES
             ruby-cloud-service-override: WorkflowsServiceV2Beta=WorkflowsService
     skip_generate: true
+    version: 0.16.1
   - name: google-cloud-location
     keep:
       - README.md
