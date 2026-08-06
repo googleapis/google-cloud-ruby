@@ -889,6 +889,7 @@ libraries:
     apis:
       - path: google/cloud/cloudcontrolspartner/v1
     skip_generate: true
+    version: 2.4.1
   - name: google-cloud-cloud_controls_partner-v1beta
     apis:
       - path: google/cloud/cloudcontrolspartner/v1beta
