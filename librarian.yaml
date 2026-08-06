@@ -4303,6 +4303,7 @@ libraries:
     apis:
       - path: google/identity/accesscontextmanager/v1
     skip_generate: true
+    version: 0.15.1
   - name: google-maps-fleet_engine
     apis:
       - path: google/maps/fleetengine/v1
