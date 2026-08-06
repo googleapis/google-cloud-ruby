@@ -893,6 +893,7 @@ libraries:
     apis:
       - path: google/cloud/cloudcontrolspartner/v1beta
     skip_generate: true
+    version: 0.9.1
   - name: google-cloud-cloud_dms
     apis:
       - path: google/cloud/clouddms/v1
