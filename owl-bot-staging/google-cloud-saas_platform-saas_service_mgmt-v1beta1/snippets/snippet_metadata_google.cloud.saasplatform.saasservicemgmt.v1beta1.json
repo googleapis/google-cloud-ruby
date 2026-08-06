@@ -1,0 +1,1615 @@
+{
+  "client_library": {
+    "name": "google-cloud-saas_platform-saas_service_mgmt-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.saasplatform.saasservicemgmt.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_ListSaas_sync",
+      "title": "Snippet for the list_saas call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_saas.",
+      "file": "saas_deployments/list_saas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_saas",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_saas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListSaasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListSaasResponse",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "ListSaas",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.ListSaas",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_GetSaas_sync",
+      "title": "Snippet for the get_saas call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_saas.",
+      "file": "saas_deployments/get_saas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_saas",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_saas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetSaasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Saas",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "GetSaas",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.GetSaas",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_CreateSaas_sync",
+      "title": "Snippet for the create_saas call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_saas.",
+      "file": "saas_deployments/create_saas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_saas",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_saas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateSaasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Saas",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "CreateSaas",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.CreateSaas",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateSaas_sync",
+      "title": "Snippet for the update_saas call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_saas.",
+      "file": "saas_deployments/update_saas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_saas",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_saas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateSaasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Saas",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "UpdateSaas",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.UpdateSaas",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteSaas_sync",
+      "title": "Snippet for the delete_saas call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_saas.",
+      "file": "saas_deployments/delete_saas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_saas",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_saas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteSaasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "DeleteSaas",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.DeleteSaas",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_ListTenants_sync",
+      "title": "Snippet for the list_tenants call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_tenants.",
+      "file": "saas_deployments/list_tenants.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tenants",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_tenants",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListTenantsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListTenantsResponse",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "ListTenants",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.ListTenants",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_GetTenant_sync",
+      "title": "Snippet for the get_tenant call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_tenant.",
+      "file": "saas_deployments/get_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_tenant",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Tenant",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "GetTenant",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.GetTenant",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_CreateTenant_sync",
+      "title": "Snippet for the create_tenant call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_tenant.",
+      "file": "saas_deployments/create_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tenant",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Tenant",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "CreateTenant",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.CreateTenant",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateTenant_sync",
+      "title": "Snippet for the update_tenant call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_tenant.",
+      "file": "saas_deployments/update_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_tenant",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Tenant",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "UpdateTenant",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.UpdateTenant",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteTenant_sync",
+      "title": "Snippet for the delete_tenant call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_tenant.",
+      "file": "saas_deployments/delete_tenant.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tenant",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_tenant",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteTenantRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "DeleteTenant",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.DeleteTenant",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnitKinds_sync",
+      "title": "Snippet for the list_unit_kinds call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_unit_kinds.",
+      "file": "saas_deployments/list_unit_kinds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_unit_kinds",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_unit_kinds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitKindsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitKindsResponse",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "ListUnitKinds",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.ListUnitKinds",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnitKind_sync",
+      "title": "Snippet for the get_unit_kind call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_unit_kind.",
+      "file": "saas_deployments/get_unit_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_unit_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_unit_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitKind",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "GetUnitKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.GetUnitKind",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnitKind_sync",
+      "title": "Snippet for the create_unit_kind call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_unit_kind.",
+      "file": "saas_deployments/create_unit_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_unit_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_unit_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitKind",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "CreateUnitKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.CreateUnitKind",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnitKind_sync",
+      "title": "Snippet for the update_unit_kind call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_unit_kind.",
+      "file": "saas_deployments/update_unit_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_unit_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_unit_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitKind",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "UpdateUnitKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.UpdateUnitKind",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnitKind_sync",
+      "title": "Snippet for the delete_unit_kind call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_unit_kind.",
+      "file": "saas_deployments/delete_unit_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_unit_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_unit_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "DeleteUnitKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.DeleteUnitKind",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnits_sync",
+      "title": "Snippet for the list_units call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_units.",
+      "file": "saas_deployments/list_units.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_units",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_units",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitsResponse",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "ListUnits",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.ListUnits",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnit_sync",
+      "title": "Snippet for the get_unit call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_unit.",
+      "file": "saas_deployments/get_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_unit",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Unit",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "GetUnit",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.GetUnit",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnit_sync",
+      "title": "Snippet for the create_unit call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_unit.",
+      "file": "saas_deployments/create_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_unit",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Unit",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "CreateUnit",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.CreateUnit",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnit_sync",
+      "title": "Snippet for the update_unit call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_unit.",
+      "file": "saas_deployments/update_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_unit",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Unit",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "UpdateUnit",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.UpdateUnit",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnit_sync",
+      "title": "Snippet for the delete_unit call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_unit.",
+      "file": "saas_deployments/delete_unit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_unit",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_unit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "DeleteUnit",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.DeleteUnit",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnitOperations_sync",
+      "title": "Snippet for the list_unit_operations call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_unit_operations.",
+      "file": "saas_deployments/list_unit_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_unit_operations",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_unit_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListUnitOperationsResponse",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "ListUnitOperations",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.ListUnitOperations",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnitOperation_sync",
+      "title": "Snippet for the get_unit_operation call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_unit_operation.",
+      "file": "saas_deployments/get_unit_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_unit_operation",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_unit_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetUnitOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitOperation",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "GetUnitOperation",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.GetUnitOperation",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnitOperation_sync",
+      "title": "Snippet for the create_unit_operation call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_unit_operation.",
+      "file": "saas_deployments/create_unit_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_unit_operation",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_unit_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateUnitOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitOperation",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "CreateUnitOperation",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.CreateUnitOperation",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnitOperation_sync",
+      "title": "Snippet for the update_unit_operation call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_unit_operation.",
+      "file": "saas_deployments/update_unit_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_unit_operation",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_unit_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateUnitOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UnitOperation",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "UpdateUnitOperation",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.UpdateUnitOperation",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnitOperation_sync",
+      "title": "Snippet for the delete_unit_operation call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_unit_operation.",
+      "file": "saas_deployments/delete_unit_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_unit_operation",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_unit_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteUnitOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "DeleteUnitOperation",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.DeleteUnitOperation",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_ListReleases_sync",
+      "title": "Snippet for the list_releases call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_releases.",
+      "file": "saas_deployments/list_releases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_releases",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#list_releases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListReleasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListReleasesResponse",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "ListReleases",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.ListReleases",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_GetRelease_sync",
+      "title": "Snippet for the get_release call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_release.",
+      "file": "saas_deployments/get_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_release",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#get_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Release",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "GetRelease",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.GetRelease",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_CreateRelease_sync",
+      "title": "Snippet for the create_release call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_release.",
+      "file": "saas_deployments/create_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_release",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#create_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Release",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "CreateRelease",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.CreateRelease",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateRelease_sync",
+      "title": "Snippet for the update_release call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_release.",
+      "file": "saas_deployments/update_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_release",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#update_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Release",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "UpdateRelease",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.UpdateRelease",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteRelease_sync",
+      "title": "Snippet for the delete_release call in the SaasDeployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_release.",
+      "file": "saas_deployments/delete_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_release",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client#delete_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasDeployments::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasDeployments::Client"
+        },
+        "method": {
+          "short_name": "DeleteRelease",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.DeleteRelease",
+          "service": {
+            "short_name": "SaasDeployments",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_ListRollouts_sync",
+      "title": "Snippet for the list_rollouts call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#list_rollouts.",
+      "file": "saas_rollouts/list_rollouts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rollouts",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#list_rollouts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutsResponse",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "ListRollouts",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.ListRollouts",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_GetRollout_sync",
+      "title": "Snippet for the get_rollout call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#get_rollout.",
+      "file": "saas_rollouts/get_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rollout",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#get_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Rollout",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "GetRollout",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.GetRollout",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_CreateRollout_sync",
+      "title": "Snippet for the create_rollout call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#create_rollout.",
+      "file": "saas_rollouts/create_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rollout",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#create_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Rollout",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "CreateRollout",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.CreateRollout",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_UpdateRollout_sync",
+      "title": "Snippet for the update_rollout call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#update_rollout.",
+      "file": "saas_rollouts/update_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_rollout",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#update_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::Rollout",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "UpdateRollout",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.UpdateRollout",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_DeleteRollout_sync",
+      "title": "Snippet for the delete_rollout call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#delete_rollout.",
+      "file": "saas_rollouts/delete_rollout.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_rollout",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#delete_rollout",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "DeleteRollout",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.DeleteRollout",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_ListRolloutKinds_sync",
+      "title": "Snippet for the list_rollout_kinds call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#list_rollout_kinds.",
+      "file": "saas_rollouts/list_rollout_kinds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rollout_kinds",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#list_rollout_kinds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutKindsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::ListRolloutKindsResponse",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "ListRolloutKinds",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.ListRolloutKinds",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_GetRolloutKind_sync",
+      "title": "Snippet for the get_rollout_kind call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#get_rollout_kind.",
+      "file": "saas_rollouts/get_rollout_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rollout_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#get_rollout_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::GetRolloutKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::RolloutKind",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "GetRolloutKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.GetRolloutKind",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_CreateRolloutKind_sync",
+      "title": "Snippet for the create_rollout_kind call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#create_rollout_kind.",
+      "file": "saas_rollouts/create_rollout_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rollout_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#create_rollout_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::CreateRolloutKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::RolloutKind",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "CreateRolloutKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.CreateRolloutKind",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_UpdateRolloutKind_sync",
+      "title": "Snippet for the update_rollout_kind call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#update_rollout_kind.",
+      "file": "saas_rollouts/update_rollout_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_rollout_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#update_rollout_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::UpdateRolloutKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::RolloutKind",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "UpdateRolloutKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.UpdateRolloutKind",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "saasservicemgmt_v1beta1_generated_SaasRollouts_DeleteRolloutKind_sync",
+      "title": "Snippet for the delete_rollout_kind call in the SaasRollouts service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#delete_rollout_kind.",
+      "file": "saas_rollouts/delete_rollout_kind.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_rollout_kind",
+        "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client#delete_rollout_kind",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::DeleteRolloutKindRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SaasRollouts::Client",
+          "full_name": "::Google::Cloud::SaasPlatform::SaasServiceMgmt::V1beta1::SaasRollouts::Client"
+        },
+        "method": {
+          "short_name": "DeleteRolloutKind",
+          "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.DeleteRolloutKind",
+          "service": {
+            "short_name": "SaasRollouts",
+            "full_name": "google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
