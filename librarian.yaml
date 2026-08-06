@@ -310,6 +310,7 @@ libraries:
     apis:
       - path: google/cloud/apiregistry/v1beta
     skip_generate: true
+    version: 0.4.1
   - name: google-cloud-apigee_connect
     apis:
       - path: google/cloud/apigeeconnect/v1
