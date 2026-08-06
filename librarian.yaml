@@ -1886,6 +1886,7 @@ libraries:
     apis:
       - path: google/cloud/gkerecommender/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-gsuite_add_ons
     apis:
       - path: google/cloud/gsuiteaddons/v1
