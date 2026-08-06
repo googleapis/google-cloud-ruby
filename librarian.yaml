@@ -3880,6 +3880,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TRANSCODER
     skip_generate: true
+    version: 2.6.1
   - name: google-cloud-video_intelligence
     apis:
       - path: google/cloud/videointelligence/v1
