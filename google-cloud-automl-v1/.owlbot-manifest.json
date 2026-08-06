@@ -122,6 +122,7 @@
   "static": [
     ".OwlBot.yaml",
     ".owlbot.rb",
+    "Gemfile.lock",
     "lib/google/cloud/automl/v1/_helpers.rb"
   ]
 }
