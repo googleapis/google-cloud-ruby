@@ -2358,6 +2358,7 @@ libraries:
       wrapper_of:
         - v1:1.0
         - v2:1.0
+    version: 3.2.1
   - name: google-cloud-notebooks-v1
     apis:
       - path: google/cloud/notebooks/v1
