@@ -80,6 +80,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "acceptance/data",
     "acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb"
   ]

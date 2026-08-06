@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,11 @@
 module Google
   module Protobuf
     # A protocol buffer message type.
+    #
+    # New usages of this message as an alternative to DescriptorProto are strongly
+    # discouraged. This message does not reliability preserve all information
+    # necessary to model the schema and preserve semantics. Instead make use of
+    # FileDescriptorSet which preserves the necessary information.
     # @!attribute [rw] name
     #   @return [::String]
     #     The fully qualified message name.
@@ -47,6 +52,11 @@ module Google
     end
 
     # A single field of a message type.
+    #
+    # New usages of this message as an alternative to FieldDescriptorProto are
+    # strongly discouraged. This message does not reliability preserve all
+    # information necessary to model the schema and preserve semantics. Instead
+    # make use of FileDescriptorSet which preserves the necessary information.
     # @!attribute [rw] kind
     #   @return [::Google::Protobuf::Field::Kind]
     #     The field type.
@@ -160,6 +170,11 @@ module Google
     end
 
     # Enum type definition.
+    #
+    # New usages of this message as an alternative to EnumDescriptorProto are
+    # strongly discouraged. This message does not reliability preserve all
+    # information necessary to model the schema and preserve semantics. Instead
+    # make use of FileDescriptorSet which preserves the necessary information.
     # @!attribute [rw] name
     #   @return [::String]
     #     Enum type name.
@@ -184,6 +199,11 @@ module Google
     end
 
     # Enum value definition.
+    #
+    # New usages of this message as an alternative to EnumValueDescriptorProto are
+    # strongly discouraged. This message does not reliability preserve all
+    # information necessary to model the schema and preserve semantics. Instead
+    # make use of FileDescriptorSet which preserves the necessary information.
     # @!attribute [rw] name
     #   @return [::String]
     #     Enum value name.
@@ -200,6 +220,10 @@ module Google
 
     # A protocol buffer option, which can be attached to a message, field,
     # enumeration, etc.
+    #
+    # New usages of this message as an alternative to FileOptions, MessageOptions,
+    # FieldOptions, EnumOptions, EnumValueOptions, ServiceOptions, or MethodOptions
+    # are strongly discouraged.
     # @!attribute [rw] name
     #   @return [::String]
     #     The option's name. For protobuf built-in options (options defined in
