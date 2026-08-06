@@ -1256,6 +1256,7 @@ libraries:
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     skip_generate: true
+    version: 0.1.1
   - name: google-cloud-data_catalog-lineage-v1
     apis:
       - path: google/cloud/datacatalog/lineage/v1
