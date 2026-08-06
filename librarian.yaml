@@ -2406,6 +2406,7 @@ libraries:
     apis:
       - path: google/cloud/orchestration/airflow/service/v1
     skip_generate: true
+    version: 1.9.1
   - name: google-cloud-org_policy
     apis:
       - path: google/cloud/orgpolicy/v2
