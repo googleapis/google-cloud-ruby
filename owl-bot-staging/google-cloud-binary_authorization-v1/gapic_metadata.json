@@ -1,0 +1,81 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.binaryauthorization.v1",
+  "libraryPackage": "::Google::Cloud::BinaryAuthorization::V1",
+  "services": {
+    "BinauthzManagementServiceV1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client",
+          "rpcs": {
+            "GetPolicy": {
+              "methods": [
+                "get_policy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "update_policy"
+              ]
+            },
+            "CreateAttestor": {
+              "methods": [
+                "create_attestor"
+              ]
+            },
+            "GetAttestor": {
+              "methods": [
+                "get_attestor"
+              ]
+            },
+            "UpdateAttestor": {
+              "methods": [
+                "update_attestor"
+              ]
+            },
+            "ListAttestors": {
+              "methods": [
+                "list_attestors"
+              ]
+            },
+            "DeleteAttestor": {
+              "methods": [
+                "delete_attestor"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SystemPolicyV1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client",
+          "rpcs": {
+            "GetSystemPolicy": {
+              "methods": [
+                "get_system_policy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ValidationHelperV1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client",
+          "rpcs": {
+            "ValidateAttestationOccurrence": {
+              "methods": [
+                "validate_attestation_occurrence"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
