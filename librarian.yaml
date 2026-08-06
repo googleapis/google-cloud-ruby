@@ -1767,6 +1767,7 @@ libraries:
     ruby:
       wrapper_of:
         - v1beta:0.0
+    version: 1.0.1
   - name: google-cloud-gemini_data_analytics-v1
     apis:
       - path: google/cloud/geminidataanalytics/v1
