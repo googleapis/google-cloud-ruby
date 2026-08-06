@@ -3399,6 +3399,7 @@ libraries:
     apis:
       - path: google/cloud/sql/v1
     skip_generate: true
+    version: 0.3.0
   - name: google-cloud-sql-v1beta4
     apis:
       - path: google/cloud/sql/v1beta4

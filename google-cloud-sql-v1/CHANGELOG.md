@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.3.0 (2026-08-06)
+
+#### Features
+
+* add client library publishing configuration for SQL Admin ([#34995](https://github.com/googleapis/google-cloud-ruby/issues/34995)) 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35063](https://github.com/googleapis/google-cloud-ruby/issues/35063)) 
+
 ### 0.2.0 (2026-06-30)
 
 #### Features
