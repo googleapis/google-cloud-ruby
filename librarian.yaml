@@ -1863,6 +1863,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: GKE_HUB
     skip_generate: true
+    version: 0.21.1
   - name: google-cloud-gke_multi_cloud
     apis:
       - path: google/cloud/gkemulticloud/v1
