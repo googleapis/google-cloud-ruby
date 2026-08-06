@@ -60,6 +60,7 @@ libraries:
     apis:
       - path: google/marketingplatform/admin/v1alpha
     skip_generate: true
+    version: 0.6.1
   - name: google-analytics-admin
     apis:
       - path: google/analytics/admin/v1alpha
