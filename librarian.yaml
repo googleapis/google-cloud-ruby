@@ -2667,6 +2667,7 @@ libraries:
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
     skip_generate: true
+    version: 1.7.1
   - name: google-cloud-product_registry
     apis:
       - path: google/cloud/productregistry/v1
