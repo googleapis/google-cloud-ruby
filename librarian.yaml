@@ -1693,6 +1693,7 @@ libraries:
     apis:
       - path: google/cloud/financialservices/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-firestore-admin
     apis:
       - path: google/firestore/admin/v1
