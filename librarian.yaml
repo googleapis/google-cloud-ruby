@@ -835,6 +835,7 @@ libraries:
     apis:
       - path: google/cloud/certificatemanager/v1
     skip_generate: true
+    version: 1.5.1
   - name: google-cloud-ces
     apis:
       - path: google/cloud/ces/v1
