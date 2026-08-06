@@ -66,6 +66,7 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    "Gemfile.lock"
   ]
 }
