@@ -63,33 +63,35 @@ module Google
           # Computes a base64-encoded digest for a local file or IO stream.
           #
           # This method handles two types of inputs for `local_file`:
-          # 1. A file path (String or Pathname): It efficiently streams the file
-          #    to compute the digest without loading the entire file into memory.
-          # 2. An IO-like stream (e.g., File, StringIO): It reads the stream's
-          #    content to compute the digest. The stream is rewound before and after
+          # 1. An IO-like stream (e.g., File, Tempfile, StringIO): It reads the
+          #    stream's content in chunks to compute the digest without loading
+          #    the entire file into memory. The stream is rewound before and after
           #    reading to ensure its position is not permanently changed.
+          # 2. A file path (String or Pathname): It efficiently streams the file
+          #    to compute the digest without loading the entire file into memory.
           #
           # @param local_file [String, Pathname, IO] The local file path or IO
           #   stream for which to compute the digest.
           # @param digest_class [Class] The digest class to use for the
-          #   calculation (e.g., `Digest::MD5`). It must respond to `.file` and
-          #   `.base64digest`.
+          #   calculation (e.g., `Digest::MD5`). It must respond to `.new`,
+          #   `.file` and `.base64digest`.
           #
           # @return [String] The base64-encoded digest of the file's content.
           #
           def self._digest_for local_file, digest_class
 
-            if local_file.respond_to?(:to_path) || local_file.is_a?(String)
-              # Case 1: Input is a file path (String, Pathname, or object that responds to :to_path).
-              ::File.open Pathname(local_file).to_path, "rb" do |f|
-                digest_class.file(f).base64digest
+            if local_file.respond_to?(:read)
+              # Case 1: Input is an open stream (File, StringIO, ActionDispatch::Http::UploadedFile, etc.).
+              local_file.rewind if local_file.respond_to?(:rewind)
+              digest = digest_class.new
+              while (chunk = local_file.read(16 * 1024))
+                digest.update(chunk)
               end
-            else
-              # Case 2: Input is an open stream (File or StringIO).
-              local_file.rewind
-              digest = digest_class.base64digest local_file.read
-              local_file.rewind
-              digest
+              local_file.rewind if local_file.respond_to?(:rewind)
+              digest.base64digest
+            elsif local_file.respond_to?(:to_path) || local_file.is_a?(String)
+              # Case 2: Input is a file path (String, Pathname).
+              digest_class.file(Pathname(local_file).to_path).base64digest
             end
           end
         end
