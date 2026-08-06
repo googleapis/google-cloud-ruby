@@ -2719,6 +2719,7 @@ libraries:
       - test/google/cloud/pubsub/v1/subscription_admin/helpers_test.rb
       - test/google/cloud/pubsub/v1/topic_admin/helpers_test.rb
     skip_generate: true
+    version: 1.16.1
   - name: google-cloud-rapid_migration_assessment
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
