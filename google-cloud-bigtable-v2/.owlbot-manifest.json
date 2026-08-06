@@ -73,6 +73,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "lib/google/cloud/bigtable/v2/bigtable/helpers.rb",
     "test/google/cloud/bigtable/v2/bigtable/helpers_test.rb"
   ]
