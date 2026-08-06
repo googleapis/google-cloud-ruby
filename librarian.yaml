@@ -1848,6 +1848,7 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.8
+    version: 1.5.1
   - name: google-cloud-gke_multi_cloud-v1
     apis:
       - path: google/cloud/gkemulticloud/v1
