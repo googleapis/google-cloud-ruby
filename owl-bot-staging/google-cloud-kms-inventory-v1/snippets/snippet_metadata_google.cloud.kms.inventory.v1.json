@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-kms-inventory-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.kms.inventory.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "kmsinventory_v1_generated_KeyDashboardService_ListCryptoKeys_sync",
+      "title": "Snippet for the list_crypto_keys call in the KeyDashboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client#list_crypto_keys.",
+      "file": "key_dashboard_service/list_crypto_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_crypto_keys",
+        "full_name": "::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client#list_crypto_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::Inventory::V1::ListCryptoKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::Inventory::V1::ListCryptoKeysResponse",
+        "client": {
+          "short_name": "KeyDashboardService::Client",
+          "full_name": "::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Client"
+        },
+        "method": {
+          "short_name": "ListCryptoKeys",
+          "full_name": "google.cloud.kms.inventory.v1.KeyDashboardService.ListCryptoKeys",
+          "service": {
+            "short_name": "KeyDashboardService",
+            "full_name": "google.cloud.kms.inventory.v1.KeyDashboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_sync",
+      "title": "Snippet for the get_protected_resources_summary call in the KeyTrackingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#get_protected_resources_summary.",
+      "file": "key_tracking_service/get_protected_resources_summary.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_protected_resources_summary",
+        "full_name": "::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#get_protected_resources_summary",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::Inventory::V1::GetProtectedResourcesSummaryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::Inventory::V1::ProtectedResourcesSummary",
+        "client": {
+          "short_name": "KeyTrackingService::Client",
+          "full_name": "::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client"
+        },
+        "method": {
+          "short_name": "GetProtectedResourcesSummary",
+          "full_name": "google.cloud.kms.inventory.v1.KeyTrackingService.GetProtectedResourcesSummary",
+          "service": {
+            "short_name": "KeyTrackingService",
+            "full_name": "google.cloud.kms.inventory.v1.KeyTrackingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_sync",
+      "title": "Snippet for the search_protected_resources call in the KeyTrackingService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources.",
+      "file": "key_tracking_service/search_protected_resources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_protected_resources",
+        "full_name": "::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client#search_protected_resources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::Inventory::V1::SearchProtectedResourcesResponse",
+        "client": {
+          "short_name": "KeyTrackingService::Client",
+          "full_name": "::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::Client"
+        },
+        "method": {
+          "short_name": "SearchProtectedResources",
+          "full_name": "google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources",
+          "service": {
+            "short_name": "KeyTrackingService",
+            "full_name": "google.cloud.kms.inventory.v1.KeyTrackingService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
