@@ -3337,6 +3337,7 @@ libraries:
             ruby-cloud-env-prefix: SPANNER
             ruby-cloud-wrapper-gem-override: google-cloud-spanner
     skip_generate: true
+    version: 1.14.1
   - name: google-cloud-spanner-admin-instance-v1
     apis:
       - path: google/spanner/admin/instance/v1
