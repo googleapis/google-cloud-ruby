@@ -3462,6 +3462,7 @@ libraries:
     apis:
       - path: google/cloud/storagebatchoperations/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-storage_insights
     apis:
       - path: google/cloud/storageinsights/v1
