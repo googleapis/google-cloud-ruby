@@ -983,6 +983,7 @@ libraries:
     apis:
       - path: google/cloud/commerceproducer/v1beta
     skip_generate: true
+    version: 0.2.0
   - name: google-cloud-compute
     apis:
       - path: google/cloud/compute/v1
