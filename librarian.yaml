@@ -662,6 +662,7 @@ libraries:
     apis:
       - path: google/cloud/bigquery/migration/v2
     skip_generate: true
+    version: 0.22.1
   - name: google-cloud-bigquery-reservation
     apis:
       - path: google/cloud/bigquery/reservation/v1
