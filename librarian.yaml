@@ -4293,7 +4293,7 @@ libraries:
       - path: google/maps/isochrones/v1
     skip_generate: true
   - name: google-maps-route_optimization
-    version: 0.0.1
+    version: 0.1.0
     apis:
       - path: google/maps/routeoptimization/v1
     copyright_year: "2026"
