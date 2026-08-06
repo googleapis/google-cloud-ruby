@@ -38,6 +38,7 @@ libraries:
     apis:
       - path: google/ads/admanager/v1
     skip_generate: true
+    version: 5.0.1
   - name: google-ads-data_manager
     apis:
       - path: google/ads/datamanager/v1
