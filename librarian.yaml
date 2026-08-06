@@ -3388,6 +3388,7 @@ libraries:
       - acceptance/data
       - acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb
     skip_generate: true
+    version: 0.30.1
   - name: google-cloud-speech-v2
     apis:
       - path: google/cloud/speech/v2
