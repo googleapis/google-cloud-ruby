@@ -2049,6 +2049,7 @@ libraries:
     apis:
       - path: google/cloud/locationfinder/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-logging-v2
     apis:
       - path: google/logging/v2
