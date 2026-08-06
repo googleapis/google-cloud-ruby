@@ -1893,6 +1893,7 @@ libraries:
     apis:
       - path: google/cloud/gkemulticloud/v1
     skip_generate: true
+    version: 0.21.1
   - name: google-cloud-gke_recommender
     apis:
       - path: google/cloud/gkerecommender/v1
