@@ -522,6 +522,7 @@ libraries:
     apis:
       - path: google/cloud/baremetalsolution/v2
     skip_generate: true
+    version: 1.6.1
   - name: google-cloud-batch
     apis:
       - path: google/cloud/batch/v1
