@@ -1,0 +1,854 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.networksecurity.v1",
+  "libraryPackage": "::Google::Cloud::NetworkSecurity::V1",
+  "services": {
+    "AddressGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::AddressGroupService::Client",
+          "rpcs": {
+            "ListAddressGroups": {
+              "methods": [
+                "list_address_groups"
+              ]
+            },
+            "GetAddressGroup": {
+              "methods": [
+                "get_address_group"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "create_address_group"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "update_address_group"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "add_address_group_items"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "remove_address_group_items"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "clone_address_group_items"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "delete_address_group"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "list_address_group_references"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OrganizationAddressGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::OrganizationAddressGroupService::Client",
+          "rpcs": {
+            "ListAddressGroups": {
+              "methods": [
+                "list_address_groups"
+              ]
+            },
+            "GetAddressGroup": {
+              "methods": [
+                "get_address_group"
+              ]
+            },
+            "CreateAddressGroup": {
+              "methods": [
+                "create_address_group"
+              ]
+            },
+            "UpdateAddressGroup": {
+              "methods": [
+                "update_address_group"
+              ]
+            },
+            "AddAddressGroupItems": {
+              "methods": [
+                "add_address_group_items"
+              ]
+            },
+            "RemoveAddressGroupItems": {
+              "methods": [
+                "remove_address_group_items"
+              ]
+            },
+            "CloneAddressGroupItems": {
+              "methods": [
+                "clone_address_group_items"
+              ]
+            },
+            "DeleteAddressGroup": {
+              "methods": [
+                "delete_address_group"
+              ]
+            },
+            "ListAddressGroupReferences": {
+              "methods": [
+                "list_address_group_references"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DnsThreatDetectorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::DnsThreatDetectorService::Client",
+          "rpcs": {
+            "ListDnsThreatDetectors": {
+              "methods": [
+                "list_dns_threat_detectors"
+              ]
+            },
+            "GetDnsThreatDetector": {
+              "methods": [
+                "get_dns_threat_detector"
+              ]
+            },
+            "CreateDnsThreatDetector": {
+              "methods": [
+                "create_dns_threat_detector"
+              ]
+            },
+            "UpdateDnsThreatDetector": {
+              "methods": [
+                "update_dns_threat_detector"
+              ]
+            },
+            "DeleteDnsThreatDetector": {
+              "methods": [
+                "delete_dns_threat_detector"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FirewallActivation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::FirewallActivation::Client",
+          "rpcs": {
+            "ListFirewallEndpoints": {
+              "methods": [
+                "list_firewall_endpoints"
+              ]
+            },
+            "ListProjectFirewallEndpoints": {
+              "methods": [
+                "list_project_firewall_endpoints"
+              ]
+            },
+            "GetFirewallEndpoint": {
+              "methods": [
+                "get_firewall_endpoint"
+              ]
+            },
+            "GetProjectFirewallEndpoint": {
+              "methods": [
+                "get_project_firewall_endpoint"
+              ]
+            },
+            "CreateFirewallEndpoint": {
+              "methods": [
+                "create_firewall_endpoint"
+              ]
+            },
+            "CreateProjectFirewallEndpoint": {
+              "methods": [
+                "create_project_firewall_endpoint"
+              ]
+            },
+            "DeleteFirewallEndpoint": {
+              "methods": [
+                "delete_firewall_endpoint"
+              ]
+            },
+            "DeleteProjectFirewallEndpoint": {
+              "methods": [
+                "delete_project_firewall_endpoint"
+              ]
+            },
+            "UpdateFirewallEndpoint": {
+              "methods": [
+                "update_firewall_endpoint"
+              ]
+            },
+            "UpdateProjectFirewallEndpoint": {
+              "methods": [
+                "update_project_firewall_endpoint"
+              ]
+            },
+            "ListFirewallEndpointAssociations": {
+              "methods": [
+                "list_firewall_endpoint_associations"
+              ]
+            },
+            "GetFirewallEndpointAssociation": {
+              "methods": [
+                "get_firewall_endpoint_association"
+              ]
+            },
+            "CreateFirewallEndpointAssociation": {
+              "methods": [
+                "create_firewall_endpoint_association"
+              ]
+            },
+            "DeleteFirewallEndpointAssociation": {
+              "methods": [
+                "delete_firewall_endpoint_association"
+              ]
+            },
+            "UpdateFirewallEndpointAssociation": {
+              "methods": [
+                "update_firewall_endpoint_association"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Intercept": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::Intercept::Client",
+          "rpcs": {
+            "ListInterceptEndpointGroups": {
+              "methods": [
+                "list_intercept_endpoint_groups"
+              ]
+            },
+            "GetInterceptEndpointGroup": {
+              "methods": [
+                "get_intercept_endpoint_group"
+              ]
+            },
+            "CreateInterceptEndpointGroup": {
+              "methods": [
+                "create_intercept_endpoint_group"
+              ]
+            },
+            "UpdateInterceptEndpointGroup": {
+              "methods": [
+                "update_intercept_endpoint_group"
+              ]
+            },
+            "DeleteInterceptEndpointGroup": {
+              "methods": [
+                "delete_intercept_endpoint_group"
+              ]
+            },
+            "ListInterceptEndpointGroupAssociations": {
+              "methods": [
+                "list_intercept_endpoint_group_associations"
+              ]
+            },
+            "GetInterceptEndpointGroupAssociation": {
+              "methods": [
+                "get_intercept_endpoint_group_association"
+              ]
+            },
+            "CreateInterceptEndpointGroupAssociation": {
+              "methods": [
+                "create_intercept_endpoint_group_association"
+              ]
+            },
+            "UpdateInterceptEndpointGroupAssociation": {
+              "methods": [
+                "update_intercept_endpoint_group_association"
+              ]
+            },
+            "DeleteInterceptEndpointGroupAssociation": {
+              "methods": [
+                "delete_intercept_endpoint_group_association"
+              ]
+            },
+            "ListInterceptDeploymentGroups": {
+              "methods": [
+                "list_intercept_deployment_groups"
+              ]
+            },
+            "GetInterceptDeploymentGroup": {
+              "methods": [
+                "get_intercept_deployment_group"
+              ]
+            },
+            "CreateInterceptDeploymentGroup": {
+              "methods": [
+                "create_intercept_deployment_group"
+              ]
+            },
+            "UpdateInterceptDeploymentGroup": {
+              "methods": [
+                "update_intercept_deployment_group"
+              ]
+            },
+            "DeleteInterceptDeploymentGroup": {
+              "methods": [
+                "delete_intercept_deployment_group"
+              ]
+            },
+            "ListInterceptDeployments": {
+              "methods": [
+                "list_intercept_deployments"
+              ]
+            },
+            "GetInterceptDeployment": {
+              "methods": [
+                "get_intercept_deployment"
+              ]
+            },
+            "CreateInterceptDeployment": {
+              "methods": [
+                "create_intercept_deployment"
+              ]
+            },
+            "UpdateInterceptDeployment": {
+              "methods": [
+                "update_intercept_deployment"
+              ]
+            },
+            "DeleteInterceptDeployment": {
+              "methods": [
+                "delete_intercept_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Mirroring": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::Mirroring::Client",
+          "rpcs": {
+            "ListMirroringEndpointGroups": {
+              "methods": [
+                "list_mirroring_endpoint_groups"
+              ]
+            },
+            "GetMirroringEndpointGroup": {
+              "methods": [
+                "get_mirroring_endpoint_group"
+              ]
+            },
+            "CreateMirroringEndpointGroup": {
+              "methods": [
+                "create_mirroring_endpoint_group"
+              ]
+            },
+            "UpdateMirroringEndpointGroup": {
+              "methods": [
+                "update_mirroring_endpoint_group"
+              ]
+            },
+            "DeleteMirroringEndpointGroup": {
+              "methods": [
+                "delete_mirroring_endpoint_group"
+              ]
+            },
+            "ListMirroringEndpointGroupAssociations": {
+              "methods": [
+                "list_mirroring_endpoint_group_associations"
+              ]
+            },
+            "GetMirroringEndpointGroupAssociation": {
+              "methods": [
+                "get_mirroring_endpoint_group_association"
+              ]
+            },
+            "CreateMirroringEndpointGroupAssociation": {
+              "methods": [
+                "create_mirroring_endpoint_group_association"
+              ]
+            },
+            "UpdateMirroringEndpointGroupAssociation": {
+              "methods": [
+                "update_mirroring_endpoint_group_association"
+              ]
+            },
+            "DeleteMirroringEndpointGroupAssociation": {
+              "methods": [
+                "delete_mirroring_endpoint_group_association"
+              ]
+            },
+            "ListMirroringDeploymentGroups": {
+              "methods": [
+                "list_mirroring_deployment_groups"
+              ]
+            },
+            "GetMirroringDeploymentGroup": {
+              "methods": [
+                "get_mirroring_deployment_group"
+              ]
+            },
+            "CreateMirroringDeploymentGroup": {
+              "methods": [
+                "create_mirroring_deployment_group"
+              ]
+            },
+            "UpdateMirroringDeploymentGroup": {
+              "methods": [
+                "update_mirroring_deployment_group"
+              ]
+            },
+            "DeleteMirroringDeploymentGroup": {
+              "methods": [
+                "delete_mirroring_deployment_group"
+              ]
+            },
+            "ListMirroringDeployments": {
+              "methods": [
+                "list_mirroring_deployments"
+              ]
+            },
+            "GetMirroringDeployment": {
+              "methods": [
+                "get_mirroring_deployment"
+              ]
+            },
+            "CreateMirroringDeployment": {
+              "methods": [
+                "create_mirroring_deployment"
+              ]
+            },
+            "UpdateMirroringDeployment": {
+              "methods": [
+                "update_mirroring_deployment"
+              ]
+            },
+            "DeleteMirroringDeployment": {
+              "methods": [
+                "delete_mirroring_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NetworkSecurity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::NetworkSecurity::Client",
+          "rpcs": {
+            "ListAuthorizationPolicies": {
+              "methods": [
+                "list_authorization_policies"
+              ]
+            },
+            "GetAuthorizationPolicy": {
+              "methods": [
+                "get_authorization_policy"
+              ]
+            },
+            "CreateAuthorizationPolicy": {
+              "methods": [
+                "create_authorization_policy"
+              ]
+            },
+            "UpdateAuthorizationPolicy": {
+              "methods": [
+                "update_authorization_policy"
+              ]
+            },
+            "DeleteAuthorizationPolicy": {
+              "methods": [
+                "delete_authorization_policy"
+              ]
+            },
+            "ListBackendAuthenticationConfigs": {
+              "methods": [
+                "list_backend_authentication_configs"
+              ]
+            },
+            "GetBackendAuthenticationConfig": {
+              "methods": [
+                "get_backend_authentication_config"
+              ]
+            },
+            "CreateBackendAuthenticationConfig": {
+              "methods": [
+                "create_backend_authentication_config"
+              ]
+            },
+            "UpdateBackendAuthenticationConfig": {
+              "methods": [
+                "update_backend_authentication_config"
+              ]
+            },
+            "DeleteBackendAuthenticationConfig": {
+              "methods": [
+                "delete_backend_authentication_config"
+              ]
+            },
+            "ListServerTlsPolicies": {
+              "methods": [
+                "list_server_tls_policies"
+              ]
+            },
+            "GetServerTlsPolicy": {
+              "methods": [
+                "get_server_tls_policy"
+              ]
+            },
+            "CreateServerTlsPolicy": {
+              "methods": [
+                "create_server_tls_policy"
+              ]
+            },
+            "UpdateServerTlsPolicy": {
+              "methods": [
+                "update_server_tls_policy"
+              ]
+            },
+            "DeleteServerTlsPolicy": {
+              "methods": [
+                "delete_server_tls_policy"
+              ]
+            },
+            "ListClientTlsPolicies": {
+              "methods": [
+                "list_client_tls_policies"
+              ]
+            },
+            "GetClientTlsPolicy": {
+              "methods": [
+                "get_client_tls_policy"
+              ]
+            },
+            "CreateClientTlsPolicy": {
+              "methods": [
+                "create_client_tls_policy"
+              ]
+            },
+            "UpdateClientTlsPolicy": {
+              "methods": [
+                "update_client_tls_policy"
+              ]
+            },
+            "DeleteClientTlsPolicy": {
+              "methods": [
+                "delete_client_tls_policy"
+              ]
+            },
+            "ListGatewaySecurityPolicies": {
+              "methods": [
+                "list_gateway_security_policies"
+              ]
+            },
+            "GetGatewaySecurityPolicy": {
+              "methods": [
+                "get_gateway_security_policy"
+              ]
+            },
+            "CreateGatewaySecurityPolicy": {
+              "methods": [
+                "create_gateway_security_policy"
+              ]
+            },
+            "UpdateGatewaySecurityPolicy": {
+              "methods": [
+                "update_gateway_security_policy"
+              ]
+            },
+            "DeleteGatewaySecurityPolicy": {
+              "methods": [
+                "delete_gateway_security_policy"
+              ]
+            },
+            "ListGatewaySecurityPolicyRules": {
+              "methods": [
+                "list_gateway_security_policy_rules"
+              ]
+            },
+            "GetGatewaySecurityPolicyRule": {
+              "methods": [
+                "get_gateway_security_policy_rule"
+              ]
+            },
+            "CreateGatewaySecurityPolicyRule": {
+              "methods": [
+                "create_gateway_security_policy_rule"
+              ]
+            },
+            "UpdateGatewaySecurityPolicyRule": {
+              "methods": [
+                "update_gateway_security_policy_rule"
+              ]
+            },
+            "DeleteGatewaySecurityPolicyRule": {
+              "methods": [
+                "delete_gateway_security_policy_rule"
+              ]
+            },
+            "ListUrlLists": {
+              "methods": [
+                "list_url_lists"
+              ]
+            },
+            "GetUrlList": {
+              "methods": [
+                "get_url_list"
+              ]
+            },
+            "CreateUrlList": {
+              "methods": [
+                "create_url_list"
+              ]
+            },
+            "UpdateUrlList": {
+              "methods": [
+                "update_url_list"
+              ]
+            },
+            "DeleteUrlList": {
+              "methods": [
+                "delete_url_list"
+              ]
+            },
+            "ListTlsInspectionPolicies": {
+              "methods": [
+                "list_tls_inspection_policies"
+              ]
+            },
+            "GetTlsInspectionPolicy": {
+              "methods": [
+                "get_tls_inspection_policy"
+              ]
+            },
+            "CreateTlsInspectionPolicy": {
+              "methods": [
+                "create_tls_inspection_policy"
+              ]
+            },
+            "UpdateTlsInspectionPolicy": {
+              "methods": [
+                "update_tls_inspection_policy"
+              ]
+            },
+            "DeleteTlsInspectionPolicy": {
+              "methods": [
+                "delete_tls_inspection_policy"
+              ]
+            },
+            "ListAuthzPolicies": {
+              "methods": [
+                "list_authz_policies"
+              ]
+            },
+            "GetAuthzPolicy": {
+              "methods": [
+                "get_authz_policy"
+              ]
+            },
+            "CreateAuthzPolicy": {
+              "methods": [
+                "create_authz_policy"
+              ]
+            },
+            "UpdateAuthzPolicy": {
+              "methods": [
+                "update_authz_policy"
+              ]
+            },
+            "DeleteAuthzPolicy": {
+              "methods": [
+                "delete_authz_policy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SecurityProfileGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::SecurityProfileGroupService::Client",
+          "rpcs": {
+            "ListSecurityProfileGroups": {
+              "methods": [
+                "list_security_profile_groups"
+              ]
+            },
+            "GetSecurityProfileGroup": {
+              "methods": [
+                "get_security_profile_group"
+              ]
+            },
+            "CreateSecurityProfileGroup": {
+              "methods": [
+                "create_security_profile_group"
+              ]
+            },
+            "UpdateSecurityProfileGroup": {
+              "methods": [
+                "update_security_profile_group"
+              ]
+            },
+            "DeleteSecurityProfileGroup": {
+              "methods": [
+                "delete_security_profile_group"
+              ]
+            },
+            "ListSecurityProfiles": {
+              "methods": [
+                "list_security_profiles"
+              ]
+            },
+            "GetSecurityProfile": {
+              "methods": [
+                "get_security_profile"
+              ]
+            },
+            "CreateSecurityProfile": {
+              "methods": [
+                "create_security_profile"
+              ]
+            },
+            "UpdateSecurityProfile": {
+              "methods": [
+                "update_security_profile"
+              ]
+            },
+            "DeleteSecurityProfile": {
+              "methods": [
+                "delete_security_profile"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OrganizationSecurityProfileGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::OrganizationSecurityProfileGroupService::Client",
+          "rpcs": {
+            "ListSecurityProfileGroups": {
+              "methods": [
+                "list_security_profile_groups"
+              ]
+            },
+            "GetSecurityProfileGroup": {
+              "methods": [
+                "get_security_profile_group"
+              ]
+            },
+            "CreateSecurityProfileGroup": {
+              "methods": [
+                "create_security_profile_group"
+              ]
+            },
+            "UpdateSecurityProfileGroup": {
+              "methods": [
+                "update_security_profile_group"
+              ]
+            },
+            "DeleteSecurityProfileGroup": {
+              "methods": [
+                "delete_security_profile_group"
+              ]
+            },
+            "ListSecurityProfiles": {
+              "methods": [
+                "list_security_profiles"
+              ]
+            },
+            "GetSecurityProfile": {
+              "methods": [
+                "get_security_profile"
+              ]
+            },
+            "CreateSecurityProfile": {
+              "methods": [
+                "create_security_profile"
+              ]
+            },
+            "UpdateSecurityProfile": {
+              "methods": [
+                "update_security_profile"
+              ]
+            },
+            "DeleteSecurityProfile": {
+              "methods": [
+                "delete_security_profile"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SSERealmService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkSecurity::V1::SSERealmService::Client",
+          "rpcs": {
+            "ListSACRealms": {
+              "methods": [
+                "list_sac_realms"
+              ]
+            },
+            "GetSACRealm": {
+              "methods": [
+                "get_sac_realm"
+              ]
+            },
+            "CreateSACRealm": {
+              "methods": [
+                "create_sac_realm"
+              ]
+            },
+            "DeleteSACRealm": {
+              "methods": [
+                "delete_sac_realm"
+              ]
+            },
+            "ListSACAttachments": {
+              "methods": [
+                "list_sac_attachments"
+              ]
+            },
+            "GetSACAttachment": {
+              "methods": [
+                "get_sac_attachment"
+              ]
+            },
+            "CreateSACAttachment": {
+              "methods": [
+                "create_sac_attachment"
+              ]
+            },
+            "DeleteSACAttachment": {
+              "methods": [
+                "delete_sac_attachment"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
