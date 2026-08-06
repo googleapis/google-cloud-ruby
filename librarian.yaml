@@ -2119,6 +2119,7 @@ libraries:
     apis:
       - path: google/cloud/managedkafka/schemaregistry/v1
     skip_generate: true
+    version: 0.5.1
   - name: google-cloud-managed_kafka-v1
     apis:
       - path: google/cloud/managedkafka/v1
