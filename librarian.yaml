@@ -2848,6 +2848,7 @@ libraries:
             ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
             ruby-cloud-service-override: RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService
     skip_generate: true
+    version: 0.21.1
   - name: google-cloud-recommendation_engine
     apis:
       - path: google/cloud/recommendationengine/v1beta1
