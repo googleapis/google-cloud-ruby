@@ -2730,6 +2730,7 @@ libraries:
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
     skip_generate: true
+    version: 2.6.1
   - name: google-cloud-recaptcha_enterprise
     apis:
       - path: google/cloud/recaptchaenterprise/v1
