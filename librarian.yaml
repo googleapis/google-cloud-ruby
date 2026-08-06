@@ -783,6 +783,7 @@ libraries:
             ruby-cloud-service-override: BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper
             ruby-cloud-yard-strict: "false"
     skip_generate: true
+    version: 1.8.1
   - name: google-cloud-binary_authorization-v1beta1
     apis:
       - path: google/cloud/binaryauthorization/v1beta1
