@@ -1783,6 +1783,7 @@ libraries:
     apis:
       - path: google/cloud/geminidataanalytics/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-gemini_data_analytics-v1beta
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
