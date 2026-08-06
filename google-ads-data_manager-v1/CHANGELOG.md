@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.8.0 (2026-08-06)
+
+#### Features
+
+* add google_user_id_data and partner_provided_id_data to AudienceMember ([#35072](https://github.com/googleapis/google-cloud-ruby/issues/35072)) 
+* add GoogleUserIdData and PartnerProvidedIdData messages to audience.proto 
+#### Bug Fixes
+
+* generate double-wildcard path patterns with capture groups ([#35043](https://github.com/googleapis/google-cloud-ruby/issues/35043)) 
+
 ### 0.7.0 (2026-06-17)
 
 #### Features

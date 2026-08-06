@@ -50,6 +50,7 @@ libraries:
     apis:
       - path: google/ads/datamanager/v1
     skip_generate: true
+    version: 0.8.0
   - name: google-ads-marketing_platform-admin
     apis:
       - path: google/marketingplatform/admin/v1alpha
