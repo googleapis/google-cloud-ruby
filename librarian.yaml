@@ -1888,6 +1888,7 @@ libraries:
     apis:
       - path: google/cloud/hypercomputecluster/v1beta
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-iap
     apis:
       - path: google/cloud/iap/v1
