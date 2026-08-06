@@ -2253,6 +2253,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-monitoring
     skip_generate: true
+    version: 1.8.1
   - name: google-cloud-monitoring-v3
     apis:
       - path: google/monitoring/v3
