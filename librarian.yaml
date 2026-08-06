@@ -1760,6 +1760,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::GDCHardwareManagement::V1alpha
             ruby-cloud-service-override: GdcHardwareManagement=GDCHardwareManagement
     skip_generate: true
+    version: 0.15.1
   - name: google-cloud-gemini_data_analytics
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
