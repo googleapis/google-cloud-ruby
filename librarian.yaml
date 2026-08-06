@@ -1813,6 +1813,7 @@ libraries:
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
     skip_generate: true
+    version: 0.9.1
   - name: google-cloud-gke_connect-gateway-v1beta1
     apis:
       - path: google/cloud/gkeconnect/gateway/v1beta1
