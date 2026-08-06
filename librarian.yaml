@@ -579,6 +579,7 @@ libraries:
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
     skip_generate: true
+    version: 0.20.1
   - name: google-cloud-bigquery-connection
     apis:
       - path: google/cloud/bigquery/connection/v1
