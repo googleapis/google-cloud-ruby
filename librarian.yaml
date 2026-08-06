@@ -258,6 +258,7 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1beta
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
     skip_generate: true
+    version: 0.23.1
   - name: google-cloud-api_gateway
     apis:
       - path: google/cloud/apigateway/v1
