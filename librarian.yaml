@@ -1155,6 +1155,7 @@ libraries:
     apis:
       - path: google/cloud/contactcenterinsights/v1
     skip_generate: true
+    version: 1.11.1
   - name: google-cloud-container
     apis:
       - path: google/container/v1
