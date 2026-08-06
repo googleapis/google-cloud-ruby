@@ -172,6 +172,7 @@
   "static": [
     ".OwlBot.yaml",
     ".owlbot.rb",
+    "Gemfile.lock",
     "lib/google/cloud/kms/v1/_helpers.rb",
     "lib/google/cloud/kms/v1/iam_policy.rb",
     "lib/google/cloud/kms/v1/iam_policy/client.rb",
