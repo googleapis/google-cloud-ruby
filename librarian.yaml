@@ -3836,6 +3836,7 @@ libraries:
     apis:
       - path: google/cloud/video/stitcher/v1
     skip_generate: true
+    version: 1.7.1
   - name: google-cloud-video-transcoder
     apis:
       - path: google/cloud/video/transcoder/v1
