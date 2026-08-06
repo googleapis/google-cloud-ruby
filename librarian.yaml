@@ -3167,6 +3167,7 @@ libraries:
     apis:
       - path: google/cloud/securesourcemanager/v1
     skip_generate: true
+    version: 2.8.1
   - name: google-cloud-security-private_ca
     apis:
       - path: google/cloud/security/privateca/v1
