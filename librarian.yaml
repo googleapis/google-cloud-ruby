@@ -789,6 +789,7 @@ libraries:
             ruby-cloud-env-prefix: BINARY_AUTHORIZATION
             ruby-cloud-service-override: BinauthzManagementServiceV1Beta1=BinauthzManagementService;SystemPolicyV1Beta1=SystemPolicy
     skip_generate: true
+    version: 0.20.1
   - name: google-cloud-build
     apis:
       - path: google/devtools/cloudbuild/v1
