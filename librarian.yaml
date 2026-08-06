@@ -1759,6 +1759,7 @@ libraries:
     ruby:
       wrapper_of:
         - v1alpha:0.0
+    version: 0.4.1
   - name: google-cloud-gdc_hardware_management-v1alpha
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
