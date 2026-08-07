@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.apps.events.subscriptions.v1",
+  "libraryPackage": "::Google::Apps::Events::Subscriptions::V1",
+  "services": {
+    "SubscriptionsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client",
+          "rpcs": {
+            "CreateSubscription": {
+              "methods": [
+                "create_subscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "delete_subscription"
+              ]
+            },
+            "GetSubscription": {
+              "methods": [
+                "get_subscription"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "list_subscriptions"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "update_subscription"
+              ]
+            },
+            "ReactivateSubscription": {
+              "methods": [
+                "reactivate_subscription"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
