@@ -219,13 +219,18 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-ai_platform-v1
+    version: 1.47.1
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
+          additional_protos:
+            - google/type/expr.proto
+          delete_generation_output_paths:
+            - google/cloud/aiplatform/v1/schema
+            - google/type
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform::V1
             ruby-cloud-service-override: AiPlatform=AIPlatform
-    skip_generate: true
   - name: google-cloud-alloy_db
     apis:
       - path: google/cloud/alloydb/v1
