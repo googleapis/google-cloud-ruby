@@ -217,6 +217,8 @@ libraries:
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
+          additional_protos:
+            - google/type/expr.proto
           delete_generation_output_paths:
             - google/cloud/aiplatform/v1/schema
           ruby_cloud_opts:
