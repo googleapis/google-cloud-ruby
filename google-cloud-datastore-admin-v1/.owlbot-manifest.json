@@ -58,8 +58,10 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "Gemfile.lock",
     "samples/.rubocop.yml",
     "samples/Gemfile",
+    "samples/Gemfile.lock",
     "samples/README.md",
     "samples/Rakefile",
     "samples/acceptance/helper.rb",
