@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -439,6 +439,7 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     instance = "hello world"
+    no_graceful_shutdown = true
     project = "hello world"
     request_id = "hello world"
     zone = "hello world"
@@ -457,27 +458,27 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.delete({ instance: instance, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.delete({ instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.delete instance: instance, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.delete instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.delete ::Google::Cloud::Compute::V1::DeleteInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.delete ::Google::Cloud::Compute::V1::DeleteInstanceRequest.new(instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.delete({ instance: instance, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.delete({ instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.delete(::Google::Cloud::Compute::V1::DeleteInstanceRequest.new(instance: instance, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.delete(::Google::Cloud::Compute::V1::DeleteInstanceRequest.new(instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2578,6 +2579,7 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     discard_local_ssd = true
     instance = "hello world"
+    no_graceful_shutdown = true
     project = "hello world"
     request_id = "hello world"
     zone = "hello world"
@@ -2596,27 +2598,27 @@ class ::Google::Cloud::Compute::V1::Instances::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        c.stop({ discard_local_ssd: discard_local_ssd, instance: instance, project: project, request_id: request_id, zone: zone }) do |_result, response|
+        c.stop({ discard_local_ssd: discard_local_ssd, instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.stop discard_local_ssd: discard_local_ssd, instance: instance, project: project, request_id: request_id, zone: zone do |_result, response|
+        c.stop discard_local_ssd: discard_local_ssd, instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.stop ::Google::Cloud::Compute::V1::StopInstanceRequest.new(discard_local_ssd: discard_local_ssd, instance: instance, project: project, request_id: request_id, zone: zone) do |_result, response|
+        c.stop ::Google::Cloud::Compute::V1::StopInstanceRequest.new(discard_local_ssd: discard_local_ssd, instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.stop({ discard_local_ssd: discard_local_ssd, instance: instance, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+        c.stop({ discard_local_ssd: discard_local_ssd, instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.stop(::Google::Cloud::Compute::V1::StopInstanceRequest.new(discard_local_ssd: discard_local_ssd, instance: instance, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+        c.stop(::Google::Cloud::Compute::V1::StopInstanceRequest.new(discard_local_ssd: discard_local_ssd, instance: instance, no_graceful_shutdown: no_graceful_shutdown, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
