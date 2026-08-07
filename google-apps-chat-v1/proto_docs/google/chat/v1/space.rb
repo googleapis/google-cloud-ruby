@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -763,9 +763,6 @@ module Google
         #     Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
         #     [OAuth 2.0
         #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-        #
-        #     This method currently only supports admin access, thus only `true` is
-        #     accepted for this field.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of spaces to return. The service may return fewer than
@@ -787,7 +784,8 @@ module Google
         #   @return [::String]
         #     Required. A search query.
         #
-        #     You can search by using the following parameters:
+        #     You can search by using the following parameters when `useAdminAccess`
+        #     is set to `true`:
         #
         #     - `create_time`
         #     - `customer`
@@ -797,18 +795,27 @@ module Google
         #     - `space_history_state`
         #     - `space_type`
         #
+        #     When `useAdminAccess` is set to `false`:
+        #
+        #     - `display_name`
+        #     - `external_user_allowed`
+        #     - `space_type`
+        #
         #     `create_time` and `last_active_time` accept a timestamp in
         #     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
         #     comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
         #
-        #     `customer` is required and is used to indicate which customer
-        #     to fetch spaces from. `customers/my_customer` is the only supported value.
+        #     `customer` is required when `useAdminAccess` is set to `true`, and is
+        #     used to indicate which customer to fetch spaces from.
+        #     `customers/my_customer` is the only supported value.
         #
         #     `display_name` only accepts the `HAS` (`:`) operator. The text to
         #     match is first tokenized into tokens and each token is prefix-matched
         #     case-insensitively and independently as a substring anywhere in the space's
         #     `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-        #     evening was fun`, but not `notFun event` or `even`.
+        #     evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+        #     is set to `false`, `display_name` is required to retrieve meaningful
+        #     results. Otherwise, the default behavior is to return an empty response.
         #
         #     `external_user_allowed` accepts either `true` or `false`.
         #
@@ -831,7 +838,8 @@ module Google
         #     < "2022-01-01T00:00:00+00:00" AND last_active_time >
         #     "2023-01-01T00:00:00+00:00"`.
         #
-        #     The following example queries are valid:
+        #     The following example queries are valid when `useAdminAccess` is set to
+        #     `true`:
         #
         #     ```
         #     customer = "customers/my_customer" AND space_type = "SPACE"
@@ -853,6 +861,21 @@ module Google
         #     "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
         #     (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
         #     ```
+        #
+        #     The following example queries are valid when `useAdminAccess` is set to
+        #     `false`:
+        #
+        #     ```
+        #     display_name:"Hello World" AND space_type = "SPACE"
+        #
+        #     (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+        #
+        #     (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+        #     empty response.
+        #
+        #     (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+        #     "SPACE")
+        #     ```
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. How the list of spaces is ordered.
@@ -865,13 +888,17 @@ module Google
         #     any topic of this space.
         #     - `create_time` — Denotes the time of the space creation.
         #
+        #     When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+        #     supported for ordering. Only `DESC` is supported for these fields in
+        #     non-admin searches.
+        #
         #     Valid ordering operation values are:
         #
         #     - `ASC` for ascending. Default value.
         #
         #     - `DESC` for descending.
         #
-        #     The supported syntax are:
+        #     The supported syntax are when `useAdminAccess` is set to `true`:
         #
         #     - `membership_count.joined_direct_human_user_count DESC`
         #     - `membership_count.joined_direct_human_user_count ASC`
@@ -879,6 +906,11 @@ module Google
         #     - `last_active_time ASC`
         #     - `create_time DESC`
         #     - `create_time ASC`
+        #
+        #     When `useAdminAccess` is set to `false`:
+        #
+        #     - `create_time DESC`
+        #     - `relevance DESC`
         class SearchSpacesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -886,8 +918,12 @@ module Google
 
         # Response with a list of spaces corresponding to the search spaces request.
         # @!attribute [rw] spaces
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Apps::Chat::V1::Space>]
-        #     A page of the requested spaces.
+        #     Deprecated: Please use the new `results` field instead.
+        #     A page of the requested spaces. This field will be populated only when
+        #     `useAdminAccess` is set to `true` and deprecated in favor of the new
+        #     `results` field.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token that can be used to retrieve the next page. If this field is empty,
@@ -896,9 +932,21 @@ module Google
         #   @return [::Integer]
         #     The total number of spaces that match the query, across all pages. If the
         #     result is over 10,000 spaces, this value is an estimate.
+        # @!attribute [r] results
+        #   @return [::Array<::Google::Apps::Chat::V1::SearchSpacesResponse::SearchSpaceResult>]
+        #     Output only. The list of search results that matched the query.
         class SearchSpacesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single result item from a space search.
+          # @!attribute [r] space
+          #   @return [::Google::Apps::Chat::V1::Space]
+          #     Output only. The matched space.
+          class SearchSpaceResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request for deleting a space.
