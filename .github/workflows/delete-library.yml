@@ -29,6 +29,8 @@ jobs:
       with:
         ruby-version: "3.4"
     - name: Install tools
+      # zizmor: ignore[adhoc-packages]
+      # zizmor: ignore[adhoc-packages]
       run: |
         gem install --no-document toys
     - name: Delete-library

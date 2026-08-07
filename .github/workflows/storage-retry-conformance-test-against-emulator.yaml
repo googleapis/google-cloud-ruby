@@ -33,7 +33,9 @@ jobs:
         with:
           ruby-version: '3.3'
       - run: ruby --version
-      - run: gem install toys
+      - name: install toys
+        # zizmor: ignore[adhoc-packages]
+        run: gem install toys
       - run: bundle install
       - run: toys conformance
         env:
