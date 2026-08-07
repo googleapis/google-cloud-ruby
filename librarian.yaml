@@ -213,9 +213,12 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-ai_platform-v1
+    version: 1.47.1
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
+          delete_generation_output_paths:
+            - google/cloud/aiplatform/v1/schema
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform::V1
             ruby-cloud-service-override: AiPlatform=AIPlatform
