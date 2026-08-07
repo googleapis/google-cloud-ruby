@@ -81,9 +81,11 @@ module Google
             ensure_service!
             gapi = @service.list_buckets prefix: @prefix, token: @token,
                                          max: @max, user_project: @user_project,
-                                         soft_deleted: @soft_deleted
+                                         soft_deleted: @soft_deleted,
+                                         projection: @projection
             Bucket::List.from_gapi gapi, @service, @prefix, @max,
-                                   user_project: @user_project
+                                   user_project: @user_project, soft_deleted: @soft_deleted,
+                                   projection: @projection
           end
 
           ##
@@ -155,7 +157,7 @@ module Google
           # @private New Bucket::List from a Google API Client
           # Google::Apis::StorageV1::Buckets object.
           def self.from_gapi gapi_list, service, prefix = nil, max = nil,
-                             user_project: nil, soft_deleted: nil, return_partial_success: nil
+                             user_project: nil, soft_deleted: nil, return_partial_success: nil, projection: nil
             buckets = new(Array(gapi_list.items).map do |gapi_object|
               Bucket.from_gapi gapi_object, service, user_project: user_project
             end)
@@ -165,6 +167,7 @@ module Google
             buckets.instance_variable_set :@max, max
             buckets.instance_variable_set :@user_project, user_project
             buckets.instance_variable_set :@soft_deleted, soft_deleted
+            buckets.instance_variable_set :@projection, projection
             buckets.instance_variable_set :@unreachable, Array(gapi_list.unreachable) if return_partial_success
             buckets
           end
