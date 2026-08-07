@@ -221,6 +221,7 @@ libraries:
             - google/type/expr.proto
           delete_generation_output_paths:
             - google/cloud/aiplatform/v1/schema
+            - google/type
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform::V1
             ruby-cloud-service-override: AiPlatform=AIPlatform
