@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -66,6 +66,11 @@ module Google
         #     Optional. If specified, Vertex AI will use Parallel.ai to search for
         #     information to answer user queries. The search results will be grounded on
         #     Parallel.ai and presented to the model for response generation
+        # @!attribute [rw] exa_ai_search
+        #   @return [::Google::Cloud::AIPlatform::V1::Tool::ExaAiSearch]
+        #     Optional. Uses Exa.ai to search for information to
+        #     answer user queries. The search results will be grounded on Exa.ai
+        #     and presented to the model for response generation
         # @!attribute [rw] code_execution
         #   @return [::Google::Cloud::AIPlatform::V1::Tool::CodeExecution]
         #     Optional. CodeExecution tool type.
@@ -127,6 +132,20 @@ module Google
           #       }
           #     }
           class ParallelAiSearch
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ExaAiSearch tool type.
+          # A tool that uses the Exa.ai search engine for grounding.
+          # @!attribute [rw] api_key
+          #   @return [::String]
+          #     Required. The API key for ExaAiSearch.
+          # @!attribute [rw] custom_configs
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. This field can be used to pass any parameter from the Exa.ai
+          #     Search API.
+          class ExaAiSearch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
