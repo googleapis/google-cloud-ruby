@@ -214,6 +214,7 @@ libraries:
       - samples/acceptance/predict_text_prompt_test.rb
       - samples/predict_text_prompt.rb
       - test/README.md
+    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
