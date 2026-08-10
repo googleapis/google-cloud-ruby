@@ -1,8 +1,7 @@
 # Ruby Client for the Vertex AI API
 
-API Client library for the Vertex AI API
+Train high-quality custom machine learning models with minimal machine learning expertise and effort.
 
-Vertex AI enables data scientists, developers, and AI newcomers to create custom machine learning models specific to their business needs by leveraging Google's state-of-the-art transfer learning and innovative AI research.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-ai_platform-v*`.
@@ -18,7 +17,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-ai_platform-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest).
 
-See also the [Product Documentation](https://cloud.google.com/vertex-ai/docs/)
+See also the [Product Documentation](https://cloud.google.com/ai-platform/docs)
 for more usage information.
 
 ## Quick Start

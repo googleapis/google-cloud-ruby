@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.33.0
+version: v0.34.0
 sources:
   googleapis:
     commit: 57394718a71457aa37ab002352b22081976bdd91
@@ -35,10 +35,10 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-ads-ad_manager-v1
+    version: 5.0.1
     apis:
       - path: google/ads/admanager/v1
     skip_generate: true
-    version: 5.0.1
   - name: google-ads-data_manager
     apis:
       - path: google/ads/datamanager/v1
@@ -47,23 +47,23 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-ads-data_manager-v1
+    version: 0.8.0
     apis:
       - path: google/ads/datamanager/v1
     skip_generate: true
-    version: 0.8.0
   - name: google-ads-marketing_platform-admin
+    version: 0.3.1
     apis:
       - path: google/marketingplatform/admin/v1alpha
     skip_generate: true
     ruby:
       wrapper_of:
         - v1alpha:0.0
-    version: 0.3.1
   - name: google-ads-marketing_platform-admin-v1alpha
+    version: 0.6.1
     apis:
       - path: google/marketingplatform/admin/v1alpha
     skip_generate: true
-    version: 0.6.1
   - name: google-analytics-admin
     apis:
       - path: google/analytics/admin/v1alpha
@@ -197,11 +197,12 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-agent_registry-v1
+    version: 0.1.1
     apis:
       - path: google/cloud/agentregistry/v1
     skip_generate: true
-    version: 0.1.1
   - name: google-cloud-ai_platform
+    version: 2.4.1
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
@@ -214,18 +215,22 @@ libraries:
       - samples/acceptance/predict_text_prompt_test.rb
       - samples/predict_text_prompt.rb
       - test/README.md
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-ai_platform-v1
+    version: 1.47.1
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
+          additional_protos:
+            - google/type/expr.proto
+          delete_generation_output_paths:
+            - google/cloud/aiplatform/v1/schema
+            - google/type
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform::V1
             ruby-cloud-service-override: AiPlatform=AIPlatform
-    skip_generate: true
   - name: google-cloud-alloy_db
     apis:
       - path: google/cloud/alloydb/v1
@@ -254,6 +259,7 @@ libraries:
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
     skip_generate: true
   - name: google-cloud-alloy_db-v1beta
+    version: 0.23.1
     apis:
       - path: google/cloud/alloydb/v1beta
         ruby:
@@ -261,7 +267,6 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AlloyDB::V1beta
             ruby-cloud-service-override: AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin
     skip_generate: true
-    version: 0.23.1
   - name: google-cloud-api_gateway
     apis:
       - path: google/cloud/apigateway/v1
@@ -287,10 +292,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-api_hub-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/apihub/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-api_keys
     apis:
       - path: google/api/apikeys/v2
@@ -310,10 +315,10 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-api_registry-v1beta
+    version: 0.4.1
     apis:
       - path: google/cloud/apiregistry/v1beta
     skip_generate: true
-    version: 0.4.1
   - name: google-cloud-apigee_connect
     apis:
       - path: google/cloud/apigeeconnect/v1
@@ -348,13 +353,13 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-app_engine-v1
+    version: 1.8.1
     apis:
       - path: google/appengine/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: APP_ENGINE
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-app_hub
     apis:
       - path: google/cloud/apphub/v1
@@ -363,10 +368,10 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-app_hub-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/apphub/v1
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-app_optimize
     apis:
       - path: google/cloud/appoptimize/v1beta
@@ -389,13 +394,13 @@ libraries:
       wrapper_of:
         - v1:1.3
   - name: google-cloud-artifact_registry-v1
+    version: 1.14.1
     apis:
       - path: google/devtools/artifactregistry/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ARTIFACT_REGISTRY
     skip_generate: true
-    version: 1.14.1
   - name: google-cloud-artifact_registry-v1beta2
     apis:
       - path: google/devtools/artifactregistry/v1beta2
@@ -438,13 +443,13 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-assured_workloads-v1
+    version: 1.8.1
     apis:
       - path: google/cloud/assuredworkloads/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ASSURED_WORKLOADS
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-assured_workloads-v1beta1
     apis:
       - path: google/cloud/assuredworkloads/v1beta1
@@ -531,10 +536,10 @@ libraries:
       wrapper_of:
         - v2:1.0
   - name: google-cloud-bare_metal_solution-v2
+    version: 1.6.1
     apis:
       - path: google/cloud/baremetalsolution/v2
     skip_generate: true
-    version: 1.6.1
   - name: google-cloud-batch
     apis:
       - path: google/cloud/batch/v1
@@ -554,37 +559,37 @@ libraries:
       wrapper_of:
         - v1:0.4
   - name: google-cloud-beyond_corp-app_connections-v1
+    version: 0.13.1
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
     skip_generate: true
-    version: 0.13.1
   - name: google-cloud-beyond_corp-app_connectors-v1
+    version: 0.13.1
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
     skip_generate: true
-    version: 0.13.1
   - name: google-cloud-beyond_corp-app_gateways-v1
+    version: 0.13.1
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
     skip_generate: true
-    version: 0.13.1
   - name: google-cloud-beyond_corp-client_gateways-v1
+    version: 0.13.1
     apis:
       - path: google/cloud/beyondcorp/clientgateways/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-beyond_corp
     skip_generate: true
-    version: 0.13.1
   - name: google-cloud-bigquery-analytics_hub
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
@@ -593,10 +598,10 @@ libraries:
       wrapper_of:
         - v1:0.5
   - name: google-cloud-bigquery-analytics_hub-v1
+    version: 0.20.1
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
     skip_generate: true
-    version: 0.20.1
   - name: google-cloud-bigquery-connection
     apis:
       - path: google/cloud/bigquery/connection/v1
@@ -622,10 +627,10 @@ libraries:
       wrapper_of:
         - v1beta1:0.6
   - name: google-cloud-bigquery-data_exchange-v1beta1
+    version: 0.13.1
     apis:
       - path: google/cloud/bigquery/dataexchange/v1beta1
     skip_generate: true
-    version: 0.13.1
   - name: google-cloud-bigquery-data_policies
     apis:
       - path: google/cloud/bigquery/datapolicies/v1
@@ -634,15 +639,15 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-bigquery-data_policies-v1
+    version: 1.4.1
     apis:
       - path: google/cloud/bigquery/datapolicies/v1
     skip_generate: true
-    version: 1.4.1
   - name: google-cloud-bigquery-data_policies-v1beta1
+    version: 0.11.1
     apis:
       - path: google/cloud/bigquery/datapolicies/v1beta1
     skip_generate: true
-    version: 0.11.1
   - name: google-cloud-bigquery-data_transfer
     apis:
       - path: google/cloud/bigquery/datatransfer/v1
@@ -680,10 +685,10 @@ libraries:
       wrapper_of:
         - v2:0.9
   - name: google-cloud-bigquery-migration-v2
+    version: 0.22.1
     apis:
       - path: google/cloud/bigquery/migration/v2
     skip_generate: true
-    version: 0.22.1
   - name: google-cloud-bigquery-reservation
     apis:
       - path: google/cloud/bigquery/reservation/v1
@@ -695,13 +700,13 @@ libraries:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-bigquery-reservation-v1
+    version: 1.12.1
     apis:
       - path: google/cloud/bigquery/reservation/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_RESERVATION
     skip_generate: true
-    version: 1.12.1
   - name: google-cloud-bigquery-storage
     apis:
       - path: google/cloud/bigquery/storage/v1
@@ -713,14 +718,15 @@ libraries:
       wrapper_of:
         - v1:0.25
   - name: google-cloud-bigquery-storage-v1
+    version: 1.8.1
     apis:
       - path: google/cloud/bigquery/storage/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BIGQUERY_STORAGE
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-bigtable-admin-v2
+    version: 1.18.1
     apis:
       - path: google/bigtable/admin/v2
         ruby:
@@ -732,7 +738,6 @@ libraries:
       - test/google/cloud/bigtable/admin/v2/bigtable_table_admin_helpers_test.rb
       - test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb
     skip_generate: true
-    version: 1.18.1
   - name: google-cloud-bigtable-v2
     apis:
       - path: google/bigtable/v2
@@ -765,21 +770,21 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-billing-budgets-v1
+    version: 1.6.1
     apis:
       - path: google/cloud/billing/budgets/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BILLING_BUDGETS
     skip_generate: true
-    version: 1.6.1
   - name: google-cloud-billing-budgets-v1beta1
+    version: 0.18.1
     apis:
       - path: google/cloud/billing/budgets/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: BILLING_BUDGETS
     skip_generate: true
-    version: 0.18.1
   - name: google-cloud-billing-v1
     apis:
       - path: google/cloud/billing/v1
@@ -799,6 +804,7 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-binary_authorization-v1
+    version: 1.8.1
     apis:
       - path: google/cloud/binaryauthorization/v1
         ruby:
@@ -808,8 +814,8 @@ libraries:
             ruby-cloud-service-override: BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper
             ruby-cloud-yard-strict: "false"
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-binary_authorization-v1beta1
+    version: 0.20.1
     apis:
       - path: google/cloud/binaryauthorization/v1beta1
         ruby:
@@ -817,7 +823,6 @@ libraries:
             ruby-cloud-env-prefix: BINARY_AUTHORIZATION
             ruby-cloud-service-override: BinauthzManagementServiceV1Beta1=BinauthzManagementService;SystemPolicyV1Beta1=SystemPolicy
     skip_generate: true
-    version: 0.20.1
   - name: google-cloud-build
     apis:
       - path: google/devtools/cloudbuild/v1
@@ -850,10 +855,10 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-capacity_planner-v1beta
+    version: 0.5.1
     apis:
       - path: google/cloud/capacityplanner/v1beta
     skip_generate: true
-    version: 0.5.1
   - name: google-cloud-certificate_manager
     apis:
       - path: google/cloud/certificatemanager/v1
@@ -862,10 +867,10 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-certificate_manager-v1
+    version: 1.5.1
     apis:
       - path: google/cloud/certificatemanager/v1
     skip_generate: true
-    version: 1.5.1
   - name: google-cloud-ces
     apis:
       - path: google/cloud/ces/v1
@@ -917,15 +922,15 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-cloud_controls_partner-v1
+    version: 2.4.1
     apis:
       - path: google/cloud/cloudcontrolspartner/v1
     skip_generate: true
-    version: 2.4.1
   - name: google-cloud-cloud_controls_partner-v1beta
+    version: 0.9.1
     apis:
       - path: google/cloud/cloudcontrolspartner/v1beta
     skip_generate: true
-    version: 0.9.1
   - name: google-cloud-cloud_dms
     apis:
       - path: google/cloud/clouddms/v1
@@ -969,10 +974,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-cloud_security_compliance-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-commerce-consumer-procurement
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
@@ -981,10 +986,10 @@ libraries:
       wrapper_of:
         - v1:1.1
   - name: google-cloud-commerce-consumer-procurement-v1
+    version: 1.9.1
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
     skip_generate: true
-    version: 1.9.1
   - name: google-cloud-commerce_producer
     apis:
       - path: google/cloud/commerceproducer/v1beta
@@ -993,10 +998,10 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-commerce_producer-v1beta
+    version: 0.2.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     skip_generate: true
-    version: 0.2.0
   - name: google-cloud-compute
     apis:
       - path: google/cloud/compute/v1
@@ -1164,10 +1169,10 @@ libraries:
       wrapper_of:
         - v1:0.20
   - name: google-cloud-contact_center_insights-v1
+    version: 1.11.1
     apis:
       - path: google/cloud/contactcenterinsights/v1
     skip_generate: true
-    version: 1.11.1
   - name: google-cloud-container
     apis:
       - path: google/container/v1
@@ -1237,31 +1242,31 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-data_catalog-lineage
+    version: 1.3.1
     apis:
       - path: google/cloud/datacatalog/lineage/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.6
-    version: 1.3.1
   - name: google-cloud-data_catalog-lineage-config_management
+    version: 0.1.1
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
-    version: 0.1.1
   - name: google-cloud-data_catalog-lineage-config_management-v1
+    version: 0.1.1
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     skip_generate: true
-    version: 0.1.1
   - name: google-cloud-data_catalog-lineage-v1
+    version: 0.16.1
     apis:
       - path: google/cloud/datacatalog/lineage/v1
     skip_generate: true
-    version: 0.16.1
   - name: google-cloud-data_catalog-v1
     apis:
       - path: google/cloud/datacatalog/v1
@@ -1295,13 +1300,13 @@ libraries:
       wrapper_of:
         - v1beta1:0.7
   - name: google-cloud-data_labeling-v1beta1
+    version: 0.16.1
     apis:
       - path: google/cloud/datalabeling/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: DATA_LABELING
     skip_generate: true
-    version: 0.16.1
   - name: google-cloud-database_center
     apis:
       - path: google/cloud/databasecenter/v1beta
@@ -1732,10 +1737,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-financial_services-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/financialservices/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-firestore-admin
     apis:
       - path: google/firestore/admin/v1
@@ -1747,13 +1752,13 @@ libraries:
       wrapper_of:
         - v1:0.14
   - name: google-cloud-firestore-admin-v1
+    version: 1.14.1
     apis:
       - path: google/firestore/admin/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: FIRESTORE
     skip_generate: true
-    version: 1.14.1
   - name: google-cloud-firestore-v1
     apis:
       - path: google/firestore/v1
@@ -1786,6 +1791,7 @@ libraries:
             ruby-cloud-env-prefix: FUNCTIONS
     skip_generate: true
   - name: google-cloud-gdc_hardware_management
+    version: 0.4.1
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
         ruby:
@@ -1796,8 +1802,8 @@ libraries:
     ruby:
       wrapper_of:
         - v1alpha:0.0
-    version: 0.4.1
   - name: google-cloud-gdc_hardware_management-v1alpha
+    version: 0.15.1
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
         ruby:
@@ -1805,25 +1811,24 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::GDCHardwareManagement::V1alpha
             ruby-cloud-service-override: GdcHardwareManagement=GDCHardwareManagement
     skip_generate: true
-    version: 0.15.1
   - name: google-cloud-gemini_data_analytics
+    version: 1.0.1
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
     skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.0
-    version: 1.0.1
   - name: google-cloud-gemini_data_analytics-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/geminidataanalytics/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-gemini_data_analytics-v1beta
+    version: 1.0.1
     apis:
       - path: google/cloud/geminidataanalytics/v1beta
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-gke_backup
     apis:
       - path: google/cloud/gkebackup/v1
@@ -1832,11 +1837,12 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-gke_backup-v1
+    version: 1.8.1
     apis:
       - path: google/cloud/gkebackup/v1
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-gke_connect-gateway
+    version: 2.3.1
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
         ruby:
@@ -1846,20 +1852,19 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.2
-    version: 2.3.1
   - name: google-cloud-gke_connect-gateway-v1
+    version: 0.9.1
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
     skip_generate: true
-    version: 0.9.1
   - name: google-cloud-gke_connect-gateway-v1beta1
+    version: 0.14.1
     apis:
       - path: google/cloud/gkeconnect/gateway/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: GKE_CONNECT_GATEWAY
     skip_generate: true
-    version: 0.14.1
   - name: google-cloud-gke_hub
     apis:
       - path: google/cloud/gkehub/v1
@@ -1873,34 +1878,34 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-gke_hub-v1
+    version: 2.6.1
     apis:
       - path: google/cloud/gkehub/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: GKE_HUB
     skip_generate: true
-    version: 2.6.1
   - name: google-cloud-gke_hub-v1beta1
+    version: 0.21.1
     apis:
       - path: google/cloud/gkehub/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: GKE_HUB
     skip_generate: true
-    version: 0.21.1
   - name: google-cloud-gke_multi_cloud
+    version: 1.5.1
     apis:
       - path: google/cloud/gkemulticloud/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.8
-    version: 1.5.1
   - name: google-cloud-gke_multi_cloud-v1
+    version: 0.21.1
     apis:
       - path: google/cloud/gkemulticloud/v1
     skip_generate: true
-    version: 0.21.1
   - name: google-cloud-gke_recommender
     apis:
       - path: google/cloud/gkerecommender/v1
@@ -1909,11 +1914,12 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-gke_recommender-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/gkerecommender/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-gsuite_add_ons
+    version: 1.3.1
     apis:
       - path: google/cloud/gsuiteaddons/v1
         ruby:
@@ -1925,8 +1931,8 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.5
-    version: 1.3.1
   - name: google-cloud-gsuite_add_ons-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/gsuiteaddons/v1
         ruby:
@@ -1936,7 +1942,6 @@ libraries:
             ruby-cloud-namespace-override: GsuiteAddOns=GSuiteAddOns
             ruby-cloud-path-override: g_suite_add_ons=gsuite_add_ons
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-hypercompute_cluster
     apis:
       - path: google/cloud/hypercomputecluster/v1beta
@@ -1945,10 +1950,10 @@ libraries:
       wrapper_of:
         - v1beta:0.0
   - name: google-cloud-hypercompute_cluster-v1beta
+    version: 1.0.1
     apis:
       - path: google/cloud/hypercomputecluster/v1beta
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-iap
     apis:
       - path: google/cloud/iap/v1
@@ -2013,13 +2018,13 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-kms-inventory-v1
+    version: 0.23.1
     apis:
       - path: google/cloud/kms/inventory/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-cloud-kms-v1=>0.0+<2.a
     skip_generate: true
-    version: 0.23.1
   - name: google-cloud-kms-v1
     apis:
       - path: google/cloud/kms/v1
@@ -2073,10 +2078,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-license_manager-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/licensemanager/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-life_sciences
     apis:
       - path: google/cloud/lifesciences/v2beta
@@ -2089,6 +2094,7 @@ libraries:
       wrapper_of:
         - v2beta:0.7
   - name: google-cloud-life_sciences-v2beta
+    version: 0.16.1
     apis:
       - path: google/cloud/lifesciences/v2beta
         ruby:
@@ -2096,7 +2102,6 @@ libraries:
             ruby-cloud-env-prefix: LIFE_SCIENCES
             ruby-cloud-service-override: WorkflowsServiceV2Beta=WorkflowsService
     skip_generate: true
-    version: 0.16.1
   - name: google-cloud-location
     keep:
       - README.md
@@ -2110,10 +2115,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-location_finder-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/locationfinder/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-logging-v2
     apis:
       - path: google/logging/v2
@@ -2174,18 +2179,18 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-managed_kafka-schema_registry
+    version: 0.3.1
     apis:
       - path: google/cloud/managedkafka/schemaregistry/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
-    version: 0.3.1
   - name: google-cloud-managed_kafka-schema_registry-v1
+    version: 0.5.1
     apis:
       - path: google/cloud/managedkafka/schemaregistry/v1
     skip_generate: true
-    version: 0.5.1
   - name: google-cloud-managed_kafka-v1
     apis:
       - path: google/cloud/managedkafka/v1
@@ -2306,6 +2311,7 @@ libraries:
       wrapper_of:
         - v3:0.15
   - name: google-cloud-monitoring-dashboard-v1
+    version: 1.7.1
     apis:
       - path: google/monitoring/dashboard/v1
         ruby:
@@ -2313,15 +2319,14 @@ libraries:
             ruby-cloud-env-prefix: MONITORING_DASHBOARD
             ruby-cloud-wrapper-gem-override: google-cloud-monitoring
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-monitoring-metrics_scope-v1
+    version: 1.8.1
     apis:
       - path: google/monitoring/metricsscope/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-wrapper-gem-override: google-cloud-monitoring
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-monitoring-v3
     apis:
       - path: google/monitoring/v3
@@ -2414,6 +2419,7 @@ libraries:
       - path: google/cloud/networkservices/v1
     skip_generate: true
   - name: google-cloud-notebooks
+    version: 3.2.1
     apis:
       - path: google/cloud/notebooks/v1
         ruby:
@@ -2424,7 +2430,6 @@ libraries:
       wrapper_of:
         - v1:1.0
         - v2:1.0
-    version: 3.2.1
   - name: google-cloud-notebooks-v1
     apis:
       - path: google/cloud/notebooks/v1
@@ -2455,30 +2460,30 @@ libraries:
       - path: google/cloud/optimization/v1
     skip_generate: true
   - name: google-cloud-oracle_database
+    version: 1.0.1
     apis:
       - path: google/cloud/oracledatabase/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
-    version: 1.0.1
   - name: google-cloud-oracle_database-v1
     apis:
       - path: google/cloud/oracledatabase/v1
     skip_generate: true
   - name: google-cloud-orchestration-airflow-service
+    version: 1.7.1
     apis:
       - path: google/cloud/orchestration/airflow/service/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.9
-    version: 1.7.1
   - name: google-cloud-orchestration-airflow-service-v1
+    version: 1.9.1
     apis:
       - path: google/cloud/orchestration/airflow/service/v1
     skip_generate: true
-    version: 1.9.1
   - name: google-cloud-org_policy
     apis:
       - path: google/cloud/orgpolicy/v2
@@ -2698,13 +2703,13 @@ libraries:
       wrapper_of:
         - v1:0.10
   - name: google-cloud-policy_troubleshooter-iam-v3
+    version: 0.12.1
     apis:
       - path: google/cloud/policytroubleshooter/iam/v3
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-iam-v1=>0.5+<2.a;google-iam-v2=>0.3+<2.a
     skip_generate: true
-    version: 0.12.1
   - name: google-cloud-policy_troubleshooter-v1
     apis:
       - path: google/cloud/policytroubleshooter/v1
@@ -2738,10 +2743,10 @@ libraries:
       wrapper_of:
         - v1:1.0
   - name: google-cloud-privileged_access_manager-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-product_registry
     apis:
       - path: google/cloud/productregistry/v1
@@ -2802,10 +2807,10 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-rapid_migration_assessment-v1
+    version: 2.6.1
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
     skip_generate: true
-    version: 2.6.1
   - name: google-cloud-recaptcha_enterprise
     apis:
       - path: google/cloud/recaptchaenterprise/v1
@@ -2978,18 +2983,18 @@ libraries:
             ruby-cloud-wrapper-gem-override: google-cloud-run-client
     skip_generate: true
   - name: google-cloud-saas_platform-saas_service_mgmt
+    version: 0.3.1
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1beta1:0.0
-    version: 0.3.1
   - name: google-cloud-saas_platform-saas_service_mgmt-v1beta1
+    version: 0.8.1
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     skip_generate: true
-    version: 0.8.1
   - name: google-cloud-scheduler
     apis:
       - path: google/cloud/scheduler/v1
@@ -3191,10 +3196,10 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-secure_source_manager-v1
+    version: 2.8.1
     apis:
       - path: google/cloud/securesourcemanager/v1
     skip_generate: true
-    version: 2.8.1
   - name: google-cloud-security-private_ca
     apis:
       - path: google/cloud/security/privateca/v1
@@ -3207,6 +3212,7 @@ libraries:
       wrapper_of:
         - v1:2.0
   - name: google-cloud-security-private_ca-v1
+    version: 2.8.1
     apis:
       - path: google/cloud/security/privateca/v1
         ruby:
@@ -3214,8 +3220,8 @@ libraries:
             ruby-cloud-env-prefix: PRIVATE_CA
             ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA::V1
     skip_generate: true
-    version: 2.8.1
   - name: google-cloud-security-private_ca-v1beta1
+    version: 0.18.1
     apis:
       - path: google/cloud/security/privateca/v1beta1
         ruby:
@@ -3223,7 +3229,6 @@ libraries:
             ruby-cloud-env-prefix: PRIVATE_CA
             ruby-cloud-gem-namespace: Google::Cloud::Security::PrivateCA::V1beta1
     skip_generate: true
-    version: 0.18.1
   - name: google-cloud-security-public_ca
     apis:
       - path: google/cloud/security/publicca/v1
@@ -3242,13 +3247,13 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::Security::PublicCA::V1
     skip_generate: true
   - name: google-cloud-security-public_ca-v1beta1
+    version: 0.13.1
     apis:
       - path: google/cloud/security/publicca/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-gem-namespace: Google::Cloud::Security::PublicCA::V1beta1
     skip_generate: true
-    version: 0.13.1
   - name: google-cloud-security_center
     apis:
       - path: google/cloud/securitycenter/v2
@@ -3296,10 +3301,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-security_center_management-v1
+    version: 1.8.1
     apis:
       - path: google/cloud/securitycentermanagement/v1
     skip_generate: true
-    version: 1.8.1
   - name: google-cloud-service_control
     apis:
       - path: google/api/servicecontrol/v1
@@ -3311,13 +3316,13 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-service_control-v1
+    version: 1.7.1
     apis:
       - path: google/api/servicecontrol/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SERVICE_CONTROL
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-service_directory
     apis:
       - path: google/cloud/servicedirectory/v1
@@ -3414,6 +3419,7 @@ libraries:
             ruby-cloud-env-prefix: CLOUD_SHELL
     skip_generate: true
   - name: google-cloud-spanner-admin-database-v1
+    version: 1.14.1
     apis:
       - path: google/spanner/admin/database/v1
         ruby:
@@ -3421,7 +3427,6 @@ libraries:
             ruby-cloud-env-prefix: SPANNER
             ruby-cloud-wrapper-gem-override: google-cloud-spanner
     skip_generate: true
-    version: 1.14.1
   - name: google-cloud-spanner-admin-instance-v1
     apis:
       - path: google/spanner/admin/instance/v1
@@ -3481,10 +3486,10 @@ libraries:
             ruby-cloud-env-prefix: SPEECH
     skip_generate: true
   - name: google-cloud-sql-v1
+    version: 0.3.0
     apis:
       - path: google/cloud/sql/v1
     skip_generate: true
-    version: 0.3.0
   - name: google-cloud-sql-v1beta4
     apis:
       - path: google/cloud/sql/v1beta4
@@ -3651,13 +3656,13 @@ libraries:
       wrapper_of:
         - v2:1.2
   - name: google-cloud-tasks-v2
+    version: 1.6.1
     apis:
       - path: google/cloud/tasks/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TASKS
     skip_generate: true
-    version: 1.6.1
   - name: google-cloud-tasks-v2beta2
     apis:
       - path: google/cloud/tasks/v2beta2
@@ -4179,21 +4184,21 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-web_security_scanner-v1
+    version: 1.6.1
     apis:
       - path: google/cloud/websecurityscanner/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
     skip_generate: true
-    version: 1.6.1
   - name: google-cloud-web_security_scanner-v1beta
+    version: 0.15.1
     apis:
       - path: google/cloud/websecurityscanner/v1beta
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: WEB_SECURITY_SCANNER
     skip_generate: true
-    version: 0.15.1
   - name: google-cloud-workflows
     apis:
       - path: google/cloud/workflows/v1
@@ -4333,10 +4338,10 @@ libraries:
       wrapper_of:
         - v1:0.7
   - name: google-identity-access_context_manager-v1
+    version: 0.15.1
     apis:
       - path: google/identity/accesscontextmanager/v1
     skip_generate: true
-    version: 0.15.1
   - name: google-maps-fleet_engine
     apis:
       - path: google/maps/fleetengine/v1
