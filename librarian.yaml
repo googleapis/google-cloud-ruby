@@ -2661,6 +2661,7 @@ libraries:
     apis:
       - path: google/cloud/parametermanager/v1
     skip_generate: true
+    version: 1.0.1
   - name: google-cloud-phishing_protection
     apis:
       - path: google/cloud/phishingprotection/v1beta1
