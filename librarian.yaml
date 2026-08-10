@@ -53,7 +53,6 @@ libraries:
     version: 0.3.1
     apis:
       - path: google/marketingplatform/admin/v1alpha
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1alpha:0.0
@@ -61,14 +60,12 @@ libraries:
     version: 0.6.1
     apis:
       - path: google/marketingplatform/admin/v1alpha
-    skip_generate: true
   - name: google-analytics-admin
     apis:
       - path: google/analytics/admin/v1alpha
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ANALYTICS_ADMIN
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1alpha:0.27
@@ -78,7 +75,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ANALYTICS_ADMIN
-    skip_generate: true
   - name: google-analytics-data
     apis:
       - path: google/analytics/data/v1beta
@@ -86,7 +82,6 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ANALYTICS_DATA
             ruby-cloud-service-override: BetaAnalyticsData=AnalyticsData
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1beta:0.11
@@ -97,11 +92,9 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ANALYTICS_DATA
             ruby-cloud-service-override: BetaAnalyticsData=AnalyticsData
-    skip_generate: true
   - name: google-apps-chat
     apis:
       - path: google/chat/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -111,7 +104,6 @@ libraries:
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-apps-card-v1=>0.0+<2.a
-    skip_generate: true
     version: 0.29.0
   - name: google-apps-events-subscriptions
     apis:
