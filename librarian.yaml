@@ -3847,6 +3847,7 @@ libraries:
     ruby:
       wrapper_of:
         - v1:2.0
+    version: 2.2.1
   - name: google-cloud-video-live_stream-v1
     apis:
       - path: google/cloud/video/livestream/v1
