@@ -2,7 +2,6 @@
 
 A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.
 
-A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-ads-data_manager-v*`.

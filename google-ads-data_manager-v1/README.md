@@ -2,7 +2,6 @@
 
 A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.
 
-A unified ingestion API for data partners, agencies and advertisers to connect first-party data across Google advertising products.
 
 https://github.com/googleapis/google-cloud-ruby
 

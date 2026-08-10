@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.34.0
+version: v0.35.0
 sources:
   googleapis:
     commit: 57394718a71457aa37ab002352b22081976bdd91
@@ -28,9 +28,9 @@ tools:
     sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 libraries:
   - name: google-ads-ad_manager
+    version: 5.0.1
     apis:
       - path: google/ads/admanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:2.0
@@ -38,11 +38,10 @@ libraries:
     version: 5.0.1
     apis:
       - path: google/ads/admanager/v1
-    skip_generate: true
   - name: google-ads-data_manager
+    version: 0.4.1
     apis:
       - path: google/ads/datamanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -50,7 +49,6 @@ libraries:
     version: 0.8.0
     apis:
       - path: google/ads/datamanager/v1
-    skip_generate: true
   - name: google-ads-marketing_platform-admin
     version: 0.3.1
     apis:
