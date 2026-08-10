@@ -4068,6 +4068,7 @@ libraries:
       - owlbot-templates/image_annotator_helpers_test.erb
       - test/google/cloud/vision/v1p3beta1/image_annotator_helpers_test.rb
     skip_generate: true
+    version: 0.20.1
   - name: google-cloud-vision-v1p4beta1
     apis:
       - path: google/cloud/vision/v1p4beta1
