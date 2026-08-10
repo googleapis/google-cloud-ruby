@@ -259,6 +259,9 @@ module Google
 
               # The table keeps data versioned at a granularity of 1ms.
               MILLIS = 1
+
+              # The table keeps data versioned at a granularity of 1us.
+              MICROS = 2
             end
 
             # Defines a view over a table's fields.
