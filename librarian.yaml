@@ -1010,6 +1010,7 @@ libraries:
     ruby:
       wrapper_of:
         - v1:2.15
+    version: 1.20.0
   - name: google-cloud-compute-v1
     apis:
       - path: google/cloud/compute/v1
