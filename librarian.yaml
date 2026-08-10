@@ -2038,6 +2038,7 @@ libraries:
       - lib/google/cloud/kms/v1/iam_policy/credentials.rb
       - test/google/cloud/kms/v1/iam_policy_test.rb
     skip_generate: true
+    version: 1.15.1
   - name: google-cloud-language
     apis:
       - path: google/cloud/language/v2
