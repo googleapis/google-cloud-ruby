@@ -3573,6 +3573,7 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.0
+    version: 1.0.1
   - name: google-cloud-storage_batch_operations-v1
     apis:
       - path: google/cloud/storagebatchoperations/v1
