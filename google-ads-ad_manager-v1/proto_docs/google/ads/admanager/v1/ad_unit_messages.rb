@@ -133,6 +133,10 @@ module Google
         #     from the AdSense content network. This attribute defaults to the ad unit's
         #     parent or ancestor's setting if one has been set. If no ancestor of the ad
         #     unit has set appliedAdsenseEnabled, the attribute is defaulted to true.
+        # @!attribute [rw] refresh_rate_type
+        #   @return [::Google::Ads::AdManager::V1::RefreshRateTypeEnum::RefreshRateType]
+        #     Optional. Non-empty default. Defines the type of refresh rate control for
+        #     this ad unit. This field defaults to `DISABLED`.
         class AdUnit
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

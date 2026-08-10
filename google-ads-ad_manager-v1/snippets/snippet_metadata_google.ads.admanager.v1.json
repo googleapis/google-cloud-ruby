@@ -2292,6 +2292,246 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_ChildPublisherService_GetChildPublisher_sync",
+      "title": "Snippet for the get_child_publisher call in the ChildPublisherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#get_child_publisher.",
+      "file": "child_publisher_service/get_child_publisher.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_child_publisher",
+        "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#get_child_publisher",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetChildPublisherRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ChildPublisher",
+        "client": {
+          "short_name": "ChildPublisherService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetChildPublisher",
+          "full_name": "google.ads.admanager.v1.ChildPublisherService.GetChildPublisher",
+          "service": {
+            "short_name": "ChildPublisherService",
+            "full_name": "google.ads.admanager.v1.ChildPublisherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ChildPublisherService_ListChildPublishers_sync",
+      "title": "Snippet for the list_child_publishers call in the ChildPublisherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#list_child_publishers.",
+      "file": "child_publisher_service/list_child_publishers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_child_publishers",
+        "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#list_child_publishers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListChildPublishersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListChildPublishersResponse",
+        "client": {
+          "short_name": "ChildPublisherService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListChildPublishers",
+          "full_name": "google.ads.admanager.v1.ChildPublisherService.ListChildPublishers",
+          "service": {
+            "short_name": "ChildPublisherService",
+            "full_name": "google.ads.admanager.v1.ChildPublisherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ChildPublisherService_CreateChildPublisher_sync",
+      "title": "Snippet for the create_child_publisher call in the ChildPublisherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#create_child_publisher.",
+      "file": "child_publisher_service/create_child_publisher.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_child_publisher",
+        "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#create_child_publisher",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateChildPublisherRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ChildPublisher",
+        "client": {
+          "short_name": "ChildPublisherService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateChildPublisher",
+          "full_name": "google.ads.admanager.v1.ChildPublisherService.CreateChildPublisher",
+          "service": {
+            "short_name": "ChildPublisherService",
+            "full_name": "google.ads.admanager.v1.ChildPublisherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ChildPublisherService_BatchCreateChildPublishers_sync",
+      "title": "Snippet for the batch_create_child_publishers call in the ChildPublisherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#batch_create_child_publishers.",
+      "file": "child_publisher_service/batch_create_child_publishers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_child_publishers",
+        "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#batch_create_child_publishers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateChildPublishersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateChildPublishersResponse",
+        "client": {
+          "short_name": "ChildPublisherService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateChildPublishers",
+          "full_name": "google.ads.admanager.v1.ChildPublisherService.BatchCreateChildPublishers",
+          "service": {
+            "short_name": "ChildPublisherService",
+            "full_name": "google.ads.admanager.v1.ChildPublisherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ChildPublisherService_UpdateChildPublisher_sync",
+      "title": "Snippet for the update_child_publisher call in the ChildPublisherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#update_child_publisher.",
+      "file": "child_publisher_service/update_child_publisher.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_child_publisher",
+        "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#update_child_publisher",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateChildPublisherRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ChildPublisher",
+        "client": {
+          "short_name": "ChildPublisherService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateChildPublisher",
+          "full_name": "google.ads.admanager.v1.ChildPublisherService.UpdateChildPublisher",
+          "service": {
+            "short_name": "ChildPublisherService",
+            "full_name": "google.ads.admanager.v1.ChildPublisherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ChildPublisherService_BatchUpdateChildPublishers_sync",
+      "title": "Snippet for the batch_update_child_publishers call in the ChildPublisherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#batch_update_child_publishers.",
+      "file": "child_publisher_service/batch_update_child_publishers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_child_publishers",
+        "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client#batch_update_child_publishers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateChildPublishersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateChildPublishersResponse",
+        "client": {
+          "short_name": "ChildPublisherService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ChildPublisherService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateChildPublishers",
+          "full_name": "google.ads.admanager.v1.ChildPublisherService.BatchUpdateChildPublishers",
+          "service": {
+            "short_name": "ChildPublisherService",
+            "full_name": "google.ads.admanager.v1.ChildPublisherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_CmsMetadataKeyService_GetCmsMetadataKey_sync",
       "title": "Snippet for the get_cms_metadata_key call in the CmsMetadataKeyService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CmsMetadataKeyService::Rest::Client#get_cms_metadata_key.",
@@ -2687,6 +2927,166 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CompanyService_CreateCompany_sync",
+      "title": "Snippet for the create_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CompanyService::Rest::Client#create_company.",
+      "file": "company_service/create_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_company",
+        "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client#create_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Company",
+        "client": {
+          "short_name": "CompanyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCompany",
+          "full_name": "google.ads.admanager.v1.CompanyService.CreateCompany",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.ads.admanager.v1.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CompanyService_BatchCreateCompanies_sync",
+      "title": "Snippet for the batch_create_companies call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CompanyService::Rest::Client#batch_create_companies.",
+      "file": "company_service/batch_create_companies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_companies",
+        "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client#batch_create_companies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateCompaniesResponse",
+        "client": {
+          "short_name": "CompanyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateCompanies",
+          "full_name": "google.ads.admanager.v1.CompanyService.BatchCreateCompanies",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.ads.admanager.v1.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CompanyService_UpdateCompany_sync",
+      "title": "Snippet for the update_company call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CompanyService::Rest::Client#update_company.",
+      "file": "company_service/update_company.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_company",
+        "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client#update_company",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateCompanyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Company",
+        "client": {
+          "short_name": "CompanyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCompany",
+          "full_name": "google.ads.admanager.v1.CompanyService.UpdateCompany",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.ads.admanager.v1.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CompanyService_BatchUpdateCompanies_sync",
+      "title": "Snippet for the batch_update_companies call in the CompanyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CompanyService::Rest::Client#batch_update_companies.",
+      "file": "company_service/batch_update_companies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_companies",
+        "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client#batch_update_companies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateCompaniesResponse",
+        "client": {
+          "short_name": "CompanyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CompanyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateCompanies",
+          "full_name": "google.ads.admanager.v1.CompanyService.BatchUpdateCompanies",
+          "service": {
+            "short_name": "CompanyService",
+            "full_name": "google.ads.admanager.v1.CompanyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -3487,6 +3887,326 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_GetCreativeWrapper_sync",
+      "title": "Snippet for the get_creative_wrapper call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#get_creative_wrapper.",
+      "file": "creative_wrapper_service/get_creative_wrapper.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_creative_wrapper",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#get_creative_wrapper",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetCreativeWrapperRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CreativeWrapper",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetCreativeWrapper",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.GetCreativeWrapper",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_ListCreativeWrappers_sync",
+      "title": "Snippet for the list_creative_wrappers call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#list_creative_wrappers.",
+      "file": "creative_wrapper_service/list_creative_wrappers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_creative_wrappers",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#list_creative_wrappers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListCreativeWrappersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListCreativeWrappersResponse",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListCreativeWrappers",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.ListCreativeWrappers",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_CreateCreativeWrapper_sync",
+      "title": "Snippet for the create_creative_wrapper call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#create_creative_wrapper.",
+      "file": "creative_wrapper_service/create_creative_wrapper.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_creative_wrapper",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#create_creative_wrapper",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateCreativeWrapperRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CreativeWrapper",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCreativeWrapper",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.CreateCreativeWrapper",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_BatchCreateCreativeWrappers_sync",
+      "title": "Snippet for the batch_create_creative_wrappers call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_create_creative_wrappers.",
+      "file": "creative_wrapper_service/batch_create_creative_wrappers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_creative_wrappers",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_create_creative_wrappers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateCreativeWrappersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateCreativeWrappersResponse",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateCreativeWrappers",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.BatchCreateCreativeWrappers",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_UpdateCreativeWrapper_sync",
+      "title": "Snippet for the update_creative_wrapper call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#update_creative_wrapper.",
+      "file": "creative_wrapper_service/update_creative_wrapper.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_creative_wrapper",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#update_creative_wrapper",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateCreativeWrapperRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::CreativeWrapper",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCreativeWrapper",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.UpdateCreativeWrapper",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_BatchUpdateCreativeWrappers_sync",
+      "title": "Snippet for the batch_update_creative_wrappers call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_update_creative_wrappers.",
+      "file": "creative_wrapper_service/batch_update_creative_wrappers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_creative_wrappers",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_update_creative_wrappers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateCreativeWrappersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateCreativeWrappersResponse",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateCreativeWrappers",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.BatchUpdateCreativeWrappers",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_BatchActivateCreativeWrappers_sync",
+      "title": "Snippet for the batch_activate_creative_wrappers call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_activate_creative_wrappers.",
+      "file": "creative_wrapper_service/batch_activate_creative_wrappers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_creative_wrappers",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_activate_creative_wrappers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateCreativeWrappersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateCreativeWrappersResponse",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateCreativeWrappers",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.BatchActivateCreativeWrappers",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_CreativeWrapperService_BatchDeactivateCreativeWrappers_sync",
+      "title": "Snippet for the batch_deactivate_creative_wrappers call in the CreativeWrapperService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_deactivate_creative_wrappers.",
+      "file": "creative_wrapper_service/batch_deactivate_creative_wrappers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_creative_wrappers",
+        "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client#batch_deactivate_creative_wrappers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateCreativeWrappersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateCreativeWrappersResponse",
+        "client": {
+          "short_name": "CreativeWrapperService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::CreativeWrapperService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateCreativeWrappers",
+          "full_name": "google.ads.admanager.v1.CreativeWrapperService.BatchDeactivateCreativeWrappers",
+          "service": {
+            "short_name": "CreativeWrapperService",
+            "full_name": "google.ads.admanager.v1.CreativeWrapperService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -4438,6 +5158,646 @@
           "service": {
             "short_name": "CustomTargetingValueService",
             "full_name": "google.ads.admanager.v1.CustomTargetingValueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_GetDaiAuthenticationKey_sync",
+      "title": "Snippet for the get_dai_authentication_key call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#get_dai_authentication_key.",
+      "file": "dai_authentication_key_service/get_dai_authentication_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dai_authentication_key",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#get_dai_authentication_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetDaiAuthenticationKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DaiAuthenticationKey",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetDaiAuthenticationKey",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.GetDaiAuthenticationKey",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_ListDaiAuthenticationKeys_sync",
+      "title": "Snippet for the list_dai_authentication_keys call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#list_dai_authentication_keys.",
+      "file": "dai_authentication_key_service/list_dai_authentication_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dai_authentication_keys",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#list_dai_authentication_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListDaiAuthenticationKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListDaiAuthenticationKeysResponse",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListDaiAuthenticationKeys",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.ListDaiAuthenticationKeys",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_CreateDaiAuthenticationKey_sync",
+      "title": "Snippet for the create_dai_authentication_key call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#create_dai_authentication_key.",
+      "file": "dai_authentication_key_service/create_dai_authentication_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dai_authentication_key",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#create_dai_authentication_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateDaiAuthenticationKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DaiAuthenticationKey",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateDaiAuthenticationKey",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.CreateDaiAuthenticationKey",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_BatchCreateDaiAuthenticationKeys_sync",
+      "title": "Snippet for the batch_create_dai_authentication_keys call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_create_dai_authentication_keys.",
+      "file": "dai_authentication_key_service/batch_create_dai_authentication_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_dai_authentication_keys",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_create_dai_authentication_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateDaiAuthenticationKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateDaiAuthenticationKeysResponse",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateDaiAuthenticationKeys",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.BatchCreateDaiAuthenticationKeys",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_UpdateDaiAuthenticationKey_sync",
+      "title": "Snippet for the update_dai_authentication_key call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#update_dai_authentication_key.",
+      "file": "dai_authentication_key_service/update_dai_authentication_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dai_authentication_key",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#update_dai_authentication_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateDaiAuthenticationKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DaiAuthenticationKey",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateDaiAuthenticationKey",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.UpdateDaiAuthenticationKey",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_BatchUpdateDaiAuthenticationKeys_sync",
+      "title": "Snippet for the batch_update_dai_authentication_keys call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_update_dai_authentication_keys.",
+      "file": "dai_authentication_key_service/batch_update_dai_authentication_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_dai_authentication_keys",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_update_dai_authentication_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateDaiAuthenticationKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateDaiAuthenticationKeysResponse",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateDaiAuthenticationKeys",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.BatchUpdateDaiAuthenticationKeys",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_BatchActivateDaiAuthenticationKeys_sync",
+      "title": "Snippet for the batch_activate_dai_authentication_keys call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_activate_dai_authentication_keys.",
+      "file": "dai_authentication_key_service/batch_activate_dai_authentication_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_dai_authentication_keys",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_activate_dai_authentication_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateDaiAuthenticationKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateDaiAuthenticationKeysResponse",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateDaiAuthenticationKeys",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.BatchActivateDaiAuthenticationKeys",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiAuthenticationKeyService_BatchDeactivateDaiAuthenticationKeys_sync",
+      "title": "Snippet for the batch_deactivate_dai_authentication_keys call in the DaiAuthenticationKeyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_deactivate_dai_authentication_keys.",
+      "file": "dai_authentication_key_service/batch_deactivate_dai_authentication_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_deactivate_dai_authentication_keys",
+        "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client#batch_deactivate_dai_authentication_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchDeactivateDaiAuthenticationKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchDeactivateDaiAuthenticationKeysResponse",
+        "client": {
+          "short_name": "DaiAuthenticationKeyService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchDeactivateDaiAuthenticationKeys",
+          "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService.BatchDeactivateDaiAuthenticationKeys",
+          "service": {
+            "short_name": "DaiAuthenticationKeyService",
+            "full_name": "google.ads.admanager.v1.DaiAuthenticationKeyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_GetDaiEncodingProfile_sync",
+      "title": "Snippet for the get_dai_encoding_profile call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#get_dai_encoding_profile.",
+      "file": "dai_encoding_profile_service/get_dai_encoding_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dai_encoding_profile",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#get_dai_encoding_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetDaiEncodingProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DaiEncodingProfile",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetDaiEncodingProfile",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.GetDaiEncodingProfile",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_ListDaiEncodingProfiles_sync",
+      "title": "Snippet for the list_dai_encoding_profiles call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#list_dai_encoding_profiles.",
+      "file": "dai_encoding_profile_service/list_dai_encoding_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dai_encoding_profiles",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#list_dai_encoding_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListDaiEncodingProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListDaiEncodingProfilesResponse",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListDaiEncodingProfiles",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.ListDaiEncodingProfiles",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_CreateDaiEncodingProfile_sync",
+      "title": "Snippet for the create_dai_encoding_profile call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#create_dai_encoding_profile.",
+      "file": "dai_encoding_profile_service/create_dai_encoding_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dai_encoding_profile",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#create_dai_encoding_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateDaiEncodingProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DaiEncodingProfile",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateDaiEncodingProfile",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.CreateDaiEncodingProfile",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_BatchCreateDaiEncodingProfiles_sync",
+      "title": "Snippet for the batch_create_dai_encoding_profiles call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_create_dai_encoding_profiles.",
+      "file": "dai_encoding_profile_service/batch_create_dai_encoding_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_dai_encoding_profiles",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_create_dai_encoding_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateDaiEncodingProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateDaiEncodingProfilesResponse",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateDaiEncodingProfiles",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.BatchCreateDaiEncodingProfiles",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_UpdateDaiEncodingProfile_sync",
+      "title": "Snippet for the update_dai_encoding_profile call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#update_dai_encoding_profile.",
+      "file": "dai_encoding_profile_service/update_dai_encoding_profile.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dai_encoding_profile",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#update_dai_encoding_profile",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateDaiEncodingProfileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DaiEncodingProfile",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateDaiEncodingProfile",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.UpdateDaiEncodingProfile",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_BatchUpdateDaiEncodingProfiles_sync",
+      "title": "Snippet for the batch_update_dai_encoding_profiles call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_update_dai_encoding_profiles.",
+      "file": "dai_encoding_profile_service/batch_update_dai_encoding_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_dai_encoding_profiles",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_update_dai_encoding_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateDaiEncodingProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateDaiEncodingProfilesResponse",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateDaiEncodingProfiles",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.BatchUpdateDaiEncodingProfiles",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_BatchActivateDaiEncodingProfiles_sync",
+      "title": "Snippet for the batch_activate_dai_encoding_profiles call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_activate_dai_encoding_profiles.",
+      "file": "dai_encoding_profile_service/batch_activate_dai_encoding_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_activate_dai_encoding_profiles",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_activate_dai_encoding_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchActivateDaiEncodingProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchActivateDaiEncodingProfilesResponse",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchActivateDaiEncodingProfiles",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.BatchActivateDaiEncodingProfiles",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DaiEncodingProfileService_BatchArchiveDaiEncodingProfiles_sync",
+      "title": "Snippet for the batch_archive_dai_encoding_profiles call in the DaiEncodingProfileService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_archive_dai_encoding_profiles.",
+      "file": "dai_encoding_profile_service/batch_archive_dai_encoding_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_archive_dai_encoding_profiles",
+        "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client#batch_archive_dai_encoding_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchArchiveDaiEncodingProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchArchiveDaiEncodingProfilesResponse",
+        "client": {
+          "short_name": "DaiEncodingProfileService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchArchiveDaiEncodingProfiles",
+          "full_name": "google.ads.admanager.v1.DaiEncodingProfileService.BatchArchiveDaiEncodingProfiles",
+          "service": {
+            "short_name": "DaiEncodingProfileService",
+            "full_name": "google.ads.admanager.v1.DaiEncodingProfileService"
           }
         }
       },
@@ -7252,6 +8612,166 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_PartnerService_GetPartner_sync",
+      "title": "Snippet for the get_partner call in the PartnerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PartnerService::Rest::Client#get_partner.",
+      "file": "partner_service/get_partner.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_partner",
+        "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client#get_partner",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetPartnerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Partner",
+        "client": {
+          "short_name": "PartnerService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetPartner",
+          "full_name": "google.ads.admanager.v1.PartnerService.GetPartner",
+          "service": {
+            "short_name": "PartnerService",
+            "full_name": "google.ads.admanager.v1.PartnerService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PartnerService_ListPartners_sync",
+      "title": "Snippet for the list_partners call in the PartnerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PartnerService::Rest::Client#list_partners.",
+      "file": "partner_service/list_partners.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_partners",
+        "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client#list_partners",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListPartnersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListPartnersResponse",
+        "client": {
+          "short_name": "PartnerService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListPartners",
+          "full_name": "google.ads.admanager.v1.PartnerService.ListPartners",
+          "service": {
+            "short_name": "PartnerService",
+            "full_name": "google.ads.admanager.v1.PartnerService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PartnerService_UpdatePartner_sync",
+      "title": "Snippet for the update_partner call in the PartnerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PartnerService::Rest::Client#update_partner.",
+      "file": "partner_service/update_partner.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_partner",
+        "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client#update_partner",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdatePartnerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::Partner",
+        "client": {
+          "short_name": "PartnerService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdatePartner",
+          "full_name": "google.ads.admanager.v1.PartnerService.UpdatePartner",
+          "service": {
+            "short_name": "PartnerService",
+            "full_name": "google.ads.admanager.v1.PartnerService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PartnerService_BatchUpdatePartners_sync",
+      "title": "Snippet for the batch_update_partners call in the PartnerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PartnerService::Rest::Client#batch_update_partners.",
+      "file": "partner_service/batch_update_partners.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_partners",
+        "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client#batch_update_partners",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdatePartnersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdatePartnersResponse",
+        "client": {
+          "short_name": "PartnerService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PartnerService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdatePartners",
+          "full_name": "google.ads.admanager.v1.PartnerService.BatchUpdatePartners",
+          "service": {
+            "short_name": "PartnerService",
+            "full_name": "google.ads.admanager.v1.PartnerService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_PlacementService_GetPlacement_sync",
       "title": "Snippet for the get_placement call in the PlacementService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PlacementService::Rest::Client#get_placement.",
@@ -9958,6 +11478,246 @@
           "service": {
             "short_name": "UserService",
             "full_name": "google.ads.admanager.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ViewabilityProviderService_GetViewabilityProvider_sync",
+      "title": "Snippet for the get_viewability_provider call in the ViewabilityProviderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#get_viewability_provider.",
+      "file": "viewability_provider_service/get_viewability_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_viewability_provider",
+        "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#get_viewability_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetViewabilityProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ViewabilityProvider",
+        "client": {
+          "short_name": "ViewabilityProviderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetViewabilityProvider",
+          "full_name": "google.ads.admanager.v1.ViewabilityProviderService.GetViewabilityProvider",
+          "service": {
+            "short_name": "ViewabilityProviderService",
+            "full_name": "google.ads.admanager.v1.ViewabilityProviderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ViewabilityProviderService_ListViewabilityProviders_sync",
+      "title": "Snippet for the list_viewability_providers call in the ViewabilityProviderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#list_viewability_providers.",
+      "file": "viewability_provider_service/list_viewability_providers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_viewability_providers",
+        "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#list_viewability_providers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListViewabilityProvidersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListViewabilityProvidersResponse",
+        "client": {
+          "short_name": "ViewabilityProviderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListViewabilityProviders",
+          "full_name": "google.ads.admanager.v1.ViewabilityProviderService.ListViewabilityProviders",
+          "service": {
+            "short_name": "ViewabilityProviderService",
+            "full_name": "google.ads.admanager.v1.ViewabilityProviderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ViewabilityProviderService_CreateViewabilityProvider_sync",
+      "title": "Snippet for the create_viewability_provider call in the ViewabilityProviderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#create_viewability_provider.",
+      "file": "viewability_provider_service/create_viewability_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_viewability_provider",
+        "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#create_viewability_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateViewabilityProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ViewabilityProvider",
+        "client": {
+          "short_name": "ViewabilityProviderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateViewabilityProvider",
+          "full_name": "google.ads.admanager.v1.ViewabilityProviderService.CreateViewabilityProvider",
+          "service": {
+            "short_name": "ViewabilityProviderService",
+            "full_name": "google.ads.admanager.v1.ViewabilityProviderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ViewabilityProviderService_BatchCreateViewabilityProviders_sync",
+      "title": "Snippet for the batch_create_viewability_providers call in the ViewabilityProviderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#batch_create_viewability_providers.",
+      "file": "viewability_provider_service/batch_create_viewability_providers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_viewability_providers",
+        "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#batch_create_viewability_providers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchCreateViewabilityProvidersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchCreateViewabilityProvidersResponse",
+        "client": {
+          "short_name": "ViewabilityProviderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateViewabilityProviders",
+          "full_name": "google.ads.admanager.v1.ViewabilityProviderService.BatchCreateViewabilityProviders",
+          "service": {
+            "short_name": "ViewabilityProviderService",
+            "full_name": "google.ads.admanager.v1.ViewabilityProviderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ViewabilityProviderService_UpdateViewabilityProvider_sync",
+      "title": "Snippet for the update_viewability_provider call in the ViewabilityProviderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#update_viewability_provider.",
+      "file": "viewability_provider_service/update_viewability_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_viewability_provider",
+        "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#update_viewability_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateViewabilityProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ViewabilityProvider",
+        "client": {
+          "short_name": "ViewabilityProviderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateViewabilityProvider",
+          "full_name": "google.ads.admanager.v1.ViewabilityProviderService.UpdateViewabilityProvider",
+          "service": {
+            "short_name": "ViewabilityProviderService",
+            "full_name": "google.ads.admanager.v1.ViewabilityProviderService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ViewabilityProviderService_BatchUpdateViewabilityProviders_sync",
+      "title": "Snippet for the batch_update_viewability_providers call in the ViewabilityProviderService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#batch_update_viewability_providers.",
+      "file": "viewability_provider_service/batch_update_viewability_providers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_viewability_providers",
+        "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client#batch_update_viewability_providers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::BatchUpdateViewabilityProvidersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BatchUpdateViewabilityProvidersResponse",
+        "client": {
+          "short_name": "ViewabilityProviderService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Rest::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateViewabilityProviders",
+          "full_name": "google.ads.admanager.v1.ViewabilityProviderService.BatchUpdateViewabilityProviders",
+          "service": {
+            "short_name": "ViewabilityProviderService",
+            "full_name": "google.ads.admanager.v1.ViewabilityProviderService"
           }
         }
       },
