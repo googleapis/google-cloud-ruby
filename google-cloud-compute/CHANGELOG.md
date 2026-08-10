@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.20.0 (2026-08-10)
+
+#### Features
+
+* update Compute v1 to revision 20260722 ([#36185](https://github.com/googleapis/google-cloud-ruby/issues/36185)) 
+#### Documentation
+
+* Update copyright year 
+
 ### 1.19.1 (2026-08-05)
 
 #### Bug Fixes
