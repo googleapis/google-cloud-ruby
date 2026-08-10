@@ -112,6 +112,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-apps-card-v1=>0.0+<2.a
     skip_generate: true
+    version: 0.29.0
   - name: google-apps-events-subscriptions
     apis:
       - path: google/apps/events/subscriptions/v1

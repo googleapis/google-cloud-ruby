@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.29.0 (2026-08-10)
+
+#### Features
+
+* Allow users to search for spaces without requiring admin privileges- [#36200](https://github.com/googleapis/google-cloud-ruby/issues/36200) 
+
 ### 0.28.0 (2026-08-05)
 
 #### Features
