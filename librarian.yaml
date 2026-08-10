@@ -39,9 +39,9 @@ libraries:
     apis:
       - path: google/ads/admanager/v1
   - name: google-ads-data_manager
+    version: 0.4.1
     apis:
       - path: google/ads/datamanager/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -49,7 +49,6 @@ libraries:
     version: 0.8.0
     apis:
       - path: google/ads/datamanager/v1
-    skip_generate: true
   - name: google-ads-marketing_platform-admin
     version: 0.3.1
     apis:
