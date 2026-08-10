@@ -676,6 +676,7 @@ libraries:
             ruby-cloud-env-prefix: DATA_TRANSFER
             ruby-cloud-yard-strict: "false"
     skip_generate: true
+    version: 1.7.1
   - name: google-cloud-bigquery-migration
     apis:
       - path: google/cloud/bigquery/migration/v2
