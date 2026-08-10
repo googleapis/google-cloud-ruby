@@ -3621,6 +3621,7 @@ libraries:
     apis:
       - path: google/storagetransfer/v1
     skip_generate: true
+    version: 1.11.1
   - name: google-cloud-support
     apis:
       - path: google/cloud/support/v2
