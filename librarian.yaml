@@ -46,7 +46,7 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-ads-data_manager-v1
-    version: 0.8.0
+    version: 0.8.1
     apis:
       - path: google/ads/datamanager/v1
   - name: google-ads-marketing_platform-admin
