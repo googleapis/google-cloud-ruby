@@ -2972,6 +2972,7 @@ libraries:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: RETAIL
     skip_generate: true
+    version: 2.10.0
   - name: google-cloud-run-client
     apis:
       - path: google/cloud/run/v2
