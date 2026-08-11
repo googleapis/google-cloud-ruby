@@ -1,6 +1,6 @@
 # Ruby Client for the Advisory Notifications V1 API
 
-An API for accessing Advisory Notifications in Google Cloud.
+An API for accessing Advisory Notifications in Google Cloud
 
 
 https://github.com/googleapis/google-cloud-ruby
