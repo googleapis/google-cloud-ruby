@@ -1,5 +1,11 @@
 # Changelog
 
+### 5.0.2 (2026-08-11)
+
+#### Documentation
+
+* Onboard to Librarian & Update README ([#36214](https://github.com/googleapis/google-cloud-ruby/issues/36214)) 
+
 ### 5.0.1 (2026-08-05)
 
 #### Documentation
