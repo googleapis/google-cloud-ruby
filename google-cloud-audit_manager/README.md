@@ -1,8 +1,7 @@
 # Ruby Client for the Audit Manager API
 
-API Client library for the Audit Manager API
+The Audit Manager API allows customers to manage compliance audits.
 
-google-cloud-audit_manager is the official client library for the Audit Manager API.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-audit_manager-v*`.
