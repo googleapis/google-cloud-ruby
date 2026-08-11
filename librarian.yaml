@@ -104,12 +104,12 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-apps-chat-v1
+    version: 0.29.0
     apis:
       - path: google/chat/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-extra-dependencies: google-apps-card-v1=>0.0+<2.a
-    version: 0.29.0
   - name: google-apps-events-subscriptions
     version: 1.3.1
     apis:
@@ -665,6 +665,7 @@ libraries:
       wrapper_of:
         - v1:0.12
   - name: google-cloud-bigquery-data_transfer-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/bigquery/datatransfer/v1
         ruby:
@@ -672,7 +673,6 @@ libraries:
             ruby-cloud-env-prefix: DATA_TRANSFER
             ruby-cloud-yard-strict: "false"
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-bigquery-migration
     apis:
       - path: google/cloud/bigquery/migration/v2
@@ -999,6 +999,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     skip_generate: true
   - name: google-cloud-compute
+    version: 1.20.0
     apis:
       - path: google/cloud/compute/v1
         ruby:
@@ -1008,7 +1009,6 @@ libraries:
     ruby:
       wrapper_of:
         - v1:2.15
-    version: 1.20.0
   - name: google-cloud-compute-v1
     apis:
       - path: google/cloud/compute/v1
@@ -2023,6 +2023,7 @@ libraries:
             ruby-cloud-extra-dependencies: google-cloud-kms-v1=>0.0+<2.a
     skip_generate: true
   - name: google-cloud-kms-v1
+    version: 1.15.1
     apis:
       - path: google/cloud/kms/v1
         ruby:
@@ -2035,7 +2036,6 @@ libraries:
       - lib/google/cloud/kms/v1/iam_policy/credentials.rb
       - test/google/cloud/kms/v1/iam_policy_test.rb
     skip_generate: true
-    version: 1.15.1
   - name: google-cloud-language
     apis:
       - path: google/cloud/language/v2
@@ -2051,26 +2051,26 @@ libraries:
         - v2:1.0
         - v1:1.0
   - name: google-cloud-language-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/language/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: LANGUAGE
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-language-v1beta2
+    version: 0.18.1
     apis:
       - path: google/cloud/language/v1beta2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: LANGUAGE
     skip_generate: true
-    version: 0.18.1
   - name: google-cloud-language-v2
+    version: 1.5.1
     apis:
       - path: google/cloud/language/v2
     skip_generate: true
-    version: 1.5.1
   - name: google-cloud-license_manager
     apis:
       - path: google/cloud/licensemanager/v1
@@ -2568,6 +2568,7 @@ libraries:
       - path: google/cloud/parallelstore/v1beta
     skip_generate: true
   - name: google-cloud-parameter_manager
+    version: 1.0.1
     apis:
       - path: google/cloud/parametermanager/v1
     keep:
@@ -2653,12 +2654,11 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.0
-    version: 1.0.1
   - name: google-cloud-parameter_manager-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/parametermanager/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-phishing_protection
     apis:
       - path: google/cloud/phishingprotection/v1beta1
@@ -2779,6 +2779,7 @@ libraries:
             ruby-cloud-env-prefix: PROFILER
     skip_generate: true
   - name: google-cloud-pubsub-v1
+    version: 1.16.1
     apis:
       - path: google/pubsub/v1
         ruby:
@@ -2802,7 +2803,6 @@ libraries:
       - test/google/cloud/pubsub/v1/subscription_admin/helpers_test.rb
       - test/google/cloud/pubsub/v1/topic_admin/helpers_test.rb
     skip_generate: true
-    version: 1.16.1
   - name: google-cloud-rapid_migration_assessment
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
@@ -2816,6 +2816,7 @@ libraries:
       - path: google/cloud/rapidmigrationassessment/v1
     skip_generate: true
   - name: google-cloud-recaptcha_enterprise
+    version: 2.2.1
     apis:
       - path: google/cloud/recaptchaenterprise/v1
         ruby:
@@ -2842,16 +2843,16 @@ libraries:
     ruby:
       wrapper_of:
         - v1:1.6
-    version: 2.2.1
   - name: google-cloud-recaptcha_enterprise-v1
+    version: 1.12.1
     apis:
       - path: google/cloud/recaptchaenterprise/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
     skip_generate: true
-    version: 1.12.1
   - name: google-cloud-recaptcha_enterprise-v1beta1
+    version: 0.21.1
     apis:
       - path: google/cloud/recaptchaenterprise/v1beta1
         ruby:
@@ -2859,7 +2860,6 @@ libraries:
             ruby-cloud-env-prefix: RECAPTCHA_ENTERPRISE
             ruby-cloud-service-override: RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService
     skip_generate: true
-    version: 0.21.1
   - name: google-cloud-recommendation_engine
     apis:
       - path: google/cloud/recommendationengine/v1beta1
@@ -2896,6 +2896,7 @@ libraries:
             ruby-cloud-env-prefix: RECOMMENDER
     skip_generate: true
   - name: google-cloud-redis
+    version: 2.2.1
     apis:
       - path: google/cloud/redis/v1
         ruby:
@@ -2908,7 +2909,6 @@ libraries:
     ruby:
       wrapper_of:
         - v1:2.0
-    version: 2.2.1
   - name: google-cloud-redis-cluster
     apis:
       - path: google/cloud/redis/cluster/v1
@@ -2925,21 +2925,21 @@ libraries:
       - path: google/cloud/redis/cluster/v1beta1
     skip_generate: true
   - name: google-cloud-redis-v1
+    version: 2.6.1
     apis:
       - path: google/cloud/redis/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: REDIS
     skip_generate: true
-    version: 2.6.1
   - name: google-cloud-redis-v1beta1
+    version: 0.22.1
     apis:
       - path: google/cloud/redis/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: REDIS
     skip_generate: true
-    version: 0.22.1
   - name: google-cloud-resource_manager
     apis:
       - path: google/cloud/resourcemanager/v3
@@ -2970,13 +2970,13 @@ libraries:
       wrapper_of:
         - v2:2.0
   - name: google-cloud-retail-v2
+    version: 2.10.0
     apis:
       - path: google/cloud/retail/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: RETAIL
     skip_generate: true
-    version: 2.10.0
   - name: google-cloud-run-client
     apis:
       - path: google/cloud/run/v2
@@ -3179,29 +3179,29 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-secret_manager-v1
+    version: 1.9.1
     apis:
       - path: google/cloud/secretmanager/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECRET_MANAGER
     skip_generate: true
-    version: 1.9.1
   - name: google-cloud-secret_manager-v1beta1
+    version: 0.22.1
     apis:
       - path: google/cloud/secrets/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECRET_MANAGER
     skip_generate: true
-    version: 0.22.1
   - name: google-cloud-secret_manager-v1beta2
+    version: 0.8.1
     apis:
       - path: google/cloud/secretmanager/v1beta2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECRET_MANAGER
     skip_generate: true
-    version: 0.8.1
   - name: google-cloud-secure_source_manager
     apis:
       - path: google/cloud/securesourcemanager/v1
@@ -3287,29 +3287,29 @@ libraries:
         - v2:1.0
         - v1:1.0
   - name: google-cloud-security_center-v1
+    version: 1.11.1
     apis:
       - path: google/cloud/securitycenter/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECURITY_CENTER
     skip_generate: true
-    version: 1.11.1
   - name: google-cloud-security_center-v1p1beta1
+    version: 0.22.1
     apis:
       - path: google/cloud/securitycenter/v1p1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECURITY_CENTER
     skip_generate: true
-    version: 0.22.1
   - name: google-cloud-security_center-v2
+    version: 1.9.1
     apis:
       - path: google/cloud/securitycenter/v2
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SECURITY_CENTER
     skip_generate: true
-    version: 1.9.1
   - name: google-cloud-security_center_management
     apis:
       - path: google/cloud/securitycentermanagement/v1
@@ -3360,21 +3360,21 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-service_directory-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/servicedirectory/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SERVICE_DIRECTORY
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-service_directory-v1beta1
+    version: 0.22.1
     apis:
       - path: google/cloud/servicedirectory/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: SERVICE_DIRECTORY
     skip_generate: true
-    version: 0.22.1
   - name: google-cloud-service_health
     apis:
       - path: google/cloud/servicehealth/v1
@@ -3488,6 +3488,7 @@ libraries:
       - acceptance/google/cloud/speech/v1/speech_smoke_test.rb
     skip_generate: true
   - name: google-cloud-speech-v1p1beta1
+    version: 0.30.1
     apis:
       - path: google/cloud/speech/v1p1beta1
         ruby:
@@ -3497,7 +3498,6 @@ libraries:
       - acceptance/data
       - acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb
     skip_generate: true
-    version: 0.30.1
   - name: google-cloud-speech-v2
     apis:
       - path: google/cloud/speech/v2
@@ -3548,11 +3548,12 @@ libraries:
       wrapper_of:
         - v2:0.0
   - name: google-cloud-storage-control-v2
+    version: 1.13.1
     apis:
       - path: google/storage/control/v2
     skip_generate: true
-    version: 1.13.1
   - name: google-cloud-storage_batch_operations
+    version: 1.0.1
     apis:
       - path: google/cloud/storagebatchoperations/v1
     keep:
@@ -3570,12 +3571,11 @@ libraries:
     ruby:
       wrapper_of:
         - v1:0.0
-    version: 1.0.1
   - name: google-cloud-storage_batch_operations-v1
+    version: 1.0.1
     apis:
       - path: google/cloud/storagebatchoperations/v1
     skip_generate: true
-    version: 1.0.1
   - name: google-cloud-storage_insights
     apis:
       - path: google/cloud/storageinsights/v1
@@ -3615,10 +3615,10 @@ libraries:
       wrapper_of:
         - v1:0.9
   - name: google-cloud-storage_transfer-v1
+    version: 1.11.1
     apis:
       - path: google/storagetransfer/v1
     skip_generate: true
-    version: 1.11.1
   - name: google-cloud-support
     apis:
       - path: google/cloud/support/v2
@@ -3649,13 +3649,13 @@ libraries:
       wrapper_of:
         - v4:1.3
   - name: google-cloud-talent-v4
+    version: 1.9.1
     apis:
       - path: google/cloud/talent/v4
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TALENT
     skip_generate: true
-    version: 1.9.1
   - name: google-cloud-talent-v4beta1
     apis:
       - path: google/cloud/talent/v4beta1
@@ -3735,13 +3735,13 @@ libraries:
             ruby-cloud-env-prefix: TEXTTOSPEECH
     skip_generate: true
   - name: google-cloud-text_to_speech-v1beta1
+    version: 0.31.1
     apis:
       - path: google/cloud/texttospeech/v1beta1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: TEXTTOSPEECH
     skip_generate: true
-    version: 0.31.1
   - name: google-cloud-tpu
     apis:
       - path: google/cloud/tpu/v1
@@ -3813,6 +3813,7 @@ libraries:
       - path: google/cloud/vectorsearch/v1
     skip_generate: true
   - name: google-cloud-video-live_stream
+    version: 2.2.1
     apis:
       - path: google/cloud/video/livestream/v1
     keep:
@@ -3873,12 +3874,11 @@ libraries:
     ruby:
       wrapper_of:
         - v1:2.0
-    version: 2.2.1
   - name: google-cloud-video-live_stream-v1
+    version: 2.7.1
     apis:
       - path: google/cloud/video/livestream/v1
     skip_generate: true
-    version: 2.7.1
   - name: google-cloud-video-stitcher
     apis:
       - path: google/cloud/video/stitcher/v1
@@ -3953,10 +3953,10 @@ libraries:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-video-stitcher-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/video/stitcher/v1
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-video-transcoder
     apis:
       - path: google/cloud/video/transcoder/v1
@@ -4064,6 +4064,7 @@ libraries:
       wrapper_of:
         - v1:1.2
   - name: google-cloud-vision-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/vision/v1
         ruby:
@@ -4080,8 +4081,8 @@ libraries:
       - owlbot-templates/image_annotator_helpers_test.erb
       - test/google/cloud/vision/v1/image_annotator_helpers_test.rb
     skip_generate: true
-    version: 1.7.1
   - name: google-cloud-vision-v1p3beta1
+    version: 0.20.1
     apis:
       - path: google/cloud/vision/v1p3beta1
         ruby:
@@ -4098,7 +4099,6 @@ libraries:
       - owlbot-templates/image_annotator_helpers_test.erb
       - test/google/cloud/vision/v1p3beta1/image_annotator_helpers_test.rb
     skip_generate: true
-    version: 0.20.1
   - name: google-cloud-vision-v1p4beta1
     apis:
       - path: google/cloud/vision/v1p4beta1
