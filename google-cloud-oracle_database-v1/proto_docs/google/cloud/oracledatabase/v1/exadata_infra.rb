@@ -159,12 +159,12 @@ module Google
         # @!attribute [r] compute_model
         #   @return [::Google::Cloud::OracleDatabase::V1::ComputeModel]
         #     Output only. The compute model of the Exadata Infrastructure.
-        # @!attribute [r] database_server_type
+        # @!attribute [rw] database_server_type
         #   @return [::String]
-        #     Output only. The database server type of the Exadata Infrastructure.
-        # @!attribute [r] storage_server_type
+        #     Optional. The database server type of the Exadata Infrastructure.
+        # @!attribute [rw] storage_server_type
         #   @return [::String]
-        #     Output only. The storage server type of the Exadata Infrastructure.
+        #     Optional. The storage server type of the Exadata Infrastructure.
         # @!attribute [r] exascale_config
         #   @return [::Google::Cloud::OracleDatabase::V1::ExascaleConfig]
         #     Output only. The Exascale configuration for the Exadata Infrastructure.
@@ -207,6 +207,12 @@ module Google
         # @!attribute [r] available_storage_size_gb
         #   @return [::Integer]
         #     Output only. Available storage size for Exascale in GBs.
+        # @!attribute [r] total_vm_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Storage size needed for VM storage on Exascale in GBs.
+        # @!attribute [r] available_vm_storage_size_gb
+        #   @return [::Integer]
+        #     Output only. Available storage size for VM storage on Exascale in GBs.
         class ExascaleConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -295,6 +301,9 @@ module Google
         # @!attribute [rw] total_storage_size_gb
         #   @return [::Integer]
         #     Required. The total storage to be allocated to Exascale in GBs.
+        # @!attribute [rw] total_vm_storage_size_gb
+        #   @return [::Integer]
+        #     Optional. Storage size needed for VM storage on Exascale in GBs.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional ID to identify the request.

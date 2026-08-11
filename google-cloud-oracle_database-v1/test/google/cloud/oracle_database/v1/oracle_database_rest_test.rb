@@ -313,6 +313,7 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
     total_storage_size_gb = 42
+    total_vm_storage_size_gb = 42
     request_id = "hello world"
 
     configure_exascale_cloud_exadata_infrastructure_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -329,27 +330,27 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
         end
 
         # Use hash object
-        c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }) do |_result, response|
+        c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.configure_exascale_cloud_exadata_infrastructure name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id do |_result, response|
+        c.configure_exascale_cloud_exadata_infrastructure name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.configure_exascale_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id) do |_result, response|
+        c.configure_exascale_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }, call_options) do |_result, response|
+        c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.configure_exascale_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id), call_options) do |_result, response|
+        c.configure_exascale_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1752,6 +1753,115 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, failover_autonomous_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_refresh_autonomous_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    refresh_cutoff_time = {}
+
+    refresh_autonomous_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_refresh_autonomous_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, refresh_autonomous_database_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.refresh_autonomous_database({ name: name, refresh_cutoff_time: refresh_cutoff_time }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.refresh_autonomous_database name: name, refresh_cutoff_time: refresh_cutoff_time do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.refresh_autonomous_database ::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest.new(name: name, refresh_cutoff_time: refresh_cutoff_time) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.refresh_autonomous_database({ name: name, refresh_cutoff_time: refresh_cutoff_time }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.refresh_autonomous_database(::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest.new(name: name, refresh_cutoff_time: refresh_cutoff_time), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, refresh_autonomous_database_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_autonomous_database_refreshable_clones
+    # Create test objects.
+    client_result = ::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_autonomous_database_refreshable_clones_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::ServiceStub.stub :transcode_get_autonomous_database_refreshable_clones_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_autonomous_database_refreshable_clones_client_stub do
+        # Create client
+        c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_autonomous_database_refreshable_clones({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_autonomous_database_refreshable_clones name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_autonomous_database_refreshable_clones ::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_autonomous_database_refreshable_clones({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_autonomous_database_refreshable_clones(::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_autonomous_database_refreshable_clones_client_stub.call_count
       end
     end
   end

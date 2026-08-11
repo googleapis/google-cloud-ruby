@@ -206,6 +206,14 @@ module Google
         # @!attribute [r] storage_management_type
         #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties::StorageManagementType]
         #     Output only. The storage management type of the VM Cluster.
+        # @!attribute [rw] vm_file_system_storage_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties::VmFileSystemStorageType]
+        #     Optional. Specifies whether VM file system storage / VM images are stored
+        #     on local DB server storage or Exascale storage.
+        # @!attribute [rw] vm_backup_storage_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::CloudVmClusterProperties::VmBackupStorageType]
+        #     Optional. Specifies whether VM backups are stored on local DB server
+        #     storage or Exascale storage.
         class CloudVmClusterProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -271,6 +279,30 @@ module Google
 
             # Exascale storage management.
             EXASCALE = 2
+          end
+
+          # Storage types for VM File System.
+          module VmFileSystemStorageType
+            # Unspecified storage type.
+            VM_FILE_SYSTEM_STORAGE_TYPE_UNSPECIFIED = 0
+
+            # Local DB server storage.
+            VM_FILE_SYSTEM_STORAGE_TYPE_LOCAL = 1
+
+            # Exascale storage.
+            VM_FILE_SYSTEM_STORAGE_TYPE_EXASCALE = 2
+          end
+
+          # Storage types for VM Backup.
+          module VmBackupStorageType
+            # Unspecified storage type.
+            VM_BACKUP_STORAGE_TYPE_UNSPECIFIED = 0
+
+            # Local DB server storage.
+            VM_BACKUP_STORAGE_TYPE_LOCAL = 1
+
+            # Exascale storage.
+            VM_BACKUP_STORAGE_TYPE_EXASCALE = 2
           end
         end
 

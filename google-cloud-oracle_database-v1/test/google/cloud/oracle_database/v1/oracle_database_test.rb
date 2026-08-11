@@ -338,6 +338,7 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
     total_storage_size_gb = 42
+    total_vm_storage_size_gb = 42
     request_id = "hello world"
 
     configure_exascale_cloud_exadata_infrastructure_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -345,6 +346,7 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
       assert_kind_of ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest, request
       assert_equal "hello world", request["name"]
       assert_equal 42, request["total_storage_size_gb"]
+      assert_equal 42, request["total_vm_storage_size_gb"]
       assert_equal "hello world", request["request_id"]
       refute_nil options
     end
@@ -356,35 +358,35 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
       end
 
       # Use hash object
-      c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }) do |response, operation|
+      c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.configure_exascale_cloud_exadata_infrastructure name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id do |response, operation|
+      c.configure_exascale_cloud_exadata_infrastructure name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.configure_exascale_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id) do |response, operation|
+      c.configure_exascale_cloud_exadata_infrastructure ::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id }, grpc_options) do |response, operation|
+      c.configure_exascale_cloud_exadata_infrastructure({ name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.configure_exascale_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, request_id: request_id), grpc_options) do |response, operation|
+      c.configure_exascale_cloud_exadata_infrastructure(::Google::Cloud::OracleDatabase::V1::ConfigureExascaleCloudExadataInfrastructureRequest.new(name: name, total_storage_size_gb: total_storage_size_gb, total_vm_storage_size_gb: total_vm_storage_size_gb, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -2046,6 +2048,129 @@ class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, failover_autonomous_database_client_stub.call_rpc_count
+    end
+  end
+
+  def test_refresh_autonomous_database
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    refresh_cutoff_time = {}
+
+    refresh_autonomous_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :refresh_autonomous_database, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["refresh_cutoff_time"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, refresh_autonomous_database_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.refresh_autonomous_database({ name: name, refresh_cutoff_time: refresh_cutoff_time }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.refresh_autonomous_database name: name, refresh_cutoff_time: refresh_cutoff_time do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.refresh_autonomous_database ::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest.new(name: name, refresh_cutoff_time: refresh_cutoff_time) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.refresh_autonomous_database({ name: name, refresh_cutoff_time: refresh_cutoff_time }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.refresh_autonomous_database(::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest.new(name: name, refresh_cutoff_time: refresh_cutoff_time), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, refresh_autonomous_database_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_autonomous_database_refreshable_clones
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_autonomous_database_refreshable_clones_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_autonomous_database_refreshable_clones, name
+      assert_kind_of ::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_autonomous_database_refreshable_clones_client_stub do
+      # Create client
+      c = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_autonomous_database_refreshable_clones({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_autonomous_database_refreshable_clones name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_autonomous_database_refreshable_clones ::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_autonomous_database_refreshable_clones({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_autonomous_database_refreshable_clones(::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_autonomous_database_refreshable_clones_client_stub.call_rpc_count
     end
   end
 

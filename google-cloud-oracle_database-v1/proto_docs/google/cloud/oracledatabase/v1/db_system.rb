@@ -123,23 +123,28 @@ module Google
         #     Output only. OCID of the DbSystem.
         # @!attribute [rw] memory_size_gb
         #   @return [::Integer]
-        #     Optional. The memory size in GB.
+        #     Optional. The memory size in GB. This value can not be set and is
+        #     automatically calculated based on the number of ECPUs allocated to the
+        #     DbSystem.
         # @!attribute [rw] compute_model
         #   @return [::Google::Cloud::OracleDatabase::V1::DbSystemProperties::ComputeModel]
         #     Optional. The compute model of the DbSystem.
         # @!attribute [rw] data_storage_size_gb
         #   @return [::Integer]
         #     Optional. The data storage size in GB that is currently available to
-        #     DbSystems.
+        #     DbSystems. The value is same as initial_data_storage_size_gb. This can be
+        #     modified from OCI console.
         # @!attribute [rw] reco_storage_size_gb
         #   @return [::Integer]
-        #     Optional. The reco/redo storage size in GB.
+        #     Optional. The reco/redo storage size in GB. The value for recovery storage
+        #     size is based on the available data storage size.
         # @!attribute [rw] domain
         #   @return [::String]
         #     Optional. The host domain name of the DbSystem.
         # @!attribute [rw] node_count
         #   @return [::Integer]
-        #     Optional. The number of nodes in the DbSystem.
+        #     Optional. The number of nodes to launch for a virtual machine DbSystem. By
+        #     default this will be set to 1.
         # @!attribute [rw] db_system_options
         #   @return [::Google::Cloud::OracleDatabase::V1::DbSystemOptions]
         #     Optional. The options for the DbSystem.
@@ -218,6 +223,7 @@ module Google
             # The compute model is virtual.
             ECPU = 1
 
+            # Deprecated: This option is not supported. Please use ECPU instead.
             # The compute model is physical.
             OCPU = 2
           end

@@ -847,7 +847,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload configure_exascale_cloud_exadata_infrastructure(name: nil, total_storage_size_gb: nil, request_id: nil)
+            # @overload configure_exascale_cloud_exadata_infrastructure(name: nil, total_storage_size_gb: nil, total_vm_storage_size_gb: nil, request_id: nil)
             #   Pass arguments to `configure_exascale_cloud_exadata_infrastructure` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -858,6 +858,8 @@ module Google
             #     projects/\\{project}/locations/\\{location}/cloudExadataInfrastructures/\\{cloud_exadata_infrastructure}.
             #   @param total_storage_size_gb [::Integer]
             #     Required. The total storage to be allocated to Exascale in GBs.
+            #   @param total_vm_storage_size_gb [::Integer]
+            #     Optional. Storage size needed for VM storage on Exascale in GBs.
             #   @param request_id [::String]
             #     Optional. An optional ID to identify the request.
             #
@@ -1665,8 +1667,8 @@ module Google
             #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
             #     Optional. An expression for filtering the results of the request. Only the
-            #     shape, gcp_oracle_zone and gi_version fields are supported in this format:
-            #     `shape="{shape}"`.
+            #     `shape` and `gcp_oracle_zone_id` fields are supported in the following
+            #     format: `shape="{shape}" AND gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::GiVersion>]
@@ -1769,9 +1771,9 @@ module Google
             #     fields except the filter should remain the same as in the request that
             #     provided this page token.
             #   @param filter [::String]
-            #     Optional. An expression for filtering the results of the request.
-            #     Only shapeFamily and gcp_oracle_zone_id are supported in this format:
-            #     `shape_family="{shapeFamily}" AND
+            #     Optional. An expression for filtering the results of the request. Only the
+            #     `shape_family` and `gcp_oracle_zone_id` fields are supported in the
+            #     following format: `shape_family="{shape_family}" AND
             #     gcp_oracle_zone_id="\\{gcp_oracle_zone_id}"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1872,9 +1874,11 @@ module Google
             #   @param page_token [::String]
             #     Optional. A token identifying a page of results the server should return.
             #   @param filter [::String]
-            #     Optional. An expression for filtering the results of the request. Only the
-            #     gcp_oracle_zone_id field is supported in this format:
-            #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}"`.
+            #     Optional. An expression for filtering the results of the request. The
+            #     `gcp_oracle_zone_id`, `shape_family`, and `database_edition` fields
+            #     are supported in the following format:
+            #     `gcp_oracle_zone_id="{gcp_oracle_zone_id}" AND
+            #     shape_family="\\{shape_family}" AND database_edition="\\{database_edition}"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OracleDatabase::V1::DbSystemShape>]
@@ -3436,6 +3440,193 @@ module Google
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Refreshes the refreshable clone of an Autonomous Database.
+            #
+            # @overload refresh_autonomous_database(request, options = nil)
+            #   Pass arguments to `refresh_autonomous_database` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload refresh_autonomous_database(name: nil, refresh_cutoff_time: nil)
+            #   Pass arguments to `refresh_autonomous_database` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the AutonomousDatabase resource.
+            #     Format:
+            #     projects/\\{project}/location/\\{location}/autonomousDatabases/\\{autonomous_database}
+            #   @param refresh_cutoff_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Required. The timestamp to which the Autonomous Database refreshable clone
+            #     will be refreshed. Changes made in the primary database after this
+            #     timestamp are not part of the data refresh.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest.new
+            #
+            #   # Call the refresh_autonomous_database method.
+            #   result = client.refresh_autonomous_database request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def refresh_autonomous_database request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.refresh_autonomous_database.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.refresh_autonomous_database.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.refresh_autonomous_database.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :refresh_autonomous_database, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the refreshable clones for a given Autonomous Database.
+            #
+            # @overload get_autonomous_database_refreshable_clones(request, options = nil)
+            #   Pass arguments to `get_autonomous_database_refreshable_clones` via a request object, either of type
+            #   {::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_autonomous_database_refreshable_clones(name: nil)
+            #   Pass arguments to `get_autonomous_database_refreshable_clones` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The Autonomous Database resource whose refreshable clones are to
+            #     be listed. Format:
+            #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/oracle_database/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest.new
+            #
+            #   # Call the get_autonomous_database_refreshable_clones method.
+            #   result = client.get_autonomous_database_refreshable_clones request
+            #
+            #   # The returned object is of type Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones.
+            #   p result
+            #
+            def get_autonomous_database_refreshable_clones request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_autonomous_database_refreshable_clones.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_autonomous_database_refreshable_clones.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_autonomous_database_refreshable_clones.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @oracle_database_stub.call_rpc :get_autonomous_database_refreshable_clones, request, options: options do |response, operation|
+                yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8655,6 +8846,16 @@ module Google
                 #
                 attr_reader :failover_autonomous_database
                 ##
+                # RPC-specific configuration for `refresh_autonomous_database`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :refresh_autonomous_database
+                ##
+                # RPC-specific configuration for `get_autonomous_database_refreshable_clones`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_autonomous_database_refreshable_clones
+                ##
                 # RPC-specific configuration for `list_odb_networks`
                 # @return [::Gapic::Config::Method]
                 #
@@ -8957,6 +9158,10 @@ module Google
                   @switchover_autonomous_database = ::Gapic::Config::Method.new switchover_autonomous_database_config
                   failover_autonomous_database_config = parent_rpcs.failover_autonomous_database if parent_rpcs.respond_to? :failover_autonomous_database
                   @failover_autonomous_database = ::Gapic::Config::Method.new failover_autonomous_database_config
+                  refresh_autonomous_database_config = parent_rpcs.refresh_autonomous_database if parent_rpcs.respond_to? :refresh_autonomous_database
+                  @refresh_autonomous_database = ::Gapic::Config::Method.new refresh_autonomous_database_config
+                  get_autonomous_database_refreshable_clones_config = parent_rpcs.get_autonomous_database_refreshable_clones if parent_rpcs.respond_to? :get_autonomous_database_refreshable_clones
+                  @get_autonomous_database_refreshable_clones = ::Gapic::Config::Method.new get_autonomous_database_refreshable_clones_config
                   list_odb_networks_config = parent_rpcs.list_odb_networks if parent_rpcs.respond_to? :list_odb_networks
                   @list_odb_networks = ::Gapic::Config::Method.new list_odb_networks_config
                   get_odb_network_config = parent_rpcs.get_odb_network if parent_rpcs.respond_to? :get_odb_network

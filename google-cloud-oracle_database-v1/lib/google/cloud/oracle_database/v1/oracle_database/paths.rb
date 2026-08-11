@@ -44,6 +44,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AutonomousDatabaseBackup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/autonomousDatabaseBackups/{autonomous_database_backup}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param autonomous_database_backup [String]
+            #
+            # @return [::String]
+            def autonomous_database_backup_path project:, location:, autonomous_database_backup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/autonomousDatabaseBackups/#{autonomous_database_backup}"
+            end
+
+            ##
             # Create a fully-qualified CloudExadataInfrastructure resource string.
             #
             # The resource will be in the following format:

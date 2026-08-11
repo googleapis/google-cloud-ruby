@@ -98,6 +98,10 @@ module Google
             # Initiates a failover to target autonomous database from the associated
             # primary database.
             rpc :FailoverAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::FailoverAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Refreshes the refreshable clone of an Autonomous Database.
+            rpc :RefreshAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Gets the refreshable clones for a given Autonomous Database.
+            rpc :GetAutonomousDatabaseRefreshableClones, ::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest, ::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones
             # Lists the ODB Networks in a given project and location.
             rpc :ListOdbNetworks, ::Google::Cloud::OracleDatabase::V1::ListOdbNetworksRequest, ::Google::Cloud::OracleDatabase::V1::ListOdbNetworksResponse
             # Gets details of a single ODB Network.
