@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/marketingplatform/admin/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-ads-marketing_platform-admin/$1

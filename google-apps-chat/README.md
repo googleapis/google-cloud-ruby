@@ -2,7 +2,6 @@
 
 The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.
 
-The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-apps-chat-v*`.
