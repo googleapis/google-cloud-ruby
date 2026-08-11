@@ -193,7 +193,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     skip_generate: true
   - name: google-cloud-ai_platform
-    version: 2.4.1
+    version: 2.4.2
     apis:
       - path: google/cloud/aiplatform/v1
         ruby:
