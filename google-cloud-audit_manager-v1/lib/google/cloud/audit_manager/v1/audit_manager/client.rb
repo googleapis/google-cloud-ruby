@@ -245,11 +245,11 @@ module Google
             # Service calls
 
             ##
-            # Enrolls the customer resource(folder/project/organization) to the audit
-            # manager service by creating the audit managers Service Agent in customers
-            # workload and granting required permissions to the Service Agent. Please
-            # note that if enrollment request is made on the already enrolled workload
-            # then enrollment is executed overriding the existing set of destinations.
+            # Adds your project, folder, or organization to Audit
+            # Manager. This method creates the Audit Manager service agent in your
+            # workload and grants required permissions to the service agent.
+            # If you make this request on a workload that's already enrolled,
+            # then this method overrides the existing set of destinations.
             #
             # @overload enroll_resource(request, options = nil)
             #   Pass arguments to `enroll_resource` via a request object, either of type
@@ -267,19 +267,21 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. The resource to be enrolled to the audit manager. Scope format
-            #     should be resource_type/resource_identifier Eg:
-            #     projects/\\{project}/locations/\\{location},
-            #     folders/\\{folder}/locations/\\{location}
-            #     organizations/\\{organization}/locations/\\{location}
+            #     Required. Organization, folder, or project to enroll in Audit Manager, in
+            #     one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param destinations [::Array<::Google::Cloud::AuditManager::V1::EnrollResourceRequest::EligibleDestination, ::Hash>]
-            #     Required. List of destination among which customer can choose to upload
-            #     their reports during the audit process. While enrolling at a
-            #     organization/folder level, customer can choose Cloud storage bucket in any
-            #     project. If the audit is triggered at project level using the service agent
-            #     at organization/folder level, all the destination options associated with
-            #     respective organization/folder level service agent will be available to
-            #     auditing projects.
+            #     Required. Cloud Storage buckets that you can upload your audit reports to
+            #     during the audit process.
+            #
+            #     When you enroll an organization or folder, you can choose a Cloud Storage
+            #     bucket from any project in the organization or folder. If you run an audit
+            #     at the project level using the service agent at the organization or folder
+            #     level, all the buckets that are associated with the service agent are
+            #     available.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::Enrollment]
@@ -346,9 +348,14 @@ module Google
             end
 
             ##
-            # Generates a demo report highlighting different responsibilities
-            # (Google/Customer/ shared) required to be fulfilled for the customer's
-            # workload to be compliant with the given standard.
+            # Generates an audit scope report for the given standard.
+            #
+            # The report includes the following:
+            #
+            # * The technical attributes and constraints that Audit Manager uses to
+            #   verify your compliance with a framework.
+            # * A list of Google Cloud services and resources that are within the
+            #   scope of the framework.
             #
             # @overload generate_audit_scope_report(request, options = nil)
             #   Pass arguments to `generate_audit_scope_report` via a request object, either of type
@@ -366,18 +373,22 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. Scope for which the AuditScopeReport is required. Must be of
-            #     format resource_type/resource_identifier Eg:
-            #     projects/\\{project}/locations/\\{location},
-            #     folders/\\{folder}/locations/\\{location}
+            #     Required. Project or folder that the audit scope report is generated for,
+            #     in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param compliance_standard [::String]
-            #     Required. Compliance Standard against which the Scope Report must be
-            #     generated. Eg: FEDRAMP_MODERATE
+            #     Optional. Deprecated. The standard (industry or regulatory requirements)
+            #     that the audit scope report is run against.
+            #
+            #     Use the `compliance_framework` field instead.
             #   @param report_format [::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest::AuditScopeReportFormat]
-            #     Required. The format in which the Scope report bytes should be returned.
+            #     Required. Format for the audit scope report.
             #   @param compliance_framework [::String]
-            #     Required. Compliance framework against which the Scope Report must be
-            #     generated.
+            #     Required. Framework (set of controls) that the audit scope report is
+            #     generated against. For example, `NIST_800_53`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditScopeReport]
@@ -444,8 +455,9 @@ module Google
             end
 
             ##
-            # Register the Audit Report generation requests and returns the OperationId
-            # using which the customer can track the report generation progress.
+            # Registers audit report generation requests. This method returns the
+            # operation identifier that you can use to track the report generation
+            # progress.
             #
             # @overload generate_audit_report(request, options = nil)
             #   Pass arguments to `generate_audit_report` via a request object, either of type
@@ -457,27 +469,34 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_audit_report(gcs_uri: nil, scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil)
+            # @overload generate_audit_report(gcs_uri: nil, scope: nil, compliance_standard: nil, report_format: nil, compliance_framework: nil, validate_only: nil)
             #   Pass arguments to `generate_audit_report` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param gcs_uri [::String]
-            #     Destination Cloud storage bucket where report and evidence must be
-            #     uploaded. The Cloud storage bucket provided here must be selected among
-            #     the buckets entered during the enrollment process.
+            #     URL for the Cloud Storage bucket where the report and evidence is
+            #     uploaded. You must select a bucket that was provided during the
+            #     enrollment process.
             #   @param scope [::String]
-            #     Required. Scope for which the AuditScopeReport is required. Must be of
-            #     format resource_type/resource_identifier Eg:
-            #     projects/\\{project}/locations/\\{location},
-            #     folders/\\{folder}/locations/\\{location}
+            #     Required. Organization, folder, or project that the audit applies to, in
+            #     one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param compliance_standard [::String]
-            #     Required. Compliance Standard against which the Scope Report must be
-            #     generated. Eg: FEDRAMP_MODERATE
+            #     Optional. Deprecated. Compliance standard for the audit report.
+            #
+            #     Use the `compliance_framework` field instead.
             #   @param report_format [::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest::AuditReportFormat]
-            #     Required. The format in which the audit report should be created.
+            #     Required. Format for the audit report.
             #   @param compliance_framework [::String]
-            #     Required. Compliance framework against which the Report must be generated.
+            #     Required. The framework that's used for the audit report. For example,
+            #     `NIST_800_53`.
+            #   @param validate_only [::Boolean]
+            #     Optional. If `true`, only validate the request and don't generate the audit
+            #     report.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -553,7 +572,8 @@ module Google
             end
 
             ##
-            # Lists audit reports in the selected parent scope
+            # Lists the audit reports for the organization, folder, or project that you
+            # specify as the parent scope.
             #
             # @overload list_audit_reports(request, options = nil)
             #   Pass arguments to `list_audit_reports` via a request object, either of type
@@ -571,12 +591,20 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent scope for which to list the reports.
+            #     Required. Parent organization, folder, or project to list reports for,
+            #     in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}`
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of resources to return.
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
             #   @param page_token [::String]
-            #     Optional. The next_page_token value returned from a previous List request,
-            #     if any.
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::AuditReport>]
@@ -649,7 +677,7 @@ module Google
             end
 
             ##
-            # Get the overall audit report
+            # Gets the full metadata and findings for an audit report.
             #
             # @overload get_audit_report(request, options = nil)
             #   Pass arguments to `get_audit_report` via a request object, either of type
@@ -667,9 +695,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Format
-            #     projects/\\{project}/locations/\\{location}/auditReports/\\{audit_report},
-            #     folders/\\{folder}/locations/\\{location}/auditReports/\\{audit_report}
+            #     Required. Name of the audit report, in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}/auditReports/{audit_report}`
+            #     * `folders/{folder}/locations/{location}/auditReports/{audit_report}`
+            #     * `organizations/{organization}/locations/{location}/auditReports/{audit_report}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::AuditReport]
@@ -736,7 +766,7 @@ module Google
             end
 
             ##
-            # Get a resource along with its enrollment status.
+            # Gets a resource and its enrollment status.
             #
             # @overload get_resource_enrollment_status(request, options = nil)
             #   Pass arguments to `get_resource_enrollment_status` via a request object, either of type
@@ -754,10 +784,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Format
-            #     folders/\\{folder}/locations/\\{location}/resourceEnrollmentStatuses/\\{resource_enrollment_status},
-            #     projects/\\{project}/locations/\\{location}/resourceEnrollmentStatuses/\\{resource_enrollment_status},
-            #     organizations/\\{organization}/locations/\\{location}/resourceEnrollmentStatuses/\\{resource_enrollment_status}
+            #     Required. Name of the resource enrollment status, in one of the following
+            #     formats:
+            #
+            #     * `folders/{folder}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+            #     * `projects/{project}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
+            #     * `organizations/{organization}/locations/{location}/resourceEnrollmentStatuses/{resource_enrollment_status}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AuditManager::V1::ResourceEnrollmentStatus]
@@ -824,7 +856,8 @@ module Google
             end
 
             ##
-            # Fetches all resources under the parent along with their enrollment.
+            # Lists all the folders and projects in an organization or folder, along with
+            # their enrollments.
             #
             # @overload list_resource_enrollment_statuses(request, options = nil)
             #   Pass arguments to `list_resource_enrollment_statuses` via a request object, either of type
@@ -842,13 +875,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent scope for which the list of resources with enrollments
-            #     are required.
+            #     Required. Parent organization or folder to list enrollment statuses for,
+            #     in one of the following formats:
+            #
+            #     * `folders/{folder}/locations/{location}`
+            #     * `organizations/{organization}/locations/{location}`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of resources to return.
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
             #   @param page_token [::String]
-            #     Optional. The next_page_token value returned from a previous List request,
-            #     if any.
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::ResourceEnrollmentStatus>]
@@ -921,7 +960,8 @@ module Google
             end
 
             ##
-            # Gets controls needed to be implemented to be compliant to a standard.
+            # Lists the controls that you must implement to become compliant to a
+            # regulatory standard.
             #
             # @overload list_controls(request, options = nil)
             #   Pass arguments to `list_controls` via a request object, either of type
@@ -939,14 +979,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Format
-            #     projects/\\{project}/locations/\\{location}/standards/\\{standard},
-            #     folders/\\{folder}/locations/\\{location}/standards/\\{standard}
+            #     Required. Standard to list controls for, in one of the following formats:
+            #
+            #     * `projects/{project}/locations/{location}/standards/{standard}`
+            #     * `folders/{folder}/locations/{location}/standards/{standard}`
+            #     * `organizations/{organization}/locations/{location}/standards/{standard}`
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of resources to return.
+            #     Optional. Maximum number of items to return in a single page. The service
+            #     might return fewer items than this value. If unspecified, the service picks
+            #     an appropriate default. The maximum value is 100; values above 100 are
+            #     reduced to 100.
             #   @param page_token [::String]
-            #     Optional. The next_page_token value returned from a previous List request,
-            #     if any.
+            #     Optional. A page token, received from a previous call, to retrieve the next
+            #     page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AuditManager::V1::Control>]
