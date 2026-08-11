@@ -39,7 +39,7 @@ response = client.list_approval_requests request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-access_approval-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/access-approval/)
+See also the [Product Documentation](https://cloud.google.com/access-approval/docs)
 for general usage information.
 
 ## Debug Logging
