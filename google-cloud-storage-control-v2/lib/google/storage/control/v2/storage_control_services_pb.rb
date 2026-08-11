@@ -136,6 +136,16 @@ module Google
               rpc :GetIntelligenceFindingRevision, ::Google::Cloud::Storage::Control::V2::GetIntelligenceFindingRevisionRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceFindingRevision
               # Lists all the revisions of an `IntelligenceFinding` resource.
               rpc :ListIntelligenceFindingRevisions, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsRequest, ::Google::Cloud::Storage::Control::V2::ListIntelligenceFindingRevisionsResponse
+              # Retrieves the full content of an object context, including its key, value,
+              # and any associated extended data for a given context key.
+              #
+              # Object contexts can optionally contain extended data. If an object context
+              # contains extended data, the metadata payload structure will contain only
+              # its type URL. To retrieve the full extended data, call this method.
+              #
+              # Returns the complete representation of the context as an
+              # [`ObjectFullContext`][google.storage.control.v2.ObjectFullContext].
+              rpc :ViewObjectFullContext, ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest, ::Google::Cloud::Storage::Control::V2::ObjectFullContext
             end
 
             Stub = Service.rpc_stub_class

@@ -1928,6 +1928,98 @@ module Google
                 end
 
                 ##
+                # Retrieves the full content of an object context, including its key, value,
+                # and any associated extended data for a given context key.
+                #
+                # Object contexts can optionally contain extended data. If an object context
+                # contains extended data, the metadata payload structure will contain only
+                # its type URL. To retrieve the full extended data, call this method.
+                #
+                # Returns the complete representation of the context as an
+                # {::Google::Cloud::Storage::Control::V2::ObjectFullContext `ObjectFullContext`}.
+                #
+                # @overload view_object_full_context(request, options = nil)
+                #   Pass arguments to `view_object_full_context` via a request object, either of type
+                #   {::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload view_object_full_context(generation: nil, context_key: nil, name: nil)
+                #   Pass arguments to `view_object_full_context` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param generation [::Integer]
+                #     Optional. If present, selects a specific revision of this object (as
+                #     opposed to the latest version, the default).
+                #   @param context_key [::String]
+                #     Required. The key of the object context to retrieve.
+                #   @param name [::String]
+                #     Required. The name of the object.
+                #     Format: `projects/{project}/buckets/{bucket}/objects/{object}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::ObjectFullContext]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::ObjectFullContext]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/storage/control/v2"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest.new
+                #
+                #   # Call the view_object_full_context method.
+                #   result = client.view_object_full_context request
+                #
+                #   # The returned object is of type Google::Cloud::Storage::Control::V2::ObjectFullContext.
+                #   p result
+                #
+                def view_object_full_context request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.view_object_full_context.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.view_object_full_context.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.view_object_full_context.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @storage_control_stub.view_object_full_context request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the StorageControl REST API.
                 #
                 # This class represents the configuration for StorageControl REST,
@@ -2165,6 +2257,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :list_intelligence_finding_revisions
+                    ##
+                    # RPC-specific configuration for `view_object_full_context`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :view_object_full_context
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -2204,6 +2301,8 @@ module Google
                       @get_intelligence_finding_revision = ::Gapic::Config::Method.new get_intelligence_finding_revision_config
                       list_intelligence_finding_revisions_config = parent_rpcs.list_intelligence_finding_revisions if parent_rpcs.respond_to? :list_intelligence_finding_revisions
                       @list_intelligence_finding_revisions = ::Gapic::Config::Method.new list_intelligence_finding_revisions_config
+                      view_object_full_context_config = parent_rpcs.view_object_full_context if parent_rpcs.respond_to? :view_object_full_context
+                      @view_object_full_context = ::Gapic::Config::Method.new view_object_full_context_config
 
                       yield self if block_given?
                     end

@@ -795,6 +795,46 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the view_object_full_context REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Storage::Control::V2::ObjectFullContext]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Storage::Control::V2::ObjectFullContext]
+                #   A result object deserialized from the server's reply
+                def view_object_full_context request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_view_object_full_context_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "view_object_full_context",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Storage::Control::V2::ObjectFullContext.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # @private
                 #
                 # GRPC transcoding helper method for the create_folder REST call
@@ -1187,6 +1227,27 @@ module Google
                                                             uri_template: "/v2/{parent}/revisions",
                                                             matches: [
                                                               ["parent", %r{^projects/[^/]+/locations/[^/]+/intelligenceFindings/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the view_object_full_context REST call
+                #
+                # @param request_pb [::Google::Cloud::Storage::Control::V2::ViewObjectFullContextRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_view_object_full_context_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v2/{name}:viewFullContext",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/buckets/[^/]+/objects(?:/(?<__wildcard__>.*))?$}, true]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

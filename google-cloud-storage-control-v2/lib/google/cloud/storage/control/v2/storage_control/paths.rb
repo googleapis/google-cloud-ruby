@@ -209,6 +209,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Object resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/objects/{object}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param object [String]
+              #
+              # @return [::String]
+              def object_path project:, bucket:, object:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/objects/#{object}"
+              end
+
+              ##
               # Create a fully-qualified RapidCache resource string.
               #
               # The resource will be in the following format:
