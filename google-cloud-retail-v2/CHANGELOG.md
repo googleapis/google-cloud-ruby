@@ -1,5 +1,14 @@
 # Release History
 
+### 2.10.0 (2026-08-11)
+
+#### Features
+
+* add support for custom content types ([#36202](https://github.com/googleapis/google-cloud-ruby/issues/36202)) 
+#### Documentation
+
+* clarify wording around quota usage 
+
 ### 2.9.1 (2026-08-05)
 
 #### Bug Fixes
