@@ -60,6 +60,15 @@ module Google
         # @!attribute [rw] min_db_node_storage_per_node_gb
         #   @return [::Integer]
         #     Optional. Minimum node storage per database server in gigabytes.
+        # @!attribute [rw] minimum_core_count
+        #   @return [::Integer]
+        #     Optional. Minimum core count per node.
+        # @!attribute [rw] available_core_count
+        #   @return [::Integer]
+        #     Optional. Available core count.
+        # @!attribute [rw] core_count_increment
+        #   @return [::Integer]
+        #     Optional. Core count increment.
         class DbSystemShape
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -69,6 +69,10 @@ module Google
         #   @return [::String]
         #     Output only. The ID of the subscription entitlement associated with the
         #     ExadbVmCluster.
+        # @!attribute [r] identity_connector
+        #   @return [::Google::Cloud::OracleDatabase::V1::IdentityConnector]
+        #     Output only. The identity connector details which will allow OCI to
+        #     securely access the resources in the customer project.
         class ExadbVmCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1212,6 +1212,86 @@
       ]
     },
     {
+      "region_tag": "oracledatabase_v1_generated_OracleDatabase_RefreshAutonomousDatabase_sync",
+      "title": "Snippet for the refresh_autonomous_database call in the OracleDatabase service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#refresh_autonomous_database.",
+      "file": "oracle_database/refresh_autonomous_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "refresh_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#refresh_autonomous_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OracleDatabase::V1::RefreshAutonomousDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
+        },
+        "method": {
+          "short_name": "RefreshAutonomousDatabase",
+          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.RefreshAutonomousDatabase",
+          "service": {
+            "short_name": "OracleDatabase",
+            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabaseRefreshableClones_sync",
+      "title": "Snippet for the get_autonomous_database_refreshable_clones call in the OracleDatabase service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_autonomous_database_refreshable_clones.",
+      "file": "oracle_database/get_autonomous_database_refreshable_clones.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_autonomous_database_refreshable_clones",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_autonomous_database_refreshable_clones",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OracleDatabase::V1::GetAutonomousDatabaseRefreshableClonesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OracleDatabase::V1::AutonomousDatabaseRefreshableClones",
+        "client": {
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
+        },
+        "method": {
+          "short_name": "GetAutonomousDatabaseRefreshableClones",
+          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.GetAutonomousDatabaseRefreshableClones",
+          "service": {
+            "short_name": "OracleDatabase",
+            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListOdbNetworks_sync",
       "title": "Snippet for the list_odb_networks call in the OracleDatabase service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_odb_networks.",

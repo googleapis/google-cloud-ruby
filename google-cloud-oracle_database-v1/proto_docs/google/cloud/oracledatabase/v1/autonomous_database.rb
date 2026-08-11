@@ -118,9 +118,101 @@ module Google
         #   @return [::Boolean]
         #     Optional. This field specifies if the replication of automatic backups is
         #     enabled when creating a Data Guard.
+        # @!attribute [rw] source_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig::SourceType]
+        #     Optional. The source type of the Autonomous Database.
+        # @!attribute [rw] clone_type
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig::CloneType]
+        #     Optional. The clone type of the Autonomous Database. This field is only
+        #     applicable in case of cloning
+        # @!attribute [rw] refreshable_mode
+        #   @return [::Google::Cloud::OracleDatabase::V1::SourceConfig::RefreshableMode]
+        #     Optional. The refresh mode of the clone.
+        # @!attribute [rw] auto_refresh_frequency_seconds
+        #   @return [::Integer]
+        #     Optional. The frequency in seconds a refreshable clone is refreshed after
+        #     auto-refresh is enabled.
+        # @!attribute [rw] auto_refresh_point_lag_seconds
+        #   @return [::Integer]
+        #     Optional. The time, in seconds, the data of the automatic refreshable clone
+        #     lags the primary database at the point of refresh.
+        # @!attribute [rw] auto_refresh_start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The date and time that auto-refreshing will begin for an
+        #     Autonomous Database refreshable clone. This value controls only the start
+        #     time for the first refresh operation.
+        # @!attribute [rw] autonomous_database_backup
+        #   @return [::String]
+        #     Optional. The name of the Autonomous Database Backup resource with the
+        #     format:
+        #     projects/\\{project}/locations/\\{region}/autonomousDatabaseBackups/\\{autonomous_database_backup}
+        #     Required when source_type is BACKUP_FROM_ID.
+        # @!attribute [rw] backup_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The timestamp specified for the point-in-time clone of the source
+        #     Autonomous Database. This field is only applicable
+        #     in case of BACKUP_FROM_TIMESTAMP source type and when
+        #     use_latest_available_backup is false.
+        # @!attribute [rw] use_latest_available_backup
+        #   @return [::Boolean]
+        #     Optional. Clone from latest available backup timestamp. This field is only
+        #     applicable in case of BACKUP_FROM_TIMESTAMP source type.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The refresh mode of a refreshable clone.
+          module RefreshableMode
+            # Default unspecified value.
+            REFRESHABLE_MODE_UNSPECIFIED = 0
+
+            # Automatic refresh.
+            AUTOMATIC = 1
+
+            # Manual refresh.
+            MANUAL = 2
+          end
+
+          # Specifies the source of the database. For example, a clone or peer from an
+          # existing database.
+          # This enum may be expanded to include other source types in the future.
+          module SourceType
+            # Default unspecified value.
+            SOURCE_TYPE_UNSPECIFIED = 0
+
+            # Clone database from an existing database specified in
+            # autonomous_database field.
+            CLONE_DATABASE = 1
+
+            # Create a cross-region disaster recovery peer adb from an existing adb.
+            CROSS_REGION_DISASTER_RECOVERY = 2
+
+            # Create a refreshable clone from an existing database specified in
+            # autonomous_database field.
+            CLONE_TO_REFRESHABLE = 3
+
+            # Create clone from the backup resource.
+            BACKUP_FROM_ID = 4
+
+            # Create clone from backup specified by backup_time
+            # field, or use latest available backup if use_latest_available_backup is
+            # true. The autonomous_database field must specify the source database
+            # to clone from.
+            BACKUP_FROM_TIMESTAMP = 5
+          end
+
+          # The clone type of the Autonomous Database.
+          module CloneType
+            # Default unspecified value.
+            CLONE_TYPE_UNSPECIFIED = 0
+
+            # Creates a new database with the source database's data and metadata.
+            FULL = 1
+
+            # Creates a new database that includes all the source database schema
+            # metadata, but none of the source database data.
+            METADATA = 2
+          end
         end
 
         # The properties of an Autonomous Database.
@@ -376,6 +468,11 @@ module Google
         #   @return [::Integer]
         #     Optional. This field indicates the maximum data loss limit for an
         #     Autonomous Database, in seconds.
+        # @!attribute [rw] refreshable_clone
+        #   @return [::Boolean]
+        #     Optional. Indicates if the Autonomous Database is a refreshable clone. This
+        #     field is used in update flow to connect / disconnect a refreshable clone
+        #     from its source database.
         class AutonomousDatabaseProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -849,6 +946,18 @@ module Google
         #   @return [::Google::Type::TimeOfDay]
         #     Output only. Auto stop time.
         class ScheduledOperationDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An Autonomous Database refreshable clone
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The GCP resource name of the Autonomous Database.
+        # @!attribute [r] region
+        #   @return [::String]
+        #     Output only. The Google Cloud region where the refreshable clone exists.
+        class AutonomousDatabaseRefreshableClone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

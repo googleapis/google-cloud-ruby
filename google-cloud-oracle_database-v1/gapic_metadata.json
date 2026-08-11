@@ -160,6 +160,16 @@
                 "failover_autonomous_database"
               ]
             },
+            "RefreshAutonomousDatabase": {
+              "methods": [
+                "refresh_autonomous_database"
+              ]
+            },
+            "GetAutonomousDatabaseRefreshableClones": {
+              "methods": [
+                "get_autonomous_database_refreshable_clones"
+              ]
+            },
             "ListOdbNetworks": {
               "methods": [
                 "list_odb_networks"
