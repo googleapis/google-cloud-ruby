@@ -61,6 +61,7 @@ libraries:
     apis:
       - path: google/marketingplatform/admin/v1alpha
   - name: google-analytics-admin
+    version: 0.8.1
     apis:
       - path: google/analytics/admin/v1alpha
         ruby:
@@ -70,12 +71,14 @@ libraries:
       wrapper_of:
         - v1alpha:0.27
   - name: google-analytics-admin-v1alpha
+    version: 0.43.1
     apis:
       - path: google/analytics/admin/v1alpha
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ANALYTICS_ADMIN
   - name: google-analytics-data
+    version: 0.9.1
     apis:
       - path: google/analytics/data/v1beta
         ruby:
@@ -86,6 +89,7 @@ libraries:
       wrapper_of:
         - v1beta:0.11
   - name: google-analytics-data-v1beta
+    version: 0.22.1
     apis:
       - path: google/analytics/data/v1beta
         ruby:
@@ -93,6 +97,7 @@ libraries:
             ruby-cloud-env-prefix: ANALYTICS_DATA
             ruby-cloud-service-override: BetaAnalyticsData=AnalyticsData
   - name: google-apps-chat
+    version: 1.3.1
     apis:
       - path: google/chat/v1
     ruby:
@@ -106,84 +111,84 @@ libraries:
             ruby-cloud-extra-dependencies: google-apps-card-v1=>0.0+<2.a
     version: 0.29.0
   - name: google-apps-events-subscriptions
+    version: 1.3.1
     apis:
       - path: google/apps/events/subscriptions/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
   - name: google-apps-events-subscriptions-v1
+    version: 0.9.1
     apis:
       - path: google/apps/events/subscriptions/v1
-    skip_generate: true
   - name: google-apps-events-subscriptions-v1beta
+    version: 0.6.1
     apis:
       - path: google/apps/events/subscriptions/v1beta
-    skip_generate: true
   - name: google-apps-meet
+    version: 1.3.1
     apis:
       - path: google/apps/meet/v2
-    skip_generate: true
     ruby:
       wrapper_of:
         - v2:0.0
   - name: google-apps-meet-v2
+    version: 0.9.1
     apis:
       - path: google/apps/meet/v2
-    skip_generate: true
   - name: google-apps-meet-v2beta
+    version: 0.11.1
     apis:
       - path: google/apps/meet/v2beta
-    skip_generate: true
   - name: google-area120-tables
+    version: 0.9.1
     apis:
       - path: google/area120/tables/v1alpha1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: AREA120_TABLES
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1alpha1:0.7
   - name: google-area120-tables-v1alpha1
+    version: 0.15.1
     apis:
       - path: google/area120/tables/v1alpha1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: AREA120_TABLES
-    skip_generate: true
   - name: google-cloud-access_approval
+    version: 1.8.1
     apis:
       - path: google/cloud/accessapproval/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ACCESS_APPROVAL
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.11
   - name: google-cloud-access_approval-v1
+    version: 1.7.1
     apis:
       - path: google/cloud/accessapproval/v1
         ruby:
           ruby_cloud_opts:
             ruby-cloud-env-prefix: ACCESS_APPROVAL
-    skip_generate: true
   - name: google-cloud-advisory_notifications
+    version: 1.5.1
     apis:
       - path: google/cloud/advisorynotifications/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.8
   - name: google-cloud-advisory_notifications-v1
+    version: 0.17.1
     apis:
       - path: google/cloud/advisorynotifications/v1
-    skip_generate: true
   - name: google-cloud-agent_registry
+    version: 0.1.1
     apis:
       - path: google/cloud/agentregistry/v1
-    skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
@@ -191,7 +196,6 @@ libraries:
     version: 0.1.1
     apis:
       - path: google/cloud/agentregistry/v1
-    skip_generate: true
   - name: google-cloud-ai_platform
     version: 2.4.2
     apis:
