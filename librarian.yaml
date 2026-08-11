@@ -39,7 +39,7 @@ libraries:
     apis:
       - path: google/ads/admanager/v1
   - name: google-ads-data_manager
-    version: 0.4.1
+    version: 0.4.2
     apis:
       - path: google/ads/datamanager/v1
     ruby:
