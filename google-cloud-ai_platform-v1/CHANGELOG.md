@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.48.0 (2026-08-11)
+
+#### Features
+
+* add Tool.ExaAiSearch to Vertex AI v1 ([#36201](https://github.com/googleapis/google-cloud-ruby/issues/36201)) 
+#### Bug Fixes
+
+* onboard google-cloud-ai_platform and google-cloud-ai_platform-v1 ([#36204](https://github.com/googleapis/google-cloud-ruby/issues/36204)) 
+
 ### 1.47.1 (2026-08-05)
 
 #### Bug Fixes
