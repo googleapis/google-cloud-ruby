@@ -33,28 +33,37 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.auditmanager.v1.AuditManager'
 
-            # Enrolls the customer resource(folder/project/organization) to the audit
-            # manager service by creating the audit managers Service Agent in customers
-            # workload and granting required permissions to the Service Agent. Please
-            # note that if enrollment request is made on the already enrolled workload
-            # then enrollment is executed overriding the existing set of destinations.
+            # Adds your project, folder, or organization to Audit
+            # Manager. This method creates the Audit Manager service agent in your
+            # workload and grants required permissions to the service agent.
+            # If you make this request on a workload that's already enrolled,
+            # then this method overrides the existing set of destinations.
             rpc :EnrollResource, ::Google::Cloud::AuditManager::V1::EnrollResourceRequest, ::Google::Cloud::AuditManager::V1::Enrollment
-            # Generates a demo report highlighting different responsibilities
-            # (Google/Customer/ shared) required to be fulfilled for the customer's
-            # workload to be compliant with the given standard.
+            # Generates an audit scope report for the given standard.
+            #
+            # The report includes the following:
+            #
+            # * The technical attributes and constraints that Audit Manager uses to
+            #   verify your compliance with a framework.
+            # * A list of Google Cloud services and resources that are within the
+            #   scope of the framework.
             rpc :GenerateAuditScopeReport, ::Google::Cloud::AuditManager::V1::GenerateAuditScopeReportRequest, ::Google::Cloud::AuditManager::V1::AuditScopeReport
-            # Register the Audit Report generation requests and returns the OperationId
-            # using which the customer can track the report generation progress.
+            # Registers audit report generation requests. This method returns the
+            # operation identifier that you can use to track the report generation
+            # progress.
             rpc :GenerateAuditReport, ::Google::Cloud::AuditManager::V1::GenerateAuditReportRequest, ::Google::Longrunning::Operation
-            # Lists audit reports in the selected parent scope
+            # Lists the audit reports for the organization, folder, or project that you
+            # specify as the parent scope.
             rpc :ListAuditReports, ::Google::Cloud::AuditManager::V1::ListAuditReportsRequest, ::Google::Cloud::AuditManager::V1::ListAuditReportsResponse
-            # Get the overall audit report
+            # Gets the full metadata and findings for an audit report.
             rpc :GetAuditReport, ::Google::Cloud::AuditManager::V1::GetAuditReportRequest, ::Google::Cloud::AuditManager::V1::AuditReport
-            # Get a resource along with its enrollment status.
+            # Gets a resource and its enrollment status.
             rpc :GetResourceEnrollmentStatus, ::Google::Cloud::AuditManager::V1::GetResourceEnrollmentStatusRequest, ::Google::Cloud::AuditManager::V1::ResourceEnrollmentStatus
-            # Fetches all resources under the parent along with their enrollment.
+            # Lists all the folders and projects in an organization or folder, along with
+            # their enrollments.
             rpc :ListResourceEnrollmentStatuses, ::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesRequest, ::Google::Cloud::AuditManager::V1::ListResourceEnrollmentStatusesResponse
-            # Gets controls needed to be implemented to be compliant to a standard.
+            # Lists the controls that you must implement to become compliant to a
+            # regulatory standard.
             rpc :ListControls, ::Google::Cloud::AuditManager::V1::ListControlsRequest, ::Google::Cloud::AuditManager::V1::ListControlsResponse
           end
 

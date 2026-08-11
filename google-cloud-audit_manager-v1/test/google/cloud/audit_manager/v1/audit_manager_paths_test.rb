@@ -53,6 +53,9 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientPathsTest < Minites
 
       path = client.audit_report_path folder: "value0", location: "value1", audit_report: "value2"
       assert_equal "folders/value0/locations/value1/auditReports/value2", path
+
+      path = client.audit_report_path organization: "value0", location: "value1", audit_report: "value2"
+      assert_equal "organizations/value0/locations/value1/auditReports/value2", path
     end
   end
 
@@ -92,6 +95,18 @@ class ::Google::Cloud::AuditManager::V1::AuditManager::ClientPathsTest < Minites
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_organization_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::AuditManager::V1::AuditManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_location_path organization: "value0", location: "value1"
+      assert_equal "organizations/value0/locations/value1", path
     end
   end
 
