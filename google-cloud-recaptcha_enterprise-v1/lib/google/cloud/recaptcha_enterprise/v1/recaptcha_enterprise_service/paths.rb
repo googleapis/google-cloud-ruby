@@ -93,6 +93,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Policy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/keys/{key}/policy`
+            #
+            # @param project [String]
+            # @param key [String]
+            #
+            # @return [::String]
+            def policy_path project:, key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/keys/#{key}/policy"
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:

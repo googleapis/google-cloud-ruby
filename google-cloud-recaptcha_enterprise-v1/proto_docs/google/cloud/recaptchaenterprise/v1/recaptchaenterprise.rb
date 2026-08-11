@@ -436,7 +436,7 @@ module Google
         #     assessment event must include a token and site key to use this feature.
         # @!attribute [r] account_defender_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
-        #     Output only. Assessment returned by account defender when an account
+        #     Output only. Assessment returned by Account defense when an account
         #     identifier is provided.
         # @!attribute [rw] private_password_leak_verification
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PrivatePasswordLeakVerification]
@@ -458,13 +458,16 @@ module Google
         # @!attribute [r] phone_fraud_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PhoneFraudAssessment]
         #     Output only. Assessment returned when a site key, a token, and a phone
-        #     number as `user_id` are provided. Account defender and SMS toll fraud
-        #     protection need to be enabled.
+        #     number as `user_id` are provided. SMS defense needs to be enabled.
         # @!attribute [rw] assessment_environment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AssessmentEnvironment]
         #     Optional. The environment creating the assessment. This describes your
         #     environment (the system invoking CreateAssessment), NOT the environment of
         #     your user.
+        # @!attribute [r] policy_evaluation
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PolicyEvaluation]
+        #     Output only. Provides information about the policy evaluation for this
+        #     assessment.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -491,7 +494,7 @@ module Google
         #   @return [::String]
         #     Optional. The expected action for this type of event. This should be the
         #     same action provided at token generation time on client-side platforms
-        #     already integrated with recaptcha enterprise.
+        #     already integrated with recaptcha enterprise. Required for Universal keys.
         # @!attribute [rw] hashed_account_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -652,8 +655,8 @@ module Google
           # Details about a user's account involved in the transaction.
           # @!attribute [rw] account_id
           #   @return [::String]
-          #     Optional. Unique account identifier for this user. If using account
-          #     defender, this should match the hashed_account_id field. Otherwise, a
+          #     Optional. Unique account identifier for this user. If using Account
+          #     defense, this should match the hashed_account_id field. Otherwise, a
           #     unique and persistent identifier for this account.
           # @!attribute [rw] creation_ms
           #   @return [::Integer]
@@ -774,12 +777,19 @@ module Google
         #     Output only. Reasons contributing to the risk analysis verdict.
         # @!attribute [r] extended_verdict_reasons
         #   @return [::Array<::String>]
-        #     Output only. Extended verdict reasons to be used for experimentation only.
-        #     The set of possible reasons is subject to change.
+        #     Output only. Additional reasons contributing to the risk analysis verdict.
+        #     These reasons are available to Enterprise tier projects only. Contact sales
+        #     for more information.
+        #     The set of reasons is subject to change.
+        # @!attribute [r] last_challenge_type
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ChallengeType]
+        #     Output only. Type of the last challenge presented to the user for
+        #     Universal, `POLICY_BASED_CHALLENGE` and `INVISIBLE` keys. The field is only
+        #     set when a challenge was presented to the user.
         # @!attribute [r] challenge
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::Challenge]
-        #     Output only. Challenge information for POLICY_BASED_CHALLENGE and INVISIBLE
-        #     keys.
+        #     Output only. Challenge information for Universal, `POLICY_BASED_CHALLENGE`
+        #     and `INVISIBLE` keys.
         # @!attribute [r] verified_bots
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::Bot>]
         #     Output only. Bots with identities that have been verified by reCAPTCHA and
@@ -811,15 +821,24 @@ module Google
             # quality risk analysis.
             LOW_CONFIDENCE_SCORE = 5
 
-            # The request matches behavioral characteristics of a carding attack.
+            # Deprecated: Use
+            # {::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment#transaction_risk FraudPreventionAssessment.transaction_risk}
+            # and
+            # {::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::RiskReason::Reason::EXCESSIVE_ENUMERATION_PATTERN FraudPreventionAssessment.RiskReason.Reason.EXCESSIVE_ENUMERATION_PATTERN}
+            # instead.
             SUSPECTED_CARDING = 6
 
-            # The request matches behavioral characteristics of chargebacks for fraud.
+            # Deprecated: Use
+            # {::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment#transaction_risk FraudPreventionAssessment.transaction_risk}
+            # and
+            # {::Google::Cloud::RecaptchaEnterprise::V1::FraudPreventionAssessment::RiskReason::Reason::ASSOCIATED_WITH_FRAUD_CLUSTER FraudPreventionAssessment.RiskReason.Reason.ASSOCIATED_WITH_FRAUD_CLUSTER}
+            # instead.
             SUSPECTED_CHARGEBACK = 7
           end
 
-          # Challenge information for POLICY_BASED_CHALLENGE and INVISIBLE keys.
-          # Ensure that applications can handle values not explicitly listed.
+          # Challenge information for Universal, `POLICY_BASED_CHALLENGE` and
+          # `INVISIBLE` keys. Ensure that applications can handle values not explicitly
+          # listed.
           module Challenge
             # Default unspecified type.
             CHALLENGE_UNSPECIFIED = 0
@@ -840,7 +859,30 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Enumerated string value that indicates the identity of the bot,
-        #     formatted in kebab-case.
+        #     formatted in kebab-case. Current example values include the following:
+        #
+        #     * google-agent - AI_AGENT
+        #     * browser-base - AI_AGENT
+        #     * chat-gpt - AI_AGENT
+        #     * aws-bedrock - AI_AGENT
+        #     * cybaa-bot - AI_AGENT
+        #     * cloudflare - AI_AGENT
+        #     * payhawk - AI_AGENT
+        #     * duck-duck-go - SEARCH_INDEXER
+        #     * mediaboard - CONTENT_SCRAPER
+        #     * marker-io - AI_AGENT
+        #     * broadcom - AI_AGENT
+        #     * anchor-browser - AI_AGENT
+        #     * shopify - AI_AGENT
+        #     * stackscope - CONTENT_SCRAPER
+        #     * manus - AI_AGENT
+        #     * kernel-sh - AI_AGENT
+        #     * zvelo - SEARCH_INDEXER
+        #
+        #     Ensure that your applications can handle identifier values not explicitly
+        #     listed here. Deprecated values might take some time to stop showing
+        #     up in responses. New values can be pushed so this list should be taken
+        #     as non exhaustive.
         # @!attribute [rw] bot_type
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Bot::BotType]
         #     Optional. Enumerated field representing the type of bot.
@@ -870,11 +912,9 @@ module Google
         # Properties of the provided event token.
         # @!attribute [r] valid
         #   @return [::Boolean]
-        #     Output only. Whether the provided user response token is valid. When valid
-        #     = false, the reason could be specified in invalid_reason or it could also
-        #     be due to a user failing to solve a challenge or a sitekey mismatch (i.e
-        #     the sitekey used to generate the token was different than the one specified
-        #     in the assessment).
+        #     Output only. Indicates whether the provided user response token is valid.
+        #     If `false`, the token is invalid, either because the user failed the
+        #     challenge or for a reason provided in the `invalid_reason` field.
         # @!attribute [r] invalid_reason
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties::InvalidReason]
         #     Output only. Reason associated with the response when valid = false.
@@ -934,6 +974,13 @@ module Google
             #   - you set an action score threshold higher than 0.0
             #   - you provided a non-empty `expected_action`
             UNEXPECTED_ACTION = 7
+
+            # The key used to generate the token does not match the `site_key`.
+            KEY_MISMATCH = 8
+
+            # The domain of the page on which the token was generated does not match
+            # the `allowed_domains` configured in the `site_key`.
+            DOMAIN_MISMATCH = 9
           end
         end
 
@@ -1120,21 +1167,111 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Account defender risk assessment.
+        # Account defense risk assessment.
         # @!attribute [r] labels
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountDefenderLabel>]
         #     Output only. Labels for this request.
+        # @!attribute [r] account_takeover_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountTakeoverVerdict]
+        #     Output only. Account takeover risk assessment for this request.
         class AccountDefenderAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Labels returned by account defender for this request.
+          # Account takeover risk assessment.
+          # @!attribute [r] risk
+          #   @return [::Float]
+          #     Output only. Account takeover attempt probability.
+          #     Values are from 0.0 (lowest risk) to 1.0 (highest risk).
+          # @!attribute [r] risk_reasons
+          #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountRiskReason>]
+          #     Output only. Unordered list. Reasons why the request appears risky. Risk
+          #     reasons can be returned even if the risk is low, as trustworthy requests
+          #     can still have some risk signals.
+          # @!attribute [r] trust_reasons
+          #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountTrustReason>]
+          #     Output only. Unordered list. Reasons why the request appears trustworthy.
+          #     Trust reasons can be returned even if the risk is high, as risky requests
+          #     can still have some trust signals.
+          class AccountTakeoverVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Risk explainability reasons for Account defense.
+          # @!attribute [r] reason
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountRiskReason::RiskReason]
+          #     Output only. A risk reason associated with this request.
+          class AccountRiskReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Risk explainability reasons for Account defense.
+            # Ensure that applications can handle values not explicitly listed.
+            module RiskReason
+              # Default unspecified type.
+              RISK_REASON_UNSPECIFIED = 0
+
+              # The client has been observed sending bot-like traffic to this site in
+              # the past. This reason incorporates historical reputation and indicates
+              # that the client is known to use bots, even if the current request is
+              # being made by a human.
+              CLIENT_HISTORICAL_BOT_ACTIVITY = 1
+
+              # The account is part of a large group of related accounts, indicating
+              # that it may be part of a fraudulent network. Related accounts are
+              # identified based on having similar traffic patterns and request
+              # characteristics.
+              ACCOUNT_IN_LARGE_RELATED_GROUP = 2
+
+              # The client has been observed accessing many accounts on this site.
+              CLIENT_ACCESSED_MANY_ACCOUNTS = 3
+
+              # This email domain is a suspected provider of disposable email
+              # addresses.
+              DISPOSABLE_EMAIL_DOMAIN = 4
+            end
+          end
+
+          # Trust explainability reasons for Account defense.
+          # @!attribute [r] reason
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountTrustReason::TrustReason]
+          #     Output only. A trust reason associated with this request.
+          class AccountTrustReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Trust explainability reasons for Account defense.
+            # Ensure that applications can handle values not explicitly listed.
+            module TrustReason
+              # Default unspecified type.
+              TRUST_REASON_UNSPECIFIED = 0
+
+              # The request matches a trusted profile associated with this account.
+              # Equivalent to `AccountDefenderLabel.PROFILE_MATCH`.
+              PROFILE_MATCH = 1
+
+              # The account's historical activity is reputable. It is unlikely that the
+              # account has been compromised in the past.
+              ACCOUNT_HISTORY_REPUTABLE = 2
+
+              # The identity shows a global pattern of reputable activity based on
+              # `userInfo` and associated identifiers.
+              IDENTITY_GLOBAL_ACTIVITY_REPUTABLE = 3
+
+              # The identity shows a long-standing history of reputable activity based
+              # on `userInfo` and associated identifiers.
+              IDENTITY_HISTORY_REPUTABLE = 4
+            end
+          end
+
+          # Labels returned by Account defense for this request.
           # Ensure that applications can handle values not explicitly listed.
           module AccountDefenderLabel
             # Default unspecified type.
             ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
 
-            # The request matches a known good profile for the user.
+            # The request matches a trusted profile associated with this account.
             PROFILE_MATCH = 1
 
             # The request is potentially a suspicious login event and must be further
@@ -1415,22 +1552,27 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings]
         #     Settings for keys that can be used by websites.
         #
-        #     Note: The following fields are mutually exclusive: `web_settings`, `android_settings`, `ios_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `web_settings`, `android_settings`, `ios_settings`, `express_settings`, `universal_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] android_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AndroidKeySettings]
         #     Settings for keys that can be used by Android apps.
         #
-        #     Note: The following fields are mutually exclusive: `android_settings`, `web_settings`, `ios_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `android_settings`, `web_settings`, `ios_settings`, `express_settings`, `universal_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ios_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IOSKeySettings]
         #     Settings for keys that can be used by iOS apps.
         #
-        #     Note: The following fields are mutually exclusive: `ios_settings`, `web_settings`, `android_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `ios_settings`, `web_settings`, `android_settings`, `express_settings`, `universal_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] express_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ExpressKeySettings]
         #     Settings for keys that can be used by reCAPTCHA Express.
         #
-        #     Note: The following fields are mutually exclusive: `express_settings`, `web_settings`, `android_settings`, `ios_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `express_settings`, `web_settings`, `android_settings`, `ios_settings`, `universal_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] universal_settings
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::UniversalKeySettings]
+        #     Settings for keys that are configured through their Policy.
+        #
+        #     Note: The following fields are mutually exclusive: `universal_settings`, `web_settings`, `android_settings`, `ios_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See [Creating and managing labels]
@@ -1655,6 +1797,12 @@ module Google
 
         # Settings specific to keys that can be used for reCAPTCHA Express.
         class ExpressKeySettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings for keys that are configured through their Policy.
+        class UniversalKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2196,6 +2344,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Information about the policy evaluation.
+        # @!attribute [r] challenge_rule_evaluation
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ChallengeRuleEvaluation]
+        #     Output only. Populated if one or more Challenge rules were matched.
+        #     Its presence in the assessment indicates that at least one challenge rule
+        #     was matched and determined whether a challenge was presented to the user.
+        class PolicyEvaluation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information about the evaluation of a `ChallengeRule`.
+        class ChallengeRuleEvaluation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Information about the IP or IP range override.
         # @!attribute [rw] ip
         #   @return [::String]
@@ -2223,6 +2388,198 @@ module Google
             # all valid assessments.
             ALLOW = 1
           end
+        end
+
+        # The request message to get a policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the policy to get, in the format
+        #     `projects/{project}/keys/{key}/policy`.
+        class GetPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to update a policy.
+        # @!attribute [rw] policy
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Policy]
+        #     Required. The Policy's name is used to identify the policy to update, in
+        #     the format `projects/{project}/keys/{key}/policy`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The mask to control which fields of the policy get updated. If
+        #     the mask is not present, all fields are updated.
+        class UpdatePolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A complete configuration set containing multiple grouped rules defining the
+        # behavior of reCAPTCHA for fraud detection and prevention.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Resource name for this policy.
+        #     Format: "projects/\\{project}/keys/\\{key}/policy" for a policy under a key.
+        # @!attribute [rw] client_settings
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ClientSettings]
+        #     Required. Configuration for clients protected by this policy.
+        # @!attribute [rw] challenge_rule_groups
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ChallengeRuleGroup>]
+        #     Optional. Rules to configure the behavior of reCAPTCHA for showing a
+        #     challenge. Rule groups are evaluated in order. Evaluation stops when the
+        #     first matching rule group is found.
+        class Policy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A collection of challenge rules that applies to one or more actions.
+        # @!attribute [rw] actions
+        #   @return [::Array<::String>]
+        #     Required. Action name provided at token generation. The action name is not
+        #     case-sensitive and can only contain alphanumeric characters, slashes, and
+        #     underscores. If "*" is provided, the rule group applies to all actions. If
+        #     multiple actions are provided, the rule group is applied to all of
+        #     them. This field is required.
+        # @!attribute [rw] challenge_rules
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ChallengeRule>]
+        #     Required. A list of rules that configure when and how reCAPTCHA presents a
+        #     challenge. reCAPTCHA evaluates these rules in order and applies the first
+        #     one that matches.
+        class ChallengeRuleGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A rule to configure the behavior of reCAPTCHA for conditionally presenting a
+        # challenge.
+        # @!attribute [rw] condition
+        #   @return [::String]
+        #     Optional. A CEL condition that must be met for this rule to apply.
+        #     If unspecified, the rule applies unconditionally.
+        #     The following fields can be referenced in the condition:
+        #     * `score`
+        #     * `user_ip_address`
+        #     * `user_asn`
+        #     * `user_agent`
+        #     * `verified_bots.name`
+        #     * `verified_bots.bot_type`
+        #
+        #     Examples:
+        #     * `score < 0.5`
+        #     * `user_ip_address == "123.45.67.89"`
+        #     * `user_agent.contains("Chrome")`
+        #     * `score < 0.5 && user_ip_address == "123.45.67.89"`
+        # @!attribute [rw] no_challenge
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ChallengeRule::NoChallengeOutcome]
+        #     Do not present a challenge to the user.
+        #
+        #     Note: The following fields are mutually exclusive: `no_challenge`, `challenge`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] challenge
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ChallengeRule::ChallengeOutcome]
+        #     Present a challenge to the user.
+        #
+        #     Note: The following fields are mutually exclusive: `challenge`, `no_challenge`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class ChallengeRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # An outcome that indicates that no challenge should be presented to the
+          # user.
+          class NoChallengeOutcome
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An outcome that indicates that a challenge of a specified difficulty should
+          # be presented to the user.
+          # @!attribute [rw] difficulty
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ChallengeSecurityPreference]
+          #     Optional. The difficulty of the challenge to present to the user.
+          #     If unspecified, `BALANCE` is used.
+          class ChallengeOutcome
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Configuration for clients to protect with reCAPTCHA.
+        # @!attribute [rw] allowed_domains
+        #   @return [::Array<::String>]
+        #     Optional. Domains or subdomains of websites allowed to use the policy. All
+        #     subdomains of an allowed domain are automatically allowed. A valid domain
+        #     requires a host and must not include any path, port, query or fragment.
+        #     Examples: 'example.com' or 'subdomain.example.com'
+        #     Each policy supports a maximum of 250 domains. To use a policy on more
+        #     domains, set `allow_all_domains` to true. When this is set, you are
+        #     responsible for validating the hostname by checking the
+        #     `token_properties.hostname` field in each assessment response against your
+        #     list of allowed domains.
+        # @!attribute [rw] allow_all_domains
+        #   @return [::Boolean]
+        #     Optional. If set to true, it means allowed_domains are not enforced.
+        # @!attribute [rw] protected_endpoint_group
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ProtectedEndpointGroup]
+        #     Optional. Configuration for all API endpoints to protect with reCAPTCHA. If
+        #     this field is not set, reCAPTCHA will not automatically request tokens on
+        #     any API endpoints.
+        class ClientSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for API endpoints to protect with reCAPTCHA.
+        # @!attribute [rw] protected_endpoints
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ProtectedEndpoint>]
+        #     Optional. List of API endpoints to automatically protect with reCAPTCHA. If
+        #     any of these endpoints is invoked from a page where a key bound to this
+        #     policy is installed, a reCAPTCHA token is automatically generated and
+        #     attached to the request. If multiple protected endpoints match a given API
+        #     endpoint, the first one in the list is used.
+        class ProtectedEndpointGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for an API endpoint to protect with reCAPTCHA.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. URI path of the API endpoint to protect. Must start with '/'.
+        #     Supports glob characters '*' to match a single path segment and '**' to
+        #     match multiple path segments. Standalone root catch-alls ('/*' and '/**')
+        #     are invalid because it can negatively impact performance to trigger
+        #     reCAPTCHA on every single request to your backend.
+        #
+        #     Matching is evaluated against the URL path only (domain, scheme, and query
+        #     parameters are ignored).
+        #
+        #     Examples:
+        #     - `/login` matches `/login`, `https://example.com/login`, and
+        #     `/login?query=1`, but not `/login/step1`.
+        #     - `/products/*` matches `/products/123`, but not `/products/123/456`.
+        #     - `/content/**` matches `/content/articles/2024/01/01`.
+        # @!attribute [rw] action
+        #   @return [::String]
+        #     Required. Action name to be used for token generation for this endpoint.
+        #     The action name can only contain alphanumeric characters, slashes, and
+        #     underscores.
+        class ProtectedEndpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Enum of challenge types for Universal, `POLICY_BASED_CHALLENGE` and
+        # `INVISIBLE` keys. Ensure that applications can handle values not explicitly
+        # listed.
+        module ChallengeType
+          # Default unspecified type.
+          CHALLENGE_TYPE_UNSPECIFIED = 0
+
+          # A visual challenge.
+          CHALLENGE_TYPE_VISUAL = 1
+
+          # An audio challenge.
+          CHALLENGE_TYPE_AUDIO = 2
         end
       end
     end
