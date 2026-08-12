@@ -191,6 +191,226 @@ class ::Google::Ads::AdManager::V1::CompanyService::Rest::ClientTest < Minitest:
     end
   end
 
+  def test_create_company
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Company.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    company = {}
+
+    create_company_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CompanyService::Rest::ServiceStub.stub :transcode_create_company_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_company_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CompanyService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_company({ parent: parent, company: company }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_company parent: parent, company: company do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_company ::Google::Ads::AdManager::V1::CreateCompanyRequest.new(parent: parent, company: company) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_company({ parent: parent, company: company }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_company(::Google::Ads::AdManager::V1::CreateCompanyRequest.new(parent: parent, company: company), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_company_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_companies
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateCompaniesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_companies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CompanyService::Rest::ServiceStub.stub :transcode_batch_create_companies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_companies_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CompanyService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_companies({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_companies parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_companies ::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_companies({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_companies(::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_companies_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_company
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::Company.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    company = {}
+    update_mask = {}
+
+    update_company_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CompanyService::Rest::ServiceStub.stub :transcode_update_company_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_company_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CompanyService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_company({ company: company, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_company company: company, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_company ::Google::Ads::AdManager::V1::UpdateCompanyRequest.new(company: company, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_company({ company: company, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_company(::Google::Ads::AdManager::V1::UpdateCompanyRequest.new(company: company, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_company_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_companies
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateCompaniesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_companies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::CompanyService::Rest::ServiceStub.stub :transcode_batch_update_companies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_companies_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::CompanyService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_companies({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_companies parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_companies ::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_companies({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_companies(::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_companies_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
