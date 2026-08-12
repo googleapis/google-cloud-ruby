@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2026-08-12)
+
+#### Features
+
+* Add organizations level support for GenerateAuditScopeReport, GenerateAuditReport and GetAuditReport ([#36219](https://github.com/googleapis/google-cloud-ruby/issues/36219)) 
+
 ### 1.0.1 (2026-08-05)
 
 #### Bug Fixes
