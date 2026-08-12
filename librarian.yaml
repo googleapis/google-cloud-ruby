@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: ruby
-version: v0.36.0
+version: v0.37.0
 sources:
   googleapis:
     commit: 57394718a71457aa37ab002352b22081976bdd91
@@ -453,18 +453,18 @@ libraries:
             ruby-cloud-env-prefix: ASSURED_WORKLOADS
     skip_generate: true
   - name: google-cloud-audit_manager
+    version: 1.1.0
     apis:
       - path: google/cloud/auditmanager/v1
     skip_generate: true
     ruby:
       wrapper_of:
         - v1:0.0
-    version: 1.1.0
   - name: google-cloud-audit_manager-v1
+    version: 1.1.0
     apis:
       - path: google/cloud/auditmanager/v1
     skip_generate: true
-    version: 1.1.0
   - name: google-cloud-automl
     apis:
       - path: google/cloud/automl/v1
@@ -2471,10 +2471,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-oracle_database-v1
+    version: 1.1.0
     apis:
       - path: google/cloud/oracledatabase/v1
     skip_generate: true
-    version: 1.1.0
   - name: google-cloud-orchestration-airflow-service
     version: 1.7.1
     apis:
@@ -3812,10 +3812,10 @@ libraries:
       wrapper_of:
         - v1:0.0
   - name: google-cloud-vector_search-v1
+    version: 0.2.0
     apis:
       - path: google/cloud/vectorsearch/v1
     skip_generate: true
-    version: 0.2.0
   - name: google-cloud-video-live_stream
     version: 2.2.1
     apis:
