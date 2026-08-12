@@ -116,9 +116,14 @@ module Google
         #     Optional. An array of
         #     [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards).
         #
-        #     Only Chat apps can create cards. If your Chat app [authenticates as a
+        #     Chat apps can create cards with [app
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+        #     As part of the [Developer Preview
+        #     Program](https://developers.google.com/workspace/preview), if your Chat app
+        #     [authenticates as a
         #     user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
-        #     the messages can't contain cards.
+        #     it can create card messages. If your Chat app is not part of Developer
+        #     Preview Program, it can't create cards with user authentication.
         #
         #     To learn how to create a message that contains cards, see [Send a
         #     message](https://developers.google.com/workspace/chat/create-messages).
@@ -231,6 +236,10 @@ module Google
         #     Creating a message with accessory widgets requires [app
         #     authentication]
         #     (https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+        # @!attribute [rw] markup_syntax
+        #   @return [::Google::Apps::Chat::V1::MarkupSyntax]
+        #     Optional. Specifies how the server interprets the message `text` field
+        #     content.
         class Message
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -471,6 +480,10 @@ module Google
         #     `clientAssignedMessageId` field for `{message}`. For details, see [Name a
         #     message]
         #     (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
+        # @!attribute [rw] markup_syntax
+        #   @return [::Google::Apps::Chat::V1::MarkupSyntax]
+        #     Optional. Specifies the desired output syntax for the Chat message
+        #     `formatted_text` field.
         class GetMessageRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -733,6 +746,10 @@ module Google
         #     Optional. Whether to include deleted messages. Deleted messages include
         #     deleted time and metadata about their deletion, but message content is
         #     unavailable.
+        # @!attribute [rw] markup_syntax
+        #   @return [::Google::Apps::Chat::V1::MarkupSyntax]
+        #     Optional. Specifies the desired output syntax for the Chat message
+        #     `formatted_text` field.
         class ListMessagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -785,9 +802,17 @@ module Google
         # [card](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards)
         # in a Google Chat message.
         #
-        # Only Chat apps can create cards. If your Chat app [authenticates as a
+        # Chat apps can create cards with [app
+        # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+        # As part of the [Developer Preview
+        # Program](https://developers.google.com/workspace/preview), if your Chat app
+        # [authenticates as a
         # user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
-        # the message can't contain cards.
+        # it can create card messages. If your Chat app is not part of Developer
+        # Preview Program, it can't create cards with user authentication.
+        #
+        # To learn how to create a message that contains cards, see [Send a
+        # message](https://developers.google.com/workspace/chat/create-messages).
         #
         # [Card builder](https://addons.gsuite.google.com/uikit/builder)
         # @!attribute [rw] card_id
@@ -970,6 +995,10 @@ module Google
         #     The default ordering is `create_time desc`. Only a single order per query
         #     (`create_time` or `relevance`) is supported. Only descending order (`desc`)
         #     is supported, and it must be specified after the order attribute.
+        # @!attribute [rw] markup_syntax
+        #   @return [::Google::Apps::Chat::V1::MarkupSyntax]
+        #     Optional. Specifies the desired output syntax for the Chat message
+        #     `formatted_text` field.
         # @!attribute [rw] view
         #   @return [::Google::Apps::Chat::V1::SearchMessagesRequest::SearchMessagesView]
         #     Optional. Specifies what kind of search results view to return. The default

@@ -292,14 +292,13 @@ module Google
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>cdnConfigStatus</code></li>
-              #       <li><code>cdnConfigType</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>sourceContentConfig.ingestSettings.urlPrefix</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `cdnConfigStatus`
+              #     * `cdnConfigType`
+              #     * `displayName`
+              #     * `name`
+              #     * `sourceContentConfig.ingestSettings.urlPrefix`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at

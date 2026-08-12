@@ -147,6 +147,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
     show_deleted = true
+    markup_syntax = :MARKUP_SYNTAX_UNSPECIFIED
 
     list_messages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_messages, name
@@ -157,6 +158,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["order_by"]
       assert_equal true, request["show_deleted"]
+      assert_equal :MARKUP_SYNTAX_UNSPECIFIED, request["markup_syntax"]
       refute_nil options
     end
 
@@ -167,35 +169,35 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }) do |response, operation|
+      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted do |response, operation|
+      c.list_messages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.list_messages ::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted) do |response, operation|
+      c.list_messages ::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted }, grpc_options) do |response, operation|
+      c.list_messages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.list_messages(::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted), grpc_options) do |response, operation|
+      c.list_messages(::Google::Apps::Chat::V1::ListMessagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, show_deleted: show_deleted, markup_syntax: markup_syntax), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -350,11 +352,13 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    markup_syntax = :MARKUP_SYNTAX_UNSPECIFIED
 
     get_message_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_message, name
       assert_kind_of ::Google::Apps::Chat::V1::GetMessageRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :MARKUP_SYNTAX_UNSPECIFIED, request["markup_syntax"]
       refute_nil options
     end
 
@@ -365,31 +369,31 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.get_message({ name: name }) do |response, operation|
+      c.get_message({ name: name, markup_syntax: markup_syntax }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.get_message name: name do |response, operation|
+      c.get_message name: name, markup_syntax: markup_syntax do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.get_message ::Google::Apps::Chat::V1::GetMessageRequest.new(name: name) do |response, operation|
+      c.get_message ::Google::Apps::Chat::V1::GetMessageRequest.new(name: name, markup_syntax: markup_syntax) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.get_message({ name: name }, grpc_options) do |response, operation|
+      c.get_message({ name: name, markup_syntax: markup_syntax }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.get_message(::Google::Apps::Chat::V1::GetMessageRequest.new(name: name), grpc_options) do |response, operation|
+      c.get_message(::Google::Apps::Chat::V1::GetMessageRequest.new(name: name, markup_syntax: markup_syntax), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -534,6 +538,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     order_by = "hello world"
+    markup_syntax = :MARKUP_SYNTAX_UNSPECIFIED
     view = :SEARCH_MESSAGES_VIEW_UNSPECIFIED
 
     search_messages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -544,6 +549,7 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["order_by"]
+      assert_equal :MARKUP_SYNTAX_UNSPECIFIED, request["markup_syntax"]
       assert_equal :SEARCH_MESSAGES_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
@@ -555,35 +561,35 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }) do |response, operation|
+      c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      c.search_messages parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view do |response, operation|
+      c.search_messages parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      c.search_messages ::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view) do |response, operation|
+      c.search_messages ::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view }, grpc_options) do |response, operation|
+      c.search_messages({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      c.search_messages(::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, view: view), grpc_options) do |response, operation|
+      c.search_messages(::Google::Apps::Chat::V1::SearchMessagesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, markup_syntax: markup_syntax, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

@@ -177,7 +177,7 @@ module Google
               # Service calls
 
               ##
-              # API to retrieve a `TaxonomyCategory` object.
+              # Retrieves a `TaxonomyCategory` object.
               #
               # @overload get_taxonomy_category(request, options = nil)
               #   Pass arguments to `get_taxonomy_category` via a request object, either of type
@@ -256,7 +256,7 @@ module Google
               end
 
               ##
-              # API to retrieve a list of `TaxonomyCategory` objects.
+              # Lists `TaxonomyCategory` objects.
               #
               # @overload list_taxonomy_categories(request, options = nil)
               #   Pass arguments to `list_taxonomy_categories` via a request object, either of type

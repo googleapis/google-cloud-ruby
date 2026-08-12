@@ -29,7 +29,8 @@ module Google
             ##
             # REST client for the CompanyService service.
             #
-            # Provides methods for handling `Company` objects.
+            # Provides methods for handling {::Google::Ads::AdManager::V1::Company Company}
+            # objects.
             #
             class Client
               # @private
@@ -177,7 +178,7 @@ module Google
               # Service calls
 
               ##
-              # Retrieves a `Company` object.
+              # Retrieves a {::Google::Ads::AdManager::V1::Company Company} object.
               #
               # @overload get_company(request, options = nil)
               #   Pass arguments to `get_company` via a request object, either of type
@@ -256,7 +257,7 @@ module Google
               end
 
               ##
-              # Lists `Company` objects.
+              # Lists {::Google::Ads::AdManager::V1::Company Company} objects.
               #
               # @overload list_companies(request, options = nil)
               #   Pass arguments to `list_companies` via a request object, either of type
@@ -274,40 +275,39 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent, which owns this collection of Companies.
+              #     Required. The parent, which owns this collection of [Companies][].
               #     Format: `networks/{network_code}`
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of `Companies` to return. The service may
-              #     return fewer than this value. If unspecified, at most 50 `Companies` will
+              #     Optional. The maximum number of [Companies][] to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 [Companies][] will
               #     be returned. The maximum value is 1000; values greater than 1000 will be
               #     coerced to 1000.
               #   @param page_token [::String]
-              #     Optional. A page token, received from a previous `ListCompanies` call.
+              #     Optional. A page token, received from a previous [ListCompanies][] call.
               #     Provide this to retrieve the subsequent page.
               #
-              #     When paginating, all other parameters provided to `ListCompanies` must
+              #     When paginating, all other parameters provided to [ListCompanies][] must
               #     match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
               #
-              #     <b>Filterable fields:</b>
-              #     <ul style="list-style-type:none">
-              #       <li><code>address</code></li>
-              #       <li><code>comment</code></li>
-              #       <li><code>companyId</code></li>
-              #       <li><code>creditStatus</code></li>
-              #       <li><code>displayName</code></li>
-              #       <li><code>email</code></li>
-              #       <li><code>externalId</code></li>
-              #       <li><code>fax</code></li>
-              #       <li><code>name</code></li>
-              #       <li><code>phone</code></li>
-              #       <li><code>thirdPartyCompanyId</code></li>
-              #       <li><code>type</code></li>
-              #       <li><code>updateTime</code></li>
-              #     </ul>
+              #     **Filterable fields:**
+              #
+              #     * `address`
+              #     * `comment`
+              #     * `companyId`
+              #     * `creditStatus`
+              #     * `displayName`
+              #     * `email`
+              #     * `externalId`
+              #     * `fax`
+              #     * `name`
+              #     * `phone`
+              #     * `thirdPartyCompanyId`
+              #     * `type`
+              #     * `updateTime`
               #   @param order_by [::String]
               #     Optional. Expression to specify sorting order.
               #     See syntax details at
@@ -373,6 +373,339 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @company_service_stub, :list_companies, "companies", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a {::Google::Ads::AdManager::V1::Company Company} object.
+              #
+              # @overload create_company(request, options = nil)
+              #   Pass arguments to `create_company` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::CreateCompanyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::CreateCompanyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_company(parent: nil, company: nil)
+              #   Pass arguments to `create_company` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this
+              #     {::Google::Ads::AdManager::V1::Company Company} will be created. Format:
+              #     `networks/{network_code}`
+              #   @param company [::Google::Ads::AdManager::V1::Company, ::Hash]
+              #     Required. The {::Google::Ads::AdManager::V1::Company Company} to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Company]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Company]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::CreateCompanyRequest.new
+              #
+              #   # Call the create_company method.
+              #   result = client.create_company request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Company.
+              #   p result
+              #
+              def create_company request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::CreateCompanyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_company.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_company.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_company.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @company_service_stub.create_company request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates {::Google::Ads::AdManager::V1::Company Company} objects.
+              #
+              # @overload batch_create_companies(request, options = nil)
+              #   Pass arguments to `batch_create_companies` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_companies(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_companies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where [Companies][] will be created.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the CreateCompanyRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateCompanyRequest, ::Hash>]
+              #     Required. The {::Google::Ads::AdManager::V1::Company Company} objects to create.
+              #     A maximum of 100 objects can be created in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchCreateCompaniesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchCreateCompaniesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchCreateCompaniesRequest.new
+              #
+              #   # Call the batch_create_companies method.
+              #   result = client.batch_create_companies request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchCreateCompaniesResponse.
+              #   p result
+              #
+              def batch_create_companies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchCreateCompaniesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_companies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_companies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_companies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @company_service_stub.batch_create_companies request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a {::Google::Ads::AdManager::V1::Company Company} object.
+              #
+              # @overload update_company(request, options = nil)
+              #   Pass arguments to `update_company` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::UpdateCompanyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::UpdateCompanyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_company(company: nil, update_mask: nil)
+              #   Pass arguments to `update_company` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param company [::Google::Ads::AdManager::V1::Company, ::Hash]
+              #     Required. The {::Google::Ads::AdManager::V1::Company Company} to update.
+              #
+              #     The {::Google::Ads::AdManager::V1::Company Company}'s `name` is used to identify
+              #     the {::Google::Ads::AdManager::V1::Company Company} to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::Company]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::Company]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::UpdateCompanyRequest.new
+              #
+              #   # Call the update_company method.
+              #   result = client.update_company request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::Company.
+              #   p result
+              #
+              def update_company request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::UpdateCompanyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_company.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_company.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_company.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @company_service_stub.update_company request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch updates {::Google::Ads::AdManager::V1::Company Company} objects.
+              #
+              # @overload batch_update_companies(request, options = nil)
+              #   Pass arguments to `batch_update_companies` via a request object, either of type
+              #   {::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_update_companies(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_companies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where [Companies][] will be updated.
+              #     Format: `networks/{network_code}`
+              #     The parent field in the UpdateCompanyRequest must match this
+              #     field.
+              #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateCompanyRequest, ::Hash>]
+              #     Required. The {::Google::Ads::AdManager::V1::Company Company} objects to update.
+              #     A maximum of 100 objects can be updated in a batch.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Ads::AdManager::V1::BatchUpdateCompaniesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Ads::AdManager::V1::BatchUpdateCompaniesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/ads/ad_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Ads::AdManager::V1::CompanyService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest.new
+              #
+              #   # Call the batch_update_companies method.
+              #   result = client.batch_update_companies request
+              #
+              #   # The returned object is of type Google::Ads::AdManager::V1::BatchUpdateCompaniesResponse.
+              #   p result
+              #
+              def batch_update_companies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Ads::AdManager::V1::BatchUpdateCompaniesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_update_companies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Ads::AdManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_companies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_update_companies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @company_service_stub.batch_update_companies request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -536,6 +869,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_companies
+                  ##
+                  # RPC-specific configuration for `create_company`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_company
+                  ##
+                  # RPC-specific configuration for `batch_create_companies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_companies
+                  ##
+                  # RPC-specific configuration for `update_company`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_company
+                  ##
+                  # RPC-specific configuration for `batch_update_companies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_companies
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -543,6 +896,14 @@ module Google
                     @get_company = ::Gapic::Config::Method.new get_company_config
                     list_companies_config = parent_rpcs.list_companies if parent_rpcs.respond_to? :list_companies
                     @list_companies = ::Gapic::Config::Method.new list_companies_config
+                    create_company_config = parent_rpcs.create_company if parent_rpcs.respond_to? :create_company
+                    @create_company = ::Gapic::Config::Method.new create_company_config
+                    batch_create_companies_config = parent_rpcs.batch_create_companies if parent_rpcs.respond_to? :batch_create_companies
+                    @batch_create_companies = ::Gapic::Config::Method.new batch_create_companies_config
+                    update_company_config = parent_rpcs.update_company if parent_rpcs.respond_to? :update_company
+                    @update_company = ::Gapic::Config::Method.new update_company_config
+                    batch_update_companies_config = parent_rpcs.batch_update_companies if parent_rpcs.respond_to? :batch_update_companies
+                    @batch_update_companies = ::Gapic::Config::Method.new batch_update_companies_config
 
                     yield self if block_given?
                   end

@@ -389,6 +389,45 @@
         }
       }
     },
+    "ChildPublisherService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ChildPublisherService::Client",
+          "rpcs": {
+            "GetChildPublisher": {
+              "methods": [
+                "get_child_publisher"
+              ]
+            },
+            "ListChildPublishers": {
+              "methods": [
+                "list_child_publishers"
+              ]
+            },
+            "CreateChildPublisher": {
+              "methods": [
+                "create_child_publisher"
+              ]
+            },
+            "BatchCreateChildPublishers": {
+              "methods": [
+                "batch_create_child_publishers"
+              ]
+            },
+            "UpdateChildPublisher": {
+              "methods": [
+                "update_child_publisher"
+              ]
+            },
+            "BatchUpdateChildPublishers": {
+              "methods": [
+                "batch_update_child_publishers"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CmsMetadataKeyService": {
       "clients": {
         "grpc": {
@@ -460,6 +499,26 @@
             "ListCompanies": {
               "methods": [
                 "list_companies"
+              ]
+            },
+            "CreateCompany": {
+              "methods": [
+                "create_company"
+              ]
+            },
+            "BatchCreateCompanies": {
+              "methods": [
+                "batch_create_companies"
+              ]
+            },
+            "UpdateCompany": {
+              "methods": [
+                "update_company"
+              ]
+            },
+            "BatchUpdateCompanies": {
+              "methods": [
+                "batch_update_companies"
               ]
             }
           }
@@ -620,6 +679,55 @@
         }
       }
     },
+    "CreativeWrapperService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::CreativeWrapperService::Client",
+          "rpcs": {
+            "GetCreativeWrapper": {
+              "methods": [
+                "get_creative_wrapper"
+              ]
+            },
+            "ListCreativeWrappers": {
+              "methods": [
+                "list_creative_wrappers"
+              ]
+            },
+            "CreateCreativeWrapper": {
+              "methods": [
+                "create_creative_wrapper"
+              ]
+            },
+            "BatchCreateCreativeWrappers": {
+              "methods": [
+                "batch_create_creative_wrappers"
+              ]
+            },
+            "UpdateCreativeWrapper": {
+              "methods": [
+                "update_creative_wrapper"
+              ]
+            },
+            "BatchUpdateCreativeWrappers": {
+              "methods": [
+                "batch_update_creative_wrappers"
+              ]
+            },
+            "BatchActivateCreativeWrappers": {
+              "methods": [
+                "batch_activate_creative_wrappers"
+              ]
+            },
+            "BatchDeactivateCreativeWrappers": {
+              "methods": [
+                "batch_deactivate_creative_wrappers"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CustomFieldService": {
       "clients": {
         "grpc": {
@@ -761,6 +869,104 @@
             "BatchDeactivateCustomTargetingValues": {
               "methods": [
                 "batch_deactivate_custom_targeting_values"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DaiAuthenticationKeyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::DaiAuthenticationKeyService::Client",
+          "rpcs": {
+            "GetDaiAuthenticationKey": {
+              "methods": [
+                "get_dai_authentication_key"
+              ]
+            },
+            "ListDaiAuthenticationKeys": {
+              "methods": [
+                "list_dai_authentication_keys"
+              ]
+            },
+            "CreateDaiAuthenticationKey": {
+              "methods": [
+                "create_dai_authentication_key"
+              ]
+            },
+            "BatchCreateDaiAuthenticationKeys": {
+              "methods": [
+                "batch_create_dai_authentication_keys"
+              ]
+            },
+            "UpdateDaiAuthenticationKey": {
+              "methods": [
+                "update_dai_authentication_key"
+              ]
+            },
+            "BatchUpdateDaiAuthenticationKeys": {
+              "methods": [
+                "batch_update_dai_authentication_keys"
+              ]
+            },
+            "BatchActivateDaiAuthenticationKeys": {
+              "methods": [
+                "batch_activate_dai_authentication_keys"
+              ]
+            },
+            "BatchDeactivateDaiAuthenticationKeys": {
+              "methods": [
+                "batch_deactivate_dai_authentication_keys"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DaiEncodingProfileService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::DaiEncodingProfileService::Client",
+          "rpcs": {
+            "GetDaiEncodingProfile": {
+              "methods": [
+                "get_dai_encoding_profile"
+              ]
+            },
+            "ListDaiEncodingProfiles": {
+              "methods": [
+                "list_dai_encoding_profiles"
+              ]
+            },
+            "CreateDaiEncodingProfile": {
+              "methods": [
+                "create_dai_encoding_profile"
+              ]
+            },
+            "BatchCreateDaiEncodingProfiles": {
+              "methods": [
+                "batch_create_dai_encoding_profiles"
+              ]
+            },
+            "UpdateDaiEncodingProfile": {
+              "methods": [
+                "update_dai_encoding_profile"
+              ]
+            },
+            "BatchUpdateDaiEncodingProfiles": {
+              "methods": [
+                "batch_update_dai_encoding_profiles"
+              ]
+            },
+            "BatchActivateDaiEncodingProfiles": {
+              "methods": [
+                "batch_activate_dai_encoding_profiles"
+              ]
+            },
+            "BatchArchiveDaiEncodingProfiles": {
+              "methods": [
+                "batch_archive_dai_encoding_profiles"
               ]
             }
           }
@@ -1270,6 +1476,35 @@
         }
       }
     },
+    "PartnerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::PartnerService::Client",
+          "rpcs": {
+            "GetPartner": {
+              "methods": [
+                "get_partner"
+              ]
+            },
+            "ListPartners": {
+              "methods": [
+                "list_partners"
+              ]
+            },
+            "UpdatePartner": {
+              "methods": [
+                "update_partner"
+              ]
+            },
+            "BatchUpdatePartners": {
+              "methods": [
+                "batch_update_partners"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PlacementService": {
       "clients": {
         "grpc": {
@@ -1739,6 +1974,45 @@
             "GetUser": {
               "methods": [
                 "get_user"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ViewabilityProviderService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ViewabilityProviderService::Client",
+          "rpcs": {
+            "GetViewabilityProvider": {
+              "methods": [
+                "get_viewability_provider"
+              ]
+            },
+            "ListViewabilityProviders": {
+              "methods": [
+                "list_viewability_providers"
+              ]
+            },
+            "CreateViewabilityProvider": {
+              "methods": [
+                "create_viewability_provider"
+              ]
+            },
+            "BatchCreateViewabilityProviders": {
+              "methods": [
+                "batch_create_viewability_providers"
+              ]
+            },
+            "UpdateViewabilityProvider": {
+              "methods": [
+                "update_viewability_provider"
+              ]
+            },
+            "BatchUpdateViewabilityProviders": {
+              "methods": [
+                "batch_update_viewability_providers"
               ]
             }
           }

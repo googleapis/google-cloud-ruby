@@ -248,7 +248,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/v1/{parent}/suggestedAdUnit:batchApprove",
+                                                          uri_template: "/v1/{parent}/suggestedAdUnits:batchApprove",
                                                           body: "*",
                                                           matches: [
                                                             ["parent", %r{^networks/[^/]+/?$}, false]
