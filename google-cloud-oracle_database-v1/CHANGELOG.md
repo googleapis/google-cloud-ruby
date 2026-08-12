@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2026-08-12)
+
+#### Features
+
+* Expand Oracle Database v1 API to add support for Exascale CMEK, VM Storage options ([#36228](https://github.com/googleapis/google-cloud-ruby/issues/36228)) 
+
 ### 1.0.1 (2026-08-05)
 
 #### Bug Fixes
